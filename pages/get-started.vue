@@ -7,29 +7,13 @@
 
     <div class="relative">
       <section class="px-3 sm:px-4">
-        <div class="mx-auto max-w-5xl pb-12 pt-16 md:pb-16">
-          <div class="flex flex-col gap-5 rounded-4xl border border-white/60 bg-white/70 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
+        <div class="mx-auto max-w-4xl pb-10 pt-16 md:pb-14">
+          <div class="flex flex-col gap-4 rounded-4xl border border-white/60 bg-white/75 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
             <span class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">Start your build</span>
-            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-              A guided start to your Hinn subscription
-            </h1>
+            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">Get started in a few minutes</h1>
             <p class="max-w-2xl text-sm leading-6 text-secondary md:text-base">
-              Complete the essentials so we can open your workspace, recommend the right plan, and send over kickoff details in one smooth flow.
+              Share your contact details and plan preference so we can prep your workspace and send the kickoff invite.
             </p>
-            <div class="flex flex-wrap items-center gap-3 text-xs text-secondary">
-              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
-                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path d="M12 6v12m6-6H6" />
-                </svg>
-                Takes about 5 minutes
-              </span>
-              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
-                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path d="M5 12h14m-7-7 7 7-7 7" />
-                </svg>
-                Kickoff invite follows submission
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -212,10 +196,6 @@
                   </form>
                 </div>
 
-                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
-                  <p class="font-semibold text-primary">Skip the form?</p>
-                  <p class="mt-2 leading-5">Email <a class="font-medium text-accent-primary underline-offset-4 hover:underline" href="mailto:start@hinn.studio">start@hinn.studio</a> with your details and we’ll handle the setup.</p>
-                </div>
               </div>
 
               <!-- Step 2 -->
@@ -288,28 +268,16 @@
                   </div>
                 </div>
 
-                <div class="grid gap-4 lg:grid-cols-2">
-                  <div class="rounded-3xl border border-dashed border-accent-soft bg-white/80 p-6 text-sm text-secondary">
-                    <p class="text-sm font-semibold text-primary">Need a bespoke plan?</p>
-                    <p class="mt-2 leading-6">Share your goals and we’ll assemble a custom retainer with dedicated capacity, growth experiments, and CRO support.</p>
-                    <a href="mailto:start@hinn.studio" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-primary shadow-sm transition hover:bg-neutral-50">
-                      Email our team
-                      <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path d="M5 12h14m-7-7 7 7-7 7" />
+                <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+                  <p class="text-sm font-semibold text-primary">What’s included</p>
+                  <ul class="mt-3 space-y-2 text-xs text-secondary">
+                    <li v-for="item in support" :key="item" class="flex items-start gap-2">
+                      <svg class="mt-0.5 h-3.5 w-3.5 flex-none text-accent-primary" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0Z" clip-rule="evenodd" />
                       </svg>
-                    </a>
-                  </div>
-                  <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                    <p class="text-sm font-semibold text-primary">What’s included</p>
-                    <ul class="mt-3 space-y-2 text-xs text-secondary">
-                      <li v-for="item in support" :key="item" class="flex items-start gap-2">
-                        <svg class="mt-0.5 h-3.5 w-3.5 flex-none text-accent-primary" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                        <span>{{ item }}</span>
-                      </li>
-                    </ul>
-                  </div>
+                      <span>{{ item }}</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
@@ -390,20 +358,6 @@
                   </div>
                 </div>
 
-                <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
-                  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p class="text-sm font-semibold text-primary">Prefer to talk it through first?</p>
-                      <p class="mt-1 text-xs leading-6 text-secondary">Schedule a 15-minute call—we’ll help you pick the right plan and scope.</p>
-                    </div>
-                    <a href="https://cal.com" target="_blank" rel="noopener" class="inline-flex w-fit items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-semibold text-primary shadow-sm transition hover:bg-neutral-50">
-                      Book a call
-                      <svg class="ml-2 h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path d="M5 12h14m-7-7 7 7-7 7" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

@@ -4,31 +4,15 @@
 
     <div class="relative">
       <section class="px-3 sm:px-4">
-        <div class="mx-auto max-w-5xl pb-12 pt-16">
-          <div class="flex flex-col gap-5 rounded-4xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
+        <div class="mx-auto max-w-4xl pb-10 pt-16">
+          <div class="flex flex-col gap-4 rounded-4xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
             <p class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">
-              Onboarding checklist
+              Onboarding
             </p>
-            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-              Welcome! Let’s design your launch plan
-            </h1>
+            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">Kick off your site build</h1>
             <p class="max-w-2xl text-sm leading-6 text-secondary md:text-base">
-              Share just the essentials so we can map your site structure, prep assets, and queue your kickoff call. You’re {{ Math.round((currentStep / totalSteps) * 100) }}% of the way there.
+              Share the essentials and we’ll configure your workspace, schedule kickoff, and start shaping your launch plan.
             </p>
-            <div class="flex flex-wrap items-center gap-3 text-xs text-secondary">
-              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
-                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path d="M5 12h14m-7-7 7 7-7 7" />
-                </svg>
-                Kickoff link delivered after submission
-              </span>
-              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
-                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path d="M12 6v12m6-6H6" />
-                </svg>
-                Save progress automatically
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -188,62 +172,231 @@
                   </div>
                 </div>
 
-                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
-                  <p class="font-semibold text-primary">Prefer to talk first?</p>
-                  <p class="mt-2 leading-5">Email <a href="mailto:start@hinn.studio" class="font-medium text-accent-primary underline-offset-4 hover:underline">start@hinn.studio</a> and we’ll walk through onboarding together.</p>
-                </div>
               </div>
 
               <!-- Step 2 -->
               <div v-if="currentStep === 2" class="space-y-6">
                 <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                  <h3 class="text-base font-semibold text-primary">Tell us about your business</h3>
-                  <p class="mt-1 text-sm text-secondary">Help us understand what you do.</p>
+                  <h3 class="text-base font-semibold text-primary">Business details & coverage</h3>
+                  <p class="mt-1 text-sm text-secondary">A quick snapshot of your company helps us tailor the build plan.</p>
 
-                  <form @submit.prevent="nextStep" class="mt-6 space-y-5">
-                    <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Business/Project Name *</label>
-                      <input
-                        v-model="formData.businessName"
-                        type="text"
-                        required
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                        placeholder="Acme Inc."
-                      />
-                    </div>
-
+                  <form @submit.prevent="nextStep" class="mt-6 space-y-6">
                     <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label class="mb-1 block text-sm font-medium text-primary">Business/Project Name *</label>
+                        <input
+                          v-model="formData.businessName"
+                          type="text"
+                          required
+                          class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                          placeholder="Your company or product name"
+                        />
+                      </div>
                       <div>
                         <label class="mb-1 block text-sm font-medium text-primary">Industry/Category</label>
                         <FormSelect v-model="formData.category" :options="categories" placeholder="Select a category" />
                       </div>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label class="mb-1 block text-sm font-medium text-primary">Target Location</label>
-                        <FormSelect
-                          v-model="formData.country"
-                          :options="countries"
-                          option-label-key="name"
-                          option-value-key="code"
-                          placeholder="Select a country"
+                        <label class="mb-1 block text-sm font-medium text-primary">Business Email *</label>
+                        <input
+                          v-model="formData.businessEmail"
+                          type="email"
+                          required
+                          class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                          placeholder="you@company.com"
+                        />
+                      </div>
+                      <div>
+                        <label class="mb-1 block text-sm font-medium text-primary">Business Phone</label>
+                        <input
+                          v-model="formData.businessPhone"
+                          type="tel"
+                          class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                          placeholder="(000) 000-0000"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Brief Description</label>
+                      <label class="mb-1 block text-sm font-medium text-primary">Preferred contact method</label>
+                      <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        <button
+                          v-for="method in contactMethods"
+                          :key="method.value"
+                          type="button"
+                          @click="formData.contactMethod = method.value"
+                          :class="[
+                            'rounded-2xl border px-4 py-2 text-sm font-medium transition',
+                            formData.contactMethod === method.value
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                          ]"
+                        >
+                          {{ method.label }}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="mb-1 block text-sm font-medium text-primary">Describe what you offer</label>
                       <textarea
                         v-model="formData.description"
                         rows="3"
                         class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                        placeholder="Tell us what makes your business unique..."
+                        placeholder="Share your core services, audience, and goals"
                       />
                     </div>
 
-                    <div class="rounded-2xl bg-neutral-50 px-4 py-3 text-xs text-secondary">
-                      <p>Share anything we should know about your audience, marketing channels, or conversion goals.</p>
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-primary">Services you provide</label>
+                      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <button
+                          v-for="service in serviceOptions"
+                          :key="service"
+                          type="button"
+                          @click="toggleService(service)"
+                          :class="[
+                            'rounded-2xl border px-4 py-2 text-sm transition',
+                            formData.selectedServices.includes(service)
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                          ]"
+                        >
+                          {{ service }}
+                        </button>
+                      </div>
                     </div>
 
-                    <div class="flex flex-col gap-3 pt-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-primary">Service areas</label>
+                      <ServiceAreaPicker v-model="formData.serviceAreas" />
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label class="mb-2 block text-sm font-medium text-primary">Coverage type</label>
+                        <div class="grid grid-cols-2 gap-2">
+                          <button
+                            v-for="option in coverageOptions"
+                            :key="option.value"
+                            type="button"
+                            @click="formData.coverageType = option.value"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              formData.coverageType === option.value
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            {{ option.label }}
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <label class="mb-2 block text-sm font-medium text-primary">Service delivery</label>
+                        <div class="grid grid-cols-2 gap-2">
+                          <button
+                            v-for="option in onSiteModes"
+                            :key="option.value"
+                            type="button"
+                            @click="formData.onSiteMode = option.value"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              formData.onSiteMode === option.value
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            {{ option.label }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label class="mb-2 block text-sm font-medium text-primary">Business hours</label>
+                        <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                          <button
+                            v-for="option in hoursOptions"
+                            :key="option.value"
+                            type="button"
+                            @click="formData.businessHoursMode = option.value"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              formData.businessHoursMode === option.value
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            {{ option.label }}
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <label class="mb-1 block text-sm font-medium text-primary">Primary goal</label>
+                        <FormSelect
+                          v-model="formData.primaryGoal"
+                          :options="goalOptions"
+                          placeholder="Select a goal"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-primary">Languages your site needs</label>
+                      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <button
+                          v-for="language in languageOptions"
+                          :key="language"
+                          type="button"
+                          @click="toggleLanguage(language)"
+                          :class="[
+                            'rounded-2xl border px-4 py-2 text-sm transition',
+                            formData.languages.includes(language)
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                          ]"
+                        >
+                          {{ language }}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label class="mb-1 block text-sm font-medium text-primary">Primary language</label>
+                        <FormSelect
+                          v-model="formData.primaryLanguage"
+                          :options="primaryLanguageOptions"
+                          placeholder="Choose a primary language"
+                        />
+                      </div>
+                      <div>
+                        <label class="mb-1 block text-sm font-medium text-primary">Logo availability</label>
+                        <div class="grid grid-cols-2 gap-2">
+                          <button
+                            v-for="option in logoOptions"
+                            :key="option.value"
+                            type="button"
+                            @click="formData.hasLogo = option.value === 'yes'"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              formData.hasLogo === (option.value === 'yes')
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            {{ option.label }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                       <button
                         type="button"
                         @click="prevStep"
@@ -259,11 +412,6 @@
                       </button>
                     </div>
                   </form>
-                </div>
-
-                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
-                  <p class="font-semibold text-primary">Helpful tip</p>
-                  <p class="mt-2 leading-5">Mention key integrations or assets you already have so we can prep them for kickoff.</p>
                 </div>
               </div>
 
@@ -317,42 +465,86 @@
                   </div>
                 </div>
 
-                <div class="rounded-3xl border border-dashed border-accent-soft bg-white/70 p-6 text-sm text-secondary">
-                  <p class="font-semibold text-primary">Page strategy tip</p>
-                  <p class="mt-2 leading-6">We recommend prioritizing high-impact conversion pages first. Additional pages can be added once we understand visitor behavior.</p>
-                </div>
               </div>
 
               <!-- Step 4 -->
               <div v-if="currentStep === 4" class="space-y-6">
                 <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                   <h3 class="text-base font-semibold text-primary">Design preferences</h3>
-                  <p class="mt-1 text-sm text-secondary">Help us understand your style.</p>
+                  <p class="mt-1 text-sm text-secondary">Outline the look, feel, and any must-have details.</p>
 
-                  <div class="mt-6 space-y-5">
+                  <div class="mt-6 space-y-6">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Style preference</label>
-                      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                      <label class="mb-2 block text-sm font-medium text-primary">Style preferences</label>
+                      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         <button
                           v-for="style in designStyles"
                           :key="style"
                           type="button"
-                          @click="formData.designStyle = style"
+                          @click="toggleDesignStyle(style)"
                           :class="[
-                            'flex h-full flex-col justify-between rounded-2xl border-2 p-4 text-sm transition',
-                            formData.designStyle === style
-                              ? 'border-accent-primary bg-accent-subtle shadow-sm'
-                              : 'border-neutral-200 bg-white hover:border-accent-soft'
+                            'rounded-2xl border px-4 py-2 text-sm transition',
+                            formData.designStyles.includes(style)
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                           ]"
                         >
-                          <span class="font-semibold text-primary">{{ style }}</span>
-                          <span class="mt-3 text-xs text-secondary">{{ styleCopy[style] }}</span>
+                          {{ style }}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-primary">How should it feel?</label>
+                      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <button
+                          v-for="tone in emotionalOptions"
+                          :key="tone"
+                          type="button"
+                          @click="toggleEmotion(tone)"
+                          :class="[
+                            'rounded-2xl border px-4 py-2 text-sm transition',
+                            formData.emotionalImpact.includes(tone)
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                          ]"
+                        >
+                          {{ tone }}
                         </button>
                       </div>
                     </div>
 
                     <div class="grid gap-4 sm:grid-cols-2">
-                      <div class="sm:col-span-2">
+                      <div>
+                        <label class="mb-2 block text-sm font-medium text-primary">Accessibility</label>
+                        <div class="grid grid-cols-2 gap-2">
+                          <button
+                            type="button"
+                            @click="formData.highContrast = false"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              !formData.highContrast
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            Standard contrast
+                          </button>
+                          <button
+                            type="button"
+                            @click="formData.highContrast = true"
+                            :class="[
+                              'rounded-2xl border px-4 py-2 text-sm transition',
+                              formData.highContrast
+                                ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                                : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ]"
+                          >
+                            High contrast
+                          </button>
+                        </div>
+                      </div>
+                      <div>
                         <label class="mb-1 block text-sm font-medium text-primary">Brand colors (if any)</label>
                         <input
                           v-model="formData.brandColors"
@@ -361,22 +553,25 @@
                           placeholder="e.g., Blue and gold, or #1E40AF"
                         />
                       </div>
+                    </div>
+
+                    <div class="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label class="mb-1 block text-sm font-medium text-primary">Inspiration sites (optional)</label>
+                        <label class="mb-1 block text-sm font-medium text-primary">Inspiration sites</label>
                         <textarea
                           v-model="formData.inspirationSites"
                           rows="2"
                           class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                          placeholder="Share URLs of sites you like..."
+                          placeholder="Share URLs of sites you like"
                         />
                       </div>
                       <div>
                         <label class="mb-1 block text-sm font-medium text-primary">Additional notes</label>
                         <textarea
                           v-model="formData.additionalNotes"
-                          rows="3"
+                          rows="2"
                           class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                          placeholder="Any other details we should know..."
+                          placeholder="Any must-haves or creative direction"
                         />
                       </div>
                     </div>
@@ -427,8 +622,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import FormSelect from '~/components/FormSelect.vue'
+import ServiceAreaPicker from '~/components/ServiceAreaPicker.vue'
 
 useHead({
   title: 'Onboarding - Hinn',
@@ -438,6 +634,36 @@ useHead({
 })
 
 const currentStep = ref(1)
+
+const onboardingSeed = {
+  name: 'Bello Site',
+  cities: [
+    {
+      lat: 39.7392364,
+      lon: -104.984862,
+      name: 'Denver, Colorado, United States',
+      radiusKm: 10,
+      displayName: 'Denver, Colorado, United States'
+    }
+  ],
+  hasLogo: false,
+  category: 'Transportation',
+  siteType: 'Small business',
+  languages: ['English'],
+  primaryLanguage: 'English',
+  selectedServices: ['Vehicle transport', 'Freight', 'Courier'],
+  businessEmail: 'kofikittoe35@gmail.com',
+  businessPhone: '7208429167',
+  contactMethod: 'phone',
+  primaryGoal: 'Sales',
+  coverageType: 'single',
+  onSiteMode: 'onsite',
+  businessHoursMode: 'standard',
+  designStyles: ['Playful', 'Minimal'],
+  highContrast: false,
+  emotionalImpact: ['Exciting'],
+  envisionedPages: ['Home', 'Services', 'Fleet', 'Get a quote']
+}
 
 const stepSummaries = [
   {
@@ -449,9 +675,9 @@ const stepSummaries = [
   },
   {
     id: 'business',
-    title: 'Business context',
-    headline: 'Share your brand story and target markets.',
-    description: 'Tell us about your industry, goals, and audiences.',
+    title: 'Business profile',
+    headline: 'Share your services and where you operate.',
+    description: 'Tell us about your offer, coverage, and goals.',
     icon: 'clipboard'
   },
   {
@@ -473,17 +699,38 @@ const stepSummaries = [
 const totalSteps = stepSummaries.length
 
 const formData = ref({
-  siteType: '',
-  businessName: '',
-  category: '',
+  siteType: onboardingSeed.siteType || '',
+  businessName: onboardingSeed.name || '',
+  category: onboardingSeed.category || '',
   description: '',
-  country: '',
-  selectedPages: [],
-  customPages: '',
-  designStyle: '',
+  businessEmail: onboardingSeed.businessEmail || '',
+  businessPhone: onboardingSeed.businessPhone || '',
+  contactMethod: onboardingSeed.contactMethod || '',
+  selectedServices: [...(onboardingSeed.selectedServices || [])],
+  serviceAreas:
+    onboardingSeed.cities?.map(city => ({
+      placeId: city.displayName || city.name,
+      name: city.name,
+      displayName: city.displayName || city.name,
+      lat: city.lat,
+      lon: city.lon,
+      radiusKm: city.radiusKm || 10
+    })) || [],
+  coverageType: onboardingSeed.coverageType || '',
+  onSiteMode: onboardingSeed.onSiteMode || '',
+  businessHoursMode: onboardingSeed.businessHoursMode || '',
+  primaryGoal: onboardingSeed.primaryGoal || '',
+  languages: [...(onboardingSeed.languages || [])],
+  primaryLanguage: onboardingSeed.primaryLanguage || '',
+  hasLogo: onboardingSeed.hasLogo ?? false,
+  highContrast: onboardingSeed.highContrast ?? false,
   brandColors: '',
   inspirationSites: '',
-  additionalNotes: ''
+  additionalNotes: '',
+  selectedPages: [...(onboardingSeed.envisionedPages || [])],
+  customPages: '',
+  designStyles: [...(onboardingSeed.designStyles || [])],
+  emotionalImpact: [...(onboardingSeed.emotionalImpact || [])]
 })
 
 const siteTypes = [
@@ -500,6 +747,7 @@ const siteTypes = [
 ]
 
 const categories = [
+  'Transportation',
   'Restaurants',
   'Retail',
   'Health & Wellness',
@@ -511,21 +759,8 @@ const categories = [
   'Other'
 ]
 
-const countries = [
-  { code: 'us', name: 'United States' },
-  { code: 'ca', name: 'Canada' },
-  { code: 'gb', name: 'United Kingdom' },
-  { code: 'au', name: 'Australia' },
-  { code: 'de', name: 'Germany' },
-  { code: 'fr', name: 'France' },
-  { code: 'in', name: 'India' },
-  { code: 'mx', name: 'Mexico' },
-  { code: 'br', name: 'Brazil' },
-  { code: 'other', name: 'Other' }
-]
-
 const suggestedPages = computed(() => {
-  const basePages = ['Home', 'About', 'Contact']
+  const basePages = new Set(['Home', 'About', 'Contact'])
   const typePages = {
     'Small business': ['Services', 'Pricing', 'FAQ'],
     'Ecommerce': ['Shop', 'Cart', 'Checkout'],
@@ -540,7 +775,9 @@ const suggestedPages = computed(() => {
   }
   
   const additional = typePages[formData.value.siteType] || []
-  return [...basePages, ...additional]
+  additional.forEach(page => basePages.add(page))
+  ;(onboardingSeed.envisionedPages || []).forEach(page => basePages.add(page))
+  return Array.from(basePages)
 })
 
 const designStyles = [
@@ -552,14 +789,51 @@ const designStyles = [
   'Professional'
 ]
 
-const styleCopy = {
-  Modern: 'Clean grids, generous whitespace, and confident typography.',
-  Minimal: 'Calm palettes, refined interactions, and focus on essentials.',
-  Bold: 'Expressive type, color pops, and high-impact storytelling.',
-  Classic: 'Traditional layouts, serif-led type, and editorial sensibility.',
-  Playful: 'Friendly colors, motion accents, and conversational tone.',
-  Professional: 'Polished visuals, trusted patterns, and business-first clarity.'
-}
+const contactMethods = [
+  { label: 'Email', value: 'email' },
+  { label: 'Phone', value: 'phone' },
+  { label: 'Text message', value: 'text' },
+  { label: 'Video call', value: 'video' }
+]
+
+const serviceOptions = [
+  'Vehicle transport',
+  'Freight',
+  'Courier',
+  'Logistics planning',
+  'Warehousing',
+  'Consulting'
+]
+
+const coverageOptions = [
+  { label: 'Single location', value: 'single' },
+  { label: 'Multiple locations', value: 'multi' }
+]
+
+const onSiteModes = [
+  { label: 'On-site', value: 'onsite' },
+  { label: 'Remote', value: 'remote' },
+  { label: 'Hybrid', value: 'hybrid' }
+]
+
+const hoursOptions = [
+  { label: 'Standard', value: 'standard' },
+  { label: 'Extended', value: 'extended' },
+  { label: '24/7', value: 'always' }
+]
+
+const goalOptions = ['Sales', 'Leads', 'Bookings', 'Awareness', 'Support']
+
+const languageOptions = ['English', 'Spanish', 'French', 'German', 'Portuguese', 'Italian', 'Other']
+
+const primaryLanguageOptions = languageOptions
+
+const logoOptions = [
+  { label: 'We have a logo', value: 'yes' },
+  { label: 'Need a new logo', value: 'no' }
+]
+
+const emotionalOptions = ['Exciting', 'Trustworthy', 'Playful', 'Premium', 'Calm', 'Bold']
 
 const milestones = [
   'Kickoff call within two business days',
@@ -567,6 +841,48 @@ const milestones = [
   'First build handoff with review links in week two',
   'Iterate and launch with analytics baseline in week three'
 ]
+
+const toggleArrayValue = (array, value) => {
+  const next = array.slice()
+  const index = next.indexOf(value)
+  if (index > -1) {
+    next.splice(index, 1)
+  } else {
+    next.push(value)
+  }
+  return next
+}
+
+const toggleService = service => {
+  formData.value.selectedServices = toggleArrayValue(formData.value.selectedServices, service)
+}
+
+const toggleLanguage = language => {
+  formData.value.languages = toggleArrayValue(formData.value.languages, language)
+}
+
+const toggleDesignStyle = style => {
+  formData.value.designStyles = toggleArrayValue(formData.value.designStyles, style)
+}
+
+const toggleEmotion = tone => {
+  formData.value.emotionalImpact = toggleArrayValue(formData.value.emotionalImpact, tone)
+}
+
+watch(
+  () => formData.value.languages,
+  newLanguages => {
+    if (!newLanguages.length) {
+      formData.value.primaryLanguage = ''
+      return
+    }
+
+    if (!newLanguages.includes(formData.value.primaryLanguage)) {
+      formData.value.primaryLanguage = newLanguages[0]
+    }
+  },
+  { deep: true }
+)
 
 const nextStep = () => {
   if (currentStep.value < totalSteps) {
