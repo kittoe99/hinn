@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light, near-neutral background system */
+    --bg-page: #fefefe;
+    --panel: #f9f9f9;
+    --panel-hover: #f5f5f5;
+    --border: #e5e5e5;
+    --accent: #d97759;
+    --background: var(--bg-page);
+    --foreground: #0a0a0a;
+    
+    /* Harmonious accent-derived palette */
+    --accent-primary: var(--accent);
+    --accent-focus: #c46a4f;
+    --accent-subtle: #fdf5f2;
+    --accent-muted: #fae8e1;
+    --accent-soft: #f7dbd0;
+    
+    /* Typography tokens */
+    --text-primary: #000000;
+    --text-secondary: #404040;
+    --text-tertiary: #6b6b6b;
+    --text-accent: var(--accent-primary);
+    
+    /* Subtle background pattern */
+    --pattern-size: 32px;
+    --pattern-dot: rgba(217, 119, 89, 0.02);
+    --pattern-dot-2: rgba(217, 119, 89, 0.01);
+  }
+
+  html,
+  body {
+    background-color: var(--bg-page);
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+  }
+
+  body {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--pattern-dot) 1px, transparent 1.2px),
+      radial-gradient(circle at calc(var(--pattern-size)/2) calc(var(--pattern-size)/2), var(--pattern-dot-2) 1px, transparent 1.2px);
+    background-repeat: repeat;
+    background-size: var(--pattern-size) var(--pattern-size);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2 {
+    color: var(--text-primary);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  h3,
+  h4 {
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  h5,
+  h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+
+  label,
+  .label {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+  }
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-tertiary {
+    color: var(--text-tertiary);
+  }
+
+  .text-accent {
+    color: var(--text-accent);
+  }
+
+  .bg-page {
+    background-color: var(--bg-page);
+  }
+
+  .bg-panel {
+    background-color: var(--panel);
+  }
+
+  .border-soft {
+    border-color: var(--border);
+  }
+}
