@@ -1,207 +1,209 @@
 <template>
   <div class="py-12 md:py-16">
-    <!-- Hero Section -->
-    <section>
-      <div class="max-w-5xl mx-auto px-3 sm:px-4 grid md:grid-cols-2 gap-6 md:gap-10 items-center">
-        <div class="text-center md:text-left">
-          <h1 class="mt-1 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
-            Custom High End Websites
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle via-white to-white" aria-hidden="true" />
+      <div class="relative max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1.1fr_1fr] gap-8 md:gap-12 items-center">
+        <div class="text-center lg:text-left">
+          <p class="inline-flex items-center gap-2 rounded-full border border-accent-subtle/60 bg-white px-3 py-1 text-xs font-medium text-accent-primary">
+            Subscription websites built to launch fast and scale with you
+          </p>
+          <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
+            A modern website program without the huge upfront invoice
           </h1>
-          <p class="mt-3 text-sm md:text-base text-secondary">
-            Professional, pay-by-month websites with stunning design, secure hosting, and ongoing updates included. Get back to what you do best—running your business.
+          <p class="mt-4 text-sm md:text-base text-secondary max-w-xl mx-auto lg:mx-0">
+            Partner with a dedicated design + engineering pod that delivers the site, the content, the infrastructure, and the ongoing improvements—all on a predictable monthly plan.
           </p>
-          <p class="mt-2 text-sm md:text-base text-secondary">
-            We handle it all. One flat monthly fee covers everything you need for a powerful, professional online presence.
-          </p>
-          <div class="mt-5 flex items-center gap-3 justify-center md:justify-start">
-            <button class="px-5 py-3 rounded-full bg-accent-primary text-white border border-accent-primary text-sm md:text-base transition-colors hover:bg-accent-focus">
-              Get started
+          <div class="mt-6 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
+            <button class="w-full sm:w-auto rounded-full bg-accent-primary px-5 py-3 text-sm md:text-base font-medium text-white shadow-sm shadow-accent-primary/20 transition hover:bg-accent-focus">
+              Start your build
             </button>
-            <a href="#features" class="px-5 py-3 rounded-full border border-neutral-300 bg-white text-sm text-neutral-800 hover:bg-neutral-50">
-              See features
+            <a
+              href="#plans"
+              class="w-full sm:w-auto rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm md:text-base font-medium text-neutral-800 transition hover:bg-neutral-50"
+            >
+              Explore plans
             </a>
           </div>
-        </div>
-        <div class="relative h-48 md:h-64 rounded-3xl border border-soft overflow-hidden bg-gradient-to-br from-accent-subtle to-white flex items-center justify-center">
-          <div class="text-6xl text-accent-primary/20">🌐</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key Benefits -->
-    <section class="mt-8 md:mt-12">
-      <div class="max-w-4xl mx-auto px-3 sm:px-4">
-        <div class="flex flex-wrap items-center gap-2">
-          <span 
-            v-for="benefit in keyBenefits" 
-            :key="benefit"
-            class="inline-flex items-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1.5 text-sm text-neutral-800 ring-1 ring-neutral-200"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-accent-primary">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>{{ benefit }}</span>
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="mt-10 md:mt-14">
-      <div class="max-w-5xl mx-auto px-3 sm:px-4">
-        <div class="grid md:grid-cols-2 gap-5 md:gap-6">
-          <div 
-            v-for="(feature, index) in displayedFeatures" 
-            :key="feature.title"
-            class="flex items-start gap-3 rounded-2xl border border-soft bg-white p-4"
-          >
-            <div class="inline-flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-accent-subtle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-accent-primary">
-                <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
-              </svg>
+          <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            <div
+              v-for="stat in heroStats"
+              :key="stat.label"
+              class="rounded-2xl border border-soft bg-white/80 px-4 py-3 backdrop-blur"
+            >
+              <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ stat.label }}</dt>
+              <dd class="mt-1 text-xl font-semibold text-primary">{{ stat.value }}</dd>
+              <p class="mt-1 text-xs text-secondary">{{ stat.detail }}</p>
             </div>
-            <div class="min-w-0">
-              <h3 class="text-sm font-semibold tracking-tight text-primary">{{ feature.title }}</h3>
-              <p class="mt-1 text-sm text-secondary">{{ feature.desc }}</p>
-            </div>
-          </div>
+          </dl>
         </div>
-        <div class="mt-5 flex justify-center">
-          <button
-            @click="showAllFeatures = !showAllFeatures"
-            class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-800 hover:bg-neutral-50"
-          >
-            {{ showAllFeatures ? 'Show fewer' : 'Show all features' }}
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI-Powered Section -->
-    <section class="mt-12 md:mt-16 bg-neutral-50 py-8 md:py-10">
-      <div class="max-w-5xl mx-auto px-3 md:px-4">
-        <header class="mb-6 md:mb-8 text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">
-            Not Just a Website. A Growth Partner Powered by AI.
-          </h2>
-        </header>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div 
-            v-for="item in aiFeatures" 
-            :key="item.title"
-            class="flex items-start gap-3"
-          >
-            <div class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-white ring-1 ring-neutral-200">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-accent-primary">
-                <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
-              </svg>
+        <div class="relative">
+          <div class="rounded-3xl border border-soft bg-white/90 p-5 shadow-lg shadow-accent-subtle/40">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Launch blueprint</p>
+                <p class="mt-1 text-lg font-semibold text-primary">From kickoff to live in weeks</p>
+              </div>
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle text-2xl text-accent-primary">🌐</span>
             </div>
-            <div>
-              <div class="text-sm font-medium text-primary">{{ item.title }}</div>
-              <p class="mt-1 text-sm text-secondary">{{ item.desc }}</p>
-            </div>
+            <ol class="mt-5 space-y-3">
+              <li
+                v-for="step in heroRoadmap"
+                :key="step.title"
+                class="flex items-start gap-3"
+              >
+                <span class="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-accent-primary/10 text-xs font-semibold text-accent-primary">
+                  {{ step.step }}
+                </span>
+                <div class="text-left">
+                  <p class="text-sm font-medium text-primary">{{ step.title }}</p>
+                  <p class="mt-0.5 text-xs text-secondary">{{ step.detail }}</p>
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="mt-12 md:mt-16">
+    <!-- Outcomes -->
+    <section class="mt-12 md:mt-16">
       <div class="max-w-5xl mx-auto px-3 sm:px-4">
-        <header class="mb-6 md:mb-8 text-center">
-          <h2 class="mt-1 text-2xl md:text-3xl font-semibold tracking-tight text-primary">
-            Simple monthly pricing
-          </h2>
-          <p class="mt-2 text-sm md:text-base text-secondary max-w-2xl mx-auto">
-            One flat monthly fee covers design, hosting, updates, and support.
+        <header class="text-center">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">Websites engineered for real business outcomes</h2>
+          <p class="mt-3 text-sm md:text-base text-secondary max-w-2xl mx-auto">
+            Every engagement combines product strategy, UX, creative, copy, and technical support so you launch with clarity and continue optimizing as you grow.
           </p>
         </header>
-        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-          <div 
-            v-for="tier in pricingTiers" 
-            :key="tier.name"
-            class="rounded-3xl border border-soft bg-white p-5 sm:p-6 ring-1 ring-transparent hover:ring-accent-subtle transition-all"
+        <div class="mt-8 grid md:grid-cols-3 gap-5">
+          <article
+            v-for="pillar in outcomePillars"
+            :key="pillar.title"
+            class="flex flex-col gap-3 rounded-2xl border border-soft bg-white p-5"
           >
-            <div class="flex items-baseline justify-between">
-              <div class="text-base font-semibold text-primary">{{ tier.name }}</div>
-              <div class="text-primary font-semibold">{{ tier.price }}</div>
-            </div>
-            <ul class="mt-3 space-y-2 text-sm text-secondary">
-              <li 
-                v-for="feature in tier.features" 
-                :key="feature"
-                class="flex items-start gap-2"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-accent-primary mt-0.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>{{ feature }}</span>
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-xl">{{ pillar.emoji }}</div>
+            <h3 class="text-base font-semibold text-primary">{{ pillar.title }}</h3>
+            <p class="text-sm text-secondary">{{ pillar.desc }}</p>
+            <ul class="mt-1 space-y-1 text-sm text-neutral-700">
+              <li v-for="point in pillar.points" :key="point" class="flex items-start gap-2">
+                <span class="mt-0.5 text-accent-primary">•</span>
+                <span>{{ point }}</span>
               </li>
             </ul>
-            <div class="mt-4">
-              <button class="w-full px-5 py-3 rounded-full bg-accent-primary text-white border border-accent-primary text-sm transition-colors hover:bg-accent-focus">
-                Get Started
-              </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature grid -->
+    <section id="features" class="mt-12 md:mt-16 bg-neutral-50 py-10 md:py-14">
+      <div class="max-w-6xl mx-auto px-3 sm:px-4">
+        <header class="text-center">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">Everything included in every website plan</h2>
+          <p class="mt-3 text-sm md:text-base text-secondary max-w-3xl mx-auto">
+            No hidden add-ons. We deliver the full stack—strategy, UX, visual design, development, hosting, and continuous improvement.
+          </p>
+        </header>
+        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            v-for="feature in allFeatures"
+            :key="feature.title"
+            class="rounded-2xl border border-soft bg-white p-5"
+          >
+            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-subtle text-lg text-accent-primary">
+              {{ feature.emoji }}
+            </div>
+            <h3 class="mt-3 text-sm font-semibold text-primary">{{ feature.title }}</h3>
+            <p class="mt-2 text-sm text-secondary">{{ feature.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Launch timeline -->
+    <section class="mt-12 md:mt-16">
+      <div class="max-w-5xl mx-auto px-3 sm:px-4">
+        <div class="grid md:grid-cols-[1fr_1.2fr] gap-8 items-start">
+          <div>
+            <h2 class="text-2xl font-semibold tracking-tight text-primary">Our collaborative launch timeline</h2>
+            <p class="mt-3 text-sm md:text-base text-secondary">
+              We run a proven sprint model that keeps your team in the loop without dragging projects for months. Weekly check-ins, async updates, and clear next steps at every milestone.
+            </p>
+            <ul class="mt-5 space-y-3 text-sm text-neutral-700">
+              <li v-for="commitment in timelineCommitments" :key="commitment" class="flex items-start gap-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-subtle text-xs font-semibold text-accent-primary">✓</span>
+                <span>{{ commitment }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="relative pl-5 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-px before:bg-neutral-200">
+            <div
+              v-for="phase in launchTimeline"
+              :key="phase.title"
+              class="relative mb-6 last:mb-0"
+            >
+              <span class="absolute -left-[11px] top-1 h-5 w-5 rounded-full border border-accent-primary bg-white text-xs font-semibold text-accent-primary flex items-center justify-center">{{ phase.week }}</span>
+              <div class="rounded-2xl border border-soft bg-white p-4">
+                <p class="text-xs uppercase tracking-wide text-neutral-500">{{ phase.label }}</p>
+                <h3 class="mt-1 text-sm font-semibold text-primary">{{ phase.title }}</h3>
+                <p class="mt-2 text-sm text-secondary">{{ phase.detail }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="mt-12 md:mt-16">
+    <!-- Plans -->
+    <section id="plans" class="mt-12 md:mt-16">
       <div class="max-w-5xl mx-auto px-3 sm:px-4">
-        <header class="mb-6 md:mb-8 text-center">
-          <h2 class="mt-1 text-2xl md:text-3xl font-semibold tracking-tight text-primary">
-            Frequently asked questions
-          </h2>
-          <p class="mt-2 text-sm md:text-base text-secondary max-w-2xl mx-auto">
-            If you have other questions, reach out—we're happy to help.
+        <header class="text-center">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">Choose the plan that matches your pace</h2>
+          <p class="mt-3 text-sm md:text-base text-secondary max-w-2xl mx-auto">
+            Each subscription includes proactive improvements, hosting, analytics instrumentation, and a dedicated point of contact.
           </p>
         </header>
-        <div class="grid md:grid-cols-2 gap-4">
-          <details 
-            v-for="(faq, index) in faqs" 
-            :key="faq.q"
-            :open="index === 0"
-            class="group rounded-2xl border border-soft bg-white p-4"
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div
+            v-for="plan in pricingTiers"
+            :key="plan.name"
+            class="flex flex-col gap-4 rounded-3xl border border-soft bg-white p-6 text-left shadow-sm hover:shadow-md transition"
           >
-            <summary class="flex items-start justify-between cursor-pointer select-none">
-              <div class="flex items-start gap-3 pr-4">
-                <span class="inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-accent-subtle">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5 text-accent-primary">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 9h.01M15 9h.01M8 13a6 6 0 108 0" />
-                  </svg>
-                </span>
-                <span class="text-sm font-medium text-primary">{{ faq.q }}</span>
+            <div class="flex items-baseline justify-between">
+              <div>
+                <p class="text-xs uppercase tracking-wide text-neutral-500">{{ plan.segment }}</p>
+                <h3 class="mt-1 text-base font-semibold text-primary">{{ plan.name }}</h3>
               </div>
-              <span class="ml-3 mt-1 text-neutral-400 transition-transform group-open:rotate-180">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
-                </svg>
-              </span>
-            </summary>
-            <p class="mt-2 text-sm text-secondary pl-9">{{ faq.a }}</p>
-          </details>
+              <p class="text-lg font-semibold text-primary">{{ plan.price }}</p>
+            </div>
+            <p class="text-sm text-secondary">{{ plan.desc }}</p>
+            <ul class="space-y-2 text-sm text-neutral-700">
+              <li v-for="item in plan.features" :key="item" class="flex items-start gap-2">
+                <span class="mt-0.5 text-accent-primary">•</span>
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+            <button class="mt-auto rounded-full border border-accent-primary bg-accent-primary/10 px-4 py-2 text-sm font-medium text-accent-primary transition hover:bg-accent-primary hover:text-white">
+              Talk to us about {{ plan.cta }}
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="mt-12 md:mt-16 bg-neutral-50 py-8 md:py-10">
+    <!-- Assurance CTA -->
+    <section class="mt-12 md:mt-16 bg-neutral-900 py-10 md:py-14 text-white">
       <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-primary">
-          Ready to get started?
-        </h2>
-        <p class="mt-2 text-sm md:text-base text-secondary">
-          Talk to us about your goals—we'll recommend the right plan and next steps.
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Ready when you are.</h2>
+        <p class="mt-3 text-sm md:text-base text-neutral-200">
+          Schedule a working session to review your goals, see relevant work, and build the roadmap for your launch.
         </p>
-        <div class="mt-4 flex items-center justify-center gap-3">
-          <button class="px-5 py-3 rounded-full bg-accent-primary text-white border border-accent-primary text-sm md:text-base transition-colors hover:bg-accent-focus">
-            Start now
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <button class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-200">
+            Book a kickoff call
           </button>
-          <button class="px-5 py-3 rounded-full border border-neutral-300 bg-white text-sm text-neutral-800 hover:bg-neutral-50">
-            Contact us
+          <button class="rounded-full border border-white/60 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            Download deliverable checklist
           </button>
         </div>
       </div>
@@ -211,86 +213,127 @@
 
 <script setup>
 useHead({
-  title: 'Custom High End Websites - Hinn',
+  title: 'Website Subscriptions — Launch & Grow with Hinn',
   meta: [
-    { name: 'description', content: 'Professional, pay-by-month websites with stunning design, secure hosting, and ongoing updates included.' }
+    {
+      name: 'description',
+      content:
+        'Launch a custom website with strategy, design, copy, development, hosting, and ongoing improvements on one predictable subscription.'
+    }
   ]
 })
 
-const showAllFeatures = ref(false)
-
-const keyBenefits = [
-  'No Hefty Upfront Cost',
-  'Managed Hosting & SSL',
-  'Always Up-to-date',
-  'All-in-one Monthly Plan'
+const heroStats = [
+  { label: 'Average launch window', value: '21 days', detail: 'From kickoff to go-live for typical builds' },
+  { label: 'Included updates', value: 'Monthly sprints', detail: 'Dedicated capacity for optimization and new pages' },
+  { label: 'Support access', value: 'Same-day', detail: 'Slack + email with your strategist and engineer' }
 ]
 
-const allFeatures = [
-  { title: 'AI-Powered Strategy', desc: 'We use AI to analyze your competitors and market to inform a data-driven site structure and content strategy that attracts your ideal customers.', icon: 'M12 6v6l4 2' },
-  { title: '100% Custom Design', desc: 'Your brand is unique. Your website should be too. No cookie-cutter templates. Just stunning, original design that makes you stand out.', icon: 'M4 6h16v12H4z' },
-  { title: 'Expert Copywriting', desc: 'Compelling, SEO-friendly content that tells your story and persuades visitors to act, crafted by our team (with an AI assist for efficiency).', icon: 'M5 12h14M5 16h10M5 8h10' },
-  { title: 'Mobile-First Development', desc: 'A flawless experience on every device—phone, tablet, and desktop. It\'s not an extra; it\'s our standard.', icon: 'M7 4h10M5 8h14M4 12h16M6 16h12' },
-  { title: 'Blazing-Fast Hosting', desc: 'Your site lives on our secure, high-speed hosting platform. No slow loading times, no downtime worries.', icon: 'M3 7h18M5 11h14M7 15h10M9 19h6' },
-  { title: 'Ongoing Maintenance', desc: 'We handle all technical updates, security patches, and backups so your site is always safe and running smoothly.', icon: 'M12 8v8M8 12h8' },
-  { title: 'Basic SEO Setup', desc: 'We optimize your site to rank higher on Google from day one, including on-page elements and technical SEO.', icon: 'M3 12h18M12 3v18' },
-  { title: 'Monthly Updates', desc: 'Need to change text, add a blog post, or update a photo? We include a set number of changes every month.', icon: 'M12 6v6l4 2' },
-  { title: 'Dedicated Support', desc: 'Have a question? Get help from a real person who knows your site inside and out.', icon: 'M4 6h16v12H4z' }
+const heroRoadmap = [
+  { step: '01', title: 'Discover & Align', detail: 'Audit your current presence, audience, and goals to shape the build roadmap.' },
+  { step: '02', title: 'Prototype & Copy', detail: 'Collaborative wireframes, messaging, and content structure for every page.' },
+  { step: '03', title: 'Design & Develop', detail: 'High-fidelity visuals, responsive dev, integrations, and QA across devices.' },
+  { step: '04', title: 'Launch & Optimize', detail: 'Publish, instrument analytics, and plan the next improvements together.' }
 ]
 
-const displayedFeatures = computed(() => {
-  return showAllFeatures.value ? allFeatures : allFeatures.slice(0, 3)
-})
-
-const aiFeatures = [
-  { title: 'Content Intelligence', desc: 'AI helps us craft headlines and page copy that are proven to convert.', icon: 'M5 13l4 4L19 7' },
-  { title: 'Competitor Analysis', desc: 'We use AI to scan your industry and identify opportunities to outperform your competition.', icon: 'M12 6v6l4 2' },
-  { title: 'SEO Insight Generation', desc: 'Get data-driven keyword and topic suggestions to attract more organic traffic.', icon: 'M3 12h18M12 3v18' },
-  { title: 'User Behavior Prediction', desc: 'Our designs are informed by AI-driven UX principles for maximum engagement.', icon: 'M12 8v8M8 12h8' }
-]
-
-const pricingTiers = [
-  { 
-    name: 'Small Businesses', 
-    price: '$59/mo', 
-    features: ['4 pages', 'Managed hosting & SSL', 'Monthly updates'] 
+const outcomePillars = [
+  {
+    emoji: '🧭',
+    title: 'Strategy baked in',
+    desc: 'Every site starts with positioning, messaging, and user journeys tailored to your buyers.',
+    points: ['Persona-backed narrative', 'Conversion-focused architecture', 'Search-friendly content planning']
   },
-  { 
-    name: 'Ecommerce / Large Businesses', 
-    price: '$99/mo', 
-    features: ['Up to 10 pages', 'Priority updates', 'On-page SEO'] 
+  {
+    emoji: '🎨',
+    title: 'Design that feels like you',
+    desc: 'Custom UI systems, animation, and brand extensions so your experience is unmistakably yours.',
+    points: ['Component libraries for growth', 'Illustration & photography direction', 'Accessibility-first layouts']
   },
-  { 
-    name: 'Large Businesses/Startups', 
-    price: '$169/mo', 
-    features: ['Unlimited pages', 'Custom components', 'Priority support'] 
+  {
+    emoji: '⚙️',
+    title: 'Infrastructure handled',
+    desc: 'Hosting, performance, monitoring, and security updates handled by the team that built it.',
+    points: ['Managed hosting & SSL', 'Analytics + funnel instrumentation', 'Iterative optimizations every month']
   }
 ]
 
-const faqs = [
+const allFeatures = [
   {
-    q: "How quickly can you launch my website?",
-    a: "Most small business sites launch in 2–4 weeks depending on scope and assets. We'll align on a timeline at kickoff."
+    emoji: '📝',
+    title: 'Story-driven copywriting',
+    desc: 'Voice-of-customer interviews and tailored messaging to communicate why clients should choose you.'
+  },
+  { emoji: '📐', title: 'Experience architecture', desc: 'Information architecture, UX flows, and component design mapped to your customer journey.' },
+  { emoji: '💻', title: 'Responsive development', desc: 'Clean, performant code that works across browsers, devices, and assistive technology.' },
+  { emoji: '🚀', title: 'Launch management', desc: 'Domain, DNS, analytics, redirects, QA, and punch-list handled for a smooth go-live.' },
+  { emoji: '📈', title: 'Conversion optimization', desc: 'Heatmaps, funnel tracking, and iterative experiments to keep improving results.' },
+  { emoji: '🤝', title: 'Ongoing partnership', desc: 'Monthly planning calls, async updates, and a dedicated Slack channel with your pod.' }
+]
+
+const timelineCommitments = [
+  'Weekly working sessions to keep momentum',
+  'Async Loom recaps after every milestone',
+  'Shared project hub with timelines and assets',
+  'Clear scope guardrails with room for iteration'
+]
+
+const launchTimeline = [
+  {
+    week: 'WK1',
+    label: 'Kickoff',
+    title: 'Insight & strategy sprint',
+    detail: 'Stakeholder interviews, analytics review, positioning and sitemap confirmation.'
   },
   {
-    q: "What's included in monthly updates?",
-    a: "Content edits, image swaps, adding new sections/pages within plan limits, and iterative improvements to design and UX."
+    week: 'WK2',
+    label: 'Structure',
+    title: 'Copy and UX prototypes',
+    detail: 'Draft page outlines, copy decks, and wireframes for core conversion paths.'
   },
   {
-    q: "Can I use my existing domain and email?",
-    a: "Yes. We connect and manage your DNS and SSL. Your email stays where it is; we'll help make sure it keeps working."
+    week: 'WK3',
+    label: 'Design',
+    title: 'Visual exploration & system build',
+    detail: 'Create moodboards, component library, and design proofs ready for dev handoff.'
   },
   {
-    q: "Do you migrate content from my old site?",
-    a: "We can migrate key pages and assets as part of setup. Larger migrations can be scoped as an add‑on."
+    week: 'WK4',
+    label: 'Build',
+    title: 'Development & integrations',
+    detail: 'Code responsive templates, configure CMS integrations, and connect analytics.'
   },
   {
-    q: "Who owns the content and domain?",
-    a: "You do. Your brand assets, copy, media, and domain remain yours. We manage hosting and updates for you."
+    week: 'WK5',
+    label: 'Launch',
+    title: 'QA, training & go-live',
+    detail: 'Full device QA, governance handoff, domain updates, and launch announcement assets.'
+  }
+]
+
+const pricingTiers = [
+  {
+    segment: 'For founders',
+    name: 'Core Launch',
+    price: '$79/mo',
+    desc: 'Perfect for new ventures that need a polished home base and clear storytelling.',
+    features: ['Up to 6 custom pages', 'Foundational SEO + analytics setup', 'Monthly optimization sprint'],
+    cta: 'a core launch'
   },
   {
-    q: "Do you support ecommerce?",
-    a: "Yes. Our Ecommerce / Large Businesses plan is designed for stores and growing operations. We'll recommend the right stack."
+    segment: 'For growing teams',
+    name: 'Growth Site',
+    price: '$129/mo',
+    desc: 'Designed for teams iterating quickly with campaigns, landing pages, and integrations.',
+    features: ['Unlimited page iterations', 'Conversion experiments + reporting', 'CRM & marketing integrations'],
+    cta: 'a growth build'
+  },
+  {
+    segment: 'For complex orgs',
+    name: 'Experience Platform',
+    price: 'Custom',
+    desc: 'Match multi-region, multi-brand, or product ecosystem needs with a dedicated squad.',
+    features: ['Advanced localization & accessibility', 'Systems architecture + documentation', 'Priority roadmap planning'],
+    cta: 'an experience platform'
   }
 ]
 </script>
