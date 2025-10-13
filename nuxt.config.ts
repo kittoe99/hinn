@@ -12,5 +12,15 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Professional websites, AI agents, and marketing services' }
       ]
     }
+  },
+  runtimeConfig: {
+    // Private keys (server-side only)
+    supabaseServiceRoleKey: '',
+    
+    // Public keys (exposed to client)
+    public: {
+      supabaseUrl: '',
+      supabaseAnonKey: '',
+    }
   }
 })
