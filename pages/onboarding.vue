@@ -109,7 +109,7 @@
                     <path d="M9 12h6m-6 3h3" />
                   </svg>
                   <svg
-                    v-else-if="stepSummaries[currentStep - 1].icon === 'pages'"
+                    v-else-if="stepSummaries[currentStep - 1].icon === 'palette'"
                     class="h-6 w-6"
                     fill="none"
                     stroke="currentColor"
@@ -118,8 +118,9 @@
                     stroke-width="1.5"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M5.25 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9A2.25 2.25 0 0 1 3 16.5v-9A2.25 2.25 0 0 1 5.25 5.25Z" />
-                    <path d="M9.75 3H18a3 3 0 0 1 3 3v8.25" />
+                    <path
+                      d="M15.75 3.75a6.75 6.75 0 0 1 0 13.5h-1.13a2.25 2.25 0 0 0-1.592.658l-1.66 1.66A1.5 1.5 0 0 1 8.321 18h-.571A6.75 6.75 0 0 1 8.25 4.5m7.5-.75a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 15.75 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 11.25 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 6.75 3.75Z"
+                    />
                   </svg>
                   <svg
                     v-else
@@ -273,6 +274,32 @@
                     <div>
                       <label class="mb-2 block text-sm font-medium text-primary">Service areas</label>
                       <ServiceAreaPicker v-model="formData.serviceAreas" />
+                      <div
+                        v-if="availableSeedAreas.length"
+                        class="mt-3 rounded-2xl border border-dashed border-accent-soft bg-accent-subtle/40 p-4 text-xs text-secondary"
+                      >
+                        <p class="text-sm font-semibold text-primary">Quick add from saved info</p>
+                        <p class="mt-1">Use locations you’ve already shared to jump-start your coverage.</p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                          <button
+                            v-for="area in availableSeedAreas"
+                            :key="area.placeId || area.name"
+                            type="button"
+                            class="rounded-full border border-accent-soft bg-white px-3 py-1.5 text-xs font-semibold text-primary transition hover:border-accent-primary"
+                            @click="useSeedArea(area)"
+                          >
+                            Add {{ area.displayName || area.name }}
+                          </button>
+                          <button
+                            v-if="availableSeedAreas.length > 1"
+                            type="button"
+                            class="rounded-full border border-transparent bg-accent-primary px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-accent-focus"
+                            @click="useAllSeedAreas"
+                          >
+                            Add all
+                          </button>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="grid gap-4 sm:grid-cols-2">
@@ -418,64 +445,24 @@
               <!-- Step 3 -->
               <div v-if="currentStep === 3" class="space-y-6">
                 <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                  <h3 class="text-base font-semibold text-primary">What pages do you need?</h3>
-                  <p class="mt-1 text-sm text-secondary">Select the pages you'd like on your website.</p>
+                  <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
+                  <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we’ll fine-tune the details together.</p>
 
-                  <div class="mt-6 grid gap-3 sm:grid-cols-2">
-                    <label
-                      v-for="page in suggestedPages"
-                      :key="page"
-                      class="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white p-3 text-sm text-primary transition hover:border-accent-soft hover:bg-neutral-50"
-                    >
-                      <input
-                        type="checkbox"
-                        :value="page"
-                        v-model="formData.selectedPages"
-                        class="h-4 w-4 rounded border-neutral-300 text-accent-primary focus:ring-accent-soft"
-                      />
-                      <span>{{ page }}</span>
-                    </label>
+                  <div v-if="submissionErrors.length" class="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                    <p class="font-semibold">Almost there! Please complete the highlighted items:</p>
+                    <ul class="mt-2 list-disc space-y-1 pl-5">
+                      <li v-for="error in submissionErrors" :key="error">{{ error }}</li>
+                    </ul>
                   </div>
 
-                  <div class="mt-6">
-                    <label class="mb-1 block text-sm font-medium text-primary">Additional Pages (optional)</label>
-                    <input
-                      v-model="formData.customPages"
-                      type="text"
-                      class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                      placeholder="e.g., Team, Careers, Press"
-                    />
+                  <div v-if="isSubmitted" class="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
+                    <p class="font-semibold">Thanks! Your onboarding answers are saved.</p>
+                    <p class="mt-1">We’ll review everything and reach out with next steps shortly.</p>
                   </div>
 
-                  <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <button
-                      type="button"
-                      @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
-                    >
-                      Back
-                    </button>
-                    <button
-                      type="button"
-                      @click="nextStep"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
-                    >
-                      Continue
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Step 4 -->
-              <div v-if="currentStep === 4" class="space-y-6">
-                <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                  <h3 class="text-base font-semibold text-primary">Design preferences</h3>
-                  <p class="mt-1 text-sm text-secondary">Outline the look, feel, and any must-have details.</p>
-
-                  <div class="mt-6 space-y-6">
+                  <form @submit.prevent="handleSubmit" class="mt-6 space-y-6">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Style preferences</label>
+                      <label class="mb-2 block text-sm font-medium text-primary">Overall look</label>
                       <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         <button
                           v-for="style in designStyles"
@@ -495,7 +482,7 @@
                     </div>
 
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">How should it feel?</label>
+                      <label class="mb-2 block text-sm font-medium text-primary">Mood</label>
                       <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         <button
                           v-for="tone in emotionalOptions"
@@ -514,28 +501,71 @@
                       </div>
                     </div>
 
+                    <div>
+                      <label class="mb-2 block text-sm font-medium text-primary">Color theme</label>
+                      <p class="text-xs text-secondary">Pick a starting palette—we can adjust or add brand colors later.</p>
+                      <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <button
+                          v-for="theme in colorThemes"
+                          :key="theme.value"
+                          type="button"
+                          @click="formData.colorTheme = theme.value"
+                          :class="[
+                            'flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition',
+                            formData.colorTheme === theme.value
+                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                          ]"
+                        >
+                          <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-1">
+                              <span
+                                v-for="swatch in theme.swatches"
+                                :key="swatch"
+                                class="h-6 w-6 rounded-full border border-white/70 shadow-sm"
+                                :style="{ backgroundColor: swatch }"
+                              />
+                            </div>
+                            <span class="text-sm font-medium">{{ theme.label }}</span>
+                          </div>
+                          <svg
+                            v-if="formData.colorTheme === theme.value"
+                            class="h-4 w-4 text-accent-primary"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0Z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
                     <div class="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label class="mb-2 block text-sm font-medium text-primary">Accessibility</label>
+                        <label class="mb-2 block text-sm font-medium text-primary">Text contrast</label>
                         <div class="grid grid-cols-2 gap-2">
                           <button
                             type="button"
                             @click="formData.highContrast = false"
                             :class="[
                               'rounded-2xl border px-4 py-2 text-sm transition',
-                              !formData.highContrast
+                              formData.highContrast === false
                                 ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
                                 : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                             ]"
                           >
-                            Standard contrast
+                            Standard
                           </button>
                           <button
                             type="button"
                             @click="formData.highContrast = true"
                             :class="[
                               'rounded-2xl border px-4 py-2 text-sm transition',
-                              formData.highContrast
+                              formData.highContrast === true
                                 ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
                                 : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                             ]"
@@ -545,54 +575,55 @@
                         </div>
                       </div>
                       <div>
-                        <label class="mb-1 block text-sm font-medium text-primary">Brand colors (if any)</label>
+                        <label class="mb-1 block text-sm font-medium text-primary">Extra color notes (optional)</label>
                         <input
                           v-model="formData.brandColors"
                           type="text"
                           class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                          placeholder="e.g., Blue and gold, or #1E40AF"
+                          placeholder="Share any specific colors or hex codes"
                         />
                       </div>
                     </div>
 
                     <div class="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label class="mb-1 block text-sm font-medium text-primary">Inspiration sites</label>
+                        <label class="mb-1 block text-sm font-medium text-primary">Websites you like</label>
                         <textarea
                           v-model="formData.inspirationSites"
                           rows="2"
                           class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                          placeholder="Share URLs of sites you like"
+                          placeholder="Add any links that inspire you"
                         />
                       </div>
                       <div>
-                        <label class="mb-1 block text-sm font-medium text-primary">Additional notes</label>
+                        <label class="mb-1 block text-sm font-medium text-primary">Anything else we should know?</label>
                         <textarea
                           v-model="formData.additionalNotes"
                           rows="2"
                           class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                          placeholder="Any must-haves or creative direction"
+                          placeholder="Special requests, must-have sections, or questions"
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <button
-                      type="button"
-                      @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
-                    >
-                      Back
-                    </button>
-                    <button
-                      type="button"
-                      @click="handleSubmit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
-                    >
-                      Complete onboarding
-                    </button>
-                  </div>
+                    <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                      <button
+                        type="button"
+                        @click="prevStep"
+                        class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="submit"
+                        :disabled="isSubmitting"
+                        class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:cursor-not-allowed disabled:opacity-70"
+                      >
+                        <span v-if="isSubmitting">Saving…</span>
+                        <span v-else>Complete onboarding</span>
+                      </button>
+                    </div>
+                  </form>
                 </div>
 
                 <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
@@ -610,6 +641,27 @@
                         <path d="M5 12h14m-7-7 7 7-7 7" />
                       </svg>
                     </NuxtLink>
+                  </div>
+                  <div v-if="submissionResult" class="mt-5 rounded-2xl border border-neutral-200 bg-white p-4 text-xs text-secondary">
+                    <p class="text-sm font-semibold text-primary">Quick recap</p>
+                    <dl class="mt-3 grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <dt class="font-medium text-primary">Site type</dt>
+                        <dd>{{ submissionResult.siteType || 'Not provided' }}</dd>
+                      </div>
+                      <div>
+                        <dt class="font-medium text-primary">Primary goal</dt>
+                        <dd>{{ submissionResult.primaryGoal || 'Not provided' }}</dd>
+                      </div>
+                      <div>
+                        <dt class="font-medium text-primary">Contact</dt>
+                        <dd>{{ submissionResult.businessEmail }}</dd>
+                      </div>
+                      <div>
+                        <dt class="font-medium text-primary">Services</dt>
+                        <dd>{{ submissionResult.selectedServices?.length ? submissionResult.selectedServices.join(', ') : 'Not provided' }}</dd>
+                      </div>
+                    </dl>
                   </div>
                 </div>
               </div>
@@ -681,56 +733,40 @@ const stepSummaries = [
     icon: 'clipboard'
   },
   {
-    id: 'pages',
-    title: 'Pages & features',
-    headline: 'Select the pages and experiences you want at launch.',
-    description: 'Pick the pages you need now—we can always expand later.',
-    icon: 'pages'
-  },
-  {
     id: 'design',
-    title: 'Design preferences',
-    headline: 'Capture brand details, inspiration, and must-haves.',
-    description: 'Share style cues, color palettes, and creative notes.',
-    icon: 'profile'
+    title: 'Brand & style',
+    headline: 'Capture the visual direction that feels right.',
+    description: 'Tell us how it should look, feel, and sound.',
+    icon: 'palette'
   }
 ]
 
 const totalSteps = stepSummaries.length
 
 const formData = ref({
-  siteType: onboardingSeed.siteType || '',
-  businessName: onboardingSeed.name || '',
-  category: onboardingSeed.category || '',
+  siteType: '',
+  businessName: '',
+  category: '',
   description: '',
-  businessEmail: onboardingSeed.businessEmail || '',
-  businessPhone: onboardingSeed.businessPhone || '',
-  contactMethod: onboardingSeed.contactMethod || '',
-  selectedServices: [...(onboardingSeed.selectedServices || [])],
-  serviceAreas:
-    onboardingSeed.cities?.map(city => ({
-      placeId: city.displayName || city.name,
-      name: city.name,
-      displayName: city.displayName || city.name,
-      lat: city.lat,
-      lon: city.lon,
-      radiusKm: city.radiusKm || 10
-    })) || [],
-  coverageType: onboardingSeed.coverageType || '',
-  onSiteMode: onboardingSeed.onSiteMode || '',
-  businessHoursMode: onboardingSeed.businessHoursMode || '',
-  primaryGoal: onboardingSeed.primaryGoal || '',
-  languages: [...(onboardingSeed.languages || [])],
-  primaryLanguage: onboardingSeed.primaryLanguage || '',
-  hasLogo: onboardingSeed.hasLogo ?? false,
-  highContrast: onboardingSeed.highContrast ?? false,
+  businessEmail: '',
+  businessPhone: '',
+  contactMethod: '',
+  selectedServices: [],
+  serviceAreas: [],
+  coverageType: '',
+  onSiteMode: '',
+  businessHoursMode: '',
+  primaryGoal: '',
+  languages: [],
+  primaryLanguage: '',
+  hasLogo: null,
+  highContrast: false,
   brandColors: '',
+  colorTheme: '',
   inspirationSites: '',
   additionalNotes: '',
-  selectedPages: [...(onboardingSeed.envisionedPages || [])],
-  customPages: '',
-  designStyles: [...(onboardingSeed.designStyles || [])],
-  emotionalImpact: [...(onboardingSeed.emotionalImpact || [])]
+  designStyles: [],
+  emotionalImpact: []
 })
 
 const siteTypes = [
@@ -759,39 +795,11 @@ const categories = [
   'Other'
 ]
 
-const suggestedPages = computed(() => {
-  const basePages = new Set(['Home', 'About', 'Contact'])
-  const typePages = {
-    'Small business': ['Services', 'Pricing', 'FAQ'],
-    'Ecommerce': ['Shop', 'Cart', 'Checkout'],
-    'Portfolio': ['Work', 'Case Studies'],
-    'Blog': ['Articles', 'Categories'],
-    'SaaS': ['Features', 'Pricing', 'Docs'],
-    'Agency': ['Services', 'Work', 'Testimonials'],
-    'Nonprofit': ['Mission', 'Donate', 'Volunteer'],
-    'Community': ['Forums', 'Events', 'Members'],
-    'Personal brand': ['Speaking', 'Coaching', 'Newsletter'],
-    'Hobby site': ['Articles', 'Gallery', 'Guides']
-  }
-  
-  const additional = typePages[formData.value.siteType] || []
-  additional.forEach(page => basePages.add(page))
-  ;(onboardingSeed.envisionedPages || []).forEach(page => basePages.add(page))
-  return Array.from(basePages)
-})
-
-const designStyles = [
-  'Modern',
-  'Minimal',
-  'Bold',
-  'Classic',
-  'Playful',
-  'Professional'
-]
+const designStyles = ['Clean & simple', 'Bold & bright', 'Elegant & classic', 'Playful & friendly']
 
 const contactMethods = [
   { label: 'Email', value: 'email' },
-  { label: 'Phone', value: 'phone' },
+  { label: 'Phone call', value: 'phone' },
   { label: 'Text message', value: 'text' },
   { label: 'Video call', value: 'video' }
 ]
@@ -817,23 +825,39 @@ const onSiteModes = [
 ]
 
 const hoursOptions = [
-  { label: 'Standard', value: 'standard' },
-  { label: 'Extended', value: 'extended' },
-  { label: '24/7', value: 'always' }
+  { label: 'Standard (Mon–Fri)', value: 'standard' },
+  { label: 'Extended (Mon–Sat)', value: 'extended' },
+  { label: '24/7 availability', value: 'always' },
+  { label: 'Weekends only', value: 'weekends' },
+  { label: 'By appointment', value: 'appointment' },
+  { label: 'Seasonal or custom', value: 'custom' }
 ]
 
-const goalOptions = ['Sales', 'Leads', 'Bookings', 'Awareness', 'Support']
+const goalOptions = [
+  'Sell more products or services',
+  'Book more appointments',
+  'Get more inquiries',
+  'Share updates or content',
+  'Something else'
+]
 
 const languageOptions = ['English', 'Spanish', 'French', 'German', 'Portuguese', 'Italian', 'Other']
 
 const primaryLanguageOptions = languageOptions
 
 const logoOptions = [
-  { label: 'We have a logo', value: 'yes' },
-  { label: 'Need a new logo', value: 'no' }
+  { label: 'Yes, we have one', value: 'yes' },
+  { label: 'Not yet, need help', value: 'no' }
 ]
 
-const emotionalOptions = ['Exciting', 'Trustworthy', 'Playful', 'Premium', 'Calm', 'Bold']
+const emotionalOptions = ['Friendly', 'Energetic', 'Trustworthy', 'Calm']
+
+const colorThemes = [
+  { value: 'ocean', label: 'Ocean blues', swatches: ['#1D4ED8', '#3B82F6', '#93C5FD'] },
+  { value: 'sunrise', label: 'Sunrise glow', swatches: ['#BE123C', '#F97316', '#FACC15'] },
+  { value: 'fresh', label: 'Fresh greens', swatches: ['#047857', '#10B981', '#6EE7B7'] },
+  { value: 'slate', label: 'Slate neutrals', swatches: ['#0F172A', '#475569', '#E2E8F0'] }
+]
 
 const milestones = [
   'Kickoff call within two business days',
@@ -841,6 +865,24 @@ const milestones = [
   'First build handoff with review links in week two',
   'Iterate and launch with analytics baseline in week three'
 ]
+
+const mapCityToArea = city => ({
+  placeId: city.displayName || city.name,
+  name: city.name,
+  displayName: city.displayName || city.name,
+  lat: city.lat,
+  lon: city.lon,
+  radiusKm: city.radiusKm || 10
+})
+
+const seedAreaSuggestions = computed(() => (onboardingSeed.cities || []).map(mapCityToArea))
+
+const availableSeedAreas = computed(() =>
+  seedAreaSuggestions.value.filter(area => {
+    const key = area.placeId || area.name
+    return !formData.value.serviceAreas.some(current => (current.placeId || current.name) === key)
+  })
+)
 
 const toggleArrayValue = (array, value) => {
   const next = array.slice()
@@ -867,6 +909,23 @@ const toggleDesignStyle = style => {
 
 const toggleEmotion = tone => {
   formData.value.emotionalImpact = toggleArrayValue(formData.value.emotionalImpact, tone)
+}
+
+const addServiceArea = area => {
+  if (!area) return
+  const key = area.placeId || area.name
+  const exists = formData.value.serviceAreas.some(current => (current.placeId || current.name) === key)
+  if (!exists) {
+    formData.value.serviceAreas = [...formData.value.serviceAreas, { ...area }]
+  }
+}
+
+const useSeedArea = area => {
+  addServiceArea(area)
+}
+
+const useAllSeedAreas = () => {
+  availableSeedAreas.value.forEach(area => addServiceArea(area))
 }
 
 watch(
@@ -903,12 +962,45 @@ const jumpTo = step => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-const handleSubmit = () => {
-  // In a real app, this would save to database
-  console.log('Onboarding data:', formData.value)
-  alert('Onboarding complete! In production, this would save your preferences and redirect you to your dashboard.')
+const submissionErrors = ref([])
+const isSubmitting = ref(false)
+const isSubmitted = ref(false)
+const submissionResult = ref(null)
 
-  // Redirect to dashboard or next step
-  // navigateTo('/dashboard')
+const requiredFields = [
+  { key: 'siteType', label: 'Site type' },
+  { key: 'businessName', label: 'Business or project name' },
+  { key: 'businessEmail', label: 'Business email' },
+  { key: 'contactMethod', label: 'Preferred contact method' },
+  { key: 'primaryGoal', label: 'Primary goal' }
+]
+
+const handleSubmit = async () => {
+  submissionErrors.value = []
+
+  const missing = requiredFields.filter(field => {
+    const value = formData.value[field.key]
+    return value === '' || value === null || value === undefined
+  })
+
+  if (missing.length) {
+    submissionErrors.value = missing.map(field => `${field.label} is required.`)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    return
+  }
+
+  isSubmitting.value = true
+  await new Promise(resolve => setTimeout(resolve, 400))
+  submissionResult.value = JSON.parse(JSON.stringify(formData.value))
+  isSubmitting.value = false
+  isSubmitted.value = true
+  console.log('Onboarding submission:', submissionResult.value)
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
+watch(currentStep, step => {
+  if (step !== totalSteps) {
+    submissionErrors.value = []
+  }
+})
 </script>

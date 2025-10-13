@@ -167,7 +167,8 @@ watch(
         `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q=${encodeURIComponent(newQuery)}`,
         {
           headers: {
-            Accept: 'application/json'
+            Accept: 'application/json',
+            'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
           },
           signal: controller.value.signal
         }
