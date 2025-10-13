@@ -34,12 +34,21 @@
                 See everything included
               </a>
             </div>
-            <div class="mt-6 grid gap-3 text-sm text-neutral-600 sm:grid-cols-2 sm:gap-4">
-              <div v-for="benefit in heroBenefits" :key="benefit" class="flex items-start gap-2 rounded-2xl bg-white/70 px-4 py-3 ring-1 ring-neutral-200">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 h-4 w-4 text-accent-primary">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>{{ benefit }}</span>
+            <div class="mt-6 grid gap-4 text-neutral-600 sm:grid-cols-2">
+              <div
+                v-for="benefit in heroBenefits"
+                :key="benefit.title"
+                class="flex items-start gap-3 rounded-3xl bg-white/80 px-5 py-4 ring-1 ring-neutral-200 transition-transform hover:-translate-y-1"
+              >
+                <div class="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-accent-subtle text-accent-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" :d="benefit.icon" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-primary">{{ benefit.title }}</div>
+                  <p class="mt-1 text-xs leading-relaxed text-secondary">{{ benefit.description }}</p>
+                </div>
               </div>
             </div>
             <div class="mt-8">
@@ -87,16 +96,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Results bar -->
-    <section class="border-y border-neutral-200 bg-white/80 py-8">
-      <div class="max-w-5xl mx-auto grid gap-6 px-4 sm:grid-cols-3">
-        <div v-for="stat in heroStats" :key="stat.label" class="text-center sm:text-left">
-          <div class="text-3xl font-semibold text-primary">{{ stat.value }}</div>
-          <div class="mt-1 text-sm text-secondary">{{ stat.label }}</div>
         </div>
       </div>
     </section>
@@ -333,16 +332,26 @@ useHead({
 })
 
 const heroBenefits = [
-  'Dedicated product designer, strategist, and engineer',
-  'Unlimited iterations—new pages, experiments, and improvements',
-  'Hosting, monitoring, analytics, and SEO upkeep included',
-  'Integrations with your CRM, marketing stack, and tooling'
-]
-
-const heroStats = [
-  { label: 'Subscription launches shipped since 2021', value: '38' },
-  { label: 'Average time from kickoff to live site', value: '10 days' },
-  { label: 'Retention after first year on plan', value: '94%' }
+  {
+    title: 'Fractional product pod',
+    description: 'Partner with a strategist, designer, and engineer who launch together every sprint.',
+    icon: 'M5 13l4 4L19 7'
+  },
+  {
+    title: 'Iterate without limits',
+    description: 'Drop in new pages, experiments, and UX tune-ups whenever you need momentum.',
+    icon: 'M4 7v6a5 5 0 005 5h7m4-4V8a5 5 0 00-5-5H8'
+  },
+  {
+    title: 'Ops handled for you',
+    description: 'Hosting, monitoring, analytics, and SEO upkeep are bundled so nothing slips.',
+    icon: 'M12 6v12m6-6H6'
+  },
+  {
+    title: 'Connect your stack',
+    description: 'Integrations with your CRM, marketing tools, and data sources come standard.',
+    icon: 'M4 7h16M4 12h12M4 17h8'
+  }
 ]
 
 const partnerLogos = ['Product SaaS', 'Membership Brands', 'Creative Studios', 'Consultancies']

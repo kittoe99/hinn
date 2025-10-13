@@ -17,7 +17,7 @@
             <input
               v-model="stickyInput"
               type="text"
-              placeholder="Ask me anything…"
+              placeholder="Ask about scope, pricing, or timelines…"
               aria-label="Ask Me Anything"
               class="w-[56vw] max-w-[28rem] min-w-[220px] rounded-full border-0 bg-transparent px-2 py-1.5 text-sm text-primary placeholder:text-neutral-400 focus:outline-none"
             />
@@ -25,7 +25,7 @@
               type="submit"
               class="inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-semibold bg-accent-primary text-white shadow-[0_6px_16px_rgba(217,119,89,0.18)] transition-all hover:brightness-95"
             >
-              Ask
+              Send
             </button>
           </div>
         </form>
@@ -33,54 +33,79 @@
     </div>
 
     <!-- Full section in-flow -->
-    <section ref="sectionRef" class="py-6 md:py-8">
-      <div class="max-w-3xl mx-auto px-3 sm:px-4">
-        <h2 class="text-xl md:text-2xl font-semibold tracking-tight text-primary text-center flex items-center justify-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="h-5 w-5 text-accent-primary"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
-          </svg>
-          <span>Ask Me Anything</span>
-        </h2>
-        <p class="mt-2 text-sm md:text-base text-secondary text-center">
-          Ask about pricing, features, timelines, or your website needs—I'll help instantly.
-        </p>
-        <form @submit.prevent="handleMainSubmit" class="mt-5">
-          <div class="relative">
-            <input
-              v-model="mainInput"
-              type="text"
-              placeholder="Ask about pricing, features, timelines, content updates..."
-              aria-label="Ask Me Anything"
-              class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3 pr-28 text-sm md:text-base text-primary shadow-soft focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-soft)]"
-            />
-            <button
-              type="submit"
-              class="absolute right-1 top-1.5 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold bg-accent-primary text-white shadow-[0_6px_20px_rgba(217,119,89,0.18)] transition-all hover:brightness-95"
-            >
-              Ask
-            </button>
-          </div>
-        </form>
-        <div class="mt-3 md:mt-4">
-          <div class="overflow-x-auto hide-scrollbar px-2 touch-pan-x" aria-label="Suggested questions">
-            <div class="flex flex-nowrap items-center gap-2 whitespace-nowrap sm:justify-center">
-              <button 
-                v-for="suggestion in suggestions" 
-                :key="suggestion"
-                type="button" 
-                @click="handleSuggestion(suggestion)" 
-                class="shrink-0 snap-start px-3 py-1.5 rounded-full border border-neutral-200 bg-white text-xs md:text-sm text-primary hover:bg-neutral-50"
-              >
-                {{ suggestion }}
-              </button>
+    <section ref="sectionRef" class="py-12 md:py-16">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-900 via-neutral-900 to-[#1c1814] text-neutral-50 shadow-[0_32px_80px_-48px_rgba(0,0,0,0.65)]">
+          <div class="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-accent-primary/20 blur-3xl" aria-hidden="true" />
+          <div class="absolute -bottom-16 -left-10 h-48 w-48 rounded-full bg-accent-subtle/30 blur-3xl" aria-hidden="true" />
+          <div class="relative grid gap-10 px-6 py-9 md:px-10 lg:grid-cols-[minmax(0,1.1fr),minmax(0,24rem)] lg:py-12">
+            <div>
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.26em] text-white/80">
+                Human + AI support
+              </div>
+              <h2 class="mt-5 text-2xl md:text-3xl font-semibold tracking-tight text-white">
+                Ask the Hinn team anything about your launch
+              </h2>
+              <p class="mt-3 text-sm md:text-base text-white/70">
+                Need clarity on scope, timelines, or how the subscription works? Start a conversation and we’ll walk you through the next steps in minutes.
+              </p>
+              <ul class="mt-6 space-y-4 text-sm text-white/80">
+                <li
+                  v-for="point in amaTalkingPoints"
+                  :key="point"
+                  class="flex items-start gap-3"
+                >
+                  <span class="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-accent-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-3 w-3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>{{ point }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-[1.8rem] border border-white/10 bg-white/95 p-6 text-primary shadow-[0_20px_45px_-30px_rgba(15,23,42,0.6)] backdrop-blur">
+              <form @submit.prevent="handleMainSubmit">
+                <h3 class="text-base font-semibold text-primary">Drop in your question</h3>
+                <p class="mt-1 text-sm text-secondary">
+                  We’ll reply live in the chat and follow up with any resources mentioned.
+                </p>
+                <div class="mt-4">
+                  <label class="sr-only" for="ama-input">Ask Me Anything</label>
+                  <div class="relative">
+                    <input
+                      id="ama-input"
+                      v-model="mainInput"
+                      type="text"
+                      placeholder="e.g. Can you audit our current site before kickoff?"
+                      aria-label="Ask Me Anything"
+                      class="w-full rounded-2xl border border-neutral-200/80 bg-white px-5 py-3 pr-32 text-sm md:text-base text-primary shadow-soft focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-soft)]"
+                    />
+                    <button
+                      type="submit"
+                      class="absolute right-1 top-1.5 inline-flex items-center justify-center rounded-2xl bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_18px_rgba(217,119,89,0.28)] transition-all hover:brightness-95"
+                    >
+                      Start chat
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div class="mt-6">
+                <div class="text-xs font-semibold uppercase tracking-[0.24em] text-tertiary">Popular prompts</div>
+                <div class="mt-3 overflow-x-auto hide-scrollbar touch-pan-x" aria-label="Suggested questions">
+                  <div class="flex flex-nowrap items-center gap-2 whitespace-nowrap">
+                    <button
+                      v-for="suggestion in suggestions"
+                      :key="suggestion"
+                      type="button"
+                      @click="handleSuggestion(suggestion)"
+                      class="shrink-0 snap-start rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs md:text-sm text-primary transition-colors hover:bg-neutral-50"
+                    >
+                      {{ suggestion }}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -178,19 +203,23 @@ const mainInput = ref('')
 const stickyInput = ref('')
 
 const suggestions = [
-  "What's included in the plan?",
-  "How fast can you launch?",
-  "Can you use my domain?",
-  "Do you handle updates?",
-  "How much does it cost?"
+  'Can you migrate our current site into the new build?',
+  'What does onboarding look like after we sign up?',
+  'How do ongoing iterations and requests get prioritized?',
+  'Do you collaborate with internal marketing or dev teams?'
 ]
 
 const sampleResponses = [
-  "Great question! Our plan includes design, hosting, SSL, analytics, on-page SEO, and monthly content updates.",
-  "We can typically launch an initial version within 3–5 business days, followed by quick iterations.",
-  "Yes — you can use your existing domain. We handle DNS and SSL setup so it's secure from day one.",
-  "We manage ongoing updates each month. Send content or requests anytime and we'll ship it.",
-  "Pricing is simple: a flat monthly rate with everything included. No hidden fees."
+  'Absolutely. We audit your current setup, migrate content into the new system, and keep redirects + SEO intact.',
+  'Onboarding kicks off with strategy sessions, a shared roadmap, and access to our sprint workspace within 48 hours.',
+  'Requests flow through our shared backlog. We review them weekly, slot quick wins instantly, and schedule larger drops into upcoming sprints.',
+  'Yes — we integrate with your in-house marketers, product managers, and engineers to keep workstreams aligned.'
+]
+
+const amaTalkingPoints = [
+  'Understand how the pay-monthly model maps to your roadmap',
+  'Plan migrations, integrations, and content workflows before kickoff',
+  'Preview sprint cadence, communication, and tooling with the team'
 ]
 
 let typeInterval = null
