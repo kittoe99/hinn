@@ -8,91 +8,27 @@
     <div class="relative">
       <section class="px-3 sm:px-4">
         <div class="mx-auto max-w-5xl pb-12 pt-16 md:pb-16">
-          <div class="flex flex-col gap-6 rounded-4xl border border-white/60 bg-white/70 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
-            <div class="flex flex-col gap-4">
-              <span class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">Start your build</span>
-              <div class="flex flex-col gap-3 text-primary">
-                <h1 class="text-3xl font-semibold tracking-tight md:text-4xl">
-                  A guided start to your Hinn subscription
-                </h1>
-                <p class="text-sm leading-6 text-secondary md:text-base">
-                  Move from idea to live website in days. Complete the essentials below and we’ll spin up a tailored workspace, recommended plan, and kickoff call for your team.
-                </p>
-              </div>
-            </div>
-
-            <div class="grid gap-4 sm:grid-cols-3">
-              <div
-                v-for="highlight in highlights"
-                :key="highlight.title"
-                class="rounded-2xl border border-soft bg-white p-4 shadow-sm"
-              >
-                <div class="flex items-center gap-3">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-subtle text-accent-primary">
-                    <svg
-                      v-if="highlight.icon === 'sparkles'"
-                      class="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 3v2m6.364.636-1.414 1.414M21 12h-2m-.636 6.364-1.414-1.414M12 19v2m-6.364-.636 1.414-1.414M3 12h2m.636-6.364 1.414 1.414M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" />
-                    </svg>
-                    <svg
-                      v-else-if="highlight.icon === 'calendar'"
-                      class="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" />
-                    </svg>
-                    <svg
-                      v-else
-                      class="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 18.5a2 2 0 0 0 2-2v-2.379a2 2 0 0 1 .588-1.414l2.707-2.707a2 2 0 0 0 .586-1.414V7a2 2 0 0 0-2-2h-1.083a2 2 0 0 1-1.414-.586l-.586-.586a2 2 0 0 0-1.414-.586H11a2 2 0 0 0-1.414.586l-.586.586A2 2 0 0 1 7.586 5H6.5A2.5 2.5 0 0 0 4 7.5V11a2 2 0 0 0 .586 1.414l2.828 2.828A2 2 0 0 1 8 16.657V18.5a2 2 0 0 0 2 2h2Z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-wide text-secondary">{{ highlight.kicker }}</p>
-                    <p class="text-sm font-medium text-primary">{{ highlight.title }}</p>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs leading-5 text-secondary">{{ highlight.copy }}</p>
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-3 rounded-2xl border border-dashed border-accent-soft bg-white p-4 text-sm text-secondary sm:flex-row sm:items-center sm:justify-between">
-              <div class="flex items-center gap-3">
-                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm font-semibold text-primary">Need a hand?</p>
-                  <p class="text-xs">Book an onboarding call and we’ll walk through the setup together.</p>
-                </div>
-              </div>
-              <NuxtLink
-                to="/onboarding"
-                class="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white transition hover:bg-primary/90"
-              >
-                Explore onboarding
-              </NuxtLink>
+          <div class="flex flex-col gap-5 rounded-4xl border border-white/60 bg-white/70 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
+            <span class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">Start your build</span>
+            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
+              A guided start to your Hinn subscription
+            </h1>
+            <p class="max-w-2xl text-sm leading-6 text-secondary md:text-base">
+              Complete the essentials so we can open your workspace, recommend the right plan, and send over kickoff details in one smooth flow.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 text-xs text-secondary">
+              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M12 6v12m6-6H6" />
+                </svg>
+                Takes about 5 minutes
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+                Kickoff invite follows submission
+              </span>
             </div>
           </div>
         </div>
@@ -276,9 +212,9 @@
                   </form>
                 </div>
 
-                <div class="rounded-3xl border border-dashed border-accent-soft bg-white/60 p-6 text-sm text-secondary">
+                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
                   <p class="font-semibold text-primary">Skip the form?</p>
-                  <p class="mt-2 leading-6">Send your details to <a class="font-medium text-accent-primary underline-offset-4 hover:underline" href="mailto:start@hinn.studio">start@hinn.studio</a> and we’ll handle setup for you.</p>
+                  <p class="mt-2 leading-5">Email <a class="font-medium text-accent-primary underline-offset-4 hover:underline" href="mailto:start@hinn.studio">start@hinn.studio</a> with your details and we’ll handle the setup.</p>
                 </div>
               </div>
 
@@ -301,7 +237,7 @@
                           : 'border-neutral-200 bg-white hover:border-accent-soft'
                       ]"
                     >
-                      <div v-if="plan.recommended" class="absolute -top-3 left-5 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow">
+                      <div v-if="plan.recommended" class="absolute -top-3 left-5 rounded-full bg-accent-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow">
                         Most popular
                       </div>
                       <div class="flex flex-wrap items-start justify-between gap-3">
@@ -447,7 +383,7 @@
                     <button
                       type="button"
                       @click="handleSubmit"
-                      class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
                     >
                       Proceed to payment
                     </button>
@@ -565,27 +501,6 @@ const support = [
   'Performance analytics dashboard',
   'A/B testing and experimentation support',
   'Proactive maintenance and updates'
-]
-
-const highlights = [
-  {
-    kicker: 'Setup time',
-    title: '10-minute guided flow',
-    copy: 'We capture the essentials and spin up your workspace right away.',
-    icon: 'sparkles'
-  },
-  {
-    kicker: 'Kickoff',
-    title: 'Collaborate on day one',
-    copy: 'Book a kickoff call to review priorities, deliverables, and your launch timeline.',
-    icon: 'calendar'
-  },
-  {
-    kicker: 'Support',
-    title: 'Always-on partnership',
-    copy: 'Async updates, weekly summaries, and a team monitoring performance 24/7.',
-    icon: 'lifebuoy'
-  }
 ]
 
 const nextStep = () => {

@@ -5,54 +5,29 @@
     <div class="relative">
       <section class="px-3 sm:px-4">
         <div class="mx-auto max-w-5xl pb-12 pt-16">
-          <div class="flex flex-col gap-6 rounded-4xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
-            <div class="flex flex-col gap-3">
-              <p class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">
-                Onboarding checklist
-              </p>
-              <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-                Welcome! Let’s design your launch plan
-              </h1>
-              <p class="text-sm leading-6 text-secondary md:text-base">
-                Answer a few questions so we can craft your site structure, recommend deliverables, and schedule your kickoff call. You’re {{ Math.round((currentStep / totalSteps) * 100) }}% done.
-              </p>
-            </div>
-
-            <div class="grid gap-4 md:grid-cols-3">
-              <div
-                v-for="card in introCards"
-                :key="card.title"
-                class="rounded-2xl border border-soft bg-white p-4 text-sm shadow-sm"
-              >
-                <p class="text-xs font-semibold uppercase tracking-wide text-secondary">{{ card.kicker }}</p>
-                <p class="mt-1 text-sm font-semibold text-primary">{{ card.title }}</p>
-                <p class="mt-2 text-xs leading-5 text-secondary">{{ card.copy }}</p>
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-3 rounded-2xl border border-dashed border-accent-soft bg-white p-4 text-sm text-secondary md:flex-row md:items-center md:justify-between">
-              <div class="flex items-center gap-3">
-                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm font-semibold text-primary">Kickoff scheduled in minutes</p>
-                  <p class="text-xs">Submit the flow to unlock a booking link for your intro call.</p>
-                </div>
-              </div>
-              <a
-                href="https://cal.com"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-semibold text-primary shadow-sm transition hover:bg-neutral-50"
-              >
-                Preview calendar
-                <svg class="ml-2 h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+          <div class="flex flex-col gap-5 rounded-4xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
+            <p class="w-fit rounded-full border border-accent-soft/70 bg-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-primary">
+              Onboarding checklist
+            </p>
+            <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">
+              Welcome! Let’s design your launch plan
+            </h1>
+            <p class="max-w-2xl text-sm leading-6 text-secondary md:text-base">
+              Share just the essentials so we can map your site structure, prep assets, and queue your kickoff call. You’re {{ Math.round((currentStep / totalSteps) * 100) }}% of the way there.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 text-xs text-secondary">
+              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                   <path d="M5 12h14m-7-7 7 7-7 7" />
                 </svg>
-              </a>
+                Kickoff link delivered after submission
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-accent-soft bg-white px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-accent-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M12 6v12m6-6H6" />
+                </svg>
+                Save progress automatically
+              </span>
             </div>
           </div>
         </div>
@@ -183,21 +158,20 @@
                   <h3 class="text-base font-semibold text-primary">What type of site do you need?</h3>
                   <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
 
-                  <div class="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
                     <button
                       v-for="type in siteTypes"
                       :key="type"
                       type="button"
                       @click="formData.siteType = type"
                       :class="[
-                        'flex h-full flex-col justify-between rounded-2xl border-2 p-4 text-left transition',
+                        'flex h-full flex-col justify-center rounded-2xl border-2 p-4 text-left transition',
                         formData.siteType === type
                           ? 'border-accent-primary bg-accent-subtle shadow-sm'
                           : 'border-neutral-200 bg-white hover:border-accent-soft'
                       ]"
                     >
                       <span class="text-sm font-semibold text-primary">{{ type }}</span>
-                      <span class="mt-3 text-xs text-secondary">{{ siteTypeCopy[type] }}</span>
                     </button>
                   </div>
 
@@ -214,9 +188,9 @@
                   </div>
                 </div>
 
-                <div class="rounded-3xl border border-dashed border-accent-soft bg-white/70 p-6 text-sm text-secondary">
+                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
                   <p class="font-semibold text-primary">Prefer to talk first?</p>
-                  <p class="mt-2 leading-6">Skip ahead by emailing your project brief to <a href="mailto:start@hinn.studio" class="font-medium text-accent-primary underline-offset-4 hover:underline">start@hinn.studio</a>. We’ll complete onboarding for you.</p>
+                  <p class="mt-2 leading-5">Email <a href="mailto:start@hinn.studio" class="font-medium text-accent-primary underline-offset-4 hover:underline">start@hinn.studio</a> and we’ll walk through onboarding together.</p>
                 </div>
               </div>
 
@@ -241,25 +215,17 @@
                     <div class="grid gap-4 sm:grid-cols-2">
                       <div>
                         <label class="mb-1 block text-sm font-medium text-primary">Industry/Category</label>
-                        <select
-                          v-model="formData.category"
-                          class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                        >
-                          <option value="">Select a category</option>
-                          <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
-                        </select>
+                        <FormSelect v-model="formData.category" :options="categories" placeholder="Select a category" />
                       </div>
                       <div>
                         <label class="mb-1 block text-sm font-medium text-primary">Target Location</label>
-                        <select
+                        <FormSelect
                           v-model="formData.country"
-                          class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                        >
-                          <option value="">Select a country</option>
-                          <option v-for="country in countries" :key="country.code" :value="country.code">
-                            {{ country.name }}
-                          </option>
-                        </select>
+                          :options="countries"
+                          option-label-key="name"
+                          option-value-key="code"
+                          placeholder="Select a country"
+                        />
                       </div>
                     </div>
 
@@ -295,16 +261,9 @@
                   </form>
                 </div>
 
-                <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
-                  <p class="text-sm font-semibold text-primary">Helpful tips</p>
-                  <ul class="mt-3 space-y-2 text-xs text-secondary">
-                    <li v-for="tip in tips" :key="tip" class="flex items-start gap-2">
-                      <svg class="mt-0.5 h-3.5 w-3.5 flex-none text-accent-primary" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                      </svg>
-                      <span>{{ tip }}</span>
-                    </li>
-                  </ul>
+                <div class="rounded-3xl border border-soft bg-white/80 p-5 text-xs text-secondary">
+                  <p class="font-semibold text-primary">Helpful tip</p>
+                  <p class="mt-2 leading-5">Mention key integrations or assets you already have so we can prep them for kickoff.</p>
                 </div>
               </div>
 
@@ -434,7 +393,7 @@
                     <button
                       type="button"
                       @click="handleSubmit"
-                      class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
                     >
                       Complete onboarding
                     </button>
@@ -469,6 +428,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import FormSelect from '~/components/FormSelect.vue'
 
 useHead({
   title: 'Onboarding - Hinn',
@@ -539,19 +499,6 @@ const siteTypes = [
   'Hobby site'
 ]
 
-const siteTypeCopy = {
-  'Small business': 'Service menus, trust signals, and booking-ready layouts.',
-  Ecommerce: 'Product grids, conversion flows, and integrations for sales.',
-  Portfolio: 'Gallery-first layouts to showcase case studies and work.',
-  Blog: 'Editorial tooling with tagging, SEO, and newsletter capture.',
-  SaaS: 'Feature storytelling, pricing, and onboarding experiments.',
-  Agency: 'Project highlights, service mix, and lead capture funnels.',
-  Nonprofit: 'Mission-driven storytelling with donation and volunteer flows.',
-  Community: 'Membership directories, events, and engagement hubs.',
-  'Personal brand': 'Personal narrative, offers, and list-building moments.',
-  'Hobby site': 'Flexible blocks for content, tutorials, and monetization.'
-}
-
 const categories = [
   'Restaurants',
   'Retail',
@@ -614,35 +561,11 @@ const styleCopy = {
   Professional: 'Polished visuals, trusted patterns, and business-first clarity.'
 }
 
-const introCards = [
-  {
-    kicker: 'Time to complete',
-    title: '5–7 minutes',
-    copy: 'You can pause anytime—your answers save automatically in the background.'
-  },
-  {
-    kicker: 'What we’ll do',
-    title: 'Build a tailored plan',
-    copy: 'Your responses inform the recommended architecture, design direction, and experiments.'
-  },
-  {
-    kicker: 'After submission',
-    title: 'Book your kickoff',
-    copy: 'Receive a meeting link, shared workspace invite, and next-step checklist instantly.'
-  }
-]
-
 const milestones = [
   'Kickoff call within two business days',
   'Design alignment and sitemap within week one',
   'First build handoff with review links in week two',
   'Iterate and launch with analytics baseline in week three'
-]
-
-const tips = [
-  'Share your differentiators to help us highlight them on key pages.',
-  'Mention any existing assets (brand guides, photography) we should use.',
-  'Note critical integrations—CRM, booking tools, or automations.'
 ]
 
 const nextStep = () => {
