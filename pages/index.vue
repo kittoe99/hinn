@@ -22,16 +22,16 @@
                 to="/get-started"
                 class="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-sm md:text-base font-semibold text-white transition-colors hover:bg-neutral-900"
               >
-                Book a discovery call
+                Get Started
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2 h-4 w-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </NuxtLink>
               <a
-                href="#subscription"
+                href="#features"
                 class="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm md:text-base font-semibold text-primary transition-colors hover:bg-neutral-100"
               >
-                See everything included
+                Features
               </a>
             </div>
             <div class="mt-6 grid gap-4 text-neutral-600 sm:grid-cols-2">
@@ -49,15 +49,6 @@
                   <div class="text-sm font-semibold text-primary">{{ benefit.title }}</div>
                   <p class="mt-1 text-xs leading-relaxed text-secondary">{{ benefit.description }}</p>
                 </div>
-              </div>
-            </div>
-            <div class="mt-8">
-              <div class="text-xs uppercase tracking-wide text-neutral-500">Trusted by teams building</div>
-              <div class="mt-3 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium text-neutral-500">
-                <span v-for="logo in partnerLogos" :key="logo" class="inline-flex items-center gap-2 text-neutral-500">
-                  <span class="h-2 w-2 rounded-full bg-neutral-300" />
-                  {{ logo }}
-                </span>
               </div>
             </div>
           </div>
@@ -104,7 +95,7 @@
     <AmaBar />
 
     <!-- Feature Section -->
-    <section class="mt-16 md:mt-20">
+    <section id="features" class="mt-16 md:mt-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="mx-auto max-w-3xl text-center">
           <div class="text-xs uppercase tracking-widest text-tertiary">Why brands choose hinn</div>
@@ -354,7 +345,6 @@ const heroBenefits = [
   }
 ]
 
-const partnerLogos = ['Product SaaS', 'Membership Brands', 'Creative Studios', 'Consultancies']
 
 const subscriptionHighlights = [
   {
