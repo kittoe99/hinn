@@ -3,7 +3,7 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <AskAnything />
+    <AmaBar />
   </div>
 </template>
 

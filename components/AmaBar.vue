@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="shouldShow">
     <!-- Sticky minimal bar shown at the bottom only when section scrolled away -->
     <div
       v-if="showSticky"
@@ -35,77 +35,8 @@
       </div>
     </div>
 
-    <!-- Full section in-flow -->
-    <section ref="sectionRef" class="relative overflow-hidden py-12 md:py-16">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/20 via-white to-white" aria-hidden="true" />
-      <div class="relative mx-auto max-w-4xl px-4 lg:px-6">
-        <div class="text-center">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="h-3.5 w-3.5"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
-            </svg>
-            AI Assistant
-          </div>
-          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-primary">
-            Ask Me Anything
-          </h2>
-          <p class="mt-3 text-base md:text-lg text-secondary max-w-2xl mx-auto">
-            Get instant answers about pricing, features, timelines, or your website needs.
-          </p>
-        </div>
-        
-        <form @submit.prevent="handleMainSubmit" class="mt-8">
-          <div class="relative max-w-2xl mx-auto">
-            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              v-model="mainInput"
-              type="text"
-              placeholder="Ask about pricing, features, timelines..."
-              aria-label="Ask Me Anything"
-              class="w-full rounded-2xl border-2 border-neutral-200 bg-white pl-12 pr-32 py-4 text-base text-primary placeholder:text-neutral-400 shadow-sm focus:outline-none focus:border-accent-primary focus:ring-4 focus:ring-accent-primary/10 transition-all"
-            />
-            <button
-              type="submit"
-              class="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent-primary/30 transition-all hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40"
-            >
-              <span>Ask</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </form>
-        
-        <div class="mt-6">
-          <p class="text-center text-xs text-tertiary mb-3">Popular questions:</p>
-          <div class="hide-scrollbar overflow-x-auto touch-pan-x" aria-label="Suggested questions">
-            <div class="flex flex-nowrap items-center gap-2 whitespace-nowrap justify-center">
-              <button
-                v-for="suggestion in suggestions"
-                :key="suggestion"
-                type="button"
-                @click="handleSuggestion(suggestion)"
-                class="shrink-0 snap-start rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm text-primary transition-all hover:border-accent-primary hover:bg-accent-subtle/20 hover:text-accent-primary"
-              >
-                {{ suggestion }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Hidden section for intersection observer -->
+    <section ref="sectionRef" class="h-0" aria-hidden="true"></section>
 
     <!-- Chat Modal -->
     <Teleport to="body">
@@ -183,6 +114,7 @@
 </template>
 
 <script setup>
+const route = useRoute()
 const sectionRef = ref(null)
 const messagesBoxRef = ref(null)
 const showSticky = ref(false)
@@ -196,6 +128,15 @@ const isThinking = ref(false)
 const typedText = ref('')
 const mainInput = ref('')
 const stickyInput = ref('')
+
+// Only show on homepage and product pages (website, agents, marketing)
+const shouldShow = computed(() => {
+  const path = route.path
+  return path === '/' || 
+         path.startsWith('/website') || 
+         path.startsWith('/agents') || 
+         path.startsWith('/marketing')
+})
 
 const suggestions = [
   "What's included in the plan?",
@@ -219,18 +160,10 @@ let lastY = 0
 let lastDirChangeTs = 0
 let nearBottomState = false
 
-// Intersection observer for sticky bar
+// Always show sticky bar
 onMounted(() => {
-  if (!sectionRef.value) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0]
-      showSticky.value = entry.intersectionRatio < 0.2
-    },
-    { root: null, threshold: [0, 0.2, 1] }
-  )
-  observer.observe(sectionRef.value)
+  // Always show the sticky bar on all pages
+  showSticky.value = true
 
   // Scroll tracking
   const MIN_DELTA = 24
@@ -278,7 +211,6 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
 
   onUnmounted(() => {
-    observer.disconnect()
     window.removeEventListener('scroll', onScroll)
     if (typeInterval) clearInterval(typeInterval)
     if (thinkTimeout) clearTimeout(thinkTimeout)

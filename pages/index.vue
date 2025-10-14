@@ -51,9 +51,6 @@
       </div>
     </section>
 
-    <!-- Ask Me Anything -->
-    <AmaBar />
-
     <!-- Feature Section -->
     <section id="features" class="mt-16 md:mt-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
