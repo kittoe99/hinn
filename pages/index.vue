@@ -1,51 +1,67 @@
 <template>
-  <div class="relative overflow-hidden bg-neutral-50">
-    <div class="absolute inset-x-0 top-0 -z-10 h-96 bg-gradient-to-b from-accent-subtle/60 via-white" />
-
+  <div class="relative overflow-hidden">
     <!-- Hero Section -->
-    <section class="pt-8 pb-16 md:pt-12 md:pb-24">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="mx-auto max-w-4xl text-center">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-neutral-600 ring-1 ring-neutral-200 backdrop-blur">
+    <section class="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-20">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/40 via-white to-white" aria-hidden="true" />
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]" aria-hidden="true" />
+      
+      <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
+        <div class="text-center max-w-4xl mx-auto">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
             <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-primary" />
             Pay monthly, cancel anytime
           </div>
-          <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-primary">
+          <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary">
             Professional Website Design & Development <span class="text-accent-primary">on Monthly Subscription</span>
           </h1>
-          <p class="mt-5 mx-auto max-w-2xl text-base md:text-lg text-secondary">
+          <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
             Custom web design, full-stack development, cloud hosting, and AI-powered marketing automation—all included in one predictable monthly plan.
           </p>
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <NuxtLink
               to="/get-started"
-              class="inline-flex items-center justify-center rounded-full bg-black px-7 py-3.5 text-sm md:text-base font-semibold text-white transition-colors hover:bg-neutral-900"
+              class="w-full sm:w-auto rounded-full bg-accent-primary px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-primary/30 transition hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40"
             >
               Get Started
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2 h-4 w-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline-block ml-2 h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </NuxtLink>
             <a
               href="#features"
-              class="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 bg-white px-6 py-3.5 text-sm md:text-base font-semibold text-primary transition-colors hover:bg-neutral-100"
+              class="w-full sm:w-auto rounded-full border-2 border-neutral-300 bg-white px-8 py-4 text-base font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20"
             >
               Learn More
             </a>
           </div>
           
-          <div class="mt-12 grid gap-6 text-left sm:grid-cols-3">
-            <div class="rounded-2xl bg-white/80 p-5 ring-1 ring-neutral-200">
-              <div class="text-2xl font-bold text-primary">$1,650/mo</div>
-              <p class="mt-1 text-sm text-secondary">All-inclusive web services</p>
+          <!-- Stats -->
+          <div class="mt-16 grid grid-cols-3 gap-6 md:gap-8">
+            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
+              <div class="text-3xl md:text-4xl font-bold text-accent-primary">$1,650</div>
+              <p class="mt-2 text-sm text-secondary">Per month</p>
             </div>
-            <div class="rounded-2xl bg-white/80 p-5 ring-1 ring-neutral-200">
-              <div class="text-2xl font-bold text-primary">10-day</div>
-              <p class="mt-1 text-sm text-secondary">Website launch timeline</p>
+            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
+              <div class="text-3xl md:text-4xl font-bold text-accent-primary">10 days</div>
+              <p class="mt-2 text-sm text-secondary">Average launch</p>
             </div>
-            <div class="rounded-2xl bg-white/80 p-5 ring-1 ring-neutral-200">
-              <div class="text-2xl font-bold text-primary">Unlimited</div>
-              <p class="mt-1 text-sm text-secondary">Revisions & updates</p>
+            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
+              <div class="text-3xl md:text-4xl font-bold text-accent-primary">24/7</div>
+              <p class="mt-2 text-sm text-secondary">Support</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Visual Element -->
+        <div class="mt-10 relative max-w-3xl mx-auto">
+          <div class="rounded-xl border border-neutral-200 bg-white p-1 shadow-lg">
+            <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-accent-subtle via-neutral-100 to-white flex items-center justify-center">
+              <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 mx-auto text-accent-primary">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                <p class="mt-2 text-xs font-medium text-neutral-500">Website Preview</p>
+              </div>
             </div>
           </div>
         </div>
@@ -59,31 +75,25 @@
     <section id="features" class="mt-16 md:mt-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="mx-auto max-w-3xl text-center">
-          <div class="text-xs uppercase tracking-widest text-tertiary">Complete Web Solutions</div>
-          <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Full-Service Website Development & Digital Marketing</h2>
+          <div class="text-xs uppercase tracking-widest text-tertiary">What's Included</div>
+          <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Everything You Need to Succeed Online</h2>
           <p class="mt-3 text-base text-secondary">
-            From UX strategy and responsive web design to React/Vue development, SEO optimization, and AI chatbot integration—everything your business needs to succeed online.
+            Design, development, hosting, and marketing—all in one subscription.
           </p>
         </div>
-        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <div
             v-for="feature in featureHighlights"
             :key="feature.title"
-            class="group rounded-3xl border border-soft bg-white p-6 transition-all hover:-translate-y-1 hover:border-accent-subtle hover:shadow-[0_30px_60px_-40px_rgba(15,23,42,0.45)]"
+            class="group rounded-2xl border border-soft bg-white p-5 transition-all hover:border-accent-primary hover:shadow-md"
           >
-            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-accent-subtle text-accent-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
               </svg>
             </div>
-            <h3 class="mt-4 text-xl font-semibold text-primary">{{ feature.title }}</h3>
-            <p class="mt-2 text-sm text-secondary">{{ feature.description }}</p>
-            <ul v-if="feature.points" class="mt-3 space-y-1 text-sm text-neutral-600">
-              <li v-for="point in feature.points" :key="point" class="flex gap-2">
-                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-accent-primary/70" />
-                <span>{{ point }}</span>
-              </li>
-            </ul>
+            <h3 class="mt-4 text-base font-semibold text-primary">{{ feature.title }}</h3>
+            <p class="mt-2 text-sm text-secondary leading-relaxed">{{ feature.description }}</p>
           </div>
         </div>
       </div>
@@ -91,49 +101,36 @@
 
     <!-- Products Section -->
     <section id="subscription" class="mt-16 md:mt-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <div class="text-xs uppercase tracking-wider text-tertiary">Subscription Services</div>
-            <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Custom Websites, AI Agents & Marketing Automation</h2>
-          </div>
-          <NuxtLink
-            to="/onboarding"
-            class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-neutral-100 sm:w-auto"
-          >
-            Start your project →
-          </NuxtLink>
+      <div class="max-w-5xl mx-auto px-4 lg:px-6">
+        <div class="text-center mb-12">
+          <div class="text-xs uppercase tracking-wider text-tertiary">What We Build</div>
+          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Choose Your Service</h2>
+          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Everything you need to grow your business online—no upfront fees, just one predictable monthly subscription.</p>
         </div>
 
-        <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="space-y-4">
           <NuxtLink
             v-for="product in subscriptionProducts"
             :key="product.title"
             :to="product.href"
-            class="group flex h-full flex-col justify-between rounded-3xl border border-soft bg-white p-6 ring-1 ring-transparent transition-all hover:-translate-y-1 hover:ring-accent-subtle"
+            class="group flex items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-8 transition-all hover:border-accent-primary hover:shadow-lg"
           >
-            <div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-subtle text-accent-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5">
-                      <path stroke-linecap="round" stroke-linejoin="round" :d="product.icon" />
-                    </svg>
-                  </div>
-                  <h3 class="text-2xl font-semibold text-primary">{{ product.title }}</h3>
-                </div>
-                <span class="text-xs font-medium uppercase tracking-wide text-neutral-400">{{ product.timeline }}</span>
+            <div class="flex-1">
+              <h3 class="text-2xl md:text-3xl font-bold text-primary">{{ product.title }}</h3>
+              <p class="mt-3 text-base text-secondary max-w-2xl">{{ product.description }}</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span v-for="tag in product.tags" :key="tag" class="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600">
+                  {{ tag }}
+                </span>
               </div>
-              <p class="mt-4 text-sm text-secondary">{{ product.description }}</p>
             </div>
-            <div class="mt-6 flex flex-wrap gap-2 text-xs text-tertiary">
-              <span v-for="tag in product.tags" :key="tag" class="inline-flex items-center gap-1 rounded-full bg-neutral-100 px-2.5 py-1">{{ tag }}</span>
-            </div>
-            <div class="mt-6 inline-flex items-center text-sm font-semibold text-accent-primary">
-              {{ product.cta }}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-1.5 h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+            <div class="flex-shrink-0">
+              <span class="inline-flex items-center gap-2 text-sm font-semibold text-accent-primary group-hover:gap-3 transition-all">
+                {{ product.cta }}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
             </div>
           </NuxtLink>
         </div>
@@ -141,33 +138,72 @@
     </section>
 
     <!-- Process Section -->
-    <section class="mt-16 md:mt-24">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="grid gap-10 lg:grid-cols-[minmax(0,28rem),minmax(0,1fr)] lg:items-center">
-          <div>
-            <div class="text-xs uppercase tracking-wider text-tertiary">Our Process</div>
-            <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Agile Web Development Process</h2>
-            <p class="mt-3 text-base text-secondary">Our dedicated team of designers, developers, and digital strategists work in sprints to deliver your website quickly, then continuously optimize for conversions and performance.</p>
-            <div class="mt-6 rounded-3xl border border-dashed border-accent-subtle bg-accent-subtle/40 p-5 text-sm text-neutral-600">
-              <strong class="text-primary">Enterprise solutions available:</strong> We build custom SaaS platforms, e-commerce websites, membership portals, and enterprise web applications.
-            </div>
+    <section class="mt-16 md:mt-24 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/30 via-white to-white" aria-hidden="true" />
+      <div class="relative max-w-6xl mx-auto px-4 lg:px-6 py-12 md:py-16">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-xs font-semibold text-accent-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Our Process
           </div>
-          <div class="space-y-5">
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">From Concept to Launch in 5 Steps</h2>
+          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Our proven agile methodology delivers high-quality websites quickly while maintaining flexibility for your evolving needs.</p>
+        </div>
+        
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-primary via-accent-subtle to-transparent" aria-hidden="true" />
+          
+          <div class="space-y-8">
             <div
               v-for="(step, index) in processSteps"
               :key="step.title"
-              class="flex gap-4 rounded-3xl border border-soft bg-white p-5 shadow-sm"
+              :class="[
+                'relative grid lg:grid-cols-2 gap-8 items-center',
+                index % 2 === 0 ? 'lg:text-right' : 'lg:flex-row-reverse'
+              ]"
             >
-              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white">
-                {{ index + 1 }}
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-primary">{{ step.title }}</h3>
-                <p class="mt-1 text-sm text-secondary">{{ step.description }}</p>
-                <div class="mt-2 flex flex-wrap gap-2 text-xs text-tertiary">
-                  <span v-for="item in step.highlights" :key="item" class="rounded-full bg-neutral-100 px-2 py-1">{{ item }}</span>
+              <!-- Content -->
+              <div :class="index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12 lg:col-start-2'">
+                <div class="group rounded-3xl border border-soft bg-white p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                  <div class="flex items-start gap-4" :class="index % 2 === 0 ? 'lg:flex-row-reverse lg:text-right' : ''">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-primary to-accent-focus text-lg font-bold text-white shadow-lg shadow-accent-primary/30">
+                      {{ index + 1 }}
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-xl font-semibold text-primary">{{ step.title }}</h3>
+                      <p class="mt-2 text-sm text-secondary leading-relaxed">{{ step.description }}</p>
+                      <div class="mt-4 flex flex-wrap gap-2" :class="index % 2 === 0 ? 'lg:justify-end' : ''">
+                        <span v-for="item in step.highlights" :key="item" class="inline-flex items-center gap-1.5 rounded-full bg-accent-subtle/60 px-3 py-1 text-xs font-medium text-accent-primary">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          {{ item }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              
+              <!-- Timeline dot -->
+              <div class="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div class="h-4 w-4 rounded-full bg-accent-primary ring-4 ring-white shadow-lg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+          <div class="inline-flex items-center gap-3 rounded-2xl border border-accent-subtle bg-white px-6 py-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-accent-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div class="text-left">
+              <p class="text-sm font-semibold text-primary">Enterprise Solutions Available</p>
+              <p class="text-xs text-secondary">Custom SaaS platforms, e-commerce sites, and enterprise applications</p>
             </div>
           </div>
         </div>
@@ -175,38 +211,60 @@
     </section>
 
     <!-- Showcase Section -->
-    <section id="showcase" class="mt-16 md:mt-24">
+    <section id="showcase" class="mt-16 md:mt-24 bg-neutral-50 py-12 md:py-16">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <header class="mx-auto mb-8 max-w-3xl text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary">Website Portfolio & Case Studies</h2>
-          <p class="mt-3 text-sm text-secondary">High-converting websites optimized for Core Web Vitals, mobile responsiveness, and organic search rankings.</p>
-        </header>
-        <div class="overflow-hidden rounded-3xl border border-neutral-200 bg-white/80 p-4">
-          <div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
-            <a
-              v-for="project in showcaseProjects"
-              :key="project.title"
-              href="#"
-              class="group w-64 flex-none snap-start overflow-hidden rounded-2xl border border-soft bg-white transition-all hover:-translate-y-1 hover:border-accent-subtle"
-            >
-              <div class="relative">
-                <img
-                  loading="lazy"
-                  :src="project.image"
-                  :alt="project.title"
-                  class="h-32 w-full object-cover"
-                />
-                <span v-if="project.tag" class="absolute top-2 left-2 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-medium text-neutral-600 ring-1 ring-neutral-200">
-                  {{ project.tag }}
-                </span>
-              </div>
-              <div class="p-4">
-                <h3 class="text-base font-semibold text-primary group-hover:underline">{{ project.title }}</h3>
-                <p class="mt-2 text-sm text-secondary line-clamp-3">{{ project.description }}</p>
-                <span class="mt-3 inline-flex items-center text-xs font-semibold text-accent-primary">View case study →</span>
-              </div>
-            </a>
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Portfolio
           </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-primary">Recent Projects</h2>
+          <p class="mt-3 text-base md:text-lg text-secondary max-w-2xl mx-auto">
+            High-converting websites optimized for performance, mobile responsiveness, and search rankings.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a
+            v-for="project in showcaseProjects"
+            :key="project.title"
+            href="#"
+            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+          >
+            <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+              <img
+                loading="lazy"
+                :src="project.image"
+                :alt="project.title"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span v-if="project.tag" class="absolute top-3 left-3 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-semibold text-neutral-700 shadow-sm">
+                {{ project.tag }}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold text-primary group-hover:text-accent-primary transition-colors">{{ project.title }}</h3>
+              <p class="mt-2 text-sm text-secondary line-clamp-2">{{ project.description }}</p>
+              <div class="mt-4 flex items-center gap-2 text-sm font-semibold text-accent-primary">
+                <span>View project</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 transition-transform group-hover:translate-x-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="mt-10 text-center">
+          <a href="#" class="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20">
+            View all projects
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -214,31 +272,58 @@
     <!-- Testimonials -->
     <section class="mt-16 md:mt-24">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,22rem),minmax(0,1fr)] lg:items-start">
-          <div>
-            <div class="text-xs uppercase tracking-wider text-tertiary">Client Success Stories</div>
-            <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Trusted by Growing Businesses</h2>
-            <p class="mt-3 text-base text-secondary">Our clients partner with us for ongoing website optimization, landing page development, conversion rate optimization, and technical SEO improvements.</p>
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent-subtle to-accent-subtle/50 px-4 py-1.5 text-xs font-semibold text-accent-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+            Client Success Stories
           </div>
-          <div class="grid gap-5 md:grid-cols-2">
-            <article
-              v-for="testimonial in testimonials"
-              :key="testimonial.name"
-              class="flex h-full flex-col justify-between rounded-3xl border border-soft bg-white p-6 shadow-sm"
-            >
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Trusted by Growing Businesses</h2>
+          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">See how we've helped companies launch faster, convert better, and scale their digital presence.</p>
+        </div>
+        
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+          <article
+            v-for="(testimonial, index) in testimonials"
+            :key="testimonial.name"
+            class="group relative flex h-full flex-col justify-between rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1"
+          >
+            <!-- Quote icon -->
+            <div class="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-16 w-16 text-accent-primary">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+            
+            <div class="relative">
+              <p class="text-base text-neutral-700 leading-relaxed italic">"{{ testimonial.quote }}"</p>
+            </div>
+            
+            <div class="mt-8 flex items-center gap-4">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-primary to-accent-focus text-base font-bold text-white shadow-lg shadow-accent-primary/20">
+                {{ testimonial.initials }}
+              </div>
               <div>
-                <p class="text-sm text-neutral-700">“{{ testimonial.quote }}”</p>
-              </div>
-              <div class="mt-6 flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-subtle text-sm font-semibold text-accent-primary">
-                  {{ testimonial.initials }}
-                </div>
-                <div>
-                  <div class="text-sm font-semibold text-primary">{{ testimonial.name }}</div>
-                  <div class="text-xs text-secondary">{{ testimonial.role }}</div>
+                <div class="text-base font-semibold text-primary">{{ testimonial.name }}</div>
+                <div class="text-sm text-secondary">{{ testimonial.role }}</div>
+                <div class="mt-1 flex gap-0.5">
+                  <svg v-for="star in 5" :key="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-amber-400">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
                 </div>
               </div>
-            </article>
+            </div>
+          </article>
+        </div>
+        
+        <div class="mt-10 text-center">
+          <p class="text-sm text-secondary">Join 50+ companies that trust us with their digital presence</p>
+          <div class="mt-4 flex items-center justify-center gap-8 opacity-40">
+            <div class="text-2xl font-bold text-neutral-400">Company</div>
+            <div class="text-2xl font-bold text-neutral-400">Brand</div>
+            <div class="text-2xl font-bold text-neutral-400">Startup</div>
+            <div class="text-2xl font-bold text-neutral-400">Agency</div>
           </div>
         </div>
       </div>
@@ -255,7 +340,7 @@
           <details
             v-for="faq in faqs"
             :key="faq.question"
-            class="group rounded-3xl border border-soft bg-white p-5 transition-colors open:border-accent-subtle open:bg-accent-subtle/20"
+            class="group rounded-3xl border border-neutral-200 bg-white p-6 transition-colors open:border-accent-subtle open:bg-accent-subtle/20"
           >
             <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-primary marker:hidden">
               <span>{{ faq.question }}</span>
@@ -327,79 +412,48 @@ const subscriptionHighlights = [
 
 const featureHighlights = [
   {
-    title: 'UX Strategy & Information Architecture',
-    description: 'User research, competitive analysis, and conversion-optimized site structure designed to turn visitors into qualified leads.',
-    icon: 'M12 6l7 12H5l7-12z',
-    points: ['User journey mapping', 'Conversion funnel design', 'SEO-friendly site structure']
+    title: 'Design & UX',
+    description: 'Beautiful, conversion-focused designs that work seamlessly across all devices.',
+    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
   },
   {
-    title: 'Responsive Web Design',
-    description: 'Mobile-first design systems with reusable components, ensuring consistent brand experience across all devices and screen sizes.',
-    icon: 'M4 7h16M4 12h16M4 17h16',
-    points: ['Figma design systems', 'WCAG accessibility standards', 'Cross-browser compatibility']
+    title: 'Development',
+    description: 'Fast, modern websites built with React, Vue.js, and optimized for performance.',
+    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
   },
   {
-    title: 'Modern Web Development',
-    description: 'Built with React, Vue.js, and Next.js for lightning-fast performance, SEO optimization, and exceptional Core Web Vitals scores.',
-    icon: 'M12 4v16m8-8H4',
-    points: ['Sub-1s page load times', 'Google Analytics 4 setup', 'Automated QA testing']
+    title: 'SEO & Analytics',
+    description: 'Technical SEO, keyword optimization, and analytics to drive organic traffic.',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
   },
   {
-    title: 'CRM & Marketing Integration',
-    description: 'Seamless integration with HubSpot, Salesforce, Mailchimp, and marketing automation platforms to capture and nurture leads.',
-    icon: 'M21 12.79A9 9 0 1111.21 3',
-    points: ['HubSpot CRM integration', 'Email marketing automation', 'Lead scoring & tracking']
-  },
-  {
-    title: 'SEO & Content Strategy',
-    description: 'Technical SEO optimization, keyword research, and conversion-focused copywriting to improve organic search rankings and traffic.',
-    icon: 'M8 21l4-4 4 4m0-8l-4 4-4-4',
-    points: ['On-page SEO optimization', 'Schema markup implementation', 'Content marketing strategy']
-  },
-  {
-    title: 'Managed Hosting & Support',
-    description: 'Cloud hosting on AWS/Vercel with 99.9% uptime, automatic backups, security monitoring, and ongoing technical support.',
-    icon: 'M18 11V5a3 3 0 00-3-3H9a3 3 0 00-3 3v6',
-    points: ['CDN & caching optimization', 'SSL certificates included', '24/7 uptime monitoring']
+    title: 'Hosting & Support',
+    description: 'Managed cloud hosting with 99.9% uptime, security, and ongoing support.',
+    icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z'
   }
 ]
 
 const subscriptionProducts = [
   {
-    title: 'Custom Website Development',
-    description: 'Full-service web design and development with React/Vue.js, headless CMS integration, SEO optimization, and conversion-focused landing pages.',
-    tags: ['Responsive design', 'Headless CMS', 'Technical SEO', 'A/B testing'],
-    timeline: 'Launch in 10 days',
+    title: 'Websites',
+    description: 'Modern, high-performing websites built for you—no upfront fees. Design system, CMS & updates, and analytics included.',
+    tags: ['Design system', 'CMS & updates', 'Analytics'],
     href: '/website',
-    cta: 'Explore website services',
-    icon: 'M3 7l9-4 9 4-9 4-9-4v10l9 4 9-4V7'
+    cta: 'Explore'
   },
   {
-    title: 'AI Chatbot Development',
-    description: 'Custom AI agents for lead qualification, customer support automation, and intelligent knowledge base search with GPT-4 integration.',
-    tags: ['GPT-4 integration', 'Lead qualification', 'Support automation', 'CRM sync'],
-    timeline: 'Deploy in 14 days',
+    title: 'AI Agents',
+    description: 'Automate support, lead-qualifying, and ops with reliable agents integrated into your stack.',
+    tags: ['RAG & tools', 'Workflows', 'Observability'],
     href: '/agents',
-    cta: 'View AI agent features',
-    icon: 'M12 3v3m0 12v3m9-9h-3M6 12H3m15.364-6.364l-2.121 2.121M8.757 15.243L6.636 17.364m12.728 0l-2.121-2.121M8.757 8.757L6.636 6.636'
+    cta: 'See details'
   },
   {
-    title: 'Digital Marketing Services',
-    description: 'Comprehensive marketing campaigns including brand strategy, content creation, email marketing, social media management, and PPC advertising.',
-    tags: ['Brand identity', 'Content marketing', 'Email campaigns', 'Social media ads'],
-    timeline: 'Ongoing campaigns',
+    title: 'Marketing & Branding',
+    description: 'Positioning, visual identity, and campaigns that match your goals and amplify your reach.',
+    tags: ['Brand identity', 'Content', 'Campaigns'],
     href: '/marketing',
-    cta: 'View marketing packages',
-    icon: 'M4 4h16v16H4z'
-  },
-  {
-    title: 'Analytics & Optimization',
-    description: 'Google Analytics 4 setup, conversion tracking, heatmap analysis, and data-driven optimization to maximize ROI and user engagement.',
-    tags: ['GA4 implementation', 'Conversion tracking', 'Performance monitoring', 'CRO testing'],
-    timeline: 'Continuous optimization',
-    href: '/onboarding',
-    cta: 'Start optimization',
-    icon: 'M5 3v4M19 3v4M5 21v-4m14 4v-4M3 9h18M3 15h18'
+    cta: 'See details'
   }
 ]
 

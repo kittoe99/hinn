@@ -4,12 +4,12 @@
     <div
       v-if="showSticky"
       class="fixed inset-x-0 z-50 flex justify-center touch-pan-y pointer-events-none"
-      :style="{ bottom: 'calc(env(safe-area-inset-bottom) + 10px)' }"
+      :style="{ bottom: 'calc(env(safe-area-inset-bottom) + 16px)' }"
     >
       <div class="pointer-events-auto">
         <form @submit.prevent="handleStickySubmit">
-          <div class="flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 backdrop-blur px-2 py-1.5 shadow-md">
-            <div class="pl-1 text-neutral-500" aria-hidden="true">
+          <div class="flex items-center gap-2 rounded-2xl border-2 border-neutral-200 bg-white/95 backdrop-blur px-3 py-2 shadow-xl">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-subtle text-accent-primary" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
               </svg>
@@ -19,13 +19,16 @@
               type="text"
               placeholder="Ask me anything…"
               aria-label="Ask Me Anything"
-              class="w-[56vw] max-w-[28rem] min-w-[220px] rounded-full border-0 bg-transparent px-2 py-1.5 text-sm text-primary placeholder:text-neutral-400 focus:outline-none"
+              class="w-[56vw] max-w-[28rem] min-w-[220px] rounded-lg border-0 bg-transparent px-2 py-2 text-sm text-primary placeholder:text-neutral-400 focus:outline-none"
             />
             <button
               type="submit"
-              class="inline-flex items-center justify-center rounded-full bg-accent-primary px-3 py-1.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(217,119,89,0.18)] transition-all hover:brightness-95"
+              class="inline-flex items-center justify-center gap-1.5 rounded-xl bg-accent-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-accent-primary/30 transition-all hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40"
             >
-              Ask
+              <span>Ask</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
         </form>
@@ -33,51 +36,68 @@
     </div>
 
     <!-- Full section in-flow -->
-    <section ref="sectionRef" class="py-6 md:py-8">
-      <div class="mx-auto max-w-3xl px-3 sm:px-4">
-        <h2 class="flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-tight text-primary md:text-2xl">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="h-5 w-5 text-accent-primary"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
-          </svg>
-          <span>Ask Me Anything</span>
-        </h2>
-        <p class="mt-2 text-center text-sm text-secondary md:text-base">
-          Ask about pricing, features, timelines, or your website needs—I'll help instantly.
-        </p>
-        <form @submit.prevent="handleMainSubmit" class="mt-5">
-          <div class="relative">
+    <section ref="sectionRef" class="relative overflow-hidden py-12 md:py-16">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/20 via-white to-white" aria-hidden="true" />
+      <div class="relative mx-auto max-w-4xl px-4 lg:px-6">
+        <div class="text-center">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="h-3.5 w-3.5"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
+            </svg>
+            AI Assistant
+          </div>
+          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-primary">
+            Ask Me Anything
+          </h2>
+          <p class="mt-3 text-base md:text-lg text-secondary max-w-2xl mx-auto">
+            Get instant answers about pricing, features, timelines, or your website needs.
+          </p>
+        </div>
+        
+        <form @submit.prevent="handleMainSubmit" class="mt-8">
+          <div class="relative max-w-2xl mx-auto">
+            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
             <input
               v-model="mainInput"
               type="text"
-              placeholder="Ask about pricing, features, timelines, content updates..."
+              placeholder="Ask about pricing, features, timelines..."
               aria-label="Ask Me Anything"
-              class="w-full rounded-full border border-neutral-200 bg-white px-5 py-3 pr-28 text-sm text-primary shadow-soft focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-soft)] md:text-base"
+              class="w-full rounded-2xl border-2 border-neutral-200 bg-white pl-12 pr-32 py-4 text-base text-primary placeholder:text-neutral-400 shadow-sm focus:outline-none focus:border-accent-primary focus:ring-4 focus:ring-accent-primary/10 transition-all"
             />
             <button
               type="submit"
-              class="absolute right-1 top-1.5 inline-flex items-center justify-center rounded-full bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_20px_rgba(217,119,89,0.18)] transition-all hover:brightness-95"
+              class="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent-primary/30 transition-all hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40"
             >
-              Ask
+              <span>Ask</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
         </form>
-        <div class="mt-3 md:mt-4">
-          <div class="hide-scrollbar overflow-x-auto px-2 touch-pan-x" aria-label="Suggested questions">
-            <div class="flex flex-nowrap items-center gap-2 whitespace-nowrap sm:justify-center">
+        
+        <div class="mt-6">
+          <p class="text-center text-xs text-tertiary mb-3">Popular questions:</p>
+          <div class="hide-scrollbar overflow-x-auto touch-pan-x" aria-label="Suggested questions">
+            <div class="flex flex-nowrap items-center gap-2 whitespace-nowrap justify-center">
               <button
                 v-for="suggestion in suggestions"
                 :key="suggestion"
                 type="button"
                 @click="handleSuggestion(suggestion)"
-                class="shrink-0 snap-start rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-primary transition-colors hover:bg-neutral-50 md:text-sm"
+                class="shrink-0 snap-start rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm text-primary transition-all hover:border-accent-primary hover:bg-accent-subtle/20 hover:text-accent-primary"
               >
                 {{ suggestion }}
               </button>
