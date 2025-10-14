@@ -118,13 +118,13 @@
               </div>
             </div>
 
-            <!-- Step 2 -->
+            <!-- Step 2: Business Basics -->
             <div v-if="currentStep === 2" class="space-y-6">
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Business details & coverage</h3>
-                <p class="mt-1 text-sm text-secondary">A quick snapshot of your company helps us tailor the build plan.</p>
+                <h3 class="text-base font-semibold text-primary">Business basics</h3>
+                <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
-                <form @submit.prevent="nextStep" class="mt-6 space-y-6">
+                <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label class="mb-1 block text-sm font-medium text-primary">Business/Project Name *</label>
@@ -137,8 +137,8 @@
                       />
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Industry/Category</label>
-                      <FormSelect v-model="formData.category" :options="categories" placeholder="Select a category" />
+                      <label class="mb-1 block text-sm font-medium text-primary">Industry/Category *</label>
+                      <FormSelect v-model="formData.category" :options="categories" placeholder="Select a category" required />
                     </div>
                   </div>
 
@@ -194,6 +194,33 @@
                     />
                   </div>
 
+                  <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                    <button
+                      type="button"
+                      @click="prevStep"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Step 3: Services & Coverage -->
+            <div v-if="currentStep === 3" class="space-y-6">
+              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+                <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
+                <p class="mt-1 text-sm text-secondary">Define what you offer and where you operate.</p>
+
+                <form @submit.prevent="nextStep" class="mt-8 space-y-8">
+
                   <div>
                     <label class="mb-2 block text-sm font-medium text-primary">Services you provide</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -221,8 +248,8 @@
                       v-if="availableSeedAreas.length"
                       class="mt-3 rounded-2xl border border-dashed border-accent-soft bg-accent-subtle/40 p-4 text-xs text-secondary"
                     >
-                      <p class="text-sm font-semibold text-primary">Quick add from saved info</p>
-                      <p class="mt-1">Use locations you’ve already shared to jump-start your coverage.</p>
+                      <p class="text-sm font-semibold text-primary">Detected location</p>
+                      <p class="mt-1">We detected your location. Click to add it as a service area.</p>
                       <div class="mt-3 flex flex-wrap gap-2">
                         <button
                           v-for="area in availableSeedAreas"
@@ -286,6 +313,32 @@
                     </div>
                   </div>
 
+                  <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                    <button
+                      type="button"
+                      @click="prevStep"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Step 4: Operations -->
+            <div v-if="currentStep === 4" class="space-y-6">
+              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+                <h3 class="text-base font-semibold text-primary">Operations</h3>
+                <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
+
+                <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label class="mb-2 block text-sm font-medium text-primary">Business hours</label>
@@ -366,7 +419,7 @@
                     </div>
                   </div>
 
-                  <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
                     <button
                       type="button"
                       @click="prevStep"
@@ -385,8 +438,8 @@
               </div>
             </div>
 
-            <!-- Step 3 -->
-            <div v-if="currentStep === 3" class="space-y-6">
+            <!-- Step 5: Design -->
+            <div v-if="currentStep === 5" class="space-y-6">
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we’ll fine-tune the details together.</p>
@@ -403,7 +456,7 @@
                   <p class="mt-1">We’ll review everything and reach out with next steps shortly.</p>
                 </div>
 
-                <form @submit.prevent="handleSubmit" class="mt-6 space-y-6">
+                <form @submit.prevent="handleSubmit" class="mt-8 space-y-8">
                   <div>
                     <label class="mb-2 block text-sm font-medium text-primary">Overall look</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -549,7 +602,7 @@
                     </div>
                   </div>
 
-                  <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
                     <button
                       type="button"
                       @click="prevStep"
@@ -629,49 +682,88 @@ useHead({
 
 const currentStep = ref(1)
 
-const onboardingSeed = {
-  name: 'Bello Site',
-  cities: [
-    {
-      lat: 39.7392364,
-      lon: -104.984862,
-      name: 'Denver, Colorado, United States',
-      radiusKm: 10,
-      displayName: 'Denver, Colorado, United States'
-    }
-  ],
+const onboardingSeed = ref({
+  name: '',
+  cities: [],
   hasLogo: false,
-  category: 'Transportation',
-  siteType: 'Small business',
-  languages: ['English'],
-  primaryLanguage: 'English',
-  selectedServices: ['Vehicle transport', 'Freight', 'Courier'],
-  businessEmail: 'kofikittoe35@gmail.com',
-  businessPhone: '7208429167',
-  contactMethod: 'phone',
-  primaryGoal: 'Sales',
-  coverageType: 'single',
-  onSiteMode: 'onsite',
-  businessHoursMode: 'standard',
-  designStyles: ['Playful', 'Minimal'],
+  category: '',
+  siteType: '',
+  languages: [],
+  primaryLanguage: '',
+  selectedServices: [],
+  businessEmail: '',
+  businessPhone: '',
+  contactMethod: '',
+  primaryGoal: '',
+  coverageType: '',
+  onSiteMode: '',
+  businessHoursMode: '',
+  designStyles: [],
   highContrast: false,
-  emotionalImpact: ['Exciting'],
-  envisionedPages: ['Home', 'Services', 'Fleet', 'Get a quote']
+  emotionalImpact: [],
+  envisionedPages: []
+})
+
+// Fetch user location via IP on mount
+const fetchUserLocation = async () => {
+  try {
+    // Using ipapi.co free API (no key required, 1000 requests/day)
+    const response = await fetch('https://ipapi.co/json/')
+    if (!response.ok) throw new Error('Failed to fetch location')
+    
+    const data = await response.json()
+    
+    if (data.city && data.latitude && data.longitude) {
+      const locationName = [data.city, data.region, data.country_name].filter(Boolean).join(', ')
+      
+      onboardingSeed.value.cities = [
+        {
+          lat: data.latitude,
+          lon: data.longitude,
+          name: locationName,
+          radiusKm: 10,
+          displayName: locationName
+        }
+      ]
+    }
+  } catch (error) {
+    console.warn('Could not detect location:', error)
+    // Fallback to empty - user can add manually
+  }
+}
+
+// Fetch location when component mounts
+if (process.client) {
+  fetchUserLocation()
 }
 
 const stepSummaries = [
   {
     id: 'type',
     title: 'Site type',
-    headline: 'We’ll tailor the structure and CMS to match your model.',
+    headline: 'We\'ll tailor the structure and CMS to match your model.',
     description: 'Choose the closest fit so we can recommend the right feature set.',
     icon: 'layout'
   },
   {
     id: 'business',
-    title: 'Business profile',
-    headline: 'Share your services and where you operate.',
-    description: 'Tell us about your offer, coverage, and goals.',
+    title: 'Business basics',
+    headline: 'Share your company name and industry.',
+    description: 'Tell us about your business.',
+    icon: 'clipboard'
+  },
+  {
+    id: 'services',
+    title: 'Services & coverage',
+    headline: 'What you offer and where you operate.',
+    description: 'Define your service offerings and locations.',
+    icon: 'clipboard'
+  },
+  {
+    id: 'operations',
+    title: 'Operations',
+    headline: 'How you work and your goals.',
+    description: 'Share your hours, delivery mode, and objectives.',
     icon: 'clipboard'
   },
   {
@@ -746,14 +838,23 @@ const contactMethods = [
   { label: 'Video call', value: 'video' }
 ]
 
-const serviceOptions = [
-  'Vehicle transport',
-  'Freight',
-  'Courier',
-  'Logistics planning',
-  'Warehousing',
-  'Consulting'
-]
+const servicesByIndustry = {
+  'Transportation': ['Vehicle transport', 'Freight', 'Courier', 'Logistics planning', 'Warehousing', 'Moving services'],
+  'Restaurants': ['Dine-in', 'Takeout', 'Delivery', 'Catering', 'Private events', 'Meal prep'],
+  'Retail': ['In-store shopping', 'Online orders', 'Curbside pickup', 'Personal shopping', 'Gift services', 'Repairs'],
+  'Health & Wellness': ['Consultations', 'Treatments', 'Therapy', 'Fitness training', 'Nutrition coaching', 'Wellness programs'],
+  'Professional Services': ['Consulting', 'Legal services', 'Accounting', 'Marketing', 'Design', 'Strategy'],
+  'Home Services': ['Cleaning', 'Repairs', 'Maintenance', 'Landscaping', 'Renovation', 'Installation'],
+  'Technology': ['Software development', 'IT support', 'Cloud services', 'Cybersecurity', 'Training', 'Consulting'],
+  'Education': ['Tutoring', 'Classes', 'Workshops', 'Online courses', 'Certification', 'Training programs'],
+  'Entertainment': ['Events', 'Performances', 'Rentals', 'Production', 'Photography', 'Videography'],
+  'Other': ['Consulting', 'Custom services', 'Project-based work', 'Subscription services', 'Rentals', 'Support']
+}
+
+const serviceOptions = computed(() => {
+  const category = formData.value.category
+  return category && servicesByIndustry[category] ? servicesByIndustry[category] : servicesByIndustry['Other']
+})
 
 const coverageOptions = [
   { label: 'Single location', value: 'single' },
@@ -817,7 +918,7 @@ const mapCityToArea = city => ({
   radiusKm: city.radiusKm || 10
 })
 
-const seedAreaSuggestions = computed(() => (onboardingSeed.cities || []).map(mapCityToArea))
+const seedAreaSuggestions = computed(() => (onboardingSeed.value.cities || []).map(mapCityToArea))
 
 const availableSeedAreas = computed(() =>
   seedAreaSuggestions.value.filter(area => {

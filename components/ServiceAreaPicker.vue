@@ -143,10 +143,18 @@ watch(
 
 const showResults = computed(() => query.value.length >= 3 && (loading.value || results.value.length > 0))
 
+let debounceTimer = null
+
 watch(
   query,
   async newQuery => {
     error.value = ''
+    
+    // Clear existing debounce timer
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+    }
+    
     if (newQuery.length < 3) {
       results.value = []
       if (controller.value) {
@@ -159,34 +167,37 @@ watch(
       controller.value.abort()
     }
 
-    controller.value = new AbortController()
-    loading.value = true
+    // Debounce the search by 500ms to prevent freezing
+    debounceTimer = setTimeout(async () => {
+      controller.value = new AbortController()
+      loading.value = true
 
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q=${encodeURIComponent(newQuery)}`,
-        {
-          headers: {
-            Accept: 'application/json',
-            'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
-          },
-          signal: controller.value.signal
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q=${encodeURIComponent(newQuery)}`,
+          {
+            headers: {
+              Accept: 'application/json',
+              'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
+            },
+            signal: controller.value.signal
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error('Unable to fetch results right now.')
         }
-      )
 
-      if (!response.ok) {
-        throw new Error('Unable to fetch results right now.')
+        const data = await response.json()
+        results.value = Array.isArray(data) ? data : []
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          error.value = 'We could not reach the address service. Please try again.'
+        }
+      } finally {
+        loading.value = false
       }
-
-      const data = await response.json()
-      results.value = Array.isArray(data) ? data : []
-    } catch (err) {
-      if (err.name !== 'AbortError') {
-        error.value = 'We could not reach the address service. Please try again.'
-      }
-    } finally {
-      loading.value = false
-    }
+    }, 500)
   }
 )
 
