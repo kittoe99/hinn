@@ -334,18 +334,39 @@ const handleModalSubmit = () => {
   demoRespond(text)
 }
 
-const demoRespond = (userPrompt) => {
+const demoRespond = async (userPrompt) => {
   if (isThinking.value || typedText.value) return
-
-  const pick = sampleResponses[Math.floor(Math.random() * sampleResponses.length)]
 
   isThinking.value = true
   typedText.value = ''
 
-  thinkTimeout = setTimeout(() => {
-    const full = pick
-    let i = 0
+  try {
+    console.log('[AmaBar] Sending question:', userPrompt)
+    
+    // Call the actual API
+    const response = await fetch('/api/ama/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: userPrompt,
+        siteUrl: window.location.origin
+      })
+    })
 
+    console.log('[AmaBar] Response status:', response.status)
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.statusMessage || 'Failed to get response')
+    }
+
+    const data = await response.json()
+    console.log('[AmaBar] Got answer, length:', data.answer?.length)
+
+    const full = data.answer || 'Sorry, I could not find an answer to that question.'
+
+    // Type out the response
+    let i = 0
     typeInterval = setInterval(() => {
       i += 1
       typedText.value = full.slice(0, i)
@@ -357,7 +378,27 @@ const demoRespond = (userPrompt) => {
         isThinking.value = false
       }
     }, 18)
-  }, 700)
+  } catch (error) {
+    console.error('[AmaBar] Error:', error)
+    console.error('[AmaBar] Error message:', error.message)
+    console.error('[AmaBar] Error stack:', error.stack)
+    
+    // Show detailed error message
+    let errorMessage = 'Sorry, I encountered an error. '
+    if (error.message.includes('FIRECRAWL_API_KEY')) {
+      errorMessage = 'The AI service is not configured. Please add FIRECRAWL_API_KEY to your .env file.'
+    } else if (error.message.includes('DEEPSEEK_API_KEY')) {
+      errorMessage = 'The AI service is not configured. Please add DEEPSEEK_API_KEY to your .env file.'
+    } else if (error.message) {
+      errorMessage += `Details: ${error.message}`
+    } else {
+      errorMessage += 'Please try again.'
+    }
+    
+    messages.value.push({ role: 'assistant', content: errorMessage })
+    typedText.value = ''
+    isThinking.value = false
+  }
 }
 </script>
 
