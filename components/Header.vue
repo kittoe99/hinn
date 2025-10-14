@@ -39,12 +39,13 @@
           >
             Marketing
           </NuxtLink>
-          <a 
-            href="#contact" 
+          <NuxtLink 
+            to="/contact" 
             class="px-4 py-2 text-sm font-medium text-secondary hover:text-primary hover:bg-neutral-50 rounded-lg transition-all"
+            active-class="text-primary bg-neutral-50"
           >
             Contact
-          </a>
+          </NuxtLink>
           <NuxtLink 
             to="/get-started" 
             class="px-4 py-2 text-sm font-medium text-secondary hover:text-primary hover:bg-neutral-50 rounded-lg transition-all"
@@ -62,6 +63,12 @@
 
         <!-- CTA Button -->
         <div class="hidden lg:flex items-center gap-3">
+          <NuxtLink 
+            to="/login"
+            class="px-4 py-2 text-sm font-medium text-secondary hover:text-primary hover:bg-neutral-50 rounded-lg transition-all"
+          >
+            Sign in
+          </NuxtLink>
           <NuxtLink 
             to="/get-started"
             class="px-6 py-2.5 rounded-full bg-accent-primary text-white text-sm font-semibold shadow-sm hover:bg-accent-focus transition-all"
@@ -201,20 +208,28 @@
               </svg>
               <span>Showcase</span>
             </a>
-            <a 
-              href="#contact" 
+            <NuxtLink 
+              to="/contact" 
               class="flex items-center gap-3 px-4 py-3 text-base font-medium text-secondary hover:text-primary hover:bg-neutral-50 rounded-xl transition-all group"
+              active-class="text-primary bg-accent-subtle"
               @click="mobileMenuOpen = false"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <span>Contact</span>
-            </a>
+            </NuxtLink>
           </nav>
 
-          <!-- CTA Button -->
-          <div class="mt-8 pt-6 border-t border-neutral-200">
+          <!-- CTA Buttons -->
+          <div class="mt-8 pt-6 border-t border-neutral-200 space-y-3">
+            <NuxtLink 
+              to="/login"
+              class="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl border border-neutral-300 bg-white text-primary text-base font-semibold hover:bg-neutral-50 transition-all"
+              @click="mobileMenuOpen = false"
+            >
+              <span>Sign in</span>
+            </NuxtLink>
             <NuxtLink 
               to="/get-started"
               class="flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-accent-primary text-white text-base font-semibold shadow-lg shadow-accent-primary/30 hover:bg-accent-focus transition-all"

@@ -7,10 +7,10 @@
       </div>
 
       <!-- Error/Success Messages -->
-      <div v-if="error" class="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+      <div v-if="error" class="text-sm text-red-700 bg-red-50 border border-red-200 rounded-2xl px-4 py-3">
         {{ error }}
       </div>
-      <div v-if="success" class="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
+      <div v-if="success" class="text-sm text-green-700 bg-green-50 border border-green-200 rounded-2xl px-4 py-3">
         {{ success }}
       </div>
 
@@ -49,7 +49,7 @@
               v-model="formData.firstName"
               type="text"
               required
-              class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-primary transition-colors"
+              class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary placeholder-neutral-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-soft transition-colors"
               placeholder="John"
             />
           </div>
@@ -60,7 +60,7 @@
               v-model="formData.lastName"
               type="text"
               required
-              class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-primary transition-colors"
+              class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary placeholder-neutral-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-soft transition-colors"
               placeholder="Doe"
             />
           </div>
@@ -73,7 +73,7 @@
             v-model="formData.email"
             type="email"
             required
-            class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-primary transition-colors"
+            class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary placeholder-neutral-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-soft transition-colors"
             placeholder="you@example.com"
           />
         </div>
@@ -86,7 +86,7 @@
             type="password"
             required
             minlength="8"
-            class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-primary transition-colors"
+            class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary placeholder-neutral-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-soft transition-colors"
             placeholder="••••••••"
           />
           <p class="mt-1.5 text-xs text-tertiary">Must be at least 8 characters</p>
@@ -99,7 +99,7 @@
             v-model="formData.confirmPassword"
             type="password"
             required
-            class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-primary transition-colors"
+            class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary placeholder-neutral-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-accent-soft focus:border-accent-soft transition-colors"
             placeholder="••••••••"
           />
         </div>

@@ -65,9 +65,9 @@
               </a>
             </li>
             <li>
-              <a href="#" class="text-sm text-secondary hover:text-primary transition-colors">
+              <NuxtLink to="/contact" class="text-sm text-secondary hover:text-primary transition-colors">
                 Contact
-              </a>
+              </NuxtLink>
             </li>
             <li>
               <a href="#" class="text-sm text-secondary hover:text-primary transition-colors">
@@ -88,12 +88,22 @@
           <ul class="space-y-3">
             <li>
               <NuxtLink to="/get-started" class="text-sm text-secondary hover:text-primary transition-colors">
-                Get Started
+                Pricing
               </NuxtLink>
             </li>
             <li>
               <NuxtLink to="/onboarding" class="text-sm text-secondary hover:text-primary transition-colors">
                 Onboarding
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/login" class="text-sm text-secondary hover:text-primary transition-colors">
+                Sign in
+              </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/signup" class="text-sm text-secondary hover:text-primary transition-colors">
+                Sign up
               </NuxtLink>
             </li>
             <li>
