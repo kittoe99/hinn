@@ -35,13 +35,21 @@ export default defineEventHandler(async (event) => {
     }
 
     // Get Supabase client with service role
-    const supabaseUrl = process.env.NUXT_PUBLIC_SUPABASE_URL
-    const supabaseServiceKey = process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY
+    const config = useRuntimeConfig()
+    const supabaseUrl = config.public.supabase?.url
+    const supabaseServiceKey = config.supabase?.serviceKey
+    
+    console.log('[contact] Supabase URL:', supabaseUrl ? 'exists' : 'missing')
+    console.log('[contact] Service Key:', supabaseServiceKey ? 'exists' : 'missing')
     
     if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('[contact] Missing Supabase config:', { 
+        hasUrl: !!supabaseUrl, 
+        hasKey: !!supabaseServiceKey 
+      })
       throw createError({
         statusCode: 500,
-        statusMessage: 'Supabase configuration missing'
+        statusMessage: `Supabase configuration missing. URL: ${!!supabaseUrl}, Key: ${!!supabaseServiceKey}`
       })
     }
     
