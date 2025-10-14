@@ -107,7 +107,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -124,11 +124,14 @@ const results = ref([])
 const loading = ref(false)
 const error = ref('')
 const controller = ref(null)
+const isUpdating = ref(false)
 
 watch(
   () => props.modelValue,
   newValue => {
-    internalAreas.value = [...newValue]
+    if (!isUpdating.value) {
+      internalAreas.value = [...newValue]
+    }
   },
   { deep: true }
 )
@@ -136,7 +139,11 @@ watch(
 watch(
   internalAreas,
   newValue => {
-    emit('update:modelValue', newValue)
+    isUpdating.value = true
+    nextTick(() => {
+      emit('update:modelValue', newValue)
+      isUpdating.value = false
+    })
   },
   { deep: true }
 )
@@ -211,20 +218,24 @@ const addArea = result => {
     return
   }
 
-  internalAreas.value = [
-    ...internalAreas.value,
-    {
-      placeId: result.place_id,
-      name: result.display_name,
-      displayName: result.display_name,
-      lat: Number.parseFloat(result.lat),
-      lon: Number.parseFloat(result.lon),
-      radiusKm: 10
-    }
-  ]
+  // Batch updates to prevent multiple re-renders on mobile
+  const newArea = {
+    placeId: result.place_id,
+    name: result.display_name,
+    displayName: result.display_name,
+    lat: Number.parseFloat(result.lat),
+    lon: Number.parseFloat(result.lon),
+    radiusKm: 10
+  }
 
+  // Clear UI first for immediate feedback
   query.value = ''
   results.value = []
+  
+  // Then update areas in next tick to prevent blocking
+  nextTick(() => {
+    internalAreas.value = [...internalAreas.value, newArea]
+  })
 }
 
 const removeArea = index => {
