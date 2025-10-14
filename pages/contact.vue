@@ -41,23 +41,6 @@
               <div class="flex items-start gap-4">
                 <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-base font-semibold text-primary">Schedule a Call</h3>
-                  <p class="mt-1 text-sm text-secondary">
-                    Book a 30-minute discovery call to discuss your project
-                  </p>
-                  <a href="#" class="mt-2 inline-flex items-center text-sm font-medium text-accent-primary hover:underline">
-                    View availability →
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -82,13 +65,43 @@
 
           <!-- Contact Form -->
           <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
-            <div class="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-4">
+            <!-- Success Message -->
+            <div v-if="submitted" class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
+                <svg class="h-6 w-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="mt-4 text-lg font-semibold text-emerald-900">Message sent successfully!</h3>
+              <p class="mt-2 text-sm text-emerald-800">Thank you for contacting us. We'll get back to you within one business day.</p>
+              <button
+                @click="submitted = false"
+                class="mt-4 inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
+                Send another message
+              </button>
+            </div>
+
+            <!-- Error Message -->
+            <div v-else-if="submitError" class="rounded-2xl border border-red-200 bg-red-50 p-4 mb-4">
+              <p class="text-sm font-semibold text-red-900">Error submitting form</p>
+              <p class="mt-1 text-sm text-red-800">{{ submitError }}</p>
+              <button
+                @click="submitError = null"
+                class="mt-2 text-sm font-medium text-red-600 hover:text-red-700"
+              >
+                Dismiss
+              </button>
+            </div>
+
+            <!-- Form Steps -->
+            <div v-if="!submitted" class="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-4">
               <p class="text-xs font-semibold uppercase tracking-wide text-secondary">Step {{ currentStep }} of {{ steps.length }}</p>
               <h2 class="mt-1 text-lg font-semibold text-primary">{{ steps[currentStep - 1].title }}</h2>
               <p class="mt-1 text-sm text-secondary">{{ steps[currentStep - 1].headline }}</p>
             </div>
 
-            <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-if="currentStep === 1">
+            <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-if="!submitted && currentStep === 1">
               <div class="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label class="mb-1 block text-sm font-medium text-primary">First Name *</label>
@@ -155,7 +168,7 @@
               </div>
             </form>
 
-            <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-else-if="currentStep === 2">
+            <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-else-if="!submitted && currentStep === 2">
               <div>
                 <label class="mb-1 block text-sm font-medium text-primary">What do you need help with? *</label>
                 <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -197,21 +210,6 @@
               </div>
 
               <div>
-                <label class="mb-1 block text-sm font-medium text-primary">Budget range *</label>
-                <select
-                  v-model="form.budget"
-                  required
-                  class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                >
-                  <option value="">Select budget</option>
-                  <option value="under-5k">Under $5k</option>
-                  <option value="5-15k">$5k - $15k</option>
-                  <option value="15-30k">$15k - $30k</option>
-                  <option value="30k-plus">$30k+</option>
-                </select>
-              </div>
-
-              <div>
                 <label class="mb-1 block text-sm font-medium text-primary">Notes or link to brief</label>
                 <textarea
                   v-model="form.notes"
@@ -231,7 +229,7 @@
               </div>
             </form>
 
-            <form @submit.prevent="handleSubmit" class="mt-6 space-y-6" v-else>
+            <form @submit.prevent="handleSubmit" class="mt-6 space-y-6" v-else-if="!submitted && currentStep === 3">
               <div>
                 <label class="mb-1 block text-sm font-medium text-primary">Message *</label>
                 <textarea
@@ -249,11 +247,16 @@
               </div>
 
               <div class="flex flex-col gap-3">
-                <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-focus">
-                  Send message
-                </button>
-                <button type="button" class="inline-flex w-full items-center justify-center rounded-full border border-neutral-300 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-neutral-50">
-                  View calendar availability
+                <button
+                  type="submit"
+                  :disabled="submitting"
+                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <svg v-if="submitting" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  {{ submitting ? 'Sending...' : 'Send message' }}
                 </button>
               </div>
 
@@ -350,7 +353,6 @@ const form = ref({
   phone: '',
   interests: [],
   timeline: '',
-  budget: '',
   notes: '',
   message: ''
 })
@@ -383,15 +385,60 @@ const nextStep = event => {
   }
 }
 
-const handleSubmit = event => {
+const submitting = ref(false)
+const submitted = ref(false)
+const submitError = ref(null)
+
+const handleSubmit = async (event) => {
   const formElement = event?.target
   if (formElement && !formElement.checkValidity()) {
     formElement.reportValidity()
     return
   }
 
-  console.log('Contact submission', form.value)
-  // Reset or trigger success state as needed
+  submitting.value = true
+  submitError.value = null
+
+  try {
+    console.log('[contact] Submitting form...', form.value)
+    
+    const response = await fetch('/api/contact/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form.value)
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.statusMessage || 'Failed to submit form')
+    }
+
+    const data = await response.json()
+    console.log('[contact] Submission successful:', data)
+
+    submitted.value = true
+    
+    // Reset form
+    form.value = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      phone: '',
+      interests: [],
+      timeline: '',
+      notes: '',
+      message: ''
+    }
+    
+    currentStep.value = 1
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } catch (error) {
+    console.error('[contact] Submission error:', error)
+    submitError.value = error.message
+  } finally {
+    submitting.value = false
+  }
 }
 
 const faqs = [
