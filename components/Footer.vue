@@ -2,9 +2,9 @@
   <footer class="bg-white border-t border-neutral-200 mt-4 md:mt-6">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <!-- Main Footer Content -->
-      <div class="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
+      <div class="py-8 sm:py-12 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8">
         <!-- Brand -->
-        <div class="lg:col-span-4">
+        <div class="col-span-2 lg:col-span-4">
           <div class="flex items-center gap-2 mb-4">
             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-primary text-white font-bold text-sm">
               H
@@ -14,7 +14,7 @@
           <p class="text-sm text-secondary max-w-xs leading-relaxed">
             One subscription for design, development, hosting, and continuous improvements.
           </p>
-          <div class="mt-6 flex items-center gap-3">
+          <div class="mt-4 sm:mt-6 flex items-center gap-3">
             <a href="#" class="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-100 text-secondary hover:bg-neutral-200 hover:text-primary transition-all" aria-label="Twitter">
               <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -35,8 +35,8 @@
 
         <!-- Services -->
         <div class="lg:col-span-2">
-          <h4 class="text-sm font-semibold text-primary mb-4">Services</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-primary mb-3">Services</h4>
+          <ul class="space-y-2">
             <li>
               <NuxtLink to="/website" class="text-sm text-secondary hover:text-primary transition-colors">
                 Websites
@@ -57,8 +57,8 @@
 
         <!-- Company -->
         <div class="lg:col-span-2">
-          <h4 class="text-sm font-semibold text-primary mb-4">Company</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-primary mb-3">Company</h4>
+          <ul class="space-y-2">
             <li>
               <a href="#" class="text-sm text-secondary hover:text-primary transition-colors">
                 About
@@ -84,8 +84,8 @@
 
         <!-- Resources -->
         <div class="lg:col-span-2">
-          <h4 class="text-sm font-semibold text-primary mb-4">Resources</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-primary mb-3">Resources</h4>
+          <ul class="space-y-2">
             <li>
               <NuxtLink to="/get-started" class="text-sm text-secondary hover:text-primary transition-colors">
                 Pricing
@@ -121,8 +121,8 @@
 
         <!-- Legal -->
         <div class="lg:col-span-2">
-          <h4 class="text-sm font-semibold text-primary mb-4">Legal</h4>
-          <ul class="space-y-3">
+          <h4 class="text-sm font-semibold text-primary mb-3">Legal</h4>
+          <ul class="space-y-2">
             <li>
               <a href="#" class="text-sm text-secondary hover:text-primary transition-colors">
                 Privacy Policy

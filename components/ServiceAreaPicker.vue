@@ -22,25 +22,34 @@
 
       <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
         <label class="text-sm font-medium text-primary sm:w-40">Search locations</label>
-        <div class="relative flex-1">
+        <div class="flex flex-1 gap-2">
           <input
             v-model="query"
-            type="search"
-            class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-            placeholder="Start typing a city, neighborhood, or region"
+            type="text"
+            class="flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+            placeholder="Enter a city, neighborhood, or region"
             aria-label="Search for service areas"
+            @keypress.enter.prevent="performSearch"
           />
-          <svg
-            class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-secondary"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            viewBox="0 0 24 24"
+          <button
+            type="button"
+            @click="performSearch"
+            :disabled="query.length < 3 || loading"
+            class="flex items-center justify-center rounded-xl bg-accent-primary px-4 py-2.5 text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Search"
           >
-            <path d="m21 21-4.35-4.35M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" />
-          </svg>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="m21 21-4.35-4.35M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -148,65 +157,50 @@ watch(
   { deep: true }
 )
 
-const showResults = computed(() => query.value.length >= 3 && (loading.value || results.value.length > 0))
+const showResults = computed(() => results.value.length > 0 || loading.value)
 
-let debounceTimer = null
-
-watch(
-  query,
-  async newQuery => {
-    error.value = ''
-    
-    // Clear existing debounce timer
-    if (debounceTimer) {
-      clearTimeout(debounceTimer)
-    }
-    
-    if (newQuery.length < 3) {
-      results.value = []
-      if (controller.value) {
-        controller.value.abort()
-      }
-      return
-    }
-
-    if (controller.value) {
-      controller.value.abort()
-    }
-
-    // Debounce the search by 500ms to prevent freezing
-    debounceTimer = setTimeout(async () => {
-      controller.value = new AbortController()
-      loading.value = true
-
-      try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q=${encodeURIComponent(newQuery)}`,
-          {
-            headers: {
-              Accept: 'application/json',
-              'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
-            },
-            signal: controller.value.signal
-          }
-        )
-
-        if (!response.ok) {
-          throw new Error('Unable to fetch results right now.')
-        }
-
-        const data = await response.json()
-        results.value = Array.isArray(data) ? data : []
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          error.value = 'We could not reach the address service. Please try again.'
-        }
-      } finally {
-        loading.value = false
-      }
-    }, 500)
+const performSearch = async () => {
+  if (query.value.length < 3) {
+    error.value = 'Please enter at least 3 characters'
+    return
   }
-)
+
+  error.value = ''
+  
+  if (controller.value) {
+    controller.value.abort()
+  }
+
+  controller.value = new AbortController()
+  loading.value = true
+  results.value = []
+
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&q=${encodeURIComponent(query.value)}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
+        },
+        signal: controller.value.signal
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Unable to fetch results right now.')
+    }
+
+    const data = await response.json()
+    results.value = Array.isArray(data) ? data : []
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      error.value = 'We could not reach the address service. Please try again.'
+    }
+  } finally {
+    loading.value = false
+  }
+}
 
 const addArea = result => {
   if (!result) return
@@ -218,7 +212,7 @@ const addArea = result => {
     return
   }
 
-  // Batch updates to prevent multiple re-renders on mobile
+  // Create new area object
   const newArea = {
     placeId: result.place_id,
     name: result.display_name,
@@ -228,14 +222,12 @@ const addArea = result => {
     radiusKm: 10
   }
 
-  // Clear UI first for immediate feedback
+  // Update immediately without batching to avoid reactivity issues
+  internalAreas.value.push(newArea)
+  
+  // Clear search UI
   query.value = ''
   results.value = []
-  
-  // Then update areas in next tick to prevent blocking
-  nextTick(() => {
-    internalAreas.value = [...internalAreas.value, newArea]
-  })
 }
 
 const removeArea = index => {
