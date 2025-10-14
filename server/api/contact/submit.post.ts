@@ -34,32 +34,26 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Get Supabase client with service role
-    const config = useRuntimeConfig(event)
+    // Get Supabase credentials directly from environment
+    // This is more reliable than runtime config for server-side operations
+    const supabaseUrl = process.env.NUXT_PUBLIC_SUPABASE_URL
+    const supabaseServiceKey = process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY
     
-    // Try multiple ways to get the config
-    const supabaseUrl = config.public?.supabase?.url || 
-                        process.env.NUXT_PUBLIC_SUPABASE_URL ||
-                        ''
-    
-    const supabaseServiceKey = config.supabase?.serviceKey || 
-                               process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY ||
-                               ''
-    
-    console.log('[contact] Config check:', {
+    console.log('[contact] Environment check:', {
       hasUrl: !!supabaseUrl,
       hasKey: !!supabaseServiceKey,
-      urlSource: config.public?.supabase?.url ? 'runtime' : 'env',
-      keySource: config.supabase?.serviceKey ? 'runtime' : 'env'
+      urlLength: supabaseUrl?.length || 0,
+      keyLength: supabaseServiceKey?.length || 0
     })
     
     if (!supabaseUrl || !supabaseServiceKey) {
-      console.error('[contact] Missing Supabase config')
-      console.error('[contact] Available config keys:', Object.keys(config))
-      console.error('[contact] Public config:', config.public)
+      console.error('[contact] Missing Supabase environment variables')
+      console.error('[contact] NUXT_PUBLIC_SUPABASE_URL:', !!supabaseUrl)
+      console.error('[contact] NUXT_SUPABASE_SERVICE_ROLE_KEY:', !!supabaseServiceKey)
+      
       throw createError({
         statusCode: 500,
-        statusMessage: `Supabase configuration missing. Check server logs for details.`
+        statusMessage: `Supabase not configured. Missing: ${!supabaseUrl ? 'URL' : ''} ${!supabaseServiceKey ? 'Service Key' : ''}`
       })
     }
     
