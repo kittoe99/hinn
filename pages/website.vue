@@ -1,89 +1,81 @@
 <template>
   <div class="pb-12 md:pb-16">
-    <!-- Hero -->
-    <section class="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-20">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/40 via-white to-white" aria-hidden="true" />
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]" aria-hidden="true" />
-      
-      <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center max-w-4xl mx-auto">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-            Website Development
-          </div>
-          <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary">
-            Modern Websites That <span class="text-accent-primary">Drive Results</span>
+    <section class="pt-12 md:pt-16">
+      <div class="max-w-5xl mx-auto px-4 lg:px-6">
+        <header class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Website design & development</p>
+          <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
+            Custom website design that aligns your brand, content, and growth goals
           </h1>
-          <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
-            Professional web design and development with React/Vue.js, SEO optimization, and managed hosting. Launch in 10 days.
+          <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+            A focused service for teams who need a polished marketing website or product site—without the overhead of hiring and managing multiple freelancers. We handle UX, development, launch, and ongoing support in one streamlined engagement.
           </p>
-          <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
-            <button class="w-full sm:w-auto rounded-full bg-accent-primary px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-primary/30 transition hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40">
-              Start your project
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline-block ml-2 h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-            <a
-              href="#plans"
-              class="w-full sm:w-auto rounded-full border-2 border-neutral-300 bg-white px-8 py-4 text-base font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20"
-            >
-              View pricing
-            </a>
-          </div>
-          
-          <!-- Stats -->
-          <div class="mt-16 grid grid-cols-3 gap-6 md:gap-8">
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">10 days</div>
-              <p class="mt-2 text-sm text-secondary">Average launch time</p>
+        </header>
+        <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
+          <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
+          <dl class="relative grid gap-4 text-sm text-neutral-700 md:grid-cols-2">
+            <div>
+              <dt class="text-xs uppercase tracking-wide text-neutral-500">Project fit</dt>
+              <dd class="mt-1 text-base font-semibold text-primary">Marketing sites, product sites, startup launches</dd>
             </div>
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">99.9%</div>
-              <p class="mt-2 text-sm text-secondary">Uptime guarantee</p>
+            <div>
+              <dt class="text-xs uppercase tracking-wide text-neutral-500">Typical scope</dt>
+              <dd class="mt-1 text-base font-semibold text-primary">5–12 page builds, CMS setup, analytics & SEO</dd>
             </div>
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">24/7</div>
-              <p class="mt-2 text-sm text-secondary">Support available</p>
+            <div>
+              <dt class="text-xs uppercase tracking-wide text-neutral-500">Engagement length</dt>
+              <dd class="mt-1 text-base font-semibold text-primary">3–5 weeks from kickoff to launch</dd>
             </div>
-          </div>
-        </div>
-        
-        <!-- Visual Element -->
-        <div class="mt-10 relative max-w-3xl mx-auto">
-          <div class="rounded-xl border border-neutral-200 bg-white p-1 shadow-lg">
-            <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-accent-subtle via-neutral-100 to-white flex items-center justify-center">
-              <div class="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 mx-auto text-accent-primary">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
-                <p class="mt-2 text-xs font-medium text-neutral-500">Website Preview</p>
-              </div>
+            <div>
+              <dt class="text-xs uppercase tracking-wide text-neutral-500">Availability</dt>
+              <dd class="mt-1 text-base font-semibold text-primary">Next kickoff opening: October 28</dd>
             </div>
+          </dl>
+          <div class="relative rounded-2xl border border-neutral-200 bg-neutral-50/90 p-6 shadow-inner shadow-white/60">
+            <div class="absolute inset-x-6 -top-4 flex justify-center">
+              <span class="inline-flex items-center rounded-full bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
+                Guided collaboration
+              </span>
+            </div>
+            <h2 class="text-base font-semibold text-primary">What you can expect</h2>
+            <ul class="mt-5 space-y-4 text-sm text-neutral-700">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-subtle text-xs font-semibold text-accent-primary">1</span>
+                <span>Weekly working sessions with design, development, and growth strategists.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-subtle text-xs font-semibold text-accent-primary">2</span>
+                <span>Dedicated Slack channel, project tracker, and async updates.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-subtle text-xs font-semibold text-accent-primary">3</span>
+                <span>Final delivery package with documentation, training, and 30 days of support.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What's Included -->
-    <section class="mt-16 md:mt-20">
+    <section class="mt-16 md:mt-20" id="deliverables">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <div class="text-xs uppercase tracking-wider text-tertiary">What's Included</div>
-          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Complete Website Package</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">
-            Everything you need to launch and grow your online presence.
-          </p>
+        <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-xs uppercase tracking-wider text-tertiary">Project deliverables</p>
+            <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Everything needed for a high-converting website</h2>
+            <p class="mt-3 text-base text-secondary">
+              We combine strategy, design, development, and optimization workstreams into a single engagement. Each pillar expands with detailed feature checklists.
+            </p>
+          </div>
+          <a href="#plans" class="inline-flex items-center text-sm font-semibold text-accent-primary hover:text-accent-focus">Skip to pricing →</a>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="pillar in outcomePillars"
             :key="pillar.title"
-            class="group rounded-3xl border border-neutral-200 bg-white p-6 transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+            class="group rounded-3xl border border-neutral-200 bg-white/95 p-6 shadow-sm shadow-neutral-200 transition-all hover:-translate-y-1.5 hover:border-accent-primary hover:shadow-2xl"
           >
-            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-subtle to-accent-subtle/50 text-accent-primary group-hover:from-accent-primary group-hover:to-accent-focus group-hover:text-white transition-all">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle text-accent-primary group-hover:bg-accent-primary group-hover:text-white transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="pillar.icon" />
               </svg>
@@ -104,22 +96,22 @@
     </section>
 
     <!-- Tech Stack -->
-    <section class="mt-16 md:mt-20 bg-neutral-50 py-12 md:py-16">
+    <section class="mt-16 md:mt-20 bg-neutral-50 py-14 md:py-18">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <div class="text-xs uppercase tracking-wider text-tertiary">Technology</div>
-          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Built with Modern Tech</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">
-            We use cutting-edge frameworks and tools to ensure your website is fast, secure, and scalable.
+        <div class="mb-12 max-w-3xl">
+          <p class="text-xs uppercase tracking-wider text-tertiary">Technology</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Modern stack and infrastructure baked in</h2>
+          <p class="mt-3 text-base text-secondary">
+            Our preferred technology stack keeps your team productive: component-based front ends, headless content, automated deployments, analytics, and compliance handled from day one.
           </p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
           <div
             v-for="tech in techStack"
             :key="tech.name"
-            class="rounded-2xl border border-neutral-200 bg-white p-6 text-center transition-all hover:border-accent-primary hover:shadow-md"
+            class="rounded-2xl border border-neutral-200 bg-white/90 p-6 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
           >
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle mx-auto">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle/80 text-accent-primary">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-accent-primary">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="tech.icon" />
               </svg>
@@ -132,23 +124,23 @@
     </section>
 
     <!-- Features Grid -->
-    <section class="mt-16 md:mt-20 bg-neutral-50 py-12 md:py-16">
+    <section class="mt-16 md:mt-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <div class="text-xs uppercase tracking-wider text-tertiary">Features</div>
-          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Powerful Features Included</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">
-            Every website comes packed with features to help you succeed online.
+        <div class="mb-12 max-w-3xl">
+          <p class="text-xs uppercase tracking-wider text-tertiary">Experience enhancements</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Built-in capabilities that improve conversion and retention</h2>
+          <p class="mt-3 text-base text-secondary">
+            From lead capture to live chat, every feature is configured to deliver measurable impact and easy maintenance for your team.
           </p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div
             v-for="feature in additionalFeatures"
             :key="feature.title"
-            class="rounded-2xl border border-neutral-200 bg-white p-5 transition-all hover:border-accent-primary hover:shadow-md"
+            class="rounded-2xl border border-neutral-200 bg-white/95 p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
           >
             <div class="flex items-start gap-4">
-              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-subtle/80 text-accent-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                   <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
                 </svg>
@@ -164,17 +156,110 @@
     </section>
 
 
-    <!-- CTA -->
-    <section class="mt-16 md:mt-20 bg-gradient-to-br from-neutral-900 to-neutral-800 py-16 md:py-20 text-white">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ready to Launch?</h2>
-        <p class="mt-4 text-lg text-neutral-300">
-          Start your project today. No contracts, cancel anytime.
-        </p>
-        <div class="mt-8">
-          <button class="rounded-full bg-white px-8 py-4 text-base font-semibold text-neutral-900 transition hover:bg-neutral-100">
-            Get started now
+    <section class="mt-16 md:mt-20">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6">
+        <div class="mb-12 max-w-3xl">
+          <p class="text-xs uppercase tracking-wider text-tertiary">Process</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Collaborative timeline with clear milestones</h2>
+          <p class="mt-3 text-base text-secondary">
+            We run the project in structured phases so you always know what we’re working on, what’s needed from your team, and when each deliverable goes live.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div
+            v-for="(phase, index) in launchTimeline"
+            :key="phase.title"
+            class="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1.5 hover:border-accent-primary hover:shadow-2xl"
+          >
+            <div class="flex items-center gap-4">
+              <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle/80 text-xl font-semibold text-accent-primary">
+                {{ index + 1 }}
+              </span>
+              <div>
+                <h3 class="text-lg font-semibold text-primary">{{ phase.title }}</h3>
+                <p class="mt-1 text-sm text-secondary">{{ phase.detail }}</p>
+              </div>
+            </div>
+            <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-1.5 text-xs font-medium text-neutral-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {{ phase.duration }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="plans" class="mt-16 md:mt-20">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6">
+        <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-xs uppercase tracking-wider text-tertiary">Pricing</p>
+            <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Engagement options based on team stage</h2>
+            <p class="mt-3 text-base text-secondary">
+              Pick the plan that matches where you are today. Each package can expand with add-on deliverables, content retainers, or product integrations.
+            </p>
+          </div>
+          <button class="self-start rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-accent-primary hover:text-accent-primary">
+            Compare scope details
           </button>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div
+            v-for="tier in pricingTiers"
+            :key="tier.name"
+            class="flex flex-col rounded-3xl border border-neutral-200 bg-white/95 p-6 shadow-sm transition-all hover:-translate-y-1.5 hover:border-accent-primary hover:shadow-2xl"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-widest text-accent-primary">{{ tier.segment }}</span>
+              <span class="text-2xl font-bold text-primary">{{ tier.price }}</span>
+            </div>
+            <h3 class="mt-4 text-xl font-semibold text-primary">{{ tier.name }}</h3>
+            <p class="mt-2 text-sm text-secondary">{{ tier.desc }}</p>
+            <ul class="mt-6 flex-1 space-y-3 text-sm text-neutral-700">
+              <li
+                v-for="benefit in tier.features"
+                :key="benefit"
+                class="flex items-start gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 flex-shrink-0 text-accent-primary">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{{ benefit }}</span>
+              </li>
+            </ul>
+            <button class="mt-8 w-full rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-focus">
+              Start with {{ tier.name.toLowerCase() }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="mt-16 md:mt-20 bg-neutral-900 py-16 text-white">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+          <div>
+            <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/80">
+              Next steps
+            </span>
+            <h2 class="mt-4 text-2xl md:text-3xl font-semibold tracking-tight">Book a working session to scope your website project</h2>
+            <p class="mt-3 text-sm md:text-base text-neutral-200">
+              Share your goals, audience, and timelines—we’ll walk you through our approach, forecast timelines, and highlight quick wins for your launch.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10">
+            <button class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100">
+              Schedule a discovery call
+            </button>
+            <button class="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Download our implementation checklist
+            </button>
+          </div>
         </div>
       </div>
     </section>

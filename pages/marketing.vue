@@ -1,53 +1,65 @@
 <template>
   <div class="pb-8 md:pb-12">
     <!-- Hero -->
-    <section class="relative overflow-hidden pt-4 md:pt-6">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle via-white to-white" aria-hidden="true" />
-      <div class="relative max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1.05fr_1fr] gap-8 md:gap-12 items-center">
-        <div class="text-center lg:text-left">
-          <p class="inline-flex items-center gap-2 rounded-full border border-accent-subtle/60 bg-white px-3 py-1 text-xs font-medium text-accent-primary">
-            Digital marketing services on monthly subscription
-          </p>
+    <section class="pt-12 md:pt-16">
+      <div class="max-w-5xl mx-auto px-4 lg:px-6">
+        <header class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Marketing strategy & execution</p>
           <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
             Digital Marketing Services & Campaign Management
           </h1>
-          <p class="mt-4 text-sm md:text-base text-secondary max-w-xl mx-auto lg:mx-0">
-            Comprehensive marketing strategy, content creation, email marketing automation, social media management, PPC advertising, SEO content, and performance analytics—delivered by a dedicated team in monthly sprints.
+          <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+            Monthly sprint-based marketing that combines strategy, content, paid media, lifecycle automation, and measurement. We embed with your team to plan, ship, and iterate campaigns quickly.
           </p>
-          <div class="mt-6 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
-            <button class="w-full sm:w-auto rounded-full bg-accent-primary px-5 py-3 text-sm md:text-base font-medium text-white shadow-sm shadow-accent-primary/20 transition hover:bg-accent-focus">
-              Plan a campaign sprint
-            </button>
-            <a
-              href="#services"
-              class="w-full sm:w-auto rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm md:text-base font-medium text-neutral-800 transition hover:bg-neutral-50"
-            >
-              Explore deliverables
-            </a>
-          </div>
-          <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            <div v-for="signal in heroSignals" :key="signal.label" class="rounded-2xl border border-soft bg-white/80 px-4 py-3 backdrop-blur">
-              <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ signal.label }}</dt>
-              <dd class="mt-1 text-xl font-semibold text-primary">{{ signal.value }}</dd>
-              <p class="mt-1 text-xs text-secondary">{{ signal.detail }}</p>
+        </header>
+        <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
+          <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
+          <div class="relative space-y-6">
+            <div>
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Where we plug in</h2>
+              <p class="mt-2 text-sm text-neutral-700">
+                From strategy and creative to paid growth and analytics, we ship integrated campaigns with tight feedback loops and shared KPIs.
+              </p>
             </div>
-          </dl>
-        </div>
-        <div class="relative">
-          <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-lg shadow-accent-subtle/40">
-            <div class="flex items-center justify-between gap-4">
-              <div>
-                <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Sprint artifacts</p>
-                <p class="mt-1 text-lg font-semibold text-primary">Everything you need to launch</p>
+            <dl class="grid gap-3 md:grid-cols-2">
+              <div
+                v-for="signal in heroSignals"
+                :key="signal.label"
+                class="rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+              >
+                <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ signal.label }}</dt>
+                <dd class="mt-1 text-xl font-semibold text-primary">{{ signal.value }}</dd>
+                <p class="mt-1 text-xs text-secondary">{{ signal.detail }}</p>
               </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle text-accent-primary">
+            </dl>
+            <div class="flex flex-wrap gap-3">
+              <button class="rounded-full bg-accent-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
+                Plan a campaign sprint
+              </button>
+              <a href="#services" class="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-accent-primary hover:text-accent-primary">
+                Explore deliverables
+              </a>
+            </div>
+          </div>
+          <div class="relative rounded-3xl border border-neutral-200 bg-neutral-50/90 p-6 shadow-inner shadow-white/60">
+            <div class="absolute inset-x-6 -top-4 flex justify-center">
+              <span class="inline-flex items-center rounded-full bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
+                Sprint artifacts
+              </span>
+            </div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-xs uppercase tracking-wide text-neutral-500">Everything you receive</p>
+                <p class="mt-1 text-lg font-semibold text-primary">Campaign, creative & analytics assets</p>
+              </div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle/80 text-accent-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                 </svg>
               </div>
             </div>
             <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-neutral-700">
-              <li v-for="artifact in sprintArtifacts" :key="artifact" class="rounded-2xl border border-soft bg-white/80 px-3 py-3">
+              <li v-for="artifact in sprintArtifacts" :key="artifact" class="rounded-2xl border border-neutral-200 bg-white/95 px-3 py-3 shadow-sm">
                 {{ artifact }}
               </li>
             </ul>

@@ -2,8 +2,7 @@
   <div class="relative overflow-hidden">
     <!-- Hero Section -->
     <section class="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-20">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/40 via-white to-white" aria-hidden="true" />
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]" aria-hidden="true" />
+      <div class="absolute inset-0 bg-white" aria-hidden="true" />
       
       <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center max-w-4xl mx-auto">
@@ -39,7 +38,7 @@
         <!-- Visual Element -->
         <div class="mt-10 relative max-w-3xl mx-auto">
           <div class="rounded-xl border border-neutral-200 bg-white p-1 shadow-lg">
-            <div class="aspect-[16/9] rounded-lg bg-gradient-to-br from-accent-subtle via-neutral-100 to-white flex items-center justify-center">
+            <div class="aspect-[16/9] rounded-lg bg-neutral-50 flex items-center justify-center">
               <div class="text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 mx-auto text-accent-primary">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -123,7 +122,7 @@
 
     <!-- Process Section -->
     <section class="mt-16 md:mt-24 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle/30 via-white to-white" aria-hidden="true" />
+      <div class="absolute inset-0 bg-white" aria-hidden="true" />
       <div class="relative max-w-6xl mx-auto px-4 lg:px-6 py-12 md:py-16">
         <div class="text-center mb-12">
           <div class="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-xs font-semibold text-accent-primary">
@@ -138,7 +137,7 @@
         
         <div class="relative">
           <!-- Timeline line -->
-          <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-primary via-accent-subtle to-transparent" aria-hidden="true" />
+          <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-accent-primary/30" aria-hidden="true" />
           
           <div class="space-y-8">
             <div
@@ -153,7 +152,7 @@
               <div :class="index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12 lg:col-start-2'">
                 <div class="group rounded-3xl border border-soft bg-white p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
                   <div class="flex items-start gap-4" :class="index % 2 === 0 ? 'lg:flex-row-reverse lg:text-right' : ''">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-primary to-accent-focus text-lg font-bold text-white shadow-lg shadow-accent-primary/30">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-primary text-lg font-bold text-white shadow-lg shadow-accent-primary/30">
                       {{ index + 1 }}
                     </div>
                     <div class="flex-1">
@@ -224,7 +223,7 @@
                 :alt="project.title"
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
               <span v-if="project.tag" class="absolute top-3 left-3 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-semibold text-neutral-700 shadow-sm">
                 {{ project.tag }}
               </span>
@@ -257,7 +256,7 @@
     <section class="mt-16 md:mt-24">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-12">
-          <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent-subtle to-accent-subtle/50 px-4 py-1.5 text-xs font-semibold text-accent-primary">
+          <div class="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-xs font-semibold text-accent-primary">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
             </svg>
@@ -285,7 +284,7 @@
             </div>
             
             <div class="mt-8 flex items-center gap-4">
-              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-primary to-accent-focus text-base font-bold text-white shadow-lg shadow-accent-primary/20">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-primary text-base font-bold text-white shadow-lg shadow-accent-primary/20">
                 {{ testimonial.initials }}
               </div>
               <div>

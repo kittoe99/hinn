@@ -1,58 +1,70 @@
 <template>
   <div class="pb-8 md:pb-12">
     <!-- Hero -->
-    <section class="relative overflow-hidden pt-4 md:pt-6">
-      <div class="absolute inset-0 bg-gradient-to-br from-accent-subtle via-white to-white" aria-hidden="true" />
-      <div class="relative max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[1.05fr_1fr] items-center gap-8 md:gap-12">
-        <div class="text-center lg:text-left">
-          <p class="inline-flex items-center gap-2 rounded-full border border-accent-subtle/60 bg-white px-3 py-1 text-xs font-medium text-accent-primary">
-            Autonomous AI agents for business automation
-          </p>
+    <section class="pt-12 md:pt-16">
+      <div class="max-w-5xl mx-auto px-4 lg:px-6">
+        <header class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Autonomous AI agents</p>
           <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
             Autonomous AI Agents for Customer Service, Sales & Operations
           </h1>
-          <p class="mt-4 text-sm md:text-base text-secondary max-w-xl mx-auto lg:mx-0">
-            Deploy intelligent AI agents powered by GPT-4 that autonomously handle customer support tickets, qualify sales leads, schedule meetings, process orders, and automate internal workflows. Trained on your knowledge base with CRM integration and real-time monitoring.
+          <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+            Deploy intelligent AI agents trained on your knowledge base with CRM and support integrations. We orchestrate discovery, guardrails, and launch so you can automate conversations without sacrificing control or customer trust.
           </p>
-          <div class="mt-6 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
-            <button class="w-full sm:w-auto rounded-full bg-accent-primary px-5 py-3 text-sm md:text-base font-medium text-white shadow-sm shadow-accent-primary/20 transition hover:bg-accent-focus">
-              Design my agent squad
-            </button>
-            <a
-              href="#catalog"
-              class="w-full sm:w-auto rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm md:text-base font-medium text-neutral-800 transition hover:bg-neutral-50"
-            >
-              Browse templates
-            </a>
-          </div>
-          <dl class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            <div v-for="metric in heroMetrics" :key="metric.label" class="rounded-2xl border border-soft bg-white/80 px-4 py-3 backdrop-blur">
-              <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ metric.label }}</dt>
-              <dd class="mt-1 text-xl font-semibold text-primary">{{ metric.value }}</dd>
-              <p class="mt-1 text-xs text-secondary">{{ metric.detail }}</p>
+        </header>
+        <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
+          <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
+          <div class="relative space-y-6">
+            <div>
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Where agents deliver ROI</h2>
+              <p class="mt-2 text-sm text-neutral-700">
+                From frontline support to revenue operations, we map high-impact use cases, craft conversations, and plug agents into your systems with human approval workflows.
+              </p>
             </div>
-          </dl>
-        </div>
-        <div class="relative">
-          <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-lg shadow-accent-subtle/40">
-            <div class="flex items-center justify-between gap-4">
+            <dl class="grid gap-3 md:grid-cols-2">
+              <div
+                v-for="metric in heroMetrics"
+                :key="metric.label"
+                class="rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+              >
+                <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ metric.label }}</dt>
+                <dd class="mt-1 text-xl font-semibold text-primary">{{ metric.value }}</dd>
+                <p class="mt-1 text-xs text-secondary">{{ metric.detail }}</p>
+              </div>
+            </dl>
+            <div class="flex flex-wrap gap-3">
+              <button class="rounded-full bg-accent-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
+                Design my agent squad
+              </button>
+              <a href="#catalog" class="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-accent-primary hover:text-accent-primary">
+                Browse templates
+              </a>
+            </div>
+          </div>
+          <div class="relative rounded-3xl border border-neutral-200 bg-neutral-50/90 p-6 shadow-inner shadow-white/60">
+            <div class="absolute inset-x-6 -top-4 flex justify-center">
+              <span class="inline-flex items-center rounded-full bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
+                Operational guardrails
+              </span>
+            </div>
+            <div class="flex items-start justify-between gap-4">
               <div>
-                <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Realtime oversight</p>
+                <p class="text-xs uppercase tracking-wide text-neutral-500">Realtime oversight</p>
                 <p class="mt-1 text-lg font-semibold text-primary">Humans stay in the loop</p>
               </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle text-accent-primary">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle/80 text-accent-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
             </div>
-            <ul class="mt-5 space-y-3 text-left text-sm text-neutral-700">
+            <ul class="mt-5 space-y-3 text-sm text-neutral-700">
               <li v-for="guardrail in oversightGuardrails" :key="guardrail" class="flex items-start gap-2">
                 <span class="mt-0.5 text-accent-primary">•</span>
                 <span>{{ guardrail }}</span>
               </li>
             </ul>
-            <div class="mt-6 rounded-2xl border border-dashed border-accent-subtle bg-accent-subtle/40 px-4 py-3 text-left text-xs text-neutral-600">
+            <div class="mt-6 rounded-2xl border border-dashed border-accent-subtle bg-accent-subtle/30 px-4 py-3 text-xs text-neutral-600">
               <p class="font-medium text-primary">Live transcript review</p>
               <p class="mt-1 leading-relaxed">
                 View every interaction in real-time, tag improvements, and push updated behaviors instantly across your agents.
