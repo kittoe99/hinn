@@ -1,0 +1,12 @@
+# Sensitive files - never deploy these
+ENV_CREDENTIALS.txt
+DEPLOYMENT_ENV_SETUP.md
+FIX_CONTACT_FORM_ERROR.md
+CONTACT_FORM_SETUP.md
+
+# Development/debug files
+server/api/debug/
+
+# Documentation that shouldn't be public
+*.md
+!README.md

@@ -22,3 +22,8 @@ logs
 .env
 .env.*
 !.env.example
+
+# Sensitive documentation files (should not be deployed)
+ENV_CREDENTIALS.txt
+DEPLOYMENT_ENV_SETUP.md
+FIX_CONTACT_FORM_ERROR.md
