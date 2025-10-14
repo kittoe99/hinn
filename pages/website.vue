@@ -131,43 +131,6 @@
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="mt-16 md:mt-20 bg-white py-12 md:py-16">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <div class="text-xs uppercase tracking-wider text-tertiary">Our Process</div>
-          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">From Idea to Launch</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">
-            Our proven process ensures your website launches on time and exceeds expectations.
-          </p>
-        </div>
-        <div class="relative">
-          <!-- Timeline line -->
-          <div class="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent-primary to-transparent" aria-hidden="true" />
-          
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 relative">
-            <div
-              v-for="(phase, index) in launchTimeline"
-              :key="phase.title"
-              class="text-center"
-            >
-              <div class="relative inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-xl bg-gradient-to-br from-accent-primary to-accent-focus text-lg md:text-xl font-bold text-white shadow-lg shadow-accent-primary/20 mb-4">
-                {{ index + 1 }}
-              </div>
-              <h3 class="text-base md:text-lg font-semibold text-primary">{{ phase.title }}</h3>
-              <p class="mt-2 text-sm text-secondary leading-relaxed">{{ phase.detail }}</p>
-              <div v-if="phase.duration" class="mt-3 inline-flex items-center gap-1 rounded-full bg-accent-subtle px-3 py-1 text-xs font-medium text-accent-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ phase.duration }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Features Grid -->
     <section class="mt-16 md:mt-20 bg-neutral-50 py-12 md:py-16">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">

@@ -34,22 +34,6 @@
               Learn More
             </a>
           </div>
-          
-          <!-- Stats -->
-          <div class="mt-16 grid grid-cols-3 gap-6 md:gap-8">
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">$1,650</div>
-              <p class="mt-2 text-sm text-secondary">Per month</p>
-            </div>
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">10 days</div>
-              <p class="mt-2 text-sm text-secondary">Average launch</p>
-            </div>
-            <div class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur p-6 shadow-sm">
-              <div class="text-3xl md:text-4xl font-bold text-accent-primary">24/7</div>
-              <p class="mt-2 text-sm text-secondary">Support</p>
-            </div>
-          </div>
         </div>
         
         <!-- Visual Element -->
@@ -113,7 +97,7 @@
             v-for="product in subscriptionProducts"
             :key="product.title"
             :to="product.href"
-            class="group flex items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-8 transition-all hover:border-accent-primary hover:shadow-lg"
+            class="group flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-8 transition-all hover:border-accent-primary hover:shadow-lg"
           >
             <div class="flex-1">
               <h3 class="text-2xl md:text-3xl font-bold text-primary">{{ product.title }}</h3>
