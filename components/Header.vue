@@ -73,14 +73,12 @@
         <!-- Mobile Menu Button -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="lg:hidden p-2 -mr-2 text-secondary hover:text-primary hover:bg-neutral-50 rounded-xl transition-all"
+          class="lg:hidden p-2 text-secondary hover:text-primary hover:bg-neutral-50 rounded-xl transition-all"
           aria-label="Toggle menu"
         >
-          <svg v-if="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            <path v-else stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -97,7 +95,7 @@
     >
       <div 
         v-if="mobileMenuOpen" 
-        class="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
+        class="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm lg:hidden"
         @click="mobileMenuOpen = false"
       />
     </transition>
@@ -113,11 +111,12 @@
     >
       <div 
         v-if="mobileMenuOpen" 
-        class="fixed top-0 right-0 bottom-0 w-[85vw] max-w-sm bg-white shadow-2xl lg:hidden overflow-y-auto"
+        class="fixed top-0 right-0 h-screen z-[70] w-80 bg-white shadow-2xl lg:hidden overflow-y-auto"
+        style="max-width: 85vw;"
       >
-        <div class="p-6">
+        <div class="p-4">
           <!-- Close Button -->
-          <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-2">
               <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent-primary to-accent-focus text-white font-bold text-sm">
                 H
@@ -136,7 +135,7 @@
           </div>
 
           <!-- Navigation Links -->
-          <nav class="space-y-1">
+          <nav class="space-y-1" style="display: block !important; visibility: visible !important;">
             <NuxtLink 
               to="/" 
               class="flex items-center gap-3 px-4 py-3 text-base font-medium text-secondary hover:text-primary hover:bg-neutral-50 rounded-xl transition-all group"
