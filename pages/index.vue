@@ -36,8 +36,8 @@
         </div>
         
         <!-- Hero Image -->
-        <div class="mt-12 relative max-w-4xl mx-auto">
-          <div class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 shadow-xl">
+        <div class="mt-8 relative max-w-2xl mx-auto">
+          <div class="rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-4 shadow-lg">
             <img src="/website-hero.svg" alt="Professional Web Services" class="w-full" />
           </div>
         </div>
