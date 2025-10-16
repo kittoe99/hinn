@@ -199,14 +199,14 @@
           </p>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           <a
             v-for="project in showcaseProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-lg"
           >
-            <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+            <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100">
               <img
                 loading="lazy"
                 :src="project.image"
@@ -214,16 +214,16 @@
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span v-if="project.tag" class="absolute top-3 left-3 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-semibold text-neutral-700 shadow-sm">
+              <span v-if="project.tag" class="absolute top-2 left-2 rounded-full bg-white/95 backdrop-blur px-2 py-0.5 text-xs font-semibold text-neutral-700 shadow-sm">
                 {{ project.tag }}
               </span>
             </div>
-            <div class="p-5">
-              <h3 class="text-lg font-semibold text-primary group-hover:text-accent-primary transition-colors">{{ project.title }}</h3>
-              <p class="mt-2 text-sm text-secondary line-clamp-2">{{ project.description }}</p>
-              <div class="mt-4 flex items-center gap-2 text-sm font-semibold text-accent-primary">
-                <span>View project</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 transition-transform group-hover:translate-x-1">
+            <div class="p-3">
+              <h3 class="text-sm font-semibold text-primary group-hover:text-accent-primary transition-colors">{{ project.title }}</h3>
+              <p class="mt-1 text-xs text-secondary line-clamp-2">{{ project.description }}</p>
+              <div class="mt-2 flex items-center gap-1 text-xs font-semibold text-accent-primary">
+                <span>View</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3 transition-transform group-hover:translate-x-1">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
