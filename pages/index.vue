@@ -35,17 +35,10 @@
           </div>
         </div>
         
-        <!-- Visual Element -->
-        <div class="mt-10 relative max-w-3xl mx-auto">
-          <div class="rounded-xl border border-neutral-200 bg-white p-1 shadow-lg">
-            <div class="aspect-[16/9] rounded-lg bg-neutral-50 flex items-center justify-center">
-              <div class="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-10 w-10 mx-auto text-accent-primary">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
-                <p class="mt-2 text-xs font-medium text-neutral-500">Website Preview</p>
-              </div>
-            </div>
+        <!-- Hero Image -->
+        <div class="mt-12 relative max-w-4xl mx-auto">
+          <div class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 shadow-xl">
+            <img src="/website-hero.svg" alt="Professional Web Services" class="w-full" />
           </div>
         </div>
       </div>

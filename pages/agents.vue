@@ -3,15 +3,20 @@
     <!-- Hero -->
     <section class="pt-12 md:pt-16">
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
-        <header class="max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Autonomous AI agents</p>
-          <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
-            Autonomous AI Agents for Customer Service, Sales & Operations
-          </h1>
-          <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
-            Deploy intelligent AI agents trained on your knowledge base with CRM and support integrations. We orchestrate discovery, guardrails, and launch so you can automate conversations without sacrificing control or customer trust.
-          </p>
-        </header>
+        <div class="grid gap-8 md:grid-cols-2 md:items-center">
+          <header class="max-w-3xl">
+            <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Autonomous AI agents</p>
+            <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
+              Autonomous AI Agents for Customer Service, Sales & Operations
+            </h1>
+            <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+              Deploy intelligent AI agents trained on your knowledge base with CRM and support integrations. We orchestrate discovery, guardrails, and launch so you can automate conversations without sacrificing control or customer trust.
+            </p>
+          </header>
+          <div class="flex justify-center md:justify-end">
+            <img src="/agents-hero.svg" alt="AI Agents Illustration" class="w-full max-w-md" />
+          </div>
+        </div>
         <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
           <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
           <div class="relative space-y-6">
