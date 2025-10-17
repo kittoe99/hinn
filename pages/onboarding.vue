@@ -178,9 +178,16 @@
                         v-model="formData.businessEmail"
                         type="email"
                         required
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        @input="validationErrors.businessEmail = false"
+                        :class="[
+                          'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
+                          validationErrors.businessEmail
+                            ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
+                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                        ]"
                         placeholder="you@company.com"
                       />
+                      <p v-if="validationErrors.businessEmail" class="mt-1 text-xs text-red-600">Business email is required</p>
                     </div>
                     <div>
                       <label class="mb-1 block text-sm font-medium text-primary">Business Phone</label>
@@ -220,9 +227,16 @@
                         v-model="formData.description"
                         rows="4"
                         required
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        @input="validationErrors.description = false"
+                        :class="[
+                          'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
+                          validationErrors.description
+                            ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
+                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                        ]"
                         placeholder="Share your core services, audience, and goals"
                       />
+                      <p v-if="validationErrors.description" class="mt-1 text-xs text-red-600">Description is required</p>
                       <div class="flex items-center gap-3">
                         <button
                           type="button"
@@ -990,8 +1004,28 @@
 
             <!-- Step 8: Review & Submit -->
             <div v-if="currentStep === 8" class="space-y-6">
+              <!-- Success Message -->
+              <div v-if="isSubmitted" class="rounded-3xl border border-green-200 bg-green-50 p-8 shadow-sm text-center">
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-green-900 mb-2">Onboarding Complete!</h3>
+                <p class="text-sm text-green-800 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
+                <NuxtLink
+                  to="/get-started"
+                  class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-focus"
+                >
+                  Review subscription options
+                  <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M5 12h14m-7-7 7 7-7 7" />
+                  </svg>
+                </NuxtLink>
+              </div>
+
               <!-- Submission Error Banner -->
-              <div v-if="submissionErrors.length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <div v-if="!isSubmitted && submissionErrors.length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -1005,7 +1039,7 @@
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+              <div v-if="!isSubmitted" class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Review your information</h3>
                 <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
 
@@ -1204,24 +1238,6 @@
                     <span v-if="isSubmitting">Submitting…</span>
                     <span v-else>Complete onboarding</span>
                   </button>
-                </div>
-              </div>
-
-              <div v-if="isSubmitted" class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
-                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p class="text-sm font-semibold text-primary">What happens next?</p>
-                    <p class="mt-1 text-xs leading-6 text-secondary">We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
-                  </div>
-                  <NuxtLink
-                    to="/get-started"
-                    class="inline-flex w-fit items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-semibold text-primary shadow-sm transition hover:bg-neutral-50"
-                  >
-                    Review subscription options
-                    <svg class="ml-2 h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-                      <path d="M5 12h14m-7-7 7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -1919,10 +1935,14 @@ const handleSubmit = async () => {
   }
 }
 
-watch(currentStep, step => {
-  if (step !== totalSteps) {
+watch(currentStep, (newStep, oldStep) => {
+  // Clear submission errors when leaving step 8
+  if (oldStep === totalSteps) {
     submissionErrors.value = []
   }
+  
+  // Don't clear validation errors when moving between steps
+  // They should only clear when user fixes the field or successfully validates
 })
 
 const enhanceDescription = async () => {
