@@ -382,12 +382,24 @@
 
             <!-- Step 4: Services & Coverage -->
             <div v-if="currentStep === 4" class="space-y-6">
+              <!-- Validation Error Banner -->
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                <div class="flex items-start gap-3">
+                  <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-red-800">Please complete all required fields</p>
+                    <p class="mt-1 text-xs text-red-700">Fields marked with * are required to continue.</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
-                <p class="mt-1 text-sm text-secondary">Define what you offer and where you operate.</p>
+                <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
-
                   <div>
                     <label class="mb-2 block text-sm font-medium text-primary">Services you provide</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -508,17 +520,20 @@
                           v-for="option in onSiteModes"
                           :key="option.value"
                           type="button"
-                          @click="formData.onSiteMode = option.value"
+                          @click="formData.onSiteMode = option.value; validationErrors.onSiteMode = false"
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.onSiteMode === option.value
                               ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : validationErrors.onSiteMode
+                              ? 'border-red-300 bg-red-50 hover:border-red-400'
                               : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                           ]"
                         >
                           {{ option.label }}
                         </button>
                       </div>
+                      <p v-if="validationErrors.onSiteMode" class="mt-2 text-xs text-red-600">Please select a service delivery mode</p>
                     </div>
                   </div>
 
@@ -543,6 +558,19 @@
 
             <!-- Step 5: Operations -->
             <div v-if="currentStep === 5" class="space-y-6">
+              <!-- Validation Error Banner -->
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                <div class="flex items-start gap-3">
+                  <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-red-800">Please complete all required fields</p>
+                    <p class="mt-1 text-xs text-red-700">Fields marked with * are required to continue.</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
@@ -556,17 +584,20 @@
                           v-for="option in hoursOptions"
                           :key="option.value"
                           type="button"
-                          @click="formData.businessHoursMode = option.value"
+                          @click="formData.businessHoursMode = option.value; validationErrors.businessHoursMode = false"
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.businessHoursMode === option.value
                               ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              : validationErrors.businessHoursMode
+                              ? 'border-red-300 bg-red-50 hover:border-red-400'
                               : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                           ]"
                         >
                           {{ option.label }}
                         </button>
                       </div>
+                      <p v-if="validationErrors.businessHoursMode" class="mt-2 text-xs text-red-600">Please select business hours</p>
                     </div>
                     <div>
                       <label class="mb-1 block text-sm font-medium text-primary">Primary goal *</label>
@@ -575,7 +606,9 @@
                         :options="goalOptions"
                         placeholder="Select a goal"
                         required
+                        @update:modelValue="validationErrors.primaryGoal = false"
                       />
+                      <p v-if="validationErrors.primaryGoal" class="mt-1 text-xs text-red-600">Please select a primary goal</p>
                     </div>
                   </div>
 
