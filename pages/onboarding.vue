@@ -5,17 +5,10 @@
     <div class="relative">
       <section class="px-3 pb-24 sm:px-4">
         <div class="mx-auto max-w-4xl pt-16">
-          <div class="rounded-3xl border border-neutral-200 bg-white p-8 sm:p-10">
-            <span class="text-xs font-medium uppercase tracking-wider text-accent-primary">
-              Onboarding
-            </span>
-            <h1 class="mt-4 text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-              Kick off your site build
-            </h1>
-            <p class="mt-3 text-base leading-relaxed text-secondary">
-              Share the essentials and we'll configure your workspace, schedule kickoff, and start shaping your launch plan.
-            </p>
-          </div>
+          <header class="text-center">
+            <h1 class="text-3xl font-semibold text-primary">Onboarding</h1>
+            <p class="mt-2 text-sm text-secondary">Follow the steps to provide everything we need for kickoff.</p>
+          </header>
 
           <div class="mt-10 space-y-6">
             <div class="flex items-center justify-between rounded-3xl border border-soft bg-white/90 p-4 shadow-sm shadow-neutral-900/5 backdrop-blur">

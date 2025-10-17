@@ -11,10 +11,10 @@
             Pay monthly, cancel anytime
           </div>
           <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary">
-            Professional Website Design & Development <span class="text-accent-primary">on Monthly Subscription</span>
+            Professional Websites, Branding & AI Agents <span class="text-accent-primary">on Monthly Subscription</span>
           </h1>
           <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
-            Custom web design, full-stack development, cloud hosting, and AI-powered marketing automation—all included in one predictable monthly plan.
+            High-velocity web builds, headline-worthy branding, and on-call AI agents—delivered as a single monthly partnership that keeps momentum on your side.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <NuxtLink
@@ -49,9 +49,9 @@
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="mx-auto max-w-3xl text-center">
           <div class="text-xs uppercase tracking-widest text-tertiary">What's Included</div>
-          <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Everything You Need to Succeed Online</h2>
+          <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Stack the odds in your favor</h2>
           <p class="mt-3 text-base text-secondary">
-            Design, development, hosting, and marketing—all in one subscription.
+            Every plan bundles pixel-perfect web builds, standout branding, and AI assistants that keep leads warm and customers impressed—delivered on a reliable monthly cadence.
           </p>
         </div>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -110,74 +110,203 @@
       </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="mt-16 md:mt-24 relative overflow-hidden">
-      <div class="absolute inset-0 bg-white" aria-hidden="true" />
-      <div class="relative max-w-6xl mx-auto px-4 lg:px-6 py-12 md:py-16">
-        <div class="text-center mb-12">
-          <div class="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-xs font-semibold text-accent-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            Our Process
+    <!-- Business Branding Section -->
+    <section class="mt-16 md:mt-24">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <!-- Branding Intro -->
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+              </svg>
+              Business Branding
+            </div>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary">Make your brand impossible to ignore</h2>
+            <p class="text-base text-secondary leading-relaxed max-w-xl">
+              We turn your story into a signature look—decks, drops, socials, packaging, and launches all built from the same unmistakable DNA.
+            </p>
+
+            <div class="rounded-3xl border border-neutral-200 bg-white/80 p-6 shadow-md backdrop-blur">
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="flex items-start gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5l8.25 4.5 8.25-4.5M4.5 7.5v9l7.5 4.5 7.5-4.5v-9" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-semibold text-primary">Launch-day brand kits</h3>
+                    <p class="mt-1 text-sm text-secondary">Logo suites, typography, and visual rules delivered in editable files so every vendor gets it right the first time.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-semibold text-primary">Merch that people keep</h3>
+                    <p class="mt-1 text-sm text-secondary">Swag lines, packaging, and presentation decks that feel premium enough for investors and die-hard fans alike.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h18M8 5v14m8-14v14M4 19h16" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-semibold text-primary">Scroll-stopping content kits</h3>
+                    <p class="mt-1 text-sm text-secondary">Template libraries for reels, carousels, stories, and email blasts that keep pace with your launch calendar.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-semibold text-primary">Creative team on speed dial</h3>
+                    <p class="mt-1 text-sm text-secondary">Your brand guardians for updates, production, and approvals so nothing ships off-brand.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <div class="flex items-center gap-2 rounded-full bg-accent-subtle/40 px-4 py-2 text-xs font-semibold text-accent-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Premium merch & packaging
+              </div>
+              <div class="flex items-center gap-2 rounded-full bg-accent-subtle/40 px-4 py-2 text-xs font-semibold text-accent-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Launch-ready design files
+              </div>
+              <div class="flex items-center gap-2 rounded-full bg-accent-subtle/40 px-4 py-2 text-xs font-semibold text-accent-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Social & ad creative packs
+              </div>
+              <div class="flex items-center gap-2 rounded-full bg-accent-subtle/40 px-4 py-2 text-xs font-semibold text-accent-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Event & campaign rollouts
+              </div>
+            </div>
           </div>
-          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">From Concept to Launch in 5 Steps</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Our proven agile methodology delivers high-quality websites quickly while maintaining flexibility for your evolving needs.</p>
-        </div>
-        
-        <div class="relative">
-          <!-- Timeline line -->
-          <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-accent-primary/30" aria-hidden="true" />
-          
-          <div class="space-y-8">
-            <div
-              v-for="(step, index) in processSteps"
-              :key="step.title"
-              :class="[
-                'relative grid lg:grid-cols-2 gap-8 items-center',
-                index % 2 === 0 ? 'lg:text-right' : 'lg:flex-row-reverse'
-              ]"
-            >
-              <!-- Content -->
-              <div :class="index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12 lg:col-start-2'">
-                <div class="group rounded-3xl border border-soft bg-white p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-                  <div class="flex items-start gap-4" :class="index % 2 === 0 ? 'lg:flex-row-reverse lg:text-right' : ''">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-primary text-lg font-bold text-white shadow-lg shadow-accent-primary/30">
-                      {{ index + 1 }}
+
+          <!-- Brand Gallery -->
+          <div class="relative rounded-4xl border border-neutral-200 bg-white p-6 shadow-xl">
+            <div class="grid gap-6">
+              <div class="grid gap-4 md:grid-cols-[1.4fr_1fr]">
+                <div class="relative overflow-hidden rounded-3xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=1400&q=80"
+                    alt="Branding moodboard with apparel and color palettes"
+                    class="h-full w-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div class="absolute bottom-6 left-6 text-white">
+                    <p class="text-xs uppercase tracking-wide opacity-80">Creative direction</p>
+                    <h3 class="mt-1 text-xl font-semibold">Launch visuals, locked and loaded</h3>
+                    <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                      <span class="rounded-full bg-white/20 px-3 py-1 font-medium">Signature palettes</span>
+                      <span class="rounded-full bg-white/20 px-3 py-1 font-medium">Photo direction</span>
+                      <span class="rounded-full bg-white/20 px-3 py-1 font-medium">Logo lockups</span>
                     </div>
-                    <div class="flex-1">
-                      <h3 class="text-xl font-semibold text-primary">{{ step.title }}</h3>
-                      <p class="mt-2 text-sm text-secondary leading-relaxed">{{ step.description }}</p>
-                      <div class="mt-4 flex flex-wrap gap-2" :class="index % 2 === 0 ? 'lg:justify-end' : ''">
-                        <span v-for="item in step.highlights" :key="item" class="inline-flex items-center gap-1.5 rounded-full bg-accent-subtle/60 px-3 py-1 text-xs font-medium text-accent-primary">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                          {{ item }}
-                        </span>
-                      </div>
+                  </div>
+                </div>
+                <div class="grid gap-4">
+                  <div class="relative overflow-hidden rounded-3xl border border-neutral-200">
+                    <img
+                      src="https://images.unsplash.com/photo-1603202662706-90401dc63b1f?auto=format&fit=crop&w=900&q=80"
+                      alt="Custom apparel with embroidered logo"
+                      class="h-full w-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-br from-black/50 to-transparent" />
+                    <div class="absolute bottom-4 left-4 text-white">
+                      <h4 class="text-sm font-semibold">Retail-ready merch drops</h4>
+                      <p class="mt-1 text-xs opacity-80">Production files, mockups, and vendor notes included.</p>
+                    </div>
+                  </div>
+                  <div class="relative overflow-hidden rounded-3xl border border-neutral-200">
+                    <img
+                      src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80"
+                      alt="Social media templates for a brand campaign"
+                      class="h-full w-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/30" />
+                    <div class="absolute bottom-4 left-4 text-white">
+                      <h4 class="text-sm font-semibold">Channel-ready campaign kits</h4>
+                      <p class="mt-1 text-xs opacity-80">Stories, reels, paid creative, and email modules shipped in editable files.</p>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              <!-- Timeline dot -->
-              <div class="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div class="h-4 w-4 rounded-full bg-accent-primary ring-4 ring-white shadow-lg" />
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+                  <h4 class="text-sm font-semibold text-primary">Apparel & merch</h4>
+                  <p class="mt-2 text-xs text-secondary">Jerseys, conference swag, retail packaging, and styled shoots prepped for press.</p>
+                </div>
+                <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+                  <h4 class="text-sm font-semibold text-primary">Web & product assets</h4>
+                  <p class="mt-2 text-xs text-secondary">Hero graphics, product visuals, and landing page art boards engineered for conversions.</p>
+                </div>
+                <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+                  <h4 class="text-sm font-semibold text-primary">Social playbooks</h4>
+                  <p class="mt-2 text-xs text-secondary">Content calendars, motion templates, and copy guidance customized per platform.</p>
+                </div>
+                <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-5">
+                  <h4 class="text-sm font-semibold text-primary">Launch & PR packs</h4>
+                  <p class="mt-2 text-xs text-secondary">Press kits, rollout plans, internal activation decks, and sales enablement collateral.</p>
+                </div>
+              </div>
+
+              <div class="rounded-3xl border border-accent-subtle/60 bg-accent-subtle/30 p-6">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-wide text-accent-primary">Signature Branding Sprint</p>
+                    <h4 class="mt-2 text-lg font-semibold text-primary">4 weeks from brand audit to full asset rollout</h4>
+                  </div>
+                  <div class="flex flex-wrap gap-3">
+                    <span class="rounded-full bg-white px-3 py-1 text-xs font-semibold text-accent-primary shadow-sm">Strategy workshop</span>
+                    <span class="rounded-full bg-white px-3 py-1 text-xs font-semibold text-accent-primary shadow-sm">Design iterations</span>
+                    <span class="rounded-full bg-white px-3 py-1 text-xs font-semibold text-accent-primary shadow-sm">Asset delivery</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        
-        <div class="mt-12 text-center">
-          <div class="inline-flex items-center gap-3 rounded-2xl border border-accent-subtle bg-white px-6 py-4 shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-accent-primary">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <div class="text-left">
-              <p class="text-sm font-semibold text-primary">Enterprise Solutions Available</p>
-              <p class="text-xs text-secondary">Custom SaaS platforms, e-commerce sites, and enterprise applications</p>
-            </div>
+
+        <div class="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-sm">
+          <div>
+            <p class="text-sm font-semibold text-primary">Need us every launch cycle?</p>
+            <p class="text-xs text-secondary">Lock in a branding retainer for rolling campaigns, asset refreshes, and rapid turnaround support from the same team that knows your playbook.</p>
+          </div>
+          <div class="flex gap-3">
+            <NuxtLink to="/showcase" class="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20">
+              View branding work
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </NuxtLink>
+            <NuxtLink to="/contact" class="inline-flex items-center gap-2 rounded-full bg-accent-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
+              Start a project
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -193,9 +322,9 @@
             </svg>
             Portfolio
           </div>
-          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-primary">Recent Projects</h2>
+          <h2 class="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-primary">Launches we're proud to lead</h2>
           <p class="mt-3 text-base md:text-lg text-secondary max-w-2xl mx-auto">
-            High-converting websites optimized for performance, mobile responsiveness, and search rankings.
+            Rebrands, product drops, AI rollouts, and marketing sites that shipped fast and converted harder—here’s a quick look.
           </p>
         </div>
         
@@ -233,7 +362,7 @@
         
         <div class="mt-10 text-center">
           <a href="#" class="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20">
-            View all projects
+            Browse full portfolio
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
@@ -252,8 +381,8 @@
             </svg>
             Client Success Stories
           </div>
-          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Trusted by Growing Businesses</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">See how we've helped companies launch faster, convert better, and scale their digital presence.</p>
+          <h2 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Teams that bet on us keep winning</h2>
+          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Demand-gen leaders, founders, and operators rely on our subscription to ship faster launches, smarter AI workflows, and higher-converting funnels.</p>
         </div>
         
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
@@ -291,7 +420,7 @@
         </div>
         
         <div class="mt-10 text-center">
-          <p class="text-sm text-secondary">Join 50+ companies that trust us with their digital presence</p>
+          <p class="text-sm text-secondary">Join the roster of brands that swapped freelance chaos for a subscription team on speed dial.</p>
           <div class="mt-4 flex items-center justify-center gap-8 opacity-40">
             <div class="text-2xl font-bold text-neutral-400">Company</div>
             <div class="text-2xl font-bold text-neutral-400">Brand</div>
@@ -306,8 +435,8 @@
     <section class="mt-16 md:mt-24 pb-16 md:pb-24">
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
         <div class="mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary">Frequently asked questions</h2>
-          <p class="mt-3 text-base text-secondary">Straight answers about how the subscription works, what’s included, and how we collaborate.</p>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary">Answers before you hit “Start”</h2>
+          <p class="mt-3 text-base text-secondary">The most common questions founders ask before locking in their monthly site, branding, and AI partner.</p>
         </div>
         <div class="mt-10 space-y-4">
           <details
@@ -385,24 +514,24 @@ const subscriptionHighlights = [
 
 const featureHighlights = [
   {
-    title: 'Design & UX',
-    description: 'Beautiful, conversion-focused designs that work seamlessly across all devices.',
+    title: 'Websites that convert',
+    description: 'Pixel-perfect Nuxt builds, lightning-fast load times, and UX engineered to move visitors from curiosity to checkout.',
     icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
   },
   {
-    title: 'Development',
-    description: 'Fast, modern websites built with React, Vue.js, and optimized for performance.',
-    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
+    title: 'Brand visuals that stick',
+    description: 'Logo suites, color stories, and campaign assets that make your name impossible to forget on socials, packaging, and pitch decks.',
+    icon: 'M3 5h18M8 5v14m8-14v14M4 19h16'
   },
   {
-    title: 'SEO & Analytics',
-    description: 'Technical SEO, keyword optimization, and analytics to drive organic traffic.',
-    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+    title: 'AI agents that never clock out',
+    description: 'Conversational bots trained on your offer, synced to your CRM, and ready to qualify leads or resolve tickets 24/7.',
+    icon: 'M9 5v2a2 2 0 002 2h2a2 2 0 002-2V5m-2 6v7m-6-7v7m-4 0h12'
   },
   {
-    title: 'Hosting & Support',
-    description: 'Managed cloud hosting with 99.9% uptime, security, and ongoing support.',
-    icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z'
+    title: 'Launch support on repeat',
+    description: 'Hosting, analytics, experiments, and ongoing CRO so every new release lands harder than the last.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
   }
 ]
 
@@ -427,34 +556,6 @@ const subscriptionProducts = [
     tags: ['Brand identity', 'Content', 'Campaigns'],
     href: '/marketing',
     cta: 'See details'
-  }
-]
-
-const processSteps = [
-  {
-    title: 'Discovery & Strategy',
-    description: 'Comprehensive website audit, competitor analysis, user research, and technical requirements gathering to define project scope and goals.',
-    highlights: ['SEO audit', 'User persona development', 'Technical architecture planning']
-  },
-  {
-    title: 'Design & Prototyping',
-    description: 'Mobile-first wireframes, high-fidelity mockups in Figma, interactive prototypes, and conversion-optimized copywriting for all pages.',
-    highlights: ['Responsive mockups', 'Brand style guide', 'Content strategy']
-  },
-  {
-    title: 'Development & Integration',
-    description: 'Front-end development with React/Vue.js, back-end API integration, CMS implementation, and third-party service connections.',
-    highlights: ['Code optimization', 'API integrations', 'CMS training']
-  },
-  {
-    title: 'Testing & Launch',
-    description: 'Cross-browser testing, mobile responsiveness checks, performance optimization, SEO validation, and smooth deployment to production.',
-    highlights: ['QA testing', 'Performance tuning', 'DNS & SSL setup']
-  },
-  {
-    title: 'Optimization & Growth',
-    description: 'Ongoing A/B testing, conversion rate optimization, content updates, technical SEO improvements, and feature enhancements.',
-    highlights: ['Analytics monitoring', 'CRO experiments', 'Monthly reporting']
   }
 ]
 

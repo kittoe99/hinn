@@ -4,17 +4,10 @@
     <div class="relative">
       <section class="px-3 pb-20 sm:px-4">
         <div class="mx-auto max-w-4xl pt-16">
-          <div class="rounded-3xl border border-neutral-200 bg-white p-8 sm:p-10">
-            <span class="text-xs font-medium uppercase tracking-wider text-accent-primary">
-              Start your build
-            </span>
-            <h1 class="mt-4 text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-              Get started in minutes
-            </h1>
-            <p class="mt-3 text-base leading-relaxed text-secondary">
-              Share your details and we'll prep your workspace, send the kickoff invite, and get you building within 48 hours.
-            </p>
-          </div>
+          <header class="text-center">
+            <h1 class="text-3xl font-semibold text-primary">Get Started</h1>
+            <p class="mt-2 text-sm text-secondary">Complete the steps below to set up your project.</p>
+          </header>
 
           <div class="mt-10 space-y-6">
             <div class="flex items-center justify-between rounded-3xl border border-soft bg-white/90 p-4 shadow-sm shadow-neutral-900/5 backdrop-blur">
