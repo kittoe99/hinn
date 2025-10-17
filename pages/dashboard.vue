@@ -60,7 +60,7 @@
 
       <!-- Navigation Tabs -->
       <div class="border-t border-neutral-100">
-        <nav class="flex items-center justify-center gap-1 px-6 overflow-x-auto scrollbar-hide">
+        <nav class="flex items-center md:justify-center gap-1 px-6 overflow-x-auto scrollbar-hide">
           <a
             v-for="tab in navigationTabs"
             :key="tab.id"
