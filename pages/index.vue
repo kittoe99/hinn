@@ -16,10 +16,10 @@
           <p class="mt-6 text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
             High-velocity web builds, headline-worthy branding, and on-call AI agents—delivered as a single monthly partnership that keeps momentum on your side.
           </p>
-          <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
             <NuxtLink
               to="/get-started"
-              class="w-full sm:w-auto rounded-full bg-accent-primary px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-primary/30 transition hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40"
+              class="rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent-primary/30 transition hover:bg-accent-focus hover:shadow-xl hover:shadow-accent-primary/40 sm:px-8 sm:py-4 sm:text-base"
             >
               Get Started
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline-block ml-2 h-4 w-4">
@@ -28,7 +28,7 @@
             </NuxtLink>
             <a
               href="#features"
-              class="w-full sm:w-auto rounded-full border-2 border-neutral-300 bg-white px-8 py-4 text-base font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20"
+              class="rounded-full border-2 border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20 sm:px-8 sm:py-4 sm:text-base"
             >
               Learn More
             </a>
@@ -76,9 +76,9 @@
     <section id="subscription" class="mt-16 md:mt-20">
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-12">
-          <div class="text-xs uppercase tracking-wider text-tertiary">What We Build</div>
-          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Choose Your Service</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Everything you need to grow your business online—no upfront fees, just one predictable monthly subscription.</p>
+          <div class="text-xs uppercase tracking-wider text-tertiary">Subscription lineup</div>
+          <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight text-primary">Pick the partnership that fits your roadmap</h2>
+          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">Bundle sites, AI agents, and campaigns under one agile team. Shift focus month-to-month without renegotiating scope or chasing freelancers.</p>
         </div>
 
         <div class="space-y-4">

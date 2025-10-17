@@ -14,7 +14,7 @@
             </p>
           </header>
           <div class="flex justify-center md:justify-end">
-            <img src="/agents-hero.svg" alt="AI Agents Illustration" class="w-full max-w-md" />
+            <AgentWorkflow class="max-w-xl" />
           </div>
         </div>
         <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
@@ -228,6 +228,8 @@
 </template>
 
 <script setup>
+import AgentWorkflow from '@/components/AgentWorkflow.vue'
+
 useHead({
   title: 'Autonomous AI Agents | Customer Service & Sales Automation | Hinn',
   meta: [
