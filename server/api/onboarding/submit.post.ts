@@ -2,11 +2,16 @@ import { createClient } from '@supabase/supabase-js'
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get Supabase client
-    const supabaseUrl = process.env.SUPABASE_URL
-    const supabaseKey = process.env.SUPABASE_KEY
+    // Get Supabase configuration from Nuxt runtime config
+    const config = useRuntimeConfig(event)
+    const supabaseUrl = config.public.supabaseUrl
+    const supabaseKey = config.supabaseServiceRoleKey || config.public.supabaseAnonKey
     
     if (!supabaseUrl || !supabaseKey) {
+      console.error('[Onboarding Submit] Missing Supabase config:', { 
+        hasUrl: !!supabaseUrl, 
+        hasKey: !!supabaseKey 
+      })
       throw createError({
         statusCode: 500,
         statusMessage: 'Supabase configuration missing'
