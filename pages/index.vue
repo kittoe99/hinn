@@ -37,8 +37,15 @@
         
         <!-- Hero Image -->
         <div class="mt-8 relative max-w-2xl mx-auto">
-          <div class="rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-4 shadow-lg">
-            <img src="/website-hero.svg" alt="Professional Web Services" class="w-full" />
+          <div class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-4 shadow-lg">
+            <div class="relative aspect-[16/10] overflow-hidden rounded-xl">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
+                alt="Design team collaborating in a modern workspace"
+                class="h-full w-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-black/10" />
+            </div>
           </div>
         </div>
       </div>
