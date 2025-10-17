@@ -76,8 +76,21 @@
 
             <!-- Step 1 -->
             <div v-if="currentStep === 1" class="space-y-6">
+              <!-- Validation Error Banner -->
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                <div class="flex items-start gap-3">
+                  <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-red-800">Please complete all required fields</p>
+                    <p class="mt-1 text-xs text-red-700">Fields marked with * are required to continue.</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">What type of site do you need?</h3>
+                <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
 
                 <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -85,17 +98,20 @@
                     v-for="type in siteTypes"
                     :key="type"
                     type="button"
-                    @click="formData.siteType = type"
+                    @click="formData.siteType = type; validationErrors.siteType = false"
                     :class="[
                       'flex h-full flex-col justify-center rounded-2xl border-2 p-4 text-left transition',
                       formData.siteType === type
                         ? 'border-accent-primary bg-accent-subtle shadow-sm'
+                        : validationErrors.siteType
+                        ? 'border-red-300 bg-red-50 hover:border-red-400'
                         : 'border-neutral-200 bg-white hover:border-accent-soft'
                     ]"
                   >
                     <span class="text-sm font-semibold text-primary">{{ type }}</span>
                   </button>
                 </div>
+                <p v-if="validationErrors.siteType" class="mt-2 text-xs text-red-600">Please select a site type</p>
 
                 <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <p class="text-xs text-secondary">Not sure? Pick the closest fit—we’ll refine together.</p>
@@ -113,6 +129,19 @@
 
             <!-- Step 2: Business Basics -->
             <div v-if="currentStep === 2" class="space-y-6">
+              <!-- Validation Error Banner -->
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                <div class="flex items-start gap-3">
+                  <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-red-800">Please complete all required fields</p>
+                    <p class="mt-1 text-xs text-red-700">Fields marked with * are required to continue.</p>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
@@ -125,9 +154,16 @@
                         v-model="formData.businessName"
                         type="text"
                         required
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        @input="validationErrors.businessName = false"
+                        :class="[
+                          'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
+                          validationErrors.businessName
+                            ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
+                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                        ]"
                         placeholder="Your company or product name"
                       />
+                      <p v-if="validationErrors.businessName" class="mt-1 text-xs text-red-600">Business name is required</p>
                     </div>
                     <div>
                       <label class="mb-1 block text-sm font-medium text-primary">Industry/Category *</label>
@@ -954,6 +990,21 @@
 
             <!-- Step 8: Review & Submit -->
             <div v-if="currentStep === 8" class="space-y-6">
+              <!-- Submission Error Banner -->
+              <div v-if="submissionErrors.length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+                <div class="flex items-start gap-3">
+                  <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-red-800">Cannot submit onboarding</p>
+                    <ul class="mt-2 space-y-1 text-xs text-red-700">
+                      <li v-for="(error, index) in submissionErrors" :key="index">• {{ error }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
                 <h3 class="text-base font-semibold text-primary">Review your information</h3>
                 <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
@@ -1223,6 +1274,10 @@ const showSources = ref(false)
 // AI enhancement state
 const isEnhancing = ref(false)
 const enhanceError = ref('')
+
+// Validation state
+const validationErrors = ref({})
+const showValidation = ref(false)
 
 const onboardingSeed = ref({
   name: '',
@@ -1741,15 +1796,25 @@ const nextStep = () => {
   }
 
   const requiredForStep = stepValidations[currentStep.value] || []
-  const missing = requiredForStep.filter(key => {
+  const errors = {}
+  
+  requiredForStep.forEach(key => {
     const value = formData.value[key]
-    return value === '' || value === null || value === undefined
+    if (value === '' || value === null || value === undefined) {
+      errors[key] = true
+    }
   })
 
-  if (missing.length > 0) {
-    // Browser's native validation will handle the error display
+  if (Object.keys(errors).length > 0) {
+    validationErrors.value = errors
+    showValidation.value = true
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     return
   }
+
+  // Clear validation errors on successful validation
+  validationErrors.value = {}
+  showValidation.value = false
 
   if (currentStep.value < totalSteps) {
     currentStep.value++
@@ -1787,18 +1852,26 @@ const requiredFields = [
 ]
 
 const handleSubmit = async () => {
+  console.log('[Onboarding] handleSubmit called')
   submissionErrors.value = []
 
   const missing = requiredFields.filter(field => {
     const value = formData.value[field.key]
-    return value === '' || value === null || value === undefined
+    const isEmpty = value === '' || value === null || value === undefined
+    if (isEmpty) {
+      console.log(`[Onboarding] Missing field: ${field.key}`, value)
+    }
+    return isEmpty
   })
 
   if (missing.length) {
+    console.log('[Onboarding] Validation failed, missing fields:', missing)
     submissionErrors.value = missing.map(field => `${field.label} is required.`)
     window.scrollTo({ top: 0, behavior: 'smooth' })
     return
   }
+  
+  console.log('[Onboarding] Validation passed, proceeding with submission')
 
   isSubmitting.value = true
   submissionErrors.value = []
