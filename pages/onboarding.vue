@@ -158,7 +158,7 @@
                   </div>
 
                   <div>
-                    <label class="mb-1 block text-sm font-medium text-primary">Preferred contact method</label>
+                    <label class="mb-1 block text-sm font-medium text-primary">Preferred contact method *</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       <button
                         v-for="method in contactMethods"
@@ -178,13 +178,34 @@
                   </div>
 
                   <div>
-                    <label class="mb-1 block text-sm font-medium text-primary">Describe what you offer</label>
-                    <textarea
-                      v-model="formData.description"
-                      rows="3"
-                      class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
-                      placeholder="Share your core services, audience, and goals"
-                    />
+                    <label class="mb-1 block text-sm font-medium text-primary">Describe what you offer *</label>
+                    <div class="space-y-3">
+                      <textarea
+                        v-model="formData.description"
+                        rows="4"
+                        required
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        placeholder="Share your core services, audience, and goals"
+                      />
+                      <div class="flex items-center gap-3">
+                        <button
+                          type="button"
+                          @click="enhanceDescription"
+                          :disabled="!formData.description.trim() || isEnhancing"
+                          class="inline-flex items-center gap-2 rounded-full border border-accent-primary bg-accent-primary/10 px-4 py-2 text-sm font-medium text-accent-primary transition hover:bg-accent-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <svg v-if="!isEnhancing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
+                          </svg>
+                          <svg v-else class="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>{{ isEnhancing ? 'Enhancing...' : 'Enhance with AI' }}</span>
+                        </button>
+                        <p v-if="enhanceError" class="text-sm text-red-500">{{ enhanceError }}</p>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
@@ -220,10 +241,10 @@
                         v-for="option in [{value: 'yes', label: 'Yes'}, {value: 'no', label: 'No'}]"
                         :key="option.value"
                         type="button"
-                        @click="hasCurrent = option.value"
+                        @click="formData.hasCurrentWebsite = option.value; hasCurrent = option.value"
                         :class="[
                           'rounded-2xl border px-6 py-3 text-sm font-medium transition',
-                          hasCurrent === option.value
+                          formData.hasCurrentWebsite === option.value
                             ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
                             : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
                         ]"
@@ -233,15 +254,16 @@
                     </div>
                   </div>
 
-                  <div v-if="hasCurrent === 'yes'" class="space-y-4">
+                  <div v-if="formData.hasCurrentWebsite === 'yes'" class="space-y-4">
                     <div>
                       <label class="block text-sm font-medium text-primary mb-2">Website URL or domain</label>
                       <input
-                        v-model="currentUrl"
+                        v-model="formData.currentWebsiteUrl"
                         :disabled="searching"
                         type="text"
                         placeholder="example.com or https://example.com"
                         class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft disabled:opacity-60"
+                        @input="currentUrl = formData.currentWebsiteUrl"
                       />
                     </div>
 
@@ -249,14 +271,14 @@
                       <button
                         type="button"
                         @click="analyzeWebsite"
-                        :disabled="!currentUrl || searching"
+                        :disabled="!formData.currentWebsiteUrl || searching"
                         class="rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {{ searching ? 'Analyzing…' : 'Analyze site' }}
                       </button>
                       <button
                         type="button"
-                        @click="skipped = true; siteAdded = false; siteSummary = null; siteError = null"
+                        @click="formData.websiteSkipped = true; skipped = true; siteAdded = false; siteSummary = null; siteError = null"
                         class="text-sm text-secondary hover:text-primary hover:underline"
                       >
                         Skip
@@ -298,7 +320,7 @@
                     </button>
                     <button
                       type="submit"
-                      :disabled="hasCurrent === 'yes' && !siteAdded && !skipped"
+                      :disabled="formData.hasCurrentWebsite === 'yes' && !siteAdded && !formData.websiteSkipped"
                       class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
@@ -430,7 +452,7 @@
                       </div>
                     </div>
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Service delivery</label>
+                      <label class="mb-2 block text-sm font-medium text-primary">Service delivery *</label>
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           v-for="option in onSiteModes"
@@ -478,7 +500,7 @@
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Business hours</label>
+                      <label class="mb-2 block text-sm font-medium text-primary">Business hours *</label>
                       <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         <button
                           v-for="option in hoursOptions"
@@ -497,11 +519,12 @@
                       </div>
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Primary goal</label>
+                      <label class="mb-1 block text-sm font-medium text-primary">Primary goal *</label>
                       <FormSelect
                         v-model="formData.primaryGoal"
                         :options="goalOptions"
                         placeholder="Select a goal"
+                        required
                       />
                     </div>
                   </div>
@@ -752,7 +775,7 @@
                 <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 
-                <form @submit.prevent="handleSubmit" class="mt-8 space-y-8">
+                <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   
                   <!-- Logo Upload -->
                   <div>
@@ -919,21 +942,225 @@
                     </button>
                     <button
                       type="submit"
-                      :disabled="isSubmitting"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:cursor-not-allowed disabled:opacity-70"
+                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
                     >
-                      <span v-if="isSubmitting">Saving…</span>
-                      <span v-else>Complete onboarding</span>
+                      Continue
                     </button>
                   </div>
                 </form>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
+            </div>
+
+            <!-- Step 8: Review & Submit -->
+            <div v-if="currentStep === 8" class="space-y-6">
+              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+                <h3 class="text-base font-semibold text-primary">Review your information</h3>
+                <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
+
+                <div class="mt-8 space-y-6">
+                  <!-- Site Type -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <p class="text-xs font-medium uppercase tracking-wide text-secondary">Site Type</p>
+                        <p class="mt-1 text-sm font-semibold text-primary">{{ formData.siteType || 'Not provided' }}</p>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(1)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Business Basics -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1 space-y-3">
+                        <div>
+                          <p class="text-xs font-medium uppercase tracking-wide text-secondary">Business Information</p>
+                          <p class="mt-1 text-sm font-semibold text-primary">{{ formData.businessName || 'Not provided' }}</p>
+                          <p class="text-sm text-secondary">{{ formData.category || 'No category' }}</p>
+                        </div>
+                        <div v-if="formData.description">
+                          <p class="text-xs font-medium uppercase tracking-wide text-secondary">Description</p>
+                          <p class="mt-1 text-sm text-secondary">{{ formData.description }}</p>
+                        </div>
+                        <div>
+                          <p class="text-xs font-medium uppercase tracking-wide text-secondary">Contact</p>
+                          <p class="mt-1 text-sm text-secondary">{{ formData.businessEmail || 'No email' }}</p>
+                          <p v-if="formData.businessPhone" class="text-sm text-secondary">{{ formData.businessPhone }}</p>
+                          <p v-if="formData.contactMethod" class="text-sm text-secondary">Preferred: {{ formData.contactMethod }}</p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(2)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Existing Website -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <p class="text-xs font-medium uppercase tracking-wide text-secondary">Existing Website</p>
+                        <div class="mt-2 space-y-1 text-sm text-secondary">
+                          <p v-if="formData.hasCurrentWebsite === 'yes'">
+                            <span class="font-medium">URL:</span> {{ formData.currentWebsiteUrl || 'Not provided' }}
+                          </p>
+                          <p v-else-if="formData.hasCurrentWebsite === 'no'">
+                            No existing website
+                          </p>
+                          <p v-else>Not specified</p>
+                          <p v-if="formData.websiteSummary" class="mt-2 text-xs">{{ formData.websiteSummary }}</p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(3)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Services & Coverage -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1 space-y-3">
+                        <div>
+                          <p class="text-xs font-medium uppercase tracking-wide text-secondary">Services</p>
+                          <p v-if="formData.selectedServices.length" class="mt-1 text-sm text-secondary">
+                            {{ formData.selectedServices.join(', ') }}
+                          </p>
+                          <p v-else class="mt-1 text-sm text-secondary">No services selected</p>
+                        </div>
+                        <div v-if="formData.serviceAreas.length">
+                          <p class="text-xs font-medium uppercase tracking-wide text-secondary">Service Areas</p>
+                          <p class="mt-1 text-sm text-secondary">
+                            {{ formData.serviceAreas.map(a => a.displayName || a.name).join(', ') }}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(4)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Operations -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1 space-y-2">
+                        <p class="text-xs font-medium uppercase tracking-wide text-secondary">Operations</p>
+                        <div class="grid gap-2 text-sm text-secondary sm:grid-cols-2">
+                          <div v-if="formData.primaryGoal">
+                            <span class="font-medium">Goal:</span> {{ formData.primaryGoal }}
+                          </div>
+                          <div v-if="formData.businessHoursMode">
+                            <span class="font-medium">Hours:</span> {{ formData.businessHoursMode }}
+                          </div>
+                          <div v-if="formData.onSiteMode">
+                            <span class="font-medium">Mode:</span> {{ formData.onSiteMode }}
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(5)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Design Preferences -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1 space-y-2">
+                        <p class="text-xs font-medium uppercase tracking-wide text-secondary">Design & Branding</p>
+                        <div class="space-y-2 text-sm text-secondary">
+                          <div v-if="formData.designStyles.length">
+                            <span class="font-medium">Styles:</span> {{ formData.designStyles.join(', ') }}
+                          </div>
+                          <div v-if="formData.emotionalImpact.length">
+                            <span class="font-medium">Tone:</span> {{ formData.emotionalImpact.join(', ') }}
+                          </div>
+                          <div v-if="formData.colorTheme">
+                            <span class="font-medium">Color theme:</span> {{ formData.colorTheme }}
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(6)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Logo & Assets -->
+                  <div class="rounded-2xl border border-neutral-200 bg-neutral-50/50 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <p class="text-xs font-medium uppercase tracking-wide text-secondary">Logo & Assets</p>
+                        <div class="mt-2 space-y-2 text-sm text-secondary">
+                          <p v-if="uploadedLogo">Logo: {{ uploadedLogo.name }}</p>
+                          <p v-else>No logo uploaded</p>
+                          <p v-if="uploadedAssets.length">Additional assets: {{ uploadedAssets.length }} file(s)</p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        @click="jumpTo(7)"
+                        class="text-xs font-medium text-accent-primary hover:underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <button
+                    type="button"
+                    @click="prevStep"
+                    class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    @click="handleSubmit"
+                    :disabled="isSubmitting"
+                    class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    <span v-if="isSubmitting">Submitting…</span>
+                    <span v-else>Complete onboarding</span>
+                  </button>
+                </div>
+              </div>
+
+              <div v-if="isSubmitted" class="rounded-3xl border border-soft bg-white/90 p-6 shadow-sm">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p class="text-sm font-semibold text-primary">What happens next?</p>
-                    <p class="mt-1 text-xs leading-6 text-secondary">We’ll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
+                    <p class="mt-1 text-xs leading-6 text-secondary">We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
                   </div>
                   <NuxtLink
                     to="/get-started"
@@ -944,27 +1171,6 @@
                       <path d="M5 12h14m-7-7 7 7-7 7" />
                     </svg>
                   </NuxtLink>
-                </div>
-                <div v-if="submissionResult" class="mt-5 rounded-2xl border border-neutral-200 bg-white p-4 text-xs text-secondary">
-                  <p class="text-sm font-semibold text-primary">Quick recap</p>
-                  <dl class="mt-3 grid gap-3 sm:grid-cols-2">
-                    <div>
-                      <dt class="font-medium text-primary">Site type</dt>
-                      <dd>{{ submissionResult.siteType || 'Not provided' }}</dd>
-                    </div>
-                    <div>
-                      <dt class="font-medium text-primary">Primary goal</dt>
-                      <dd>{{ submissionResult.primaryGoal || 'Not provided' }}</dd>
-                    </div>
-                    <div>
-                      <dt class="font-medium text-primary">Contact</dt>
-                      <dd>{{ submissionResult.businessEmail }}</dd>
-                    </div>
-                    <div>
-                      <dt class="font-medium text-primary">Services</dt>
-                      <dd>{{ submissionResult.selectedServices?.length ? submissionResult.selectedServices.join(', ') : 'Not provided' }}</dd>
-                    </div>
-                  </dl>
                 </div>
               </div>
             </div>
@@ -1013,6 +1219,10 @@ const searchProgress = ref(0)
 const searchLogs = ref([])
 const searchedPreview = ref([])
 const showSources = ref(false)
+
+// AI enhancement state
+const isEnhancing = ref(false)
+const enhanceError = ref('')
 
 const onboardingSeed = ref({
   name: '',
@@ -1119,6 +1329,13 @@ const stepSummaries = [
     headline: 'Share your brand materials.',
     description: 'Upload your logo and any brand assets.',
     icon: 'upload'
+  },
+  {
+    id: 'review',
+    title: 'Review & submit',
+    headline: 'Review your information before submitting.',
+    description: 'Check everything looks good and make any final edits.',
+    icon: 'clipboard'
   }
 ]
 
@@ -1132,6 +1349,10 @@ const formData = ref({
   businessEmail: '',
   businessPhone: '',
   contactMethod: '',
+  hasCurrentWebsite: null,
+  currentWebsiteUrl: '',
+  websiteSummary: '',
+  websiteSkipped: false,
   selectedServices: [],
   serviceAreas: [],
   coverageType: '',
@@ -1141,13 +1362,15 @@ const formData = ref({
   languages: [],
   primaryLanguage: '',
   hasLogo: null,
+  noLogo: false,
   highContrast: false,
   brandColors: '',
   colorTheme: '',
   inspirationSites: '',
   additionalNotes: '',
   designStyles: [],
-  emotionalImpact: []
+  emotionalImpact: [],
+  envisionedPages: []
 })
 
 const siteTypes = [
@@ -1418,13 +1641,15 @@ const removeAsset = (index) => {
 
 // Website URL analysis
 const analyzeWebsite = async () => {
-  if (!currentUrl.value) return
+  if (!formData.value.currentWebsiteUrl) return
   
+  currentUrl.value = formData.value.currentWebsiteUrl
   siteError.value = null
   siteSummary.value = null
   searching.value = true
   siteNotFound.value = false
   siteAdded.value = false
+  formData.value.websiteSkipped = false
   skipped.value = false
   searchProgress.value = 0
   searchLogs.value = []
@@ -1473,6 +1698,7 @@ const analyzeWebsite = async () => {
     
     if (data.summary) {
       siteSummary.value = data
+      formData.value.websiteSummary = data.summary
       siteAdded.value = true
       searchProgress.value = 100
     } else if (data.error) {
@@ -1506,6 +1732,25 @@ watch(
 )
 
 const nextStep = () => {
+  // Validate required fields for current step
+  const stepValidations = {
+    1: ['siteType'],
+    2: ['businessName', 'category', 'businessEmail', 'contactMethod', 'description'],
+    4: ['onSiteMode'],
+    5: ['primaryGoal', 'businessHoursMode']
+  }
+
+  const requiredForStep = stepValidations[currentStep.value] || []
+  const missing = requiredForStep.filter(key => {
+    const value = formData.value[key]
+    return value === '' || value === null || value === undefined
+  })
+
+  if (missing.length > 0) {
+    // Browser's native validation will handle the error display
+    return
+  }
+
   if (currentStep.value < totalSteps) {
     currentStep.value++
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1533,8 +1778,12 @@ const requiredFields = [
   { key: 'siteType', label: 'Site type' },
   { key: 'businessName', label: 'Business or project name' },
   { key: 'businessEmail', label: 'Business email' },
+  { key: 'category', label: 'Industry/Category' },
+  { key: 'description', label: 'Description' },
   { key: 'contactMethod', label: 'Preferred contact method' },
-  { key: 'primaryGoal', label: 'Primary goal' }
+  { key: 'primaryGoal', label: 'Primary goal' },
+  { key: 'businessHoursMode', label: 'Business hours' },
+  { key: 'onSiteMode', label: 'Service delivery mode' }
 ]
 
 const handleSubmit = async () => {
@@ -1552,12 +1801,49 @@ const handleSubmit = async () => {
   }
 
   isSubmitting.value = true
-  await new Promise(resolve => setTimeout(resolve, 400))
-  submissionResult.value = JSON.parse(JSON.stringify(formData.value))
-  isSubmitting.value = false
-  isSubmitted.value = true
-  console.log('Onboarding submission:', submissionResult.value)
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  submissionErrors.value = []
+  
+  try {
+    // Create complete payload with all form data and file uploads
+    const payload = {
+      ...JSON.parse(JSON.stringify(formData.value)),
+      uploadedLogo: uploadedLogo.value ? {
+        name: uploadedLogo.value.name,
+        size: uploadedLogo.value.size,
+        preview: uploadedLogo.value.preview
+      } : null,
+      uploadedAssets: uploadedAssets.value.map(asset => ({
+        name: asset.name,
+        size: asset.size
+      }))
+    }
+    
+    console.log('[Onboarding] Submitting payload:', payload)
+    
+    const response = await fetch('/api/onboarding/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.statusMessage || errorData.message || 'Failed to submit onboarding')
+    }
+    
+    const data = await response.json()
+    console.log('[Onboarding] Submission successful:', data)
+    
+    submissionResult.value = { ...payload, id: data.id }
+    isSubmitted.value = true
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } catch (error) {
+    console.error('[Onboarding] Submission error:', error)
+    submissionErrors.value = [error.message || 'Failed to submit onboarding. Please try again.']
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } finally {
+    isSubmitting.value = false
+  }
 }
 
 watch(currentStep, step => {
@@ -1565,4 +1851,42 @@ watch(currentStep, step => {
     submissionErrors.value = []
   }
 })
+
+const enhanceDescription = async () => {
+  if (isEnhancing.value) return
+  
+  const description = formData.value.description?.trim()
+  if (!description) {
+    enhanceError.value = 'Please enter a description first'
+    return
+  }
+
+  isEnhancing.value = true
+  enhanceError.value = ''
+
+  try {
+    const response = await fetch('/api/onboarding/enhance-description', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ description })
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.statusMessage || 'Failed to enhance description')
+    }
+
+    const data = await response.json()
+    if (data.enhanced) {
+      formData.value.description = data.enhanced
+    } else {
+      throw new Error('No enhanced description returned')
+    }
+  } catch (error) {
+    console.error('[Onboarding] Enhancement error:', error)
+    enhanceError.value = error.message || 'Could not enhance description. Please try again.'
+  } finally {
+    isEnhancing.value = false
+  }
+}
 </script>
