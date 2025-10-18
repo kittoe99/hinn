@@ -485,8 +485,518 @@
         </div>
       </div>
 
+      <!-- Support Tab -->
+      <div v-if="activeTab === 'support'">
+        <!-- Mobile View -->
+        <div class="md:hidden">
+          <!-- Menu List (when no tab selected) -->
+          <div v-if="!supportMobileContentOpen" class="space-y-6">
+            <div>
+              <h1 class="text-3xl font-bold text-primary mb-6">Support</h1>
+              
+              <!-- Search Bar -->
+              <div class="relative mb-6">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                  <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                </div>
+                <input
+                  v-model="supportSearchQuery"
+                  type="text"
+                  placeholder="Search..."
+                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-primary placeholder-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                />
+              </div>
+
+              <!-- Menu Items -->
+              <div class="space-y-0 border-t border-neutral-200">
+                <a
+                  v-for="subTab in supportTabs"
+                  :key="subTab.id"
+                  href="#"
+                  @click.prevent="supportActiveTab = subTab.id; supportMobileContentOpen = true"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                >
+                  {{ subTab.label }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content View (when tab selected) -->
+          <div v-if="supportMobileContentOpen" class="space-y-6">
+            <!-- Back Button -->
+            <button
+              @click="supportMobileContentOpen = false"
+              class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Back to Support
+            </button>
+
+            <!-- Content Sections -->
+            <div>
+              <!-- Chat Support Section -->
+              <div v-if="supportActiveTab === 'chat'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Chat Support</h2>
+                  <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="text-center py-12">
+                    <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                    <h3 class="text-base font-semibold text-primary mb-2">Chat support coming soon</h3>
+                    <p class="text-sm text-secondary">We're working on bringing you real-time chat support</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Helpful Docs Section -->
+              <div v-if="supportActiveTab === 'docs'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Helpful Docs</h2>
+                  <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="text-center py-12">
+                    <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <h3 class="text-base font-semibold text-primary mb-2">Documentation coming soon</h3>
+                    <p class="text-sm text-secondary">We're preparing comprehensive guides for you</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Technical/Bugs Section -->
+              <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Technical/Bugs</h2>
+                  <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="text-center py-12">
+                    <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <h3 class="text-base font-semibold text-primary mb-2">Bug reporting coming soon</h3>
+                    <p class="text-sm text-secondary">We're setting up our bug tracking system</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Us Section -->
+              <div v-if="supportActiveTab === 'contact'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Contact Us</h2>
+                  <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="space-y-5">
+                    <div>
+                      <label class="block text-sm font-medium text-primary mb-2">Subject</label>
+                      <input
+                        type="text"
+                        placeholder="How can we help?"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                      />
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-primary mb-2">Message</label>
+                      <textarea
+                        rows="5"
+                        placeholder="Tell us more..."
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                      ></textarea>
+                    </div>
+
+                    <div class="pt-4 border-t border-neutral-200">
+                      <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                        Send Message
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop/Tablet View -->
+        <div class="hidden md:flex md:flex-row gap-6">
+          <!-- Sidebar Navigation -->
+          <aside class="md:w-48 shrink-0">
+            <nav class="space-y-0.5">
+              <a
+                v-for="subTab in supportTabs"
+                :key="subTab.id"
+                href="#"
+                @click.prevent="supportActiveTab = subTab.id"
+                :class="[
+                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  supportActiveTab === subTab.id
+                    ? 'bg-neutral-100 text-primary'
+                    : 'text-secondary hover:bg-neutral-50 hover:text-primary'
+                ]"
+              >
+                {{ subTab.label }}
+              </a>
+            </nav>
+          </aside>
+
+          <!-- Content Area -->
+          <div class="flex-1 min-w-0">
+            <!-- Chat Support Section -->
+            <div v-if="supportActiveTab === 'chat'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Chat Support</h2>
+                <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="text-center py-12">
+                  <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                  </svg>
+                  <h3 class="text-base font-semibold text-primary mb-2">Chat support coming soon</h3>
+                  <p class="text-sm text-secondary">We're working on bringing you real-time chat support</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Helpful Docs Section -->
+            <div v-if="supportActiveTab === 'docs'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Helpful Docs</h2>
+                <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="text-center py-12">
+                  <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                  </svg>
+                  <h3 class="text-base font-semibold text-primary mb-2">Documentation coming soon</h3>
+                  <p class="text-sm text-secondary">We're preparing comprehensive guides for you</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technical/Bugs Section -->
+            <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Technical/Bugs</h2>
+                <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="text-center py-12">
+                  <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                  </svg>
+                  <h3 class="text-base font-semibold text-primary mb-2">Bug reporting coming soon</h3>
+                  <p class="text-sm text-secondary">We're setting up our bug tracking system</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div v-if="supportActiveTab === 'contact'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Contact Us</h2>
+                <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="space-y-5">
+                  <div>
+                    <label class="block text-sm font-medium text-primary mb-2">Subject</label>
+                    <input
+                      type="text"
+                      placeholder="How can we help?"
+                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-primary mb-2">Message</label>
+                    <textarea
+                      rows="5"
+                      placeholder="Tell us more..."
+                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                    ></textarea>
+                  </div>
+
+                  <div class="pt-4 border-t border-neutral-200">
+                    <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domains Tab -->
+      <div v-if="activeTab === 'domains'">
+        <!-- Mobile View -->
+        <div class="md:hidden">
+          <!-- Menu List (when no tab selected) -->
+          <div v-if="!domainsMobileContentOpen" class="space-y-6">
+            <div>
+              <h1 class="text-3xl font-bold text-primary mb-6">Domains</h1>
+              
+              <!-- Search Bar -->
+              <div class="relative mb-6">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                  <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                </div>
+                <input
+                  v-model="domainsSearchQuery"
+                  type="text"
+                  placeholder="Search..."
+                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-primary placeholder-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                />
+              </div>
+
+              <!-- Menu Items -->
+              <div class="space-y-0 border-t border-neutral-200">
+                <a
+                  v-for="subTab in domainsTabs"
+                  :key="subTab.id"
+                  href="#"
+                  @click.prevent="domainsActiveTab = subTab.id; domainsMobileContentOpen = true"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                >
+                  {{ subTab.label }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content View (when tab selected) -->
+          <div v-if="domainsMobileContentOpen" class="space-y-6">
+            <!-- Back Button -->
+            <button
+              @click="domainsMobileContentOpen = false"
+              class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Back to Domains
+            </button>
+
+            <!-- Content Sections -->
+            <div>
+              <!-- Purchased Domains Section -->
+              <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
+                  <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="text-center py-12">
+                    <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                    </svg>
+                    <h3 class="text-base font-semibold text-primary mb-2">No domains yet</h3>
+                    <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
+                    <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                      Buy Your First Domain
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Buy New Domain Section -->
+              <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Buy New Domain</h2>
+                  <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="space-y-5">
+                    <div>
+                      <label class="block text-sm font-medium text-primary mb-2">Search for a domain</label>
+                      <div class="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="yourdomain.com"
+                          class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        />
+                        <button class="rounded-lg bg-accent-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                          Search
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-neutral-200">
+                      <p class="text-xs text-secondary">Popular extensions: .com, .net, .org, .io, .app</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DNS & Configurations Section -->
+              <div v-if="domainsActiveTab === 'dns'" class="space-y-6">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">DNS & Configurations</h2>
+                  <p class="mt-1 text-sm text-secondary">Manage DNS records and domain settings</p>
+                </div>
+
+                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="text-center py-12">
+                    <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <h3 class="text-base font-semibold text-primary mb-2">No domains to configure</h3>
+                    <p class="text-sm text-secondary">Purchase a domain to manage DNS settings</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop/Tablet View -->
+        <div class="hidden md:flex md:flex-row gap-6">
+          <!-- Sidebar Navigation -->
+          <aside class="md:w-48 shrink-0">
+            <nav class="space-y-0.5">
+              <a
+                v-for="subTab in domainsTabs"
+                :key="subTab.id"
+                href="#"
+                @click.prevent="domainsActiveTab = subTab.id"
+                :class="[
+                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  domainsActiveTab === subTab.id
+                    ? 'bg-neutral-100 text-primary'
+                    : 'text-secondary hover:bg-neutral-50 hover:text-primary'
+                ]"
+              >
+                {{ subTab.label }}
+              </a>
+            </nav>
+          </aside>
+
+          <!-- Content Area -->
+          <div class="flex-1 min-w-0">
+            <!-- Purchased Domains Section -->
+            <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
+                <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="text-center py-12">
+                  <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                  </svg>
+                  <h3 class="text-base font-semibold text-primary mb-2">No domains yet</h3>
+                  <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
+                  <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                    Buy Your First Domain
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buy New Domain Section -->
+            <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Buy New Domain</h2>
+                <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="space-y-5">
+                  <div>
+                    <label class="block text-sm font-medium text-primary mb-2">Search for a domain</label>
+                    <div class="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="yourdomain.com"
+                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                      />
+                      <button class="rounded-lg bg-accent-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                        Search
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="pt-4 border-t border-neutral-200">
+                    <p class="text-xs text-secondary">Popular extensions: .com, .net, .org, .io, .app</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DNS & Configurations Section -->
+            <div v-if="domainsActiveTab === 'dns'" class="space-y-6">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">DNS & Configurations</h2>
+                <p class="mt-1 text-sm text-secondary">Manage DNS records and domain settings</p>
+              </div>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="text-center py-12">
+                  <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <h3 class="text-base font-semibold text-primary mb-2">No domains to configure</h3>
+                  <p class="text-sm text-secondary">Purchase a domain to manage DNS settings</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
+      <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
+        <div class="text-center max-w-md">
+          <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent-subtle">
+            <svg class="h-10 w-10 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-primary mb-3">Coming Soon</h2>
+          <p class="text-base text-secondary mb-6">
+            We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
+            Stay tuned for updates!
+          </p>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 text-sm text-secondary">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            This feature is under development
+          </div>
+        </div>
+      </div>
+
       <!-- Other Tabs Content -->
-      <div v-if="activeTab !== 'overview' && activeTab !== 'settings'" class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
+      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents'" class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
         <p class="text-sm text-secondary">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
       </div>
     </main>
@@ -534,6 +1044,27 @@ const settingsActiveTab = ref('profile')
 const settingsMobileMenuOpen = ref(false)
 const settingsMobileContentOpen = ref(false)
 const settingsSearchQuery = ref('')
+
+// Support sub-navigation
+const supportTabs = [
+  { id: 'chat', label: 'Chat Support' },
+  { id: 'docs', label: 'Helpful Docs' },
+  { id: 'bugs', label: 'Technical/Bugs' },
+  { id: 'contact', label: 'Contact Us' }
+]
+const supportActiveTab = ref('chat')
+const supportMobileContentOpen = ref(false)
+const supportSearchQuery = ref('')
+
+// Domains sub-navigation
+const domainsTabs = [
+  { id: 'purchased', label: 'Purchased Domains' },
+  { id: 'buy', label: 'Buy New Domain' },
+  { id: 'dns', label: 'DNS & Configurations' }
+]
+const domainsActiveTab = ref('purchased')
+const domainsMobileContentOpen = ref(false)
+const domainsSearchQuery = ref('')
 
 // Sample projects data
 const projects = ref([
