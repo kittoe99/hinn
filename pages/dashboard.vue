@@ -1008,7 +1008,8 @@ import { ref, computed } from 'vue'
 
 // Disable default layout (removes navigation and footer)
 definePageMeta({
-  layout: false
+  layout: false,
+  middleware: ['auth']
 })
 
 useHead({

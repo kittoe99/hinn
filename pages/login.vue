@@ -106,6 +106,7 @@
 </template>
 
 <script setup>
+import { getSupabaseClient } from '~/lib/supabaseClient'
 useHead({
   title: 'Login - Hinn',
   meta: [
@@ -123,19 +124,25 @@ const formData = ref({
   remember: false
 })
 
-const signInWithGoogle = () => {
+const signInWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
   // In production, this would integrate with your auth provider
-  setTimeout(() => {
-    alert('Google Sign-In would be integrated here.\n\nIn production, this connects to your authentication service (Supabase, Auth0, etc.)')
+  try {
+    const supabase = getSupabaseClient()
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: typeof window !== 'undefined' ? window.location.origin + '/dashboard' : undefined }
+    })
+  } catch (e) {
+    error.value = e?.message || 'Failed to start Google sign-in'
     loading.value = false
-  }, 1000)
+  }
 }
 
-const handleLogin = () => {
+const handleLogin = async () => {
   loading.value = true
   error.value = null
   success.value = null
@@ -148,20 +155,22 @@ const handleLogin = () => {
   }
 
   // Simulate login
-  setTimeout(() => {
-    // In production, this would call your auth API
-    if (formData.value.email && formData.value.password) {
-      success.value = 'Login successful! Redirecting...'
-      
-      setTimeout(() => {
-        // In production: navigateTo('/dashboard')
-        alert('Login successful!\n\nIn production, you would be redirected to your dashboard.')
-        loading.value = false
-      }, 1000)
-    } else {
-      error.value = 'Invalid email or password'
+  try {
+    const supabase = getSupabaseClient()
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: formData.value.email,
+      password: formData.value.password
+    })
+    if (authError) {
+      error.value = authError.message
       loading.value = false
+      return
     }
-  }, 1000)
+    success.value = 'Login successful! Redirecting...'
+    await navigateTo('/dashboard')
+  } catch (e) {
+    error.value = e?.message || 'Login failed'
+    loading.value = false
+  }
 }
 </script>

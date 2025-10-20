@@ -140,6 +140,7 @@
 </template>
 
 <script setup>
+import { getSupabaseClient } from '~/lib/supabaseClient'
 useHead({
   title: 'Sign Up - Hinn',
   meta: [
@@ -160,19 +161,25 @@ const formData = ref({
   agreeToTerms: false
 })
 
-const signUpWithGoogle = () => {
+const signUpWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
   // In production, this would integrate with your auth provider
-  setTimeout(() => {
-    alert('Google Sign-Up would be integrated here.\n\nIn production, this connects to your authentication service (Supabase, Auth0, etc.)')
+  try {
+    const supabase = getSupabaseClient()
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: typeof window !== 'undefined' ? window.location.origin + '/dashboard' : undefined }
+    })
+  } catch (e) {
+    error.value = e?.message || 'Failed to start Google sign-up'
     loading.value = false
-  }, 1000)
+  }
 }
 
-const handleSignup = () => {
+const handleSignup = async () => {
   loading.value = true
   error.value = null
   success.value = null
@@ -197,14 +204,23 @@ const handleSignup = () => {
   }
 
   // Simulate signup
-  setTimeout(() => {
-    success.value = 'Account created successfully! Redirecting...'
-    
-    setTimeout(() => {
-      // In production: navigateTo('/onboarding') or navigateTo('/dashboard')
-      alert(`Account created for ${formData.value.firstName} ${formData.value.lastName}!\n\nIn production, you would be redirected to onboarding or dashboard.`)
+  try {
+    const supabase = getSupabaseClient()
+    const { data, error: authError } = await supabase.auth.signUp({
+      email: formData.value.email,
+      password: formData.value.password
+    })
+    if (authError) {
+      error.value = authError.message
       loading.value = false
-    }, 1500)
-  }, 1000)
+      return
+    }
+
+    success.value = 'Account created successfully! Redirecting...'
+    await navigateTo('/dashboard')
+  } catch (e) {
+    error.value = e?.message || 'Sign up failed'
+    loading.value = false
+  }
 }
 </script>
