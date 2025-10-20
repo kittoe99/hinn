@@ -1,3 +1,4 @@
+import { getSupabaseServer } from '~/lib/supabaseServer'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
 export default defineEventHandler(async (event) => {
@@ -21,11 +22,9 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Create Supabase client with user's session
-    const supabase = getSupabaseClient()
-    
-    // Verify user session
-    const { data: { user }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
+    // Verify user session with client
+    const clientSupabase = getSupabaseClient()
+    const { data: { user }, error: authError } = await clientSupabase.auth.getUser(authHeader.replace('Bearer ', ''))
     
     if (authError || !user) {
       throw createError({
@@ -33,6 +32,9 @@ export default defineEventHandler(async (event) => {
         message: 'Invalid or expired token'
       })
     }
+
+    // Use server client to bypass RLS for data fetching
+    const supabase = getSupabaseServer()
 
     // Fetch website first
     const { data: website, error: websiteError } = await supabase
@@ -70,6 +72,9 @@ export default defineEventHandler(async (event) => {
     }
 
     // Transform onboarding submission data to match requested JSON structure
+    console.log('Submission object:', submission)
+    console.log('Creating structured data...')
+    
     const structuredData = submission ? {
       business_name: submission.business_name || '',
       business_type: submission.site_type || '',
@@ -112,6 +117,9 @@ export default defineEventHandler(async (event) => {
       created_at: submission.created_at,
       updated_at: submission.updated_at
     } : null
+
+    console.log('Structured data created:', structuredData ? 'YES' : 'NULL')
+    console.log('Returning response with onboarding_data:', !!structuredData)
 
     return {
       success: true,

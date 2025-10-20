@@ -45,25 +45,42 @@
     </div>
 
     <!-- Main Content -->
-    <main v-else-if="website" class="mx-auto max-w-6xl px-6 py-8">
+    <main v-else-if="website" class="mx-auto max-w-7xl px-6 py-8">
       <!-- Website Header -->
-      <div class="mb-8">
-        <div class="flex items-start justify-between">
-          <div>
-            <h1 class="text-3xl font-bold text-primary">{{ website.name }}</h1>
-            <div class="mt-2 flex items-center gap-3">
-              <a v-if="website.custom_domain || website.domain" :href="`https://${website.custom_domain || website.domain}`" target="_blank" class="text-sm text-accent-primary hover:underline">
+      <div class="mb-8 rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-accent-primary to-accent-focus flex items-center justify-center shadow-lg">
+                <span class="text-xl font-bold text-white">{{ website.name.charAt(0) }}</span>
+              </div>
+              <div>
+                <h1 class="text-3xl font-bold text-primary">{{ website.name }}</h1>
+                <p v-if="onboarding?.category" class="text-sm text-secondary mt-0.5">{{ onboarding.category }}</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 mt-4">
+              <a v-if="website.custom_domain || website.domain" :href="`https://${website.custom_domain || website.domain}`" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-accent-primary hover:text-accent-focus transition-colors">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
                 {{ website.custom_domain || website.domain }}
               </a>
               <span :class="[
-                'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium',
-                website.status === 'active' ? 'bg-emerald-50 text-emerald-700' : 'bg-neutral-100 text-neutral-700'
+                'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm',
+                website.status === 'active' ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-600/20' : 'bg-neutral-100 text-neutral-700 ring-1 ring-neutral-600/20'
               ]">
                 <span :class="[
-                  'h-1.5 w-1.5 rounded-full',
-                  website.status === 'active' ? 'bg-emerald-500' : 'bg-neutral-500'
+                  'h-2 w-2 rounded-full',
+                  website.status === 'active' ? 'bg-emerald-500 animate-pulse' : 'bg-neutral-500'
                 ]"></span>
-                {{ website.status }}
+                {{ website.status === 'active' ? 'Active' : website.status }}
+              </span>
+              <span v-if="website.slug" class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium bg-neutral-100 text-neutral-600">
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                </svg>
+                {{ website.slug }}
               </span>
             </div>
           </div>
@@ -73,31 +90,45 @@
       <!-- Onboarding Data Sections -->
       <div v-if="onboarding" class="space-y-6">
         <!-- Business Information -->
-        <section class="rounded-lg border border-neutral-200 bg-white p-6">
-          <h2 class="text-lg font-semibold text-primary mb-4">Business Information</h2>
-          <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Business Name</dt>
-              <dd class="mt-1 text-sm text-primary">{{ onboarding.business_name || '—' }}</dd>
+        <section class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
+              <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
             </div>
-            <div>
-              <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Business Type</dt>
-              <dd class="mt-1 text-sm text-primary">{{ onboarding.business_type || '—' }}</dd>
+            <h2 class="text-lg font-semibold text-primary">Business Information</h2>
+          </div>
+          <dl class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="rounded-lg bg-neutral-50 p-4">
+              <dt class="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Business Name</dt>
+              <dd class="text-base font-medium text-primary">{{ onboarding.business_name || '—' }}</dd>
             </div>
-            <div>
-              <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Category</dt>
-              <dd class="mt-1 text-sm text-primary">{{ onboarding.category || '—' }}</dd>
+            <div class="rounded-lg bg-neutral-50 p-4">
+              <dt class="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Business Type</dt>
+              <dd class="text-base font-medium text-primary">{{ onboarding.business_type || '—' }}</dd>
             </div>
-            <div class="md:col-span-2">
-              <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Description</dt>
-              <dd class="mt-1 text-sm text-primary">{{ onboarding.description || '—' }}</dd>
+            <div class="rounded-lg bg-neutral-50 p-4">
+              <dt class="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Category</dt>
+              <dd class="text-base font-medium text-primary">{{ onboarding.category || '—' }}</dd>
+            </div>
+            <div class="md:col-span-2 rounded-lg bg-neutral-50 p-4">
+              <dt class="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Description</dt>
+              <dd class="text-sm leading-relaxed text-primary">{{ onboarding.description || '—' }}</dd>
             </div>
           </dl>
         </section>
 
         <!-- Contact Information -->
-        <section class="rounded-lg border border-neutral-200 bg-white p-6">
-          <h2 class="text-lg font-semibold text-primary mb-4">Contact Information</h2>
+        <section class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
+              <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h2 class="text-lg font-semibold text-primary">Contact Information</h2>
+          </div>
           <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Email</dt>
@@ -115,14 +146,26 @@
         </section>
 
         <!-- Services -->
-        <section class="rounded-lg border border-neutral-200 bg-white p-6">
-          <h2 class="text-lg font-semibold text-primary mb-4">Services</h2>
-          <div v-if="onboarding.services && onboarding.services.length > 0" class="flex flex-wrap gap-2">
-            <span v-for="service in onboarding.services" :key="service" class="inline-flex items-center rounded-full bg-accent-subtle px-3 py-1 text-sm font-medium text-accent-primary">
+        <section class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
+              <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <h2 class="text-lg font-semibold text-primary">Services</h2>
+          </div>
+          <div v-if="onboarding.services && onboarding.services.length > 0" class="flex flex-wrap gap-2.5">
+            <span v-for="service in onboarding.services" :key="service" class="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-br from-accent-subtle to-accent-subtle/50 px-4 py-2 text-sm font-semibold text-accent-primary ring-1 ring-accent-primary/10 hover:ring-accent-primary/30 transition-all">
+              <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
               {{ service }}
             </span>
           </div>
-          <p v-else class="text-sm text-secondary">No services specified</p>
+          <div v-else class="rounded-lg bg-neutral-50 p-4 text-center">
+            <p class="text-sm text-secondary">No services specified</p>
+          </div>
         </section>
 
         <!-- Service Area -->
