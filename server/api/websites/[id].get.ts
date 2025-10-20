@@ -87,8 +87,8 @@ export default defineEventHandler(async (event) => {
       },
       services: submission.selected_services || [],
       service_area: {
-        primary_location: submission.service_areas?.[0] || '',
-        radius_km: '',
+        primary_location: submission.service_areas?.[0]?.displayName || submission.service_areas?.[0]?.name || '',
+        radius_km: submission.service_areas?.[0]?.radiusKm || '',
         coverage_type: submission.coverage_type || ''
       },
       operation_details: {
