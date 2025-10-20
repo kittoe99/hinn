@@ -142,11 +142,32 @@
             </button>
           </div>
         </div>
+        <!-- Loading State -->
+        <div v-if="loading" class="flex items-center justify-center py-16">
+          <div class="text-center">
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent-primary border-r-transparent"></div>
+            <p class="mt-4 text-sm text-secondary">Loading websites...</p>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-6 text-center">
+          <svg class="h-8 w-8 text-red-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <h3 class="text-sm font-semibold text-red-900 mb-1">Failed to load websites</h3>
+          <p class="text-xs text-red-700 mb-4">{{ error }}</p>
+          <button @click="fetchWebsites" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
+            Try Again
+          </button>
+        </div>
+
         <!-- Projects Grid/List -->
-        <div v-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div
+        <div v-else-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <NuxtLink
             v-for="project in filteredProjects"
             :key="project.id"
+            :to="`/websites/${project.id}`"
             class="group rounded-lg border border-neutral-200 bg-white p-6 hover:border-neutral-300 hover:shadow-md transition-all cursor-pointer"
           >
             <div class="flex items-start justify-between mb-4">
@@ -187,21 +208,21 @@
                 <span class="text-xs text-neutral-500">{{ project.framework }}</span>
               </div>
             </div>
-          </div>
+          </NuxtLink>
         </div>
 
         <!-- Empty State -->
-        <div v-if="filteredProjects.length === 0" class="flex flex-col items-center justify-center py-16 text-center">
+        <div v-else-if="!loading && !error && filteredProjects.length === 0" class="flex flex-col items-center justify-center py-16 text-center">
           <div class="mb-4 rounded-full bg-neutral-100 p-4">
             <svg class="h-8 w-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-primary mb-2">No projects found</h3>
-          <p class="text-sm text-secondary mb-6">Get started by creating your first project</p>
-          <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
-            Create Project
-          </button>
+          <h3 class="text-lg font-semibold text-primary mb-2">{{ searchQuery ? 'No websites match your search' : 'No websites yet' }}</h3>
+          <p class="text-sm text-secondary mb-6">{{ searchQuery ? 'Try a different search term' : 'Get started by creating your first website' }}</p>
+          <NuxtLink v-if="!searchQuery" to="/onboarding" class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+            Create Website
+          </NuxtLink>
         </div>
       </div>
 
@@ -1004,7 +1025,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { getSupabaseClient } from '~/lib/supabaseClient'
 
 // Disable default layout (removes navigation and footer)
 definePageMeta({
@@ -1067,33 +1089,51 @@ const domainsActiveTab = ref('purchased')
 const domainsMobileContentOpen = ref(false)
 const domainsSearchQuery = ref('')
 
-// Sample projects data
-const projects = ref([
-  {
-    id: 1,
-    name: 'hinn-website',
-    domain: 'hinn.io',
-    status: 'Ready',
-    framework: 'Next.js',
-    lastDeployed: '2 hours ago'
-  },
-  {
-    id: 2,
-    name: 'client-portal',
-    domain: 'portal.hinn.io',
-    status: 'Ready',
-    framework: 'Nuxt.js',
-    lastDeployed: '1 day ago'
-  },
-  {
-    id: 3,
-    name: 'marketing-site',
-    domain: 'marketing.hinn.io',
-    status: 'Building',
-    framework: 'Next.js',
-    lastDeployed: '3 days ago'
+// Real websites data from Supabase
+const websites = ref([])
+const loading = ref(true)
+const error = ref(null)
+
+// Fetch websites from API
+const fetchWebsites = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    
+    if (!session) {
+      error.value = 'Not authenticated'
+      return
+    }
+
+    const response = await $fetch('/api/websites', {
+      headers: {
+        Authorization: `Bearer ${session.access_token}`
+      }
+    })
+    
+    websites.value = response.websites || []
+  } catch (err) {
+    console.error('Failed to fetch websites:', err)
+    error.value = err.message || 'Failed to load websites'
+  } finally {
+    loading.value = false
   }
-])
+}
+
+// Map websites to project card format
+const projects = computed(() => {
+  return websites.value.map(w => ({
+    id: w.id,
+    name: w.name || 'Unnamed Website',
+    domain: w.custom_domain || w.domain || w.slug + '.vercel.app',
+    status: w.status === 'active' ? 'Ready' : w.status === 'paused' ? 'Paused' : 'Building',
+    framework: 'Nuxt.js',
+    lastDeployed: formatRelativeTime(w.updated_at || w.created_at)
+  }))
+})
 
 const filteredProjects = computed(() => {
   if (!searchQuery.value) return projects.value
@@ -1101,6 +1141,26 @@ const filteredProjects = computed(() => {
     project.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     project.domain.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
+})
+
+// Helper to format relative time
+const formatRelativeTime = (dateString) => {
+  if (!dateString) return 'Never'
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffMs = now - date
+  const diffMins = Math.floor(diffMs / 60000)
+  const diffHours = Math.floor(diffMs / 3600000)
+  const diffDays = Math.floor(diffMs / 86400000)
+  
+  if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`
+  if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
+  return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`
+}
+
+// Fetch on mount
+onMounted(() => {
+  fetchWebsites()
 })
 </script>
 

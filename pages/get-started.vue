@@ -302,6 +302,10 @@ useHead({
   ]
 })
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const currentStep = ref(1)
 const steps = [
   {
