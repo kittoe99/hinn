@@ -45,73 +45,106 @@
     </div>
 
     <!-- Main Content -->
-    <main v-else-if="website" class="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-accent-subtle/10">
-      <div class="mx-auto max-w-5xl px-6 py-8">
-        <!-- Website Header -->
-        <div class="mb-8 relative overflow-hidden rounded-3xl bg-white shadow-xl border border-neutral-200/50">
-          <!-- Decorative gradient background -->
-          <div class="absolute inset-0 bg-gradient-to-br from-accent-primary/5 via-transparent to-accent-focus/5"></div>
-          <div class="absolute top-0 right-0 w-96 h-96 bg-accent-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+    <main v-else-if="website" class="min-h-screen bg-white">
+      <div class="mx-auto max-w-5xl px-6 py-6">
+        <!-- Two Column Layout: Preview Left, Details Right -->
+        <div class="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-8 mb-8">
           
-          <div class="relative p-8">
-            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-              <div class="flex-1">
-                <div class="flex items-start gap-4 mb-4">
-                  <div class="relative">
-                    <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-accent-primary via-accent-primary to-accent-focus flex items-center justify-center shadow-lg ring-4 ring-white">
-                      <span class="text-2xl font-bold text-white">{{ website.name.charAt(0) }}</span>
-                    </div>
-                    <div v-if="website.status === 'active'" class="absolute -bottom-1 -right-1 h-5 w-5 bg-emerald-500 rounded-full ring-4 ring-white flex items-center justify-center">
-                      <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <h1 class="text-3xl font-bold text-primary mb-1 tracking-tight">{{ website.name }}</h1>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <span v-if="onboarding?.category" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-accent-primary/10 text-accent-primary text-xs font-semibold">
-                        <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                        </svg>
-                        {{ onboarding.category }}
-                      </span>
-                      <a v-if="website.custom_domain || website.domain" :href="`https://${website.custom_domain || website.domain}`" target="_blank" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-100 hover:bg-neutral-200 text-neutral-700 text-xs font-medium transition-colors group">
-                        <svg class="h-3 w-3 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                        </svg>
-                        {{ website.custom_domain || website.domain }}
-                      </a>
-                      <span v-if="website.slug" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-100 text-neutral-600 text-xs font-medium">
-                        <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                        </svg>
-                        {{ website.slug }}
-                      </span>
-                    </div>
-                  </div>
+          <!-- Left Column: Website Preview -->
+          <div>
+            <div class="rounded-xl border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
+              <div class="aspect-video flex items-center justify-center p-8">
+                <div class="text-center">
+                  <svg class="h-16 w-16 text-neutral-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <p class="text-sm text-neutral-500">Website preview</p>
                 </div>
               </div>
-              <div class="flex flex-wrap gap-3 lg:flex-shrink-0">
-                <button class="inline-flex items-center gap-2 rounded-xl border-2 border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-primary hover:border-accent-primary hover:bg-accent-primary/5 transition-all shadow-sm hover:shadow-md">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                  </svg>
-                  Add Domain
-                </button>
-                <button class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent-primary to-accent-focus px-5 py-2.5 text-sm font-semibold text-white hover:shadow-lg hover:scale-105 transition-all shadow-md">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                  </svg>
-                  Request Changes
-                </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Website Details -->
+          <div class="space-y-4">
+            <!-- Title Section -->
+            <div>
+              <h1 class="text-2xl font-bold text-neutral-900 mb-1">{{ website.name }}</h1>
+              <a 
+                v-if="website.custom_domain || website.domain" 
+                :href="`https://${website.custom_domain || website.domain || website.slug + '.vercel.app'}`"
+                target="_blank"
+                class="text-sm text-neutral-500 hover:text-neutral-700 inline-flex items-center gap-1 transition-colors"
+              >
+                {{ website.custom_domain || website.domain || website.slug + '.vercel.app' }}
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Domains Section -->
+            <div class="py-3 border-y border-neutral-200">
+              <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Domains</h3>
+              <a 
+                v-if="website.custom_domain || website.domain" 
+                :href="`https://${website.custom_domain || website.domain || website.slug + '.vercel.app'}`"
+                target="_blank"
+                class="text-sm text-neutral-700 hover:text-neutral-900 inline-flex items-center gap-1 transition-colors"
+              >
+                {{ website.custom_domain || website.domain || website.slug + '.vercel.app' }}
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Status & Created Grid -->
+            <div class="grid grid-cols-2 gap-4 py-3 border-b border-neutral-200">
+              <!-- Status -->
+              <div>
+                <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Status</h3>
+                <div class="flex items-center gap-2">
+                  <span :class="[
+                    'h-2 w-2 rounded-full',
+                    website.status === 'active' ? 'bg-emerald-500' : 'bg-neutral-400'
+                  ]"></span>
+                  <span class="text-sm font-medium text-neutral-900 capitalize">{{ website.status === 'active' ? 'Ready' : website.status }}</span>
+                </div>
               </div>
+
+              <!-- Created -->
+              <div>
+                <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Created</h3>
+                <p class="text-sm font-medium text-neutral-900">{{ formatDate(website.created_at) }}</p>
+              </div>
+            </div>
+
+            <!-- Source/Category Section -->
+            <div v-if="onboarding?.category" class="py-3 border-b border-neutral-200">
+              <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Category</h3>
+              <p class="text-sm font-medium text-neutral-900">{{ onboarding.category }}</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-2 pt-1">
+              <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3.5 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                </svg>
+                Add Domain
+              </button>
+              <button class="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-3.5 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                </svg>
+                Request Changes
+              </button>
             </div>
           </div>
         </div>
 
       <!-- Onboarding Data Sections -->
-      <div v-if="onboarding" class="space-y-4">
+      <div v-if="onboarding" class="space-y-3">
         <!-- Business Information -->
         <section class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden backdrop-blur-sm">
           <button @click="toggleSection('business')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
@@ -514,6 +547,23 @@ const expandedSections = ref({
 
 const toggleSection = (section) => {
   expandedSections.value[section] = !expandedSections.value[section]
+}
+
+// Format date helper
+const formatDate = (dateString) => {
+  if (!dateString) return 'N/A'
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffTime = Math.abs(now - date)
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60))
+  const diffMinutes = Math.floor(diffTime / (1000 * 60))
+  
+  if (diffMinutes < 60) return `${diffMinutes}m ago`
+  if (diffHours < 24) return `${diffHours}h ago`
+  if (diffDays < 7) return `${diffDays}d ago`
+  
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 useHead(() => ({
