@@ -831,21 +831,69 @@
             <div>
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-                <div>
-                  <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
-                  <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
+                    <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                  </div>
+                  <button 
+                    @click="loadMyDomains" 
+                    class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                  >
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    Refresh
+                  </button>
                 </div>
 
                 <div class="rounded-lg border border-neutral-200 bg-white p-6">
-                  <div class="text-center py-12">
+                  <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
+                  <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
+                  <div v-else-if="myDomains.length === 0" class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                     </svg>
                     <h3 class="text-base font-semibold text-primary mb-2">No domains yet</h3>
                     <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
-                    <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                    <button 
+                      @click="domainsActiveTab = 'buy'; domainsMobileContentOpen = true" 
+                      class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors"
+                    >
                       Buy Your First Domain
                     </button>
+                  </div>
+                  <div v-else class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                      <thead class="bg-neutral-50 text-neutral-700">
+                        <tr>
+                          <th class="text-left px-4 py-3 font-semibold">Domain</th>
+                          <th class="text-left px-4 py-3 font-semibold">Status</th>
+                          <th class="text-left px-4 py-3 font-semibold hidden sm:table-cell">Price</th>
+                          <th class="text-left px-4 py-3 font-semibold hidden sm:table-cell">Purchased</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-neutral-200">
+                        <tr v-for="domain in myDomains" :key="domain.id">
+                          <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
+                          <td class="px-4 py-3">
+                            <span v-if="domain.status" :class="[
+                              'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs border',
+                              domain.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                              domain.status === 'failed' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                              'bg-neutral-100 text-neutral-700 border-neutral-200'
+                            ]">
+                              {{ domain.status }}
+                            </span>
+                            <span v-else class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
+                          </td>
+                          <td class="px-4 py-3 text-neutral-800 hidden sm:table-cell">
+                            {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
+                          </td>
+                          <td class="px-4 py-3 text-neutral-700 hidden sm:table-cell">{{ formatDate(domain.created_at) }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -928,21 +976,69 @@
           <div class="flex-1 min-w-0">
             <!-- Purchased Domains Section -->
             <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-              <div>
-                <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
-                <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
+                  <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                </div>
+                <button 
+                  @click="loadMyDomains" 
+                  class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                  </svg>
+                  Refresh
+                </button>
               </div>
 
               <div class="rounded-lg border border-neutral-200 bg-white p-6">
-                <div class="text-center py-12">
+                <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
+                <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
+                <div v-else-if="myDomains.length === 0" class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
                   <h3 class="text-base font-semibold text-primary mb-2">No domains yet</h3>
                   <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
-                  <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                  <button 
+                    @click="domainsActiveTab = 'buy'" 
+                    class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors"
+                  >
                     Buy Your First Domain
                   </button>
+                </div>
+                <div v-else class="overflow-hidden rounded-lg border border-neutral-200">
+                  <table class="w-full text-sm">
+                    <thead class="bg-neutral-50 text-neutral-700">
+                      <tr>
+                        <th class="text-left px-4 py-3 font-semibold">Domain</th>
+                        <th class="text-left px-4 py-3 font-semibold">Status</th>
+                        <th class="text-left px-4 py-3 font-semibold">Price</th>
+                        <th class="text-left px-4 py-3 font-semibold">Purchased</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-200">
+                      <tr v-for="domain in myDomains" :key="domain.id">
+                        <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
+                        <td class="px-4 py-3">
+                          <span v-if="domain.status" :class="[
+                            'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs border',
+                            domain.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                            domain.status === 'failed' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                            'bg-neutral-100 text-neutral-700 border-neutral-200'
+                          ]">
+                            {{ domain.status }}
+                          </span>
+                          <span v-else class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
+                        </td>
+                        <td class="px-4 py-3 text-neutral-800">
+                          {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
+                        </td>
+                        <td class="px-4 py-3 text-neutral-700">{{ formatDate(domain.created_at) }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -954,25 +1050,189 @@
                 <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
               </div>
 
+              <!-- Search Domain -->
               <div class="rounded-lg border border-neutral-200 bg-white p-6">
-                <div class="space-y-5">
+                <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-primary mb-2">Search for a domain</label>
+                    <label class="block text-sm font-medium text-primary mb-2">Keyword / Brand</label>
                     <div class="flex gap-2">
                       <input
+                        v-model="domainSearchQuery"
                         type="text"
-                        placeholder="yourdomain.com"
+                        placeholder="acme, mybrand, etc"
                         class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        @keyup.enter="handleDomainSearch"
                       />
-                      <button class="rounded-lg bg-accent-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
-                        Search
+                      <button 
+                        @click="handleDomainSearch" 
+                        :disabled="domainSearchLoading"
+                        class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                        :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-accent-primary hover:bg-accent-focus'"
+                      >
+                        {{ domainSearchLoading ? 'Searching...' : 'Search' }}
                       </button>
                     </div>
                   </div>
 
-                  <div class="pt-4 border-t border-neutral-200">
+                  <div v-if="domainSearchError" class="text-sm text-red-600">{{ domainSearchError }}</div>
+
+                  <!-- Search Results -->
+                  <div v-if="domainSuggestions.length > 0 && !purchaseMode" class="pt-4">
+                    <div class="overflow-hidden rounded-lg border border-neutral-200">
+                      <table class="w-full text-sm">
+                        <thead class="bg-neutral-50 text-neutral-700">
+                          <tr>
+                            <th class="text-left px-4 py-3 font-semibold">Domain</th>
+                            <th class="text-left px-4 py-3 font-semibold">Availability</th>
+                            <th class="text-left px-4 py-3 font-semibold">Price</th>
+                            <th class="px-4 py-3"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-200">
+                          <tr 
+                            v-for="suggestion in domainSuggestions" 
+                            :key="suggestion.name"
+                            class="hover:bg-neutral-50 cursor-pointer transition-colors"
+                            @click="selectDomain(suggestion.name)"
+                          >
+                            <td class="px-4 py-3 text-neutral-900 font-medium">{{ suggestion.name }}</td>
+                            <td class="px-4 py-3">
+                              <span v-if="suggestion.available === null" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">
+                                Unknown
+                              </span>
+                              <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">
+                                Available
+                              </span>
+                              <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">
+                                Taken
+                              </span>
+                            </td>
+                            <td class="px-4 py-3 text-neutral-800">
+                              {{ suggestion.price != null ? `$${suggestion.price}` : '—' }}
+                            </td>
+                            <td class="px-4 py-3 text-right">
+                              <button 
+                                @click.stop="selectDomain(suggestion.name)"
+                                class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                              >
+                                Select
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div v-if="!purchaseMode" class="pt-2 border-t border-neutral-200">
                     <p class="text-xs text-secondary">Popular extensions: .com, .net, .org, .io, .app</p>
                   </div>
+                </div>
+              </div>
+
+              <!-- Selected Domain -->
+              <div v-if="purchaseMode" class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="text-sm font-semibold text-neutral-900">Selected domain</h3>
+                    <p class="mt-2 text-lg font-bold text-primary">{{ selectedDomain }}</p>
+                    <div class="mt-2 flex items-center gap-2">
+                      <span v-if="checkingAvailability" class="inline-flex items-center gap-2 text-sm text-neutral-700">
+                        <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M5.64 18.36l2.12-2.12M16.24 7.76l2.12-2.12"/>
+                        </svg>
+                        Checking...
+                      </span>
+                      <span v-else-if="domainAvailable !== null">
+                        <span v-if="domainAvailable" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">
+                          Available
+                        </span>
+                        <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">
+                          Taken
+                        </span>
+                      </span>
+                      <span v-if="domainPrice" class="inline-flex items-center rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs text-neutral-800">
+                        ${{ domainPrice.price }} / {{ domainPrice.period }} yr
+                      </span>
+                    </div>
+                  </div>
+                  <button 
+                    @click="cancelPurchase" 
+                    class="text-sm text-neutral-600 hover:text-neutral-800 transition-colors"
+                  >
+                    Change
+                  </button>
+                </div>
+              </div>
+
+              <!-- Registrant Information -->
+              <div v-if="purchaseMode" class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-primary mb-4">Registrant information</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
+                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
+                    <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
+                    <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
+                    <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
+                    <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
+                    <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
+                    <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
+                    <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
+                    <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
+                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
+                    <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
+                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-accent-primary focus:ring-accent-primary" />
+                      Auto-renew
+                    </label>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex items-center gap-4">
+                  <button 
+                    @click="handleDomainPurchase" 
+                    :disabled="purchaseLoading"
+                    class="inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-colors"
+                    :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
+                  >
+                    {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
+                  </button>
+                  <span v-if="purchaseError" class="text-sm text-red-600">{{ purchaseError }}</span>
+                  <span v-if="purchaseSuccess" class="text-sm text-emerald-700">{{ purchaseSuccess }}</span>
                 </div>
               </div>
             </div>
@@ -1094,6 +1354,41 @@ const domainsActiveTab = ref('purchased')
 const domainsMobileContentOpen = ref(false)
 const domainsSearchQuery = ref('')
 
+// Domain search and purchase
+const domainSearchQuery = ref('')
+const domainSearchLoading = ref(false)
+const domainSearchError = ref(null)
+const domainSuggestions = ref([])
+const purchaseMode = ref(false)
+const selectedDomain = ref('')
+const checkingAvailability = ref(false)
+const domainAvailable = ref(null)
+const domainPrice = ref(null)
+const purchaseLoading = ref(false)
+const purchaseError = ref(null)
+const purchaseSuccess = ref(null)
+
+// Registrant information
+const registrant = ref({
+  country: 'US',
+  organization: '',
+  firstName: '',
+  lastName: '',
+  address1: '',
+  address2: '',
+  city: '',
+  state: '',
+  postalCode: '',
+  phone: '',
+  email: '',
+  autoRenew: true
+})
+
+// My domains
+const myDomains = ref([])
+const myDomainsLoading = ref(false)
+const myDomainsError = ref(null)
+
 // Real websites data from Supabase
 const websites = ref([])
 const loading = ref(true)
@@ -1125,6 +1420,117 @@ const fetchWebsites = async () => {
     error.value = err.message || 'Failed to load websites'
   } finally {
     loading.value = false
+  }
+}
+
+// Domain functions
+const handleDomainSearch = async () => {
+  if (!domainSearchQuery.value.trim()) return
+  
+  domainSearchLoading.value = true
+  domainSearchError.value = null
+  
+  try {
+    // TODO: Implement domain search API
+    // Mock results for now
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    const query = domainSearchQuery.value.trim().toLowerCase()
+    domainSuggestions.value = [
+      { name: `${query}.com`, available: true, price: 12.99, period: 1 },
+      { name: `${query}.net`, available: true, price: 14.99, period: 1 },
+      { name: `${query}.io`, available: false, price: null, period: null },
+      { name: `${query}.co`, available: true, price: 24.99, period: 1 },
+      { name: `get${query}.com`, available: true, price: 12.99, period: 1 },
+    ]
+  } catch (err) {
+    domainSearchError.value = err.message || 'Failed to search domains'
+  } finally {
+    domainSearchLoading.value = false
+  }
+}
+
+const selectDomain = async (domainName) => {
+  selectedDomain.value = domainName
+  purchaseMode.value = true
+  checkingAvailability.value = true
+  domainAvailable.value = null
+  domainPrice.value = null
+  
+  try {
+    // TODO: Implement domain availability check API
+    await new Promise(resolve => setTimeout(resolve, 800))
+    
+    const suggestion = domainSuggestions.value.find(s => s.name === domainName)
+    domainAvailable.value = suggestion?.available ?? true
+    domainPrice.value = suggestion?.price ? { price: suggestion.price, period: suggestion.period } : null
+  } catch (err) {
+    console.error('Failed to check domain availability:', err)
+  } finally {
+    checkingAvailability.value = false
+  }
+}
+
+const cancelPurchase = () => {
+  purchaseMode.value = false
+  selectedDomain.value = ''
+  domainAvailable.value = null
+  domainPrice.value = null
+  purchaseError.value = null
+  purchaseSuccess.value = null
+}
+
+const handleDomainPurchase = async () => {
+  purchaseLoading.value = true
+  purchaseError.value = null
+  purchaseSuccess.value = null
+  
+  try {
+    // TODO: Implement domain purchase API
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    purchaseSuccess.value = 'Domain purchased successfully!'
+    
+    // Reload domains list
+    await loadMyDomains()
+    
+    // Reset form after success
+    setTimeout(() => {
+      cancelPurchase()
+      domainSuggestions.value = []
+      domainSearchQuery.value = ''
+      domainsActiveTab.value = 'purchased'
+    }, 2000)
+  } catch (err) {
+    purchaseError.value = err.message || 'Failed to purchase domain'
+  } finally {
+    purchaseLoading.value = false
+  }
+}
+
+const loadMyDomains = async () => {
+  myDomainsLoading.value = true
+  myDomainsError.value = null
+  
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) throw new Error('Not authenticated')
+    
+    const { data, error } = await supabase
+      .from('domain_purchases')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+    
+    if (error) throw error
+    
+    myDomains.value = data || []
+  } catch (err) {
+    myDomainsError.value = err.message || 'Failed to load your domains'
+  } finally {
+    myDomainsLoading.value = false
   }
 }
 
@@ -1162,6 +1568,23 @@ const formatRelativeTime = (dateString) => {
   if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
   return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`
 }
+
+// Helper to format date
+const formatDate = (dateString) => {
+  if (!dateString) return '—'
+  return new Date(dateString).toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  })
+}
+
+// Watch for tab changes to load domains
+watch(activeTab, (newTab) => {
+  if (newTab === 'domains') {
+    loadMyDomains()
+  }
+})
 
 // Fetch on mount
 onMounted(() => {
