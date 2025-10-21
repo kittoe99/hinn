@@ -905,25 +905,184 @@
                   <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
                 </div>
 
+                <!-- Search Domain -->
                 <div class="rounded-lg border border-neutral-200 bg-white p-6">
-                  <div class="space-y-5">
+                  <div class="space-y-4">
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Search for a domain</label>
+                      <label class="block text-sm font-medium text-primary mb-2">Keyword / Brand</label>
                       <div class="flex gap-2">
                         <input
+                          v-model="domainSearchQuery"
                           type="text"
-                          placeholder="yourdomain.com"
+                          placeholder="acme, mybrand, etc"
                           class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                          @keyup.enter="handleDomainSearch"
                         />
-                        <button class="rounded-lg bg-accent-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
-                          Search
+                        <button 
+                          @click="handleDomainSearch" 
+                          :disabled="domainSearchLoading"
+                          class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                          :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-accent-primary hover:bg-accent-focus'"
+                        >
+                          {{ domainSearchLoading ? 'Searching...' : 'Search' }}
                         </button>
                       </div>
                     </div>
 
-                    <div class="pt-4 border-t border-neutral-200">
+                    <div v-if="domainSearchError" class="text-sm text-red-600">{{ domainSearchError }}</div>
+
+                    <!-- Search Results -->
+                    <div v-if="domainSuggestions.length > 0 && !purchaseMode" class="pt-4">
+                      <div class="overflow-hidden rounded-lg border border-neutral-200">
+                        <table class="w-full text-sm">
+                          <thead class="bg-neutral-50 text-neutral-700">
+                            <tr>
+                              <th class="text-left px-4 py-3 font-semibold">Domain</th>
+                              <th class="text-left px-4 py-3 font-semibold">Status</th>
+                              <th class="px-4 py-3"></th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-neutral-200">
+                            <tr 
+                              v-for="suggestion in domainSuggestions" 
+                              :key="suggestion.name"
+                              class="hover:bg-neutral-50"
+                            >
+                              <td class="px-4 py-3 text-neutral-900 font-medium text-xs">{{ suggestion.name }}</td>
+                              <td class="px-4 py-3">
+                                <span v-if="suggestion.available === null" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700">
+                                  Unknown
+                                </span>
+                                <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+                                  Available
+                                </span>
+                                <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs text-rose-700">
+                                  Taken
+                                </span>
+                              </td>
+                              <td class="px-4 py-3 text-right">
+                                <button 
+                                  @click="selectDomain(suggestion.name)"
+                                  class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                                >
+                                  Select
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div v-if="!purchaseMode" class="pt-2 border-t border-neutral-200">
                       <p class="text-xs text-secondary">Popular extensions: .com, .net, .org, .io, .app</p>
                     </div>
+                  </div>
+                </div>
+
+                <!-- Selected Domain -->
+                <div v-if="purchaseMode" class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <div class="flex items-start justify-between">
+                    <div>
+                      <h3 class="text-sm font-semibold text-neutral-900">Selected domain</h3>
+                      <p class="mt-2 text-lg font-bold text-primary">{{ selectedDomain }}</p>
+                      <div class="mt-2 flex items-center gap-2">
+                        <span v-if="checkingAvailability" class="inline-flex items-center gap-2 text-sm text-neutral-700">
+                          <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M5.64 18.36l2.12-2.12M16.24 7.76l2.12-2.12"/>
+                          </svg>
+                          Checking...
+                        </span>
+                        <span v-else-if="domainAvailable !== null">
+                          <span v-if="domainAvailable" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">
+                            Available
+                          </span>
+                          <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">
+                            Taken
+                          </span>
+                        </span>
+                        <span v-if="domainPrice" class="inline-flex items-center rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs text-neutral-800">
+                          ${{ domainPrice.price }} / {{ domainPrice.period }} yr
+                        </span>
+                      </div>
+                    </div>
+                    <button 
+                      @click="cancelPurchase" 
+                      class="text-sm text-neutral-600 hover:text-neutral-800 transition-colors"
+                    >
+                      Change
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Registrant Information -->
+                <div v-if="purchaseMode" class="rounded-lg border border-neutral-200 bg-white p-6">
+                  <h3 class="text-lg font-semibold text-primary mb-4">Registrant information</h3>
+                  
+                  <div class="grid grid-cols-1 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
+                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
+                      <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
+                      <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
+                      <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
+                      <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
+                      <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
+                      <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
+                      <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
+                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
+                      <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
+                        <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-accent-primary focus:ring-accent-primary" />
+                        Auto-renew
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mt-6 flex flex-col gap-3">
+                    <button 
+                      @click="handleDomainPurchase" 
+                      :disabled="purchaseLoading"
+                      class="w-full inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-colors"
+                      :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
+                    >
+                      {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
+                    </button>
+                    <span v-if="purchaseError" class="text-sm text-red-600 text-center">{{ purchaseError }}</span>
+                    <span v-if="purchaseSuccess" class="text-sm text-emerald-700 text-center">{{ purchaseSuccess }}</span>
                   </div>
                 </div>
               </div>
