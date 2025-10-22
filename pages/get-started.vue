@@ -424,17 +424,31 @@ const checkCompletion = async () => {
       return
     }
 
+    console.log('[Get Started] Checking completion for user:', user.id)
+
     // Check if user has a profile with completed get-started
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
       .select('has_completed_get_started')
       .eq('user_id', user.id)
-      .single()
+      .maybeSingle()
 
-    if (profile?.has_completed_get_started) {
+    if (profileError) {
+      console.error('[Get Started] Profile fetch error:', profileError)
+      // Allow user to continue if profile doesn't exist or error occurs
+      isLoading.value = false
+      return
+    }
+
+    console.log('[Get Started] User profile:', profile)
+
+    // Only redirect if they've actually completed get-started
+    if (profile?.has_completed_get_started === true) {
+      console.log('[Get Started] Already completed, redirecting to dashboard')
       alreadyCompleted.value = true
-      // Redirect to dashboard if already completed
       await navigateTo('/dashboard')
+    } else {
+      console.log('[Get Started] Not completed yet, showing form')
     }
   } catch (error) {
     console.error('[Get Started] Check completion error:', error)

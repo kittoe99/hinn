@@ -2327,6 +2327,13 @@ const checkOnboardingStatus = async () => {
 
     console.log('[Dashboard] User profile:', profile)
 
+    // If user hasn't completed get-started, redirect them there first
+    if (!profile?.has_completed_get_started) {
+      console.log('[Dashboard] User has not completed get-started, redirecting...')
+      await navigateTo('/get-started')
+      return
+    }
+
     // If user completed get-started but not onboarding, show onboarding requirement
     if (profile?.has_completed_get_started && !profile?.has_completed_onboarding) {
       console.log('[Dashboard] Showing onboarding requirement banner')
