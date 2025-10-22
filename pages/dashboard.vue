@@ -85,6 +85,37 @@
 
     <!-- Main Content -->
     <main class="mx-auto max-w-7xl px-6 py-8">
+      <!-- Onboarding Required Banner -->
+      <div v-if="showOnboardingRequired && !selectedWebsiteId" class="mb-8 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-8 shadow-lg">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+              <div class="h-12 w-12 rounded-full bg-accent-primary flex items-center justify-center">
+                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-primary mb-2">Complete Your Onboarding</h3>
+              <p class="text-sm text-secondary max-w-2xl">
+                Welcome! To unlock full access to your dashboard and start building your website, please complete the onboarding process. 
+                This will help us understand your business needs and create the perfect website for you.
+              </p>
+            </div>
+          </div>
+          <NuxtLink
+            to="/onboarding"
+            class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
+          >
+            Start Onboarding
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </NuxtLink>
+        </div>
+      </div>
+
       <!-- Website Details View -->
       <div v-if="selectedWebsiteId">
         <!-- Back Button -->
@@ -1995,6 +2026,10 @@ const websiteExpandedSections = ref({
   language: false
 })
 
+// Onboarding state
+const showOnboardingRequired = ref(false)
+const checkingOnboarding = ref(true)
+
 // Fetch websites from API
 const fetchWebsites = async () => {
   try {
@@ -2240,6 +2275,34 @@ const toggleWebsiteSection = (section) => {
   websiteExpandedSections.value[section] = !websiteExpandedSections.value[section]
 }
 
+// Check if user needs to complete onboarding
+const checkOnboardingStatus = async () => {
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      return
+    }
+
+    // Check user profile for onboarding completion
+    const { data: profile } = await supabase
+      .from('user_profiles')
+      .select('has_completed_get_started, has_completed_onboarding')
+      .eq('user_id', user.id)
+      .single()
+
+    // If user completed get-started but not onboarding, show onboarding requirement
+    if (profile?.has_completed_get_started && !profile?.has_completed_onboarding) {
+      showOnboardingRequired.value = true
+    }
+  } catch (error) {
+    console.error('[Dashboard] Check onboarding error:', error)
+  } finally {
+    checkingOnboarding.value = false
+  }
+}
+
 // Watch for tab changes to load domains
 watch(activeTab, (newTab) => {
   if (newTab === 'domains') {
@@ -2249,6 +2312,7 @@ watch(activeTab, (newTab) => {
 
 // Fetch on mount
 onMounted(() => {
+  checkOnboardingStatus()
   fetchWebsites()
 })
 </script>

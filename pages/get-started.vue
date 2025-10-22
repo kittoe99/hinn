@@ -4,8 +4,22 @@
     <div class="relative">
       <section class="px-3 pb-20 sm:px-4">
         <div class="mx-auto max-w-4xl pt-16">
+          <!-- Loading State -->
+          <div v-if="isLoading" class="flex items-center justify-center py-24">
+            <div class="text-center">
+              <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent-primary border-r-transparent"></div>
+              <p class="mt-4 text-sm text-secondary">Loading...</p>
+            </div>
+          </div>
+
+          <div v-else>
           <header class="text-center">
-            <h1 class="text-3xl font-semibold text-primary">Get Started</h1>
+            <h1 class="inline-flex items-center gap-3 text-3xl font-semibold text-primary">
+              <svg class="h-8 w-8 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              Get Started
+            </h1>
             <p class="mt-2 text-sm text-secondary">Complete the steps below to set up your project.</p>
           </header>
 
@@ -277,14 +291,20 @@
                   <button
                     type="button"
                     @click="handleSubmit"
-                    class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                    :disabled="isSubmitting"
+                    class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Proceed to payment
+                    <svg v-if="isSubmitting" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    {{ isSubmitting ? 'Saving...' : 'Proceed to payment' }}
                   </button>
                 </div>
               </div>
 
             </div>
+          </div>
           </div>
         </div>
       </section>
@@ -293,7 +313,8 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { getSupabaseClient } from '~/lib/supabaseClient'
 
 useHead({
   title: 'Get Started - Hinn',
@@ -307,12 +328,18 @@ definePageMeta({
 })
 
 const currentStep = ref(1)
+const isSubmitting = ref(false)
+const submitError = ref(null)
+const submitSuccess = ref(false)
+const isLoading = ref(true)
+const alreadyCompleted = ref(false)
+
 const steps = [
   {
     id: 'personal',
     title: 'Personal details',
     headline: 'Tell us who will lead the engagement so we can personalize your workspace.',
-    description: 'Share your contact information and we’ll send a kickoff checklist.',
+    description: 'Share your contact information and we will send a kickoff checklist.',
     icon: 'user'
   },
   {
@@ -386,11 +413,88 @@ const prevStep = () => {
   }
 }
 
-const handleSubmit = () => {
-  // In a real app, this would redirect to payment processor
-  alert('In production, this would redirect to Stripe Checkout.\n\nYour selection:\n' +
-    `Name: ${formData.value.firstName} ${formData.value.lastName}\n` +
-    `Email: ${formData.value.email}\n` +
-    `Plan: ${selectedPlanDetails.value?.name} - ${selectedPlanDetails.value?.price}`)
+// Check if user has already completed get-started
+const checkCompletion = async () => {
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      await navigateTo('/login')
+      return
+    }
+
+    // Check if user has a profile with completed get-started
+    const { data: profile } = await supabase
+      .from('user_profiles')
+      .select('has_completed_get_started')
+      .eq('user_id', user.id)
+      .single()
+
+    if (profile?.has_completed_get_started) {
+      alreadyCompleted.value = true
+      // Redirect to dashboard if already completed
+      await navigateTo('/dashboard')
+    }
+  } catch (error) {
+    console.error('[Get Started] Check completion error:', error)
+  } finally {
+    isLoading.value = false
+  }
 }
+
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  submitError.value = null
+  
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    
+    if (!session) {
+      throw new Error('Not authenticated')
+    }
+
+    const response = await $fetch('/api/get-started/submit', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session.access_token}`
+      },
+      body: formData.value
+    })
+
+    console.log('[Get Started] Submission successful:', response)
+    submitSuccess.value = true
+    
+    // Update user profile to mark get-started as completed
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      // Upsert user profile
+      await supabase
+        .from('user_profiles')
+        .upsert({
+          user_id: user.id,
+          has_completed_get_started: true,
+          get_started_submission_id: response.id
+        }, {
+          onConflict: 'user_id'
+        })
+    }
+    
+    // Redirect to dashboard after successful submission
+    await navigateTo('/dashboard')
+    
+  } catch (error) {
+    console.error('[Get Started] Submission error:', error)
+    submitError.value = error.message || 'Failed to submit. Please try again.'
+    alert('❌ Error: ' + submitError.value)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// Check completion on mount
+onMounted(() => {
+  checkCompletion()
+})
 </script>
