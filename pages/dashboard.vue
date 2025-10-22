@@ -85,6 +85,11 @@
 
     <!-- Main Content -->
     <main class="mx-auto max-w-7xl px-6 py-8">
+      <!-- Debug Info (Remove in production) -->
+      <div v-if="!checkingOnboarding" class="mb-4 p-4 bg-gray-100 rounded text-xs">
+        <strong>Debug:</strong> showOnboardingRequired = {{ showOnboardingRequired }}, selectedWebsiteId = {{ selectedWebsiteId }}
+      </div>
+
       <!-- Onboarding Required Banner -->
       <div v-if="showOnboardingRequired && !selectedWebsiteId" class="mb-8 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-8 shadow-lg">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -2282,19 +2287,35 @@ const checkOnboardingStatus = async () => {
     const { data: { user } } = await supabase.auth.getUser()
     
     if (!user) {
+      console.log('[Dashboard] No user found')
       return
     }
 
+    console.log('[Dashboard] Checking onboarding status for user:', user.id)
+
     // Check user profile for onboarding completion
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
       .select('has_completed_get_started, has_completed_onboarding')
       .eq('user_id', user.id)
-      .single()
+      .maybeSingle()
+
+    if (profileError) {
+      console.error('[Dashboard] Profile fetch error:', profileError)
+      return
+    }
+
+    console.log('[Dashboard] User profile:', profile)
 
     // If user completed get-started but not onboarding, show onboarding requirement
     if (profile?.has_completed_get_started && !profile?.has_completed_onboarding) {
+      console.log('[Dashboard] Showing onboarding requirement banner')
       showOnboardingRequired.value = true
+    } else {
+      console.log('[Dashboard] Onboarding not required', {
+        hasGetStarted: profile?.has_completed_get_started,
+        hasOnboarding: profile?.has_completed_onboarding
+      })
     }
   } catch (error) {
     console.error('[Dashboard] Check onboarding error:', error)
