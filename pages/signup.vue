@@ -208,7 +208,14 @@ const handleSignup = async () => {
     const supabase = getSupabaseClient()
     const { data, error: authError } = await supabase.auth.signUp({
       email: formData.value.email,
-      password: formData.value.password
+      password: formData.value.password,
+      options: {
+        data: {
+          first_name: formData.value.firstName,
+          last_name: formData.value.lastName,
+          full_name: `${formData.value.firstName} ${formData.value.lastName}`
+        }
+      }
     })
     if (authError) {
       error.value = authError.message
@@ -217,7 +224,8 @@ const handleSignup = async () => {
     }
 
     success.value = 'Account created successfully! Redirecting...'
-    await navigateTo('/dashboard')
+    // Redirect to get-started page for new users
+    await navigateTo('/get-started')
   } catch (e) {
     error.value = e?.message || 'Sign up failed'
     loading.value = false
