@@ -60,14 +60,14 @@
 
       <!-- Navigation Tabs -->
       <div class="border-t border-neutral-100">
-        <nav class="flex items-center md:justify-center gap-1 px-6 overflow-x-auto scrollbar-hide">
+        <nav class="flex gap-1 overflow-x-auto scrollbar-hide md:justify-center">
           <a
             v-for="tab in navigationTabs"
             :key="tab.id"
-            href="#"
-            @click.prevent="activeTab = tab.id"
+            @click="!showOnboardingRequired && (activeTab = tab.id)"
             :class="[
-              'relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap',
+              'relative whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
+              showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
               activeTab === tab.id
                 ? 'text-primary'
                 : 'text-secondary hover:text-primary'
@@ -85,42 +85,6 @@
 
     <!-- Main Content -->
     <main class="mx-auto max-w-7xl px-6 py-8">
-      <!-- Debug Info (Remove in production) -->
-      <div v-if="!checkingOnboarding" class="mb-4 p-4 bg-gray-100 rounded text-xs">
-        <strong>Debug:</strong> showOnboardingRequired = {{ showOnboardingRequired }}, selectedWebsiteId = {{ selectedWebsiteId }}
-      </div>
-
-      <!-- Onboarding Required Banner -->
-      <div v-if="showOnboardingRequired && !selectedWebsiteId" class="mb-8 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-8 shadow-lg">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0">
-              <div class="h-12 w-12 rounded-full bg-accent-primary flex items-center justify-center">
-                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-primary mb-2">Complete Your Onboarding</h3>
-              <p class="text-sm text-secondary max-w-2xl">
-                Welcome! To unlock full access to your dashboard and start building your website, please complete the onboarding process. 
-                This will help us understand your business needs and create the perfect website for you.
-              </p>
-            </div>
-          </div>
-          <NuxtLink
-            to="/onboarding"
-            class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
-          >
-            Start Onboarding
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </NuxtLink>
-        </div>
-      </div>
-
       <!-- Website Details View -->
       <div v-if="selectedWebsiteId">
         <!-- Back Button -->
@@ -558,15 +522,21 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search Projects..."
-              class="h-9 w-full rounded-md border border-neutral-200 bg-white pl-9 pr-3 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+              :disabled="showOnboardingRequired"
+              :class="[
+                'h-9 w-full rounded-md border border-neutral-200 pl-9 pr-3 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary',
+                showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
+              ]"
             />
           </div>
 
           <div class="flex items-center gap-2">
             <button
-              @click="viewMode = 'grid'"
+              @click="!showOnboardingRequired && (viewMode = 'grid')"
+              :disabled="showOnboardingRequired"
               :class="[
                 'rounded-lg p-2 transition-colors',
+                showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'grid'
                   ? 'bg-accent-primary text-white'
                   : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50'
@@ -578,9 +548,11 @@
             </button>
 
             <button
-              @click="viewMode = 'list'"
+              @click="!showOnboardingRequired && (viewMode = 'list')"
+              :disabled="showOnboardingRequired"
               :class="[
                 'rounded-lg p-2 transition-colors',
+                showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'list'
                   ? 'bg-accent-primary text-white'
                   : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50'
@@ -593,7 +565,15 @@
 
             <div class="h-6 w-px bg-neutral-200"></div>
 
-            <button class="flex items-center gap-2 rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+            <button 
+              :disabled="showOnboardingRequired"
+              :class="[
+                'flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors',
+                showOnboardingRequired 
+                  ? 'bg-neutral-300 cursor-not-allowed' 
+                  : 'bg-accent-primary hover:bg-accent-focus'
+              ]"
+            >
               Add New...
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -601,6 +581,38 @@
             </button>
           </div>
         </div>
+
+        <!-- Onboarding Required Banner -->
+        <div v-if="showOnboardingRequired" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0">
+                <div class="h-12 w-12 rounded-full bg-accent-primary flex items-center justify-center">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-primary mb-2">Complete Your Onboarding</h3>
+                <p class="text-sm text-secondary max-w-2xl">
+                  Welcome! To unlock full access to your dashboard and start building your website, please complete the onboarding process. 
+                  This will help us understand your business needs and create the perfect website for you.
+                </p>
+              </div>
+            </div>
+            <NuxtLink
+              to="/onboarding"
+              class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
+            >
+              Start Onboarding
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </NuxtLink>
+          </div>
+        </div>
+
         <!-- Loading State -->
         <div v-if="loading" class="flex items-center justify-center py-16">
           <div class="text-center">
@@ -622,12 +634,20 @@
         </div>
 
         <!-- Projects Grid/List -->
-        <div v-else-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div v-else-if="viewMode === 'grid'" :class="['grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4', showOnboardingRequired ? 'relative' : '']">
+          <!-- Disabled Overlay -->
+          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 rounded-lg"></div>
+          
           <div
             v-for="project in filteredProjects"
             :key="project.id"
-            @click="openWebsiteDetails(project.id)"
-            class="group rounded-lg border border-neutral-200 bg-white p-6 hover:border-neutral-300 hover:shadow-md transition-all cursor-pointer"
+            @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
+            :class="[
+              'group rounded-lg border border-neutral-200 bg-white p-6 transition-all',
+              showOnboardingRequired 
+                ? 'cursor-not-allowed opacity-60' 
+                : 'hover:border-neutral-300 hover:shadow-md cursor-pointer'
+            ]"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
