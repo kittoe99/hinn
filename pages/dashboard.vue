@@ -16,9 +16,9 @@
         </button>
 
         <!-- Mobile: Show menu button -->
-        <div class="md:hidden relative">
+        <div class="md:hidden relative" @click.stop>
           <button 
-            @click="showMobileMenu = !showMobileMenu"
+            @click.stop="showMobileMenu = !showMobileMenu"
             class="p-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
           >
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,11 +29,10 @@
           <!-- Mobile Menu Dropdown -->
           <div 
             v-if="showMobileMenu"
-            @click.stop
-            class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden"
+            class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden z-50"
           >
             <button 
-              @click="handleLogout"
+              @click="handleLogout; showMobileMenu = false"
               class="flex w-full items-center gap-2 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
