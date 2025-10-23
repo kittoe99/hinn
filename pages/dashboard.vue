@@ -1,65 +1,52 @@
 <template>
   <div class="min-h-screen bg-page">
-    <!-- Top Header Bar -->
-    <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white">
-      <div class="flex h-16 items-center justify-between px-6">
-        <!-- Left: Logo and Project Selector -->
-        <div class="flex items-center gap-4">
-          <button class="flex items-center gap-2 rounded-lg px-3 py-2 hover:bg-neutral-100 transition-colors">
-            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-accent-primary">
-              <span class="text-xs font-bold text-white">H</span>
-            </div>
-            <span class="text-sm font-semibold text-neutral-900">Hinn</span>
-            <span class="rounded bg-neutral-100 px-1.5 py-0.5 text-xs font-medium text-neutral-600">Hobby</span>
-            <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-        </div>
+    <!-- Header with Profile and Navigation -->
+    <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+      <!-- Top Bar with Logout -->
+      <div class="flex h-16 items-center justify-end px-6 border-b border-neutral-100">
+        <!-- Desktop: Show logout button -->
+        <button 
+          @click="handleLogout"
+          class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-red-600 transition-colors"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          Logout
+        </button>
 
-        <!-- Center: Quick Links -->
-        <div class="hidden md:flex items-center gap-2">
-          <a href="#" class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-100 transition-colors">
-            Next.js <span class="rounded bg-neutral-900 px-1.5 py-0.5 text-xs font-medium text-white">v15</span> tickets
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Right: Search, Feedback, Notifications, Profile -->
-        <div class="flex items-center gap-3">
-          <button class="flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-500 hover:border-neutral-300 transition-colors">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-            <span class="hidden sm:inline">Find...</span>
-            <kbd class="hidden sm:inline-flex h-5 items-center rounded border border-neutral-200 bg-neutral-50 px-1.5 text-xs font-medium text-neutral-500">F</kbd>
-          </button>
-
-          <button class="rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 transition-colors">
-            Feedback
-          </button>
-
-          <button class="relative rounded-lg p-2 hover:bg-neutral-100 transition-colors">
-            <svg class="h-5 w-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-            </svg>
-            <span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-blue-500"></span>
-          </button>
-
-          <button class="flex items-center gap-2 rounded-lg p-1 hover:bg-neutral-100 transition-colors">
-            <svg class="h-5 w-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Mobile: Show menu button -->
+        <div class="md:hidden relative">
+          <button 
+            @click="showMobileMenu = !showMobileMenu"
+            class="p-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+          >
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           </button>
 
-          <button class="h-8 w-8 rounded-full bg-accent-primary"></button>
+          <!-- Mobile Menu Dropdown -->
+          <div 
+            v-if="showMobileMenu"
+            @click.stop
+            class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden"
+          >
+            <button 
+              @click="handleLogout"
+              class="flex w-full items-center gap-2 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="border-t border-neutral-100">
+      <div>
         <nav class="flex gap-1 overflow-x-auto scrollbar-hide md:justify-center">
           <a
             v-for="tab in navigationTabs"
@@ -2332,6 +2319,36 @@ const addNewStep = ref('select') // 'select' or 'plan'
 const selectedProduct = ref(null)
 const selectedPlan = ref(null)
 
+// Profile menu state
+const showProfileMenu = ref(false)
+const showMobileMenu = ref(false)
+const userEmail = ref('')
+const userInitial = computed(() => userEmail.value ? userEmail.value.charAt(0).toUpperCase() : 'U')
+
+// Get user email
+const loadUserEmail = async () => {
+  const supabase = getSupabaseClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    userEmail.value = user.email || ''
+  }
+}
+
+// Handle logout
+const handleLogout = async () => {
+  const supabase = getSupabaseClient()
+  await supabase.auth.signOut()
+  navigateTo('/login')
+}
+
+// Close menus when clicking outside
+if (process.client) {
+  document.addEventListener('click', () => {
+    showProfileMenu.value = false
+    showMobileMenu.value = false
+  })
+}
+
 // Check if on onboarding page
 const route = useRoute()
 const isOnboardingPage = computed(() => route.path === '/dashboard/onboarding')
@@ -2761,6 +2778,7 @@ if (process.client) {
 onMounted(() => {
   console.log('[Dashboard] Component mounted')
   console.log('[Dashboard] Initial state - loading:', loading.value, 'error:', error.value, 'checkingOnboarding:', checkingOnboarding.value)
+  loadUserEmail()
   checkOnboardingStatus()
   fetchWebsites()
   
