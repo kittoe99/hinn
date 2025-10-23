@@ -1977,25 +1977,63 @@ const handleSubmit = async () => {
           onConflict: 'user_id'
         })
 
-      // Update pending website product status
-      const { data: pendingProducts } = await supabase
-        .from('website_products')
+      // Update pending plan status and create website
+      const { data: pendingPlans } = await supabase
+        .from('plans')
         .select('*')
         .eq('user_id', user.id)
         .eq('status', 'pending_onboarding')
         .order('created_at', { ascending: false })
         .limit(1)
 
-      if (pendingProducts && pendingProducts.length > 0) {
-        await supabase
-          .from('website_products')
-          .update({
-            status: 'onboarding_completed',
-            onboarding_submission_id: data.id
-          })
-          .eq('id', pendingProducts[0].id)
+      if (pendingPlans && pendingPlans.length > 0) {
+        const plan = pendingPlans[0]
         
-        console.log('[Onboarding] Updated website product status to onboarding_completed')
+        // Create website entry if it's a website plan
+        if (plan.product_type === 'website') {
+          const businessName = formData.value.businessName || 'My Website'
+          const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+          
+          const { data: website, error: websiteError } = await supabase
+            .from('websites')
+            .insert({
+              user_id: user.id,
+              plan_id: plan.id,
+              name: businessName,
+              slug: slug,
+              status: 'active',
+              onboarding_submission_id: data.id
+            })
+            .select()
+            .single()
+
+          if (websiteError) {
+            console.error('[Onboarding] Error creating website:', websiteError)
+          } else {
+            console.log('[Onboarding] Website created:', website)
+            
+            // Update plan with website_id
+            await supabase
+              .from('plans')
+              .update({
+                status: 'onboarding_completed',
+                onboarding_submission_id: data.id,
+                website_id: website.id
+              })
+              .eq('id', plan.id)
+          }
+        } else {
+          // For non-website products, just update status
+          await supabase
+            .from('plans')
+            .update({
+              status: 'onboarding_completed',
+              onboarding_submission_id: data.id
+            })
+            .eq('id', plan.id)
+        }
+        
+        console.log('[Onboarding] Updated plan status to onboarding_completed')
       }
     }
     

@@ -584,7 +584,7 @@
         </div>
 
         <!-- Onboarding Required Banner -->
-        <div v-if="showOnboardingRequired && pendingWebsiteProduct" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
+        <div v-if="showOnboardingRequired && pendingPlan" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
@@ -595,11 +595,11 @@
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-bold text-primary mb-2">Complete Onboarding for Your New Website</h3>
+                <h3 class="text-xl font-bold text-primary mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
                 <p class="text-sm text-secondary max-w-2xl mb-3">
-                  You've selected the <span class="font-semibold text-primary capitalize">{{ pendingWebsiteProduct.plan }}</span> plan 
-                  (<span class="font-semibold">${{ pendingWebsiteProduct.price_monthly }}/month</span>). 
-                  Complete the onboarding process to provide us with your business details and preferences so we can start building your website.
+                  You've selected the <span class="font-semibold text-primary capitalize">{{ pendingPlan.plan_tier }}</span> plan 
+                  (<span class="font-semibold">${{ pendingPlan.price_monthly }}/month</span>). 
+                  Complete the onboarding process to provide us with your business details and preferences so we can get started.
                 </p>
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 text-xs font-medium text-secondary">
                   <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -664,12 +664,25 @@
                 </div>
                 <div>
                   <h3 class="text-sm font-semibold text-primary">{{ project.name }}</h3>
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-semibold mt-1">
-                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                    </svg>
-                    Website
-                  </span>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-semibold">
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                      </svg>
+                      Website
+                    </span>
+                    <span v-if="project.plan_tier" :class="[
+                      'inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold capitalize',
+                      project.plan_tier === 'starter' ? 'bg-neutral-100 text-neutral-700' : 
+                      project.plan_tier === 'professional' ? 'bg-purple-50 text-purple-700' : 
+                      'bg-amber-50 text-amber-700'
+                    ]">
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                      </svg>
+                      {{ project.plan_tier }}
+                    </span>
+                  </div>
                 </div>
               </div>
               <button class="opacity-0 group-hover:opacity-100 rounded p-1 hover:bg-neutral-100 transition-all">
@@ -2321,7 +2334,7 @@ const websiteExpandedSections = ref({
 // Onboarding state
 const showOnboardingRequired = ref(false)
 const checkingOnboarding = ref(true)
-const pendingWebsiteProduct = ref(null)
+const pendingPlan = ref(null)
 
 // Add New Modal state
 const showAddNewModal = ref(false)
@@ -2477,7 +2490,8 @@ const projects = computed(() => {
     domain: w.custom_domain || w.domain || w.slug + '.vercel.app',
     status: w.status === 'active' ? 'Ready' : w.status === 'paused' ? 'Paused' : 'Building',
     framework: 'Nuxt.js',
-    lastDeployed: formatRelativeTime(w.updated_at || w.created_at)
+    lastDeployed: formatRelativeTime(w.updated_at || w.created_at),
+    plan_tier: w.plans?.plan_tier || null
   }))
 })
 
@@ -2608,29 +2622,29 @@ const checkOnboardingStatus = async () => {
       return
     }
 
-    // Check for pending website products that need onboarding
-    const { data: pendingProducts, error: productsError } = await supabase
-      .from('website_products')
+    // Check for pending plans that need onboarding
+    const { data: pendingPlans, error: plansError } = await supabase
+      .from('plans')
       .select('*')
       .eq('user_id', user.id)
       .eq('status', 'pending_onboarding')
       .order('created_at', { ascending: false })
 
-    if (productsError) {
-      console.error('[Dashboard] Products fetch error:', productsError)
+    if (plansError) {
+      console.error('[Dashboard] Plans fetch error:', plansError)
     }
 
-    console.log('[Dashboard] Pending products:', pendingProducts)
+    console.log('[Dashboard] Pending plans:', pendingPlans)
 
-    // If there's a pending website product, show onboarding requirement
-    if (pendingProducts && pendingProducts.length > 0) {
-      pendingWebsiteProduct.value = pendingProducts[0]
+    // If there's a pending plan, show onboarding requirement
+    if (pendingPlans && pendingPlans.length > 0) {
+      pendingPlan.value = pendingPlans[0]
       showOnboardingRequired.value = true
-      console.log('[Dashboard] Showing onboarding requirement for website product:', pendingProducts[0])
+      console.log('[Dashboard] Showing onboarding requirement for plan:', pendingPlans[0])
     } else {
       showOnboardingRequired.value = false
-      pendingWebsiteProduct.value = null
-      console.log('[Dashboard] No pending website products')
+      pendingPlan.value = null
+      console.log('[Dashboard] No pending plans')
     }
   } catch (error) {
     console.error('[Dashboard] Check onboarding error:', error)
@@ -2675,24 +2689,26 @@ const selectPlan = async (plan) => {
       enterprise: 199
     }
 
-    // Create website product entry
-    const { data: product, error: productError } = await supabase
-      .from('website_products')
+    // Create plan entry
+    const { data: planData, error: planError } = await supabase
+      .from('plans')
       .insert({
         user_id: user.id,
-        plan: plan,
+        product_type: 'website',
+        plan_tier: plan,
         status: 'pending_onboarding',
+        is_active: false,
         price_monthly: prices[plan]
       })
       .select()
       .single()
 
-    if (productError) {
-      console.error('[Dashboard] Error creating website product:', productError)
+    if (planError) {
+      console.error('[Dashboard] Error creating plan:', planError)
       return
     }
 
-    console.log('[Dashboard] Website product created:', product)
+    console.log('[Dashboard] Plan created:', planData)
     
     // Close modal and redirect to onboarding
     showAddNewModal.value = false

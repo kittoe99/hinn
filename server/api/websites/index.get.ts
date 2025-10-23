@@ -12,11 +12,14 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Create Supabase client with user's session
+    // Create Supabase client
     const supabase = getSupabaseClient()
     
+    // Extract the token
+    const token = authHeader.replace('Bearer ', '')
+    
     // Verify user session
-    const { data: { user }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''))
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token)
     
     if (authError || !user) {
       throw createError({
@@ -25,27 +28,53 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Fetch websites for this user
-    // Note: If you add owner_user_id to websites table later, filter by it
-    // For now, return all websites (adjust based on your ownership model)
-    const { data: websites, error } = await supabase
+    // Create authenticated Supabase client with user's token for RLS
+    const config = useRuntimeConfig()
+    const { createClient } = await import('@supabase/supabase-js')
+    const authenticatedSupabase = createClient(
+      config.public.supabaseUrl as string,
+      config.public.supabaseKey as string,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
+    )
+
+    // Fetch websites for this user with plan information using authenticated client
+    const { data: websites, error } = await authenticatedSupabase
       .from('websites')
-      .select('*')
+      .select(`
+        *,
+        plans:plan_id (
+          id,
+          product_type,
+          plan_tier,
+          status,
+          is_active
+        )
+      `)
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
 
     if (error) {
+      console.error('[API] Supabase error fetching websites:', error)
       throw createError({
         statusCode: 500,
         message: `Failed to fetch websites: ${error.message}`
       })
     }
 
+    console.log('[API] Successfully fetched websites:', websites?.length || 0)
+
     return {
       success: true,
       websites: websites || []
     }
   } catch (err: any) {
-    console.error('Error fetching websites:', err)
+    console.error('[API] Error fetching websites:', err)
     throw createError({
       statusCode: err.statusCode || 500,
       message: err.message || 'Failed to fetch websites'
