@@ -2198,7 +2198,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
 // Disable default layout (removes navigation and footer)
@@ -2335,6 +2335,17 @@ const selectedPlan = ref(null)
 // Check if on onboarding page
 const route = useRoute()
 const isOnboardingPage = computed(() => route.path === '/dashboard/onboarding')
+
+// Watch for route changes back to dashboard
+watch(() => route.path, (newPath, oldPath) => {
+  if (newPath === '/dashboard' && oldPath === '/onboarding') {
+    console.log('[Dashboard] Returned from onboarding, refreshing status')
+    setTimeout(() => {
+      checkOnboardingStatus()
+      fetchWebsites()
+    }, 500)
+  }
+})
 
 // Fetch websites from API
 const fetchWebsites = async () => {
@@ -2757,6 +2768,17 @@ onMounted(() => {
   setTimeout(() => {
     console.log('[Dashboard] After mount - loading:', loading.value, 'error:', error.value, 'websites:', websites.value.length)
   }, 2000)
+  
+  // Re-check onboarding status when page becomes visible (e.g., after returning from onboarding)
+  if (process.client) {
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        console.log('[Dashboard] Page visible, re-checking onboarding status')
+        checkOnboardingStatus()
+        fetchWebsites()
+      }
+    })
+  }
 })
 </script>
 
