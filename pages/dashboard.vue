@@ -566,6 +566,7 @@
             <div class="h-6 w-px bg-neutral-200"></div>
 
             <button 
+              @click="showAddNewModal = true"
               :disabled="showOnboardingRequired"
               :class="[
                 'flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors',
@@ -583,33 +584,40 @@
         </div>
 
         <!-- Onboarding Required Banner -->
-        <div v-if="showOnboardingRequired" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
+        <div v-if="showOnboardingRequired && pendingWebsiteProduct" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
                 <div class="h-12 w-12 rounded-full bg-accent-primary flex items-center justify-center">
                   <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-bold text-primary mb-2">Complete Your Onboarding</h3>
-                <p class="text-sm text-secondary max-w-2xl">
-                  Welcome! To unlock full access to your dashboard and start building your website, please complete the onboarding process. 
-                  This will help us understand your business needs and create the perfect website for you.
+                <h3 class="text-xl font-bold text-primary mb-2">Complete Onboarding for Your New Website</h3>
+                <p class="text-sm text-secondary max-w-2xl mb-3">
+                  You've selected the <span class="font-semibold text-primary capitalize">{{ pendingWebsiteProduct.plan }}</span> plan 
+                  (<span class="font-semibold">${{ pendingWebsiteProduct.price_monthly }}/month</span>). 
+                  Complete the onboarding process to provide us with your business details and preferences so we can start building your website.
                 </p>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 text-xs font-medium text-secondary">
+                  <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  Takes about 10 minutes
+                </div>
               </div>
             </div>
-            <NuxtLink
-              to="/onboarding"
+            <button
+              @click="activeTab = 'onboarding'"
               class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
             >
               Start Onboarding
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
-            </NuxtLink>
+            </button>
           </div>
         </div>
 
@@ -1897,6 +1905,16 @@
         </div>
       </div>
 
+      <!-- Onboarding Tab -->
+      <div v-if="activeTab === 'onboarding'">
+        <iframe 
+          src="/onboarding" 
+          class="w-full border-0 rounded-lg"
+          style="height: calc(100vh - 200px); min-height: 800px;"
+          @load="onOnboardingLoad"
+        ></iframe>
+      </div>
+
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center max-w-md">
@@ -1920,10 +1938,259 @@
       </div>
 
       <!-- Other Tabs Content -->
-      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents'" class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
+      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
         <p class="text-sm text-secondary">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
       </div>
     </main>
+
+    <!-- Add New Modal -->
+    <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="showAddNewModal = false">
+      <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-primary">Add New Product</h2>
+            <p class="text-sm text-secondary mt-1">Choose what you'd like to create</p>
+          </div>
+          <button @click="showAddNewModal = false" class="rounded-lg p-2 hover:bg-neutral-100 transition-colors">
+            <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Product Selection (Step 1) -->
+        <div v-if="addNewStep === 'select'" class="p-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Website Product -->
+            <button
+              @click="selectProduct('website')"
+              class="group relative rounded-xl border-2 border-neutral-200 bg-white p-6 text-left hover:border-accent-primary hover:shadow-lg transition-all"
+            >
+              <div class="flex items-start justify-between mb-4">
+                <div class="h-12 w-12 rounded-lg bg-accent-primary/10 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                  <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  Available
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Website</h3>
+              <p class="text-sm text-secondary mb-4">Create a professional website with custom design and features</p>
+              <div class="flex items-center gap-2 text-sm text-accent-primary font-medium">
+                Get Started
+                <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </div>
+            </button>
+
+            <!-- Marketing Product -->
+            <div class="relative rounded-xl border-2 border-neutral-200 bg-neutral-50 p-6 text-left opacity-60">
+              <div class="flex items-start justify-between mb-4">
+                <div class="h-12 w-12 rounded-lg bg-neutral-200 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">
+                  Coming Soon
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-neutral-600 mb-2">Marketing</h3>
+              <p class="text-sm text-neutral-500 mb-4">Boost your reach with targeted marketing campaigns</p>
+            </div>
+
+            <!-- AI Agent Product -->
+            <div class="relative rounded-xl border-2 border-neutral-200 bg-neutral-50 p-6 text-left opacity-60">
+              <div class="flex items-start justify-between mb-4">
+                <div class="h-12 w-12 rounded-lg bg-neutral-200 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">
+                  Coming Soon
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-neutral-600 mb-2">AI Agent</h3>
+              <p class="text-sm text-neutral-500 mb-4">Deploy intelligent AI agents to automate tasks</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website Plan Selection (Step 2) -->
+        <div v-if="addNewStep === 'plan'" class="p-6">
+          <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors mb-6">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back to Products
+          </button>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-primary mb-2">Choose Your Website Plan</h3>
+            <p class="text-sm text-secondary">Select the plan that best fits your needs</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Starter Plan -->
+            <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
+              <div class="mb-4">
+                <h4 class="text-lg font-bold text-primary mb-1">Starter</h4>
+                <p class="text-sm text-secondary">Perfect for small businesses</p>
+              </div>
+              <div class="mb-6">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-bold text-primary">$29</span>
+                  <span class="text-sm text-secondary">/month</span>
+                </div>
+              </div>
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Up to 5 pages</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Custom domain</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">SSL certificate</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Basic SEO</span>
+                </li>
+              </ul>
+              <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">
+                Select Starter
+              </button>
+            </div>
+
+            <!-- Professional Plan (Popular) -->
+            <div class="relative rounded-xl border-2 border-accent-primary bg-white p-6 shadow-lg">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent-primary text-white text-xs font-semibold">
+                  <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                  Popular
+                </span>
+              </div>
+              <div class="mb-4">
+                <h4 class="text-lg font-bold text-primary mb-1">Professional</h4>
+                <p class="text-sm text-secondary">For growing businesses</p>
+              </div>
+              <div class="mb-6">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-bold text-primary">$79</span>
+                  <span class="text-sm text-secondary">/month</span>
+                </div>
+              </div>
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Up to 15 pages</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Custom domain</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Advanced SEO</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">E-commerce ready</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Priority support</span>
+                </li>
+              </ul>
+              <button @click="selectPlan('professional')" class="w-full rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-focus transition-colors">
+                Select Professional
+              </button>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
+              <div class="mb-4">
+                <h4 class="text-lg font-bold text-primary mb-1">Enterprise</h4>
+                <p class="text-sm text-secondary">For large organizations</p>
+              </div>
+              <div class="mb-6">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-bold text-primary">$199</span>
+                  <span class="text-sm text-secondary">/month</span>
+                </div>
+              </div>
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Unlimited pages</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Multiple domains</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Advanced analytics</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Dedicated support</span>
+                </li>
+                <li class="flex items-start gap-2 text-sm">
+                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-secondary">Custom integrations</span>
+                </li>
+              </ul>
+              <button @click="selectPlan('enterprise')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">
+                Select Enterprise
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -2054,6 +2321,13 @@ const websiteExpandedSections = ref({
 // Onboarding state
 const showOnboardingRequired = ref(false)
 const checkingOnboarding = ref(true)
+const pendingWebsiteProduct = ref(null)
+
+// Add New Modal state
+const showAddNewModal = ref(false)
+const addNewStep = ref('select') // 'select' or 'plan'
+const selectedProduct = ref(null)
+const selectedPlan = ref(null)
 
 // Fetch websites from API
 const fetchWebsites = async () => {
@@ -2334,15 +2608,29 @@ const checkOnboardingStatus = async () => {
       return
     }
 
-    // If user completed get-started but not onboarding, show onboarding requirement
-    if (profile?.has_completed_get_started && !profile?.has_completed_onboarding) {
-      console.log('[Dashboard] Showing onboarding requirement banner')
+    // Check for pending website products that need onboarding
+    const { data: pendingProducts, error: productsError } = await supabase
+      .from('website_products')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'pending_onboarding')
+      .order('created_at', { ascending: false })
+
+    if (productsError) {
+      console.error('[Dashboard] Products fetch error:', productsError)
+    }
+
+    console.log('[Dashboard] Pending products:', pendingProducts)
+
+    // If there's a pending website product, show onboarding requirement
+    if (pendingProducts && pendingProducts.length > 0) {
+      pendingWebsiteProduct.value = pendingProducts[0]
       showOnboardingRequired.value = true
+      console.log('[Dashboard] Showing onboarding requirement for website product:', pendingProducts[0])
     } else {
-      console.log('[Dashboard] Onboarding not required', {
-        hasGetStarted: profile?.has_completed_get_started,
-        hasOnboarding: profile?.has_completed_onboarding
-      })
+      showOnboardingRequired.value = false
+      pendingWebsiteProduct.value = null
+      console.log('[Dashboard] No pending website products')
     }
   } catch (error) {
     console.error('[Dashboard] Check onboarding error:', error)
@@ -2357,6 +2645,89 @@ watch(activeTab, (newTab) => {
     loadMyDomains()
   }
 })
+
+// Handle product selection in Add New modal
+const selectProduct = (product) => {
+  selectedProduct.value = product
+  if (product === 'website') {
+    addNewStep.value = 'plan'
+  }
+}
+
+// Handle plan selection
+const selectPlan = async (plan) => {
+  selectedPlan.value = plan
+  console.log('[Dashboard] Selected plan:', plan)
+  
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      console.error('[Dashboard] No user found')
+      return
+    }
+
+    // Determine price based on plan
+    const prices = {
+      starter: 29,
+      professional: 79,
+      enterprise: 199
+    }
+
+    // Create website product entry
+    const { data: product, error: productError } = await supabase
+      .from('website_products')
+      .insert({
+        user_id: user.id,
+        plan: plan,
+        status: 'pending_onboarding',
+        price_monthly: prices[plan]
+      })
+      .select()
+      .single()
+
+    if (productError) {
+      console.error('[Dashboard] Error creating website product:', productError)
+      return
+    }
+
+    console.log('[Dashboard] Website product created:', product)
+    
+    // Close modal and redirect to onboarding
+    showAddNewModal.value = false
+    activeTab.value = 'onboarding'
+    
+    // Refresh to show onboarding requirement
+    await checkOnboardingStatus()
+    
+    // Reset modal state
+    setTimeout(() => {
+      addNewStep.value = 'select'
+      selectedProduct.value = null
+      selectedPlan.value = null
+    }, 300)
+  } catch (error) {
+    console.error('[Dashboard] Error in selectPlan:', error)
+  }
+}
+
+// Handle onboarding completion from iframe
+const onOnboardingLoad = () => {
+  console.log('[Dashboard] Onboarding iframe loaded')
+}
+
+// Listen for messages from onboarding iframe
+if (process.client) {
+  window.addEventListener('message', (event) => {
+    if (event.data.type === 'onboarding-complete') {
+      console.log('[Dashboard] Onboarding completed, refreshing status')
+      showOnboardingRequired.value = false
+      activeTab.value = 'overview'
+      checkOnboardingStatus()
+    }
+  })
+}
 
 // Fetch on mount
 onMounted(() => {

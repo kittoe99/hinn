@@ -1962,10 +1962,11 @@ const handleSubmit = async () => {
     const data = await response.json()
     console.log('[Onboarding] Submission successful:', data)
     
-    // Update user profile to mark onboarding as completed
+    // Update user profile and website product status
     const supabase = getSupabaseClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
+      // Update user profile
       await supabase
         .from('user_profiles')
         .upsert({
@@ -1975,11 +1976,42 @@ const handleSubmit = async () => {
         }, {
           onConflict: 'user_id'
         })
+
+      // Update pending website product status
+      const { data: pendingProducts } = await supabase
+        .from('website_products')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('status', 'pending_onboarding')
+        .order('created_at', { ascending: false })
+        .limit(1)
+
+      if (pendingProducts && pendingProducts.length > 0) {
+        await supabase
+          .from('website_products')
+          .update({
+            status: 'onboarding_completed',
+            onboarding_submission_id: data.id
+          })
+          .eq('id', pendingProducts[0].id)
+        
+        console.log('[Onboarding] Updated website product status to onboarding_completed')
+      }
     }
     
     submissionResult.value = { ...payload, id: data.id }
     isSubmitted.value = true
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    
+    // Notify parent window if in iframe (dashboard)
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'onboarding-complete' }, '*')
+    }
+    
+    // Redirect to dashboard after a short delay
+    setTimeout(() => {
+      navigateTo('/dashboard')
+    }, 2000)
   } catch (error) {
     console.error('[Onboarding] Submission error:', error)
     submissionErrors.value = [error.message || 'Failed to submit onboarding. Please try again.']
