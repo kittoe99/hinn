@@ -1919,11 +1919,11 @@
       </div>
 
       <!-- Onboarding Tab -->
-      <div v-if="activeTab === 'onboarding'" class="w-full">
+      <div v-if="activeTab === 'onboarding'" class="w-full -mx-3 sm:mx-0">
         <iframe 
           src="/onboarding?embedded=true" 
           class="w-full border-0"
-          style="height: 2500px; overflow: hidden;"
+          style="height: 1200px; overflow: hidden;"
           scrolling="no"
           @load="onOnboardingLoad"
         ></iframe>
