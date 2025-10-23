@@ -583,8 +583,8 @@
           </div>
         </div>
 
-        <!-- Onboarding Required Banner -->
-        <div v-if="showOnboardingRequired && pendingPlan" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
+        <!-- Onboarding Required Banner (hide when on onboarding page) -->
+        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
@@ -609,15 +609,15 @@
                 </div>
               </div>
             </div>
-            <button
-              @click="activeTab = 'onboarding'"
+            <NuxtLink
+              to="/onboarding"
               class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
             >
               Start Onboarding
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
-            </button>
+            </NuxtLink>
           </div>
         </div>
 
@@ -1918,17 +1918,6 @@
         </div>
       </div>
 
-      <!-- Onboarding Tab -->
-      <div v-if="activeTab === 'onboarding'" class="w-full -mx-3 sm:mx-0">
-        <iframe 
-          src="/onboarding?embedded=true" 
-          class="w-full border-0"
-          style="height: 1350px; overflow: hidden;"
-          scrolling="no"
-          @load="onOnboardingLoad"
-        ></iframe>
-      </div>
-
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center max-w-md">
@@ -2342,6 +2331,10 @@ const showAddNewModal = ref(false)
 const addNewStep = ref('select') // 'select' or 'plan'
 const selectedProduct = ref(null)
 const selectedPlan = ref(null)
+
+// Check if on onboarding page
+const route = useRoute()
+const isOnboardingPage = computed(() => route.path === '/dashboard/onboarding')
 
 // Fetch websites from API
 const fetchWebsites = async () => {
