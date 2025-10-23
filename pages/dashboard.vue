@@ -1923,7 +1923,7 @@
         <iframe 
           src="/onboarding?embedded=true" 
           class="w-full border-0"
-          style="height: 1200px; overflow: hidden;"
+          style="height: 1350px; overflow: hidden;"
           scrolling="no"
           @load="onOnboardingLoad"
         ></iframe>
