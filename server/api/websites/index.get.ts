@@ -28,23 +28,11 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Create authenticated Supabase client with user's token for RLS
-    const config = useRuntimeConfig()
-    const { createClient } = await import('@supabase/supabase-js')
-    const authenticatedSupabase = createClient(
-      config.public.supabaseUrl as string,
-      config.public.supabaseKey as string,
-      {
-        global: {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      }
-    )
+    console.log('[API] Fetching websites for user:', user.id)
 
-    // Fetch websites for this user with plan information using authenticated client
-    const { data: websites, error } = await authenticatedSupabase
+    // Fetch websites for this user with plan information
+    // Using service role client which bypasses RLS
+    const { data: websites, error } = await supabase
       .from('websites')
       .select(`
         *,
@@ -68,6 +56,7 @@ export default defineEventHandler(async (event) => {
     }
 
     console.log('[API] Successfully fetched websites:', websites?.length || 0)
+    console.log('[API] Websites data:', JSON.stringify(websites, null, 2))
 
     return {
       success: true,

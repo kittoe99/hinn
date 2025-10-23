@@ -2362,6 +2362,9 @@ const fetchWebsites = async () => {
       }
     })
     
+    console.log('[Dashboard] API response:', response)
+    console.log('[Dashboard] Websites received:', response.websites?.length || 0)
+    
     websites.value = response.websites || []
   } catch (err) {
     console.error('Failed to fetch websites:', err)
