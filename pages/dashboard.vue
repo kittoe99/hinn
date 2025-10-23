@@ -1919,11 +1919,12 @@
       </div>
 
       <!-- Onboarding Tab -->
-      <div v-if="activeTab === 'onboarding'">
+      <div v-if="activeTab === 'onboarding'" class="w-full">
         <iframe 
-          src="/onboarding" 
-          class="w-full border-0 rounded-lg"
-          style="height: calc(100vh - 200px); min-height: 800px;"
+          src="/onboarding?embedded=true" 
+          class="w-full border-0"
+          style="height: 2500px; overflow: hidden;"
+          scrolling="no"
           @load="onOnboardingLoad"
         ></iframe>
       </div>
@@ -2344,6 +2345,7 @@ const selectedPlan = ref(null)
 
 // Fetch websites from API
 const fetchWebsites = async () => {
+  console.log('[Dashboard] fetchWebsites called')
   try {
     loading.value = true
     error.value = null
@@ -2351,7 +2353,10 @@ const fetchWebsites = async () => {
     const supabase = getSupabaseClient()
     const { data: { session } } = await supabase.auth.getSession()
     
+    console.log('[Dashboard] Session:', session ? 'exists' : 'null')
+    
     if (!session) {
+      console.error('[Dashboard] No session found')
       error.value = 'Not authenticated'
       return
     }
@@ -2750,8 +2755,15 @@ if (process.client) {
 
 // Fetch on mount
 onMounted(() => {
+  console.log('[Dashboard] Component mounted')
+  console.log('[Dashboard] Initial state - loading:', loading.value, 'error:', error.value, 'checkingOnboarding:', checkingOnboarding.value)
   checkOnboardingStatus()
   fetchWebsites()
+  
+  // Debug: Log state after a delay
+  setTimeout(() => {
+    console.log('[Dashboard] After mount - loading:', loading.value, 'error:', error.value, 'websites:', websites.value.length)
+  }, 2000)
 })
 </script>
 

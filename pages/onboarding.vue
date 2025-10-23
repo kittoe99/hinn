@@ -1292,6 +1292,16 @@ import { getSupabaseClient } from '~/lib/supabaseClient'
 import FormSelect from '~/components/FormSelect.vue'
 import ServiceAreaPicker from '~/components/ServiceAreaPicker.vue'
 
+// Check if embedded in iframe
+const route = useRoute()
+const isEmbedded = computed(() => route.query.embedded === 'true')
+
+// Disable layout if embedded
+definePageMeta({
+  layout: false,
+  middleware: ['auth']
+})
+
 useHead({
   title: 'Onboarding - Hinn',
   meta: [
