@@ -1288,6 +1288,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { getSupabaseClient } from '~/lib/supabaseClient'
 import FormSelect from '~/components/FormSelect.vue'
 import ServiceAreaPicker from '~/components/ServiceAreaPicker.vue'
 
