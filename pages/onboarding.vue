@@ -144,14 +144,14 @@
                       <input
                         v-model="formData.businessPhone"
                         type="tel"
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
                         placeholder="(000) 000-0000"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label class="mb-1 block text-sm font-medium text-primary">Preferred contact method *</label>
+                    <label class="mb-1 block text-sm font-medium text-neutral-900">Preferred contact method *</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       <button
                         v-for="method in contactMethods"
@@ -161,8 +161,8 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm font-medium transition',
                           formData.contactMethod === method.value
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ method.label }}
@@ -171,7 +171,7 @@
                   </div>
 
                   <div>
-                    <label class="mb-1 block text-sm font-medium text-primary">Describe what you offer *</label>
+                    <label class="mb-1 block text-sm font-medium text-neutral-900">Describe what you offer *</label>
                     <div class="space-y-3">
                       <textarea
                         v-model="formData.description"
@@ -179,7 +179,7 @@
                         required
                         @input="validationErrors.description = false"
                         :class="[
-                          'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
+                          'w-full rounded-xl border px-4 py-3 text-sm text-neutral-900 shadow-inner focus:outline-none focus:ring-2 focus:ring-neutral-300',
                           validationErrors.description
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
                             : 'border-neutral-200 bg-white focus:border-neutral-400 focus:ring-0'
@@ -212,13 +212,13 @@
                     <button
                       type="button"
                       @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
                     >
                       Continue
                     </button>
@@ -235,7 +235,7 @@
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div>
-                    <label class="block text-sm font-medium text-primary mb-3">Do you have a current website?</label>
+                    <label class="block text-sm font-medium text-neutral-900 mb-3">Do you have a current website?</label>
                     <div class="flex gap-3">
                       <button
                         v-for="option in [{value: 'yes', label: 'Yes'}, {value: 'no', label: 'No'}]"
@@ -245,8 +245,8 @@
                         :class="[
                           'rounded-2xl border px-6 py-3 text-sm font-medium transition',
                           formData.hasCurrentWebsite === option.value
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ option.label }}
@@ -256,13 +256,13 @@
 
                   <div v-if="formData.hasCurrentWebsite === 'yes'" class="space-y-4">
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Website URL or domain</label>
+                      <label class="block text-sm font-medium text-neutral-900 mb-2">Website URL or domain</label>
                       <input
                         v-model="formData.currentWebsiteUrl"
                         :disabled="searching"
                         type="text"
                         placeholder="example.com or https://example.com"
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft disabled:opacity-60"
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0 disabled:opacity-60"
                         @input="currentUrl = formData.currentWebsiteUrl"
                       />
                     </div>
@@ -272,14 +272,14 @@
                         type="button"
                         @click="analyzeWebsite"
                         :disabled="!formData.currentWebsiteUrl || searching"
-                        class="rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {{ searching ? 'Analyzing…' : 'Analyze site' }}
                       </button>
                       <button
                         type="button"
                         @click="formData.websiteSkipped = true; skipped = true; siteAdded = false; siteSummary = null; siteError = null"
-                        class="text-sm text-secondary hover:text-primary hover:underline"
+                        class="text-sm text-neutral-600 hover:text-neutral-900 hover:underline"
                       >
                         Skip
                       </button>
@@ -287,13 +287,13 @@
 
                     <!-- Progress indicator -->
                     <div v-if="searching" class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
-                      <div class="text-sm font-medium text-primary mb-2">Analyzing your website…</div>
+                      <div class="text-sm font-medium text-neutral-900 mb-2">Analyzing your website…</div>
                       <div class="h-2 w-full rounded-full bg-neutral-100">
-                        <div class="h-2 rounded-full bg-accent-primary transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
+                        <div class="h-2 rounded-full bg-neutral-900 transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
                       </div>
-                      <ul class="mt-3 space-y-1 text-xs text-secondary">
+                      <ul class="mt-3 space-y-1 text-xs text-neutral-600">
                         <li v-for="(log, idx) in searchLogs" :key="idx" class="flex items-center gap-2">
-                          <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-primary" />
+                          <span class="inline-block h-1.5 w-1.5 rounded-full bg-neutral-900" />
                           {{ log }}
                         </li>
                       </ul>
@@ -301,12 +301,12 @@
 
                     <!-- Error message -->
                     <div v-if="siteError" class="text-sm text-red-600">{{ siteError }}</div>
-                    <div v-if="siteNotFound" class="text-sm text-secondary">No info found. You can skip or add details manually.</div>
+                    <div v-if="siteNotFound" class="text-sm text-neutral-600">No info found. You can skip or add details manually.</div>
 
                     <!-- Summary -->
                     <div v-if="siteSummary?.summary && !searching" class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 shadow-sm">
-                      <div class="text-sm font-medium text-primary mb-2">Summary</div>
-                      <div class="text-sm text-secondary whitespace-pre-wrap">{{ siteSummary.summary }}</div>
+                      <div class="text-sm font-medium text-neutral-900 mb-2">Summary</div>
+                      <div class="text-sm text-neutral-600 whitespace-pre-wrap">{{ siteSummary.summary }}</div>
                     </div>
                   </div>
 
@@ -314,14 +314,14 @@
                     <button
                       type="button"
                       @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
                       :disabled="formData.hasCurrentWebsite === 'yes' && !siteAdded && !formData.websiteSkipped"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
                     </button>
@@ -351,7 +351,7 @@
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Services you provide</label>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Services you provide</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       <button
                         v-for="service in serviceOptions"
@@ -361,8 +361,8 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.selectedServices.includes(service)
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ service }}
@@ -371,20 +371,20 @@
 
                     <!-- Custom service input -->
                     <div class="mt-4">
-                      <label class="mb-2 block text-xs font-medium text-secondary">Add custom service</label>
+                      <label class="mb-2 block text-xs font-medium text-neutral-600">Add custom service</label>
                       <div class="flex gap-2">
                         <input
                           v-model="customService"
                           type="text"
                           placeholder="e.g., Custom consulting"
-                          class="flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                          class="flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
                           @keydown.enter.prevent="addCustomService"
                         />
                         <button
                           type="button"
                           @click="addCustomService"
                           :disabled="!customService.trim()"
-                          class="rounded-xl bg-accent-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+                          class="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Add
                         </button>
@@ -396,13 +396,13 @@
                       <div
                         v-for="(service, index) in formData.selectedServices"
                         :key="index"
-                        class="inline-flex items-center gap-2 rounded-full border border-accent-primary bg-accent-subtle px-3 py-1.5 text-sm text-primary"
+                        class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-900"
                       >
                         <span>{{ service }}</span>
                         <button
                           type="button"
                           @click="removeService(index)"
-                          class="inline-flex h-4 w-4 items-center justify-center rounded-full hover:bg-accent-primary hover:text-white transition"
+                          class="inline-flex h-4 w-4 items-center justify-center rounded-full hover:bg-neutral-900 hover:text-white transition"
                         >
                           <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -413,20 +413,20 @@
                   </div>
 
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Service areas</label>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Service areas</label>
                     <ServiceAreaPicker v-model="formData.serviceAreas" />
                     <div
                       v-if="availableSeedAreas.length"
-                      class="mt-3 rounded-2xl border border-dashed border-accent-soft bg-accent-subtle/40 p-4 text-xs text-secondary"
+                      class="mt-3 rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-xs text-neutral-600"
                     >
-                      <p class="text-sm font-semibold text-primary">Detected location</p>
+                      <p class="text-sm font-semibold text-neutral-900">Detected location</p>
                       <p class="mt-1">We detected your location. Click to add it as a service area.</p>
                       <div class="mt-3 flex flex-wrap gap-2">
                         <button
                           v-for="area in availableSeedAreas"
                           :key="area.placeId || area.name"
                           type="button"
-                          class="rounded-full border border-accent-soft bg-white px-3 py-1.5 text-xs font-semibold text-primary transition hover:border-accent-primary"
+                          class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-900 transition hover:border-neutral-300"
                           @click="useSeedArea(area)"
                         >
                           Add {{ area.displayName || area.name }}
@@ -434,7 +434,7 @@
                         <button
                           v-if="availableSeedAreas.length > 1"
                           type="button"
-                          class="rounded-full border border-transparent bg-accent-primary px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-accent-focus"
+                          class="rounded-full border border-transparent bg-neutral-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-neutral-800"
                           @click="useAllSeedAreas"
                         >
                           Add all
@@ -445,7 +445,7 @@
 
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Coverage type</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Coverage type</label>
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           v-for="option in coverageOptions"
@@ -464,7 +464,7 @@
                       </div>
                     </div>
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Service delivery *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Service delivery *</label>
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           v-for="option in onSiteModes"
@@ -491,13 +491,13 @@
                     <button
                       type="button"
                       @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
                     >
                       Continue
                     </button>
@@ -528,7 +528,7 @@
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Business hours *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Business hours *</label>
                       <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                         <button
                           v-for="option in hoursOptions"
@@ -563,7 +563,7 @@
                   </div>
 
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Languages your site needs</label>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Languages your site needs</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       <button
                         v-for="language in languageOptions"
@@ -573,8 +573,8 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.languages.includes(language)
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ language }}
@@ -616,13 +616,13 @@
                     <button
                       type="button"
                       @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
                     >
                       Continue
                     </button>
@@ -639,7 +639,7 @@
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Overall look</label>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Overall look</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       <button
                         v-for="style in designStyles"
@@ -649,8 +649,8 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.designStyles.includes(style)
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ style }}
@@ -659,7 +659,7 @@
                   </div>
 
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Mood</label>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Mood</label>
                     <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       <button
                         v-for="tone in emotionalOptions"
@@ -669,8 +669,8 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.emotionalImpact.includes(tone)
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         {{ tone }}
@@ -679,8 +679,8 @@
                   </div>
 
                   <div>
-                    <label class="mb-2 block text-sm font-medium text-primary">Color theme</label>
-                    <p class="text-xs text-secondary">Pick a starting palette—we can adjust or add brand colors later.</p>
+                    <label class="mb-2 block text-sm font-medium text-neutral-900">Color theme</label>
+                    <p class="text-xs text-neutral-600">Pick a starting palette—we can adjust or add brand colors later.</p>
                     <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                       <button
                         v-for="theme in colorThemes"
@@ -690,8 +690,8 @@
                         :class="[
                           'flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition',
                           formData.colorTheme === theme.value
-                            ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
                         <div class="flex items-center gap-3">
@@ -707,13 +707,13 @@
                         </div>
                         <svg
                           v-if="formData.colorTheme === theme.value"
-                          class="h-4 w-4 text-accent-primary"
+                          class="h-4 w-4 text-neutral-900"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
                           <path
                             fill-rule="evenodd"
-                            d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0Z"
+                            d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0z"
                             clip-rule="evenodd"
                           />
                         </svg>
@@ -723,7 +723,7 @@
 
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-primary">Text contrast</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Text contrast</label>
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           type="button"
@@ -756,7 +756,7 @@
                       <input
                         v-model="formData.brandColors"
                         type="text"
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
                         placeholder="Share any specific colors or hex codes"
                       />
                     </div>
@@ -768,7 +768,7 @@
                       <textarea
                         v-model="formData.inspirationSites"
                         rows="2"
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
                         placeholder="Add any links that inspire you"
                       />
                     </div>
@@ -777,7 +777,7 @@
                       <textarea
                         v-model="formData.additionalNotes"
                         rows="2"
-                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                        class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
                         placeholder="Special requests, must-have sections, or questions"
                       />
                     </div>
@@ -787,13 +787,13 @@
                     <button
                       type="button"
                       @click="prevStep"
-                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50"
+                      class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50"
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
                     >
                       Continue
                     </button>
@@ -812,16 +812,16 @@
                   
                   <!-- Logo Upload -->
                   <div>
-                    <label class="mb-3 block text-sm font-medium text-primary">Company logo</label>
+                    <label class="mb-3 block text-sm font-medium text-neutral-900">Company logo</label>
                     <div class="space-y-4">
                       <!-- No Logo Option -->
                       <label class="flex items-center gap-3 cursor-pointer">
                         <input
                           v-model="formData.noLogo"
                           type="checkbox"
-                          class="h-4 w-4 rounded border-neutral-300 text-accent-primary focus:ring-accent-soft"
+                          class="h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-300"
                         />
-                        <span class="text-sm text-secondary">I don't have a logo yet (we can help create one)</span>
+                        <span class="text-sm text-neutral-600">I don't have a logo yet (we can help create one)</span>
                       </label>
 
                       <!-- Upload Area -->
@@ -833,8 +833,8 @@
                         :class="[
                           'relative rounded-2xl border-2 border-dashed transition-all',
                           logoDropping
-                            ? 'border-accent-primary bg-accent-subtle/50'
-                            : 'border-neutral-200 bg-neutral-50/50 hover:border-accent-soft hover:bg-accent-subtle/20'
+                            ? 'border-neutral-900 bg-neutral-100'
+                            : 'border-neutral-200 bg-neutral-50/50 hover:border-neutral-300 hover:bg-neutral-100'
                         ]"
                       >
                         <input
@@ -847,8 +847,8 @@
                         
                         <!-- Upload Prompt -->
                         <div v-if="!uploadedLogo" class="flex flex-col items-center justify-center px-6 py-12 text-center">
-                          <div class="rounded-full bg-accent-subtle p-4 mb-4">
-                            <svg class="h-8 w-8 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div class="rounded-full bg-neutral-100 p-4 mb-4">
+                            <svg class="h-8 w-8 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                           </div>
@@ -857,7 +857,7 @@
                           <button
                             type="button"
                             @click="$refs.logoInput.click()"
-                            class="inline-flex items-center gap-2 rounded-full bg-accent-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                            class="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800"
                           >
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -903,8 +903,8 @@
                       :class="[
                         'relative rounded-2xl border-2 border-dashed transition-all',
                         assetsDropping
-                          ? 'border-accent-primary bg-accent-subtle/50'
-                          : 'border-neutral-200 bg-neutral-50/50 hover:border-accent-soft hover:bg-accent-subtle/20'
+                          ? 'border-neutral-900 bg-neutral-100'
+                          : 'border-neutral-200 bg-neutral-50/50 hover:border-neutral-300 hover:bg-neutral-100'
                       ]"
                     >
                       <input
@@ -975,7 +975,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus"
+                      class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
                     >
                       Continue
                     </button>
@@ -998,7 +998,7 @@
                 <p class="text-sm text-green-800 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
                 <NuxtLink
                   to="/get-started"
-                  class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-focus"
+                  class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-neutral-800"
                 >
                   Review subscription options
                   <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
@@ -1037,7 +1037,7 @@
                       <button
                         type="button"
                         @click="jumpTo(1)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1067,7 +1067,7 @@
                       <button
                         type="button"
                         @click="jumpTo(2)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1093,7 +1093,7 @@
                       <button
                         type="button"
                         @click="jumpTo(3)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1121,7 +1121,7 @@
                       <button
                         type="button"
                         @click="jumpTo(4)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1148,7 +1148,7 @@
                       <button
                         type="button"
                         @click="jumpTo(5)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1175,7 +1175,7 @@
                       <button
                         type="button"
                         @click="jumpTo(6)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>
@@ -1196,7 +1196,7 @@
                       <button
                         type="button"
                         @click="jumpTo(7)"
-                        class="text-xs font-medium text-accent-primary hover:underline"
+                        class="text-xs font-medium text-neutral-900 hover:underline"
                       >
                         Edit
                       </button>

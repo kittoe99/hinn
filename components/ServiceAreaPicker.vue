@@ -5,12 +5,12 @@
         <div
           v-for="(area, index) in internalAreas"
           :key="area.placeId || area.name"
-          class="flex items-center gap-2 rounded-full border border-accent-soft bg-accent-subtle px-3 py-1 text-xs text-primary"
+          class="flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-900"
         >
           <span class="font-semibold">{{ area.displayName || area.name }}</span>
           <button
             type="button"
-            class="text-secondary transition hover:text-primary"
+            class="text-neutral-600 transition hover:text-neutral-900"
             @click="removeArea(index)"
             aria-label="Remove service area"
           >
@@ -21,12 +21,12 @@
       </div>
 
       <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <label class="text-sm font-medium text-primary sm:w-40">Search locations</label>
+        <label class="text-sm font-medium text-neutral-900 sm:w-40">Search locations</label>
         <div class="flex flex-1 gap-2">
           <input
             v-model="query"
             type="text"
-            class="flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+            class="flex-1 rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 shadow-inner focus:border-neutral-400 focus:outline-none focus:ring-0"
             placeholder="Enter a city, neighborhood, or region"
             aria-label="Search for service areas"
             @keypress.enter.prevent="performSearch"
@@ -35,7 +35,7 @@
             type="button"
             @click="performSearch"
             :disabled="loading"
-            class="flex items-center justify-center rounded-xl bg-accent-primary px-4 py-2.5 text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+            class="flex items-center justify-center rounded-xl bg-neutral-900 px-4 py-2.5 text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Search"
           >
             <svg
@@ -76,7 +76,7 @@
       >
         <div class="flex items-center justify-between border-b border-neutral-100 px-4 py-2 text-xs text-secondary">
           <span>Search results</span>
-          <button type="button" class="text-accent-primary hover:underline" @click="clearResults">Close</button>
+          <button type="button" class="text-neutral-900 hover:underline" @click="clearResults">Close</button>
         </div>
         <ul class="max-h-60 overflow-y-auto">
           <li v-if="loading" class="px-4 py-3 text-sm text-secondary">Searching&hellip;</li>
@@ -87,7 +87,7 @@
               class="flex w-full items-start justify-between gap-3 px-4 py-3 text-left text-sm transition hover:bg-neutral-50"
               @click="addArea(result)"
             >
-              <span class="text-primary">{{ result.display_name }}</span>
+              <span class="text-neutral-900">{{ result.display_name }}</span>
               <span class="text-xs text-secondary">Add</span>
             </button>
           </li>
@@ -114,10 +114,10 @@
               max="200"
               step="1"
               :value="area.radiusKm"
-              class="h-1 w-40 cursor-pointer appearance-none rounded-full bg-neutral-200 accent-accent-primary"
+              class="h-1 w-40 cursor-pointer appearance-none rounded-full bg-neutral-200 accent-neutral-900"
               @input="updateRadius(index, $event.target.value)"
             />
-            <span class="text-sm font-medium text-primary">{{ area.radiusKm }} km</span>
+            <span class="text-sm font-medium text-neutral-900">{{ area.radiusKm }} km</span>
           </div>
         </div>
       </div>
