@@ -279,7 +279,7 @@
                       <button
                         type="button"
                         @click="formData.websiteSkipped = true; skipped = true; siteAdded = false; siteSummary = null; siteError = null"
-                        class="text-sm text-neutral-600 hover:text-neutral-900 hover:underline"
+                        class="text-sm text-blue-700 hover:text-blue-800 hover:underline"
                       >
                         Skip
                       </button>
@@ -289,11 +289,11 @@
                     <div v-if="searching" class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
                       <div class="text-sm font-medium text-neutral-900 mb-2">Analyzing your website…</div>
                       <div class="h-2 w-full rounded-full bg-neutral-100">
-                        <div class="h-2 rounded-full bg-neutral-900 transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
+                        <div class="h-2 rounded-full bg-blue-600 transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
                       </div>
                       <ul class="mt-3 space-y-1 text-xs text-neutral-600">
                         <li v-for="(log, idx) in searchLogs" :key="idx" class="flex items-center gap-2">
-                          <span class="inline-block h-1.5 w-1.5 rounded-full bg-neutral-900" />
+                          <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600" />
                           {{ log }}
                         </li>
                       </ul>
@@ -396,7 +396,7 @@
                       <div
                         v-for="(service, index) in formData.selectedServices"
                         :key="index"
-                        class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-900"
+                        :class="['inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm', chipColorClasses[index % chipColorClasses.length]]"
                       >
                         <span>{{ service }}</span>
                         <button
@@ -417,7 +417,7 @@
                     <ServiceAreaPicker v-model="formData.serviceAreas" />
                     <div
                       v-if="availableSeedAreas.length"
-                      class="mt-3 rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-xs text-neutral-600"
+                      class="mt-3 rounded-2xl border border-dashed border-blue-200 bg-blue-50/50 p-4 text-xs text-neutral-700"
                     >
                       <p class="text-sm font-semibold text-neutral-900">Detected location</p>
                       <p class="mt-1">We detected your location. Click to add it as a service area.</p>
@@ -426,7 +426,7 @@
                           v-for="area in availableSeedAreas"
                           :key="area.placeId || area.name"
                           type="button"
-                          class="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-900 transition hover:border-neutral-300"
+                          class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
                           @click="useSeedArea(area)"
                         >
                           Add {{ area.displayName || area.name }}
@@ -1251,6 +1251,14 @@ useHead({
     { name: 'description', content: 'Complete your onboarding to get started' }
   ]
 })
+
+// Subtle color palette for chips ("stickers") in selected services
+const chipColorClasses = [
+  'border border-blue-200 bg-blue-50 text-blue-700',
+  'border border-amber-200 bg-amber-50 text-amber-700',
+  'border border-emerald-200 bg-emerald-50 text-emerald-700',
+  'border border-purple-200 bg-purple-50 text-purple-700'
+]
 
 const currentStep = ref(1)
 
