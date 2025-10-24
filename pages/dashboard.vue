@@ -62,7 +62,7 @@
             {{ tab.label }}
             <span
               v-if="activeTab === tab.id"
-              class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-primary"
+              class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-900"
             ></span>
           </a>
         </nav>
@@ -182,7 +182,7 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-2">
               <!-- Business Information -->
-              <section class="border border-neutral-200 bg-white overflow-hidden">
+              <section class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,7 +234,7 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,7 +253,7 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,7 +275,7 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -297,7 +297,7 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,7 +319,7 @@
               </section>
 
               <!-- Design Preferences -->
-              <section v-if="selectedWebsiteOnboarding.design_preferences" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Design Preferences</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -341,7 +341,7 @@
               </section>
 
               <!-- Language & Additional Info -->
-              <section v-if="selectedWebsiteOnboarding.language" class="border border-neutral-200 bg-white overflow-hidden">
+              <section v-if="selectedWebsiteOnboarding.language" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
                 <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
                   <h2 class="text-sm font-semibold text-neutral-900">Language & Additional Info</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -388,7 +388,7 @@
               placeholder="Search Projects..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none',
+                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md',
                 showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
               ]"
             />
@@ -399,7 +399,7 @@
               @click="!showOnboardingRequired && (viewMode = 'grid')"
               :disabled="showOnboardingRequired"
               :class="[
-                'p-2 border border-neutral-200 transition-colors',
+                'p-2 border border-neutral-200 transition-colors rounded-md',
                 showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'grid'
                   ? 'bg-neutral-900 text-white'
@@ -415,7 +415,7 @@
               @click="!showOnboardingRequired && (viewMode = 'list')"
               :disabled="showOnboardingRequired"
               :class="[
-                'p-2 border border-neutral-200 transition-colors',
+                'p-2 border border-neutral-200 transition-colors rounded-md',
                 showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'list'
                   ? 'bg-neutral-900 text-white'
@@ -433,7 +433,7 @@
               @click="showAddNewModal = true"
               :disabled="showOnboardingRequired"
               :class="[
-                'flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm font-medium transition-colors rounded-md',
                 showOnboardingRequired 
                   ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' 
                   : 'bg-white text-neutral-900 hover:bg-neutral-50'
@@ -448,12 +448,12 @@
         </div>
 
         <!-- Onboarding Required Banner (hide when on onboarding page) -->
-        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 rounded-xl border-2 border-accent-primary bg-gradient-to-r from-accent-primary/10 to-accent-focus/5 p-6 shadow-lg">
+        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 border-2 border-neutral-200 bg-neutral-50 p-6 rounded-md">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-full bg-accent-primary flex items-center justify-center">
-                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="h-12 w-12 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
                 </div>
@@ -465,8 +465,8 @@
                   (<span class="font-semibold">${{ pendingPlan.price_monthly }}/month</span>). 
                   Complete the onboarding process to provide us with your business details and preferences so we can get started.
                 </p>
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 text-xs font-medium text-secondary">
-                  <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 bg-white text-xs font-medium text-neutral-600">
+                  <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   Takes about 10 minutes
@@ -475,7 +475,7 @@
             </div>
             <NuxtLink
               to="/onboarding"
-              class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-accent-primary px-8 py-3 text-sm font-semibold text-white hover:bg-accent-focus transition-all shadow-md hover:shadow-lg"
+              class="flex-shrink-0 inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-neutral-900 px-8 py-3 text-sm font-semibold text-white hover:bg-neutral-800 transition-all"
             >
               Start Onboarding
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -515,7 +515,7 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'border border-neutral-200 bg-white p-5 transition-colors',
+              'border border-neutral-200 bg-white p-5 transition-colors rounded-md',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
                 : 'hover:bg-neutral-50 cursor-pointer'
@@ -523,7 +523,7 @@
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-start gap-3">
-                <div class="h-8 w-8 border border-neutral-200 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                <div class="h-8 w-8 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center flex-shrink-0">
                   <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
@@ -582,7 +582,7 @@
           </div>
           <h3 class="text-lg font-semibold text-primary mb-2">{{ searchQuery ? 'No websites match your search' : 'No websites yet' }}</h3>
           <p class="text-sm text-secondary mb-6">{{ searchQuery ? 'Try a different search term' : 'Get started by creating your first website' }}</p>
-          <NuxtLink v-if="!searchQuery" to="/onboarding" class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+          <NuxtLink v-if="!searchQuery" to="/onboarding" class="rounded-md border border-neutral-200 bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
             Create Website
           </NuxtLink>
         </div>
@@ -608,7 +608,7 @@
                   v-model="settingsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-primary placeholder-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
                 />
               </div>
 
@@ -619,7 +619,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="settingsActiveTab = subTab.id; settingsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
                 >
                   {{ subTab.label }}
                 </a>
@@ -649,7 +649,7 @@
                   <p class="mt-1 text-sm text-secondary">Manage your personal information and account preferences</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="space-y-5">
                     <div>
                       <label class="block text-sm font-medium text-primary mb-2">Full Name</label>
@@ -679,7 +679,7 @@
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
                         Save Changes
                       </button>
                     </div>
@@ -690,30 +690,30 @@
               <!-- Billing Section -->
               <div v-if="settingsActiveTab === 'billing'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Billing Settings</h2>
-                  <p class="mt-1 text-sm text-secondary">Manage your subscription and payment methods</p>
+                  <h2 class="text-2xl font-bold text-neutral-900">Billing Settings</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="space-y-6">
                     <div>
-                      <h3 class="text-base font-semibold text-primary mb-4">Current Plan</h3>
-                      <div class="flex items-center justify-between p-4 rounded-lg bg-accent-subtle border border-accent-primary/20">
+                      <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
+                      <div class="flex items-center justify-between p-4 rounded-md border border-neutral-200 bg-neutral-50">
                         <div>
-                          <div class="text-sm font-semibold text-primary">Hobby Plan</div>
-                          <div class="text-xs text-secondary mt-1">Free forever</div>
+                          <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
+                          <div class="text-xs text-neutral-600 mt-1">Free forever</div>
                         </div>
-                        <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                        <button class="rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
                           Upgrade
                         </button>
                       </div>
                     </div>
 
                     <div>
-                      <h3 class="text-base font-semibold text-primary mb-4">Payment Method</h3>
-                      <div class="p-4 rounded-lg border border-neutral-200">
-                        <p class="text-sm text-secondary">No payment method on file</p>
-                        <button class="mt-3 text-sm font-medium text-accent-primary hover:text-accent-focus">
+                      <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
+                      <div class="p-4 rounded-md border border-neutral-200">
+                        <p class="text-sm text-neutral-600">No payment method on file</p>
+                        <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
                           Add Payment Method
                         </button>
                       </div>
@@ -729,13 +729,13 @@
                   <p class="mt-1 text-sm text-secondary">View and download your billing invoices</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
-                    <h3 class="text-base font-semibold text-primary mb-2">No invoices yet</h3>
-                    <p class="text-sm text-secondary">Your invoices will appear here once you upgrade to a paid plan</p>
+                    <h3 class="text-base font-semibold text-neutral-900 mb-2">No invoices yet</h3>
+                    <p class="text-sm text-neutral-600">Your invoices will appear here once you upgrade to a paid plan</p>
                   </div>
                 </div>
               </div>
@@ -804,7 +804,7 @@
               </div>
 
               <div class="pt-4 border-t border-neutral-200">
-                <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
                   Save Changes
                 </button>
               </div>
@@ -815,30 +815,30 @@
         <!-- Billing Section -->
         <div v-if="settingsActiveTab === 'billing'" class="space-y-6">
           <div>
-            <h2 class="text-2xl font-bold text-primary">Billing Settings</h2>
-            <p class="mt-1 text-sm text-secondary">Manage your subscription and payment methods</p>
+            <h2 class="text-2xl font-bold text-neutral-900">Billing Settings</h2>
+            <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
           </div>
 
-          <div class="rounded-lg border border-neutral-200 bg-white p-6">
+          <div class="rounded-md border border-neutral-200 bg-white p-6">
             <div class="space-y-6">
               <div>
-                <h3 class="text-base font-semibold text-primary mb-4">Current Plan</h3>
-                <div class="flex items-center justify-between p-4 rounded-lg bg-accent-subtle border border-accent-primary/20">
+                <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
+                <div class="flex items-center justify-between p-4 rounded-md border border-neutral-200 bg-neutral-50">
                   <div>
-                    <div class="text-sm font-semibold text-primary">Hobby Plan</div>
-                    <div class="text-xs text-secondary mt-1">Free forever</div>
+                    <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
+                    <div class="text-xs text-neutral-600 mt-1">Free forever</div>
                   </div>
-                  <button class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                  <button class="rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
                     Upgrade
                   </button>
                 </div>
               </div>
 
               <div>
-                <h3 class="text-base font-semibold text-primary mb-4">Payment Method</h3>
-                <div class="p-4 rounded-lg border border-neutral-200">
-                  <p class="text-sm text-secondary">No payment method on file</p>
-                  <button class="mt-3 text-sm font-medium text-accent-primary hover:text-accent-focus">
+                <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
+                <div class="p-4 rounded-md border border-neutral-200">
+                  <p class="text-sm text-neutral-600">No payment method on file</p>
+                  <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
                     Add Payment Method
                   </button>
                 </div>
@@ -888,7 +888,7 @@
                   v-model="supportSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-primary placeholder-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
                 />
               </div>
 
@@ -899,7 +899,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="supportActiveTab = subTab.id; supportMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
                 >
                   {{ subTab.label }}
                 </a>
@@ -929,13 +929,13 @@
                   <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                     </svg>
-                    <h3 class="text-base font-semibold text-primary mb-2">Chat support coming soon</h3>
-                    <p class="text-sm text-secondary">We're working on bringing you real-time chat support</p>
+                    <h3 class="text-base font-semibold text-neutral-900 mb-2">Chat support coming soon</h3>
+                    <p class="text-sm text-neutral-600">We're working on bringing you real-time chat support</p>
                   </div>
                 </div>
               </div>
@@ -947,13 +947,13 @@
                   <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
-                    <h3 class="text-base font-semibold text-primary mb-2">Documentation coming soon</h3>
-                    <p class="text-sm text-secondary">We're preparing comprehensive guides for you</p>
+                    <h3 class="text-base font-semibold text-neutral-900 mb-2">Documentation coming soon</h3>
+                    <p class="text-sm text-neutral-600">We're preparing comprehensive guides for you</p>
                   </div>
                 </div>
               </div>
@@ -965,13 +965,13 @@
                   <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                     </svg>
-                    <h3 class="text-base font-semibold text-primary mb-2">Bug reporting coming soon</h3>
-                    <p class="text-sm text-secondary">We're setting up our bug tracking system</p>
+                    <h3 class="text-base font-semibold text-neutral-900 mb-2">Bug reporting coming soon</h3>
+                    <p class="text-sm text-neutral-600">We're setting up our bug tracking system</p>
                   </div>
                 </div>
               </div>
@@ -1004,7 +1004,7 @@
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
                         Send Message
                       </button>
                     </div>
@@ -1121,7 +1121,7 @@
                   </div>
 
                   <div class="pt-4 border-t border-neutral-200">
-                    <button class="rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-focus transition-colors">
+                    <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
                       Send Message
                     </button>
                   </div>
@@ -1152,7 +1152,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
                 />
               </div>
 
@@ -1163,7 +1163,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="domainsActiveTab = subTab.id; domainsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
                 >
                   {{ subTab.label }}
                 </a>
@@ -1195,7 +1195,7 @@
                   </div>
                   <button 
                     @click="loadMyDomains" 
-                    class="inline-flex items-center gap-2 border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                    class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                   >
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -1204,7 +1204,7 @@
                   </button>
                 </div>
 
-                <div class="border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                   <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                   <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1215,7 +1215,7 @@
                     <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
                     <button 
                       @click="domainsActiveTab = 'buy'; domainsMobileContentOpen = true" 
-                      class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                      class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors rounded-md"
                     >
                       Buy Your First Domain
                     </button>
@@ -1258,28 +1258,28 @@
               <!-- Buy New Domain Section -->
               <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Buy New Domain</h2>
-                  <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
+                  <h2 class="text-2xl font-bold text-neutral-900">Buy New Domain</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Search and register a new domain name</p>
                 </div>
 
                 <!-- Search Domain -->
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div class="space-y-4">
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Keyword / Brand</label>
+                      <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
                       <div class="flex gap-2">
                         <input
                           v-model="domainSearchQuery"
                           type="text"
                           placeholder="acme, mybrand, etc"
-                          class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                          class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
                           @keyup.enter="handleDomainSearch"
                         />
                         <button 
                           @click="handleDomainSearch" 
                           :disabled="domainSearchLoading"
-                          class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors"
-                          :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-accent-primary hover:bg-accent-focus'"
+                          class="rounded-md px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                          :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                         >
                           {{ domainSearchLoading ? 'Searching...' : 'Search' }}
                         </button>
@@ -1305,7 +1305,7 @@
                               :key="suggestion.name"
                               class="hover:bg-neutral-50"
                             >
-                              <td class="px-4 py-3 text-neutral-900 font-medium text-xs">{{ suggestion.name }}</td>
+                              <td class="px-4 py-3 text-neutral-900 font-medium">{{ suggestion.name }}</td>
                               <td class="px-4 py-3">
                                 <span v-if="suggestion.available === null" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700">
                                   Unknown
@@ -1519,7 +1519,7 @@
                   <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
                   <button 
                     @click="domainsActiveTab = 'buy'" 
-                    class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors"
+                    class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors rounded-md"
                   >
                     Buy Your First Domain
                   </button>
@@ -1562,28 +1562,28 @@
             <!-- Buy New Domain Section -->
             <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">Buy New Domain</h2>
-                <p class="mt-1 text-sm text-secondary">Search and register a new domain name</p>
+                <h2 class="text-2xl font-bold text-neutral-900">Buy New Domain</h2>
+                <p class="mt-1 text-sm text-neutral-600">Search and register a new domain name</p>
               </div>
 
               <!-- Search Domain -->
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="rounded-md border border-neutral-200 bg-white p-6">
                 <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-primary mb-2">Keyword / Brand</label>
+                    <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
                     <div class="flex gap-2">
                       <input
                         v-model="domainSearchQuery"
                         type="text"
                         placeholder="acme, mybrand, etc"
-                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
                         @keyup.enter="handleDomainSearch"
                       />
                       <button 
                         @click="handleDomainSearch" 
                         :disabled="domainSearchLoading"
-                        class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors"
-                        :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-accent-primary hover:bg-accent-focus'"
+                        class="rounded-md px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                        :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                       >
                         {{ domainSearchLoading ? 'Searching...' : 'Search' }}
                       </button>
@@ -1788,7 +1788,7 @@
             We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
             Stay tuned for updates!
           </p>
-          <div class="inline-flex items-center gap-2 px-4 py-2 border border-neutral-200 bg-white text-sm text-neutral-600">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-neutral-200 bg-white text-sm text-neutral-600">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -1798,7 +1798,7 @@
       </div>
 
       <!-- Other Tabs Content -->
-      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="border border-neutral-200 bg-white p-8 text-center">
+      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="rounded-md border border-neutral-200 bg-white p-8 text-center">
         <p class="text-sm text-neutral-600">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
       </div>
     </main>
