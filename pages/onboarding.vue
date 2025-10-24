@@ -1,88 +1,33 @@
 <template>
-  <div class="relative overflow-hidden bg-neutral-50">
-    <div class="absolute inset-x-0 -top-48 h-[420px] bg-transparent" />
+  <div class="min-h-screen bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-16">
+      <header class="text-center mb-12">
+        <h1 class="text-3xl font-bold text-neutral-900">Website Onboarding</h1>
+        <p class="mt-3 text-base text-neutral-600">Help us understand your needs so we can build the perfect website for you</p>
+      </header>
 
-    <div class="relative">
-      <section class="px-3 pb-24 sm:px-4">
-        <div class="mx-auto max-w-4xl pt-16">
-          <header class="text-center">
-            <h1 class="inline-flex items-center gap-3 text-3xl font-semibold text-primary">
-              <svg class="h-8 w-8 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-              </svg>
-              Onboarding
-            </h1>
-            <p class="mt-2 text-sm text-secondary">Follow the steps to provide everything we need for kickoff.</p>
-          </header>
+      <!-- Progress Indicator -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-medium text-neutral-900">Step {{ currentStep }} of {{ totalSteps }}</span>
+          <span class="text-sm text-neutral-600">{{ Math.round((currentStep / totalSteps) * 100) }}% complete</span>
+        </div>
+        <div class="h-2 bg-neutral-100 rounded-full overflow-hidden">
+          <div class="h-full bg-neutral-900 transition-all duration-300" :style="{ width: `${(currentStep / totalSteps) * 100}%` }"></div>
+        </div>
+      </div>
 
-          <div class="mt-10 space-y-6">
-            <div class="flex items-center justify-between rounded-3xl border border-soft bg-white/90 p-4 shadow-sm shadow-neutral-900/5 backdrop-blur">
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-wide text-secondary">Step {{ currentStep }} of {{ totalSteps }}</p>
-                <h2 class="mt-1 text-lg font-semibold text-primary">{{ stepSummaries[currentStep - 1].title }}</h2>
-                <p class="mt-1 text-sm text-secondary">{{ stepSummaries[currentStep - 1].headline }}</p>
-              </div>
-              <div class="hidden h-14 w-14 items-center justify-center rounded-full bg-accent-subtle text-accent-primary sm:flex">
-                <svg
-                  v-if="stepSummaries[currentStep - 1].icon === 'layout'"
-                  class="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M3.75 6A2.25 2.25 0 0 1 6 3.75h12A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6Z" />
-                  <path d="M3.75 9h16.5M9 20.25V9" />
-                </svg>
-                <svg
-                  v-else-if="stepSummaries[currentStep - 1].icon === 'clipboard'"
-                  class="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M9 5.25h6" />
-                  <path d="M9 3.75h6a1.5 1.5 0 0 1 1.5 1.5v.75h1.125A2.625 2.625 0 0 1 20.25 8.625v9.75A2.625 2.625 0 0 1 17.625 21H6.375A2.625 2.625 0 0 1 3.75 18.375v-9.75A2.625 2.625 0 0 1 6.375 6h1.125V4.5A1.5 1.5 0 0 1 9 3Z" />
-                  <path d="M9 12h6m-6 3h3" />
-                </svg>
-                <svg
-                  v-else-if="stepSummaries[currentStep - 1].icon === 'palette'"
-                  class="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15.75 3.75a6.75 6.75 0 0 1 0 13.5h-1.13a2.25 2.25 0 0 0-1.592.658l-1.66 1.66A1.5 1.5 0 0 1 8.321 18h-.571A6.75 6.75 0 0 1 8.25 4.5m7.5-.75a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 15.75 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 11.25 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 6.75 3.75Z"
-                  />
-                </svg>
-                <svg
-                  v-else
-                  class="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 6.75A3.75 3.75 0 1 1 8.25 3 3.75 3.75 0 0 1 12 6.75Zm0 0a4.5 4.5 0 0 1 4.5 4.5V12a4.5 4.5 0 0 0 2.1 3.773l.008.005a2.25 2.25 0 0 1-1.208 4.222H6.6a2.25 2.25 0 0 1-1.208-4.222l.008-.005A4.5 4.5 0 0 0 7.5 12v-.75a4.5 4.5 0 0 1 4.5-4.5Z" />
-                </svg>
-              </div>
-            </div>
+      <!-- Step Header -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">{{ stepSummaries[currentStep - 1].title }}</h2>
+        <p class="mt-2 text-base text-neutral-600">{{ stepSummaries[currentStep - 1].headline }}</p>
+      </div>
 
-            <!-- Step 1 -->
-            <div v-if="currentStep === 1" class="space-y-6">
+      <div class="space-y-6">
+        <!-- Step 1 -->
+        <div v-if="currentStep === 1" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-lg border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -94,9 +39,9 @@
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
-                <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">What type of site do you need? *</h3>
+                <p class="mt-2 text-sm text-neutral-600">Choose the option that best describes your project.</p>
 
                 <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   <button
@@ -105,26 +50,26 @@
                     type="button"
                     @click="formData.siteType = type; validationErrors.siteType = false"
                     :class="[
-                      'flex h-full flex-col justify-center rounded-2xl border-2 p-4 text-left transition',
+                      'flex h-full flex-col justify-center rounded-lg border-2 p-4 text-left transition',
                       formData.siteType === type
-                        ? 'border-accent-primary bg-accent-subtle shadow-sm'
+                        ? 'border-neutral-900 bg-neutral-50'
                         : validationErrors.siteType
                         ? 'border-red-300 bg-red-50 hover:border-red-400'
-                        : 'border-neutral-200 bg-white hover:border-accent-soft'
+                        : 'border-neutral-200 bg-white hover:border-neutral-300'
                     ]"
                   >
-                    <span class="text-sm font-semibold text-primary">{{ type }}</span>
+                    <span class="text-sm font-semibold text-neutral-900">{{ type }}</span>
                   </button>
                 </div>
                 <p v-if="validationErrors.siteType" class="mt-2 text-xs text-red-600">Please select a site type</p>
 
                 <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p class="text-xs text-secondary">Not sure? Pick the closest fit—we’ll refine together.</p>
+                  <p class="text-xs text-neutral-500">Not sure? Pick the closest fit—we'll refine together.</p>
                   <button
                     type="button"
                     @click="nextStep"
                     :disabled="!formData.siteType"
-                    class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:cursor-not-allowed disabled:opacity-60"
+                    class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Continue
                   </button>
@@ -135,7 +80,7 @@
             <!-- Step 2: Business Basics -->
             <div v-if="currentStep === 2" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-lg border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -147,14 +92,14 @@
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Business basics</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Business/Project Name *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Business/Project Name *</label>
                       <input
                         v-model="formData.businessName"
                         type="text"
@@ -164,21 +109,21 @@
                           'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
                           validationErrors.businessName
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white focus:border-neutral-400 focus:ring-0'
                         ]"
                         placeholder="Your company or product name"
                       />
                       <p v-if="validationErrors.businessName" class="mt-1 text-xs text-red-600">Business name is required</p>
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Industry/Category *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Industry/Category *</label>
                       <FormSelect v-model="formData.category" :options="categories" placeholder="Select a category" required />
                     </div>
                   </div>
 
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Business Email *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Business Email *</label>
                       <input
                         v-model="formData.businessEmail"
                         type="email"
@@ -188,14 +133,14 @@
                           'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
                           validationErrors.businessEmail
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white focus:border-neutral-400 focus:ring-0'
                         ]"
                         placeholder="you@company.com"
                       />
                       <p v-if="validationErrors.businessEmail" class="mt-1 text-xs text-red-600">Business email is required</p>
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Business Phone</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Business Phone</label>
                       <input
                         v-model="formData.businessPhone"
                         type="tel"
@@ -237,7 +182,7 @@
                           'w-full rounded-xl border px-4 py-3 text-sm text-primary shadow-inner focus:outline-none focus:ring-2',
                           validationErrors.description
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white focus:border-neutral-400 focus:ring-0'
                         ]"
                         placeholder="Share your core services, audience, and goals"
                       />
@@ -247,7 +192,7 @@
                           type="button"
                           @click="enhanceDescription"
                           :disabled="!formData.description.trim() || isEnhancing"
-                          class="inline-flex items-center gap-2 rounded-full border border-accent-primary bg-accent-primary/10 px-4 py-2 text-sm font-medium text-accent-primary transition hover:bg-accent-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                          class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <svg v-if="!isEnhancing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -284,8 +229,8 @@
 
             <!-- Step 3: Existing Website -->
             <div v-if="currentStep === 3" class="space-y-6">
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Existing website</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Existing website</h3>
                 <p class="mt-1 text-sm text-secondary">Do you have a current website we can analyze?</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
@@ -388,7 +333,7 @@
             <!-- Step 4: Services & Coverage -->
             <div v-if="currentStep === 4" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-lg border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -400,8 +345,8 @@
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Services & coverage</h3>
                 <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
@@ -510,8 +455,8 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.coverageType === option.value
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           {{ option.label }}
@@ -529,10 +474,10 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.onSiteMode === option.value
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
                               : validationErrors.onSiteMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           {{ option.label }}
@@ -564,7 +509,7 @@
             <!-- Step 5: Operations -->
             <div v-if="currentStep === 5" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-lg border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -576,8 +521,8 @@
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Operations</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
@@ -593,10 +538,10 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.businessHoursMode === option.value
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
                               : validationErrors.businessHoursMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           {{ option.label }}
@@ -605,7 +550,7 @@
                       <p v-if="validationErrors.businessHoursMode" class="mt-2 text-xs text-red-600">Please select business hours</p>
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Primary goal *</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Primary goal *</label>
                       <FormSelect
                         v-model="formData.primaryGoal"
                         :options="goalOptions"
@@ -639,7 +584,7 @@
 
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Primary language</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Primary language</label>
                       <FormSelect
                         v-model="formData.primaryLanguage"
                         :options="primaryLanguageOptions"
@@ -647,7 +592,7 @@
                       />
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Logo availability</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Logo availability</label>
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           v-for="option in logoOptions"
@@ -657,8 +602,8 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.hasLogo === (option.value === 'yes')
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           {{ option.label }}
@@ -688,8 +633,8 @@
 
             <!-- Step 6: Design -->
             <div v-if="currentStep === 6" class="space-y-6">
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we'll fine-tune the details together.</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
@@ -786,8 +731,8 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.highContrast === false
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           Standard
@@ -798,8 +743,8 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.highContrast === true
-                              ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
                           High contrast
@@ -807,7 +752,7 @@
                       </div>
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Extra color notes (optional)</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Extra color notes (optional)</label>
                       <input
                         v-model="formData.brandColors"
                         type="text"
@@ -819,7 +764,7 @@
 
                   <div class="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Websites you like</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Websites you like</label>
                       <textarea
                         v-model="formData.inspirationSites"
                         rows="2"
@@ -828,7 +773,7 @@
                       />
                     </div>
                     <div>
-                      <label class="mb-1 block text-sm font-medium text-primary">Anything else we should know?</label>
+                      <label class="mb-2 block text-sm font-medium text-neutral-900">Anything else we should know?</label>
                       <textarea
                         v-model="formData.additionalNotes"
                         rows="2"
@@ -859,8 +804,8 @@
 
             <!-- Step 7: Logo & Assets -->
             <div v-if="currentStep === 7" class="space-y-6">
-              <div class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
+              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <h3 class="text-lg font-semibold text-neutral-900">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 
                 <form @submit.prevent="nextStep" class="mt-8 space-y-8">
@@ -1078,7 +1023,7 @@
               </div>
 
               <div v-if="!isSubmitted" class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
-                <h3 class="text-base font-semibold text-primary">Review your information</h3>
+                <h3 class="text-lg font-semibold text-neutral-900">Review your information</h3>
                 <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
 
                 <div class="mt-8 space-y-6">
@@ -1271,7 +1216,7 @@
                     type="button"
                     @click="handleSubmit"
                     :disabled="isSubmitting"
-                    class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:cursor-not-allowed disabled:opacity-70"
+                    class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <span v-if="isSubmitting">Submitting…</span>
                     <span v-else>Complete onboarding</span>
@@ -1279,9 +1224,7 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   </div>
 </template>
