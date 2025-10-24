@@ -388,7 +388,7 @@
               placeholder="Search Projects..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-9 w-full rounded-md border border-neutral-200 pl-9 pr-3 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary',
+                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none',
                 showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
               ]"
             />
@@ -399,11 +399,11 @@
               @click="!showOnboardingRequired && (viewMode = 'grid')"
               :disabled="showOnboardingRequired"
               :class="[
-                'rounded-lg p-2 transition-colors',
+                'p-2 border border-neutral-200 transition-colors',
                 showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'grid'
-                  ? 'bg-accent-primary text-white'
-                  : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+                  ? 'bg-neutral-900 text-white'
+                  : 'bg-white text-neutral-600 hover:bg-neutral-50'
               ]"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -415,11 +415,11 @@
               @click="!showOnboardingRequired && (viewMode = 'list')"
               :disabled="showOnboardingRequired"
               :class="[
-                'rounded-lg p-2 transition-colors',
+                'p-2 border border-neutral-200 transition-colors',
                 showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
                 viewMode === 'list'
-                  ? 'bg-accent-primary text-white'
-                  : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+                  ? 'bg-neutral-900 text-white'
+                  : 'bg-white text-neutral-600 hover:bg-neutral-50'
               ]"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -433,10 +433,10 @@
               @click="showAddNewModal = true"
               :disabled="showOnboardingRequired"
               :class="[
-                'flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors',
+                'flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm font-medium transition-colors',
                 showOnboardingRequired 
-                  ? 'bg-neutral-300 cursor-not-allowed' 
-                  : 'bg-accent-primary hover:bg-accent-focus'
+                  ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' 
+                  : 'bg-white text-neutral-900 hover:bg-neutral-50'
               ]"
             >
               Add New...
@@ -515,58 +515,52 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group rounded-lg border border-neutral-200 bg-white p-6 transition-all',
+              'border border-neutral-200 bg-white p-5 transition-colors',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:border-neutral-300 hover:shadow-md cursor-pointer'
+                : 'hover:bg-neutral-50 cursor-pointer'
             ]"
           >
             <div class="flex items-start justify-between mb-4">
-              <div class="flex items-center gap-3">
-                <div class="h-10 w-10 rounded-lg bg-accent-primary flex items-center justify-center">
-                  <span class="text-sm font-bold text-white">{{ project.name.charAt(0) }}</span>
+              <div class="flex items-start gap-3">
+                <div class="h-8 w-8 border border-neutral-200 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                  </svg>
                 </div>
                 <div>
-                  <h3 class="text-sm font-semibold text-primary">{{ project.name }}</h3>
-                  <div class="flex items-center gap-2 mt-1">
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-xs font-semibold">
-                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                      </svg>
-                      Website
-                    </span>
-                    <span v-if="project.plan_tier" :class="[
-                      'inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold capitalize',
-                      project.plan_tier === 'starter' ? 'bg-neutral-100 text-neutral-700' : 
-                      project.plan_tier === 'professional' ? 'bg-purple-50 text-purple-700' : 
-                      'bg-amber-50 text-amber-700'
-                    ]">
-                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                      </svg>
+                  <h3 class="text-sm font-semibold text-neutral-900 mb-1">{{ project.name }}</h3>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-neutral-500">Website</span>
+                    <span class="text-neutral-300">•</span>
+                    <span v-if="project.plan_tier" class="text-xs text-neutral-500 capitalize">
                       {{ project.plan_tier }}
                     </span>
                   </div>
                 </div>
               </div>
-              <button class="opacity-0 group-hover:opacity-100 rounded p-1 hover:bg-neutral-100 transition-all">
-                <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                </svg>
-              </button>
             </div>
 
-            <div class="space-y-2">
-              <div class="flex items-center gap-2 text-xs text-neutral-600">
-                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+            <div class="space-y-2 text-xs text-neutral-600">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span>Last deployed</span>
+                </div>
                 <span>{{ project.lastDeployed }}</span>
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span>Status</span>
+                </div>
                 <span :class="[
-                  'inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-medium',
-                  project.status === 'Ready' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                  'flex items-center gap-1.5 font-medium',
+                  project.status === 'Ready' ? 'text-emerald-600' : 'text-amber-600'
                 ]">
                   <span :class="[
                     'h-1.5 w-1.5 rounded-full',
@@ -574,7 +568,6 @@
                   ]"></span>
                   {{ project.status }}
                 </span>
-                <span class="text-xs text-neutral-500">{{ project.framework }}</span>
               </div>
             </div>
           </div>
@@ -1159,7 +1152,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-primary placeholder-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-neutral-300"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
                 />
               </div>
 
@@ -1202,7 +1195,7 @@
                   </div>
                   <button 
                     @click="loadMyDomains" 
-                    class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                    class="inline-flex items-center gap-2 border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                   >
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -1211,7 +1204,7 @@
                   </button>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                   <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                   <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1222,7 +1215,7 @@
                     <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
                     <button 
                       @click="domainsActiveTab = 'buy'; domainsMobileContentOpen = true" 
-                      class="rounded-lg bg-accent-primary px-4 py-2 text-sm font-medium text-white hover:bg-accent-focus transition-colors"
+                      class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                     >
                       Buy Your First Domain
                     </button>
@@ -1785,17 +1778,17 @@
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center max-w-md">
-          <div class="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent-subtle">
-            <svg class="h-10 w-10 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="mb-6 inline-flex items-center justify-center w-16 h-16 border border-neutral-200 bg-neutral-50">
+            <svg class="h-8 w-8 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h2 class="text-2xl font-bold text-primary mb-3">Coming Soon</h2>
-          <p class="text-base text-secondary mb-6">
+          <h2 class="text-2xl font-bold text-neutral-900 mb-3">Coming Soon</h2>
+          <p class="text-base text-neutral-600 mb-6">
             We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
             Stay tuned for updates!
           </p>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 text-sm text-secondary">
+          <div class="inline-flex items-center gap-2 px-4 py-2 border border-neutral-200 bg-white text-sm text-neutral-600">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -1805,8 +1798,8 @@
       </div>
 
       <!-- Other Tabs Content -->
-      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
-        <p class="text-sm text-secondary">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
+      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="border border-neutral-200 bg-white p-8 text-center">
+        <p class="text-sm text-neutral-600">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
       </div>
     </main>
 
