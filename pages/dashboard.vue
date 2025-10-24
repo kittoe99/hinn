@@ -180,10 +180,10 @@
             </div>
 
             <!-- Onboarding Sections (if available) -->
-            <div v-if="selectedWebsiteOnboarding" class="space-y-3">
-              <!-- Business Information -->
+            <div v-if="selectedWebsiteOnboarding" class="space-y-4">
+              <!-- Section 1: Business & Contact Details -->
               <section class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
+                <button @click="toggleWebsiteSection('businessContact')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-primary/10 to-accent-focus/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg class="h-5 w-5 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,17 +191,17 @@
                       </svg>
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h2 class="text-base font-bold text-primary mb-0.5">Business Information</h2>
-                      <p v-if="!websiteExpandedSections.business && selectedWebsiteOnboarding?.business_name" class="hidden md:block text-sm text-secondary truncate">
-                        {{ selectedWebsiteOnboarding.business_name }}
+                      <h2 class="text-base font-bold text-primary mb-0.5">Business & Contact Details</h2>
+                      <p v-if="!websiteExpandedSections.businessContact && selectedWebsiteOnboarding?.business_name" class="hidden md:block text-sm text-secondary truncate">
+                        {{ selectedWebsiteOnboarding.business_name }} • {{ selectedWebsiteOnboarding.contact_info?.email }}
                       </p>
                     </div>
                   </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-all', websiteExpandedSections.business ? 'rotate-180 text-accent-primary' : 'group-hover:text-accent-primary']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg :class="['h-5 w-5 text-neutral-400 transition-all', websiteExpandedSections.businessContact ? 'rotate-180 text-accent-primary' : 'group-hover:text-accent-primary']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
-                <div v-show="websiteExpandedSections.business" class="px-6 pb-6 pt-2">
+                <div v-show="websiteExpandedSections.businessContact" class="px-6 pb-6 pt-2">
                   <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent mb-6"></div>
                   <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
@@ -216,46 +216,28 @@
                       <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-3">Description</dt>
                       <dd class="text-sm leading-relaxed text-primary/90">{{ selectedWebsiteOnboarding.description }}</dd>
                     </div>
-                  </dl>
-                </div>
-              </section>
-
-              <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                      </svg>
+                    
+                    <!-- Contact Info merged here -->
+                    <div class="md:col-span-2"><div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent my-4"></div></div>
+                    <div v-if="selectedWebsiteOnboarding.contact_info?.email" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Email</dt>
+                      <dd class="text-base font-semibold text-primary">{{ selectedWebsiteOnboarding.contact_info.email }}</dd>
                     </div>
-                    <h2 class="text-lg font-semibold text-primary">Contact Information</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.contact" class="px-6 pb-6">
-                  <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Email</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.contact_info.email || '—' }}</dd>
+                    <div v-if="selectedWebsiteOnboarding.contact_info?.phone" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Phone</dt>
+                      <dd class="text-base font-semibold text-primary">{{ selectedWebsiteOnboarding.contact_info.phone }}</dd>
                     </div>
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Phone</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.contact_info.phone || '—' }}</dd>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.contact_info.preferred_contact_method">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Preferred Contact Method</dt>
-                      <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.contact_info.preferred_contact_method }}</dd>
+                    <div v-if="selectedWebsiteOnboarding.contact_info?.preferred_contact_method" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Preferred Contact</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.contact_info.preferred_contact_method }}</dd>
                     </div>
                   </dl>
                 </div>
               </section>
 
-              <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
+              <!-- Section 2: Services & Operations -->
+              <section class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden">
+                <button @click="toggleWebsiteSection('servicesOperations')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-primary/10 to-accent-focus/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg class="h-5 w-5 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,19 +245,19 @@
                       </svg>
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h2 class="text-base font-bold text-primary mb-0.5">Services</h2>
-                      <p v-if="!websiteExpandedSections.services && selectedWebsiteOnboarding?.services?.length" class="hidden md:block text-sm text-secondary truncate">
-                        {{ selectedWebsiteOnboarding.services.length }} service{{ selectedWebsiteOnboarding.services.length !== 1 ? 's' : '' }}
+                      <h2 class="text-base font-bold text-primary mb-0.5">Services & Operations</h2>
+                      <p v-if="!websiteExpandedSections.servicesOperations && selectedWebsiteOnboarding?.services?.length" class="hidden md:block text-sm text-secondary truncate">
+                        {{ selectedWebsiteOnboarding.services.length }} service{{ selectedWebsiteOnboarding.services.length !== 1 ? 's' : '' }} • {{ selectedWebsiteOnboarding.service_area?.primary_location }}
                       </p>
                     </div>
                   </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-all', websiteExpandedSections.services ? 'rotate-180 text-accent-primary' : 'group-hover:text-accent-primary']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg :class="['h-5 w-5 text-neutral-400 transition-all', websiteExpandedSections.servicesOperations ? 'rotate-180 text-accent-primary' : 'group-hover:text-accent-primary']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
-                <div v-show="websiteExpandedSections.services" class="px-6 pb-6 pt-2">
+                <div v-show="websiteExpandedSections.servicesOperations" class="px-6 pb-6 pt-2">
                   <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent mb-6"></div>
-                  <div v-if="selectedWebsiteOnboarding.services && selectedWebsiteOnboarding.services.length > 0" class="flex flex-wrap gap-3">
+                  <div v-if="selectedWebsiteOnboarding.services && selectedWebsiteOnboarding.services.length > 0" class="flex flex-wrap gap-3 mb-6">
                     <span v-for="service in selectedWebsiteOnboarding.services" :key="service" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-accent-primary/10 via-accent-primary/5 to-transparent px-5 py-3 text-sm font-bold text-accent-primary border border-accent-primary/20 hover:border-accent-primary hover:shadow-md transition-all">
                       <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -283,203 +265,46 @@
                       {{ service }}
                     </span>
                   </div>
-                </div>
-              </section>
-
-              <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    </div>
-                    <h2 class="text-lg font-semibold text-primary">Service Area</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.serviceArea" class="px-6 pb-6">
+                  
+                  <!-- All other data consolidated here -->
+                  <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent mb-6"></div>
                   <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Primary Location</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.service_area.primary_location || '—' }}</dd>
+                    <div v-if="selectedWebsiteOnboarding.service_area?.primary_location" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Primary Location</dt>
+                      <dd class="text-base font-semibold text-primary">{{ selectedWebsiteOnboarding.service_area.primary_location }}</dd>
                     </div>
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Coverage Type</dt>
-                      <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type || '—' }}</dd>
+                    <div v-if="selectedWebsiteOnboarding.service_area?.coverage_type" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Coverage Type</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.operation_details?.on_site_mode" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">On-Site Mode</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.operation_details?.business_hours" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Business Hours</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.website_info?.primary_goal" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Primary Goal</dt>
+                      <dd class="text-base font-semibold text-primary">{{ selectedWebsiteOnboarding.website_info.primary_goal }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.design_preferences?.color_theme" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Color Theme</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.design_preferences.color_theme }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.language" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Primary Language</dt>
+                      <dd class="text-base font-semibold text-primary capitalize">{{ selectedWebsiteOnboarding.language }}</dd>
+                    </div>
+                    <div v-if="selectedWebsiteOnboarding.design_preferences?.has_logo !== undefined" class="group rounded-xl bg-gradient-to-br from-neutral-50 to-white p-5 border border-neutral-100 hover:border-accent-primary/20 hover:shadow-sm transition-all">
+                      <dt class="text-xs font-bold text-accent-primary uppercase tracking-wider mb-2">Has Logo</dt>
+                      <dd class="text-base font-semibold text-primary">{{ selectedWebsiteOnboarding.design_preferences.has_logo ? 'Yes' : 'No' }}</dd>
                     </div>
                   </dl>
                 </div>
               </section>
 
-              <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                    </div>
-                    <h2 class="text-lg font-semibold text-primary">Operation Details</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.operations" class="px-6 pb-6">
-                  <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">On-Site Mode</dt>
-                      <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode || '—' }}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Business Hours</dt>
-                      <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours || '—' }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-
-              <!-- Website Info -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                      </svg>
-                    </div>
-                    <h2 class="text-lg font-semibold text-primary">Website Information</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.websiteInfo" class="px-6 pb-6">
-                  <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Has Current Website</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.website_info.has_current_website ? 'Yes' : 'No' }}</dd>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.website_info.current_website_url">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Current Website URL</dt>
-                      <dd class="mt-1 text-sm text-primary">
-                        <a :href="selectedWebsiteOnboarding.website_info.current_website_url" target="_blank" class="text-accent-primary hover:underline">
-                          {{ selectedWebsiteOnboarding.website_info.current_website_url }}
-                        </a>
-                      </dd>
-                    </div>
-                    <div class="md:col-span-2">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Primary Goal</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.website_info.primary_goal || '—' }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-
-              <!-- Design Preferences -->
-              <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                      </svg>
-                    </div>
-                    <h2 class="text-lg font-semibold text-primary">Design Preferences</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.design" class="px-6 pb-6">
-                  <div class="space-y-4">
-                    <div v-if="selectedWebsiteOnboarding.design_preferences.styles && selectedWebsiteOnboarding.design_preferences.styles.length > 0">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide mb-2">Styles</dt>
-                      <div class="flex flex-wrap gap-2">
-                        <span v-for="style in selectedWebsiteOnboarding.design_preferences.styles" :key="style" class="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-sm font-medium text-neutral-700">
-                          {{ style }}
-                        </span>
-                      </div>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.design_preferences.emotional_impact && selectedWebsiteOnboarding.design_preferences.emotional_impact.length > 0">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide mb-2">Emotional Impact</dt>
-                      <div class="flex flex-wrap gap-2">
-                        <span v-for="emotion in selectedWebsiteOnboarding.design_preferences.emotional_impact" :key="emotion" class="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-sm font-medium text-neutral-700">
-                          {{ emotion }}
-                        </span>
-                      </div>
-                    </div>
-                    <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div v-if="selectedWebsiteOnboarding.design_preferences.color_theme">
-                        <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Color Theme</dt>
-                        <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.design_preferences.color_theme }}</dd>
-                      </div>
-                      <div v-if="selectedWebsiteOnboarding.design_preferences.brand_colors">
-                        <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Brand Colors</dt>
-                        <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.design_preferences.brand_colors }}</dd>
-                      </div>
-                      <div>
-                        <dt class="text-xs font-medium text-secondary uppercase tracking-wide">High Contrast</dt>
-                        <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.design_preferences.high_contrast ? 'Yes' : 'No' }}</dd>
-                      </div>
-                      <div>
-                        <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Has Logo</dt>
-                        <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.design_preferences.has_logo ? 'Yes' : 'No' }}</dd>
-                      </div>
-                    </dl>
-                    <div v-if="selectedWebsiteOnboarding.design_preferences.inspiration_sites">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Inspiration Sites</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.design_preferences.inspiration_sites }}</dd>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <!-- Language & Additional Info -->
-              <section v-if="selectedWebsiteOnboarding.language" class="rounded-xl border border-neutral-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between p-6 text-left hover:bg-neutral-50 transition-colors">
-                  <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 rounded-lg bg-accent-subtle flex items-center justify-center">
-                      <svg class="h-4 w-4 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                      </svg>
-                    </div>
-                    <h2 class="text-lg font-semibold text-primary">Language & Additional Information</h2>
-                  </div>
-                  <svg :class="['h-5 w-5 text-neutral-400 transition-transform', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.language" class="px-6 pb-6">
-                  <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Primary Language</dt>
-                      <dd class="mt-1 text-sm text-primary capitalize">{{ selectedWebsiteOnboarding.language || '—' }}</dd>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.languages && selectedWebsiteOnboarding.languages.length > 0">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">All Languages</dt>
-                      <dd class="mt-1 text-sm text-primary">{{ selectedWebsiteOnboarding.languages.join(', ') }}</dd>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.envisioned_pages && selectedWebsiteOnboarding.envisioned_pages.length > 0" class="md:col-span-2">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide mb-2">Envisioned Pages</dt>
-                      <div class="flex flex-wrap gap-2">
-                        <span v-for="page in selectedWebsiteOnboarding.envisioned_pages" :key="page" class="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-sm font-medium text-neutral-700">
-                          {{ page }}
-                        </span>
-                      </div>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.additional_notes" class="md:col-span-2">
-                      <dt class="text-xs font-medium text-secondary uppercase tracking-wide">Additional Notes</dt>
-                      <dd class="mt-1 text-sm text-primary whitespace-pre-wrap">{{ selectedWebsiteOnboarding.additional_notes }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
             </div>
 
             <!-- No Onboarding Data -->
@@ -2295,16 +2120,10 @@ const selectedWebsiteOnboarding = ref(null)
 const websiteDetailsLoading = ref(false)
 const websiteDetailsError = ref(null)
 
-// Website expanded sections
+// Website expanded sections - consolidated to 2 sections
 const websiteExpandedSections = ref({
-  business: false,
-  contact: false,
-  services: false,
-  serviceArea: false,
-  operations: false,
-  websiteInfo: false,
-  design: false,
-  language: false
+  businessContact: false,
+  servicesOperations: false
 })
 
 // Onboarding state
