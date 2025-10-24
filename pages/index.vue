@@ -24,7 +24,7 @@
             </NuxtLink>
             <a
               href="#features"
-              class="rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50 sm:px-8 sm:py-4 sm:text-base"
+              class="rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300 sm:px-8 sm:py-4 sm:text-base"
             >
               Learn More
             </a>
@@ -103,7 +103,7 @@
                 <span 
                   v-for="(tag, index) in product.tags" 
                   :key="tag" 
-                  class="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600 transition-all duration-300 hover:bg-neutral-900 hover:text-white"
+                  :class="['rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 hover:opacity-90', chipColorClasses[index % chipColorClasses.length]]"
                   :style="{ transitionDelay: `${index * 50}ms` }"
                 >
                   {{ tag }}
@@ -140,7 +140,7 @@
             class="group relative rounded-lg border border-neutral-200 bg-white p-8 opacity-0 animate-fade-in-up transition-all duration-300 hover:border-neutral-900 hover:shadow-lg"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
-            <div class="absolute top-0 left-0 w-1 h-full bg-neutral-900 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
+            <div class="absolute top-0 left-0 w-1 h-full bg-blue-200 transform scale-y-0 group-hover:scale-y-100 group-hover:bg-blue-300 transition-[transform,background-color] duration-300 origin-top"></div>
             <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-900 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
@@ -192,16 +192,16 @@
                 class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-90"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span v-if="project.tag" class="absolute top-3 left-3 rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-900 shadow-md transition-all duration-300 group-hover:bg-neutral-900 group-hover:text-white">
+              <span v-if="project.tag" :class="['absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-semibold shadow-md transition-all duration-300', projectTagColor(project.tag)]">
                 {{ project.tag }}
               </span>
             </div>
             <div class="relative p-5 z-20">
               <h3 class="text-base font-bold text-neutral-900 transition-colors">{{ project.title }}</h3>
               <p class="mt-2 text-sm text-neutral-600 line-clamp-2">{{ project.description }}</p>
-              <div class="mt-3 flex items-center gap-2 text-sm font-semibold text-neutral-900 group-hover:gap-3 transition-all duration-300">
+              <div class="mt-3 flex items-center gap-2 text-sm font-semibold text-blue-700 group-hover:gap-3 transition-all duration-300">
                 <span>View Project</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 transition-transform group-hover:translate-x-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-blue-700 transition-transform group-hover:translate-x-1">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
@@ -239,7 +239,7 @@
           >
             <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-neutral-900 marker:hidden">
               <span>{{ faq.question }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-neutral-600 transition-transform duration-300 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
@@ -275,6 +275,25 @@ useHead({
     }
   ]
 })
+
+// Subtle color palette for chips ("stickers")
+const chipColorClasses = [
+  'border border-blue-200 bg-blue-50 text-blue-700',
+  'border border-amber-200 bg-amber-50 text-amber-700',
+  'border border-emerald-200 bg-emerald-50 text-emerald-700',
+  'border border-purple-200 bg-purple-50 text-purple-700'
+]
+
+// Marker/badge color by tag label
+const projectTagColor = (tag) => {
+  const key = String(tag || '').toLowerCase()
+  if (key.includes('brand')) return 'border border-purple-200 bg-purple-50 text-purple-700 group-hover:bg-purple-600 group-hover:text-white'
+  if (key.includes('case')) return 'border border-amber-200 bg-amber-50 text-amber-700 group-hover:bg-amber-600 group-hover:text-white'
+  if (key.includes('cms')) return 'border border-emerald-200 bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
+  if (key.includes('web')) return 'border border-blue-200 bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white'
+  return 'border border-neutral-200 bg-neutral-100 text-neutral-700 group-hover:bg-neutral-900 group-hover:text-white'
+}
+
 
 const heroBenefits = [
   {
