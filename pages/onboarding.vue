@@ -1934,78 +1934,99 @@ const handleSubmit = async () => {
     const data = await response.json()
     console.log('[Onboarding] Submission successful:', data)
     
-    // Update user profile and website product status
+    // Get user from auth
     const { data: { user } } = await supabase.auth.getUser()
-    if (user) {
-      // Update user profile
-      await supabase
-        .from('user_profiles')
-        .upsert({
-          user_id: user.id,
-          has_completed_onboarding: true,
-          onboarding_submission_id: data.id
-        }, {
-          onConflict: 'user_id'
-        })
+    
+    if (!user) {
+      console.error('[Onboarding] No authenticated user found')
+      throw new Error('Authentication required')
+    }
+    
+    // Get the onboarding submission to ensure we have the user_id
+    const { data: submission, error: submissionFetchError } = await supabase
+      .from('onboarding_submissions')
+      .select('user_id')
+      .eq('id', data.id)
+      .single()
+    
+    if (submissionFetchError || !submission) {
+      console.error('[Onboarding] Failed to fetch submission:', submissionFetchError)
+      throw new Error('Failed to retrieve submission data')
+    }
+    
+    const userId = submission.user_id || user.id
+    console.log('[Onboarding] Using user_id:', userId)
+    
+    // Update user profile
+    await supabase
+      .from('user_profiles')
+      .upsert({
+        user_id: userId,
+        has_completed_onboarding: true,
+        onboarding_submission_id: data.id
+      }, {
+        onConflict: 'user_id'
+      })
 
-      // Update pending plan status and create website
-      const { data: pendingPlans } = await supabase
-        .from('plans')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('status', 'pending_onboarding')
-        .order('created_at', { ascending: false })
-        .limit(1)
+    // Update pending plan status and create website
+    const { data: pendingPlans } = await supabase
+      .from('plans')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('status', 'pending_onboarding')
+      .order('created_at', { ascending: false })
+      .limit(1)
 
-      if (pendingPlans && pendingPlans.length > 0) {
-        const plan = pendingPlans[0]
+    if (pendingPlans && pendingPlans.length > 0) {
+      const plan = pendingPlans[0]
+      
+      // Create website entry if it's a website plan
+      if (plan.product_type === 'website') {
+        const businessName = formData.value.businessName || 'My Website'
+        const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
         
-        // Create website entry if it's a website plan
-        if (plan.product_type === 'website') {
-          const businessName = formData.value.businessName || 'My Website'
-          const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-          
-          const { data: website, error: websiteError } = await supabase
-            .from('websites')
-            .insert({
-              user_id: user.id,
-              plan_id: plan.id,
-              name: businessName,
-              slug: slug,
-              status: 'active',
-              onboarding_submission_id: data.id
-            })
-            .select()
-            .single()
+        console.log('[Onboarding] Creating website with user_id:', userId)
+        
+        const { data: website, error: websiteError } = await supabase
+          .from('websites')
+          .insert({
+            user_id: userId,
+            plan_id: plan.id,
+            name: businessName,
+            slug: slug,
+            status: 'active',
+            onboarding_submission_id: data.id
+          })
+          .select()
+          .single()
 
-          if (websiteError) {
-            console.error('[Onboarding] Error creating website:', websiteError)
-          } else {
-            console.log('[Onboarding] Website created:', website)
-            
-            // Update plan with website_id
-            await supabase
-              .from('plans')
-              .update({
-                status: 'onboarding_completed',
-                onboarding_submission_id: data.id,
-                website_id: website.id
-              })
-              .eq('id', plan.id)
-          }
+        if (websiteError) {
+          console.error('[Onboarding] Error creating website:', websiteError)
         } else {
-          // For non-website products, just update status
+          console.log('[Onboarding] Website created:', website)
+          
+          // Update plan with website_id
           await supabase
             .from('plans')
             .update({
               status: 'onboarding_completed',
-              onboarding_submission_id: data.id
+              onboarding_submission_id: data.id,
+              website_id: website.id
             })
             .eq('id', plan.id)
         }
-        
-        console.log('[Onboarding] Updated plan status to onboarding_completed')
+      } else {
+        // For non-website products, just update status
+        await supabase
+          .from('plans')
+          .update({
+            status: 'onboarding_completed',
+            onboarding_submission_id: data.id
+          })
+          .eq('id', plan.id)
       }
+      
+      console.log('[Onboarding] Updated plan status to onboarding_completed')
     }
     
     submissionResult.value = { ...payload, id: data.id }
