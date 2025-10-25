@@ -10,10 +10,10 @@
             <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
             Monthly services
           </div>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mt-6 opacity-0 animate-fade-in" style="animation-delay: 100ms">
+          <h1 class="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mt-6 opacity-0 animate-fade-in" style="animation-delay: 100ms">
             Websites, marketing & 
             <span class="typewriter-container">
-              <span class="typewriter-word text-blue-600">{{ currentWord }}</span>
+              <span :class="['typewriter-word text-blue-600', { 'flipping': isFlipping }]">{{ currentWord }}</span>
             </span>
           </h1>
           <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
@@ -320,38 +320,39 @@ useHead({
   ]
 })
 
-// Typewriter effect - character by character with smooth transitions
+// Typewriter effect with flip transition
 const currentWord = ref('')
 const words = ['AI agents', 'automation', 'chatbots', 'workflows']
 let wordIndex = 0
 let charIndex = 0
-let isDeleting = false
+let isTyping = true
 let typewriterTimeout = null
-const isTransitioning = ref(false)
+const isFlipping = ref(false)
 
 const typeWriter = () => {
   const currentFullWord = words[wordIndex]
   
-  if (isDeleting) {
-    currentWord.value = currentFullWord.substring(0, charIndex - 1)
-    charIndex--
-  } else {
+  if (isTyping) {
     currentWord.value = currentFullWord.substring(0, charIndex + 1)
     charIndex++
+    
+    if (charIndex === currentFullWord.length) {
+      // Word complete, pause then flip to next word
+      typewriterTimeout = setTimeout(() => {
+        isFlipping.value = true
+        setTimeout(() => {
+          wordIndex = (wordIndex + 1) % words.length
+          charIndex = 0
+          currentWord.value = ''
+          isFlipping.value = false
+          typewriterTimeout = setTimeout(typeWriter, 100)
+        }, 600) // Flip animation duration
+      }, 2500) // Pause before flip
+      return
+    }
+    
+    typewriterTimeout = setTimeout(typeWriter, 120)
   }
-  
-  let typeSpeed = isDeleting ? 60 : 120
-  
-  if (!isDeleting && charIndex === currentFullWord.length) {
-    typeSpeed = 3000 // Longer pause at end
-    isDeleting = true
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false
-    wordIndex = (wordIndex + 1) % words.length
-    typeSpeed = 500 // Short pause before next word
-  }
-  
-  typewriterTimeout = setTimeout(typeWriter, typeSpeed)
 }
 
 onMounted(() => {
@@ -656,30 +657,59 @@ const filteredShowcaseProjects = computed(() => {
   animation: fade-in-up 0.6s ease-out forwards;
 }
 
+.hero-heading {
+  min-height: 120px;
+}
+
+@media (min-width: 768px) {
+  .hero-heading {
+    min-height: 140px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-heading {
+    min-height: 160px;
+  }
+}
+
 .typewriter-container {
   display: inline-block;
-  width: 220px;
+  min-width: 250px;
+  height: 1.2em;
   text-align: left;
   position: relative;
   vertical-align: baseline;
+  perspective: 1000px;
 }
 
 .typewriter-word {
   display: inline-block;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 1.2em;
   line-height: 1.2em;
   white-space: nowrap;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Smooth character appearance */
-.typewriter-word::after {
-  content: '';
-  display: inline-block;
-  width: 2px;
-  height: 0.9em;
-  background: transparent;
-  margin-left: 2px;
-  vertical-align: middle;
+.typewriter-word.flipping {
+  animation: flipOut 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes flipOut {
+  0% {
+    transform: rotateX(0deg) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotateX(90deg) translateZ(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg) translateZ(0);
+    opacity: 1;
+  }
 }
 </style>
