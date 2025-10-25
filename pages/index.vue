@@ -11,7 +11,7 @@
             Monthly services
           </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 opacity-0 animate-fade-in" style="animation-delay: 0ms">
-            Your website, brand & AI—built & managed for you
+            Websites, marketing & AI agents—done for you
           </h1>
           <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
             One monthly subscription. Zero technical work. We design, build, and maintain everything while you focus on growing your business.
