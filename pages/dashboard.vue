@@ -1944,7 +1944,7 @@
               <p class="text-sm text-secondary">Select the plan that fits</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
+              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-blue-600 hover:shadow-lg transition-all">
                 <h4 class="text-lg font-bold text-primary mb-1">Starter</h4>
                 <div class="mb-4"><span class="text-3xl font-bold text-primary">$29</span><span class="text-sm text-secondary">/month</span></div>
                 <ul class="space-y-2 mb-4 text-sm text-secondary">
@@ -1954,9 +1954,9 @@
                 </ul>
                 <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">Select Starter</button>
               </div>
-              <div class="relative rounded-xl border-2 border-accent-primary bg-white p-6 shadow-sm">
+              <div class="relative rounded-xl border-2 border-blue-600 bg-white p-6 shadow-sm">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-accent-primary text-white text-xs font-semibold">Popular</span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-600 text-white text-xs font-semibold">Popular</span>
                 </div>
                 <h4 class="text-lg font-bold text-primary mb-1">Professional</h4>
                 <div class="mb-4"><span class="text-3xl font-bold text-primary">$79</span><span class="text-sm text-secondary">/month</span></div>
@@ -1965,9 +1965,9 @@
                   <li>Advanced SEO</li>
                   <li>E-commerce ready</li>
                 </ul>
-                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-focus transition-colors">Select Professional</button>
+                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">Select Professional</button>
               </div>
-              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
+              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-blue-600 hover:shadow-lg transition-all">
                 <h4 class="text-lg font-bold text-primary mb-1">Enterprise</h4>
                 <div class="mb-4"><span class="text-3xl font-bold text-primary">$199</span><span class="text-sm text-secondary">/month</span></div>
                 <ul class="space-y-2 mb-4 text-sm text-secondary">
@@ -2540,9 +2540,12 @@ watch(activeTab, (newTab) => {
 
 // Handle product selection in Add New modal
 const selectProduct = (product) => {
+  console.log('[Dashboard] selectProduct called with:', product)
   selectedProduct.value = product
+  console.log('[Dashboard] selectedProduct set to:', selectedProduct.value)
   if (product === 'website') {
     addNewStep.value = 'plan'
+    console.log('[Dashboard] addNewStep changed to:', addNewStep.value)
   }
 }
 
@@ -2588,19 +2591,16 @@ const selectPlan = async (plan) => {
 
     console.log('[Dashboard] Plan created:', planData)
     
-    // Close modal and redirect to onboarding
+    // Close modal
     showAddNewModal.value = false
-    activeTab.value = 'onboarding'
-    
-    // Refresh to show onboarding requirement
-    await checkOnboardingStatus()
     
     // Reset modal state
-    setTimeout(() => {
-      addNewStep.value = 'select'
-      selectedProduct.value = null
-      selectedPlan.value = null
-    }, 300)
+    addNewStep.value = 'select'
+    selectedProduct.value = null
+    selectedPlan.value = null
+    
+    // Redirect to onboarding page
+    await navigateTo('/onboarding')
   } catch (error) {
     console.error('[Dashboard] Error in selectPlan:', error)
   }
