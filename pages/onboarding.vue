@@ -1934,28 +1934,14 @@ const handleSubmit = async () => {
     const data = await response.json()
     console.log('[Onboarding] Submission successful:', data)
     
-    // Get user from auth
-    const { data: { user } } = await supabase.auth.getUser()
+    // Use user_id from API response
+    const userId = data.user_id
+    console.log('[Onboarding] Using user_id from API response:', userId)
     
-    if (!user) {
-      console.error('[Onboarding] No authenticated user found')
-      throw new Error('Authentication required')
+    if (!userId) {
+      console.error('[Onboarding] No user_id in API response')
+      throw new Error('User ID not found in submission response')
     }
-    
-    // Get the onboarding submission to ensure we have the user_id
-    const { data: submission, error: submissionFetchError } = await supabase
-      .from('onboarding_submissions')
-      .select('user_id')
-      .eq('id', data.id)
-      .single()
-    
-    if (submissionFetchError || !submission) {
-      console.error('[Onboarding] Failed to fetch submission:', submissionFetchError)
-      throw new Error('Failed to retrieve submission data')
-    }
-    
-    const userId = submission.user_id || user.id
-    console.log('[Onboarding] Using user_id:', userId)
     
     // Update user profile
     await supabase
@@ -1969,7 +1955,9 @@ const handleSubmit = async () => {
       })
 
     // Update pending plan status and create website
-    const { data: pendingPlans } = await supabase
+    console.log('[Onboarding] Fetching pending plans for user_id:', userId)
+    
+    const { data: pendingPlans, error: plansError } = await supabase
       .from('plans')
       .select('*')
       .eq('user_id', userId)
@@ -1977,26 +1965,37 @@ const handleSubmit = async () => {
       .order('created_at', { ascending: false })
       .limit(1)
 
+    if (plansError) {
+      console.error('[Onboarding] Error fetching plans:', plansError)
+    }
+    
+    console.log('[Onboarding] Pending plans found:', pendingPlans)
+
     if (pendingPlans && pendingPlans.length > 0) {
       const plan = pendingPlans[0]
+      console.log('[Onboarding] Using plan:', plan)
+      console.log('[Onboarding] Plan ID:', plan.id)
+      console.log('[Onboarding] Plan user_id:', plan.user_id)
       
       // Create website entry if it's a website plan
       if (plan.product_type === 'website') {
         const businessName = formData.value.businessName || 'My Website'
         const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
         
-        console.log('[Onboarding] Creating website with user_id:', userId)
+        const websiteData = {
+          user_id: userId,
+          plan_id: plan.id,
+          name: businessName,
+          slug: slug,
+          status: 'active',
+          onboarding_submission_id: data.id
+        }
+        
+        console.log('[Onboarding] Creating website with data:', websiteData)
         
         const { data: website, error: websiteError } = await supabase
           .from('websites')
-          .insert({
-            user_id: userId,
-            plan_id: plan.id,
-            name: businessName,
-            slug: slug,
-            status: 'active',
-            onboarding_submission_id: data.id
-          })
+          .insert(websiteData)
           .select()
           .single()
 

@@ -152,6 +152,7 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       id: data.id,
+      user_id: data.user_id,
       message: 'Onboarding submitted successfully'
     }
   } catch (error: any) {
