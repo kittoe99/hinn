@@ -33,13 +33,16 @@ export default defineEventHandler(async (event) => {
       }
     }
     
-    // For now, allow submissions without authentication (can be changed later)
-    // if (!userId) {
-    //   throw createError({
-    //     statusCode: 401,
-    //     statusMessage: 'Unauthorized - Please sign in to submit onboarding'
-    //   })
-    // }
+    // Require authentication for onboarding submissions
+    if (!userId) {
+      console.error('[Onboarding Submit] No user ID found in request')
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Unauthorized - Please sign in to submit onboarding'
+      })
+    }
+    
+    console.log('[Onboarding Submit] Authenticated user:', userId)
 
     const body = await readBody(event)
     
@@ -116,6 +119,35 @@ export default defineEventHandler(async (event) => {
     }
 
     console.log('[Onboarding Submit] Success:', data.id)
+
+    // Update the plan status to 'onboarding_completed' if user is authenticated
+    if (userId) {
+      const { data: plans, error: plansFetchError } = await supabase
+        .from('plans')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('status', 'pending_onboarding')
+        .order('created_at', { ascending: false })
+        .limit(1)
+
+      if (!plansFetchError && plans && plans.length > 0) {
+        const plan = plans[0]
+        
+        const { error: planUpdateError } = await supabase
+          .from('plans')
+          .update({
+            status: 'onboarding_completed',
+            onboarding_submission_id: data.id
+          })
+          .eq('id', plan.id)
+
+        if (planUpdateError) {
+          console.error('[Onboarding Submit] Failed to update plan status:', planUpdateError)
+        } else {
+          console.log('[Onboarding Submit] Updated plan status to onboarding_completed for plan:', plan.id)
+        }
+      }
+    }
 
     return {
       success: true,

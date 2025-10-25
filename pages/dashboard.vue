@@ -84,7 +84,7 @@
         <!-- Loading State -->
         <div v-if="websiteDetailsLoading" class="flex items-center justify-center py-24">
           <div class="text-center">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent-primary border-r-transparent"></div>
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
             <p class="mt-4 text-sm text-secondary">Loading website details...</p>
           </div>
         </div>
@@ -158,12 +158,12 @@
                 <!-- Category -->
                 <div v-if="selectedWebsiteOnboarding?.category" class="py-3 border-b border-neutral-200">
                   <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Category</h3>
-                  <p class="text-sm font-medium text-neutral-900">{{ selectedWebsiteOnboarding.category }}</p>
+                  <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">{{ selectedWebsiteOnboarding.category }}</span>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-2 pt-1">
-                  <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3.5 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                  <button class="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 hover:border-blue-300 transition-colors">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                     </svg>
@@ -183,9 +183,9 @@
             <div v-if="selectedWebsiteOnboarding" class="space-y-2">
               <!-- Business Information -->
               <section class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Business Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Business Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -209,9 +209,9 @@
 
               <!-- Contact Information -->
               <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Contact Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Contact Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -235,9 +235,9 @@
 
               <!-- Services -->
               <section v-if="selectedWebsiteOnboarding.services" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Services</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Services</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -254,9 +254,9 @@
 
               <!-- Service Area -->
               <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Service Area</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Service Area</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -276,9 +276,9 @@
 
               <!-- Operation Details -->
               <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Operation Details</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Operation Details</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -298,9 +298,9 @@
 
               <!-- Website Information -->
               <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Website Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Website Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -320,9 +320,9 @@
 
               <!-- Design Preferences -->
               <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Design Preferences</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Design Preferences</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -342,9 +342,9 @@
 
               <!-- Language & Additional Info -->
               <section v-if="selectedWebsiteOnboarding.language" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors">
-                  <h2 class="text-sm font-semibold text-neutral-900">Language & Additional Info</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Language & Additional Info</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -388,7 +388,7 @@
               placeholder="Search Projects..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md',
+                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md',
                 showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
               ]"
             />
@@ -488,7 +488,7 @@
         <!-- Loading State -->
         <div v-if="loading" class="flex items-center justify-center py-16">
           <div class="text-center">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent-primary border-r-transparent"></div>
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
             <p class="mt-4 text-sm text-secondary">Loading websites...</p>
           </div>
         </div>
@@ -515,16 +515,16 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'border border-neutral-200 bg-white p-5 transition-colors rounded-md',
+              'group border border-neutral-200 bg-white p-5 rounded-md transition-all duration-200',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-neutral-50 cursor-pointer'
+                : 'hover:bg-neutral-50 hover:border-blue-600 hover:shadow-md hover:-translate-y-0.5 cursor-pointer'
             ]"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-start gap-3">
-                <div class="h-8 w-8 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="h-8 w-8 rounded border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 group-hover:rotate-3 group-hover:scale-110">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
                 </div>
@@ -533,7 +533,7 @@
                   <div class="flex items-center gap-2">
                     <span class="text-xs text-neutral-500">Website</span>
                     <span class="text-neutral-300">•</span>
-                    <span v-if="project.plan_tier" class="text-xs text-neutral-500 capitalize">
+                    <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 capitalize">
                       {{ project.plan_tier }}
                     </span>
                   </div>
@@ -608,7 +608,7 @@
                   v-model="settingsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md"
                 />
               </div>
 
@@ -619,7 +619,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="settingsActiveTab = subTab.id; settingsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-blue-50 hover:text-blue-700 transition-colors rounded-md"
                 >
                   {{ subTab.label }}
                 </a>
@@ -656,7 +656,7 @@
                       <input
                         type="text"
                         placeholder="John Doe"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
@@ -665,7 +665,7 @@
                       <input
                         type="email"
                         placeholder="you@example.com"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
@@ -674,7 +674,7 @@
                       <input
                         type="text"
                         placeholder="Your Company"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
@@ -754,10 +754,10 @@
                 href="#"
                 @click.prevent="settingsActiveTab = subTab.id"
                 :class="[
-                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors border',
                   settingsActiveTab === subTab.id
-                    ? 'bg-neutral-100 text-primary'
-                    : 'text-secondary hover:bg-neutral-50 hover:text-primary'
+                    ? 'bg-blue-50 text-blue-700 border-blue-200'
+                    : 'text-neutral-600 border-transparent hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
                 ]"
               >
                 {{ subTab.label }}
@@ -781,7 +781,7 @@
                 <input
                   type="text"
                   placeholder="John Doe"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
@@ -790,7 +790,7 @@
                 <input
                   type="email"
                   placeholder="you@example.com"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
@@ -799,7 +799,7 @@
                 <input
                   type="text"
                   placeholder="Your Company"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
@@ -990,7 +990,7 @@
                       <input
                         type="text"
                         placeholder="How can we help?"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
@@ -999,7 +999,7 @@
                       <textarea
                         rows="5"
                         placeholder="Tell us more..."
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                       ></textarea>
                     </div>
 
@@ -1107,7 +1107,7 @@
                     <input
                       type="text"
                       placeholder="How can we help?"
-                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                   </div>
 
@@ -1116,7 +1116,7 @@
                     <textarea
                       rows="5"
                       placeholder="Tell us more..."
-                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary"
+                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     ></textarea>
                   </div>
 
@@ -1152,7 +1152,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md"
                 />
               </div>
 
@@ -1163,7 +1163,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="domainsActiveTab = subTab.id; domainsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-blue-50 hover:text-blue-700 transition-colors rounded-md"
                 >
                   {{ subTab.label }}
                 </a>
@@ -1379,51 +1379,51 @@
                   <div class="grid grid-cols-1 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                      <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                      <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                      <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                      <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                      <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                      <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                      <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                      <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                      <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
-                        <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-accent-primary focus:ring-accent-primary" />
+                        <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
                         Auto-renew
                       </label>
                     </div>
@@ -1477,10 +1477,10 @@
                 href="#"
                 @click.prevent="domainsActiveTab = subTab.id"
                 :class="[
-                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors border',
                   domainsActiveTab === subTab.id
-                    ? 'bg-neutral-100 text-primary'
-                    : 'text-secondary hover:bg-neutral-50 hover:text-primary'
+                    ? 'bg-blue-50 text-blue-700 border-blue-200'
+                    : 'text-neutral-600 border-transparent hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
                 ]"
               >
                 {{ subTab.label }}
@@ -1576,7 +1576,7 @@
                         v-model="domainSearchQuery"
                         type="text"
                         placeholder="acme, mybrand, etc"
-                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
+                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                         @keyup.enter="handleDomainSearch"
                       />
                       <button 
@@ -1688,51 +1688,51 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                    <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                    <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                    <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                    <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                    <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                    <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                    <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                    <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                    <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-1 focus:ring-accent-primary" />
+                    <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
-                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-accent-primary focus:ring-accent-primary" />
+                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
                       Auto-renew
                     </label>
                   </div>
@@ -1778,17 +1778,20 @@
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center max-w-md">
-          <div class="mb-6 inline-flex items-center justify-center w-16 h-16 border border-neutral-200 bg-neutral-50">
-            <svg class="h-8 w-8 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
+              <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </span>
+            <span>{{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}</span>
           </div>
           <h2 class="text-2xl font-bold text-neutral-900 mb-3">Coming Soon</h2>
           <p class="text-base text-neutral-600 mb-6">
             We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
             Stay tuned for updates!
           </p>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-neutral-200 bg-white text-sm text-neutral-600">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-blue-200 bg-blue-50 text-sm text-blue-700">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -2535,11 +2538,54 @@ const checkOnboardingStatus = async () => {
 
     console.log('[Dashboard] Pending plans:', pendingPlans)
 
-    // If there's a pending plan, show onboarding requirement
+    // More robust check: verify if onboarding was actually completed
     if (pendingPlans && pendingPlans.length > 0) {
-      pendingPlan.value = pendingPlans[0]
-      showOnboardingRequired.value = true
-      console.log('[Dashboard] Showing onboarding requirement for plan:', pendingPlans[0])
+      const plan = pendingPlans[0]
+      
+      // Check if user has completed ANY onboarding submission
+      const { data: submissions, error: submissionError } = await supabase
+        .from('onboarding_submissions')
+        .select('id, status, created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
+
+      if (submissionError) {
+        console.error('[Dashboard] Onboarding submission fetch error:', submissionError)
+      }
+
+      console.log('[Dashboard] Onboarding submissions:', submissions)
+
+      // If user has completed onboarding, auto-fix the plan status
+      if (submissions && submissions.length > 0) {
+        console.log('[Dashboard] User has completed onboarding, fixing plan status...')
+        
+        // Update the plan status to onboarding_completed
+        const { error: updateError } = await supabase
+          .from('plans')
+          .update({
+            status: 'onboarding_completed',
+            onboarding_submission_id: submissions[0].id
+          })
+          .eq('id', plan.id)
+
+        if (updateError) {
+          console.error('[Dashboard] Failed to auto-fix plan status:', updateError)
+          // Still show the banner if update fails
+          pendingPlan.value = plan
+          showOnboardingRequired.value = true
+        } else {
+          console.log('[Dashboard] Successfully auto-fixed plan status')
+          // Don't show the banner since onboarding is complete
+          showOnboardingRequired.value = false
+          pendingPlan.value = null
+        }
+      } else {
+        // No onboarding submission found, legitimately needs onboarding
+        pendingPlan.value = plan
+        showOnboardingRequired.value = true
+        console.log('[Dashboard] Showing onboarding requirement for plan:', plan)
+      }
     } else {
       showOnboardingRequired.value = false
       pendingPlan.value = null
@@ -2554,6 +2600,12 @@ const checkOnboardingStatus = async () => {
 
 // Watch for tab changes to load domains
 watch(activeTab, (newTab) => {
+  // Close website details if user navigates away from Websites tab
+  if (selectedWebsiteId.value && newTab !== 'websites') {
+    closeWebsiteDetails()
+  }
+
+  // Lazy-load domains data when entering Domains tab
   if (newTab === 'domains') {
     loadMyDomains()
   }

@@ -25,7 +25,7 @@
     <!-- Loading State -->
     <div v-if="loading" class="flex items-center justify-center py-24">
       <div class="text-center">
-        <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent-primary border-r-transparent"></div>
+        <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
         <p class="mt-4 text-sm text-secondary">Loading website details...</p>
       </div>
     </div>
