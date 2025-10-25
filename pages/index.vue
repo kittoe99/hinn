@@ -15,8 +15,6 @@
             <span class="typewriter-container">
               <span class="typewriter-word text-blue-600">{{ currentWord }}</span>
             </span>
-            <br />
-            —done for you
           </h1>
           <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
             One monthly subscription. Zero technical work. We design, build, and maintain everything while you focus on growing your business.
