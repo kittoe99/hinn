@@ -11,7 +11,7 @@
             Monthly services
           </div>
           <h1 class="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mt-6 opacity-0 animate-fade-in" style="animation-delay: 100ms">
-            Websites, marketing & 
+            Websites, marketing &<br class="hidden md:inline" />
             <span class="typewriter-container">
               <span :class="['typewriter-word text-blue-600', { 'flipping': isFlipping }]">{{ currentWord }}</span>
             </span>
@@ -677,10 +677,16 @@ const filteredShowcaseProjects = computed(() => {
   display: inline-block;
   min-width: 250px;
   height: 1.2em;
-  text-align: left;
+  text-align: center;
   position: relative;
   vertical-align: baseline;
   perspective: 1000px;
+}
+
+@media (min-width: 640px) {
+  .typewriter-container {
+    text-align: left;
+  }
 }
 
 .typewriter-word {
