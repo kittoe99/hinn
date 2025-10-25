@@ -11,12 +11,12 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#d97759',
-          primary: '#d97759',
-          focus: '#c46a4f',
-          subtle: '#fdf5f2',
-          muted: '#fae8e1',
-          soft: '#f7dbd0',
+          DEFAULT: '#2563eb',
+          primary: '#2563eb',
+          focus: '#1d4ed8',
+          subtle: '#eff6ff',
+          muted: '#dbeafe',
+          soft: '#bfdbfe',
         },
         page: '#fefefe',
         panel: '#f9f9f9',

@@ -573,6 +573,66 @@
           </div>
         </div>
 
+        <!-- List View -->
+        <div v-else-if="viewMode === 'list'" :class="['relative']">
+          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 rounded-lg"></div>
+          <div class="overflow-hidden rounded-md border border-neutral-200 bg-white">
+            <div class="hidden md:grid grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-3 text-xs font-medium text-neutral-500 border-b border-neutral-200">
+              <div>Project</div>
+              <div>Domain</div>
+              <div>Plan</div>
+              <div>Status</div>
+              <div>Updated</div>
+            </div>
+
+            <div
+              v-for="project in filteredProjects"
+              :key="project.id"
+              @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
+              :class="[
+                'grid grid-cols-1 md:grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-4 border-b border-neutral-100 last:border-0 transition-colors',
+                showOnboardingRequired
+                  ? 'cursor-not-allowed opacity-60'
+                  : 'hover:bg-neutral-50 cursor-pointer'
+              ]"
+            >
+              <div class="flex items-center gap-3">
+                <div class="h-8 w-8 rounded border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-neutral-900">{{ project.name }}</div>
+                  <div class="mt-0.5 text-xs text-neutral-500 md:hidden truncate">{{ project.domain }}</div>
+                </div>
+              </div>
+
+              <div class="hidden md:block self-center text-sm text-neutral-700 truncate">{{ project.domain }}</div>
+
+              <div class="hidden md:flex self-center">
+                <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 capitalize">
+                  {{ project.plan_tier }}
+                </span>
+                <span v-else class="text-sm text-neutral-400">—</span>
+              </div>
+
+              <div class="hidden md:flex items-center gap-2 self-center">
+                <span :class="[
+                  'h-1.5 w-1.5 rounded-full',
+                  project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
+                ]"></span>
+                <span :class="[
+                  'text-sm font-medium',
+                  project.status === 'Ready' ? 'text-emerald-600' : 'text-amber-600'
+                ]">{{ project.status }}</span>
+              </div>
+
+              <div class="hidden md:block self-center text-sm text-neutral-700">{{ project.lastDeployed }}</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Empty State -->
         <div v-else-if="!loading && !error && filteredProjects.length === 0" class="flex flex-col items-center justify-center py-16 text-center">
           <div class="mb-4 rounded-full bg-neutral-100 p-4">
@@ -1799,265 +1859,132 @@
           </div>
         </div>
       </div>
-
-      <!-- Other Tabs Content -->
-      <div v-if="activeTab !== 'overview' && activeTab !== 'settings' && activeTab !== 'support' && activeTab !== 'domains' && activeTab !== 'branding' && activeTab !== 'marketing' && activeTab !== 'ai-agents' && activeTab !== 'onboarding'" class="rounded-md border border-neutral-200 bg-white p-8 text-center">
-        <p class="text-sm text-neutral-600">{{ activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }} content goes here</p>
-      </div>
     </main>
 
-    <!-- Add New Modal -->
-    <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="showAddNewModal = false">
-      <div class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
-        <!-- Modal Header -->
-        <div class="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
-          <div>
-            <h2 class="text-xl font-bold text-primary">Add New Product</h2>
-            <p class="text-sm text-secondary mt-1">Choose what you'd like to create</p>
-          </div>
-          <button @click="showAddNewModal = false" class="rounded-lg p-2 hover:bg-neutral-100 transition-colors">
-            <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Product Selection (Step 1) -->
-        <div v-if="addNewStep === 'select'" class="p-6">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Website Product -->
-            <button
-              @click="selectProduct('website')"
-              class="group relative rounded-xl border-2 border-neutral-200 bg-white p-6 text-left hover:border-accent-primary hover:shadow-lg transition-all"
-            >
-              <div class="flex items-start justify-between mb-4">
-                <div class="h-12 w-12 rounded-lg bg-accent-primary/10 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                  </svg>
-                </div>
-                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-                  <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  Available
-                </span>
-              </div>
-              <h3 class="text-lg font-bold text-primary mb-2">Website</h3>
-              <p class="text-sm text-secondary mb-4">Create a professional website with custom design and features</p>
-              <div class="flex items-center gap-2 text-sm text-accent-primary font-medium">
-                Get Started
-                <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                </svg>
-              </div>
+      <!-- Add New Modal (concise) -->
+      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="showAddNewModal = false">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <!-- Header -->
+          <div class="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-primary">Add New Product</h2>
+              <p class="text-sm text-secondary mt-1">Pick what to create</p>
+            </div>
+            <button @click="showAddNewModal = false" class="rounded-lg p-2 hover:bg-neutral-100 transition-colors">
+              <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
             </button>
-
-            <!-- Marketing Product -->
-            <div class="relative rounded-xl border-2 border-neutral-200 bg-neutral-50 p-6 text-left opacity-60">
-              <div class="flex items-start justify-between mb-4">
-                <div class="h-12 w-12 rounded-lg bg-neutral-200 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                  </svg>
-                </div>
-                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">
-                  Coming Soon
-                </span>
-              </div>
-              <h3 class="text-lg font-bold text-neutral-600 mb-2">Marketing</h3>
-              <p class="text-sm text-neutral-500 mb-4">Boost your reach with targeted marketing campaigns</p>
+          </div>
+          <!-- Step: Select Product -->
+          <div v-if="addNewStep === 'select'" class="p-6">
+            <div class="mb-2">
+              <p class="text-sm text-neutral-500">Choose a product to start. More coming soon.</p>
             </div>
-
-            <!-- AI Agent Product -->
-            <div class="relative rounded-xl border-2 border-neutral-200 bg-neutral-50 p-6 text-left opacity-60">
-              <div class="flex items-start justify-between mb-4">
-                <div class="h-12 w-12 rounded-lg bg-neutral-200 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Website -->
+              <button
+                @click="selectProduct('website')"
+                @keydown.enter.prevent="selectProduct('website')"
+                @keydown.space.prevent="selectProduct('website')"
+                role="button"
+                aria-label="Create Website"
+                class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 text-left shadow-sm hover:shadow-md hover:border-blue-300 transition-all focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <span class="absolute inset-x-0 top-0 h-1 bg-blue-600"></span>
+                <div class="flex items-start justify-between mb-3">
+                  <div class="h-10 w-10 rounded-md border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold">Available</span>
                 </div>
-                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold">
-                  Coming Soon
-                </span>
+                <h3 class="text-base font-bold text-neutral-900 mb-1">Website</h3>
+                <p class="text-sm text-neutral-600 mb-4">Professional site with custom design</p>
+                <div class="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-md bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
+                  Get Started
+                  <svg class="h-4 w-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </div>
+              </button>
+
+              <!-- Marketing (disabled) -->
+              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 p-6 text-left opacity-60 cursor-not-allowed" aria-disabled="true">
+                <span class="absolute inset-x-0 top-0 h-1 bg-neutral-200"></span>
+                <div class="flex items-start justify-between mb-3">
+                  <div class="h-10 w-10 rounded-md bg-neutral-200 flex items-center justify-center">
+                    <svg class="h-5 w-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-semibold">Coming Soon</span>
+                </div>
+                <h3 class="text-base font-bold text-neutral-700">Marketing</h3>
+                <p class="mt-1 text-sm text-neutral-500">Boost reach with campaigns</p>
               </div>
-              <h3 class="text-lg font-bold text-neutral-600 mb-2">AI Agent</h3>
-              <p class="text-sm text-neutral-500 mb-4">Deploy intelligent AI agents to automate tasks</p>
+
+              <!-- AI Agent (disabled) -->
+              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 p-6 text-left opacity-60 cursor-not-allowed" aria-disabled="true">
+                <span class="absolute inset-x-0 top-0 h-1 bg-neutral-200"></span>
+                <div class="flex items-start justify-between mb-3">
+                  <div class="h-10 w-10 rounded-md bg-neutral-200 flex items-center justify-center">
+                    <svg class="h-5 w-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  </div>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-semibold">Coming Soon</span>
+                </div>
+                <h3 class="text-base font-bold text-neutral-700">AI Agent</h3>
+                <p class="mt-1 text-sm text-neutral-500">Automate tasks with agents</p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Website Plan Selection (Step 2) -->
-        <div v-if="addNewStep === 'plan'" class="p-6">
-          <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors mb-6">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-            Back to Products
-          </button>
-
-          <div class="mb-6">
-            <h3 class="text-lg font-bold text-primary mb-2">Choose Your Website Plan</h3>
-            <p class="text-sm text-secondary">Select the plan that best fits your needs</p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Starter Plan -->
-            <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
-              <div class="mb-4">
+          <!-- Step: Choose Plan -->
+          <div v-if="addNewStep === 'plan'" class="p-6">
+            <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors mb-6">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              Back to Products
+            </button>
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-primary">Choose Your Website Plan</h3>
+              <p class="text-sm text-secondary">Select the plan that fits</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
                 <h4 class="text-lg font-bold text-primary mb-1">Starter</h4>
-                <p class="text-sm text-secondary">Perfect for small businesses</p>
+                <div class="mb-4"><span class="text-3xl font-bold text-primary">$29</span><span class="text-sm text-secondary">/month</span></div>
+                <ul class="space-y-2 mb-4 text-sm text-secondary">
+                  <li>Up to 5 pages</li>
+                  <li>Custom domain</li>
+                  <li>SSL certificate</li>
+                </ul>
+                <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">Select Starter</button>
               </div>
-              <div class="mb-6">
-                <div class="flex items-baseline gap-1">
-                  <span class="text-3xl font-bold text-primary">$29</span>
-                  <span class="text-sm text-secondary">/month</span>
+              <div class="relative rounded-xl border-2 border-accent-primary bg-white p-6 shadow-sm">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-accent-primary text-white text-xs font-semibold">Popular</span>
                 </div>
-              </div>
-              <ul class="space-y-3 mb-6">
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Up to 5 pages</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Custom domain</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">SSL certificate</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Basic SEO</span>
-                </li>
-              </ul>
-              <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">
-                Select Starter
-              </button>
-            </div>
-
-            <!-- Professional Plan (Popular) -->
-            <div class="relative rounded-xl border-2 border-accent-primary bg-white p-6 shadow-lg">
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent-primary text-white text-xs font-semibold">
-                  <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                  </svg>
-                  Popular
-                </span>
-              </div>
-              <div class="mb-4">
                 <h4 class="text-lg font-bold text-primary mb-1">Professional</h4>
-                <p class="text-sm text-secondary">For growing businesses</p>
+                <div class="mb-4"><span class="text-3xl font-bold text-primary">$79</span><span class="text-sm text-secondary">/month</span></div>
+                <ul class="space-y-2 mb-4 text-sm text-secondary">
+                  <li>Up to 15 pages</li>
+                  <li>Advanced SEO</li>
+                  <li>E-commerce ready</li>
+                </ul>
+                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-focus transition-colors">Select Professional</button>
               </div>
-              <div class="mb-6">
-                <div class="flex items-baseline gap-1">
-                  <span class="text-3xl font-bold text-primary">$79</span>
-                  <span class="text-sm text-secondary">/month</span>
-                </div>
-              </div>
-              <ul class="space-y-3 mb-6">
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Up to 15 pages</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Custom domain</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Advanced SEO</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">E-commerce ready</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Priority support</span>
-                </li>
-              </ul>
-              <button @click="selectPlan('professional')" class="w-full rounded-lg bg-accent-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-focus transition-colors">
-                Select Professional
-              </button>
-            </div>
-
-            <!-- Enterprise Plan -->
-            <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
-              <div class="mb-4">
+              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-accent-primary hover:shadow-lg transition-all">
                 <h4 class="text-lg font-bold text-primary mb-1">Enterprise</h4>
-                <p class="text-sm text-secondary">For large organizations</p>
+                <div class="mb-4"><span class="text-3xl font-bold text-primary">$199</span><span class="text-sm text-secondary">/month</span></div>
+                <ul class="space-y-2 mb-4 text-sm text-secondary">
+                  <li>Unlimited pages</li>
+                  <li>Advanced analytics</li>
+                </ul>
+                <button @click="selectPlan('enterprise')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">Select Enterprise</button>
               </div>
-              <div class="mb-6">
-                <div class="flex items-baseline gap-1">
-                  <span class="text-3xl font-bold text-primary">$199</span>
-                  <span class="text-sm text-secondary">/month</span>
-                </div>
-              </div>
-              <ul class="space-y-3 mb-6">
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Unlimited pages</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Multiple domains</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Advanced analytics</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Dedicated support</span>
-                </li>
-                <li class="flex items-start gap-2 text-sm">
-                  <svg class="h-5 w-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="text-secondary">Custom integrations</span>
-                </li>
-              </ul>
-              <button @click="selectPlan('enterprise')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">
-                Select Enterprise
-              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</template>
 
-<script setup>
+  </template>
+
+  <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
