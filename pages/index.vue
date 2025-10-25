@@ -172,43 +172,78 @@
     <!-- Showcase Section -->
     <section id="showcase" class="mt-16 md:mt-24 py-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12">
           <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Real sites we've built & launched</h2>
           <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
             From idea to live site in weeks, not months. See what we've shipped for businesses just like yours.
           </p>
         </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          <button
+            v-for="category in showcaseCategories"
+            :key="category.value"
+            @click="selectedShowcaseCategory = category.value"
+            :class="[
+              'rounded-full px-5 py-2 text-sm font-semibold transition-all',
+              selectedShowcaseCategory === category.value
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-blue-600 hover:text-blue-700'
+            ]"
+          >
+            {{ category.label }}
+          </button>
+        </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
-            v-for="(project, index) in showcaseProjects"
+            v-for="(project, index) in filteredShowcaseProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-lg border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl opacity-0 animate-fade-in-up"
+            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl opacity-0 animate-fade-in-up"
             :style="{ animationDelay: `${index * 75}ms` }"
           >
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-            <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
-              <img
-                loading="lazy"
-                :src="project.image"
-                :alt="project.title"
-                class="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-90"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span v-if="project.tag" :class="['absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-semibold shadow-md transition-all duration-300', projectTagColor(project.tag)]">
-                {{ project.tag }}
-              </span>
-            </div>
-            <div class="relative p-5 z-20">
-              <h3 class="text-base font-bold text-neutral-900 transition-colors">{{ project.title }}</h3>
-              <p class="mt-2 text-sm text-neutral-600 line-clamp-2">{{ project.description }}</p>
-              <div class="mt-3 flex items-center gap-2 text-sm font-semibold text-blue-700 group-hover:gap-3 transition-all duration-300">
-                <span>View Project</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-blue-700 transition-transform group-hover:translate-x-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
+            <!-- Top bar accent -->
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Category badge and featured -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span v-if="project.tag" class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold border border-blue-200 bg-blue-50 text-blue-700">
+                  <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+                  {{ project.tag }}
+                </span>
+                <span v-if="project.featured" class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  Featured
+                </span>
               </div>
+              <svg class="h-5 w-5 text-neutral-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </div>
+
+            <!-- Project info -->
+            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-blue-700 transition-colors">{{ project.title }}</h3>
+            <p class="text-sm text-neutral-600 mb-4 line-clamp-2">{{ project.description }}</p>
+
+            <!-- Metrics -->
+            <div v-if="project.metrics" class="flex items-center gap-3 mb-4 pb-4 border-b border-neutral-100">
+              <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1 text-xs">
+                <span class="font-bold text-blue-700">{{ metric.value }}</span>
+                <span class="text-neutral-600">{{ metric.label }}</span>
+              </div>
+            </div>
+
+            <!-- Tech stack -->
+            <div v-if="project.tech" class="flex flex-wrap gap-2">
+              <span
+                v-for="tech in project.tech"
+                :key="tech"
+                class="inline-flex items-center px-2 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700 border border-neutral-200"
+              >
+                {{ tech }}
+              </span>
             </div>
           </a>
         </div>
@@ -459,38 +494,86 @@ const brandFeatures = [
   }
 ]
 
+const selectedShowcaseCategory = ref('all')
+
+const showcaseCategories = [
+  { label: 'All Projects', value: 'all' },
+  { label: 'Websites', value: 'websites' },
+  { label: 'AI Agents', value: 'agents' },
+  { label: 'Marketing', value: 'marketing' }
+]
+
 const showcaseProjects = [
   {
-    title: 'Aurora Fitness',
-    description: 'Sleek site with schedules, trainer bios, and conversion pages.',
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop',
-    tag: 'Website'
+    title: 'E-Commerce Platform Redesign',
+    description: 'Complete redesign and development of a high-converting e-commerce platform with custom checkout flow.',
+    tag: 'Websites',
+    featured: true,
+    metrics: [
+      { label: 'conversion', value: '+45%' },
+      { label: 'page speed', value: '95/100' }
+    ],
+    tech: ['Next.js', 'Stripe', 'Tailwind']
   },
   {
-    title: 'Summit Outdoors',
-    description: 'Catalog layout with product stories and lightweight ecommerce.',
-    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
-    tag: 'CMS'
+    title: 'AI Customer Support Agent',
+    description: 'Intelligent chatbot trained on company knowledge base, handling 80% of customer inquiries automatically.',
+    tag: 'AI Agents',
+    featured: true,
+    metrics: [
+      { label: 'automation', value: '80%' },
+      { label: 'response time', value: '<2s' }
+    ],
+    tech: ['OpenAI', 'LangChain', 'Supabase']
   },
   {
-    title: 'Bluegrain Coffee Co.',
-    description: 'Editorial design, storytelling pages, newsletter growth.',
-    image: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1200&auto=format&fit=crop',
-    tag: 'Brand'
+    title: 'SaaS Product Launch Campaign',
+    description: 'Multi-channel marketing campaign for B2B SaaS product launch, including SEO, paid ads, and email automation.',
+    tag: 'Marketing',
+    metrics: [
+      { label: 'leads', value: '2,400+' },
+      { label: 'ROI', value: '340%' }
+    ],
+    tech: ['Google Ads', 'HubSpot', 'Analytics']
   },
   {
-    title: 'Northstar Consulting',
-    description: 'Professional presence with case study templates.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop',
-    tag: 'Case study'
+    title: 'Real Estate Listing Platform',
+    description: 'Modern property listing website with advanced search, map integration, and virtual tour capabilities.',
+    tag: 'Websites',
+    metrics: [
+      { label: 'listings', value: '5,000+' },
+      { label: 'uptime', value: '99.9%' }
+    ],
+    tech: ['Vue.js', 'Mapbox', 'Firebase']
   },
   {
-    title: 'Evergreen Nonprofit',
-    description: 'Accessible site with donation flows and impact highlights.',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=1200&auto=format&fit=crop',
-    tag: null
+    title: 'Sales Qualification Bot',
+    description: 'AI agent that qualifies leads through conversational interface and schedules demos automatically.',
+    tag: 'AI Agents',
+    metrics: [
+      { label: 'qualified leads', value: '+120%' },
+      { label: 'time saved', value: '15hrs/wk' }
+    ],
+    tech: ['GPT-4', 'Salesforce', 'Calendly']
+  },
+  {
+    title: 'Content Marketing Strategy',
+    description: 'SEO-focused content strategy with blog posts, case studies, and whitepapers driving organic traffic growth.',
+    tag: 'Marketing',
+    metrics: [
+      { label: 'organic traffic', value: '+280%' },
+      { label: 'keywords ranked', value: '450+' }
+    ],
+    tech: ['Ahrefs', 'WordPress', 'GA4']
   }
 ]
+
+const filteredShowcaseProjects = computed(() => {
+  if (selectedShowcaseCategory.value === 'all') {
+    return showcaseProjects
+  }
+  return showcaseProjects.filter(p => p.tag.toLowerCase() === selectedShowcaseCategory.value)
+})
 </script>
 
 <style scoped>

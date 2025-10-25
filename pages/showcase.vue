@@ -38,68 +38,53 @@
     <!-- Projects Grid -->
     <section class="mt-12 md:mt-16">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
             v-for="project in filteredProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all hover:-translate-y-2 hover:border-blue-600 hover:shadow-2xl"
+            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl"
           >
-            <!-- Project Image -->
-            <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
-              <img
-                loading="lazy"
-                :src="project.image"
-                :alt="project.title"
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              <!-- Tags -->
-              <div class="absolute top-3 left-3 flex flex-wrap gap-2">
-                <span class="rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-semibold text-neutral-700 shadow-sm">
+            <!-- Top bar accent -->
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Category badge and featured -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold border border-blue-200 bg-blue-50 text-blue-700">
+                  <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
                   {{ project.category }}
                 </span>
-                <span v-if="project.featured" class="rounded-full bg-blue-600/95 backdrop-blur px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                <span v-if="project.featured" class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                   Featured
                 </span>
               </div>
+              <svg class="h-5 w-5 text-neutral-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </div>
 
-              <!-- View Project Overlay -->
-              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-900 shadow-xl">
-                  View Project →
-                </div>
+            <!-- Project info -->
+            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-blue-700 transition-colors">{{ project.title }}</h3>
+            <p class="text-sm text-neutral-600 mb-4 line-clamp-2">{{ project.description }}</p>
+
+            <!-- Metrics -->
+            <div v-if="project.metrics" class="flex items-center gap-3 mb-4 pb-4 border-b border-neutral-100">
+              <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1 text-xs">
+                <span class="font-bold text-blue-700">{{ metric.value }}</span>
+                <span class="text-neutral-600">{{ metric.label }}</span>
               </div>
             </div>
 
-            <!-- Project Info -->
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-neutral-900 group-hover:text-blue-700 transition-colors">
-                {{ project.title }}
-              </h3>
-              <p class="mt-2 text-sm text-neutral-600 line-clamp-2">
-                {{ project.description }}
-              </p>
-              
-              <!-- Stats/Metrics -->
-              <div v-if="project.metrics" class="mt-4 flex items-center gap-4 text-xs text-neutral-500">
-                <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1">
-                  <span class="font-semibold text-blue-700">{{ metric.value }}</span>
-                  <span>{{ metric.label }}</span>
-                </div>
-              </div>
-
-              <!-- Tech Stack -->
-              <div v-if="project.tech" class="mt-4 flex flex-wrap gap-2">
-                <span
-                  v-for="tech in project.tech"
-                  :key="tech"
-                  class="rounded-md bg-neutral-100 px-2 py-1 text-xs font-medium text-neutral-600"
-                >
-                  {{ tech }}
-                </span>
-              </div>
+            <!-- Tech stack -->
+            <div v-if="project.tech" class="flex flex-wrap gap-2">
+              <span
+                v-for="tech in project.tech"
+                :key="tech"
+                class="inline-flex items-center px-2 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700 border border-neutral-200"
+              >
+                {{ tech }}
+              </span>
             </div>
           </a>
         </div>
