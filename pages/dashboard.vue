@@ -2469,46 +2469,45 @@ const checkOnboardingStatus = async () => {
     if (pendingPlans && pendingPlans.length > 0) {
       const plan = pendingPlans[0]
       
-      // Check if user has completed ANY onboarding submission
-      const { data: submissions, error: submissionError } = await supabase
-        .from('onboarding_submissions')
-        .select('id, status, created_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-
-      if (submissionError) {
-        console.error('[Dashboard] Onboarding submission fetch error:', submissionError)
-      }
-
-      console.log('[Dashboard] Onboarding submissions:', submissions)
-
-      // If user has completed onboarding, auto-fix the plan status
-      if (submissions && submissions.length > 0) {
-        console.log('[Dashboard] User has completed onboarding, fixing plan status...')
+      // Check if this specific plan has an onboarding_submission_id
+      if (plan.onboarding_submission_id) {
+        console.log('[Dashboard] Plan has onboarding_submission_id, checking if it exists...')
         
-        // Update the plan status to onboarding_completed
-        const { error: updateError } = await supabase
-          .from('plans')
-          .update({
-            status: 'onboarding_completed',
-            onboarding_submission_id: submissions[0].id
-          })
-          .eq('id', plan.id)
+        // Verify the submission exists
+        const { data: submission, error: submissionError } = await supabase
+          .from('onboarding_submissions')
+          .select('id, status')
+          .eq('id', plan.onboarding_submission_id)
+          .single()
 
-        if (updateError) {
-          console.error('[Dashboard] Failed to auto-fix plan status:', updateError)
-          // Still show the banner if update fails
+        if (!submissionError && submission) {
+          console.log('[Dashboard] Onboarding submission found, auto-fixing plan status...')
+          
+          // Update the plan status to onboarding_completed
+          const { error: updateError } = await supabase
+            .from('plans')
+            .update({ status: 'onboarding_completed' })
+            .eq('id', plan.id)
+
+          if (updateError) {
+            console.error('[Dashboard] Failed to auto-fix plan status:', updateError)
+            pendingPlan.value = plan
+            showOnboardingRequired.value = true
+          } else {
+            console.log('[Dashboard] Successfully auto-fixed plan status')
+            showOnboardingRequired.value = false
+            pendingPlan.value = null
+            // Refresh websites to show the new one
+            await fetchWebsites()
+          }
+        } else {
+          // Submission doesn't exist, show banner
           pendingPlan.value = plan
           showOnboardingRequired.value = true
-        } else {
-          console.log('[Dashboard] Successfully auto-fixed plan status')
-          // Don't show the banner since onboarding is complete
-          showOnboardingRequired.value = false
-          pendingPlan.value = null
+          console.log('[Dashboard] Showing onboarding requirement for plan:', plan)
         }
       } else {
-        // No onboarding submission found, legitimately needs onboarding
+        // No onboarding submission linked yet, legitimately needs onboarding
         pendingPlan.value = plan
         showOnboardingRequired.value = true
         console.log('[Dashboard] Showing onboarding requirement for plan:', plan)
@@ -2599,8 +2598,13 @@ const selectPlan = async (plan) => {
     selectedProduct.value = null
     selectedPlan.value = null
     
-    // Redirect to onboarding page
-    await navigateTo('/onboarding')
+    // Set the pending plan and show onboarding banner
+    pendingPlan.value = planData
+    showOnboardingRequired.value = true
+    activeTab.value = 'overview'
+    
+    // Refresh onboarding status to show the banner
+    await checkOnboardingStatus()
   } catch (error) {
     console.error('[Dashboard] Error in selectPlan:', error)
   }
