@@ -448,25 +448,25 @@
         </div>
 
         <!-- Onboarding Required Banner (hide when on onboarding page) -->
-        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 border-2 border-neutral-200 bg-neutral-50 p-6 rounded-md">
+        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-sm">
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded border border-neutral-200 bg-neutral-50 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="h-12 w-12 rounded-xl border border-blue-200 bg-blue-50 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-bold text-primary mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
-                <p class="text-sm text-secondary max-w-2xl mb-3">
-                  You've selected the <span class="font-semibold text-primary capitalize">{{ pendingPlan.plan_tier }}</span> plan 
+                <h3 class="text-xl font-bold text-neutral-900 mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
+                <p class="text-sm text-neutral-600 max-w-2xl mb-3">
+                  You've selected the <span class="font-semibold text-neutral-900 capitalize">{{ pendingPlan.plan_tier }}</span> plan 
                   (<span class="font-semibold">${{ pendingPlan.price_monthly }}/month</span>). 
                   Complete the onboarding process to provide us with your business details and preferences so we can get started.
                 </p>
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 bg-white text-xs font-medium text-neutral-600">
-                  <svg class="h-4 w-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-xs font-medium text-blue-700">
+                  <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   Takes about 10 minutes
@@ -475,7 +475,7 @@
             </div>
             <NuxtLink
               to="/onboarding"
-              class="flex-shrink-0 inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-neutral-900 px-8 py-3 text-sm font-semibold text-white hover:bg-neutral-800 transition-all"
+              class="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-8 py-3 text-sm font-semibold text-white hover:bg-neutral-800 transition-all shadow-lg"
             >
               Start Onboarding
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

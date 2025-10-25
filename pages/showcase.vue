@@ -4,17 +4,15 @@
     <section class="pt-12 md:pt-16">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center max-w-3xl mx-auto">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white border border-accent-subtle/60 px-4 py-1.5 text-xs font-semibold text-accent-primary shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
             Portfolio
           </div>
-          <h1 class="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
-            Our Work
+          <h1 class="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900">
+            Real sites we've built & launched
           </h1>
-          <p class="mt-4 text-base md:text-lg text-secondary">
-            High-converting websites, intelligent AI agents, and data-driven marketing campaigns that deliver real results for our clients.
+          <p class="mt-4 text-base md:text-lg text-neutral-600">
+            From idea to live site in weeks. See what we've shipped for businesses just like yours—all done for you, start to finish.
           </p>
         </div>
 
@@ -27,8 +25,8 @@
             :class="[
               'rounded-full px-5 py-2 text-sm font-semibold transition-all',
               selectedCategory === category.value
-                ? 'bg-accent-primary text-white shadow-lg shadow-accent-primary/30'
-                : 'bg-white border border-neutral-200 text-secondary hover:border-accent-primary hover:text-accent-primary'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-blue-600 hover:text-blue-700'
             ]"
           >
             {{ category.label }}
@@ -45,7 +43,7 @@
             v-for="project in filteredProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all hover:-translate-y-2 hover:border-accent-primary hover:shadow-2xl"
+            class="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all hover:-translate-y-2 hover:border-blue-600 hover:shadow-2xl"
           >
             <!-- Project Image -->
             <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100">
@@ -62,14 +60,14 @@
                 <span class="rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-semibold text-neutral-700 shadow-sm">
                   {{ project.category }}
                 </span>
-                <span v-if="project.featured" class="rounded-full bg-accent-primary/95 backdrop-blur px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                <span v-if="project.featured" class="rounded-full bg-blue-600/95 backdrop-blur px-3 py-1 text-xs font-semibold text-white shadow-sm">
                   Featured
                 </span>
               </div>
 
               <!-- View Project Overlay -->
               <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary shadow-xl">
+                <div class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-900 shadow-xl">
                   View Project →
                 </div>
               </div>
@@ -77,17 +75,17 @@
 
             <!-- Project Info -->
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-primary group-hover:text-accent-primary transition-colors">
+              <h3 class="text-xl font-semibold text-neutral-900 group-hover:text-blue-700 transition-colors">
                 {{ project.title }}
               </h3>
-              <p class="mt-2 text-sm text-secondary line-clamp-2">
+              <p class="mt-2 text-sm text-neutral-600 line-clamp-2">
                 {{ project.description }}
               </p>
               
               <!-- Stats/Metrics -->
-              <div v-if="project.metrics" class="mt-4 flex items-center gap-4 text-xs text-tertiary">
+              <div v-if="project.metrics" class="mt-4 flex items-center gap-4 text-xs text-neutral-500">
                 <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1">
-                  <span class="font-semibold text-accent-primary">{{ metric.value }}</span>
+                  <span class="font-semibold text-blue-700">{{ metric.value }}</span>
                   <span>{{ metric.label }}</span>
                 </div>
               </div>
@@ -111,7 +109,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-16 w-16 mx-auto text-neutral-300">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <p class="mt-4 text-base text-secondary">No projects found in this category.</p>
+          <p class="mt-4 text-base text-neutral-600">No projects found in this category.</p>
         </div>
       </div>
     </section>
@@ -120,22 +118,22 @@
     <section class="mt-20 md:mt-24">
       <div class="max-w-4xl mx-auto px-4 lg:px-6">
         <div class="rounded-3xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 md:p-12 text-center shadow-xl">
-          <h2 class="text-2xl md:text-3xl font-bold text-primary">Ready to start your project?</h2>
-          <p class="mt-3 text-base text-secondary max-w-2xl mx-auto">
-            Let's build something amazing together. Get in touch to discuss your project and see how we can help.
+          <h2 class="text-2xl md:text-3xl font-bold text-neutral-900">Ready to get your site built?</h2>
+          <p class="mt-3 text-base text-neutral-600 max-w-2xl mx-auto">
+            Subscribe today and we'll start building this week. No contracts, no setup fees—just professional work that gets results.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <NuxtLink
-              to="/contact"
-              class="w-full sm:w-auto rounded-full bg-accent-primary px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-primary/30 transition hover:bg-accent-focus hover:shadow-xl"
+              to="/get-started"
+              class="w-full sm:w-auto rounded-full bg-neutral-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-neutral-800 hover:shadow-xl"
             >
-              Start a Project
+              Get Started
             </NuxtLink>
             <NuxtLink
-              to="/get-started"
-              class="w-full sm:w-auto rounded-full border-2 border-neutral-300 bg-white px-8 py-4 text-base font-semibold text-primary transition hover:border-accent-primary hover:bg-accent-subtle/20"
+              to="/contact"
+              class="w-full sm:w-auto rounded-full border-2 border-blue-200 bg-blue-50 px-8 py-4 text-base font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300"
             >
-              View Pricing
+              Contact Us
             </NuxtLink>
           </div>
         </div>

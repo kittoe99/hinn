@@ -13,7 +13,7 @@
           <span class="text-sm text-neutral-600">{{ Math.round((currentStep / totalSteps) * 100) }}% complete</span>
         </div>
         <div class="h-2 bg-neutral-100 rounded-full overflow-hidden">
-          <div class="h-full bg-neutral-900 transition-all duration-300" :style="{ width: `${(currentStep / totalSteps) * 100}%` }"></div>
+          <div class="h-full bg-blue-600 transition-all duration-300" :style="{ width: `${(currentStep / totalSteps) * 100}%` }"></div>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
                     :class="[
                       'flex h-full flex-col justify-center rounded-lg border-2 p-4 text-left transition',
                       formData.siteType === type
-                        ? 'border-neutral-900 bg-neutral-50'
+                        ? 'border-blue-600 bg-blue-50'
                         : validationErrors.siteType
                         ? 'border-red-300 bg-red-50 hover:border-red-400'
                         : 'border-neutral-200 bg-white hover:border-neutral-300'
@@ -161,7 +161,7 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm font-medium transition',
                           formData.contactMethod === method.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -195,7 +195,7 @@
                           class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <svg v-if="!isEnhancing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
                           </svg>
                           <svg v-else class="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -245,7 +245,7 @@
                         :class="[
                           'rounded-2xl border px-6 py-3 text-sm font-medium transition',
                           formData.hasCurrentWebsite === option.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -361,7 +361,7 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.selectedServices.includes(service)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -455,7 +455,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.coverageType === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
@@ -474,7 +474,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.onSiteMode === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : validationErrors.onSiteMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
@@ -538,7 +538,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.businessHoursMode === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : validationErrors.businessHoursMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
@@ -573,7 +573,7 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.languages.includes(language)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -602,7 +602,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.hasLogo === (option.value === 'yes')
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
@@ -649,7 +649,7 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.designStyles.includes(style)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -669,7 +669,7 @@
                         :class="[
                           'rounded-2xl border px-4 py-2 text-sm transition',
                           formData.emotionalImpact.includes(tone)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -690,7 +690,7 @@
                         :class="[
                           'flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition',
                           formData.colorTheme === theme.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                            ? 'border-blue-600 bg-blue-50 text-blue-700'
                             : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                         ]"
                       >
@@ -707,7 +707,7 @@
                         </div>
                         <svg
                           v-if="formData.colorTheme === theme.value"
-                          class="h-4 w-4 text-neutral-900"
+                          class="h-4 w-4 text-blue-600"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -731,7 +731,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.highContrast === false
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >
@@ -743,7 +743,7 @@
                           :class="[
                             'rounded-2xl border px-4 py-2 text-sm transition',
                             formData.highContrast === true
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-blue-600 bg-blue-50 text-blue-700'
                               : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900'
                           ]"
                         >

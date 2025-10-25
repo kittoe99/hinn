@@ -5,59 +5,66 @@
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
         <div class="grid gap-8 md:grid-cols-2 md:items-center">
           <header class="max-w-3xl">
-            <p class="text-xs font-semibold uppercase tracking-wider text-accent-primary">Marketing strategy & execution</p>
-            <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-primary">
-              Digital Marketing Services & Campaign Management
+            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+              <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+              Marketing & Branding
+            </div>
+            <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">
+              Marketing & branding that actually drives growth—done for you
             </h1>
-            <p class="mt-4 text-base md:text-lg text-secondary leading-relaxed">
-              Monthly sprint-based marketing that combines strategy, content, paid media, lifecycle automation, and measurement. We embed with your team to plan, ship, and iterate campaigns quickly.
+            <p class="mt-4 text-base md:text-lg text-neutral-600 leading-relaxed">
+              We handle your brand identity, content creation, and campaign execution. You get professional marketing that works—no agencies to manage, no freelancers to chase.
             </p>
           </header>
           <div class="flex justify-center md:justify-end">
-            <img src="/marketing-hero.svg" alt="Marketing Services Illustration" class="w-full max-w-md" />
+            <img
+              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop"
+              alt="Marketing team collaboration"
+              class="w-full max-w-md md:max-w-lg aspect-[4/3] object-cover rounded-xl border border-neutral-200 shadow-sm"
+              loading="lazy"
+            />
           </div>
         </div>
         <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
           <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
           <div class="relative space-y-6">
             <div>
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Where we plug in</h2>
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">What's included</h2>
               <p class="mt-2 text-sm text-neutral-700">
-                From strategy and creative to paid growth and analytics, we ship integrated campaigns with tight feedback loops and shared KPIs.
+                Brand identity, content creation, and campaign management—all handled for you monthly.
               </p>
             </div>
             <dl class="grid gap-3 md:grid-cols-2">
               <div
                 v-for="signal in heroSignals"
                 :key="signal.label"
-                class="rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-accent-primary hover:shadow-xl"
+                class="rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl"
               >
                 <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ signal.label }}</dt>
-                <dd class="mt-1 text-xl font-semibold text-primary">{{ signal.value }}</dd>
-                <p class="mt-1 text-xs text-secondary">{{ signal.detail }}</p>
+                <dd class="mt-1 text-xl font-semibold text-neutral-900">{{ signal.value }}</dd>
               </div>
             </dl>
             <div class="flex flex-wrap gap-3">
-              <button class="rounded-full bg-accent-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
-                Plan a campaign sprint
-              </button>
-              <a href="#services" class="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-accent-primary hover:text-accent-primary">
-                Explore deliverables
+              <NuxtLink to="/get-started" class="rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800">
+                Get started
+              </NuxtLink>
+              <a href="#services" class="rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300">
+                See what's included
               </a>
             </div>
           </div>
           <div class="relative rounded-3xl border border-neutral-200 bg-neutral-50/90 p-6 shadow-inner shadow-white/60">
             <div class="absolute inset-x-6 -top-4 flex justify-center">
-              <span class="inline-flex items-center rounded-full bg-accent-primary/10 px-3 py-1 text-xs font-semibold text-accent-primary">
-                Sprint artifacts
+              <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                Deliverables
               </span>
             </div>
             <div class="flex items-start justify-between gap-4">
               <div>
-                <p class="text-xs uppercase tracking-wide text-neutral-500">Everything you receive</p>
-                <p class="mt-1 text-lg font-semibold text-primary">Campaign, creative & analytics assets</p>
+                <p class="text-xs uppercase tracking-wide text-neutral-500">What you get</p>
+                <p class="mt-1 text-lg font-semibold text-neutral-900">Everything you need to market your business</p>
               </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-subtle/80 text-accent-primary">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-200 bg-blue-50 text-blue-700">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                 </svg>
@@ -77,23 +84,23 @@
     <section id="services" class="mt-12 md:mt-16">
       <div class="max-w-5xl mx-auto px-3 sm:px-4">
         <header class="text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">Full-Service Digital Marketing Solutions</h2>
-          <p class="mt-3 text-sm md:text-base text-secondary max-w-3xl mx-auto">
-            Integrated marketing campaigns combining brand strategy, content marketing, email automation, social media advertising, SEO optimization, and conversion rate optimization—all managed by expert strategists and designers.
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">What we build for you</h2>
+          <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-3xl mx-auto">
+            From brand identity to campaign execution—we handle everything so you can focus on running your business.
           </p>
         </header>
         <div class="mt-8 grid md:grid-cols-3 gap-5">
-          <article v-for="lane in marketingLanes" :key="lane.title" class="flex flex-col gap-3 rounded-2xl border border-soft bg-white p-5">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+          <article v-for="lane in marketingLanes" :key="lane.title" class="flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-5">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="lane.icon" />
               </svg>
             </div>
-            <h3 class="text-base font-semibold text-primary">{{ lane.title }}</h3>
-            <p class="text-sm text-secondary">{{ lane.desc }}</p>
+            <h3 class="text-base font-semibold text-neutral-900">{{ lane.title }}</h3>
+            <p class="text-sm text-neutral-600">{{ lane.desc }}</p>
             <ul class="mt-1 space-y-1 text-sm text-neutral-700">
               <li v-for="deliverable in lane.deliverables" :key="deliverable" class="flex items-start gap-2">
-                <span class="mt-0.5 text-accent-primary">•</span>
+                <span class="mt-0.5 text-blue-600">•</span>
                 <span>{{ deliverable }}</span>
               </li>
             </ul>
@@ -102,62 +109,65 @@
       </div>
     </section>
 
-    <!-- Playbook -->
-    <section class="mt-12 md:mt-16 bg-neutral-50 py-10 md:py-14">
-      <div class="max-w-6xl mx-auto px-3 sm:px-4">
-        <div class="grid md:grid-cols-[1fr_1.1fr] gap-8 items-start">
-          <div>
-            <h2 class="text-2xl font-semibold tracking-tight text-primary">Our playbook for repeatable growth</h2>
-            <p class="mt-3 text-sm md:text-base text-secondary">
-              We pair deep research with agile execution. Every sprint ladders up to a quarterly growth thesis and is measured against shared KPIs.
-            </p>
-            <ul class="mt-5 space-y-3 text-sm text-neutral-700">
-              <li v-for="principle in playbookPrinciples" :key="principle" class="flex items-start gap-2">
-                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-subtle text-xs font-semibold text-accent-primary">✓</span>
-                <span>{{ principle }}</span>
-              </li>
-            </ul>
+    <!-- How it works -->
+    <section class="mt-12 md:mt-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <header class="text-center">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">How it works</h2>
+          <p class="mt-3 text-sm md:text-base text-neutral-600">
+            Subscribe, share your goals, and we'll handle everything—from brand design to campaign execution.
+          </p>
+          <div class="mt-5 flex flex-wrap justify-center gap-2">
+            <span
+              v-for="chip in operatingCommitments"
+              :key="chip"
+              class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700"
+            >
+              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0z" clip-rule="evenodd"/></svg>
+              {{ chip }}
+            </span>
           </div>
-          <div class="relative pl-5 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-px before:bg-neutral-200">
-            <div v-for="stage in playbookStages" :key="stage.title" class="relative mb-6 last:mb-0">
-              <span class="absolute -left-[11px] top-1 h-5 w-5 rounded-full border border-accent-primary bg-white text-xs font-semibold text-accent-primary flex items-center justify-center">{{ stage.phase }}</span>
-              <div class="rounded-2xl border border-soft bg-white p-4">
-                <p class="text-xs uppercase tracking-wide text-neutral-500">{{ stage.label }}</p>
-                <h3 class="mt-1 text-sm font-semibold text-primary">{{ stage.title }}</h3>
-                <p class="mt-2 text-sm text-secondary">{{ stage.detail }}</p>
-              </div>
+        </header>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div v-for="stage in playbookStages" :key="stage.title" class="rounded-2xl border border-neutral-200 bg-white p-5">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-blue-600 text-sm font-bold text-blue-700">{{ stage.phase }}</span>
+              <span class="text-xs uppercase tracking-wide text-neutral-500">{{ stage.label }}</span>
             </div>
+            <h3 class="mt-3 text-sm font-semibold text-neutral-900">{{ stage.title }}</h3>
+            <p class="mt-2 text-sm text-neutral-600">{{ stage.detail }}</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Campaign library -->
-    <section class="mt-12 md:mt-16">
-      <div class="max-w-5xl mx-auto px-3 sm:px-4">
+    <section class="mt-12 md:mt-16 bg-neutral-50 py-10 md:py-14">
+      <div class="max-w-6xl mx-auto px-3 sm:px-4">
         <header class="text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-primary">Marketing Campaigns & Content Strategy</h2>
-          <p class="mt-3 text-sm md:text-base text-secondary max-w-3xl mx-auto">
-            Data-driven marketing campaigns including landing page optimization, email sequences, social media content calendars, paid advertising creative, and content marketing strategies tailored to your business goals.
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">Campaign templates we customize for you</h2>
+          <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-3xl mx-auto">
+            Pick a campaign type and we'll adapt it to your brand, create all the assets, and manage the execution—all included monthly.
           </p>
         </header>
-        <div class="mt-8 grid md:grid-cols-2 gap-5">
-          <article v-for="campaign in campaignLibrary" :key="campaign.title" class="rounded-2xl border border-soft bg-white p-5 text-left">
+        <div class="mt-8 grid md:grid-cols-2 gap-4">
+          <article v-for="campaign in campaignLibrary" :key="campaign.title" class="rounded-2xl border border-neutral-200 bg-white p-5 text-left">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-xs uppercase tracking-wide text-neutral-500">{{ campaign.goal }}</p>
-                <h3 class="mt-1 text-base font-semibold text-primary">{{ campaign.title }}</h3>
+                <h3 class="mt-1 text-sm font-semibold text-neutral-900">{{ campaign.title }}</h3>
               </div>
-              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                   <path stroke-linecap="round" stroke-linejoin="round" :d="campaign.icon" />
                 </svg>
               </div>
             </div>
-            <p class="mt-3 text-sm text-secondary">{{ campaign.desc }}</p>
+            <p class="mt-3 text-sm text-neutral-600">{{ campaign.desc }}</p>
             <ul class="mt-4 space-y-2 text-sm text-neutral-700">
               <li v-for="asset in campaign.assets" :key="asset" class="flex items-start gap-2">
-                <span class="mt-0.5 text-accent-primary">•</span>
+                <span class="mt-0.5 text-blue-600">•</span>
                 <span>{{ asset }}</span>
               </li>
             </ul>
@@ -166,49 +176,20 @@
       </div>
     </section>
 
-    <!-- Measurement -->
-    <section class="mt-12 md:mt-16 bg-neutral-900 py-10 md:py-14 text-white">
-      <div class="max-w-6xl mx-auto px-3 sm:px-4">
-        <div class="grid md:grid-cols-[1fr_1fr] gap-8 items-center">
-          <div>
-            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Clarity on what’s working every step of the way</h2>
-            <p class="mt-3 text-sm md:text-base text-neutral-200">
-              From attribution to creative testing, we set up dashboards that make it easy for stakeholders to see results and plan the next sprint.
-            </p>
-            <ul class="mt-5 space-y-3 text-sm text-neutral-100">
-              <li v-for="insight in measurementInsights" :key="insight" class="flex items-start gap-2">
-                <span class="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-white/20 text-xs font-semibold text-white">✓</span>
-                <span>{{ insight }}</span>
-              </li>
-            </ul>
-          </div>
-          <div class="rounded-3xl border border-white/20 bg-white/5 p-6 text-left">
-            <h3 class="text-lg font-semibold">Reporting stack</h3>
-            <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-neutral-100">
-              <li v-for="tool in reportingTools" :key="tool" class="rounded-2xl border border-white/20 bg-white/10 px-4 py-3">{{ tool }}</li>
-            </ul>
-            <button class="mt-6 rounded-full border border-white/40 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10">
-              View sample reports
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="mt-12 md:mt-16">
       <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-semibold tracking-tight text-primary">Let’s co-create your next marketing chapter</h2>
-        <p class="mt-3 text-sm md:text-base text-secondary max-w-2xl mx-auto">
-          Tell us what you’re solving for—pipeline, retention, awareness—and we’ll architect the roadmap and show you how we’ll measure success.
+        <h2 class="text-2xl font-semibold tracking-tight text-neutral-900">Ready to grow your brand?</h2>
+        <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-2xl mx-auto">
+          Subscribe today and we'll start building your brand this week. No setup fees, no contracts—just professional marketing that works. Cancel anytime.
         </p>
         <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <button class="rounded-full bg-accent-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-focus">
-            Request a strategy session
-          </button>
-          <button class="rounded-full border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 transition hover:bg-neutral-50">
-            Download our capabilities deck
-          </button>
+          <NuxtLink to="/get-started" class="rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800">
+            Get started
+          </NuxtLink>
+          <a href="#services" class="rounded-full border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300">
+            See what's included
+          </a>
         </div>
       </div>
     </section>
@@ -263,37 +244,36 @@ const marketingLanes = [
   }
 ]
 
-const playbookPrinciples = [
-  'Quarterly growth thesis anchored in revenue targets',
-  'Customer interviews feed positioning and creative briefs',
-  'Two-week sprints with mid-sprint reviews and async recaps',
-  'Transparent backlog prioritized with your leadership team'
+const operatingCommitments = [
+  'Cancel anytime',
+  'Unlimited revisions',
+  'Weekly updates'
 ]
 
 const playbookStages = [
   {
     phase: '01',
-    label: 'Discovery',
-    title: 'Insights & alignment workshop',
-    detail: 'Audit messaging, funnel performance, audience data, and goals to craft the quarterly thesis.'
+    label: 'Subscribe',
+    title: 'Pick your plan',
+    detail: 'Choose monthly or annual. Cancel anytime.'
   },
   {
     phase: '02',
-    label: 'Strategy',
-    title: 'Channel + creative roadmap',
-    detail: 'Plot sprint themes, define KPIs, and select campaigns that support near-term and long-term growth.'
+    label: 'Kickoff',
+    title: 'Share your vision',
+    detail: 'Tell us about your brand, goals, and target audience.'
   },
   {
     phase: '03',
-    label: 'Execution',
-    title: 'Production & launch',
-    detail: 'Design, write, develop, and deploy campaigns with QA, tracking, and enablement collateral included.'
+    label: 'Build',
+    title: 'We create everything',
+    detail: 'Sit back while we design your brand and build campaigns.'
   },
   {
     phase: '04',
-    label: 'Optimization',
-    title: 'Review & iterate',
-    detail: 'Analyze performance, ship experiments, and adjust the backlog based on impact and learning velocity.'
+    label: 'Launch',
+    title: 'Go live & iterate',
+    detail: 'We launch, monitor results, and improve weekly.'
   }
 ]
 

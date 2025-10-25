@@ -4,50 +4,51 @@
     <section class="px-3 pb-20 sm:px-4">
       <div class="mx-auto max-w-5xl pt-16">
         <div class="rounded-3xl border border-neutral-200 bg-white p-8 sm:p-10">
-          <span class="text-xs font-medium uppercase tracking-wider text-accent-primary">
-            Contact
-          </span>
-          <h1 class="mt-4 text-3xl font-semibold tracking-tight text-primary md:text-4xl">
-            Let's build something great together
+          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+            Contact Us
+          </div>
+          <h1 class="mt-4 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
+            Ready to get started?
           </h1>
-          <p class="mt-3 text-base leading-relaxed text-secondary">
-            Tell us about your goals and we'll connect you with the right team member. We respond to every message within one business day.
+          <p class="mt-3 text-base leading-relaxed text-neutral-600">
+            Tell us what you need and we'll handle the rest. Subscribe today and we'll start building this week. No contracts, cancel anytime.
           </p>
         </div>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <!-- Contact Info -->
-          <aside class="space-y-6 rounded-3xl border border-soft bg-white/80 p-6 shadow-sm shadow-neutral-900/5 backdrop-blur">
+          <aside class="space-y-6 rounded-3xl border border-neutral-200 bg-white/80 p-6 shadow-sm shadow-neutral-900/5 backdrop-blur">
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide text-secondary">Availability</p>
-              <p class="mt-2 text-sm text-secondary">We take on a limited number of projects each month to keep quality high. Share your timeline and we'll let you know if we’re a fit.</p>
+              <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Response time</p>
+              <p class="mt-2 text-sm text-neutral-600">We respond to every message within one business day. Most clients start within the same week.</p>
             </div>
 
             <div class="space-y-5">
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-base font-semibold text-primary">Email</h3>
-                  <a href="mailto:hello@hinn.studio" class="mt-1 text-sm text-secondary hover:text-accent-primary transition-colors">
+                  <h3 class="text-base font-semibold text-neutral-900">Email</h3>
+                  <a href="mailto:hello@hinn.studio" class="mt-1 text-sm text-neutral-600 hover:text-blue-700 transition-colors">
                     hello@hinn.studio
                   </a>
                 </div>
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-accent-subtle text-accent-primary">
+                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-base font-semibold text-primary">Location</h3>
-                  <p class="mt-1 text-sm text-secondary">
+                  <h3 class="text-base font-semibold text-neutral-900">Location</h3>
+                  <p class="mt-1 text-sm text-neutral-600">
                     Remote-first team<br />
                     Serving clients worldwide
                   </p>
@@ -56,15 +57,15 @@
             </div>
 
             <div>
-              <div class="rounded-3xl border border-dashed border-accent-subtle bg-accent-subtle/40 p-5">
-                <h3 class="text-base font-semibold text-primary">Response time</h3>
-                <p class="mt-2 text-sm text-secondary leading-relaxed">You'll hear from us within one business day. Mention any deadlines and we'll factor them into our reply.</p>
+              <div class="rounded-3xl border border-dashed border-blue-200 bg-blue-50 p-5">
+                <h3 class="text-base font-semibold text-neutral-900">What happens next</h3>
+                <p class="mt-2 text-sm text-neutral-600 leading-relaxed">We'll review your message and send you a calendar link to schedule a quick call. Most clients start within the same week.</p>
               </div>
             </div>
           </aside>
 
           <!-- Contact Form -->
-          <div class="rounded-3xl border border-soft bg-white/90 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
+          <div class="rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-neutral-900/5 backdrop-blur sm:p-8">
             <!-- Success Message -->
             <div v-if="submitted" class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
               <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
@@ -96,30 +97,30 @@
 
             <!-- Form Steps -->
             <div v-if="!submitted" class="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wide text-secondary">Step {{ currentStep }} of {{ steps.length }}</p>
-              <h2 class="mt-1 text-lg font-semibold text-primary">{{ steps[currentStep - 1].title }}</h2>
-              <p class="mt-1 text-sm text-secondary">{{ steps[currentStep - 1].headline }}</p>
+              <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Step {{ currentStep }} of {{ steps.length }}</p>
+              <h2 class="mt-1 text-lg font-semibold text-neutral-900">{{ steps[currentStep - 1].title }}</h2>
+              <p class="mt-1 text-sm text-neutral-600">{{ steps[currentStep - 1].headline }}</p>
             </div>
 
             <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-if="!submitted && currentStep === 1">
               <div class="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label class="mb-1 block text-sm font-medium text-primary">First Name *</label>
+                  <label class="mb-1 block text-sm font-medium text-neutral-900">First Name *</label>
                   <input
                     v-model="form.firstName"
                     type="text"
                     required
-                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="John"
                   />
                 </div>
                 <div>
-                  <label class="mb-1 block text-sm font-medium text-primary">Last Name *</label>
+                  <label class="mb-1 block text-sm font-medium text-neutral-900">Last Name *</label>
                   <input
                     v-model="form.lastName"
                     type="text"
                     required
-                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Doe"
                   />
                 </div>
@@ -127,42 +128,42 @@
 
               <div class="grid gap-4 sm:grid-cols-2">
                 <div class="sm:col-span-2">
-                  <label class="mb-1 block text-sm font-medium text-primary">Work Email *</label>
+                  <label class="mb-1 block text-sm font-medium text-neutral-900">Work Email *</label>
                   <input
                     v-model="form.email"
                     type="email"
                     required
-                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="john@company.com"
                   />
                 </div>
                 <div>
-                  <label class="mb-1 block text-sm font-medium text-primary">Company</label>
+                  <label class="mb-1 block text-sm font-medium text-neutral-900">Company</label>
                   <input
                     v-model="form.company"
                     type="text"
-                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Company"
                   />
                 </div>
                 <div>
-                  <label class="mb-1 block text-sm font-medium text-primary">Phone (optional)</label>
+                  <label class="mb-1 block text-sm font-medium text-neutral-900">Phone (optional)</label>
                   <input
                     v-model="form.phone"
                     type="tel"
-                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus-border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft"
+                    class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
               </div>
 
-              <div class="rounded-2xl bg-neutral-50 px-4 py-3 text-xs text-secondary">
+              <div class="rounded-2xl bg-neutral-50 px-4 py-3 text-xs text-neutral-600">
                 <p>We’ll send scheduling details and prep materials to your inbox after this step.</p>
               </div>
 
               <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                <p class="text-xs text-secondary">Prefer async updates only? Let us know in the notes.</p>
-                <button type="submit" class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
+                <p class="text-xs text-neutral-600">Prefer async updates only? Let us know in the notes.</p>
+                <button type="submit" class="inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800">
                   Continue
                 </button>
               </div>
@@ -170,7 +171,7 @@
 
             <form @submit.prevent="nextStep" class="mt-6 space-y-6" v-else-if="!submitted && currentStep === 2">
               <div>
-                <label class="mb-1 block text-sm font-medium text-primary">What do you need help with? *</label>
+                <label class="mb-1 block text-sm font-medium text-neutral-900">What do you need help with? *</label>
                 <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                   <button
                     v-for="option in interestOptions"
@@ -180,8 +181,8 @@
                     :class="[
                       'rounded-2xl border px-4 py-2 text-sm transition',
                       form.interests.includes(option.value)
-                        ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                        : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                        ? 'border-blue-600 bg-blue-50 text-neutral-900 shadow-sm'
+                        : 'border-neutral-200 bg-white text-neutral-600 hover:border-blue-300 hover:text-neutral-900'
                     ]"
                   >
                     {{ option.label }}
@@ -190,7 +191,7 @@
               </div>
 
               <div>
-                <label class="mb-1 block text-sm font-medium text-primary">Project timeline *</label>
+                <label class="mb-1 block text-sm font-medium text-neutral-900">Project timeline *</label>
                 <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
                   <button
                     v-for="timeline in timelineOptions"
@@ -200,8 +201,8 @@
                     :class="[
                       'rounded-2xl border px-4 py-2 text-sm transition',
                       form.timeline === timeline
-                        ? 'border-accent-primary bg-accent-subtle text-primary shadow-sm'
-                        : 'border-neutral-200 bg-white text-secondary hover:border-accent-soft hover:text-primary'
+                        ? 'border-blue-600 bg-blue-50 text-neutral-900 shadow-sm'
+                        : 'border-neutral-200 bg-white text-neutral-600 hover:border-blue-300 hover:text-neutral-900'
                     ]"
                   >
                     {{ timeline }}
@@ -210,20 +211,20 @@
               </div>
 
               <div>
-                <label class="mb-1 block text-sm font-medium text-primary">Notes or link to brief</label>
+                <label class="mb-1 block text-sm font-medium text-neutral-900">Notes or link to brief</label>
                 <textarea
                   v-model="form.notes"
                   rows="4"
-                  class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft resize-none"
+                  class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   placeholder="Share anything else we should know."
                 />
               </div>
 
               <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                <button type="button" @click="prevStep" class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-primary transition hover:bg-neutral-50">
+                <button type="button" @click="prevStep" class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-50">
                   Back
                 </button>
-                <button type="submit" class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-focus">
+                <button type="submit" class="inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800">
                   Continue
                 </button>
               </div>
@@ -231,18 +232,18 @@
 
             <form @submit.prevent="handleSubmit" class="mt-6 space-y-6" v-else-if="!submitted && currentStep === 3">
               <div>
-                <label class="mb-1 block text-sm font-medium text-primary">Message *</label>
+                <label class="mb-1 block text-sm font-medium text-neutral-900">Message *</label>
                 <textarea
                   v-model="form.message"
                   rows="5"
                   required
-                  class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-primary shadow-inner focus:border-accent-soft focus:outline-none focus:ring-2 focus:ring-accent-soft resize-none"
+                  class="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 shadow-inner focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   placeholder="Tell us about your project, success metrics, or constraints."
                 />
               </div>
 
-              <div class="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-4 text-xs text-secondary">
-                <p class="font-semibold text-primary">Here's what happens next:</p>
+              <div class="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-4 text-xs text-neutral-600">
+                <p class="font-semibold text-neutral-900">Here's what happens next:</p>
                 <p class="mt-2 leading-6">We'll review your note, match you with a strategist, and send an intro email with next steps and suggested time slots.</p>
               </div>
 
@@ -250,7 +251,7 @@
                 <button
                   type="submit"
                   :disabled="submitting"
-                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-focus disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg v-if="submitting" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -273,8 +274,8 @@
     <section class="mt-16 md:mt-24 pb-16">
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
         <div class="text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-primary">Common Questions</h2>
-          <p class="mt-3 text-base text-secondary">
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Common Questions</h2>
+          <p class="mt-3 text-base text-neutral-600">
             Quick answers to questions you might have before reaching out
           </p>
         </div>
@@ -282,15 +283,15 @@
           <details
             v-for="faq in faqs"
             :key="faq.question"
-            class="group rounded-3xl border border-soft bg-white p-5 transition-colors open:border-accent-subtle open:bg-accent-subtle/20"
+            class="group rounded-3xl border border-neutral-200 bg-white p-5 transition-colors open:border-blue-200 open:bg-blue-50/50"
           >
-            <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-primary marker:hidden">
+            <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-neutral-900 marker:hidden">
               <span>{{ faq.question }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4 text-neutral-500 transition-transform group-open:rotate-180">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
-            <p class="mt-3 text-sm text-secondary">{{ faq.answer }}</p>
+            <p class="mt-3 text-sm text-neutral-600">{{ faq.answer }}</p>
           </details>
         </div>
       </div>

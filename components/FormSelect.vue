@@ -2,8 +2,8 @@
   <div ref="root" class="relative">
     <button
       type="button"
-      class="flex w-full items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3 text-left text-sm text-primary shadow-inner transition focus:outline-none focus:ring-2 focus:ring-accent-soft"
-      :class="{ 'border-accent-primary ring-2 ring-accent-soft': open }"
+      class="flex w-full items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3 text-left text-sm text-neutral-900 shadow-inner transition focus:outline-none focus:ring-0"
+      :class="{ 'border-blue-600 ring-2 ring-blue-100': open }"
       @click="toggle"
     >
       <span :class="selectedLabel ? 'text-primary' : 'text-secondary'">
@@ -34,15 +34,15 @@
             type="button"
             class="flex w-full items-center justify-between px-4 py-2 text-left text-sm transition hover:bg-neutral-50"
             :class="{
-              'bg-accent-subtle text-primary': getValue(option) === modelValue,
-              'text-primary': getValue(option) !== modelValue
+              'bg-blue-50 text-blue-700': getValue(option) === modelValue,
+              'text-neutral-900': getValue(option) !== modelValue
             }"
             @click="select(option)"
           >
             <span>{{ getLabel(option) }}</span>
             <svg
               v-if="getValue(option) === modelValue"
-              class="ml-2 h-4 w-4 text-accent-primary"
+              class="ml-2 h-4 w-4 text-blue-600"
               viewBox="0 0 20 20"
               fill="currentColor"
             >

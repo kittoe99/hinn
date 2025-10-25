@@ -6,11 +6,15 @@
       
       <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center max-w-4xl mx-auto">
+          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 opacity-0 animate-fade-in" style="animation-delay: 0ms">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+            Monthly services
+          </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 opacity-0 animate-fade-in" style="animation-delay: 0ms">
-            Websites, Branding & AI Agents
+            Your website, brand & AI—built & managed for you
           </h1>
           <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
-            Everything you need to grow your business, delivered monthly.
+            One monthly subscription. Zero technical work. We design, build, and maintain everything while you focus on growing your business.
           </p>
           <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4 opacity-0 animate-fade-in" style="animation-delay: 400ms">
             <NuxtLink
@@ -51,22 +55,22 @@
     <section id="features" class="mt-16 md:mt-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">What's Included</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Everything you need, nothing you don't</h2>
           <p class="mt-4 text-base text-neutral-600">
-            Websites, branding, and AI agents—delivered monthly.
+            No freelancers to manage. No agencies to chase. Just one team handling everything—from design to deployment to daily maintenance.
           </p>
         </div>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <div
             v-for="(feature, index) in featureHighlights"
             :key="feature.title"
-            class="group relative rounded-md border border-neutral-200 bg-white p-5 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-neutral-900 opacity-0 animate-fade-in-up overflow-hidden"
+            class="group relative rounded-md border border-neutral-200 bg-white p-5 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-blue-600 opacity-0 animate-fade-in-up overflow-hidden"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
             <div class="absolute inset-0 bg-gradient-to-br from-neutral-900/0 to-neutral-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute top-0 right-0 w-20 h-20 bg-neutral-900/5 rounded-full blur-2xl transform translate-x-10 -translate-y-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div class="relative z-10">
-              <div class="flex h-10 w-10 items-center justify-center rounded border border-neutral-200 bg-neutral-50 text-neutral-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-neutral-900 group-hover:text-white group-hover:border-neutral-900 group-hover:rotate-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded border border-blue-200 bg-blue-50 text-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 group-hover:rotate-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                   <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
                 </svg>
@@ -83,8 +87,8 @@
     <section id="subscription" class="mt-16 md:mt-20">
       <div class="max-w-5xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Choose Your Service</h2>
-          <p class="mt-3 text-base text-neutral-600 max-w-xl mx-auto">Pick what you need. Switch anytime.</p>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Pick your plan, we'll handle the rest</h2>
+          <p class="mt-3 text-base text-neutral-600 max-w-xl mx-auto">Subscribe monthly. Cancel anytime. No contracts, no surprises—just results.</p>
         </div>
 
         <div class="space-y-4">
@@ -92,7 +96,7 @@
             v-for="product in subscriptionProducts"
             :key="product.title"
             :to="product.href"
-            class="group relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-md border border-neutral-200 bg-white p-8 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-neutral-900 opacity-0 animate-fade-in-up overflow-hidden"
+            class="group relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-md border border-neutral-200 bg-white p-8 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-blue-600 opacity-0 animate-fade-in-up overflow-hidden"
             :style="{ animationDelay: `${product.delay}ms` }"
           >
             <div class="absolute inset-0 bg-gradient-to-r from-neutral-900/0 via-neutral-900/0 to-neutral-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -111,9 +115,9 @@
               </div>
             </div>
             <div class="flex-shrink-0 relative z-10">
-              <span class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 group-hover:gap-3 transition-all duration-300">
+              <span class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 group-hover:gap-3 transition-all duration-300">
                 {{ product.cta }}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-blue-700 group-hover:translate-x-1 transition-transform duration-300">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </span>
@@ -127,9 +131,9 @@
     <section class="mt-16 md:mt-24 py-20 bg-gradient-to-b from-white to-neutral-50">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Brand Identity</h2>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Stand out with professional branding</h2>
           <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-            Complete visual systems that make you memorable
+            We create complete brand identities—from logo to guidelines—so you look credible, professional, and ready to compete.
           </p>
         </div>
 
@@ -137,11 +141,11 @@
           <div 
             v-for="(item, index) in brandFeatures" 
             :key="item.title"
-            class="group relative rounded-lg border border-neutral-200 bg-white p-8 opacity-0 animate-fade-in-up transition-all duration-300 hover:border-neutral-900 hover:shadow-lg"
+            class="group relative rounded-lg border border-neutral-200 bg-white p-8 opacity-0 animate-fade-in-up transition-all duration-300 hover:border-blue-600 hover:shadow-lg"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
             <div class="absolute top-0 left-0 w-1 h-full bg-blue-200 transform scale-y-0 group-hover:scale-y-100 group-hover:bg-blue-300 transition-[transform,background-color] duration-300 origin-top"></div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-900 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+            <div class="flex items-center justify-center w-12 h-12 rounded-lg border border-blue-200 bg-blue-50 text-blue-700 mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-transform duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
               </svg>
@@ -169,9 +173,9 @@
     <section id="showcase" class="mt-16 md:mt-24 py-20">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Portfolio</h2>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Real sites we've built & launched</h2>
           <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-            Recent launches that shipped fast and converted.
+            From idea to live site in weeks, not months. See what we've shipped for businesses just like yours.
           </p>
         </div>
         
@@ -180,7 +184,7 @@
             v-for="(project, index) in showcaseProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-lg border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-neutral-900 hover:shadow-xl opacity-0 animate-fade-in-up"
+            class="group relative overflow-hidden rounded-lg border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl opacity-0 animate-fade-in-up"
             :style="{ animationDelay: `${index * 75}ms` }"
           >
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
@@ -227,8 +231,8 @@
     <section class="mt-16 md:mt-24 py-20 bg-neutral-50">
       <div class="max-w-4xl mx-auto px-4 lg:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">FAQ</h2>
-          <p class="mt-4 text-lg text-neutral-600">Common questions answered.</p>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Questions? We've got answers</h2>
+          <p class="mt-4 text-lg text-neutral-600">Everything you need to know about our done-for-you monthly service.</p>
         </div>
         <div class="space-y-3">
           <details
@@ -340,22 +344,22 @@ const subscriptionHighlights = [
 const featureHighlights = [
   {
     title: 'Websites',
-    description: 'Fast, modern sites built to convert visitors into customers.',
+    description: 'We design, build, and launch your site—then keep it fast, secure, and converting.',
     icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
   },
   {
     title: 'Branding',
-    description: 'Logos, colors, and assets that make you memorable.',
+    description: 'Complete visual identity—logo, colors, fonts—delivered ready to use everywhere.',
     icon: 'M3 5h18M8 5v14m8-14v14M4 19h16'
   },
   {
     title: 'AI Agents',
-    description: 'Smart bots that qualify leads and support customers 24/7.',
+    description: 'Autonomous agents handle support, qualify leads, and work 24/7—no training required.',
     icon: 'M9 5v2a2 2 0 002 2h2a2 2 0 002-2V5m-2 6v7m-6-7v7m-4 0h12'
   },
   {
-    title: 'Support',
-    description: 'Hosting, analytics, and ongoing optimization included.',
+    title: 'Fully Managed',
+    description: 'Hosting, security, backups, analytics\u2014we handle it all so you don\'t have to.',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
   }
 ]
@@ -363,26 +367,26 @@ const featureHighlights = [
 const subscriptionProducts = [
   {
     title: 'Websites',
-    description: 'Modern, high-performing websites built for you—no upfront fees. Design system, CMS & updates, and analytics included.',
-    tags: ['Design system', 'CMS & updates', 'Analytics'],
+    description: 'We design, build, host, and maintain your site. You get unlimited revisions, weekly updates, and a site that actually converts—all for one monthly fee.',
+    tags: ['Custom design', 'Hosting included', 'Weekly updates', 'SEO built-in'],
     href: '/website',
-    cta: 'Explore',
+    cta: 'Learn more',
     delay: 0
   },
   {
     title: 'AI Agents',
-    description: 'Automate support, lead-qualifying, and ops with reliable agents integrated into your stack.',
-    tags: ['RAG & tools', 'Workflows', 'Observability'],
+    description: 'Autonomous agents that handle customer support, qualify leads, and automate workflows. We build, train, and manage them—you just watch them work.',
+    tags: ['24/7 automation', 'CRM integration', 'Human oversight'],
     href: '/agents',
-    cta: 'See details',
+    cta: 'See how it works',
     delay: 150
   },
   {
     title: 'Marketing & Branding',
-    description: 'Positioning, visual identity, and campaigns that match your goals and amplify your reach.',
-    tags: ['Brand identity', 'Content', 'Campaigns'],
+    description: 'Complete brand identity, content strategy, and campaign execution. We handle everything from logo design to email campaigns—you approve and launch.',
+    tags: ['Brand identity', 'Content creation', 'Campaign management'],
     href: '/marketing',
-    cta: 'See details',
+    cta: 'Explore services',
     delay: 300
   }
 ]
