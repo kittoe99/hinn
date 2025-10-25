@@ -10,8 +10,13 @@
             <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
             Monthly services
           </div>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 opacity-0 animate-fade-in" style="animation-delay: 0ms">
-            Websites, marketing & AI agents—done for you
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mt-6 opacity-0 animate-fade-in" style="animation-delay: 100ms">
+            Websites, marketing & 
+            <span class="typewriter-container">
+              <span class="typewriter-word text-blue-600">{{ currentWord }}</span>
+            </span>
+            <br />
+            —done for you
           </h1>
           <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
             One monthly subscription. Zero technical work. We design, build, and maintain everything while you focus on growing your business.
@@ -304,6 +309,8 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 useHead({
   title: 'Professional Website Design & Development Services | Monthly Subscription | Hinn',
   meta: [
@@ -313,6 +320,52 @@ useHead({
         'Custom web design, React/Vue.js development, SEO optimization, and AI chatbot integration on a monthly subscription. Launch your website in 10 days with ongoing support and optimization.'
     }
   ]
+})
+
+// Typewriter effect - character by character with smooth transitions
+const currentWord = ref('')
+const words = ['AI agents', 'automation', 'chatbots', 'workflows']
+let wordIndex = 0
+let charIndex = 0
+let isDeleting = false
+let typewriterTimeout = null
+const isTransitioning = ref(false)
+
+const typeWriter = () => {
+  const currentFullWord = words[wordIndex]
+  
+  if (isDeleting) {
+    currentWord.value = currentFullWord.substring(0, charIndex - 1)
+    charIndex--
+  } else {
+    currentWord.value = currentFullWord.substring(0, charIndex + 1)
+    charIndex++
+  }
+  
+  let typeSpeed = isDeleting ? 60 : 120
+  
+  if (!isDeleting && charIndex === currentFullWord.length) {
+    typeSpeed = 3000 // Longer pause at end
+    isDeleting = true
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false
+    wordIndex = (wordIndex + 1) % words.length
+    typeSpeed = 500 // Short pause before next word
+  }
+  
+  typewriterTimeout = setTimeout(typeWriter, typeSpeed)
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    typeWriter()
+  }, 1500) // Start after initial animations
+})
+
+onUnmounted(() => {
+  if (typewriterTimeout) {
+    clearTimeout(typewriterTimeout)
+  }
 })
 
 // Subtle color palette for chips ("stickers")
@@ -603,5 +656,32 @@ const filteredShowcaseProjects = computed(() => {
 
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.typewriter-container {
+  display: inline-block;
+  width: 220px;
+  text-align: left;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.typewriter-word {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 1.2em;
+  line-height: 1.2em;
+  white-space: nowrap;
+}
+
+/* Smooth character appearance */
+.typewriter-word::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: transparent;
+  margin-left: 2px;
+  vertical-align: middle;
 }
 </style>
