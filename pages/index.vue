@@ -37,52 +37,6 @@
             </a>
           </div>
         </div>
-        
-        <!-- Hero Image -->
-        <div class="mt-8 relative max-w-2xl mx-auto">
-          <div class="rounded-xl border border-neutral-200 bg-white p-4">
-            <div class="relative aspect-[16/10] overflow-hidden rounded-xl">
-              <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80"
-                alt="Design team collaborating in a modern workspace"
-                class="h-full w-full object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-black/10" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Feature Section -->
-    <section id="features" class="mt-16 md:mt-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Everything you need, nothing you don't</h2>
-          <p class="mt-4 text-base text-neutral-600">
-            No freelancers to manage. No agencies to chase. Just one team handling everything—from design to deployment to daily maintenance.
-          </p>
-        </div>
-        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <div
-            v-for="(feature, index) in featureHighlights"
-            :key="feature.title"
-            class="group relative rounded-md border border-neutral-200 bg-white p-5 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-blue-600 opacity-0 animate-fade-in-up overflow-hidden"
-            :style="{ animationDelay: `${index * 100}ms` }"
-          >
-            <div class="absolute inset-0 bg-gradient-to-br from-neutral-900/0 to-neutral-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="absolute top-0 right-0 w-20 h-20 bg-neutral-900/5 rounded-full blur-2xl transform translate-x-10 -translate-y-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="flex h-10 w-10 items-center justify-center rounded border border-blue-200 bg-blue-50 text-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 group-hover:rotate-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
-                </svg>
-              </div>
-              <h3 class="mt-4 text-base font-semibold text-neutral-900 group-hover:text-neutral-900 transition-colors">{{ feature.title }}</h3>
-              <p class="mt-2 text-sm text-neutral-600 leading-relaxed">{{ feature.description }}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -125,48 +79,6 @@
                 </svg>
               </span>
             </div>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- Business Branding Section -->
-    <section class="mt-16 md:mt-24 py-20 bg-gradient-to-b from-white to-neutral-50">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Stand out with professional branding</h2>
-          <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-            We create complete brand identities—from logo to guidelines—so you look credible, professional, and ready to compete.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-          <div 
-            v-for="(item, index) in brandFeatures" 
-            :key="item.title"
-            class="group relative rounded-lg border border-neutral-200 bg-white p-8 opacity-0 animate-fade-in-up transition-all duration-300 hover:border-blue-600 hover:shadow-lg"
-            :style="{ animationDelay: `${index * 100}ms` }"
-          >
-            <div class="absolute top-0 left-0 w-1 h-full bg-blue-200 transform scale-y-0 group-hover:scale-y-100 group-hover:bg-blue-300 transition-[transform,background-color] duration-300 origin-top"></div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg border border-blue-200 bg-blue-50 text-blue-700 mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-transform duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-3">{{ item.title }}</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">{{ item.description }}</p>
-          </div>
-        </div>
-
-        <div class="mt-12 text-center">
-          <NuxtLink 
-            to="/marketing" 
-            class="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:gap-3"
-          >
-            View Branding Services
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
           </NuxtLink>
         </div>
       </div>
@@ -264,45 +176,6 @@
         </div>
       </div>
     </section>
-
-    <!-- FAQ -->
-    <section class="mt-16 md:mt-24 py-20 bg-neutral-50">
-      <div class="max-w-4xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Questions? We've got answers</h2>
-          <p class="mt-4 text-lg text-neutral-600">Everything you need to know about our done-for-you monthly service.</p>
-        </div>
-        <div class="space-y-3">
-          <details
-            v-for="(faq, index) in faqs"
-            :key="faq.question"
-            class="group rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-neutral-900 hover:shadow-lg opacity-0 animate-fade-in-up"
-            :style="{ animationDelay: `${index * 50}ms` }"
-          >
-            <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-neutral-900 marker:hidden">
-              <span>{{ faq.question }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-blue-600 transition-transform duration-300 group-open:rotate-180">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <p class="mt-4 text-sm text-neutral-600 leading-relaxed">{{ faq.answer }}</p>
-          </details>
-        </div>
-        
-        <div class="mt-12 text-center">
-          <p class="text-sm text-neutral-600 mb-4">Still have questions?</p>
-          <NuxtLink 
-            to="/contact" 
-            class="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:gap-3"
-          >
-            Contact Us
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -321,10 +194,10 @@ useHead({
 })
 
 // Typewriter effect with flip transition
-const currentWord = ref('')
 const words = ['AI agents', 'automation', 'chatbots', 'workflows']
+const currentWord = ref(words[0])
 let wordIndex = 0
-let charIndex = 0
+let charIndex = words[0].length
 let isTyping = true
 let typewriterTimeout = null
 const isFlipping = ref(false)
@@ -356,9 +229,18 @@ const typeWriter = () => {
 }
 
 onMounted(() => {
+  // First word is already shown, wait then start the flip cycle
   setTimeout(() => {
-    typeWriter()
-  }, 1500) // Start after initial animations
+    // Trigger flip to second word after pause
+    isFlipping.value = true
+    setTimeout(() => {
+      wordIndex = 1
+      charIndex = 0
+      currentWord.value = ''
+      isFlipping.value = false
+      typewriterTimeout = setTimeout(typeWriter, 100)
+    }, 600) // Flip animation duration
+  }, 3500) // Pause on first word before starting animation
 })
 
 onUnmounted(() => {
@@ -658,18 +540,18 @@ const filteredShowcaseProjects = computed(() => {
 }
 
 .hero-heading {
-  min-height: 120px;
+  min-height: 80px;
 }
 
 @media (min-width: 768px) {
   .hero-heading {
-    min-height: 140px;
+    min-height: 90px;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-heading {
-    min-height: 160px;
+    min-height: 100px;
   }
 }
 
