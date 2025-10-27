@@ -138,10 +138,11 @@ export default defineEventHandler(async (event) => {
         inspiration_sites: body.inspirationSites || null,
         envisioned_pages: body.envisionedPages || [],
         no_logo: body.noLogo || false,
-        uploaded_logo: body.uploadedLogo || null,
-        uploaded_assets: body.uploadedAssets || [],
+        uploaded_logo: body.uploadedLogo || null, // Stores URL string or null
+        uploaded_assets: body.uploadedAssets || [], // Stores array of {name, url, size}
         additional_notes: body.additionalNotes || null,
-        submission_status: 'submitted'
+        submission_status: 'submitted',
+        updated_at: new Date().toISOString()
       }
 
       // Find the website record that was created when the plan was selected

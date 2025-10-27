@@ -243,7 +243,102 @@
           </div>
         </section>
 
-        <!-- Section 2: Services & Operations -->
+        <!-- Section 2: Logo & Assets -->
+        <section class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden backdrop-blur-sm">
+          <button @click="toggleSection('logoAssets')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
+            <div class="flex items-center gap-3 flex-1 min-w-0">
+              <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-accent-primary/10 to-accent-focus/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="h-5 w-5 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-base font-bold text-primary mb-0.5">Logo & Assets</h2>
+                <p v-if="!expandedSections.logoAssets" class="hidden md:block text-sm text-secondary truncate">
+                  {{ (website.uploaded_logo ? 1 : 0) + (website.uploaded_assets?.length || 0) }} file(s)
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <span v-if="expandedSections.logoAssets" class="text-xs font-medium text-accent-primary px-2 py-1 rounded-md bg-accent-primary/10">
+                Expanded
+              </span>
+              <svg :class="['h-5 w-5 text-neutral-400 transition-all', expandedSections.logoAssets ? 'rotate-180 text-accent-primary' : 'group-hover:text-accent-primary']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </button>
+          <div v-show="expandedSections.logoAssets" class="px-6 pb-6 pt-2">
+            <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent mb-6"></div>
+            
+            <!-- Logo Section -->
+            <div class="mb-6">
+              <h3 class="text-sm font-semibold text-neutral-900 mb-3">Logo</h3>
+              <div v-if="website.uploaded_logo" class="border border-neutral-200 bg-white p-4">
+                <div class="flex items-center gap-4">
+                  <div class="flex-shrink-0 h-20 w-20 border border-neutral-200 bg-neutral-50 p-2 flex items-center justify-center overflow-hidden">
+                    <img :src="website.uploaded_logo" alt="Logo" class="max-h-full max-w-full object-contain" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-neutral-900">Current Logo</p>
+                    <a :href="website.uploaded_logo" target="_blank" class="text-xs text-neutral-600 hover:text-neutral-900 underline truncate block">View full size</a>
+                  </div>
+                  <button @click="deleteLogo" :disabled="deletingLogo" class="px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 border border-red-200 transition-colors disabled:opacity-50">
+                    {{ deletingLogo ? 'Deleting...' : 'Delete' }}
+                  </button>
+                </div>
+              </div>
+              <div v-else class="border-2 border-dashed border-neutral-300 bg-neutral-50 p-6">
+                <input ref="logoInput" type="file" accept="image/*" @change="handleLogoUpload" class="hidden" />
+                <div class="text-center">
+                  <svg class="h-12 w-12 text-neutral-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <p class="text-sm text-neutral-600 mb-3">No logo uploaded</p>
+                  <button @click="$refs.logoInput.click()" :disabled="uploadingLogo" class="bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors disabled:opacity-50">
+                    {{ uploadingLogo ? 'Uploading...' : 'Upload Logo' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assets Section -->
+            <div>
+              <h3 class="text-sm font-semibold text-neutral-900 mb-3">Additional Assets</h3>
+              <div v-if="website.uploaded_assets?.length" class="space-y-2 mb-4">
+                <div v-for="(asset, index) in website.uploaded_assets" :key="index" class="border border-neutral-200 bg-white p-3 flex items-center gap-3">
+                  <svg class="h-5 w-5 text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                  </svg>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-neutral-900 truncate">{{ asset.name }}</p>
+                    <p class="text-xs text-neutral-600">{{ formatFileSize(asset.size) }}</p>
+                  </div>
+                  <a :href="asset.url" target="_blank" class="px-3 py-1.5 text-xs font-medium text-neutral-700 hover:bg-neutral-50 border border-neutral-200 transition-colors">
+                    Download
+                  </a>
+                  <button @click="deleteAsset(index)" :disabled="deletingAsset === index" class="px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 border border-red-200 transition-colors disabled:opacity-50">
+                    {{ deletingAsset === index ? 'Deleting...' : 'Delete' }}
+                  </button>
+                </div>
+              </div>
+              <div class="border-2 border-dashed border-neutral-300 bg-neutral-50 p-6">
+                <input ref="assetsInput" type="file" multiple accept="image/*,.pdf,.doc,.docx" @change="handleAssetsUpload" class="hidden" />
+                <div class="text-center">
+                  <svg class="h-10 w-10 text-neutral-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                  </svg>
+                  <p class="text-sm text-neutral-600 mb-3">Upload additional assets (images, PDFs, documents)</p>
+                  <button @click="$refs.assetsInput.click()" :disabled="uploadingAssets" class="bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors disabled:opacity-50">
+                    {{ uploadingAssets ? 'Uploading...' : 'Upload Assets' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Services & Operations -->
         <section class="group rounded-2xl border border-neutral-200/60 bg-white shadow-sm hover:shadow-lg hover:border-accent-primary/30 transition-all overflow-hidden backdrop-blur-sm">
           <button @click="toggleSection('servicesOperations')" class="w-full flex items-center justify-between p-6 text-left hover:bg-gradient-to-r hover:from-accent-primary/5 hover:to-transparent transition-all">
             <div class="flex items-center gap-3 flex-1 min-w-0">
@@ -354,11 +449,20 @@ const onboarding = ref(null)
 const loading = ref(true)
 const error = ref(null)
 
-// Expandable sections state - consolidated to 2 sections
+// Expandable sections state - consolidated to 3 sections
 const expandedSections = ref({
   businessContact: false,
+  logoAssets: false,
   servicesOperations: false
 })
+
+// File upload state
+const logoInput = ref(null)
+const assetsInput = ref(null)
+const uploadingLogo = ref(false)
+const uploadingAssets = ref(false)
+const deletingLogo = ref(false)
+const deletingAsset = ref(null)
 
 const toggleSection = (section) => {
   expandedSections.value[section] = !expandedSections.value[section]
@@ -421,6 +525,161 @@ const fetchWebsite = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// File upload handlers
+const handleLogoUpload = async (event) => {
+  const file = event.target.files?.[0]
+  if (!file) return
+
+  uploadingLogo.value = true
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('fileType', 'logo')
+    formData.append('websiteId', websiteId)
+
+    const uploadResponse = await fetch('/api/upload/website-assets', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${session.access_token}` },
+      body: formData
+    })
+
+    if (!uploadResponse.ok) throw new Error('Upload failed')
+
+    const uploadData = await uploadResponse.json()
+    const logoUrl = uploadData.files[0]?.url
+
+    // Update website record
+    const { error: updateError } = await supabase
+      .from('websites')
+      .update({ uploaded_logo: logoUrl })
+      .eq('id', websiteId)
+
+    if (updateError) throw updateError
+
+    website.value.uploaded_logo = logoUrl
+    event.target.value = ''
+  } catch (err) {
+    console.error('Logo upload failed:', err)
+    alert('Failed to upload logo')
+  } finally {
+    uploadingLogo.value = false
+  }
+}
+
+const handleAssetsUpload = async (event) => {
+  const files = Array.from(event.target.files || [])
+  if (files.length === 0) return
+
+  uploadingAssets.value = true
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+
+    const uploadedUrls = []
+
+    for (const file of files) {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('fileType', 'asset')
+      formData.append('websiteId', websiteId)
+
+      const uploadResponse = await fetch('/api/upload/website-assets', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${session.access_token}` },
+        body: formData
+      })
+
+      if (uploadResponse.ok) {
+        const uploadData = await uploadResponse.json()
+        if (uploadData.files[0]) {
+          uploadedUrls.push({
+            name: file.name,
+            url: uploadData.files[0].url,
+            size: file.size
+          })
+        }
+      }
+    }
+
+    // Update website record
+    const currentAssets = website.value.uploaded_assets || []
+    const updatedAssets = [...currentAssets, ...uploadedUrls]
+
+    const { error: updateError } = await supabase
+      .from('websites')
+      .update({ uploaded_assets: updatedAssets })
+      .eq('id', websiteId)
+
+    if (updateError) throw updateError
+
+    website.value.uploaded_assets = updatedAssets
+    event.target.value = ''
+  } catch (err) {
+    console.error('Assets upload failed:', err)
+    alert('Failed to upload assets')
+  } finally {
+    uploadingAssets.value = false
+  }
+}
+
+const deleteLogo = async () => {
+  if (!confirm('Are you sure you want to delete the logo?')) return
+
+  deletingLogo.value = true
+  try {
+    const supabase = getSupabaseClient()
+    const { error: updateError } = await supabase
+      .from('websites')
+      .update({ uploaded_logo: null })
+      .eq('id', websiteId)
+
+    if (updateError) throw updateError
+
+    website.value.uploaded_logo = null
+  } catch (err) {
+    console.error('Logo deletion failed:', err)
+    alert('Failed to delete logo')
+  } finally {
+    deletingLogo.value = false
+  }
+}
+
+const deleteAsset = async (index) => {
+  if (!confirm('Are you sure you want to delete this asset?')) return
+
+  deletingAsset.value = index
+  try {
+    const supabase = getSupabaseClient()
+    const currentAssets = [...(website.value.uploaded_assets || [])]
+    currentAssets.splice(index, 1)
+
+    const { error: updateError } = await supabase
+      .from('websites')
+      .update({ uploaded_assets: currentAssets })
+      .eq('id', websiteId)
+
+    if (updateError) throw updateError
+
+    website.value.uploaded_assets = currentAssets
+  } catch (err) {
+    console.error('Asset deletion failed:', err)
+    alert('Failed to delete asset')
+  } finally {
+    deletingAsset.value = null
+  }
+}
+
+const formatFileSize = (bytes) => {
+  if (!bytes) return '0 B'
+  const k = 1024
+  const sizes = ['B', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i]
 }
 
 onMounted(() => {

@@ -1060,17 +1060,17 @@
             <!-- Step 8: Review & Submit -->
             <div v-if="currentStep === 8" class="space-y-6">
               <!-- Success Message -->
-              <div v-if="isSubmitted" class="rounded-3xl border border-green-200 bg-green-50 p-8 shadow-sm text-center">
-                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+              <div v-if="isSubmitted" class="border border-neutral-200 bg-white p-8 text-center">
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center border border-emerald-200 bg-emerald-50">
                   <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 class="text-xl font-bold text-green-900 mb-2">Onboarding Complete!</h3>
-                <p class="text-sm text-green-800 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
+                <h3 class="text-xl font-medium text-neutral-900 mb-2">Onboarding Complete!</h3>
+                <p class="text-sm text-neutral-600 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
                 <NuxtLink
                   to="/dashboard"
-                  class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-focus"
+                  class="inline-flex items-center justify-center bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
                 >
                   Go to Dashboard
                   <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
@@ -1953,29 +1953,72 @@ const handleSubmit = async () => {
   submissionErrors.value = []
   
   try {
-    // Create complete payload with all form data and file uploads
-    const payload = {
-      ...JSON.parse(JSON.stringify(formData.value)),
-      uploadedLogo: uploadedLogo.value ? {
-        name: uploadedLogo.value.name,
-        size: uploadedLogo.value.size,
-        preview: uploadedLogo.value.preview
-      } : null,
-      uploadedAssets: uploadedAssets.value.map(asset => ({
-        name: asset.name,
-        size: asset.size
-      }))
-    }
-    
-    console.log('[Onboarding] Submitting payload:', payload)
-    
-    // Get auth token from Supabase
+    // Get auth token for file uploads
     const { data: { session } } = await supabase.auth.getSession()
     const authToken = session?.access_token
     
     if (!authToken) {
       throw new Error('No authentication token found. Please sign in again.')
     }
+
+    // Upload logo if exists
+    let logoUrl = null
+    if (uploadedLogo.value?.file) {
+      const logoFormData = new FormData()
+      logoFormData.append('file', uploadedLogo.value.file)
+      logoFormData.append('fileType', 'logo')
+      logoFormData.append('websiteId', 'temp')
+      
+      const logoResponse = await fetch('/api/upload/website-assets', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${authToken}` },
+        body: logoFormData
+      })
+      
+      if (logoResponse.ok) {
+        const logoData = await logoResponse.json()
+        logoUrl = logoData.files[0]?.url || null
+      }
+    }
+
+    // Upload assets if exist
+    const assetUrls = []
+    if (uploadedAssets.value.length > 0) {
+      for (const asset of uploadedAssets.value) {
+        if (asset.file) {
+          const assetFormData = new FormData()
+          assetFormData.append('file', asset.file)
+          assetFormData.append('fileType', 'asset')
+          assetFormData.append('websiteId', 'temp')
+          
+          const assetResponse = await fetch('/api/upload/website-assets', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${authToken}` },
+            body: assetFormData
+          })
+          
+          if (assetResponse.ok) {
+            const assetData = await assetResponse.json()
+            if (assetData.files[0]) {
+              assetUrls.push({
+                name: asset.name,
+                url: assetData.files[0].url,
+                size: asset.size
+              })
+            }
+          }
+        }
+      }
+    }
+
+    // Create complete payload with file URLs
+    const payload = {
+      ...JSON.parse(JSON.stringify(formData.value)),
+      uploadedLogo: logoUrl,
+      uploadedAssets: assetUrls
+    }
+    
+    console.log('[Onboarding] Submitting payload:', payload)
     
     const response = await fetch('/api/onboarding/submit', {
       method: 'POST',
