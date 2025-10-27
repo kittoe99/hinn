@@ -1308,6 +1308,10 @@ import { getSupabaseClient } from '~/lib/supabaseClient'
 import FormSelect from '~/components/FormSelect.vue'
 import ServiceAreaPicker from '~/components/ServiceAreaPicker.vue'
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 useHead({
   title: 'Onboarding - Hinn',
   meta: [
