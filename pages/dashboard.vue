@@ -2508,7 +2508,7 @@ const checkOnboardingStatus = async () => {
     // Check user profile for onboarding completion
     const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
-      .select('has_completed_get_started, has_completed_onboarding')
+      .select('has_completed_onboarding')
       .eq('user_id', user.id)
       .maybeSingle()
 
