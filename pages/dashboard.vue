@@ -2441,29 +2441,54 @@ const openWebsiteDetails = async (websiteId) => {
   selectedWebsiteOnboarding.value = null
   
   try {
-    const supabase = getSupabaseClient()
-    const { data: { session } } = await supabase.auth.getSession()
+    // Find the website from the existing websites list
+    const website = websites.value.find(w => w.id === websiteId)
     
-    if (!session) {
-      throw new Error('Not authenticated')
+    if (!website) {
+      throw new Error('Website not found')
     }
-
-    const response = await $fetch(`/api/websites/${websiteId}`, {
-      headers: {
-        Authorization: `Bearer ${session.access_token}`
-      }
-    })
     
-    console.log('API Response:', response)
-    console.log('Website data:', response.website)
-    console.log('Onboarding data:', response.website?.onboarding_data)
+    console.log('Website data:', website)
     
-    selectedWebsite.value = response.website
-    selectedWebsiteOnboarding.value = response.website.onboarding_data
+    // Transform onboarding data from flat structure to nested
+    const onboardingData = {
+      business_name: website.business_name,
+      category: website.category,
+      description: website.description,
+      contact_info: {
+        email: website.business_email,
+        phone: website.business_phone,
+        preferred_contact_method: website.contact_method
+      },
+      services: website.selected_services,
+      service_area: website.service_areas ? {
+        primary_location: website.service_areas[0],
+        coverage_type: website.coverage_type
+      } : null,
+      operation_details: {
+        on_site_mode: website.on_site_mode,
+        business_hours: website.business_hours_mode
+      },
+      website_info: {
+        primary_goal: website.primary_goal,
+        has_current_website: website.has_current_website,
+        current_website_url: website.current_website_url
+      },
+      design_preferences: {
+        color_theme: website.color_theme,
+        has_logo: website.has_logo,
+        design_styles: website.design_styles
+      },
+      language: website.primary_language
+    }
     
+    selectedWebsite.value = website
+    selectedWebsiteOnboarding.value = onboardingData
+    
+    console.log('Selected website:', selectedWebsite.value)
     console.log('Selected onboarding:', selectedWebsiteOnboarding.value)
   } catch (err) {
-    console.error('Failed to fetch website details:', err)
+    console.error('Failed to load website details:', err)
     websiteDetailsError.value = err.message || 'Failed to load website details'
   } finally {
     websiteDetailsLoading.value = false
@@ -2786,7 +2811,12 @@ const handleLogoUpload = async (event) => {
 
     if (updateError) throw updateError
 
+    // Update both selectedWebsite and the websites list
     selectedWebsite.value.uploaded_logo = logoUrl
+    const websiteIndex = websites.value.findIndex(w => w.id === selectedWebsite.value.id)
+    if (websiteIndex !== -1) {
+      websites.value[websiteIndex].uploaded_logo = logoUrl
+    }
     event.target.value = ''
   } catch (err) {
     console.error('Logo upload failed:', err)
@@ -2842,7 +2872,12 @@ const handleAssetsUpload = async (event) => {
 
     if (updateError) throw updateError
 
+    // Update both selectedWebsite and the websites list
     selectedWebsite.value.uploaded_assets = updatedAssets
+    const websiteIndex = websites.value.findIndex(w => w.id === selectedWebsite.value.id)
+    if (websiteIndex !== -1) {
+      websites.value[websiteIndex].uploaded_assets = updatedAssets
+    }
     event.target.value = ''
   } catch (err) {
     console.error('Assets upload failed:', err)
@@ -2865,7 +2900,12 @@ const deleteLogo = async () => {
 
     if (updateError) throw updateError
 
+    // Update both selectedWebsite and the websites list
     selectedWebsite.value.uploaded_logo = null
+    const websiteIndex = websites.value.findIndex(w => w.id === selectedWebsite.value.id)
+    if (websiteIndex !== -1) {
+      websites.value[websiteIndex].uploaded_logo = null
+    }
   } catch (err) {
     console.error('Logo deletion failed:', err)
     alert('Failed to delete logo')
@@ -2890,7 +2930,12 @@ const deleteAsset = async (index) => {
 
     if (updateError) throw updateError
 
+    // Update both selectedWebsite and the websites list
     selectedWebsite.value.uploaded_assets = currentAssets
+    const websiteIndex = websites.value.findIndex(w => w.id === selectedWebsite.value.id)
+    if (websiteIndex !== -1) {
+      websites.value[websiteIndex].uploaded_assets = currentAssets
+    }
   } catch (err) {
     console.error('Asset deletion failed:', err)
     alert('Failed to delete asset')
