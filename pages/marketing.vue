@@ -1,195 +1,126 @@
 <template>
-  <div class="pb-8 md:pb-12">
+  <div>
     <!-- Hero -->
-    <section class="pt-12 md:pt-16">
-      <div class="max-w-5xl mx-auto px-4 lg:px-6">
-        <div class="grid gap-8 md:grid-cols-2 md:items-center">
-          <header class="max-w-3xl">
-            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-              <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-              Marketing & Branding
-            </div>
-            <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">
-              Marketing & branding that actually drives growth—done for you
-            </h1>
-            <p class="mt-4 text-base md:text-lg text-neutral-600 leading-relaxed">
-              We handle your brand identity, content creation, and campaign execution. You get professional marketing that works—no agencies to manage, no freelancers to chase.
-            </p>
-          </header>
-          <div class="flex justify-center md:justify-end">
-            <img
-              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop"
-              alt="Marketing team collaboration"
-              class="w-full max-w-md md:max-w-lg aspect-[4/3] object-cover rounded-xl border border-neutral-200 shadow-sm"
-              loading="lazy"
-            />
+    <section class="pt-20 pb-24 md:pt-32 md:pb-40">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
+            Generate brand assets,<br />
+            launch campaigns with a click
+          </h1>
+          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed">
+            AI-powered marketing tools that generate custom brand assets, create campaign content, and improve your online presence—automatically.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <NuxtLink
+              to="/get-started"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            >
+              Start Creating
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </NuxtLink>
+            <a
+              href="#tools"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
+            >
+              See tools
+            </a>
           </div>
         </div>
-        <div class="relative mt-10 grid gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-lg shadow-accent-subtle/20 backdrop-blur md:grid-cols-[0.95fr_1fr] md:p-8">
-          <div class="absolute inset-0 pointer-events-none rounded-3xl bg-white" aria-hidden="true" />
-          <div class="relative space-y-6">
-            <div>
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">What's included</h2>
-              <p class="mt-2 text-sm text-neutral-700">
-                Brand identity, content creation, and campaign management—all handled for you monthly.
-              </p>
-            </div>
-            <dl class="grid gap-3 md:grid-cols-2">
-              <div
-                v-for="signal in heroSignals"
-                :key="signal.label"
-                class="rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl"
-              >
-                <dt class="text-xs uppercase tracking-wide text-neutral-500">{{ signal.label }}</dt>
-                <dd class="mt-1 text-xl font-semibold text-neutral-900">{{ signal.value }}</dd>
-              </div>
-            </dl>
-            <div class="flex flex-wrap gap-3">
-              <NuxtLink to="/get-started" class="rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800">
-                Get started
-              </NuxtLink>
-              <a href="#services" class="rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300">
-                See what's included
-              </a>
-            </div>
-          </div>
-          <div class="relative rounded-3xl border border-neutral-200 bg-neutral-50/90 p-6 shadow-inner shadow-white/60">
-            <div class="absolute inset-x-6 -top-4 flex justify-center">
-              <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                Deliverables
+      </div>
+    </section>
+
+    <!-- Marketing Tools -->
+    <section id="tools" class="py-20 md:py-32 bg-neutral-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">AI-powered marketing tools</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Everything you need to create, launch, and optimize your marketing—powered by AI.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div v-for="tool in marketingTools" :key="tool.title" class="border border-neutral-200 bg-white p-8">
+            <h3 class="text-xl font-medium text-neutral-900 mb-3">{{ tool.title }}</h3>
+            <p class="text-base text-neutral-600 leading-relaxed mb-6">{{ tool.desc }}</p>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="feature in tool.features" :key="feature" class="text-xs font-medium text-neutral-600 px-2 py-1 border border-neutral-200">
+                {{ feature }}
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campaign Launch -->
+    <section class="py-20 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Launch campaigns with a click</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Pre-built campaign templates that deploy across all channels instantly.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div v-for="campaign in campaignTypes" :key="campaign.title" class="border border-neutral-200 bg-white p-8">
             <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="text-xs uppercase tracking-wide text-neutral-500">What you get</p>
-                <p class="mt-1 text-lg font-semibold text-neutral-900">Everything you need to market your business</p>
-              </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-200 bg-blue-50 text-blue-700">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                </svg>
+              <div class="flex-1">
+                <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ campaign.title }}</h3>
+                <p class="text-base text-neutral-600 leading-relaxed">{{ campaign.desc }}</p>
               </div>
             </div>
-            <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-neutral-700">
-              <li v-for="artifact in sprintArtifacts" :key="artifact" class="rounded-2xl border border-neutral-200 bg-white/95 px-3 py-3 shadow-sm">
-                {{ artifact }}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="mt-12 md:mt-16">
-      <div class="max-w-5xl mx-auto px-3 sm:px-4">
-        <header class="text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">What we build for you</h2>
-          <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-3xl mx-auto">
-            From brand identity to campaign execution—we handle everything so you can focus on running your business.
+    <!-- Online Presence -->
+    <section class="py-20 md:py-32 bg-neutral-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Improve your online presence</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Automated tools that boost your visibility and engagement across all platforms.
           </p>
-        </header>
-        <div class="mt-8 grid md:grid-cols-3 gap-5">
-          <article v-for="lane in marketingLanes" :key="lane.title" class="flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-5">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" :d="lane.icon" />
-              </svg>
-            </div>
-            <h3 class="text-base font-semibold text-neutral-900">{{ lane.title }}</h3>
-            <p class="text-sm text-neutral-600">{{ lane.desc }}</p>
-            <ul class="mt-1 space-y-1 text-sm text-neutral-700">
-              <li v-for="deliverable in lane.deliverables" :key="deliverable" class="flex items-start gap-2">
-                <span class="mt-0.5 text-blue-600">•</span>
-                <span>{{ deliverable }}</span>
-              </li>
-            </ul>
-          </article>
         </div>
-      </div>
-    </section>
 
-    <!-- How it works -->
-    <section class="mt-12 md:mt-16">
-      <div class="max-w-6xl mx-auto px-4">
-        <header class="text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">How it works</h2>
-          <p class="mt-3 text-sm md:text-base text-neutral-600">
-            Subscribe, share your goals, and we'll handle everything—from brand design to campaign execution.
-          </p>
-          <div class="mt-5 flex flex-wrap justify-center gap-2">
-            <span
-              v-for="chip in operatingCommitments"
-              :key="chip"
-              class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700"
-            >
-              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0z" clip-rule="evenodd"/></svg>
-              {{ chip }}
-            </span>
+        <div class="space-y-6">
+          <div v-for="feature in presenceFeatures" :key="feature.title" class="border border-neutral-200 bg-white p-8">
+            <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ feature.title }}</h3>
+            <p class="text-base text-neutral-600 leading-relaxed">{{ feature.desc }}</p>
           </div>
-        </header>
-
-        <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <div v-for="stage in playbookStages" :key="stage.title" class="rounded-2xl border border-neutral-200 bg-white p-5">
-            <div class="flex items-center justify-between">
-              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-blue-600 text-sm font-bold text-blue-700">{{ stage.phase }}</span>
-              <span class="text-xs uppercase tracking-wide text-neutral-500">{{ stage.label }}</span>
-            </div>
-            <h3 class="mt-3 text-sm font-semibold text-neutral-900">{{ stage.title }}</h3>
-            <p class="mt-2 text-sm text-neutral-600">{{ stage.detail }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Campaign library -->
-    <section class="mt-12 md:mt-16 bg-neutral-50 py-10 md:py-14">
-      <div class="max-w-6xl mx-auto px-3 sm:px-4">
-        <header class="text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">Campaign templates we customize for you</h2>
-          <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-3xl mx-auto">
-            Pick a campaign type and we'll adapt it to your brand, create all the assets, and manage the execution—all included monthly.
-          </p>
-        </header>
-        <div class="mt-8 grid md:grid-cols-2 gap-4">
-          <article v-for="campaign in campaignLibrary" :key="campaign.title" class="rounded-2xl border border-neutral-200 bg-white p-5 text-left">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="text-xs uppercase tracking-wide text-neutral-500">{{ campaign.goal }}</p>
-                <h3 class="mt-1 text-sm font-semibold text-neutral-900">{{ campaign.title }}</h3>
-              </div>
-              <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" :d="campaign.icon" />
-                </svg>
-              </div>
-            </div>
-            <p class="mt-3 text-sm text-neutral-600">{{ campaign.desc }}</p>
-            <ul class="mt-4 space-y-2 text-sm text-neutral-700">
-              <li v-for="asset in campaign.assets" :key="asset" class="flex items-start gap-2">
-                <span class="mt-0.5 text-blue-600">•</span>
-                <span>{{ asset }}</span>
-              </li>
-            </ul>
-          </article>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="mt-12 md:mt-16">
-      <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-semibold tracking-tight text-neutral-900">Ready to grow your brand?</h2>
-        <p class="mt-3 text-sm md:text-base text-neutral-600 max-w-2xl mx-auto">
-          Subscribe today and we'll start building your brand this week. No setup fees, no contracts—just professional marketing that works. Cancel anytime.
+    <section class="py-20 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-6">Ready to transform your marketing?</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto mb-10">
+          Start generating assets and launching campaigns today.
         </p>
-        <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <NuxtLink to="/get-started" class="rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800">
-            Get started
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <NuxtLink 
+            to="/get-started"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+          >
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
           </NuxtLink>
-          <a href="#services" class="rounded-full border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300">
-            See what's included
-          </a>
+          <NuxtLink 
+            to="/contact"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
+          >
+            Contact us
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -198,129 +129,95 @@
 
 <script setup>
 useHead({
-  title: 'Digital Marketing Services | Email Marketing & Social Media Management | Hinn',
+  title: 'Marketing & Branding | Hinn',
   meta: [
     {
       name: 'description',
-      content:
-        'Full-service digital marketing including content strategy, email automation, PPC advertising, social media management, SEO content, and analytics. Monthly subscription with dedicated marketing team.'
+      content: 'AI-powered marketing tools. Generate brand assets, launch campaigns, improve online presence.'
     }
   ]
 })
 
-const heroSignals = [
-  { label: 'Average lift', value: '38%', detail: 'Pipeline increase across 90-day engagements' },
-  { label: 'Creative velocity', value: '25+ assets', detail: 'Shipped every monthly sprint on average' },
-  { label: 'Attribution clarity', value: 'Full-funnel', detail: 'Dashboards tying spend to revenue impact' }
-]
-
-const sprintArtifacts = [
-  'Channel playbook & messaging hierarchy',
-  'Creative concepts & visual explorations',
-  'Copy decks for ads, email, and landing pages',
-  'Analytics tagging plan & QA checklist',
-  'Retrospective report with next sprint priorities',
-  'Executive summary slides for stakeholders'
-]
-
-const marketingLanes = [
+const marketingTools = [
   {
-    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    title: 'Acquisition engine',
-    desc: 'Launch and optimize paid, organic, and partner campaigns that fuel consistent pipeline.',
-    deliverables: ['Growth experiments and CRO roadmap', 'Paid media creative + copy refreshes', 'SEO content briefs & publishing calendar']
+    title: 'Brand Asset Generator',
+    desc: 'AI creates logos, color palettes, typography, and complete brand guidelines in minutes. Export in all formats.',
+    features: ['Logo variations', 'Color systems', 'Typography', 'Brand guidelines']
   },
   {
-    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
-    title: 'Lifecycle momentum',
-    desc: 'Turn signups into loyal customers with automated journeys, nurture programs, and CX collaboration.',
-    deliverables: ['Onboarding + education sequences', 'Product launch kits & retention campaigns', 'Feedback loops with CS & product']
+    title: 'Content Creation Suite',
+    desc: 'Generate blog posts, social media content, email copy, and ad creative. AI matches your brand voice automatically.',
+    features: ['Blog posts', 'Social content', 'Email campaigns', 'Ad copy']
   },
   {
-    icon: 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z',
-    title: 'Brand elevation',
-    desc: 'Shape perception through storytelling, thought leadership, and experiential activations.',
-    deliverables: ['Narrative frameworks & messaging updates', 'Signature content series & PR hooks', 'Event, webinar, and community toolkits']
+    title: 'Social Media Manager',
+    desc: 'Schedule posts, generate captions, create graphics, and respond to comments—all automated across platforms.',
+    features: ['Auto-scheduling', 'Caption generation', 'Graphics creation', 'Comment replies']
+  },
+  {
+    title: 'Email Campaign Builder',
+    desc: 'Design emails, write copy, segment audiences, and optimize send times. A/B testing built-in.',
+    features: ['Email design', 'List segmentation', 'A/B testing', 'Analytics']
+  },
+  {
+    title: 'SEO Optimizer',
+    desc: 'Keyword research, content optimization, and technical SEO handled automatically. Track rankings in real-time.',
+    features: ['Keyword research', 'Content optimization', 'Technical SEO', 'Rank tracking']
+  },
+  {
+    title: 'Ad Campaign Manager',
+    desc: 'Create, launch, and optimize ads across Google, Facebook, and Instagram. AI adjusts bids and targeting automatically.',
+    features: ['Multi-platform ads', 'Auto-bidding', 'Audience targeting', 'Performance optimization']
   }
 ]
 
-const operatingCommitments = [
-  'Cancel anytime',
-  'Unlimited revisions',
-  'Weekly updates'
-]
-
-const playbookStages = [
+const campaignTypes = [
   {
-    phase: '01',
-    label: 'Subscribe',
-    title: 'Pick your plan',
-    detail: 'Choose monthly or annual. Cancel anytime.'
+    title: 'Product Launch Campaign',
+    desc: 'Complete campaign across email, social, ads, and PR. AI generates all assets, schedules posts, and tracks performance. Launch in one click.'
   },
   {
-    phase: '02',
-    label: 'Kickoff',
-    title: 'Share your vision',
-    detail: 'Tell us about your brand, goals, and target audience.'
+    title: 'Lead Generation Campaign',
+    desc: 'Landing pages, lead magnets, email sequences, and retargeting ads. AI optimizes for conversions automatically.'
   },
   {
-    phase: '03',
-    label: 'Build',
-    title: 'We create everything',
-    detail: 'Sit back while we design your brand and build campaigns.'
+    title: 'Brand Awareness Campaign',
+    desc: 'Multi-channel content strategy with blog posts, social media, and display ads. AI maintains consistent messaging across all channels.'
   },
   {
-    phase: '04',
-    label: 'Launch',
-    title: 'Go live & iterate',
-    detail: 'We launch, monitor results, and improve weekly.'
+    title: 'Event Promotion Campaign',
+    desc: 'Email invitations, social posts, reminder sequences, and post-event follow-ups. Fully automated from start to finish.'
+  },
+  {
+    title: 'Seasonal Campaign',
+    desc: 'Holiday and seasonal promotions with themed content, special offers, and time-limited messaging. Deploy instantly.'
   }
 ]
 
-const campaignLibrary = [
+const presenceFeatures = [
   {
-    goal: 'Demand acceleration',
-    title: 'Flagship launch campaign',
-    icon: 'M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9',
-    desc: 'Own a moment in your market with narrative, creative, and promotion that coordinates across channels.',
-    assets: ['Launch landing hub + microsite', 'Email + SMS nurture sequences', 'Paid + organic social asset suite', 'PR pitch angles and talking points']
+    title: 'Automated Content Distribution',
+    desc: 'Publish once, distribute everywhere. AI adapts your content for each platform and schedules optimal posting times.'
   },
   {
-    goal: 'Revenue expansion',
-    title: 'Lifecycle upsell program',
-    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
-    desc: 'Convert existing customers with contextual education, upgrade offers, and CX enablement.',
-    assets: ['Usage-triggered email journeys', 'In-product announcements & banners', 'Customer webinar + playbook kit', 'Sales enablement one-pagers']
+    title: 'Review & Reputation Management',
+    desc: 'Monitor reviews across all platforms. AI generates responses and alerts you to issues requiring attention.'
   },
   {
-    goal: 'Awareness & authority',
-    title: 'Thought leadership series',
-    icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
-    desc: 'Publish a high-signal editorial series and distribute it across owned and earned channels.',
-    assets: ['Research report & gated asset', 'Podcast or video interview kit', 'LinkedIn & blog content calendar', 'Media outreach toolkit']
+    title: 'Social Listening & Engagement',
+    desc: 'Track brand mentions, respond to comments, and engage with your audience automatically. Never miss an opportunity.'
   },
   {
-    goal: 'Community activation',
-    title: 'Event & partner campaign',
-    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-    desc: 'Activate your ecosystem with co-marketing, live experiences, and evergreen community assets.',
-    assets: ['Co-branded landing experience', 'Event creative system & swag', 'Influencer + partner outreach', 'Post-event nurture & recap assets']
+    title: 'Analytics & Insights',
+    desc: 'Real-time dashboards showing what\'s working. AI identifies trends and suggests improvements automatically.'
+  },
+  {
+    title: 'Competitor Monitoring',
+    desc: 'Track competitor campaigns, content, and performance. AI highlights opportunities and threats in your market.'
+  },
+  {
+    title: 'Brand Consistency Checker',
+    desc: 'Ensures all content matches your brand guidelines. AI flags inconsistencies and suggests corrections.'
   }
-]
-
-const measurementInsights = [
-  'Weekly dashboards covering pipeline, retention, and engagement',
-  'Creative testing matrices with winning concept highlights',
-  'Attribution modeling recommendations with clear next actions',
-  'Executive-ready recaps summarizing signal, impact, and plan'
-]
-
-const reportingTools = [
-  'Looker & Mode dashboards',
-  'GA4 + server-side tagging',
-  'HubSpot & Salesforce reports',
-  'Mixpanel & Amplitude cohorts',
-  'Figma & Notion collaboration hubs',
-  'Airtable campaign tracker'
 ]
 </script>

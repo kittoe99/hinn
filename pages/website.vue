@@ -1,166 +1,122 @@
 <template>
-  <div class="pb-16 md:pb-24">
+  <div>
     <!-- Hero Section -->
-    <section class="relative pt-16 md:pt-24 pb-12 border-b border-neutral-200 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-neutral-50/50 pointer-events-none"></div>
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="relative grid gap-8 md:gap-10 md:grid-cols-2 md:items-center">
-          <header>
-            <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 shadow-sm">
-              <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-              Website Development
-            </div>
-            <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900">
-              Your website, built & managed monthly
-            </h1>
-            <p class="mt-6 text-lg md:text-xl text-neutral-600 leading-relaxed">
-              One monthly fee. Fully managed. We design, build, host, and maintain your site—so you can focus on your business.
-            </p>
-          </header>
-          <div class="flex justify-center md:justify-end">
-            <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop"
-              alt="Design team collaborating on a website project"
-              class="w-full max-w-md md:max-w-lg aspect-[4/3] object-cover rounded-xl border border-neutral-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              loading="lazy"
-            />
+    <section class="pt-20 pb-24 md:pt-32 md:pb-40">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
+            AI-powered websites that<br />
+            sell and book on autopilot
+          </h1>
+          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed">
+            Built by AI. Managed monthly. Your website handles sales conversations, qualifies leads, and books appointments automatically—24/7.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <NuxtLink
+              to="/get-started"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            >
+              Build with AI
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </NuxtLink>
+            <NuxtLink
+              to="/showcase"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
+            >
+              See examples
+            </NuxtLink>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What's Included -->
-    <section class="pt-16 md:pt-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">Everything included, one monthly price</h2>
-          <p class="mt-4 text-lg text-neutral-600">
-            No surprises. No extra fees. Cancel anytime.
+    <!-- AI Features -->
+    <section class="py-20 md:py-32 bg-neutral-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Built by AI, powered by automation</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Every website comes with intelligent automation that works while you sleep.
           </p>
         </div>
 
-        <div class="mt-12 grid md:grid-cols-2 gap-6">
-          <div v-for="(item, index) in included" :key="item.title" class="group relative rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-blue-600 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="flex items-start gap-4">
-              <div class="relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 text-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 group-hover:rotate-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
-                </svg>
-              </div>
-              <div class="relative">
-                <h3 class="text-lg font-semibold text-neutral-900">{{ item.title }}</h3>
-                <p class="mt-2 text-base text-neutral-600 leading-relaxed">{{ item.desc }}</p>
-              </div>
-            </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div v-for="(item, index) in aiFeatures" :key="item.title" class="border border-neutral-200 bg-white p-8">
+            <h3 class="text-xl font-medium text-neutral-900 mb-3">{{ item.title }}</h3>
+            <p class="text-base text-neutral-600 leading-relaxed">{{ item.desc }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="pt-16 md:pt-20 bg-neutral-50">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6 py-16">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">Fully managed, no tech skills needed</h2>
-          <p class="mt-4 text-lg text-neutral-600">
-            We handle the technical details so you don't have to.
+    <!-- Automation Features -->
+    <section class="py-20 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Sales automation that converts</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Your website doesn't just look good—it actively sells for you.
           </p>
         </div>
-        
-        <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div v-for="(feature, index) in features" :key="feature.title" class="group rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-600">
-            <div class="flex items-start gap-3">
-              <div class="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border border-blue-200 bg-blue-50 text-blue-700 flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" :d="feature.icon" />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-base font-semibold text-neutral-900">{{ feature.title }}</h3>
-                <p class="mt-1 text-sm text-neutral-600">{{ feature.desc }}</p>
+
+        <div class="space-y-6">
+          <div v-for="(feature, index) in automationFeatures" :key="feature.title" class="border border-neutral-200 bg-white p-8">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1">
+                <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ feature.title }}</h3>
+                <p class="text-base text-neutral-600 leading-relaxed">{{ feature.desc }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    
 
     <!-- How it works -->
-    <section class="pt-16 md:pt-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <header class="text-center">
-          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">How it works</h2>
-          <p class="mt-3 text-base text-neutral-600">Subscribe, share your vision, and we'll handle the rest.</p>
-          <div class="mt-5 flex flex-wrap justify-center gap-2">
-            <span v-for="chip in operatingCommitments" :key="chip" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-              <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0z" clip-rule="evenodd"/></svg>
-              {{ chip }}
-            </span>
-          </div>
-        </header>
+    <section class="py-20 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">How it works</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Simple process from start to launch.
+          </p>
+        </div>
 
-        <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <div v-for="(stage, index) in operatingStages" :key="stage.title" class="group rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-600">
-            <div class="flex items-center justify-between">
-              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-blue-600 text-sm font-bold text-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white">{{ stage.phase }}</span>
-              <span class="text-xs uppercase tracking-wide text-neutral-500">{{ stage.label }}</span>
-            </div>
-            <h3 class="mt-3 text-sm font-semibold text-neutral-900">{{ stage.title }}</h3>
-            <p class="mt-2 text-sm text-neutral-600">{{ stage.detail }}</p>
+        <div class="grid md:grid-cols-4 gap-8">
+          <div v-for="(stage, index) in operatingStages" :key="stage.title" class="border-l-2 border-neutral-200 pl-6">
+            <div class="text-sm font-medium text-neutral-500 mb-2">{{ stage.label }}</div>
+            <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ stage.title }}</h3>
+            <p class="text-base text-neutral-600">{{ stage.detail }}</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Add-ons -->
-    <section class="pt-16 md:pt-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-8">
-          <h3 class="text-2xl md:text-3xl font-semibold text-neutral-900">Optional add‑ons</h3>
-          <p class="mt-2 text-sm text-neutral-600">Upgrade your plan with these extras.</p>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div v-for="(addon, index) in addons" :key="addon.title" class="group rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-600">
-            <div class="flex items-start gap-3">
-              <div class="mt-0.5 flex h-10 w-10 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 text-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" :d="addon.icon"/></svg>
-              </div>
-              <div>
-                <h4 class="text-base font-semibold text-neutral-900">{{ addon.title }}</h4>
-                <p class="mt-1 text-sm text-neutral-600">{{ addon.desc }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
 
     <!-- CTA -->
-    <section class="pt-16 md:pt-20">
-      <div class="max-w-4xl mx-auto px-4 lg:px-6">
-        <div class="rounded-lg border border-neutral-200 bg-neutral-50 p-8 md:p-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">Ready to launch your site?</h2>
-          <p class="mt-4 text-lg text-neutral-600 max-w-2xl">
-            Subscribe today and we'll start building this week. No contracts, cancel anytime.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <NuxtLink 
-              to="/get-started"
-              class="inline-flex items-center justify-center rounded-full bg-neutral-900 px-8 py-3 text-base font-semibold text-white transition hover:bg-neutral-800"
-            >
-              Get Started
-            </NuxtLink>
-            <NuxtLink 
-              to="/contact"
-              class="inline-flex items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-8 py-3 text-base font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300"
-            >
-              Contact Us
-            </NuxtLink>
-          </div>
+    <section class="py-20 md:py-32 bg-neutral-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-6">Ready to get started?</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto mb-10">
+          Subscribe today and we'll start building this week.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <NuxtLink 
+            to="/get-started"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+          >
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </NuxtLink>
+          <NuxtLink 
+            to="/contact"
+            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
+          >
+            Contact us
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -178,26 +134,49 @@ useHead({
   ]
 })
 
-const included = [
+const aiFeatures = [
   {
-    title: 'Custom Design',
-    desc: 'We design your site from scratch—tailored to your brand. Mobile-first and conversion-optimized.',
-    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
+    title: 'AI Site Builder',
+    desc: 'Describe your business and our AI generates a complete, conversion-optimized website in minutes. No coding, no design skills needed.'
   },
   {
-    title: 'Built & Deployed',
-    desc: 'We handle all development and launch. Fast, secure, and built to scale as you grow.',
-    icon: 'M4 7h16M4 12h12M4 17h8'
+    title: 'Smart Content Generation',
+    desc: 'AI writes compelling copy, product descriptions, and blog posts that match your brand voice and convert visitors into customers.'
   },
   {
-    title: 'SEO & Analytics',
-    desc: 'Built-in SEO, tracking, and insights. We optimize for search engines so customers find you.',
-    icon: 'M5 12h14M12 5l7 7-7 7'
+    title: 'Intelligent Chat Agent',
+    desc: 'Built-in AI chatbot answers questions, qualifies leads, and guides visitors through your sales funnel 24/7.'
   },
   {
-    title: 'Hosting & Maintenance',
-    desc: 'Hosting, security, backups, and updates—all managed for you. No technical work required.',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+    title: 'Automated SEO',
+    desc: 'AI optimizes your content for search engines automatically. Meta tags, keywords, and structure handled for you.'
+  }
+]
+
+const automationFeatures = [
+  {
+    title: 'Lead Qualification on Autopilot',
+    desc: 'AI agent engages every visitor, asks qualifying questions, and routes hot leads directly to your calendar or CRM. No forms, no friction—just conversations that convert.'
+  },
+  {
+    title: 'Automatic Appointment Booking',
+    desc: 'Visitors book appointments instantly through AI-powered chat. Syncs with your calendar, sends confirmations, and handles rescheduling automatically.'
+  },
+  {
+    title: 'Sales Follow-up Automation',
+    desc: 'AI sends personalized follow-ups to leads who didn\'t book. Nurtures prospects with relevant content until they\'re ready to buy.'
+  },
+  {
+    title: 'Smart Product Recommendations',
+    desc: 'AI analyzes visitor behavior and recommends the right products or services. Increases average order value and conversion rates.'
+  },
+  {
+    title: 'Automated Customer Support',
+    desc: 'Handle common questions instantly with AI. Escalates complex issues to your team with full context and conversation history.'
+  },
+  {
+    title: 'Real-time Analytics & Insights',
+    desc: 'AI tracks visitor behavior, identifies conversion bottlenecks, and suggests improvements. Get actionable insights without digging through data.'
   }
 ]
 
@@ -251,18 +230,11 @@ const features = [
   }
 ]
 
-// How it works (matches Agents page pattern)
-const operatingCommitments = [
-  'Cancel anytime',
-  'Unlimited revisions',
-  'Weekly updates'
-]
-
 const operatingStages = [
-  { phase: '01', label: 'Subscribe', title: 'Pick your plan', detail: 'Choose monthly or annual. Cancel anytime.' },
-  { phase: '02', label: 'Kickoff', title: 'Share your vision', detail: 'Tell us about your brand and goals in a quick call.' },
-  { phase: '03', label: 'Build', title: 'We design & build', detail: 'Sit back while we create your site. Review drafts weekly.' },
-  { phase: '04', label: 'Launch', title: 'Go live & iterate', detail: 'We launch, monitor, and improve based on your feedback.' }
+  { phase: '01', label: 'Describe', title: 'Tell AI about your business', detail: 'Answer a few questions about your business, goals, and target customers.' },
+  { phase: '02', label: 'Generate', title: 'AI builds your site', detail: 'Our AI creates your complete website with copy, design, and automation in minutes.' },
+  { phase: '03', label: 'Customize', title: 'Review and refine', detail: 'Make any changes you want. AI adapts instantly to your feedback.' },
+  { phase: '04', label: 'Launch', title: 'Go live with automation', detail: 'Your site launches with AI agents ready to qualify leads and book appointments.' }
 ]
 
 // Add-ons cards

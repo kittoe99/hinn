@@ -269,27 +269,27 @@ const featureHighlights = [
 const subscriptionProducts = [
   {
     title: 'Websites',
-    description: 'We design, build, host, and maintain your site. You get unlimited revisions, weekly updates, and a site that actually converts—all for one monthly fee.',
-    tags: ['Custom design', 'Hosting included', 'Weekly updates', 'SEO built-in'],
+    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment booking—all working 24/7.',
     href: '/website',
-    cta: 'Learn more',
+    cta: 'Explore Websites',
+    tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
     delay: 0
   },
   {
     title: 'AI Agents',
-    description: 'Autonomous agents that handle customer support, qualify leads, and automate workflows. We build, train, and manage them—you just watch them work.',
-    tags: ['24/7 automation', 'CRM integration', 'Human oversight'],
+    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistants—ready to work 24/7. No coding required.',
     href: '/agents',
-    cta: 'See how it works',
-    delay: 150
+    cta: 'Explore AI Agents',
+    tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
+    delay: 100
   },
   {
     title: 'Marketing & Branding',
-    description: 'Complete brand identity, content strategy, and campaign execution. We handle everything from logo design to email campaigns—you approve and launch.',
-    tags: ['Brand identity', 'Content creation', 'Campaign management'],
+    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presence—all powered by AI. Create, launch, optimize automatically.',
     href: '/marketing',
-    cta: 'Explore services',
-    delay: 300
+    cta: 'Explore Marketing',
+    tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],
+    delay: 200
   }
 ]
 
