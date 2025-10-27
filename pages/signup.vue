@@ -1,18 +1,18 @@
 <template>
-  <div class="min-h-[80vh] flex items-center justify-center px-4 py-16">
-    <div class="w-full max-w-md space-y-8">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight text-neutral-900">Create your account</h1>
-        <p class="text-base text-neutral-600">Get started with Hinn today</p>
+  <div class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900">Create account</h1>
+        <p class="mt-4 text-base text-neutral-600">Get started with Hinn</p>
       </div>
 
-      <div class="rounded-lg border border-neutral-200 bg-white p-8 space-y-6">
+      <div class="space-y-6">
 
         <!-- Error/Success Messages -->
-        <div v-if="error" class="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+        <div v-if="error" class="text-sm text-red-900 bg-red-50 border border-red-200 px-4 py-3">
           {{ error }}
         </div>
-        <div v-if="success" class="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
+        <div v-if="success" class="text-sm text-green-900 bg-green-50 border border-green-200 px-4 py-3">
           {{ success }}
         </div>
 
@@ -20,7 +20,7 @@
         <button
           @click="signUpWithGoogle"
           :disabled="loading"
-          class="w-full inline-flex items-center justify-center gap-3 rounded-lg border border-neutral-200 px-4 py-3 bg-white hover:bg-neutral-50 disabled:opacity-60 transition-colors text-sm font-medium text-neutral-900"
+          class="w-full inline-flex items-center justify-center gap-3 border border-neutral-200 px-4 py-3 bg-white hover:bg-neutral-50 disabled:opacity-60 transition-colors text-sm font-medium text-neutral-900"
         >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="h-5 w-5">
           <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303C33.676 32.66 29.223 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.161 7.957 3.043l5.657-5.657C34.869 6.053 29.729 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
@@ -42,30 +42,17 @@
         </div>
 
         <!-- Email/Password Form -->
-        <form @submit.prevent="handleSignup" class="space-y-4">
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label for="firstName" class="block text-sm font-medium text-neutral-900 mb-2">First name</label>
-              <input
-                id="firstName"
-                v-model="formData.firstName"
-                type="text"
-                required
-                class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-colors"
-                placeholder="John"
-              />
-            </div>
-            <div>
-              <label for="lastName" class="block text-sm font-medium text-neutral-900 mb-2">Last name</label>
-              <input
-                id="lastName"
-                v-model="formData.lastName"
-                type="text"
-                required
-                class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-colors"
-                placeholder="Doe"
-              />
-            </div>
+        <form @submit.prevent="handleSignup" class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-neutral-900 mb-2">Name</label>
+            <input
+              id="name"
+              v-model="formData.name"
+              type="text"
+              required
+              class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+              placeholder="Your name"
+            />
           </div>
 
           <div>
@@ -75,7 +62,7 @@
               v-model="formData.email"
               type="email"
               required
-              class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-colors"
+              class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
               placeholder="you@example.com"
             />
           </div>
@@ -88,10 +75,10 @@
               type="password"
               required
               minlength="8"
-              class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-colors"
+              class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
               placeholder="••••••••"
             />
-            <p class="mt-1.5 text-xs text-neutral-500">Must be at least 8 characters</p>
+            <p class="mt-2 text-xs text-neutral-600">Must be at least 8 characters</p>
           </div>
 
           <div>
@@ -101,30 +88,28 @@
               v-model="formData.confirmPassword"
               type="password"
               required
-              class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-neutral-400 transition-colors"
+              class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
               placeholder="••••••••"
             />
           </div>
 
-          <div class="flex items-start">
+          <div class="flex items-start gap-3">
             <input
               id="terms"
-              v-model="formData.agreeToTerms"
+              v-model="formData.acceptTerms"
               type="checkbox"
               required
-              class="mt-1 h-4 w-4 rounded border-neutral-300 text-neutral-900"
+              class="mt-1"
             />
-            <label for="terms" class="ml-2 text-sm text-neutral-600">
-              I agree to the 
-              <a href="#" class="text-neutral-900 hover:underline">Terms of Service</a> and 
-              <a href="#" class="text-neutral-900 hover:underline">Privacy Policy</a>
+            <label for="terms" class="text-sm text-neutral-600">
+              I agree to the <a href="#" class="text-neutral-900 underline hover:no-underline">Terms of Service</a> and <a href="#" class="text-neutral-900 underline hover:no-underline">Privacy Policy</a>
             </label>
           </div>
 
           <button
             type="submit"
-            :disabled="loading || !formData.agreeToTerms"
-            class="w-full rounded-lg bg-neutral-900 text-white px-4 py-3 text-sm font-semibold disabled:opacity-60 hover:bg-neutral-800 transition-colors"
+            :disabled="loading"
+            class="w-full bg-neutral-900 text-white px-4 py-3 text-sm font-medium disabled:opacity-60 hover:bg-neutral-800 transition-colors"
           >
             {{ loading ? 'Creating account...' : 'Create account' }}
           </button>
@@ -132,10 +117,10 @@
 
       </div>
 
-      <!-- Login Link -->
-      <div class="text-center text-sm text-neutral-600">
+      <!-- Sign In Link -->
+      <div class="mt-8 text-center text-sm text-neutral-600">
         Already have an account? 
-        <NuxtLink to="/login" class="text-neutral-900 font-semibold hover:underline">
+        <NuxtLink to="/login" class="text-neutral-900 font-medium underline hover:no-underline">
           Sign in
         </NuxtLink>
       </div>
