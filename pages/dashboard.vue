@@ -1840,7 +1840,7 @@
     </main>
 
       <!-- Add New Modal (minimal redesign) -->
-      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="showAddNewModal = false">
+      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="hasProduct && (showAddNewModal = false)">
         <div class="bg-white border border-neutral-900 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="sticky top-0 bg-white border-b border-neutral-900 px-8 py-6 flex items-center justify-between">
@@ -1848,7 +1848,7 @@
               <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
               <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
             </div>
-            <button @click="showAddNewModal = false" class="p-2 hover:bg-neutral-100 transition-colors">
+            <button v-if="hasProduct" @click="showAddNewModal = false" class="p-2 hover:bg-neutral-100 transition-colors">
               <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
@@ -2089,6 +2089,25 @@ const showAddNewModal = ref(false)
 const addNewStep = ref('select') // 'select' or 'plan'
 const selectedProduct = ref(null)
 const selectedPlan = ref(null)
+
+// Onboarding gate: require at least one product/website record
+const hasProduct = computed(() => (websites.value?.length || 0) > 0)
+
+// When data finishes loading and user has no products, force open the Add New modal
+watch([loading, websites], ([isLoading]) => {
+  if (!isLoading && !hasProduct.value) {
+    showAddNewModal.value = true
+    addNewStep.value = 'select'
+  }
+})
+
+// Keep modal open until a product exists
+watch(hasProduct, (val) => {
+  if (!val) {
+    showAddNewModal.value = true
+    addNewStep.value = 'select'
+  }
+})
 
 // Profile menu state
 const showProfileMenu = ref(false)
