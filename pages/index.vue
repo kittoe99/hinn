@@ -1,83 +1,62 @@
 <template>
   <div class="relative overflow-hidden">
     <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-20">
-      <div class="absolute inset-0 bg-white" aria-hidden="true" />
-      
-      <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center max-w-4xl mx-auto">
-          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 opacity-0 animate-fade-in" style="animation-delay: 0ms">
-            <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-            Monthly services
-          </div>
-          <h1 class="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mt-6 opacity-0 animate-fade-in" style="animation-delay: 100ms">
-            Websites, marketing &<br class="hidden md:inline" />
-            <span class="typewriter-container">
-              <span :class="['typewriter-word text-blue-600', { 'flipping': isFlipping }]">{{ currentWord }}</span>
-            </span>
+    <section class="relative pt-20 pb-24 md:pt-32 md:pb-40">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1] opacity-0 animate-fade-in" style="animation-delay: 0ms">
+            Websites, marketing &<br />
+            <span :class="['typewriter-word text-neutral-900', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
+            that put growth at the frontier
           </h1>
-          <p class="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto opacity-0 animate-fade-in" style="animation-delay: 200ms">
-            One monthly subscription. Zero technical work. We design, build, and maintain everything while you focus on growing your business.
+          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
+            We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
           </p>
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4 opacity-0 animate-fade-in" style="animation-delay: 400ms">
+          <div class="mt-10 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
               to="/get-started"
-              class="rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 sm:px-8 sm:py-4 sm:text-base"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
             >
               Get Started
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="inline-block ml-2 h-4 w-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </NuxtLink>
-            <a
-              href="#features"
-              class="rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300 sm:px-8 sm:py-4 sm:text-base"
+            <NuxtLink
+              to="/showcase"
+              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
             >
-              Learn More
-            </a>
+              View our work
+            </NuxtLink>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Products Section -->
-    <section id="subscription" class="mt-16 md:mt-20">
-      <div class="max-w-5xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900">Pick your plan, we'll handle the rest</h2>
-          <p class="mt-3 text-base text-neutral-600 max-w-xl mx-auto">Subscribe monthly. Cancel anytime. No contracts, no surprises—just results.</p>
+    <section class="py-20 md:py-32 bg-neutral-50">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">What we build</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Monthly subscriptions for websites, AI agents, and marketing that actually work.
+          </p>
         </div>
-
-        <div class="space-y-4">
+        <div class="grid md:grid-cols-3 gap-6">
           <NuxtLink
-            v-for="product in subscriptionProducts"
+            v-for="(product, index) in subscriptionProducts"
             :key="product.title"
             :to="product.href"
-            class="group relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-md border border-neutral-200 bg-white p-8 transition-all duration-300 hover:bg-neutral-50 hover:-translate-y-1 hover:shadow-lg hover:border-blue-600 opacity-0 animate-fade-in-up overflow-hidden"
-            :style="{ animationDelay: `${product.delay}ms` }"
+            class="group relative bg-white border border-neutral-200 p-8 hover:border-neutral-900 transition-all duration-200 opacity-0 animate-fade-in-up"
+            :style="{ animationDelay: `${index * 100}ms` }"
           >
-            <div class="absolute inset-0 bg-gradient-to-r from-neutral-900/0 via-neutral-900/0 to-neutral-900/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="flex-1 relative z-10">
-              <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 group-hover:text-neutral-900 transition-colors">{{ product.title }}</h3>
-              <p class="mt-3 text-base text-neutral-600 max-w-2xl">{{ product.description }}</p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span 
-                  v-for="(tag, index) in product.tags" 
-                  :key="tag" 
-                  :class="['rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 hover:opacity-90', chipColorClasses[index % chipColorClasses.length]]"
-                  :style="{ transitionDelay: `${index * 50}ms` }"
-                >
-                  {{ tag }}
-                </span>
-              </div>
-            </div>
-            <div class="flex-shrink-0 relative z-10">
-              <span class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 group-hover:gap-3 transition-all duration-300">
-                {{ product.cta }}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 text-blue-700 group-hover:translate-x-1 transition-transform duration-300">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
+            <h3 class="text-2xl font-medium text-neutral-900 mb-3">{{ product.title }}</h3>
+            <p class="text-base text-neutral-600 leading-relaxed mb-6">{{ product.description }}</p>
+            <div class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 group-hover:gap-3 transition-all">
+              Learn more
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </NuxtLink>
         </div>
@@ -85,90 +64,44 @@
     </section>
 
     <!-- Showcase Section -->
-    <section id="showcase" class="mt-16 md:mt-24 py-20">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">Real sites we've built & launched</h2>
-          <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-            From idea to live site in weeks, not months. See what we've shipped for businesses just like yours.
+    <section class="py-20 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="mb-16">
+          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Featured work</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl">
+            Real projects we've built and launched for businesses.
           </p>
         </div>
-
-        <!-- Filter Tabs -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12">
-          <button
-            v-for="category in showcaseCategories"
-            :key="category.value"
-            @click="selectedShowcaseCategory = category.value"
-            :class="[
-              'rounded-full px-5 py-2 text-sm font-semibold transition-all',
-              selectedShowcaseCategory === category.value
-                ? 'bg-blue-600 text-white shadow-lg'
-                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-blue-600 hover:text-blue-700'
-            ]"
-          >
-            {{ category.label }}
-          </button>
-        </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="space-y-4">
           <a
-            v-for="(project, index) in filteredShowcaseProjects"
+            v-for="(project, index) in showcaseProjects.slice(0, 6)"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl opacity-0 animate-fade-in-up"
-            :style="{ animationDelay: `${index * 75}ms` }"
+            class="group block border border-neutral-200 bg-white p-6 hover:border-neutral-900 transition-all duration-200 opacity-0 animate-fade-in-up"
+            :style="{ animationDelay: `${index * 50}ms` }"
           >
-            <!-- Top bar accent -->
-            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
-            <!-- Category badge and featured -->
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2">
-                <span v-if="project.tag" class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold border border-blue-200 bg-blue-50 text-blue-700">
-                  <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-                  {{ project.tag }}
-                </span>
-                <span v-if="project.featured" class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  Featured
-                </span>
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <h3 class="text-xl font-medium text-neutral-900">{{ project.title }}</h3>
+                  <span class="text-xs font-medium text-neutral-500 uppercase tracking-wide">{{ project.tag }}</span>
+                </div>
+                <p class="text-base text-neutral-600 leading-relaxed">{{ project.description }}</p>
               </div>
-              <svg class="h-5 w-5 text-neutral-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
-            </div>
-
-            <!-- Project info -->
-            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-blue-700 transition-colors">{{ project.title }}</h3>
-            <p class="text-sm text-neutral-600 mb-4 line-clamp-2">{{ project.description }}</p>
-
-            <!-- Metrics -->
-            <div v-if="project.metrics" class="flex items-center gap-3 mb-4 pb-4 border-b border-neutral-100">
-              <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1 text-xs">
-                <span class="font-bold text-blue-700">{{ metric.value }}</span>
-                <span class="text-neutral-600">{{ metric.label }}</span>
-              </div>
-            </div>
-
-            <!-- Tech stack -->
-            <div v-if="project.tech" class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in project.tech"
-                :key="tech"
-                class="inline-flex items-center px-2 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700 border border-neutral-200"
-              >
-                {{ tech }}
-              </span>
             </div>
           </a>
         </div>
         
-        <div class="mt-12 text-center">
+        <div class="mt-10">
           <NuxtLink 
             to="/showcase" 
-            class="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:gap-3"
+            class="inline-flex items-center gap-2 text-base font-medium text-neutral-900 hover:gap-3 transition-all underline underline-offset-4"
           >
-            View All Projects
+            View all projects
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
@@ -532,71 +465,31 @@ const filteredShowcaseProjects = computed(() => {
 }
 
 .animate-fade-in {
-  animation: fade-in 0.8s ease-out forwards;
+  animation: fade-in 1s ease-out forwards;
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.hero-heading {
-  min-height: 80px;
-}
-
-@media (min-width: 768px) {
-  .hero-heading {
-    min-height: 90px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-heading {
-    min-height: 100px;
-  }
-}
-
-.typewriter-container {
-  display: inline-block;
-  min-width: 250px;
-  height: 1.2em;
-  text-align: center;
-  position: relative;
-  vertical-align: baseline;
-  perspective: 1000px;
-}
-
-@media (min-width: 640px) {
-  .typewriter-container {
-    text-align: left;
-  }
+  animation: fade-in-up 0.8s ease-out forwards;
 }
 
 .typewriter-word {
-  display: inline-block;
-  height: 1.2em;
-  line-height: 1.2em;
-  white-space: nowrap;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
+  display: inline;
+  will-change: opacity;
   -webkit-font-smoothing: antialiased;
 }
 
 .typewriter-word.flipping {
-  animation: flipOut 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeOut 0.4s ease-in-out;
 }
 
-@keyframes flipOut {
+@keyframes fadeOut {
   0% {
-    transform: rotateX(0deg) translateZ(0);
     opacity: 1;
   }
   50% {
-    transform: rotateX(90deg) translateZ(0);
-    opacity: 0;
+    opacity: 0.3;
   }
   100% {
-    transform: rotateX(0deg) translateZ(0);
     opacity: 1;
   }
 }
