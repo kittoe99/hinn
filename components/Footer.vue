@@ -57,7 +57,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/get-started" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+              <NuxtLink to="/dashboard" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
                 Pricing
               </NuxtLink>
             </li>

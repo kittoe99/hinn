@@ -14,7 +14,7 @@
           </p>
           <div class="mt-10 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
-              to="/get-started"
+              to="/dashboard"
               class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
             >
               Get Started

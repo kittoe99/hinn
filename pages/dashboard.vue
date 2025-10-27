@@ -84,7 +84,7 @@
         <!-- Loading State -->
         <div v-if="websiteDetailsLoading" class="flex items-center justify-center py-24">
           <div class="text-center">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-neutral-600 border-r-transparent"></div>
             <p class="mt-4 text-sm text-secondary">Loading website details...</p>
           </div>
         </div>
@@ -96,7 +96,7 @@
           </svg>
           <h3 class="text-sm font-semibold text-red-900 mb-1">Failed to load website</h3>
           <p class="text-xs text-red-700 mb-4">{{ websiteDetailsError }}</p>
-          <button @click="closeWebsiteDetails" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
+          <button @click="closeWebsiteDetails" class="bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
             Back to Dashboard
           </button>
         </div>
@@ -108,7 +108,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-8 mb-8">
               <!-- Left: Preview -->
               <div>
-                <div class="rounded-xl border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
+                <div class="border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
                   <div class="aspect-video flex items-center justify-center p-8">
                     <div class="text-center">
                       <svg class="h-16 w-16 text-neutral-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,18 +158,18 @@
                 <!-- Category -->
                 <div v-if="selectedWebsiteOnboarding?.category" class="py-3 border-b border-neutral-200">
                   <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Category</h3>
-                  <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">{{ selectedWebsiteOnboarding.category }}</span>
+                  <span class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-xs font-medium text-neutral-700">{{ selectedWebsiteOnboarding.category }}</span>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-2 pt-1">
-                  <button class="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 hover:border-blue-300 transition-colors">
+                  <button class="inline-flex items-center gap-2 border border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:border-neutral-300 transition-colors">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                     </svg>
                     Add Domain
                   </button>
-                  <button class="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-3.5 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+                  <button class="inline-flex items-center gap-2 bg-neutral-900 px-3.5 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                     </svg>
@@ -182,10 +182,10 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-2">
               <!-- Business Information -->
-              <section class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Business Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Business Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -208,10 +208,10 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Contact Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Contact Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -234,10 +234,10 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Services</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.services" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Services</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -253,10 +253,10 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Service Area</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.service_area" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Service Area</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -275,10 +275,10 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Operation Details</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Operation Details</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -297,10 +297,10 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Website Information</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.website_info" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Website Information</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -319,10 +319,10 @@
               </section>
 
               <!-- Design Preferences -->
-              <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Design Preferences</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.design_preferences" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Design Preferences</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -341,10 +341,10 @@
               </section>
 
               <!-- Language & Additional Info -->
-              <section v-if="selectedWebsiteOnboarding.language" class="rounded-md border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-blue-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-blue-700">Language & Additional Info</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-blue-700', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <section v-if="selectedWebsiteOnboarding.language" class=" border border-neutral-200 bg-white overflow-hidden">
+                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Language & Additional Info</h2>
+                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
                 </button>
@@ -385,10 +385,10 @@
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Search Projects..."
+              placeholder="Search projects..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-9 w-full border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md',
+                'h-10 w-full  border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-900 focus:outline-none',
                 showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
               ]"
             />
@@ -399,11 +399,11 @@
               @click="!showOnboardingRequired && (viewMode = 'grid')"
               :disabled="showOnboardingRequired"
               :class="[
-                'p-2 border border-neutral-200 transition-colors rounded-md',
-                showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
+                'p-2  border transition-colors',
+                showOnboardingRequired ? 'opacity-50 cursor-not-allowed border-neutral-200' : '',
                 viewMode === 'grid'
-                  ? 'bg-neutral-900 text-white'
-                  : 'bg-white text-neutral-600 hover:bg-neutral-50'
+                  ? 'bg-neutral-900 text-white border-neutral-900'
+                  : 'bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
               ]"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -415,11 +415,11 @@
               @click="!showOnboardingRequired && (viewMode = 'list')"
               :disabled="showOnboardingRequired"
               :class="[
-                'p-2 border border-neutral-200 transition-colors rounded-md',
-                showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
+                'p-2  border transition-colors',
+                showOnboardingRequired ? 'opacity-50 cursor-not-allowed border-neutral-200' : '',
                 viewMode === 'list'
-                  ? 'bg-neutral-900 text-white'
-                  : 'bg-white text-neutral-600 hover:bg-neutral-50'
+                  ? 'bg-neutral-900 text-white border-neutral-900'
+                  : 'bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
               ]"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -433,10 +433,10 @@
               @click="showAddNewModal = true"
               :disabled="showOnboardingRequired"
               :class="[
-                'flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm font-medium transition-colors rounded-md',
+                'flex items-center gap-2 border px-4 py-2 text-sm font-medium transition-colors',
                 showOnboardingRequired 
-                  ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed' 
-                  : 'bg-white text-neutral-900 hover:bg-neutral-50'
+                  ? 'bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed' 
+                  : 'bg-white text-neutral-900 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
               ]"
             >
               Add New...
@@ -448,25 +448,25 @@
         </div>
 
         <!-- Onboarding Required Banner (hide when on onboarding page) -->
-        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-sm">
-          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 rounded-lg border border-neutral-900 bg-white p-8">
+          <div class="flex flex-col md:flex-row items-start justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-xl border border-blue-200 bg-blue-50 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                <div class="h-12 w-12  border border-neutral-900 bg-neutral-100 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-bold text-neutral-900 mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
-                <p class="text-sm text-neutral-600 max-w-2xl mb-3">
-                  You've selected the <span class="font-semibold text-neutral-900 capitalize">{{ pendingPlan.plan_tier }}</span> plan 
-                  (<span class="font-semibold">${{ pendingPlan.price_monthly }}/month</span>). 
+                <h3 class="text-xl font-medium text-neutral-900 mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
+                <p class="text-base text-neutral-600 max-w-2xl mb-3">
+                  You've selected the <span class="font-medium text-neutral-900 capitalize">{{ pendingPlan.plan_tier }}</span> plan 
+                  (<span class="font-medium">${{ pendingPlan.price_monthly }}/month</span>). 
                   Complete the onboarding process to provide us with your business details and preferences so we can get started.
                 </p>
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-xs font-medium text-blue-700">
-                  <svg class="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-neutral-200 bg-neutral-50 text-xs font-medium text-neutral-700">
+                  <svg class="h-4 w-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   Takes about 10 minutes
@@ -475,7 +475,7 @@
             </div>
             <NuxtLink
               to="/onboarding"
-              class="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-8 py-3 text-sm font-semibold text-white hover:bg-neutral-800 transition-all shadow-lg"
+              class="flex-shrink-0 inline-flex items-center gap-2 bg-neutral-900 px-8 py-3 text-base font-medium text-white hover:bg-neutral-800 transition-all"
             >
               Start Onboarding
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -488,7 +488,7 @@
         <!-- Loading State -->
         <div v-if="loading" class="flex items-center justify-center py-16">
           <div class="text-center">
-            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+            <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-neutral-600 border-r-transparent"></div>
             <p class="mt-4 text-sm text-secondary">Loading websites...</p>
           </div>
         </div>
@@ -500,7 +500,7 @@
           </svg>
           <h3 class="text-sm font-semibold text-red-900 mb-1">Failed to load websites</h3>
           <p class="text-xs text-red-700 mb-4">{{ error }}</p>
-          <button @click="fetchWebsites" class="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
+          <button @click="fetchWebsites" class="bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors">
             Try Again
           </button>
         </div>
@@ -508,32 +508,32 @@
         <!-- Projects Grid/List -->
         <div v-else-if="viewMode === 'grid'" :class="['grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4', showOnboardingRequired ? 'relative' : '']">
           <!-- Disabled Overlay -->
-          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 rounded-lg"></div>
+          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10"></div>
           
           <div
             v-for="project in filteredProjects"
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group border border-neutral-200 bg-white p-5 rounded-md transition-all duration-200',
+              'group border border-neutral-200 bg-white p-6 transition-all',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-neutral-50 hover:border-blue-600 hover:shadow-md hover:-translate-y-0.5 cursor-pointer'
+                : 'hover:bg-neutral-50 hover:border-neutral-900 cursor-pointer'
             ]"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-start gap-3">
-                <div class="h-8 w-8 rounded border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 group-hover:rotate-3 group-hover:scale-110">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                <div class="h-10 w-10  border border-neutral-200 bg-neutral-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-5 w-5 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-sm font-semibold text-neutral-900 mb-1">{{ project.name }}</h3>
+                  <h3 class="text-base font-medium text-neutral-900 mb-1">{{ project.name }}</h3>
                   <div class="flex items-center gap-2">
-                    <span class="text-xs text-neutral-500">Website</span>
+                    <span class="text-sm text-neutral-600">Website</span>
                     <span class="text-neutral-300">•</span>
-                    <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 capitalize">
+                    <span v-if="project.plan_tier" class="px-2 py-0.5 border border-neutral-900 bg-white text-xs font-medium text-neutral-900 capitalize">
                       {{ project.plan_tier }}
                     </span>
                   </div>
@@ -541,31 +541,15 @@
               </div>
             </div>
 
-            <div class="space-y-2 text-xs text-neutral-600">
+            <div class="space-y-2 text-sm text-neutral-600 border-t border-neutral-200 pt-4">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  <span>Last deployed</span>
-                </div>
-                <span>{{ project.lastDeployed }}</span>
+                <span>Last deployed</span>
+                <span class="text-neutral-900">{{ project.lastDeployed }}</span>
               </div>
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  <span>Status</span>
-                </div>
-                <span :class="[
-                  'flex items-center gap-1.5 font-medium',
-                  project.status === 'Ready' ? 'text-emerald-600' : 'text-amber-600'
-                ]">
-                  <span :class="[
-                    'h-1.5 w-1.5 rounded-full',
-                    project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
-                  ]"></span>
+                <span>Status</span>
+                <span class="flex items-center gap-1.5 text-neutral-900 font-medium">
+                  <span v-if="project.status === 'Ready'" class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                   {{ project.status }}
                 </span>
               </div>
@@ -575,8 +559,8 @@
 
         <!-- List View -->
         <div v-else-if="viewMode === 'list'" :class="['relative']">
-          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 rounded-lg"></div>
-          <div class="overflow-hidden rounded-md border border-neutral-200 bg-white">
+          <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10"></div>
+          <div class="overflow-hidden  border border-neutral-200 bg-white">
             <div class="hidden md:grid grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-3 text-xs font-medium text-neutral-500 border-b border-neutral-200">
               <div>Project</div>
               <div>Domain</div>
@@ -597,7 +581,7 @@
               ]"
             >
               <div class="flex items-center gap-3">
-                <div class="h-8 w-8 rounded border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0">
+                <div class="h-8 w-8 rounded border border-neutral-200 bg-neutral-50 text-neutral-700 flex items-center justify-center flex-shrink-0">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   </svg>
@@ -611,7 +595,7 @@
               <div class="hidden md:block self-center text-sm text-neutral-700 truncate">{{ project.domain }}</div>
 
               <div class="hidden md:flex self-center">
-                <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 capitalize">
+                <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[11px] font-medium text-neutral-700 capitalize">
                   {{ project.plan_tier }}
                 </span>
                 <span v-else class="text-sm text-neutral-400">—</span>
@@ -642,7 +626,7 @@
           </div>
           <h3 class="text-lg font-semibold text-primary mb-2">{{ searchQuery ? 'No websites match your search' : 'No websites yet' }}</h3>
           <p class="text-sm text-secondary mb-6">{{ searchQuery ? 'Try a different search term' : 'Get started by creating your first website' }}</p>
-          <NuxtLink v-if="!searchQuery" to="/onboarding" class="rounded-md border border-neutral-200 bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+          <NuxtLink v-if="!searchQuery" to="/onboarding" class="border border-neutral-200 bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
             Create Website
           </NuxtLink>
         </div>
@@ -655,7 +639,7 @@
           <!-- Menu List (when no tab selected) -->
           <div v-if="!settingsMobileContentOpen" class="space-y-6">
             <div>
-              <h1 class="text-3xl font-bold text-primary mb-6">Settings</h1>
+              <h1 class="text-3xl font-medium text-primary mb-6">Settings</h1>
               
               <!-- Search Bar -->
               <div class="relative mb-6">
@@ -668,7 +652,7 @@
                   v-model="settingsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 focus:outline-none "
                 />
               </div>
 
@@ -679,7 +663,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="settingsActiveTab = subTab.id; settingsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-blue-50 hover:text-blue-700 transition-colors rounded-md"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 hover:text-neutral-700 transition-colors"
                 >
                   {{ subTab.label }}
                 </a>
@@ -705,18 +689,18 @@
               <!-- Profile Section -->
               <div v-if="settingsActiveTab === 'profile'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Profile Settings</h2>
+                  <h2 class="text-2xl font-medium text-primary">Profile Settings</h2>
                   <p class="mt-1 text-sm text-secondary">Manage your personal information and account preferences</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div class="space-y-5">
                     <div>
                       <label class="block text-sm font-medium text-primary mb-2">Full Name</label>
                       <input
                         type="text"
                         placeholder="John Doe"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -725,7 +709,7 @@
                       <input
                         type="email"
                         placeholder="you@example.com"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -734,12 +718,12 @@
                       <input
                         type="text"
                         placeholder="Your Company"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                       />
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
+                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
                         Save Changes
                       </button>
                     </div>
@@ -750,20 +734,20 @@
               <!-- Billing Section -->
               <div v-if="settingsActiveTab === 'billing'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-neutral-900">Billing Settings</h2>
+                  <h2 class="text-2xl font-medium text-neutral-900">Billing Settings</h2>
                   <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div class="space-y-6">
                     <div>
                       <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
-                      <div class="flex items-center justify-between p-4 rounded-md border border-neutral-200 bg-neutral-50">
+                      <div class="flex items-center justify-between p-4 border border-neutral-200 bg-neutral-50">
                         <div>
                           <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
                           <div class="text-xs text-neutral-600 mt-1">Free forever</div>
                         </div>
-                        <button class="rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
+                        <button class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
                           Upgrade
                         </button>
                       </div>
@@ -771,7 +755,7 @@
 
                     <div>
                       <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
-                      <div class="p-4 rounded-md border border-neutral-200">
+                      <div class="p-4 border border-neutral-200">
                         <p class="text-sm text-neutral-600">No payment method on file</p>
                         <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
                           Add Payment Method
@@ -785,11 +769,11 @@
               <!-- Invoices Section -->
               <div v-if="settingsActiveTab === 'invoices'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Invoices</h2>
+                  <h2 class="text-2xl font-medium text-primary">Invoices</h2>
                   <p class="mt-1 text-sm text-secondary">View and download your billing invoices</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -814,10 +798,10 @@
                 href="#"
                 @click.prevent="settingsActiveTab = subTab.id"
                 :class="[
-                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors border',
+                  'block px-3 py-2 text-sm font-medium transition-colors border',
                   settingsActiveTab === subTab.id
-                    ? 'bg-blue-50 text-blue-700 border-blue-200'
-                    : 'text-neutral-600 border-transparent hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
+                    ? 'bg-white text-neutral-900 border-neutral-900'
+                    : 'text-neutral-600 border-transparent hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-200'
                 ]"
               >
                 {{ subTab.label }}
@@ -830,18 +814,18 @@
             <!-- Profile Section -->
             <div v-if="settingsActiveTab === 'profile'" class="space-y-6">
           <div>
-            <h2 class="text-2xl font-bold text-primary">Profile Settings</h2>
+            <h2 class="text-2xl font-medium text-primary">Profile Settings</h2>
             <p class="mt-1 text-sm text-secondary">Manage your personal information and account preferences</p>
           </div>
 
-          <div class="rounded-lg border border-neutral-200 bg-white p-6">
+          <div class="border border-neutral-200 bg-white p-6">
             <div class="space-y-5">
               <div>
                 <label class="block text-sm font-medium text-primary mb-2">Full Name</label>
                 <input
                   type="text"
                   placeholder="John Doe"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                 />
               </div>
 
@@ -850,7 +834,7 @@
                 <input
                   type="email"
                   placeholder="you@example.com"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                 />
               </div>
 
@@ -859,12 +843,12 @@
                 <input
                   type="text"
                   placeholder="Your Company"
-                  class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                 />
               </div>
 
               <div class="pt-4 border-t border-neutral-200">
-                <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
+                <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
                   Save Changes
                 </button>
               </div>
@@ -875,20 +859,20 @@
         <!-- Billing Section -->
         <div v-if="settingsActiveTab === 'billing'" class="space-y-6">
           <div>
-            <h2 class="text-2xl font-bold text-neutral-900">Billing Settings</h2>
+            <h2 class="text-2xl font-medium text-neutral-900">Billing Settings</h2>
             <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
           </div>
 
-          <div class="rounded-md border border-neutral-200 bg-white p-6">
+          <div class="border border-neutral-200 bg-white p-6">
             <div class="space-y-6">
               <div>
                 <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
-                <div class="flex items-center justify-between p-4 rounded-md border border-neutral-200 bg-neutral-50">
+                <div class="flex items-center justify-between p-4 border border-neutral-200 bg-neutral-50">
                   <div>
                     <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
                     <div class="text-xs text-neutral-600 mt-1">Free forever</div>
                   </div>
-                  <button class="rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
+                  <button class=" border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
                     Upgrade
                   </button>
                 </div>
@@ -896,7 +880,7 @@
 
               <div>
                 <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
-                <div class="p-4 rounded-md border border-neutral-200">
+                <div class="p-4  border border-neutral-200">
                   <p class="text-sm text-neutral-600">No payment method on file</p>
                   <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
                     Add Payment Method
@@ -910,11 +894,11 @@
         <!-- Invoices Section -->
         <div v-if="settingsActiveTab === 'invoices'" class="space-y-6">
           <div>
-            <h2 class="text-2xl font-bold text-primary">Invoices</h2>
+            <h2 class="text-2xl font-medium text-primary">Invoices</h2>
             <p class="mt-1 text-sm text-secondary">View and download your billing invoices</p>
           </div>
 
-          <div class="rounded-lg border border-neutral-200 bg-white p-6">
+          <div class="border border-neutral-200 bg-white p-6">
             <div class="text-center py-12">
               <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -935,7 +919,7 @@
           <!-- Menu List (when no tab selected) -->
           <div v-if="!supportMobileContentOpen" class="space-y-6">
             <div>
-              <h1 class="text-3xl font-bold text-primary mb-6">Support</h1>
+              <h1 class="text-3xl font-medium text-primary mb-6">Support</h1>
               
               <!-- Search Bar -->
               <div class="relative mb-6">
@@ -948,7 +932,7 @@
                   v-model="supportSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none rounded-md"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none "
                 />
               </div>
 
@@ -959,7 +943,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="supportActiveTab = subTab.id; supportMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors rounded-md"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
                 >
                   {{ subTab.label }}
                 </a>
@@ -985,11 +969,11 @@
               <!-- Chat Support Section -->
               <div v-if="supportActiveTab === 'chat'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Chat Support</h2>
+                  <h2 class="text-2xl font-medium text-primary">Chat Support</h2>
                   <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class=" border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
@@ -1003,11 +987,11 @@
               <!-- Helpful Docs Section -->
               <div v-if="supportActiveTab === 'docs'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Helpful Docs</h2>
+                  <h2 class="text-2xl font-medium text-primary">Helpful Docs</h2>
                   <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class=" border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1021,11 +1005,11 @@
               <!-- Technical/Bugs Section -->
               <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Technical/Bugs</h2>
+                  <h2 class="text-2xl font-medium text-primary">Technical/Bugs</h2>
                   <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
                 </div>
 
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class=" border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -1039,18 +1023,18 @@
               <!-- Contact Us Section -->
               <div v-if="supportActiveTab === 'contact'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Contact Us</h2>
+                  <h2 class="text-2xl font-medium text-primary">Contact Us</h2>
                   <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div class="space-y-5">
                     <div>
                       <label class="block text-sm font-medium text-primary mb-2">Subject</label>
                       <input
                         type="text"
                         placeholder="How can we help?"
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                       />
                     </div>
 
@@ -1059,12 +1043,12 @@
                       <textarea
                         rows="5"
                         placeholder="Tell us more..."
-                        class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
                       ></textarea>
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
+                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors ">
                         Send Message
                       </button>
                     </div>
@@ -1086,10 +1070,10 @@
                 href="#"
                 @click.prevent="supportActiveTab = subTab.id"
                 :class="[
-                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  'block px-3 py-2 text-sm font-medium transition-colors border',
                   supportActiveTab === subTab.id
-                    ? 'bg-neutral-100 text-primary'
-                    : 'text-secondary hover:bg-neutral-50 hover:text-primary'
+                    ? 'bg-white text-neutral-900 border-neutral-900'
+                    : 'text-neutral-600 border-transparent hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-200'
                 ]"
               >
                 {{ subTab.label }}
@@ -1102,11 +1086,11 @@
             <!-- Chat Support Section -->
             <div v-if="supportActiveTab === 'chat'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">Chat Support</h2>
+                <h2 class="text-2xl font-medium text-primary">Chat Support</h2>
                 <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
@@ -1120,11 +1104,11 @@
             <!-- Helpful Docs Section -->
             <div v-if="supportActiveTab === 'docs'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">Helpful Docs</h2>
+                <h2 class="text-2xl font-medium text-primary">Helpful Docs</h2>
                 <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1138,11 +1122,11 @@
             <!-- Technical/Bugs Section -->
             <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">Technical/Bugs</h2>
+                <h2 class="text-2xl font-medium text-primary">Technical/Bugs</h2>
                 <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -1156,18 +1140,18 @@
             <!-- Contact Us Section -->
             <div v-if="supportActiveTab === 'contact'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">Contact Us</h2>
+                <h2 class="text-2xl font-medium text-primary">Contact Us</h2>
                 <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div class="space-y-5">
                   <div>
                     <label class="block text-sm font-medium text-primary mb-2">Subject</label>
                     <input
                       type="text"
                       placeholder="How can we help?"
-                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                     />
                   </div>
 
@@ -1176,12 +1160,12 @@
                     <textarea
                       rows="5"
                       placeholder="Tell us more..."
-                      class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                     ></textarea>
                   </div>
 
                   <div class="pt-4 border-t border-neutral-200">
-                    <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors rounded-md">
+                    <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors ">
                       Send Message
                     </button>
                   </div>
@@ -1212,7 +1196,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none rounded-md"
+                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 focus:outline-none "
                 />
               </div>
 
@@ -1223,7 +1207,7 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="domainsActiveTab = subTab.id; domainsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-blue-50 hover:text-blue-700 transition-colors rounded-md"
+                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 hover:text-neutral-700 transition-colors"
                 >
                   {{ subTab.label }}
                 </a>
@@ -1248,23 +1232,22 @@
             <div>
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
-                    <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                <div class="border border-neutral-200 bg-white p-6">
+                  <div class="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 class="text-2xl font-medium text-primary">Purchased Domains</h2>
+                      <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                    </div>
+                    <button 
+                      @click="loadMyDomains" 
+                      class="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                    >
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                      </svg>
+                      Refresh
+                    </button>
                   </div>
-                  <button 
-                    @click="loadMyDomains" 
-                    class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
-                  >
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
-                    Refresh
-                  </button>
-                </div>
-
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
                   <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                   <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                   <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1275,7 +1258,7 @@
                     <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
                     <button 
                       @click="domainsActiveTab = 'buy'; domainsMobileContentOpen = true" 
-                      class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors rounded-md"
+                      class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                     >
                       Buy Your First Domain
                     </button>
@@ -1295,14 +1278,14 @@
                           <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                           <td class="px-4 py-3">
                             <span v-if="domain.status" :class="[
-                              'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs border',
+                              'inline-flex items-center px-2.5 py-0.5 text-xs border',
                               domain.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                               domain.status === 'failed' ? 'bg-rose-50 text-rose-700 border-rose-200' :
                               'bg-neutral-100 text-neutral-700 border-neutral-200'
                             ]">
                               {{ domain.status }}
                             </span>
-                            <span v-else class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
+                            <span v-else class="inline-flex items-center px-2.5 py-0.5 text-xs border border-neutral-200 bg-neutral-100 text-neutral-700">—</span>
                           </td>
                           <td class="px-4 py-3 text-neutral-800 hidden sm:table-cell">
                             {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
@@ -1318,12 +1301,12 @@
               <!-- Buy New Domain Section -->
               <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-neutral-900">Buy New Domain</h2>
+                  <h2 class="text-2xl font-medium text-neutral-900">Buy New Domain</h2>
                   <p class="mt-1 text-sm text-neutral-600">Search and register a new domain name</p>
                 </div>
 
                 <!-- Search Domain -->
-                <div class="rounded-md border border-neutral-200 bg-white p-6">
+                <div class=" border border-neutral-200 bg-white p-6">
                   <div class="space-y-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
@@ -1332,13 +1315,13 @@
                           v-model="domainSearchQuery"
                           type="text"
                           placeholder="acme, mybrand, etc"
-                          class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
+                          class="flex-1  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-400 focus:outline-none"
                           @keyup.enter="handleDomainSearch"
                         />
                         <button 
                           @click="handleDomainSearch" 
                           :disabled="domainSearchLoading"
-                          class="rounded-md px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                          class="px-6 py-2.5 text-sm font-medium text-white transition-colors"
                           :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                         >
                           {{ domainSearchLoading ? 'Searching...' : 'Search' }}
@@ -1380,7 +1363,7 @@
                               <td class="px-4 py-3 text-right">
                                 <button 
                                   @click="selectDomain(suggestion.name)"
-                                  class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                                  class="inline-flex items-center gap-2 border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                                 >
                                   Select
                                 </button>
@@ -1433,57 +1416,57 @@
                 </div>
 
                 <!-- Registrant Information -->
-                <div v-if="purchaseMode" class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div v-if="purchaseMode" class="border border-neutral-200 bg-white p-6">
                   <h3 class="text-lg font-semibold text-primary mb-4">Registrant information</h3>
                   
                   <div class="grid grid-cols-1 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                      <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.organization" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                      <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.firstName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                      <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.lastName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                      <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.address1" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                      <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.address2" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                      <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.city" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                      <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.state" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.postalCode" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                      <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                      <input v-model="registrant.email" type="email" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
                     </div>
                     <div>
                       <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
-                        <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
+                        <input v-model="registrant.autoRenew" type="checkbox" class="border-neutral-300 text-neutral-600 focus:ring-0" />
                         Auto-renew
                       </label>
                     </div>
@@ -1493,7 +1476,7 @@
                     <button 
                       @click="handleDomainPurchase" 
                       :disabled="purchaseLoading"
-                      class="w-full inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-colors"
+                      class="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-semibold text-white transition-colors"
                       :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                     >
                       {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
@@ -1507,11 +1490,11 @@
               <!-- DNS & Configurations Section -->
               <div v-if="domainsActiveTab === 'dns'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">DNS & Configurations</h2>
+                  <h2 class="text-2xl font-medium text-primary">DNS & Configurations</h2>
                   <p class="mt-1 text-sm text-secondary">Manage DNS records and domain settings</p>
                 </div>
 
-                <div class="rounded-lg border border-neutral-200 bg-white p-6">
+                <div class="border border-neutral-200 bg-white p-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -1537,10 +1520,10 @@
                 href="#"
                 @click.prevent="domainsActiveTab = subTab.id"
                 :class="[
-                  'block px-3 py-2 rounded-md text-sm font-medium transition-colors border',
+                  'block px-3 py-2 text-sm font-medium transition-colors border',
                   domainsActiveTab === subTab.id
-                    ? 'bg-blue-50 text-blue-700 border-blue-200'
-                    : 'text-neutral-600 border-transparent hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200'
+                    ? 'bg-white text-neutral-900 border-neutral-900'
+                    : 'text-neutral-600 border-transparent hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-200'
                 ]"
               >
                 {{ subTab.label }}
@@ -1554,12 +1537,12 @@
             <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
               <div class="flex items-center justify-between">
                 <div>
-                  <h2 class="text-2xl font-bold text-primary">Purchased Domains</h2>
+                  <h2 class="text-2xl font-medium text-primary">Purchased Domains</h2>
                   <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
                 </div>
                 <button 
                   @click="loadMyDomains" 
-                  class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                  class="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                 >
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -1568,7 +1551,7 @@
                 </button>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                 <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                 <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1579,12 +1562,12 @@
                   <p class="text-sm text-secondary mb-4">You haven't purchased any domains yet</p>
                   <button 
                     @click="domainsActiveTab = 'buy'" 
-                    class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors rounded-md"
+                    class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                   >
                     Buy Your First Domain
                   </button>
                 </div>
-                <div v-else class="overflow-hidden rounded-lg border border-neutral-200">
+                <div v-else class="overflow-hidden border border-neutral-200">
                   <table class="w-full text-sm">
                     <thead class="bg-neutral-50 text-neutral-700">
                       <tr>
@@ -1599,14 +1582,14 @@
                         <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                         <td class="px-4 py-3">
                           <span v-if="domain.status" :class="[
-                            'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs border',
+                            'inline-flex items-center px-2.5 py-0.5 text-xs border',
                             domain.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                             domain.status === 'failed' ? 'bg-rose-50 text-rose-700 border-rose-200' :
                             'bg-neutral-100 text-neutral-700 border-neutral-200'
                           ]">
                             {{ domain.status }}
                           </span>
-                          <span v-else class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
+                          <span v-else class="inline-flex items-center border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
                         </td>
                         <td class="px-4 py-3 text-neutral-800">
                           {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
@@ -1627,7 +1610,7 @@
               </div>
 
               <!-- Search Domain -->
-              <div class="rounded-md border border-neutral-200 bg-white p-6">
+              <div class=" border border-neutral-200 bg-white p-6">
                 <div class="space-y-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
@@ -1636,13 +1619,13 @@
                         v-model="domainSearchQuery"
                         type="text"
                         placeholder="acme, mybrand, etc"
-                        class="flex-1 rounded-md border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                        class="flex-1  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 focus:outline-none"
                         @keyup.enter="handleDomainSearch"
                       />
                       <button 
                         @click="handleDomainSearch" 
                         :disabled="domainSearchLoading"
-                        class="rounded-md px-6 py-2.5 text-sm font-medium text-white transition-colors"
+                        class="px-6 py-2.5 text-sm font-medium text-white transition-colors"
                         :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                       >
                         {{ domainSearchLoading ? 'Searching...' : 'Search' }}
@@ -1689,7 +1672,7 @@
                             <td class="px-4 py-3 text-right">
                               <button 
                                 @click.stop="selectDomain(suggestion.name)"
-                                class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                                class="inline-flex items-center gap-2 border border-neutral-300 bg-white px-3 py-1.5 text-xs font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
                               >
                                 Select
                               </button>
@@ -1748,51 +1731,51 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                    <input v-model="registrant.organization" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.organization" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                    <input v-model="registrant.firstName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.firstName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                    <input v-model="registrant.lastName" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.lastName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                    <input v-model="registrant.address1" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.address1" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                    <input v-model="registrant.address2" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.address2" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                    <input v-model="registrant.city" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.city" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                    <input v-model="registrant.state" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.state" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                    <input v-model="registrant.postalCode" type="text" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.postalCode" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                    <input v-model="registrant.email" type="email" class="w-full rounded-md border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    <input v-model="registrant.email" type="email" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
-                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
+                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-neutral-600 focus:ring-neutral-500" />
                       Auto-renew
                     </label>
                   </div>
@@ -1802,7 +1785,7 @@
                   <button 
                     @click="handleDomainPurchase" 
                     :disabled="purchaseLoading"
-                    class="inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-colors"
+                    class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white transition-colors"
                     :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                   >
                     {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
@@ -1816,11 +1799,11 @@
             <!-- DNS & Configurations Section -->
             <div v-if="domainsActiveTab === 'dns'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-bold text-primary">DNS & Configurations</h2>
+                <h2 class="text-2xl font-medium text-primary">DNS & Configurations</h2>
                 <p class="mt-1 text-sm text-secondary">Manage DNS records and domain settings</p>
               </div>
 
-              <div class="rounded-lg border border-neutral-200 bg-white p-6">
+              <div class="border border-neutral-200 bg-white p-6">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -1837,21 +1820,16 @@
 
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
-        <div class="text-center max-w-md">
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-            <span class="inline-flex items-center justify-center w-5 h-5 rounded-md border border-blue-200 bg-blue-50 text-blue-700">
-              <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </span>
-            <span>{{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}</span>
+        <div class="text-center max-w-md px-4">
+          <div class="mb-4 inline-flex items-center gap-2 px-3 py-1.5 border border-neutral-900 bg-white text-sm font-medium text-neutral-900">
+            {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}
           </div>
-          <h2 class="text-2xl font-bold text-neutral-900 mb-3">Coming Soon</h2>
-          <p class="text-base text-neutral-600 mb-6">
+          <h2 class="text-3xl font-medium text-neutral-900 mb-3">Coming Soon</h2>
+          <p class="text-base text-neutral-600 mb-8">
             We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
             Stay tuned for updates!
           </p>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-blue-200 bg-blue-50 text-sm text-blue-700">
+          <div class="inline-flex items-center gap-2 px-4 py-2 border border-neutral-200 bg-neutral-50 text-sm text-neutral-600">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -1861,120 +1839,113 @@
       </div>
     </main>
 
-      <!-- Add New Modal (concise) -->
-      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="showAddNewModal = false">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Add New Modal (minimal redesign) -->
+      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="showAddNewModal = false">
+        <div class="bg-white border border-neutral-900 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <!-- Header -->
-          <div class="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+          <div class="sticky top-0 bg-white border-b border-neutral-900 px-8 py-6 flex items-center justify-between">
             <div>
-              <h2 class="text-xl font-bold text-primary">Add New Product</h2>
-              <p class="text-sm text-secondary mt-1">Pick what to create</p>
+              <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
+              <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
             </div>
-            <button @click="showAddNewModal = false" class="rounded-lg p-2 hover:bg-neutral-100 transition-colors">
+            <button @click="showAddNewModal = false" class="p-2 hover:bg-neutral-100 transition-colors">
               <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
             </button>
           </div>
           <!-- Step: Select Product -->
-          <div v-if="addNewStep === 'select'" class="p-6">
-            <div class="mb-2">
-              <p class="text-sm text-neutral-500">Choose a product to start. More coming soon.</p>
+          <div v-if="addNewStep === 'select'" class="p-8">
+            <div class="mb-6">
+              <p class="text-sm text-neutral-600">Choose a product to start. More coming soon.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <!-- Website -->
               <button
                 @click="selectProduct('website')"
-                @keydown.enter.prevent="selectProduct('website')"
-                @keydown.space.prevent="selectProduct('website')"
-                role="button"
-                aria-label="Create Website"
-                class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 text-left shadow-sm hover:shadow-md hover:border-blue-300 transition-all focus:outline-none focus:ring-2 focus:ring-blue-400"
+                class="group border border-neutral-900 bg-white p-6 text-left hover:bg-neutral-50 transition-all"
               >
-                <span class="absolute inset-x-0 top-0 h-1 bg-blue-600"></span>
-                <div class="flex items-start justify-between mb-3">
-                  <div class="h-10 w-10 rounded-md border border-blue-200 bg-blue-50 text-blue-700 flex items-center justify-center">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="flex items-start justify-between mb-4">
+                  <div class="h-12 w-12  border border-neutral-900 bg-neutral-100 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   </div>
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold">Available</span>
+                  <span class="px-2 py-1 border border-neutral-900 bg-white text-neutral-900 text-xs font-medium">Available</span>
                 </div>
-                <h3 class="text-base font-bold text-neutral-900 mb-1">Website</h3>
-                <p class="text-sm text-neutral-600 mb-4">Professional site with custom design</p>
-                <div class="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-md bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
+                <h3 class="text-lg font-medium text-neutral-900 mb-2">Website</h3>
+                <p class="text-sm text-neutral-600 mb-6">Professional site with custom design</p>
+                <div class="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
                   Get Started
-                  <svg class="h-4 w-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </div>
               </button>
 
               <!-- Marketing (disabled) -->
-              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 p-6 text-left opacity-60 cursor-not-allowed" aria-disabled="true">
-                <span class="absolute inset-x-0 top-0 h-1 bg-neutral-200"></span>
-                <div class="flex items-start justify-between mb-3">
-                  <div class="h-10 w-10 rounded-md bg-neutral-200 flex items-center justify-center">
-                    <svg class="h-5 w-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
+                <div class="flex items-start justify-between mb-4">
+                  <div class="h-12 w-12  border border-neutral-200 bg-neutral-100 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
                   </div>
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-semibold">Coming Soon</span>
+                  <span class="px-2 py-1 border border-neutral-200 bg-white text-neutral-500 text-xs font-medium">Coming Soon</span>
                 </div>
-                <h3 class="text-base font-bold text-neutral-700">Marketing</h3>
-                <p class="mt-1 text-sm text-neutral-500">Boost reach with campaigns</p>
+                <h3 class="text-lg font-medium text-neutral-700 mb-2">Marketing</h3>
+                <p class="text-sm text-neutral-500">Boost reach with campaigns</p>
               </div>
 
               <!-- AI Agent (disabled) -->
-              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 p-6 text-left opacity-60 cursor-not-allowed" aria-disabled="true">
-                <span class="absolute inset-x-0 top-0 h-1 bg-neutral-200"></span>
-                <div class="flex items-start justify-between mb-3">
-                  <div class="h-10 w-10 rounded-md bg-neutral-200 flex items-center justify-center">
-                    <svg class="h-5 w-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
+                <div class="flex items-start justify-between mb-4">
+                  <div class="h-12 w-12  border border-neutral-200 bg-neutral-100 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   </div>
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-semibold">Coming Soon</span>
+                  <span class="px-2 py-1 border border-neutral-200 bg-white text-neutral-500 text-xs font-medium">Coming Soon</span>
                 </div>
-                <h3 class="text-base font-bold text-neutral-700">AI Agent</h3>
-                <p class="mt-1 text-sm text-neutral-500">Automate tasks with agents</p>
+                <h3 class="text-lg font-medium text-neutral-700 mb-2">AI Agent</h3>
+                <p class="text-sm text-neutral-500">Automate tasks with agents</p>
               </div>
             </div>
           </div>
           <!-- Step: Choose Plan -->
-          <div v-if="addNewStep === 'plan'" class="p-6">
-            <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors mb-6">
+          <div v-if="addNewStep === 'plan'" class="p-8">
+            <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors mb-6">
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
               Back to Products
             </button>
-            <div class="mb-4">
-              <h3 class="text-lg font-bold text-primary">Choose Your Website Plan</h3>
-              <p class="text-sm text-secondary">Select the plan that fits</p>
+            <div class="mb-6">
+              <h3 class="text-2xl font-medium text-neutral-900">Choose Your Website Plan</h3>
+              <p class="text-base text-neutral-600 mt-1">Select the plan that fits</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-blue-600 hover:shadow-lg transition-all">
-                <h4 class="text-lg font-bold text-primary mb-1">Starter</h4>
-                <div class="mb-4"><span class="text-3xl font-bold text-primary">$29</span><span class="text-sm text-secondary">/month</span></div>
-                <ul class="space-y-2 mb-4 text-sm text-secondary">
+              <div class="border border-neutral-900 bg-white p-6 hover:bg-neutral-50 transition-all">
+                <h4 class="text-lg font-medium text-neutral-900 mb-1">Starter</h4>
+                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$29</span><span class="text-base text-neutral-600">/month</span></div>
+                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
                   <li>Up to 5 pages</li>
                   <li>Custom domain</li>
                   <li>SSL certificate</li>
                 </ul>
-                <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">Select Starter</button>
+                <button @click="selectPlan('starter')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Starter</button>
               </div>
-              <div class="relative rounded-xl border-2 border-blue-600 bg-white p-6 shadow-sm">
+              <div class="relative border-2 border-neutral-900 bg-white p-6">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-600 text-white text-xs font-semibold">Popular</span>
+                  <span class="px-2 py-1 bg-neutral-900 text-white text-xs font-medium">Popular</span>
                 </div>
-                <h4 class="text-lg font-bold text-primary mb-1">Professional</h4>
-                <div class="mb-4"><span class="text-3xl font-bold text-primary">$79</span><span class="text-sm text-secondary">/month</span></div>
-                <ul class="space-y-2 mb-4 text-sm text-secondary">
+                <h4 class="text-lg font-medium text-neutral-900 mb-1">Professional</h4>
+                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$79</span><span class="text-base text-neutral-600">/month</span></div>
+                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
                   <li>Up to 15 pages</li>
                   <li>Advanced SEO</li>
                   <li>E-commerce ready</li>
                 </ul>
-                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">Select Professional</button>
+                <button @click="selectPlan('professional')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Professional</button>
               </div>
-              <div class="rounded-xl border-2 border-neutral-200 bg-white p-6 hover:border-blue-600 hover:shadow-lg transition-all">
-                <h4 class="text-lg font-bold text-primary mb-1">Enterprise</h4>
-                <div class="mb-4"><span class="text-3xl font-bold text-primary">$199</span><span class="text-sm text-secondary">/month</span></div>
-                <ul class="space-y-2 mb-4 text-sm text-secondary">
+              <div class="border border-neutral-900 bg-white p-6 hover:bg-neutral-50 transition-all">
+                <h4 class="text-lg font-medium text-neutral-900 mb-1">Enterprise</h4>
+                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$199</span><span class="text-base text-neutral-600">/month</span></div>
+                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
                   <li>Unlimited pages</li>
                   <li>Advanced analytics</li>
                 </ul>
-                <button @click="selectPlan('enterprise')" class="w-full rounded-lg bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-neutral-200 transition-colors">Select Enterprise</button>
+                <button @click="selectPlan('enterprise')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Enterprise</button>
               </div>
             </div>
           </div>
@@ -2444,13 +2415,6 @@ const checkOnboardingStatus = async () => {
 
     console.log('[Dashboard] User profile:', profile)
 
-    // If user hasn't completed get-started, redirect them there first
-    if (!profile?.has_completed_get_started) {
-      console.log('[Dashboard] User has not completed get-started, redirecting...')
-      await navigateTo('/get-started')
-      return
-    }
-
     // Check for pending plans that need onboarding
     const { data: pendingPlans, error: plansError } = await supabase
       .from('plans')
@@ -2589,6 +2553,38 @@ const selectPlan = async (plan) => {
     }
 
     console.log('[Dashboard] Plan created:', planData)
+    
+    // Create placeholder website record linked to the plan
+    const { data: websiteData, error: websiteError } = await supabase
+      .from('websites')
+      .insert({
+        user_id: user.id,
+        plan_id: planData.id,
+        name: 'New Website',
+        slug: `website-${Date.now()}`,
+        status: 'pending'
+      })
+      .select()
+      .single()
+
+    if (websiteError) {
+      console.error('[Dashboard] Error creating placeholder website:', websiteError)
+      // Don't return - plan is created, just log the error
+    } else {
+      console.log('[Dashboard] Placeholder website created:', websiteData)
+      
+      // Update plan with website_id for bidirectional link
+      const { error: updateError } = await supabase
+        .from('plans')
+        .update({ website_id: websiteData.id })
+        .eq('id', planData.id)
+      
+      if (updateError) {
+        console.error('[Dashboard] Error linking plan to website:', updateError)
+      } else {
+        console.log('[Dashboard] Plan linked to website:', websiteData.id)
+      }
+    }
     
     // Close modal
     showAddNewModal.value = false

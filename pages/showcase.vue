@@ -109,7 +109,7 @@
           </p>
           <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <NuxtLink
-              to="/get-started"
+              to="/dashboard"
               class="w-full sm:w-auto rounded-full bg-neutral-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-neutral-800 hover:shadow-xl"
             >
               Get Started

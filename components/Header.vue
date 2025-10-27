@@ -38,7 +38,7 @@
             Sign in
           </NuxtLink>
           <NuxtLink 
-            to="/get-started"
+            to="/dashboard"
             class="px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
           >
             Get Started
@@ -95,7 +95,7 @@
             Sign in
           </NuxtLink>
           <NuxtLink 
-            to="/get-started"
+            to="/dashboard"
             class="block px-4 py-2 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors text-center"
             @click="mobileMenuOpen = false"
           >

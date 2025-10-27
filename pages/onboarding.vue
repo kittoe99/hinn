@@ -1069,10 +1069,10 @@
                 <h3 class="text-xl font-bold text-green-900 mb-2">Onboarding Complete!</h3>
                 <p class="text-sm text-green-800 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
                 <NuxtLink
-                  to="/get-started"
+                  to="/dashboard"
                   class="inline-flex items-center justify-center rounded-full bg-accent-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-focus"
                 >
-                  Review subscription options
+                  Go to Dashboard
                   <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
                     <path d="M5 12h14m-7-7 7 7-7 7" />
                   </svg>
@@ -1319,6 +1319,7 @@ useHead({
   ]
 })
 
+const supabase = getSupabaseClient()
 const currentStep = ref(1)
 
 // Custom service input
@@ -1968,9 +1969,20 @@ const handleSubmit = async () => {
     
     console.log('[Onboarding] Submitting payload:', payload)
     
+    // Get auth token from Supabase
+    const { data: { session } } = await supabase.auth.getSession()
+    const authToken = session?.access_token
+    
+    if (!authToken) {
+      throw new Error('No authentication token found. Please sign in again.')
+    }
+    
     const response = await fetch('/api/onboarding/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
       body: JSON.stringify(payload)
     })
     
@@ -1982,79 +1994,19 @@ const handleSubmit = async () => {
     const data = await response.json()
     console.log('[Onboarding] Submission successful:', data)
     
-    // Update user profile and website product status
-    const supabase = getSupabaseClient()
+    // Update user profile
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
-      // Update user profile
       await supabase
         .from('user_profiles')
         .upsert({
           user_id: user.id,
-          has_completed_onboarding: true,
-          onboarding_submission_id: data.id
+          has_completed_onboarding: true
         }, {
           onConflict: 'user_id'
         })
-
-      // Update pending plan status and create website
-      const { data: pendingPlans } = await supabase
-        .from('plans')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('status', 'pending_onboarding')
-        .order('created_at', { ascending: false })
-        .limit(1)
-
-      if (pendingPlans && pendingPlans.length > 0) {
-        const plan = pendingPlans[0]
-        
-        // Create website entry if it's a website plan
-        if (plan.product_type === 'website') {
-          const businessName = formData.value.businessName || 'My Website'
-          const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-          
-          const { data: website, error: websiteError } = await supabase
-            .from('websites')
-            .insert({
-              user_id: user.id,
-              plan_id: plan.id,
-              name: businessName,
-              slug: slug,
-              status: 'active',
-              onboarding_submission_id: data.id
-            })
-            .select()
-            .single()
-
-          if (websiteError) {
-            console.error('[Onboarding] Error creating website:', websiteError)
-          } else {
-            console.log('[Onboarding] Website created:', website)
-            
-            // Update plan with website_id
-            await supabase
-              .from('plans')
-              .update({
-                status: 'onboarding_completed',
-                onboarding_submission_id: data.id,
-                website_id: website.id
-              })
-              .eq('id', plan.id)
-          }
-        } else {
-          // For non-website products, just update status
-          await supabase
-            .from('plans')
-            .update({
-              status: 'onboarding_completed',
-              onboarding_submission_id: data.id
-            })
-            .eq('id', plan.id)
-        }
-        
-        console.log('[Onboarding] Updated plan status to onboarding_completed')
-      }
+      
+      console.log('[Onboarding] User profile updated')
     }
     
     submissionResult.value = { ...payload, id: data.id }

@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
     // Use server client to bypass RLS for data fetching
     const supabase = getSupabaseServer()
 
-    // Fetch website first
+    // Fetch website with all onboarding data (now merged into websites table)
     const { data: website, error: websiteError } = await supabase
       .from('websites')
       .select('*')
@@ -50,76 +50,54 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Fetch linked onboarding submission if exists
-    let submission = null
-    console.log('Website onboarding_submission_id:', website.onboarding_submission_id)
+    console.log('Website fetched:', website.id)
     
-    if (website.onboarding_submission_id) {
-      const { data: onboardingData, error: onboardingError } = await supabase
-        .from('onboarding_submissions')
-        .select('*')
-        .eq('id', website.onboarding_submission_id)
-        .single()
-      
-      console.log('Onboarding fetch error:', onboardingError)
-      console.log('Onboarding data:', onboardingData ? 'Found' : 'Not found')
-      
-      if (!onboardingError && onboardingData) {
-        submission = onboardingData
-      }
-    } else {
-      console.log('No onboarding_submission_id on website')
-    }
-
-    // Transform onboarding submission data to match requested JSON structure
-    console.log('Submission object:', submission)
-    console.log('Creating structured data...')
-    
-    const structuredData = submission ? {
-      business_name: submission.business_name || '',
-      business_type: submission.site_type || '',
-      category: submission.category || '',
-      description: submission.description || '',
+    // Transform website data to match requested JSON structure
+    // All onboarding fields are now directly on the website record
+    const structuredData = {
+      business_name: website.business_name || '',
+      business_type: website.site_type || '',
+      category: website.category || '',
+      description: website.description || '',
       contact_info: {
-        email: submission.business_email || '',
-        phone: submission.business_phone || '',
-        preferred_contact_method: submission.contact_method || ''
+        email: website.business_email || '',
+        phone: website.business_phone || '',
+        preferred_contact_method: website.contact_method || ''
       },
-      services: submission.selected_services || [],
+      services: website.selected_services || [],
       service_area: {
-        primary_location: submission.service_areas?.[0]?.displayName || submission.service_areas?.[0]?.name || '',
-        radius_km: submission.service_areas?.[0]?.radiusKm || '',
-        coverage_type: submission.coverage_type || ''
+        primary_location: website.service_areas?.[0]?.displayName || website.service_areas?.[0]?.name || '',
+        radius_km: website.service_areas?.[0]?.radiusKm || '',
+        coverage_type: website.coverage_type || ''
       },
       operation_details: {
-        on_site_mode: submission.on_site_mode || '',
-        business_hours: submission.business_hours_mode || ''
+        on_site_mode: website.on_site_mode || '',
+        business_hours: website.business_hours_mode || ''
       },
       website_info: {
-        has_current_website: submission.has_current_website || false,
-        current_website_url: submission.current_website_url || '',
-        primary_goal: submission.primary_goal || ''
+        has_current_website: website.has_current_website || false,
+        current_website_url: website.current_website_url || '',
+        primary_goal: website.primary_goal || ''
       },
       design_preferences: {
-        styles: submission.design_styles || [],
-        emotional_impact: submission.emotional_impact || [],
-        color_theme: submission.color_theme || '',
-        brand_colors: submission.brand_colors || '',
-        high_contrast: submission.high_contrast || false,
-        has_logo: submission.has_logo || false,
-        inspiration_sites: submission.inspiration_sites || ''
+        styles: website.design_styles || [],
+        emotional_impact: website.emotional_impact || [],
+        color_theme: website.color_theme || '',
+        brand_colors: website.brand_colors || '',
+        high_contrast: website.high_contrast || false,
+        has_logo: website.has_logo || false,
+        inspiration_sites: website.inspiration_sites || ''
       },
-      language: submission.primary_language || '',
-      languages: submission.languages || [],
-      additional_notes: submission.additional_notes || '',
-      envisioned_pages: submission.envisioned_pages || [],
-      status: submission.status || 'submitted',
-      created_at: submission.created_at,
-      updated_at: submission.updated_at
-    } : null
+      language: website.primary_language || '',
+      languages: website.languages || [],
+      additional_notes: website.additional_notes || '',
+      envisioned_pages: website.envisioned_pages || [],
+      status: website.submission_status || 'submitted',
+      created_at: website.created_at,
+      updated_at: website.updated_at
+    }
 
-    console.log('Structured data created:', structuredData ? 'YES' : 'NULL')
-    console.log('Returning response with onboarding_data:', !!structuredData)
+    console.log('Structured data created from website record')
 
     return {
       success: true,
