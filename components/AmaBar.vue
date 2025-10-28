@@ -13,7 +13,7 @@
         <form @submit.prevent="handleStickySubmit">
           <div class="flex items-center gap-2 rounded-full border border-neutral-900 bg-white/95 backdrop-blur px-4 py-2 shadow-lg">
             <div class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-900 bg-neutral-100 text-neutral-900" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" class="h-4 w-4 ama-bar-icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
               </svg>
             </div>
@@ -63,7 +63,7 @@
           <div class="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-4">
             <div class="flex items-center gap-2 font-semibold text-neutral-900">
               <span class="inline-flex items-center justify-center w-6 h-6 rounded-md border border-neutral-900 bg-neutral-100 text-neutral-900">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 ama-icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
                 </svg>
               </span>
@@ -391,5 +391,17 @@ const demoRespond = async (userPrompt) => {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* AMA bar icon - always accent color */
+.ama-bar-icon {
+  stroke: #d97759;
+  fill: #d97759;
+}
+
+/* Modal header icon */
+.ama-icon {
+  stroke: currentColor;
+  fill: none;
 }
 </style>

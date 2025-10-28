@@ -600,8 +600,8 @@
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-start gap-3">
                 <div class="h-10 w-10  border border-neutral-200 bg-neutral-100 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-5 w-5 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  <svg class="h-5 w-5 dashboard-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
                 <div>
@@ -1942,10 +1942,8 @@
                 class="group border border-neutral-900 bg-white p-6 text-left hover:bg-neutral-50 transition-all"
               >
                 <div class="flex items-start justify-between mb-4">
-                  <div class="h-12 w-12  border border-neutral-900 bg-neutral-100 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  </div>
-                  <span class="px-2 py-1 border border-neutral-900 bg-white text-neutral-900 text-xs font-medium">Available</span>
+                  <svg class="h-8 w-8 add-product-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  <span class="text-xs font-medium text-[#d97759]">Available</span>
                 </div>
                 <h3 class="text-lg font-medium text-neutral-900 mb-2">Website</h3>
                 <p class="text-sm text-neutral-600 mb-6">Professional site with custom design</p>
@@ -1958,10 +1956,8 @@
               <!-- Marketing (disabled) -->
               <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
                 <div class="flex items-start justify-between mb-4">
-                  <div class="h-12 w-12  border border-neutral-200 bg-neutral-100 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-                  </div>
-                  <span class="px-2 py-1 border border-neutral-200 bg-white text-neutral-500 text-xs font-medium">Coming Soon</span>
+                  <svg class="h-8 w-8 add-product-icon-disabled" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+                  <span class="text-xs font-medium text-[#d97759]">Coming Soon</span>
                 </div>
                 <h3 class="text-lg font-medium text-neutral-700 mb-2">Marketing</h3>
                 <p class="text-sm text-neutral-500">Boost reach with campaigns</p>
@@ -1970,10 +1966,8 @@
               <!-- AI Agent (disabled) -->
               <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
                 <div class="flex items-start justify-between mb-4">
-                  <div class="h-12 w-12  border border-neutral-200 bg-neutral-100 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  </div>
-                  <span class="px-2 py-1 border border-neutral-200 bg-white text-neutral-500 text-xs font-medium">Coming Soon</span>
+                  <svg class="h-8 w-8 add-product-icon-disabled" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+                  <span class="text-xs font-medium text-[#d97759]">Coming Soon</span>
                 </div>
                 <h3 class="text-lg font-medium text-neutral-700 mb-2">AI Agent</h3>
                 <p class="text-sm text-neutral-500">Automate tasks with agents</p>
@@ -2963,5 +2957,22 @@ const formatFileSize = (bytes) => {
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Dashboard card icon - always accent color */
+.dashboard-card-icon {
+  stroke: #d97759;
+  fill: none;
+}
+
+/* Add product modal icons */
+.add-product-icon {
+  stroke: #d97759;
+  fill: none;
+}
+
+.add-product-icon-disabled {
+  stroke: #d97759;
+  fill: none;
 }
 </style>

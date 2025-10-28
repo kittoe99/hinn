@@ -99,7 +99,7 @@
               <div class="flex-1">
                 <div class="flex items-center gap-3 mb-2">
                   <h3 class="text-xl font-medium text-neutral-900">{{ project.title }}</h3>
-                  <span class="text-xs font-medium text-neutral-500 uppercase tracking-wide">{{ project.tag }}</span>
+                  <span :class="['text-xs font-medium uppercase tracking-wide', tagTextColor(project.tag)]">{{ project.tag }}</span>
                 </div>
                 <p class="text-base text-neutral-600 leading-relaxed">{{ project.description }}</p>
               </div>
@@ -253,6 +253,15 @@ const projectTagColor = (tag) => {
   if (key.includes('cms')) return 'border border-emerald-200 bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
   if (key.includes('web')) return 'border border-blue-200 bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white'
   return 'border border-neutral-200 bg-neutral-100 text-neutral-700 group-hover:bg-neutral-900 group-hover:text-white'
+}
+
+// Plain text color for Featured work tags
+const tagTextColor = (tag) => {
+  const key = String(tag || '').toLowerCase()
+  if (key.includes('web')) return 'text-[#d97759]'
+  if (key.includes('agent')) return 'text-[#d97759]'
+  if (key.includes('marketing')) return 'text-[#d97759]'
+  return 'text-neutral-500'
 }
 
 
