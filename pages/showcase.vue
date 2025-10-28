@@ -1,11 +1,11 @@
 <template>
-  <div class="pb-12 md:pb-16">
+  <div class="min-h-screen bg-neutral-50 pb-12 md:pb-16">
     <!-- Hero Section -->
     <section class="pt-12 md:pt-16">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="text-center max-w-3xl mx-auto">
-          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-            <span class="inline-block h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+          <div class="inline-flex items-center gap-2 rounded-full border border-[#d97759] bg-[#d97759]/5 px-3 py-1 text-xs font-medium text-[#d97759]">
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-[#d97759]"></span>
             Portfolio
           </div>
           <h1 class="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900">
@@ -25,8 +25,8 @@
             :class="[
               'rounded-full px-5 py-2 text-sm font-semibold transition-all',
               selectedCategory === category.value
-                ? 'bg-blue-600 text-white shadow-lg'
-                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-blue-600 hover:text-blue-700'
+                ? 'bg-[#d97759] text-white shadow-sm'
+                : 'bg-white border border-neutral-200 text-neutral-600 hover:border-[#d97759] hover:text-[#d97759] hover:shadow-sm'
             ]"
           >
             {{ category.label }}
@@ -43,35 +43,35 @@
             v-for="project in filteredProjects"
             :key="project.title"
             href="#"
-            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-600 hover:shadow-xl"
+            class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#d97759] hover:shadow-lg shadow-sm"
           >
             <!-- Top bar accent -->
-            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <!-- Category badge and featured -->
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-2">
-                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold border border-blue-200 bg-blue-50 text-blue-700">
-                  <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold border border-[#d97759] bg-[#d97759]/5 text-[#d97759]">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#d97759]"></span>
                   {{ project.category }}
                 </span>
                 <span v-if="project.featured" class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                   Featured
                 </span>
               </div>
-              <svg class="h-5 w-5 text-neutral-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="h-5 w-5 text-neutral-300 group-hover:text-[#d97759] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
             </div>
 
             <!-- Project info -->
-            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-blue-700 transition-colors">{{ project.title }}</h3>
+            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-[#d97759] transition-colors">{{ project.title }}</h3>
             <p class="text-sm text-neutral-600 mb-4 line-clamp-2">{{ project.description }}</p>
 
             <!-- Metrics -->
             <div v-if="project.metrics" class="flex items-center gap-3 mb-4 pb-4 border-b border-neutral-100">
               <div v-for="metric in project.metrics" :key="metric.label" class="flex items-center gap-1 text-xs">
-                <span class="font-bold text-blue-700">{{ metric.value }}</span>
+                <span class="font-bold text-[#d97759]">{{ metric.value }}</span>
                 <span class="text-neutral-600">{{ metric.label }}</span>
               </div>
             </div>
@@ -81,7 +81,7 @@
               <span
                 v-for="tech in project.tech"
                 :key="tech"
-                class="inline-flex items-center px-2 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700 border border-neutral-200"
+                class="inline-flex items-center px-2 py-1 rounded-lg bg-neutral-100 text-xs font-medium text-neutral-700 border border-neutral-200"
               >
                 {{ tech }}
               </span>
@@ -102,7 +102,8 @@
     <!-- CTA Section -->
     <section class="mt-20 md:mt-24">
       <div class="max-w-4xl mx-auto px-4 lg:px-6">
-        <div class="rounded-3xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 md:p-12 text-center shadow-xl">
+        <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-8 md:p-12 text-center shadow-sm">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
           <h2 class="text-2xl md:text-3xl font-bold text-neutral-900">Ready to get your site built?</h2>
           <p class="mt-3 text-base text-neutral-600 max-w-2xl mx-auto">
             Subscribe today and we'll start building this week. No contracts, no setup fees—just professional work that gets results.
@@ -110,13 +111,13 @@
           <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center">
             <NuxtLink
               to="/dashboard"
-              class="w-full sm:w-auto rounded-full bg-neutral-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-neutral-800 hover:shadow-xl"
+              class="w-full sm:w-auto rounded-lg bg-neutral-900 px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-neutral-800 hover:shadow"
             >
               Get Started
             </NuxtLink>
             <NuxtLink
               to="/contact"
-              class="w-full sm:w-auto rounded-full border-2 border-blue-200 bg-blue-50 px-8 py-4 text-base font-semibold text-blue-700 transition hover:bg-blue-100 hover:border-blue-300"
+              class="w-full sm:w-auto rounded-lg border-2 border-[#d97759] bg-[#d97759]/5 px-8 py-4 text-base font-semibold text-[#d97759] transition hover:bg-[#d97759]/10 hover:border-[#d97759]"
             >
               Contact Us
             </NuxtLink>

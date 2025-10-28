@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-neutral-50">
     <section class="pt-20 pb-16 md:pt-32 md:pb-24">
       <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
         <h1 class="text-5xl md:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
@@ -28,26 +28,26 @@
         <!-- Step Header -->
         <div class="mb-8">
           <div class="flex items-center gap-3 mb-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
               <!-- Layout icon for Site type -->
-              <svg v-if="stepSummaries[currentStep - 1].icon === 'layout'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg v-if="stepSummaries[currentStep - 1].icon === 'layout'" class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h12A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6Z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5M9 20.25V9" />
               </svg>
               <!-- Clipboard icon for Business basics, Services, Operations, Review -->
-              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'clipboard'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'clipboard'" class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               <!-- Globe icon for Existing website -->
-              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'globe'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'globe'" class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
               </svg>
               <!-- Palette icon for Brand & style -->
-              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'palette'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'palette'" class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75a6.75 6.75 0 0 1 0 13.5h-1.13a2.25 2.25 0 0 0-1.592.658l-1.66 1.66A1.5 1.5 0 0 1 8.321 18h-.571A6.75 6.75 0 0 1 8.25 4.5m7.5-.75a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 15.75 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 11.25 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 6.75 3.75Z" />
               </svg>
               <!-- Upload icon for Logo & assets -->
-              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'upload'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'upload'" class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
@@ -124,7 +124,7 @@
             <!-- Step 1 -->
             <div v-if="currentStep === 1" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-xl border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -136,7 +136,8 @@
                 </div>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
 
@@ -147,12 +148,12 @@
                     type="button"
                     @click="formData.siteType = type; validationErrors.siteType = false"
                     :class="[
-                      'flex h-full flex-col justify-center border-2 p-6 text-left transition-colors',
+                      'flex h-full flex-col justify-center rounded-lg border-2 p-6 text-left transition-all',
                       formData.siteType === type
-                        ? 'border-neutral-900 bg-neutral-50'
+                        ? 'border-[#d97759] bg-[#d97759]/5 shadow-sm'
                         : validationErrors.siteType
                         ? 'border-red-300 bg-red-50 hover:border-red-400'
-                        : 'border-neutral-200 bg-white hover:border-neutral-400'
+                        : 'border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm'
                     ]"
                   >
                     <span class="text-base font-medium text-neutral-900">{{ type }}</span>
@@ -166,7 +167,7 @@
                     type="button"
                     @click="nextStep"
                     :disabled="!formData.siteType"
-                    class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                    class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:shadow"
                   >
                     Continue
                   </button>
@@ -177,7 +178,7 @@
             <!-- Step 2: Business Basics -->
             <div v-if="currentStep === 2" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-xl border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -189,7 +190,8 @@
                 </div>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
@@ -203,10 +205,10 @@
                         required
                         @input="validationErrors.businessName = false"
                         :class="[
-                          'w-full border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent',
+                          'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.businessName
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white'
                         ]"
                         placeholder="Your company or product name"
                       />
@@ -227,10 +229,10 @@
                         required
                         @input="validationErrors.businessEmail = false"
                         :class="[
-                          'w-full border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent',
+                          'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.businessEmail
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white'
                         ]"
                         placeholder="you@company.com"
                       />
@@ -241,7 +243,7 @@
                       <input
                         v-model="formData.businessPhone"
                         type="tel"
-                        class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                         placeholder="(000) 000-0000"
                       />
                     </div>
@@ -256,10 +258,10 @@
                         type="button"
                         @click="formData.contactMethod = method.value"
                         :class="[
-                          'border px-4 py-2 text-sm font-medium transition',
+                          'rounded-lg border px-4 py-2 text-sm font-medium transition-all',
                           formData.contactMethod === method.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ method.label }}
@@ -276,10 +278,10 @@
                         required
                         @input="validationErrors.description = false"
                         :class="[
-                          'w-full border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent',
+                          'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.description
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white focus:border-accent-soft focus:ring-accent-soft'
+                            : 'border-neutral-200 bg-white'
                         ]"
                         placeholder="Share your core services, audience, and goals"
                       />
@@ -289,7 +291,7 @@
                           type="button"
                           @click="enhanceDescription"
                           :disabled="!formData.description.trim() || isEnhancing"
-                          class="inline-flex items-center gap-2 border border-neutral-900 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                          class="inline-flex items-center gap-2 rounded-lg border border-neutral-900 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
                         >
                           <svg v-if="!isEnhancing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -315,7 +317,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -326,7 +328,8 @@
 
             <!-- Step 3: Existing Website -->
             <div v-if="currentStep === 3" class="space-y-6">
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Existing website</h3>
                 <p class="mt-1 text-sm text-secondary">Do you have a current website we can analyze?</p>
 
@@ -340,10 +343,10 @@
                         type="button"
                         @click="formData.hasCurrentWebsite = option.value; hasCurrent = option.value"
                         :class="[
-                          'border px-6 py-3 text-sm font-medium transition',
+                          'rounded-lg border px-6 py-3 text-sm font-medium transition-all',
                           formData.hasCurrentWebsite === option.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ option.label }}
@@ -359,7 +362,7 @@
                         :disabled="searching"
                         type="text"
                         placeholder="example.com or https://example.com"
-                        class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent disabled:opacity-60"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent disabled:opacity-60 transition-all"
                         @input="currentUrl = formData.currentWebsiteUrl"
                       />
                     </div>
@@ -369,7 +372,7 @@
                         type="button"
                         @click="analyzeWebsite"
                         :disabled="!formData.currentWebsiteUrl || searching"
-                        class="bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="rounded-lg bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow"
                       >
                         {{ searching ? 'Analyzing…' : 'Analyze site' }}
                       </button>
@@ -383,14 +386,14 @@
                     </div>
 
                     <!-- Progress indicator -->
-                    <div v-if="searching" class="border border-neutral-200 bg-white p-4">
+                    <div v-if="searching" class="rounded-xl border border-neutral-200 bg-white p-4">
                       <div class="text-sm font-medium text-neutral-900 mb-2">Analyzing your website…</div>
-                      <div class="h-2 w-full bg-neutral-100">
-                        <div class="h-2 bg-neutral-900 transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
+                      <div class="h-2 w-full rounded-full bg-neutral-100 overflow-hidden">
+                        <div class="h-2 bg-[#d97759] transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
                       </div>
                       <ul class="mt-3 space-y-1 text-xs text-secondary">
                         <li v-for="(log, idx) in searchLogs" :key="idx" class="flex items-center gap-2">
-                          <span class="inline-block h-1.5 w-1.5 bg-neutral-900" />
+                          <span class="inline-block h-1.5 w-1.5 rounded-full bg-[#d97759]" />
                           {{ log }}
                         </li>
                       </ul>
@@ -401,7 +404,7 @@
                     <div v-if="siteNotFound" class="text-sm text-secondary">No info found. You can skip or add details manually.</div>
 
                     <!-- Summary -->
-                    <div v-if="siteSummary?.summary && !searching" class="border border-neutral-200 bg-neutral-50 p-4">
+                    <div v-if="siteSummary?.summary && !searching" class="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
                       <div class="text-sm font-medium text-primary mb-2">Summary</div>
                       <div class="text-sm text-secondary whitespace-pre-wrap">{{ siteSummary.summary }}</div>
                     </div>
@@ -418,7 +421,7 @@
                     <button
                       type="submit"
                       :disabled="formData.hasCurrentWebsite === 'yes' && !siteAdded && !formData.websiteSkipped"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -430,7 +433,7 @@
             <!-- Step 4: Services & Coverage -->
             <div v-if="currentStep === 4" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-xl border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -442,7 +445,8 @@
                 </div>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
                 <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
@@ -456,10 +460,10 @@
                         type="button"
                         @click="toggleService(service)"
                         :class="[
-                          'border px-4 py-2 text-sm transition',
+                          'rounded-lg border px-4 py-2 text-sm transition-all',
                           formData.selectedServices.includes(service)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ service }}
@@ -474,14 +478,14 @@
                           v-model="customService"
                           type="text"
                           placeholder="e.g., Custom consulting"
-                          class="flex-1 border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                          class="flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                           @keydown.enter.prevent="addCustomService"
                         />
                         <button
                           type="button"
                           @click="addCustomService"
                           :disabled="!customService.trim()"
-                          class="bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                          class="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                         >
                           Add
                         </button>
@@ -493,7 +497,7 @@
                       <div
                         v-for="(service, index) in formData.selectedServices"
                         :key="index"
-                        class="inline-flex items-center gap-2 border border-[#d97759] bg-[#d97759]/5 px-3 py-1.5 text-sm text-[#d97759]"
+                        class="inline-flex items-center gap-2 rounded-lg border border-[#d97759] bg-[#d97759]/5 px-3 py-1.5 text-sm text-[#d97759]"
                       >
                         <span>{{ service }}</span>
                         <button
@@ -550,10 +554,10 @@
                           type="button"
                           @click="formData.coverageType = option.value"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.coverageType === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           {{ option.label }}
@@ -569,12 +573,12 @@
                           type="button"
                           @click="formData.onSiteMode = option.value; validationErrors.onSiteMode = false"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.onSiteMode === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
                               : validationErrors.onSiteMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           {{ option.label }}
@@ -594,7 +598,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -606,7 +610,7 @@
             <!-- Step 5: Operations -->
             <div v-if="currentStep === 5" class="space-y-6">
               <!-- Validation Error Banner -->
-              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="border border-red-200 bg-red-50 p-4">
+              <div v-if="showValidation && Object.keys(validationErrors).length > 0" class="rounded-xl border border-red-200 bg-red-50 p-4">
                 <div class="flex items-start gap-3">
                   <svg class="h-5 w-5 flex-shrink-0 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -618,7 +622,8 @@
                 </div>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
 
@@ -633,12 +638,12 @@
                           type="button"
                           @click="formData.businessHoursMode = option.value; validationErrors.businessHoursMode = false"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.businessHoursMode === option.value
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
                               : validationErrors.businessHoursMode
                               ? 'border-red-300 bg-red-50 hover:border-red-400'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           {{ option.label }}
@@ -668,10 +673,10 @@
                         type="button"
                         @click="toggleLanguage(language)"
                         :class="[
-                          'border px-4 py-2 text-sm transition',
+                          'rounded-lg border px-4 py-2 text-sm transition-all',
                           formData.languages.includes(language)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ language }}
@@ -697,10 +702,10 @@
                           type="button"
                           @click="formData.hasLogo = option.value === 'yes'"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.hasLogo === (option.value === 'yes')
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                              : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           {{ option.label }}
@@ -719,7 +724,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -730,7 +735,8 @@
 
             <!-- Step 6: Design -->
             <div v-if="currentStep === 6" class="space-y-6">
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we'll fine-tune the details together.</p>
 
@@ -744,10 +750,10 @@
                         type="button"
                         @click="toggleDesignStyle(style)"
                         :class="[
-                          'border px-4 py-2 text-sm transition',
+                          'rounded-lg border px-4 py-2 text-sm transition-all',
                           formData.designStyles.includes(style)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ style }}
@@ -764,10 +770,10 @@
                         type="button"
                         @click="toggleEmotion(tone)"
                         :class="[
-                          'border px-4 py-2 text-sm transition',
+                          'rounded-lg border px-4 py-2 text-sm transition-all',
                           formData.emotionalImpact.includes(tone)
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         {{ tone }}
@@ -785,10 +791,10 @@
                         type="button"
                         @click="formData.colorTheme = theme.value"
                         :class="[
-                          'flex w-full items-center justify-between border px-4 py-3 text-left transition',
+                          'flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left transition-all',
                           formData.colorTheme === theme.value
-                            ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-400 hover:text-neutral-900'
+                            ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                            : 'border-neutral-200 bg-white text-secondary hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                         ]"
                       >
                         <div class="flex items-center gap-3">
@@ -826,10 +832,10 @@
                           type="button"
                           @click="formData.highContrast = false"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.highContrast === false
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 hover:text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           Standard
@@ -838,10 +844,10 @@
                           type="button"
                           @click="formData.highContrast = true"
                           :class="[
-                            'border px-4 py-2 text-sm transition',
+                            'rounded-lg border px-4 py-2 text-sm transition-all',
                             formData.highContrast === true
-                              ? 'border-neutral-900 bg-neutral-50 text-neutral-900'
-                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 hover:text-neutral-900'
+                              ? 'border-[#d97759] bg-[#d97759]/5 text-neutral-900 shadow-sm'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:text-neutral-900 hover:shadow-sm'
                           ]"
                         >
                           High contrast
@@ -853,7 +859,7 @@
                       <input
                         v-model="formData.brandColors"
                         type="text"
-                        class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                         placeholder="Share any specific colors or hex codes"
                       />
                     </div>
@@ -865,7 +871,7 @@
                       <textarea
                         v-model="formData.inspirationSites"
                         rows="2"
-                        class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                         placeholder="Add any links that inspire you"
                       />
                     </div>
@@ -874,7 +880,7 @@
                       <textarea
                         v-model="formData.additionalNotes"
                         rows="2"
-                        class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                         placeholder="Special requests, must-have sections, or questions"
                       />
                     </div>
@@ -890,7 +896,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -901,7 +907,8 @@
 
             <!-- Step 7: Logo & Assets -->
             <div v-if="currentStep === 7" class="space-y-6">
-              <div class="border border-neutral-200 bg-white p-8">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 
@@ -928,10 +935,10 @@
                         @dragleave.prevent="logoDropping = false"
                         @drop.prevent="handleLogoDrop"
                         :class="[
-                          'relative border-2 border-dashed transition-all',
+                          'relative rounded-xl border-2 border-dashed transition-all',
                           logoDropping
-                            ? 'border-neutral-900 bg-neutral-50'
-                            : 'border-neutral-200 bg-neutral-50/50 hover:border-neutral-400'
+                            ? 'border-[#d97759] bg-[#d97759]/10'
+                            : 'border-neutral-200 bg-neutral-50/50 hover:border-[#d97759]/30'
                         ]"
                       >
                         <input
@@ -944,7 +951,7 @@
                         
                         <!-- Upload Prompt -->
                         <div v-if="!uploadedLogo" class="flex flex-col items-center justify-center px-6 py-12 text-center">
-                          <div class="bg-neutral-100 p-4 mb-4">
+                          <div class="rounded-xl bg-neutral-100 p-4 mb-4">
                             <svg class="h-8 w-8 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -954,7 +961,7 @@
                           <button
                             type="button"
                             @click="$refs.logoInput.click()"
-                            class="inline-flex items-center gap-2 bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
+                            class="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-neutral-800 shadow-sm"
                           >
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -966,7 +973,7 @@
                         <!-- Logo Preview -->
                         <div v-else class="relative p-6">
                           <div class="flex items-center gap-4">
-                            <div class="flex-shrink-0 h-20 w-20 border border-neutral-200 bg-white p-2 flex items-center justify-center overflow-hidden">
+                            <div class="flex-shrink-0 h-20 w-20 rounded-lg border border-neutral-200 bg-white p-2 flex items-center justify-center overflow-hidden">
                               <img :src="uploadedLogo.preview" :alt="uploadedLogo.name" class="max-h-full max-w-full object-contain" />
                             </div>
                             <div class="flex-1 min-w-0">
@@ -976,7 +983,7 @@
                             <button
                               type="button"
                               @click="removeLogo"
-                              class="flex-shrink-0 p-2 text-secondary hover:bg-red-50 hover:text-red-600 transition"
+                              class="flex-shrink-0 rounded-lg p-2 text-secondary hover:bg-red-50 hover:text-red-600 transition"
                             >
                               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -1072,7 +1079,7 @@
                     </button>
                     <button
                       type="submit"
-                      class="px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+                      class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
                     >
                       Continue
                     </button>
@@ -1085,8 +1092,9 @@
             <!-- Step 8: Review & Submit -->
             <div v-if="currentStep === 8" class="space-y-6">
               <!-- Success Message -->
-              <div v-if="isSubmitted" class="border border-neutral-200 bg-white p-8 text-center">
-                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center border border-emerald-200 bg-emerald-50">
+              <div v-if="isSubmitted" class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 text-center shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50">
                   <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
@@ -1095,7 +1103,7 @@
                 <p class="text-sm text-neutral-600 mb-6">Your submission has been received successfully. We'll synthesize your inputs, share a first-week roadmap, and invite you to our collaboration hub.</p>
                 <NuxtLink
                   to="/dashboard"
-                  class="inline-flex items-center justify-center bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
+                  class="inline-flex items-center justify-center rounded-lg bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 shadow-sm hover:shadow"
                 >
                   Go to Dashboard
                   <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
@@ -1119,7 +1127,8 @@
                 </div>
               </div>
 
-              <div v-if="!isSubmitted" class="rounded-3xl border border-soft bg-white p-6 shadow-sm">
+              <div v-if="!isSubmitted" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Review your information</h3>
                 <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
 
