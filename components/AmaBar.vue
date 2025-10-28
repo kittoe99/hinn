@@ -11,8 +11,8 @@
     >
       <div class="pointer-events-auto">
         <form @submit.prevent="handleStickySubmit">
-          <div class="flex items-center gap-2 rounded-full border border-neutral-900 bg-white/95 backdrop-blur px-4 py-2 shadow-lg">
-            <div class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-900 bg-neutral-100 text-neutral-900" aria-hidden="true">
+          <div class="flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 backdrop-blur px-4 py-2 shadow-lg">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-200 bg-[#d97759]/10 text-neutral-900" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" class="h-4 w-4 ama-bar-icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
               </svg>
@@ -52,7 +52,7 @@
         <!-- Panel -->
         <div
           :class="[
-            'absolute left-1/2 -translate-x-1/2 w-[min(92vw,44rem)] h-[70vh] bg-white border border-neutral-900 rounded-lg shadow-2xl overflow-hidden transition-transform duration-300 ease-out',
+            'absolute left-1/2 -translate-x-1/2 w-[min(92vw,44rem)] h-[70vh] bg-white border border-neutral-200 rounded-lg shadow-2xl overflow-hidden transition-transform duration-300 ease-out',
             expandFrom === 'top' ? 'top-4 translate-y-0' : 'bottom-4 translate-y-0'
           ]"
           role="dialog"
@@ -62,7 +62,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-4">
             <div class="flex items-center gap-2 font-semibold text-neutral-900">
-              <span class="inline-flex items-center justify-center w-6 h-6 rounded-md border border-neutral-900 bg-neutral-100 text-neutral-900">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg border border-neutral-200 bg-[#d97759]/10 text-neutral-900">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 ama-icon">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
                 </svg>
@@ -82,7 +82,7 @@
               :key="idx"
               :class="[
                 'max-w-[85%] rounded-lg px-4 py-2.5 text-sm leading-relaxed',
-                message.role === 'user' ? 'ml-auto bg-neutral-900 text-white' : 'mr-auto bg-neutral-50 text-neutral-900 border border-neutral-200'
+                message.role === 'user' ? 'ml-auto bg-neutral-200 text-neutral-900' : 'mr-auto bg-neutral-50 text-neutral-900 border border-neutral-200'
               ]"
             >
               {{ message.content }}

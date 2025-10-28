@@ -6,7 +6,7 @@
         <div class="max-w-4xl">
           <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1] opacity-0 animate-fade-in" style="animation-delay: 0ms">
             Websites, marketing &<br />
-            <span :class="['typewriter-word text-neutral-900', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
+            <span :class="['typewriter-word text-neutral-500', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
             that put growth at the frontier
           </h1>
           <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
