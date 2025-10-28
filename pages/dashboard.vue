@@ -591,10 +591,10 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group border border-neutral-200 bg-white p-6 transition-all',
+              'group border border-neutral-200 bg-white p-6 transition-all shadow-sm hover:shadow-md',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-neutral-50 hover:border-neutral-900 cursor-pointer'
+                : 'hover:bg-neutral-50 hover:border-neutral-300 cursor-pointer'
             ]"
           >
             <div class="flex items-start justify-between mb-4">
@@ -1919,7 +1919,7 @@
       <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="hasProduct && (showAddNewModal = false)">
         <div class="bg-white border border-neutral-900 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <!-- Header -->
-          <div class="sticky top-0 bg-white border-b border-neutral-900 px-8 py-6 flex items-center justify-between">
+          <div class="sticky top-0 bg-white border-b border-neutral-200 px-8 py-6 flex items-center justify-between">
             <div>
               <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
               <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
@@ -1939,7 +1939,7 @@
               <!-- Website -->
               <button
                 @click="selectProduct('website')"
-                class="group border border-neutral-900 bg-white p-6 text-left hover:bg-neutral-50 transition-all"
+                class="group border border-neutral-200 bg-white p-6 text-left hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md"
               >
                 <div class="flex items-start justify-between mb-4">
                   <svg class="h-8 w-8 add-product-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
