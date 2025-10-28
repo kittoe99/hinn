@@ -51,7 +51,7 @@
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="rounded-lg px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
           >
             Get Started
           </NuxtLink>
@@ -215,14 +215,14 @@
         <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-neutral-200 bg-white space-y-3">
           <NuxtLink 
             to="/login"
-            class="block w-full py-3 text-center text-sm font-medium text-neutral-900 border border-neutral-200 hover:bg-neutral-50 transition-colors"
+            class="block w-full rounded-lg py-3 text-center text-sm font-medium text-neutral-900 border border-neutral-200 hover:bg-neutral-50 transition-colors"
             @click="mobileMenuOpen = false"
           >
             Sign in
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="block w-full py-3 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="block w-full rounded-lg py-3 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
             @click="mobileMenuOpen = false"
           >
             Get Started

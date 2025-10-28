@@ -14,7 +14,7 @@
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <NuxtLink
               to="/dashboard"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
             >
               Start Creating
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
@@ -43,7 +43,8 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
-          <div v-for="(tool, index) in marketingTools" :key="tool.title" :ref="el => { if (el) toolRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+          <div v-for="(tool, index) in marketingTools" :key="tool.title" :ref="el => { if (el) toolRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="mb-4">
               <svg v-if="index === 0" :class="['h-8 w-8 feature-icon transition-all duration-500', { 'icon-active': toolInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
@@ -67,7 +68,7 @@
             <h3 class="text-xl font-medium text-neutral-900 mb-3">{{ tool.title }}</h3>
             <p class="text-base text-neutral-600 leading-relaxed mb-6">{{ tool.desc }}</p>
             <div class="flex flex-wrap gap-2">
-              <span v-for="feature in tool.features" :key="feature" class="text-xs font-medium text-neutral-600 px-2 py-1 border border-neutral-200">
+              <span v-for="feature in tool.features" :key="feature" class="text-xs font-medium text-neutral-600 px-2 py-1 rounded border border-neutral-200">
                 {{ feature }}
               </span>
             </div>
@@ -86,8 +87,9 @@
           </p>
         </div>
 
-        <div class="space-y-6">
-          <div v-for="(campaign, index) in campaignTypes" :key="campaign.title" :ref="el => { if (el) campaignRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+        <div class="space-y-4">
+          <div v-for="(campaign, index) in campaignTypes" :key="campaign.title" :ref="el => { if (el) campaignRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1">
                 <div class="mb-3">
@@ -126,8 +128,9 @@
           </p>
         </div>
 
-        <div class="space-y-6">
-          <div v-for="(feature, index) in presenceFeatures" :key="feature.title" :ref="el => { if (el) presenceRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+        <div class="space-y-4">
+          <div v-for="(feature, index) in presenceFeatures" :key="feature.title" :ref="el => { if (el) presenceRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="mb-3">
               <svg v-if="index === 0" :class="['h-8 w-8 feature-icon transition-all duration-500', { 'icon-active': presenceInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
@@ -166,7 +169,7 @@
         <div class="flex flex-wrap items-center justify-center gap-4">
           <NuxtLink 
             to="/dashboard"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
           >
             Get Started
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">

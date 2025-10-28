@@ -14,7 +14,7 @@
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <NuxtLink
               to="/dashboard"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
             >
               Launch an Agent
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
@@ -43,7 +43,8 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
-          <div v-for="(agent, index) in agentCatalog" :key="agent.title" :ref="el => { if (el) agentRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+          <div v-for="(agent, index) in agentCatalog" :key="agent.title" :ref="el => { if (el) agentRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="mb-4">
               <svg v-if="index === 0" :class="['h-8 w-8 feature-icon transition-all duration-500', { 'icon-active': agentInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
@@ -70,7 +71,7 @@
             </div>
             <p class="text-base text-neutral-600 leading-relaxed mb-6">{{ agent.desc }}</p>
             <div class="flex flex-wrap gap-2">
-              <span v-for="capability in agent.capabilities" :key="capability" class="text-xs font-medium text-neutral-600 px-2 py-1 border border-neutral-200">
+              <span v-for="capability in agent.capabilities" :key="capability" class="text-xs font-medium text-neutral-600 px-2 py-1 rounded border border-neutral-200">
                 {{ capability }}
               </span>
             </div>
@@ -89,9 +90,10 @@
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <div v-for="(step, index) in launchSteps" :key="step.title" class="border-l-2 border-neutral-200 pl-6">
-            <div class="text-sm font-medium text-neutral-500 mb-2">Step {{ index + 1 }}</div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div v-for="(step, index) in launchSteps" :key="step.title" class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="text-sm font-medium text-[#d97759] mb-2">Step {{ index + 1 }}</div>
             <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ step.title }}</h3>
             <p class="text-base text-neutral-600">{{ step.desc }}</p>
           </div>
@@ -109,8 +111,9 @@
           </p>
         </div>
 
-        <div class="space-y-6">
-          <div v-for="(feature, index) in autonomyFeatures" :key="feature.title" :ref="el => { if (el) autonomyRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+        <div class="space-y-4">
+          <div v-for="(feature, index) in autonomyFeatures" :key="feature.title" :ref="el => { if (el) autonomyRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="mb-3">
               <svg v-if="index === 0" :class="['h-8 w-8 feature-icon transition-all duration-500', { 'icon-active': autonomyInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
@@ -148,7 +151,7 @@
         <div class="flex flex-wrap items-center justify-center gap-4">
           <NuxtLink 
             to="/dashboard"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
           >
             Get Started
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">

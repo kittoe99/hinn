@@ -14,7 +14,7 @@
           <div class="mt-10 flex flex-wrap items-center gap-4">
             <NuxtLink
               to="/dashboard"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
             >
               Build with AI
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
@@ -43,7 +43,8 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
-          <div v-for="(item, index) in aiFeatures" :key="item.title" :ref="el => { if (el) aiFeatureRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+          <div v-for="(item, index) in aiFeatures" :key="item.title" :ref="el => { if (el) aiFeatureRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="mb-4">
               <svg v-if="index === 0" :class="['h-8 w-8 feature-icon transition-all duration-500', { 'icon-active': aiFeatureInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 2.25c-2.998 0-5.74 1.1-7.843 2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
@@ -75,8 +76,9 @@
           </p>
         </div>
 
-        <div class="space-y-6">
-          <div v-for="(feature, index) in automationFeatures" :key="feature.title" :ref="el => { if (el) autoFeatureRefs[index] = el }" class="group border border-neutral-200 bg-white p-8">
+        <div class="space-y-4">
+          <div v-for="(feature, index) in automationFeatures" :key="feature.title" :ref="el => { if (el) autoFeatureRefs[index] = el }" class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1">
                 <div class="mb-3">
@@ -118,9 +120,10 @@
           </p>
         </div>
 
-        <div class="grid md:grid-cols-4 gap-8">
-          <div v-for="(stage, index) in operatingStages" :key="stage.title" class="border-l-2 border-neutral-200 pl-6">
-            <div class="text-sm font-medium text-neutral-500 mb-2">{{ stage.label }}</div>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div v-for="(stage, index) in operatingStages" :key="stage.title" class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="text-sm font-medium text-[#d97759] mb-2">{{ stage.label }}</div>
             <h3 class="text-xl font-medium text-neutral-900 mb-2">{{ stage.title }}</h3>
             <p class="text-base text-neutral-600">{{ stage.detail }}</p>
           </div>
@@ -138,7 +141,7 @@
         <div class="flex flex-wrap items-center justify-center gap-4">
           <NuxtLink 
             to="/dashboard"
-            class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
           >
             Get Started
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">

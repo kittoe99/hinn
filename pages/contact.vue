@@ -25,8 +25,8 @@
 
             <div class="mt-8 space-y-6">
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
+                <div class="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -39,8 +39,8 @@
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
+                <div class="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -56,8 +56,8 @@
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
+                <div class="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -72,7 +72,7 @@
               </div>
             </div>
 
-            <div class="mt-10 border border-dashed border-[#d97759]/30 bg-[#d97759]/5 p-6 rounded-lg">
+            <div class="mt-10 border border-dashed border-[#d97759]/30 bg-[#d97759]/5 p-6 rounded-xl">
               <h3 class="text-base font-semibold text-neutral-900">Response Time</h3>
               <p class="mt-2 text-sm text-neutral-600 leading-relaxed">
                 We typically respond to all inquiries within 24 hours during business days. For urgent matters, please mention it in your message.
@@ -81,7 +81,8 @@
           </div>
 
           <!-- Contact Form -->
-          <div class="border border-neutral-200 bg-white p-8 shadow-sm">
+          <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
@@ -93,7 +94,7 @@
                     v-model="form.firstName"
                     type="text"
                     required
-                    class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                    class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                     placeholder="John"
                   />
                 </div>
@@ -106,7 +107,7 @@
                     v-model="form.lastName"
                     type="text"
                     required
-                    class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                    class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                     placeholder="Doe"
                   />
                 </div>
@@ -147,7 +148,7 @@
                   id="service"
                   v-model="form.service"
                   required
-                  class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                  class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                 >
                   <option value="">Select a service</option>
                   <option value="website">Website Development</option>
@@ -166,14 +167,14 @@
                   v-model="form.message"
                   required
                   rows="5"
-                  class="w-full border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent resize-none"
+                  class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent resize-none transition-all"
                   placeholder="Tell us about your project..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-neutral-900 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-neutral-800"
+                class="w-full rounded-lg bg-neutral-900 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-neutral-800 shadow-sm hover:shadow"
               >
                 Send Message
               </button>
@@ -200,7 +201,7 @@
           <details
             v-for="faq in faqs"
             :key="faq.question"
-            class="group border border-neutral-200 bg-white p-5 shadow-sm transition-all open:border-neutral-900 open:bg-neutral-50 open:shadow-md"
+            class="group rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition-all hover:shadow-lg open:border-[#d97759] open:bg-[#d97759]/5 open:shadow-lg"
           >
             <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-neutral-900 marker:hidden">
               <span>{{ faq.question }}</span>
