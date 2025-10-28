@@ -313,46 +313,6 @@
                 </div>
               </section>
 
-              <!-- Design Preferences -->
-              <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-base font-medium text-neutral-900">Design Preferences</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.design" class="px-5 pb-5 border-t border-neutral-100">
-                  <dl class="space-y-3 mt-4">
-                    <div v-if="selectedWebsiteOnboarding.design_preferences.color_theme">
-                      <dt class="text-xs font-medium text-neutral-500 mb-1">Color Theme</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.design_preferences.color_theme }}</dd>
-                    </div>
-                    <div v-if="selectedWebsiteOnboarding.design_preferences.has_logo !== undefined">
-                      <dt class="text-xs font-medium text-neutral-500 mb-1">Has Logo</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.design_preferences.has_logo ? 'Yes' : 'No' }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-
-              <!-- Language & Additional Info -->
-              <section v-if="selectedWebsiteOnboarding.language" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-base font-medium text-neutral-900">Language & Additional Info</h2>
-                  <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-                <div v-show="websiteExpandedSections.language" class="px-5 pb-5 border-t border-neutral-100">
-                  <dl class="space-y-3 mt-4">
-                    <div>
-                      <dt class="text-xs font-medium text-neutral-500 mb-1">Primary Language</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.language }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-
               <!-- Logo & Assets -->
               <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
@@ -444,7 +404,7 @@
       </div>
 
       <!-- Onboarding Required Banner (shows on all tabs) -->
-      <div v-if="showOnboardingRequired && pendingPlan && !isOnboardingPage" class="relative overflow-hidden mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="relative overflow-hidden mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
         <div class="flex flex-col md:flex-row items-start justify-between gap-6">
           <div class="flex items-start gap-4">
@@ -483,7 +443,7 @@
       </div>
 
       <!-- Overview Tab -->
-      <div v-else-if="activeTab === 'overview'" class="space-y-6">
+      <div v-else-if="!selectedWebsiteId && activeTab === 'overview'" class="space-y-6">
         <!-- Welcome Section -->
         <div class="mb-12">
           <div class="flex items-center justify-between mb-6">
@@ -580,7 +540,7 @@
       </div>
 
       <!-- Websites Tab -->
-      <div v-else-if="activeTab === 'websites'" class="space-y-6">
+      <div v-else-if="!selectedWebsiteId && activeTab === 'websites'" class="space-y-6">
         <!-- Search and Actions Bar -->
         <div class="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div class="relative flex-1">
@@ -817,7 +777,7 @@
       </div>
 
       <!-- Settings Tab -->
-      <div v-if="activeTab === 'settings'">
+      <div v-if="!selectedWebsiteId && activeTab === 'settings'">
         <!-- Mobile View -->
         <div class="md:hidden">
           <!-- Menu List (when no tab selected) -->
@@ -1097,7 +1057,7 @@
       </div>
 
       <!-- Support Tab -->
-      <div v-if="activeTab === 'support'">
+      <div v-if="!selectedWebsiteId && activeTab === 'support'">
         <!-- Mobile View -->
         <div class="md:hidden">
           <!-- Menu List (when no tab selected) -->
@@ -1361,7 +1321,7 @@
       </div>
 
       <!-- Domains Tab -->
-      <div v-if="activeTab === 'domains'">
+      <div v-if="!selectedWebsiteId && activeTab === 'domains'">
         <!-- Mobile View -->
         <div class="md:hidden">
           <!-- Menu List (when no tab selected) -->
@@ -2297,8 +2257,6 @@ const websiteExpandedSections = ref({
   serviceArea: false,
   operations: false,
   websiteInfo: false,
-  design: false,
-  language: false,
   logoAssets: false
 })
 
