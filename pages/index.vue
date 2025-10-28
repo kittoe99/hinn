@@ -6,7 +6,7 @@
         <div class="max-w-4xl">
           <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1] opacity-0 animate-fade-in" style="animation-delay: 0ms">
             Websites, marketing &<br />
-            <span :class="['typewriter-word text-neutral-500', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
+            <span :class="['typewriter-word text-[#d97759]', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
             that put growth at the frontier
           </h1>
           <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
@@ -15,7 +15,7 @@
           <div class="mt-10 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
               to="/dashboard"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
             >
               Get Started
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
@@ -48,9 +48,10 @@
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group relative bg-white border border-neutral-200 p-8 hover:border-neutral-900 transition-all duration-200 opacity-0 animate-fade-in-up"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 opacity-0 animate-fade-in-up shadow-sm"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             <!-- Icon -->
             <div class="mb-6">
               <svg v-if="product.title === 'Websites'" :class="['h-8 w-8 transition-all duration-500 product-icon', { 'icon-active': productInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
@@ -87,12 +88,12 @@
           </p>
         </div>
         
-        <div class="space-y-4">
+        <div class="space-y-3">
           <a
             v-for="(project, index) in showcaseProjects.slice(0, 6)"
             :key="project.title"
             href="#"
-            class="group block border border-neutral-200 bg-white p-6 hover:border-neutral-900 transition-all duration-200 opacity-0 animate-fade-in-up"
+            class="group block border border-neutral-200 bg-white rounded-xl p-6 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 opacity-0 animate-fade-in-up shadow-sm"
             :style="{ animationDelay: `${index * 50}ms` }"
           >
             <div class="flex items-start justify-between gap-4">
