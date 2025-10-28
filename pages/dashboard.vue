@@ -104,77 +104,72 @@
         <!-- Website Content -->
         <div v-else-if="selectedWebsite" class="bg-white">
           <div class="mx-auto max-w-5xl">
-            <!-- Two Column Layout -->
-            <div class="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-8 mb-8">
-              <!-- Left: Preview -->
-              <div>
-                <div class="border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
-                  <div class="aspect-video flex items-center justify-center p-8">
-                    <div class="text-center">
-                      <svg class="h-16 w-16 text-neutral-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            <!-- Header Card -->
+            <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
+              <!-- Accent Bar -->
+              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+              
+              <div class="p-8">
+                <div class="flex items-start gap-6">
+                  <!-- Icon -->
+                  <div class="h-16 w-16 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  
+                  <!-- Content -->
+                  <div class="flex-1">
+                    <h1 class="text-3xl font-medium text-neutral-900 mb-3">{{ selectedWebsite.name }}</h1>
+                    <a 
+                      v-if="selectedWebsite.custom_domain || selectedWebsite.domain" 
+                      :href="`https://${selectedWebsite.custom_domain || selectedWebsite.domain || selectedWebsite.slug + '.vercel.app'}`"
+                      target="_blank"
+                      class="text-base text-neutral-600 hover:text-[#d97759] inline-flex items-center gap-2 transition-colors mb-4"
+                    >
+                      {{ selectedWebsite.custom_domain || selectedWebsite.domain || selectedWebsite.slug + '.vercel.app' }}
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                       </svg>
-                      <p class="text-sm text-neutral-500">Website preview</p>
+                    </a>
+                    
+                    <!-- Meta Info -->
+                    <div class="flex items-center gap-4 flex-wrap mb-6">
+                      <div class="flex items-center gap-2">
+                        <span :class="[
+                          'h-2 w-2 rounded-full',
+                          selectedWebsite.status === 'active' ? 'bg-emerald-500' : 'bg-neutral-400'
+                        ]"></span>
+                        <span class="text-sm font-medium text-neutral-900">{{ selectedWebsite.status === 'active' ? 'Ready' : selectedWebsite.status }}</span>
+                      </div>
+                      <span class="text-neutral-300">•</span>
+                      <div class="flex items-center gap-2 text-sm text-neutral-600">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span>{{ formatDate(selectedWebsite.created_at) }}</span>
+                      </div>
+                      <span v-if="selectedWebsiteOnboarding?.category" class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-700">
+                        {{ selectedWebsiteOnboarding.category }}
+                      </span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-3">
+                      <button class="inline-flex items-center gap-2 border border-neutral-200 bg-white px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-colors">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                        Add Domain
+                      </button>
+                      <button class="inline-flex items-center gap-2 bg-neutral-900 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                        Request Changes
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Right: Details -->
-              <div class="space-y-4">
-                <div>
-                  <h1 class="text-2xl font-bold text-neutral-900 mb-1">{{ selectedWebsite.name }}</h1>
-                  <a 
-                    v-if="selectedWebsite.custom_domain || selectedWebsite.domain" 
-                    :href="`https://${selectedWebsite.custom_domain || selectedWebsite.domain || selectedWebsite.slug + '.vercel.app'}`"
-                    target="_blank"
-                    class="text-sm text-neutral-500 hover:text-neutral-700 inline-flex items-center gap-1 transition-colors"
-                  >
-                    {{ selectedWebsite.custom_domain || selectedWebsite.domain || selectedWebsite.slug + '.vercel.app' }}
-                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                    </svg>
-                  </a>
-                </div>
-
-                <!-- Status & Created -->
-                <div class="grid grid-cols-2 gap-4 py-3 border-y border-neutral-200">
-                  <div>
-                    <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Status</h3>
-                    <div class="flex items-center gap-2">
-                      <span :class="[
-                        'h-2 w-2 rounded-full',
-                        selectedWebsite.status === 'active' ? 'bg-emerald-500' : 'bg-neutral-400'
-                      ]"></span>
-                      <span class="text-sm font-medium text-neutral-900 capitalize">{{ selectedWebsite.status === 'active' ? 'Ready' : selectedWebsite.status }}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Created</h3>
-                    <p class="text-sm font-medium text-neutral-900">{{ formatDate(selectedWebsite.created_at) }}</p>
-                  </div>
-                </div>
-
-                <!-- Category -->
-                <div v-if="selectedWebsiteOnboarding?.category" class="py-3 border-b border-neutral-200">
-                  <h3 class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-1.5">Category</h3>
-                  <span class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-xs font-medium text-neutral-700">{{ selectedWebsiteOnboarding.category }}</span>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex flex-wrap gap-2 pt-1">
-                  <button class="inline-flex items-center gap-2 border border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:border-neutral-300 transition-colors">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                    </svg>
-                    Add Domain
-                  </button>
-                  <button class="inline-flex items-center gap-2 bg-neutral-900 px-3.5 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                    </svg>
-                    Request Changes
-                  </button>
                 </div>
               </div>
             </div>
@@ -450,81 +445,177 @@
 
       <!-- Overview Tab -->
       <div v-else-if="activeTab === 'overview'" class="space-y-6">
+        <!-- Welcome Section -->
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h1 class="text-4xl font-medium text-neutral-900 mb-3">Welcome back</h1>
+              <p class="text-lg text-neutral-600">Choose a service to get started</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Website Card -->
+          <NuxtLink 
+            to="/dashboard?tab=websites"
+            @click="activeTab = 'websites'"
+            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+          >
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-medium text-neutral-900 mb-3">Website</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed mb-6">Professional sites with custom design.</p>
+            <div class="flex items-center gap-2 text-sm font-medium text-neutral-900">
+              <span>Get started</span>
+              <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </div>
+          </NuxtLink>
+
+          <!-- AI Agents Card -->
+          <NuxtLink 
+            to="/dashboard?tab=ai-agents"
+            @click="activeTab = 'ai-agents'"
+            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+          >
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                </svg>
+              </div>
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-medium text-neutral-900 mb-3">AI Agents</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed mb-6">Automate tasks and workflows.</p>
+            <div class="flex items-center gap-2 text-sm font-medium text-neutral-900">
+              <span>Explore agents</span>
+              <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </div>
+          </NuxtLink>
+
+          <!-- Marketing Card -->
+          <NuxtLink 
+            to="/dashboard?tab=marketing"
+            @click="activeTab = 'marketing'"
+            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+          >
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                </svg>
+              </div>
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-medium text-neutral-900 mb-3">Marketing</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed mb-6">Drive growth with campaigns.</p>
+            <div class="flex items-center gap-2 text-sm font-medium text-neutral-900">
+              <span>Start campaign</span>
+              <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Websites Tab -->
+      <div v-else-if="activeTab === 'websites'" class="space-y-6">
         <!-- Search and Actions Bar -->
-        <div class="mb-6 flex items-center justify-between gap-4">
+        <div class="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div class="relative flex-1">
-            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
             </div>
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Search projects..."
+              placeholder="Search websites..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-10 w-full  border border-neutral-200 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-900 focus:outline-none',
+                'h-11 w-full rounded-lg border border-neutral-200 pl-11 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all',
                 showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
               ]"
             />
           </div>
 
-          <div class="flex items-center gap-2">
-            <button
-              @click="!showOnboardingRequired && (viewMode = 'grid')"
-              :disabled="showOnboardingRequired"
-              :class="[
-                'p-2  border transition-colors',
-                showOnboardingRequired ? 'opacity-50 cursor-not-allowed border-neutral-200' : '',
-                viewMode === 'grid'
-                  ? 'bg-neutral-900 text-white border-neutral-900'
-                  : 'bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
-              ]"
-            >
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-              </svg>
-            </button>
+          <div class="flex items-center gap-3">
+            <!-- View Toggle -->
+            <div class="inline-flex items-center rounded-lg border border-neutral-200 bg-white p-1">
+              <button
+                @click="!showOnboardingRequired && (viewMode = 'grid')"
+                :disabled="showOnboardingRequired"
+                :class="[
+                  'p-2 rounded-md transition-all',
+                  showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
+                  viewMode === 'grid'
+                    ? 'bg-neutral-900 text-white shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                ]"
+              >
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                </svg>
+              </button>
 
-            <button
-              @click="!showOnboardingRequired && (viewMode = 'list')"
-              :disabled="showOnboardingRequired"
-              :class="[
-                'p-2  border transition-colors',
-                showOnboardingRequired ? 'opacity-50 cursor-not-allowed border-neutral-200' : '',
-                viewMode === 'list'
-                  ? 'bg-neutral-900 text-white border-neutral-900'
-                  : 'bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
-              ]"
-            >
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-              </svg>
-            </button>
+              <button
+                @click="!showOnboardingRequired && (viewMode = 'list')"
+                :disabled="showOnboardingRequired"
+                :class="[
+                  'p-2 rounded-md transition-all',
+                  showOnboardingRequired ? 'opacity-50 cursor-not-allowed' : '',
+                  viewMode === 'list'
+                    ? 'bg-neutral-900 text-white shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                ]"
+              >
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
+            </div>
 
-            <div class="h-6 w-px bg-neutral-200"></div>
-
+            <!-- Add New Button -->
             <button 
               @click="showAddNewModal = true"
               :disabled="showOnboardingRequired"
               :class="[
-                'flex items-center gap-2 border px-4 py-2 text-sm font-medium transition-colors',
+                'inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-all',
                 showOnboardingRequired 
                   ? 'bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed' 
-                  : 'bg-white text-neutral-900 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-900'
+                  : 'bg-neutral-900 text-white border-neutral-900 hover:bg-neutral-800 shadow-sm hover:shadow'
               ]"
             >
-              Add New...
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
               </svg>
+              Add New
             </button>
           </div>
         </div>
 
         <!-- Onboarding Required Banner (hide when on onboarding page) -->
-        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'overview' && !isOnboardingPage" class="mb-6 rounded-lg border border-neutral-900 bg-white p-8">
+        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'websites' && !isOnboardingPage" class="mb-6 rounded-lg border border-neutral-900 bg-white p-8">
           <div class="flex flex-col md:flex-row items-start justify-between gap-6">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0">
@@ -591,43 +682,56 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group border border-neutral-200 bg-white p-6 transition-all shadow-sm hover:shadow-md rounded-lg',
+              'group relative overflow-hidden border border-neutral-200 bg-white rounded-xl transition-all shadow-sm hover:shadow-lg',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-neutral-50 hover:border-neutral-300 cursor-pointer'
+                : 'hover:border-neutral-300 cursor-pointer'
             ]"
           >
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex items-start gap-3">
-                <div class="h-10 w-10  border border-neutral-200 bg-neutral-100 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-5 w-5 dashboard-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-base font-medium text-neutral-900 mb-1">{{ project.name }}</h3>
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm text-neutral-600">Website</span>
-                    <span class="text-neutral-300">•</span>
-                    <span v-if="project.plan_tier" class="px-2 py-0.5 border border-neutral-900 bg-white text-xs font-medium text-neutral-900 capitalize">
-                      {{ project.plan_tier }}
-                    </span>
+            <!-- Accent Bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            
+            <div class="p-6">
+              <!-- Header -->
+              <div class="flex items-start justify-between mb-6">
+                <div class="flex items-start gap-4">
+                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-neutral-900 mb-2">{{ project.name }}</h3>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span v-if="project.plan_tier" class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-700 capitalize">
+                        {{ project.plan_tier }}
+                      </span>
+                      <span class="flex items-center gap-1.5">
+                        <span :class="[
+                          'h-2 w-2 rounded-full',
+                          project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
+                        ]"></span>
+                        <span class="text-xs font-medium text-neutral-600">{{ project.status }}</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
+                <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
               </div>
-            </div>
 
-            <div class="space-y-2 text-sm text-neutral-600 border-t border-neutral-200 pt-4">
-              <div class="flex items-center justify-between">
-                <span>Last deployed</span>
-                <span class="text-neutral-900">{{ project.lastDeployed }}</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span>Status</span>
-                <span class="flex items-center gap-1.5 text-neutral-900 font-medium">
-                  <span v-if="project.status === 'Ready'" class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                  {{ project.status }}
-                </span>
+              <!-- Footer Info -->
+              <div class="flex items-center justify-between pt-4 border-t border-neutral-100">
+                <div class="flex items-center gap-2 text-xs text-neutral-500">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span>{{ project.lastDeployed }}</span>
+                </div>
+                <div class="text-xs font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">
+                  View details →
+                </div>
               </div>
             </div>
           </div>
@@ -657,9 +761,9 @@
               ]"
             >
               <div class="flex items-center gap-3">
-                <div class="h-8 w-8 rounded border border-neutral-200 bg-neutral-50 text-neutral-700 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                <div class="h-8 w-8 rounded-lg border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-4 w-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
                 <div>
