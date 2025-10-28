@@ -25,8 +25,8 @@
 
             <div class="mt-8 space-y-6">
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center bg-neutral-100 text-neutral-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
+                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -39,8 +39,8 @@
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center bg-neutral-100 text-neutral-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
+                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -56,8 +56,8 @@
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-none items-center justify-center bg-neutral-100 text-neutral-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
+                <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-[#d97759]/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-[#d97759]">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -72,7 +72,7 @@
               </div>
             </div>
 
-            <div class="mt-10 border border-dashed border-neutral-200 bg-neutral-50 p-6">
+            <div class="mt-10 border border-dashed border-[#d97759]/30 bg-[#d97759]/5 p-6 rounded-lg">
               <h3 class="text-base font-semibold text-neutral-900">Response Time</h3>
               <p class="mt-2 text-sm text-neutral-600 leading-relaxed">
                 We typically respond to all inquiries within 24 hours during business days. For urgent matters, please mention it in your message.
@@ -81,7 +81,7 @@
           </div>
 
           <!-- Contact Form -->
-          <div class="border border-neutral-200 bg-white p-8">
+          <div class="border border-neutral-200 bg-white p-8 shadow-sm">
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
@@ -200,7 +200,7 @@
           <details
             v-for="faq in faqs"
             :key="faq.question"
-            class="group border border-neutral-200 bg-white p-5 transition-colors open:border-neutral-900 open:bg-neutral-50"
+            class="group border border-neutral-200 bg-white p-5 shadow-sm transition-all open:border-neutral-900 open:bg-neutral-50 open:shadow-md"
           >
             <summary class="flex cursor-pointer items-center justify-between text-left text-base font-semibold text-neutral-900 marker:hidden">
               <span>{{ faq.question }}</span>

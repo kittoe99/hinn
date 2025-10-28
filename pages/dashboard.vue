@@ -1985,7 +1985,7 @@
               <p class="text-base text-neutral-600 mt-1">Select the plan that fits</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="border border-neutral-900 bg-white p-6 hover:bg-neutral-50 transition-all">
+              <div class="border border-neutral-200 bg-white p-6 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md">
                 <h4 class="text-lg font-medium text-neutral-900 mb-1">Starter</h4>
                 <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$29</span><span class="text-base text-neutral-600">/month</span></div>
                 <ul class="space-y-2 mb-6 text-sm text-neutral-600">
@@ -1995,7 +1995,7 @@
                 </ul>
                 <button @click="selectPlan('starter')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Starter</button>
               </div>
-              <div class="relative border-2 border-neutral-900 bg-white p-6">
+              <div class="relative border-2 border-neutral-900 bg-white p-6 shadow-md">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span class="px-2 py-1 bg-neutral-900 text-white text-xs font-medium">Popular</span>
                 </div>
@@ -2008,7 +2008,7 @@
                 </ul>
                 <button @click="selectPlan('professional')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Professional</button>
               </div>
-              <div class="border border-neutral-900 bg-white p-6 hover:bg-neutral-50 transition-all">
+              <div class="border border-neutral-200 bg-white p-6 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md">
                 <h4 class="text-lg font-medium text-neutral-900 mb-1">Enterprise</h4>
                 <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$199</span><span class="text-base text-neutral-600">/month</span></div>
                 <ul class="space-y-2 mb-6 text-sm text-neutral-600">
