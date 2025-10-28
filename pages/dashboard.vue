@@ -175,11 +175,11 @@
             </div>
 
             <!-- Onboarding Sections (if available) -->
-            <div v-if="selectedWebsiteOnboarding" class="space-y-2">
+            <div v-if="selectedWebsiteOnboarding" class="space-y-3">
               <!-- Business Information -->
-              <section class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Business Information</h2>
+              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -203,9 +203,9 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Contact Information</h2>
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -229,9 +229,9 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Services</h2>
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -248,9 +248,9 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Service Area</h2>
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -270,9 +270,9 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Operation Details</h2>
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -292,9 +292,9 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Website Information</h2>
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -314,9 +314,9 @@
               </section>
 
               <!-- Design Preferences -->
-              <section v-if="selectedWebsiteOnboarding.design_preferences" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Design Preferences</h2>
+              <section v-if="selectedWebsiteOnboarding.design_preferences" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('design')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Design Preferences</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.design ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -336,9 +336,9 @@
               </section>
 
               <!-- Language & Additional Info -->
-              <section v-if="selectedWebsiteOnboarding.language" class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Language & Additional Info</h2>
+              <section v-if="selectedWebsiteOnboarding.language" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('language')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Language & Additional Info</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.language ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -354,9 +354,9 @@
               </section>
 
               <!-- Logo & Assets -->
-              <section class=" border border-neutral-200 bg-white overflow-hidden">
-                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 transition-colors group">
-                  <h2 class="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700">Logo & Assets</h2>
+              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+                  <h2 class="text-base font-medium text-neutral-900">Logo & Assets</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.logoAssets ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -443,6 +443,45 @@
         </div>
       </div>
 
+      <!-- Onboarding Required Banner (shows on all tabs) -->
+      <div v-if="showOnboardingRequired && pendingPlan && !isOnboardingPage" class="relative overflow-hidden mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+        <div class="flex flex-col md:flex-row items-start justify-between gap-6">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+              <div class="h-14 w-14 rounded-xl border border-[#d97759]/20 bg-[#d97759]/10 flex items-center justify-center">
+                <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-medium text-neutral-900 mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
+              <p class="text-base text-neutral-600 max-w-2xl mb-4">
+                You've selected the <span class="font-medium text-neutral-900 capitalize">{{ pendingPlan.plan_tier }}</span> plan 
+                (<span class="font-medium">${{ pendingPlan.price_monthly }}/month</span>). 
+                Complete the onboarding process to provide us with your business details and preferences so we can get started.
+              </p>
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-neutral-200 bg-neutral-50 text-xs font-medium text-neutral-700">
+                <svg class="h-4 w-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Takes about 10 minutes
+              </div>
+            </div>
+          </div>
+          <NuxtLink
+            to="/onboarding"
+            class="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-8 py-3 text-base font-medium text-white hover:bg-neutral-800 transition-all shadow-sm"
+          >
+            Start Onboarding
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </NuxtLink>
+        </div>
+      </div>
+
       <!-- Overview Tab -->
       <div v-else-if="activeTab === 'overview'" class="space-y-6">
         <!-- Welcome Section -->
@@ -461,11 +500,12 @@
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
               </div>
@@ -487,11 +527,12 @@
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
                 </svg>
               </div>
@@ -513,11 +554,12 @@
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative bg-white border border-neutral-200 rounded-lg p-8 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+                <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
                 </svg>
               </div>
@@ -611,44 +653,6 @@
               </svg>
               Add New
             </button>
-          </div>
-        </div>
-
-        <!-- Onboarding Required Banner (hide when on onboarding page) -->
-        <div v-if="showOnboardingRequired && pendingPlan && activeTab === 'websites' && !isOnboardingPage" class="mb-6 rounded-lg border border-neutral-900 bg-white p-8">
-          <div class="flex flex-col md:flex-row items-start justify-between gap-6">
-            <div class="flex items-start gap-4">
-              <div class="flex-shrink-0">
-                <div class="h-12 w-12  border border-neutral-900 bg-neutral-100 flex items-center justify-center">
-                  <svg class="h-6 w-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-xl font-medium text-neutral-900 mb-2">Complete Onboarding for Your New {{ pendingPlan.product_type === 'website' ? 'Website' : pendingPlan.product_type === 'marketing' ? 'Marketing' : 'AI Agent' }}</h3>
-                <p class="text-base text-neutral-600 max-w-2xl mb-3">
-                  You've selected the <span class="font-medium text-neutral-900 capitalize">{{ pendingPlan.plan_tier }}</span> plan 
-                  (<span class="font-medium">${{ pendingPlan.price_monthly }}/month</span>). 
-                  Complete the onboarding process to provide us with your business details and preferences so we can get started.
-                </p>
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-neutral-200 bg-neutral-50 text-xs font-medium text-neutral-700">
-                  <svg class="h-4 w-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  Takes about 10 minutes
-                </div>
-              </div>
-            </div>
-            <NuxtLink
-              to="/onboarding"
-              class="flex-shrink-0 inline-flex items-center gap-2 bg-neutral-900 px-8 py-3 text-base font-medium text-white hover:bg-neutral-800 transition-all"
-            >
-              Start Onboarding
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </NuxtLink>
           </div>
         </div>
 
@@ -1363,7 +1367,7 @@
           <!-- Menu List (when no tab selected) -->
           <div v-if="!domainsMobileContentOpen" class="space-y-6">
             <div>
-              <h1 class="text-3xl font-bold text-primary mb-6">Domains</h1>
+              <h1 class="text-4xl font-medium text-neutral-900 mb-6">Domains</h1>
               
               <!-- Search Bar -->
               <div class="relative mb-6">
@@ -1376,7 +1380,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 focus:outline-none "
+                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
                 />
               </div>
 
@@ -1412,15 +1416,15 @@
             <div>
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-                <div class="border border-neutral-200 bg-white p-6">
-                  <div class="flex items-center justify-between mb-4">
+                <div class="rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+                  <div class="flex items-center justify-between mb-6">
                     <div>
-                      <h2 class="text-2xl font-medium text-primary">Purchased Domains</h2>
-                      <p class="mt-1 text-sm text-secondary">Manage your registered domain names</p>
+                      <h2 class="text-2xl font-medium text-neutral-900">Purchased Domains</h2>
+                      <p class="mt-2 text-base text-neutral-600">Manage your registered domain names</p>
                     </div>
                     <button 
                       @click="loadMyDomains" 
-                      class="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors"
+                      class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-all"
                     >
                       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -2000,18 +2004,31 @@
 
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
-        <div class="text-center max-w-md px-4">
-          <div class="mb-4 inline-flex items-center gap-2 px-3 py-1.5 border border-neutral-900 bg-white text-sm font-medium text-neutral-900">
-            {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}
+        <div class="text-center max-w-lg px-4">
+          <!-- Icon Container -->
+          <div class="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-[#d97759]/10">
+            <svg v-if="activeTab === 'branding'" class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+            <svg v-else-if="activeTab === 'marketing'" class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+            </svg>
+            <svg v-else class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+            </svg>
           </div>
-          <h2 class="text-3xl font-medium text-neutral-900 mb-3">Coming Soon</h2>
-          <p class="text-base text-neutral-600 mb-8">
+          
+          <!-- Title & Description -->
+          <h2 class="text-4xl font-medium text-neutral-900 mb-4">Coming Soon</h2>
+          <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
             We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
             Stay tuned for updates!
           </p>
-          <div class="inline-flex items-center gap-2 px-4 py-2 border border-neutral-200 bg-neutral-50 text-sm text-neutral-600">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          
+          <!-- Info Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-600 shadow-sm">
+            <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             This feature is under development
           </div>
@@ -2019,16 +2036,16 @@
       </div>
     </main>
 
-      <!-- Add New Modal (minimal redesign) -->
-      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" @click.self="hasProduct && (showAddNewModal = false)">
-        <div class="bg-white border border-neutral-900 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Add New Modal -->
+      <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="hasProduct && (showAddNewModal = false)">
+        <div class="bg-white rounded-2xl border border-neutral-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
           <!-- Header -->
-          <div class="sticky top-0 bg-white border-b border-neutral-200 px-8 py-6 flex items-center justify-between">
+          <div class="sticky top-0 bg-white border-b border-neutral-100 px-8 py-6 flex items-center justify-between">
             <div>
               <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
               <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
             </div>
-            <button v-if="hasProduct" @click="showAddNewModal = false" class="p-2 hover:bg-neutral-100 transition-colors">
+            <button v-if="hasProduct" @click="showAddNewModal = false" class="p-2 rounded-lg hover:bg-neutral-100 transition-colors">
               <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
@@ -2036,44 +2053,51 @@
           </div>
           <!-- Step: Select Product -->
           <div v-if="addNewStep === 'select'" class="p-8">
-            <div class="mb-6">
-              <p class="text-sm text-neutral-600">Choose a product to start. More coming soon.</p>
+            <div class="mb-8">
+              <p class="text-base text-neutral-600">Choose a product to start. More coming soon.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <!-- Website -->
               <button
                 @click="selectProduct('website')"
-                class="group border border-neutral-200 bg-white p-6 text-left hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md"
+                class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 text-left hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg"
               >
-                <div class="flex items-start justify-between mb-4">
-                  <svg class="h-8 w-8 add-product-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  <span class="text-xs font-medium text-[#d97759]">Available</span>
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+                <div class="flex items-start justify-between mb-6">
+                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-[#d97759]/10 border border-[#d97759]/20 text-xs font-medium text-[#d97759]">Available</span>
                 </div>
-                <h3 class="text-lg font-medium text-neutral-900 mb-2">Website</h3>
+                <h3 class="text-xl font-medium text-neutral-900 mb-2">Website</h3>
                 <p class="text-sm text-neutral-600 mb-6">Professional site with custom design</p>
-                <div class="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
+                <div class="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 rounded-lg bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
                   Get Started
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                  <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </div>
               </button>
 
               <!-- Marketing (disabled) -->
-              <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
-                <div class="flex items-start justify-between mb-4">
-                  <svg class="h-8 w-8 add-product-icon-disabled" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-                  <span class="text-xs font-medium text-[#d97759]">Coming Soon</span>
+              <div class="relative overflow-hidden border border-neutral-200 bg-neutral-50/50 rounded-xl p-8 text-left opacity-60 cursor-not-allowed">
+                <div class="flex items-start justify-between mb-6">
+                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-neutral-100 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-neutral-200 border border-neutral-300 text-xs font-medium text-neutral-600">Coming Soon</span>
                 </div>
-                <h3 class="text-lg font-medium text-neutral-700 mb-2">Marketing</h3>
+                <h3 class="text-xl font-medium text-neutral-700 mb-2">Marketing</h3>
                 <p class="text-sm text-neutral-500">Boost reach with campaigns</p>
               </div>
 
               <!-- AI Agent (disabled) -->
-              <div class="border border-neutral-200 bg-neutral-50 p-6 text-left opacity-50 cursor-not-allowed">
-                <div class="flex items-start justify-between mb-4">
-                  <svg class="h-8 w-8 add-product-icon-disabled" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
-                  <span class="text-xs font-medium text-[#d97759]">Coming Soon</span>
+              <div class="relative overflow-hidden border border-neutral-200 bg-neutral-50/50 rounded-xl p-8 text-left opacity-60 cursor-not-allowed">
+                <div class="flex items-start justify-between mb-6">
+                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-neutral-100 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-neutral-200 border border-neutral-300 text-xs font-medium text-neutral-600">Coming Soon</span>
                 </div>
-                <h3 class="text-lg font-medium text-neutral-700 mb-2">AI Agent</h3>
+                <h3 class="text-xl font-medium text-neutral-700 mb-2">AI Agent</h3>
                 <p class="text-sm text-neutral-500">Automate tasks with agents</p>
               </div>
             </div>
@@ -2084,42 +2108,66 @@
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
               Back to Products
             </button>
-            <div class="mb-6">
+            <div class="mb-8">
               <h3 class="text-2xl font-medium text-neutral-900">Choose Your Website Plan</h3>
-              <p class="text-base text-neutral-600 mt-1">Select the plan that fits</p>
+              <p class="text-base text-neutral-600 mt-2">Select the plan that fits your needs</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="border border-neutral-200 bg-white p-6 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md">
-                <h4 class="text-lg font-medium text-neutral-900 mb-1">Starter</h4>
-                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$29</span><span class="text-base text-neutral-600">/month</span></div>
-                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
-                  <li>Up to 5 pages</li>
-                  <li>Custom domain</li>
-                  <li>SSL certificate</li>
+              <div class="border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg">
+                <h4 class="text-xl font-medium text-neutral-900 mb-4">Starter</h4>
+                <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$29</span><span class="text-lg text-neutral-600">/month</span></div>
+                <ul class="space-y-3 mb-8 text-sm text-neutral-600">
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Up to 5 pages
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Custom domain
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    SSL certificate
+                  </li>
                 </ul>
-                <button @click="selectPlan('starter')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Starter</button>
+                <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Starter</button>
               </div>
-              <div class="relative border-2 border-neutral-900 bg-white p-6 shadow-md">
+              <div class="relative border-2 border-neutral-900 bg-white rounded-xl p-8 shadow-lg">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span class="px-2 py-1 bg-neutral-900 text-white text-xs font-medium">Popular</span>
+                  <span class="px-3 py-1.5 rounded-full bg-neutral-900 text-white text-xs font-medium">Popular</span>
                 </div>
-                <h4 class="text-lg font-medium text-neutral-900 mb-1">Professional</h4>
-                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$79</span><span class="text-base text-neutral-600">/month</span></div>
-                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
-                  <li>Up to 15 pages</li>
-                  <li>Advanced SEO</li>
-                  <li>E-commerce ready</li>
+                <h4 class="text-xl font-medium text-neutral-900 mb-4">Professional</h4>
+                <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$79</span><span class="text-lg text-neutral-600">/month</span></div>
+                <ul class="space-y-3 mb-8 text-sm text-neutral-600">
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Up to 15 pages
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Advanced SEO
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    E-commerce ready
+                  </li>
                 </ul>
-                <button @click="selectPlan('professional')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Professional</button>
+                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Professional</button>
               </div>
-              <div class="border border-neutral-200 bg-white p-6 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm hover:shadow-md">
-                <h4 class="text-lg font-medium text-neutral-900 mb-1">Enterprise</h4>
-                <div class="mb-4"><span class="text-3xl font-medium text-neutral-900">$199</span><span class="text-base text-neutral-600">/month</span></div>
-                <ul class="space-y-2 mb-6 text-sm text-neutral-600">
-                  <li>Unlimited pages</li>
-                  <li>Advanced analytics</li>
+              <div class="border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg">
+                <h4 class="text-xl font-medium text-neutral-900 mb-4">Enterprise</h4>
+                <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$199</span><span class="text-lg text-neutral-600">/month</span></div>
+                <ul class="space-y-3 mb-8 text-sm text-neutral-600">
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Unlimited pages
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Advanced analytics
+                  </li>
                 </ul>
-                <button @click="selectPlan('enterprise')" class="w-full bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Enterprise</button>
+                <button @click="selectPlan('enterprise')" class="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Enterprise</button>
               </div>
             </div>
           </div>
