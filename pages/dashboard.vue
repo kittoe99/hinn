@@ -591,7 +591,7 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group border border-neutral-200 bg-white p-6 transition-all shadow-sm hover:shadow-md',
+              'group border border-neutral-200 bg-white p-6 transition-all shadow-sm hover:shadow-md rounded-lg',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
                 : 'hover:bg-neutral-50 hover:border-neutral-300 cursor-pointer'
