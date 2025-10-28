@@ -45,24 +45,24 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div>
-        <nav class="flex gap-1 overflow-x-auto scrollbar-hide md:justify-center">
+      <div class="border-b border-neutral-200 bg-white">
+        <nav class="flex gap-1 overflow-x-auto scrollbar-hide md:justify-center px-4 md:px-6">
           <a
             v-for="tab in navigationTabs"
             :key="tab.id"
             @click="!showOnboardingRequired && (activeTab = tab.id)"
             :class="[
-              'relative whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
+              'relative whitespace-nowrap px-5 py-4 text-sm font-medium transition-all',
               showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
               activeTab === tab.id
-                ? 'text-primary'
-                : 'text-secondary hover:text-primary'
+                ? 'text-neutral-900'
+                : 'text-neutral-600 hover:text-neutral-900'
             ]"
           >
             {{ tab.label }}
             <span
               v-if="activeTab === tab.id"
-              class="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-900"
+              class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759] rounded-t-full"
             ></span>
           </a>
         </nav>
