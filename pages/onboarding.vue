@@ -21,14 +21,39 @@
             <span class="text-sm text-neutral-600">{{ Math.round((currentStep / totalSteps) * 100) }}% complete</span>
           </div>
           <div class="h-1 bg-neutral-200">
-            <div class="h-full bg-neutral-900 transition-all duration-300" :style="{ width: `${(currentStep / totalSteps) * 100}%` }"></div>
+            <div class="h-full bg-[#d97759] transition-all duration-300" :style="{ width: `${(currentStep / totalSteps) * 100}%` }"></div>
           </div>
         </div>
 
         <!-- Step Header -->
         <div class="mb-8">
-          <h2 class="text-2xl font-medium text-neutral-900">{{ stepSummaries[currentStep - 1].title }}</h2>
-          <p class="mt-2 text-base text-neutral-600">{{ stepSummaries[currentStep - 1].headline }}</p>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+              <!-- Layout icon for Site type -->
+              <svg v-if="stepSummaries[currentStep - 1].icon === 'layout'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h12A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5M9 20.25V9" />
+              </svg>
+              <!-- Clipboard icon for Business basics, Services, Operations, Review -->
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'clipboard'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 3h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <!-- Globe icon for Existing website -->
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'globe'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+              </svg>
+              <!-- Palette icon for Brand & style -->
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'palette'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75a6.75 6.75 0 0 1 0 13.5h-1.13a2.25 2.25 0 0 0-1.592.658l-1.66 1.66A1.5 1.5 0 0 1 8.321 18h-.571A6.75 6.75 0 0 1 8.25 4.5m7.5-.75a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 15.75 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 11.25 3.75Zm-4.5 0a1.125 1.125 0 1 1-1.125 1.125A1.125 1.125 0 0 1 6.75 3.75Z" />
+              </svg>
+              <!-- Upload icon for Logo & assets -->
+              <svg v-else-if="stepSummaries[currentStep - 1].icon === 'upload'" class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-medium text-neutral-900">{{ stepSummaries[currentStep - 1].title }}</h2>
+          </div>
+          <p class="text-base text-neutral-600">{{ stepSummaries[currentStep - 1].headline }}</p>
         </div>
 
         <div class="space-y-6">
@@ -39,7 +64,7 @@
                 <h2 class="mt-1 text-lg font-semibold text-primary">{{ stepSummaries[currentStep - 1].title }}</h2>
                 <p class="mt-1 text-sm text-secondary">{{ stepSummaries[currentStep - 1].headline }}</p>
               </div>
-              <div class="hidden h-14 w-14 items-center justify-center rounded-full bg-accent-subtle text-accent-primary sm:flex">
+              <div class="hidden h-14 w-14 items-center justify-center rounded-full bg-[#d97759]/10 text-[#d97759] sm:flex">
                 <svg
                   v-if="stepSummaries[currentStep - 1].icon === 'layout'"
                   class="h-6 w-6"
@@ -468,7 +493,7 @@
                       <div
                         v-for="(service, index) in formData.selectedServices"
                         :key="index"
-                        class="inline-flex items-center gap-2 border border-neutral-900 bg-neutral-50 px-3 py-1.5 text-sm text-neutral-900"
+                        class="inline-flex items-center gap-2 border border-[#d97759] bg-[#d97759]/5 px-3 py-1.5 text-sm text-[#d97759]"
                       >
                         <span>{{ service }}</span>
                         <button
@@ -489,7 +514,7 @@
                     <ServiceAreaPicker v-model="formData.serviceAreas" />
                     <div
                       v-if="availableSeedAreas.length"
-                      class="mt-3 rounded-2xl border border-dashed border-accent-soft bg-accent-subtle/40 p-4 text-xs text-secondary"
+                      class="mt-3 rounded-2xl border border-dashed border-[#d97759]/30 bg-[#d97759]/5 p-4 text-xs text-secondary"
                     >
                       <p class="text-sm font-semibold text-primary">Detected location</p>
                       <p class="mt-1">We detected your location. Click to add it as a service area.</p>
@@ -498,7 +523,7 @@
                           v-for="area in availableSeedAreas"
                           :key="area.placeId || area.name"
                           type="button"
-                          class="rounded-full border border-accent-soft bg-white px-3 py-1.5 text-xs font-semibold text-primary transition hover:border-accent-primary"
+                          class="rounded-full border border-[#d97759]/30 bg-white px-3 py-1.5 text-xs font-semibold text-[#d97759] transition hover:border-[#d97759]"
                           @click="useSeedArea(area)"
                         >
                           Add {{ area.displayName || area.name }}
@@ -506,7 +531,7 @@
                         <button
                           v-if="availableSeedAreas.length > 1"
                           type="button"
-                          class="rounded-full border border-transparent bg-accent-primary px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-accent-focus"
+                          class="rounded-full border border-transparent bg-[#d97759] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#d97759]/90"
                           @click="useAllSeedAreas"
                         >
                           Add all
@@ -975,8 +1000,8 @@
                       :class="[
                         'relative rounded-2xl border-2 border-dashed transition-all',
                         assetsDropping
-                          ? 'border-accent-primary bg-accent-subtle/50'
-                          : 'border-neutral-200 bg-neutral-50/50 hover:border-accent-soft hover:bg-accent-subtle/20'
+                          ? 'border-[#d97759] bg-[#d97759]/10'
+                          : 'border-neutral-200 bg-neutral-50/50 hover:border-[#d97759]/30 hover:bg-[#d97759]/5'
                       ]"
                     >
                       <input
