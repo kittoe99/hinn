@@ -107,9 +107,9 @@
             <!-- Header Card -->
             <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
               <!-- Accent Bar -->
-              <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
+              <!-- Accent bar removed per design update -->
               
-              <div class="p-8 pl-9">
+              <div class="p-8">
                 <div class="flex flex-col md:flex-row items-start gap-8">
                   <!-- Site Preview Image -->
                   <div class="w-full md:w-80 flex-shrink-0">
@@ -477,9 +477,9 @@
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -504,9 +504,9 @@
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -531,9 +531,9 @@
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
