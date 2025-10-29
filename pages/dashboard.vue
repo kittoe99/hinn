@@ -107,19 +107,36 @@
             <!-- Header Card -->
             <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
               <!-- Accent Bar -->
-              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+              <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
               
-              <div class="p-8">
-                <div class="flex items-start gap-6">
-                  <!-- Icon -->
-                  <div class="h-16 w-16 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
+              <div class="p-8 pl-9">
+                <div class="flex flex-col md:flex-row items-start gap-8">
+                  <!-- Site Preview Image -->
+                  <div class="w-full md:w-80 flex-shrink-0">
+                    <div class="relative aspect-[4/3] rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden group">
+                      <!-- Preview Image or Placeholder -->
+                      <div v-if="selectedWebsite.preview_image" class="w-full h-full">
+                        <img 
+                          :src="selectedWebsite.preview_image" 
+                          :alt="`${selectedWebsite.name} preview`"
+                          class="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div v-else class="w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                        <div class="h-16 w-16 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center mb-4">
+                          <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                          </svg>
+                        </div>
+                        <p class="text-sm text-neutral-500">No preview available</p>
+                      </div>
+                      <!-- Overlay on hover -->
+                      <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 transition-colors"></div>
+                    </div>
                   </div>
                   
                   <!-- Content -->
-                  <div class="flex-1">
+                  <div class="flex-1 min-w-0">
                     <h1 class="text-3xl font-medium text-neutral-900 mb-3">{{ selectedWebsite.name }}</h1>
                     <a 
                       v-if="selectedWebsite.custom_domain || selectedWebsite.domain" 
@@ -653,36 +670,41 @@
             ]"
           >
             <!-- Accent Bar -->
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             
-            <div class="p-6">
+            <!-- Product Type Badge -->
+            <div class="absolute top-4 right-4">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[#d97759]/20 bg-[#d97759]/5 text-xs font-medium text-[#d97759]">
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                Website
+              </span>
+            </div>
+            
+            <div class="p-6 pl-7">
               <!-- Header -->
-              <div class="flex items-start justify-between mb-6">
-                <div class="flex items-start gap-4">
-                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-neutral-900 mb-2">{{ project.name }}</h3>
-                    <div class="flex items-center gap-2 flex-wrap">
-                      <span v-if="project.plan_tier" class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-700 capitalize">
-                        {{ project.plan_tier }}
-                      </span>
-                      <span class="flex items-center gap-1.5">
-                        <span :class="[
-                          'h-2 w-2 rounded-full',
-                          project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
-                        ]"></span>
-                        <span class="text-xs font-medium text-neutral-600">{{ project.status }}</span>
-                      </span>
-                    </div>
+              <div class="flex items-start gap-4 mb-6">
+                <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-medium text-neutral-900 mb-2">{{ project.name }}</h3>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span v-if="project.plan_tier" class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-700 capitalize">
+                      {{ project.plan_tier }}
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                      <span :class="[
+                        'h-2 w-2 rounded-full',
+                        project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
+                      ]"></span>
+                      <span class="text-xs font-medium text-neutral-600">{{ project.status }}</span>
+                    </span>
                   </div>
                 </div>
-                <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
               </div>
 
               <!-- Footer Info -->
