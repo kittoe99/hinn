@@ -800,7 +800,7 @@
           <!-- Menu List (when no tab selected) -->
           <div v-if="!settingsMobileContentOpen" class="space-y-6">
             <div>
-              <h1 class="text-3xl font-medium text-primary mb-6">Settings</h1>
+              <h1 class="text-3xl font-medium text-neutral-900 mb-6">Settings</h1>
               
               <!-- Search Bar -->
               <div class="relative mb-6">
@@ -818,14 +818,23 @@
               </div>
 
               <!-- Menu Items -->
-              <div class="space-y-0 border-t border-neutral-200">
+              <div class="space-y-2 border-t border-neutral-200 pt-4">
                 <a
                   v-for="subTab in settingsTabs"
                   :key="subTab.id"
                   href="#"
                   @click.prevent="settingsActiveTab = subTab.id; settingsMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 hover:text-neutral-700 transition-colors"
+                  class="relative block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
+                  :class="[
+                    settingsActiveTab === subTab.id
+                      ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
+                      : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                  ]"
                 >
+                  <span
+                    v-if="settingsActiveTab === subTab.id"
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-xl"
+                  ></span>
                   {{ subTab.label }}
                 </a>
               </div>
@@ -850,41 +859,41 @@
               <!-- Profile Section -->
               <div v-if="settingsActiveTab === 'profile'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Profile Settings</h2>
-                  <p class="mt-1 text-sm text-secondary">Manage your personal information and account preferences</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Profile Settings</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Manage your personal information and account preferences</p>
                 </div>
 
-                <div class="border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="space-y-5">
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Full Name</label>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Full Name</label>
                       <input
                         type="text"
                         placeholder="John Doe"
-                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                       />
                     </div>
 
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Email Address</label>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Email Address</label>
                       <input
                         type="email"
                         placeholder="you@example.com"
-                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                       />
                     </div>
 
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Company</label>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Company</label>
                       <input
                         type="text"
                         placeholder="Your Company"
-                        class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                       />
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+                      <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors shadow-sm">
                         Save Changes
                       </button>
                     </div>
@@ -899,7 +908,7 @@
                   <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
                 </div>
 
-                <div class="border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="space-y-6">
                     <div>
                       <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
@@ -908,7 +917,7 @@
                           <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
                           <div class="text-xs text-neutral-600 mt-1">Free forever</div>
                         </div>
-                        <button class="border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
+                        <button class=" border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
                           Upgrade
                         </button>
                       </div>
@@ -916,7 +925,7 @@
 
                     <div>
                       <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
-                      <div class="p-4 border border-neutral-200">
+                      <div class="p-4  border border-neutral-200">
                         <p class="text-sm text-neutral-600">No payment method on file</p>
                         <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
                           Add Payment Method
@@ -930,11 +939,11 @@
               <!-- Invoices Section -->
               <div v-if="settingsActiveTab === 'invoices'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Invoices</h2>
-                  <p class="mt-1 text-sm text-secondary">View and download your billing invoices</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Invoices</h2>
+                  <p class="mt-1 text-sm text-neutral-600">View and download your billing invoices</p>
                 </div>
 
-                <div class="border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -952,19 +961,23 @@
         <div class="hidden md:flex md:flex-row gap-6">
           <!-- Sidebar Navigation -->
           <aside class="md:w-48 shrink-0">
-            <nav class="space-y-0.5">
+            <nav class="space-y-2">
               <a
                 v-for="subTab in settingsTabs"
                 :key="subTab.id"
                 href="#"
                 @click.prevent="settingsActiveTab = subTab.id"
+                class="relative block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
-                  'block px-3 py-2 text-sm font-medium transition-colors border',
                   settingsActiveTab === subTab.id
-                    ? 'bg-white text-neutral-900 border-neutral-900'
-                    : 'text-neutral-600 border-transparent hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-200'
+                    ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
+                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                 ]"
               >
+                <span
+                  v-if="settingsActiveTab === subTab.id"
+                  class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-lg"
+                ></span>
                 {{ subTab.label }}
               </a>
             </nav>
@@ -974,100 +987,48 @@
           <div class="hidden md:block flex-1 min-w-0">
             <!-- Profile Section -->
             <div v-if="settingsActiveTab === 'profile'" class="space-y-6">
-          <div>
-            <h2 class="text-2xl font-medium text-primary">Profile Settings</h2>
-            <p class="mt-1 text-sm text-secondary">Manage your personal information and account preferences</p>
-          </div>
-
-          <div class="border border-neutral-200 bg-white p-6">
-            <div class="space-y-5">
               <div>
-                <label class="block text-sm font-medium text-primary mb-2">Full Name</label>
-                <input
-                  type="text"
-                  placeholder="John Doe"
-                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
-                />
+                <h2 class="text-2xl font-medium text-neutral-900">Profile Settings</h2>
+                <p class="mt-1 text-sm text-neutral-600">Manage your personal information and account preferences</p>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-primary mb-2">Email Address</label>
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-primary mb-2">Company</label>
-                <input
-                  type="text"
-                  placeholder="Your Company"
-                  class="w-full border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
-                />
-              </div>
-
-              <div class="pt-4 border-t border-neutral-200">
-                <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
-                  Save Changes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Billing Section -->
-        <div v-if="settingsActiveTab === 'billing'" class="space-y-6">
-          <div>
-            <h2 class="text-2xl font-medium text-neutral-900">Billing Settings</h2>
-            <p class="mt-1 text-sm text-neutral-600">Manage your subscription and payment methods</p>
-          </div>
-
-          <div class="border border-neutral-200 bg-white p-6">
-            <div class="space-y-6">
-              <div>
-                <h3 class="text-base font-semibold text-neutral-900 mb-4">Current Plan</h3>
-                <div class="flex items-center justify-between p-4 border border-neutral-200 bg-neutral-50">
+              <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="space-y-5">
                   <div>
-                    <div class="text-sm font-semibold text-neutral-900">Hobby Plan</div>
-                    <div class="text-xs text-neutral-600 mt-1">Free forever</div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="John Doe"
+                      class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
+                    />
                   </div>
-                  <button class=" border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50 transition-colors">
-                    Upgrade
-                  </button>
+
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Company</label>
+                    <input
+                      type="text"
+                      placeholder="Your Company"
+                      class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
+                    />
+                  </div>
+
+                  <div class="pt-4 border-t border-neutral-200">
+                    <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors shadow-sm">
+                      Save Changes
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <h3 class="text-base font-semibold text-neutral-900 mb-4">Payment Method</h3>
-                <div class="p-4  border border-neutral-200">
-                  <p class="text-sm text-neutral-600">No payment method on file</p>
-                  <button class="mt-3 text-sm font-medium text-neutral-900 hover:text-neutral-700">
-                    Add Payment Method
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Invoices Section -->
-        <div v-if="settingsActiveTab === 'invoices'" class="space-y-6">
-          <div>
-            <h2 class="text-2xl font-medium text-primary">Invoices</h2>
-            <p class="mt-1 text-sm text-secondary">View and download your billing invoices</p>
-          </div>
-
-          <div class="border border-neutral-200 bg-white p-6">
-            <div class="text-center py-12">
-              <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-              </svg>
-              <h3 class="text-base font-semibold text-primary mb-2">No invoices yet</h3>
               <p class="text-sm text-secondary">Your invoices will appear here once you upgrade to a paid plan</p>
-            </div>
-          </div>
             </div>
           </div>
         </div>
@@ -1080,7 +1041,7 @@
           <!-- Menu List (when no tab selected) -->
           <div v-if="!supportMobileContentOpen" class="space-y-6">
             <div>
-              <h1 class="text-3xl font-medium text-primary mb-6">Support</h1>
+              <h1 class="text-3xl font-medium text-neutral-900 mb-6">Support</h1>
               
               <!-- Search Bar -->
               <div class="relative mb-6">
@@ -1098,14 +1059,23 @@
               </div>
 
               <!-- Menu Items -->
-              <div class="space-y-0 border-t border-neutral-200">
+              <div class="space-y-2 border-t border-neutral-200 pt-4">
                 <a
                   v-for="subTab in supportTabs"
                   :key="subTab.id"
                   href="#"
                   @click.prevent="supportActiveTab = subTab.id; supportMobileContentOpen = true"
-                  class="block px-0 py-4 text-base font-normal text-primary border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
+                  class="relative block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
+                  :class="[
+                    supportActiveTab === subTab.id
+                      ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
+                      : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                  ]"
                 >
+                  <span
+                    v-if="supportActiveTab === subTab.id"
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-xl"
+                  ></span>
                   {{ subTab.label }}
                 </a>
               </div>
@@ -1130,11 +1100,11 @@
               <!-- Chat Support Section -->
               <div v-if="supportActiveTab === 'chat'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Chat Support</h2>
-                  <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Chat Support</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Get instant help from our support team</p>
                 </div>
 
-                <div class=" border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
@@ -1148,11 +1118,11 @@
               <!-- Helpful Docs Section -->
               <div v-if="supportActiveTab === 'docs'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Helpful Docs</h2>
-                  <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Helpful Docs</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Browse our documentation and guides</p>
                 </div>
 
-                <div class=" border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1166,11 +1136,11 @@
               <!-- Technical/Bugs Section -->
               <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Technical/Bugs</h2>
-                  <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Technical/Bugs</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Report technical issues and bugs</p>
                 </div>
 
-                <div class=" border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -1184,32 +1154,32 @@
               <!-- Contact Us Section -->
               <div v-if="supportActiveTab === 'contact'" class="space-y-6">
                 <div>
-                  <h2 class="text-2xl font-medium text-primary">Contact Us</h2>
-                  <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
+                  <h2 class="text-2xl font-medium text-neutral-900">Contact Us</h2>
+                  <p class="mt-1 text-sm text-neutral-600">Get in touch with our team</p>
                 </div>
 
-                <div class="border border-neutral-200 bg-white p-6">
+                <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                   <div class="space-y-5">
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Subject</label>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Subject</label>
                       <input
                         type="text"
                         placeholder="How can we help?"
-                        class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                       />
                     </div>
 
                     <div>
-                      <label class="block text-sm font-medium text-primary mb-2">Message</label>
+                      <label class="block text-sm font-medium text-neutral-800 mb-2">Message</label>
                       <textarea
                         rows="5"
                         placeholder="Tell us more..."
-                        class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-900 focus:outline-none"
+                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                       ></textarea>
                     </div>
 
                     <div class="pt-4 border-t border-neutral-200">
-                      <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors ">
+                      <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors shadow-sm">
                         Send Message
                       </button>
                     </div>
@@ -1224,19 +1194,23 @@
         <div class="hidden md:flex md:flex-row gap-6">
           <!-- Sidebar Navigation -->
           <aside class="md:w-48 shrink-0">
-            <nav class="space-y-0.5">
+            <nav class="space-y-2">
               <a
                 v-for="subTab in supportTabs"
                 :key="subTab.id"
                 href="#"
                 @click.prevent="supportActiveTab = subTab.id"
+                class="relative block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
-                  'block px-3 py-2 text-sm font-medium transition-colors border',
                   supportActiveTab === subTab.id
-                    ? 'bg-white text-neutral-900 border-neutral-900'
-                    : 'text-neutral-600 border-transparent hover:bg-neutral-50 hover:text-neutral-900 hover:border-neutral-200'
+                    ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
+                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                 ]"
               >
+                <span
+                  v-if="supportActiveTab === subTab.id"
+                  class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-lg"
+                ></span>
                 {{ subTab.label }}
               </a>
             </nav>
@@ -1247,11 +1221,11 @@
             <!-- Chat Support Section -->
             <div v-if="supportActiveTab === 'chat'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-medium text-primary">Chat Support</h2>
-                <p class="mt-1 text-sm text-secondary">Get instant help from our support team</p>
+                <h2 class="text-2xl font-medium text-neutral-900">Chat Support</h2>
+                <p class="mt-1 text-sm text-neutral-600">Get instant help from our support team</p>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-6">
+              <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
@@ -1265,11 +1239,11 @@
             <!-- Helpful Docs Section -->
             <div v-if="supportActiveTab === 'docs'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-medium text-primary">Helpful Docs</h2>
-                <p class="mt-1 text-sm text-secondary">Browse our documentation and guides</p>
+                <h2 class="text-2xl font-medium text-neutral-900">Helpful Docs</h2>
+                <p class="mt-1 text-sm text-neutral-600">Browse our documentation and guides</p>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-6">
+              <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1283,11 +1257,11 @@
             <!-- Technical/Bugs Section -->
             <div v-if="supportActiveTab === 'bugs'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-medium text-primary">Technical/Bugs</h2>
-                <p class="mt-1 text-sm text-secondary">Report technical issues and bugs</p>
+                <h2 class="text-2xl font-medium text-neutral-900">Technical/Bugs</h2>
+                <p class="mt-1 text-sm text-neutral-600">Report technical issues and bugs</p>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-6">
+              <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div class="text-center py-12">
                   <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
@@ -1301,32 +1275,32 @@
             <!-- Contact Us Section -->
             <div v-if="supportActiveTab === 'contact'" class="space-y-6">
               <div>
-                <h2 class="text-2xl font-medium text-primary">Contact Us</h2>
-                <p class="mt-1 text-sm text-secondary">Get in touch with our team</p>
+                <h2 class="text-2xl font-medium text-neutral-900">Contact Us</h2>
+                <p class="mt-1 text-sm text-neutral-600">Get in touch with our team</p>
               </div>
 
-              <div class="border border-neutral-200 bg-white p-6">
+              <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div class="space-y-5">
                   <div>
-                    <label class="block text-sm font-medium text-primary mb-2">Subject</label>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Subject</label>
                     <input
                       type="text"
                       placeholder="How can we help?"
-                      class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
+                      class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                     />
                   </div>
 
                   <div>
-                    <label class="block text-sm font-medium text-primary mb-2">Message</label>
+                    <label class="block text-sm font-medium text-neutral-800 mb-2">Message</label>
                     <textarea
                       rows="5"
                       placeholder="Tell us more..."
-                      class="w-full  border border-neutral-200 bg-white px-4 py-2.5 text-sm text-primary placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
+                      class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500"
                     ></textarea>
                   </div>
 
                   <div class="pt-4 border-t border-neutral-200">
-                    <button class="border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors ">
+                    <button class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors shadow-sm">
                       Send Message
                     </button>
                   </div>
@@ -1481,18 +1455,18 @@
                   <div class="space-y-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
-                      <div class="flex gap-2">
+                      <div class="flex flex-col sm:flex-row gap-2">
                         <input
                           v-model="domainSearchQuery"
                           type="text"
                           placeholder="acme, mybrand, etc"
-                          class="flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
+                          class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                           @keyup.enter="handleDomainSearch"
                         />
                         <button 
                           @click="handleDomainSearch" 
                           :disabled="domainSearchLoading"
-                          class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors shadow-sm"
+                          class="w-full sm:w-auto rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors shadow-sm"
                           :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800 hover:shadow'"
                         >
                           {{ domainSearchLoading ? 'Searching...' : 'Search' }}
@@ -1506,10 +1480,10 @@
                     <div v-if="domainSuggestions.length > 0 && !purchaseMode" class="pt-4">
                       <div class="overflow-hidden rounded-lg border border-neutral-200">
                         <table class="w-full text-sm">
-                          <thead class="bg-neutral-50 text-neutral-700">
+                          <thead class="bg-neutral-50/50 text-neutral-700">
                             <tr>
-                              <th class="text-left px-4 py-3 font-semibold">Domain</th>
-                              <th class="text-left px-4 py-3 font-semibold">Status</th>
+                              <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Domain</th>
+                              <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Status</th>
                               <th class="px-4 py-3"></th>
                             </tr>
                           </thead>
@@ -1521,13 +1495,13 @@
                             >
                               <td class="px-4 py-3 text-neutral-900 font-medium">{{ suggestion.name }}</td>
                               <td class="px-4 py-3">
-                                <span v-if="suggestion.available === null" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700">
+                                <span v-if="suggestion.available === null" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">
                                   Unknown
                                 </span>
-                                <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+                                <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">
                                   Available
                                 </span>
-                                <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs text-rose-700">
+                                <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">
                                   Taken
                                 </span>
                               </td>
@@ -1594,7 +1568,7 @@
                   <div class="pl-6">
                   <h3 class="text-lg font-medium text-neutral-900 mb-4">Registrant information</h3>
                   
-                  <div class="grid grid-cols-1 gap-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
                       <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
@@ -1605,41 +1579,41 @@
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                      <input v-model="registrant.firstName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                      <input v-model="registrant.lastName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                      <input v-model="registrant.address1" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                      <input v-model="registrant.address2" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                      <input v-model="registrant.city" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                      <input v-model="registrant.state" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                      <input v-model="registrant.postalCode" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                      <input v-model="registrant.email" type="email" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-900 focus:outline-none" />
+                      <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
-                    <div>
+                    <div class="sm:col-span-2">
                       <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
                         <input v-model="registrant.autoRenew" type="checkbox" class="border-neutral-300 text-neutral-600 focus:ring-0" />
                         Auto-renew
@@ -1654,7 +1628,7 @@
                       class="w-full inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-white transition-all shadow-sm"
                       :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800 hover:shadow'"
                     >
-                      {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
+                      {{ purchaseLoading ? 'Purchasing...' : formatPriceLabel(domainPrice) }}
                     </button>
                     <span v-if="purchaseError" class="text-sm text-red-600 text-center">{{ purchaseError }}</span>
                     <span v-if="purchaseSuccess" class="text-sm text-emerald-700 text-center">{{ purchaseSuccess }}</span>
@@ -1788,26 +1762,21 @@
             <div v-if="domainsActiveTab === 'buy'" class="space-y-6">
               <div>
                 <h2 class="text-2xl font-bold text-neutral-900">Buy New Domain</h2>
-                <p class="mt-1 text-sm text-neutral-600">Search and register a new domain name</p>
-              </div>
-
-              <!-- Search Domain -->
-              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div class="pl-6 space-y-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
-                    <div class="flex gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2">
                       <input
                         v-model="domainSearchQuery"
                         type="text"
                         placeholder="acme, mybrand, etc"
-                        class="flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
+                        class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                         @keyup.enter="handleDomainSearch"
                       />
                       <button 
                         @click="handleDomainSearch" 
                         :disabled="domainSearchLoading"
-                        class="rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors shadow-sm"
+                        class="w-full sm:w-auto rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-colors shadow-sm"
                         :class="domainSearchLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800 hover:shadow'"
                       >
                         {{ domainSearchLoading ? 'Searching...' : 'Search' }}
@@ -1913,51 +1882,51 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                    <input v-model="registrant.organization" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.organization" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                    <input v-model="registrant.firstName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                    <input v-model="registrant.lastName" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                    <input v-model="registrant.address1" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                    <input v-model="registrant.address2" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                    <input v-model="registrant.city" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                    <input v-model="registrant.state" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                    <input v-model="registrant.postalCode" type="text" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                    <input v-model="registrant.email" type="email" class="w-full  border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-900 focus:border-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+                    <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
-                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-neutral-600 focus:ring-neutral-500" />
+                      <input v-model="registrant.autoRenew" type="checkbox" class="rounded border-neutral-300 text-neutral-600 focus:ring-0" />
                       Auto-renew
                     </label>
                   </div>
@@ -1970,7 +1939,7 @@
                     class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white transition-colors"
                     :class="purchaseLoading ? 'bg-neutral-300 cursor-not-allowed' : 'bg-neutral-900 hover:bg-neutral-800'"
                   >
-                    {{ purchaseLoading ? 'Purchasing...' : domainPrice ? `Purchase for $${domainPrice.price}` : 'Purchase' }}
+                    {{ purchaseLoading ? 'Purchasing...' : formatPriceLabel(domainPrice) }}
                   </button>
                   <span v-if="purchaseError" class="text-sm text-red-600">{{ purchaseError }}</span>
                   <span v-if="purchaseSuccess" class="text-sm text-emerald-700">{{ purchaseSuccess }}</span>
@@ -2176,7 +2145,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
   </template>
 
@@ -2258,6 +2227,16 @@ const domainPrice = ref(null)
 const purchaseLoading = ref(false)
 const purchaseError = ref(null)
 const purchaseSuccess = ref(null)
+
+const formatPriceLabel = (price) => {
+  if (!price) return 'Purchase'
+  const amount = Number(price.price)
+  const currency = price.currency || 'USD'
+  const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(isNaN(amount) ? Number(price.price) : amount)
+  const period = price.period
+  const periodStr = period ? ` / ${period} ${Number(period) === 1 ? 'yr' : 'yrs'}` : ''
+  return `Purchase for ${formatted}${periodStr}`
+}
 
 // Registrant information
 const registrant = ref({
