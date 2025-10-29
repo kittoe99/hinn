@@ -477,9 +477,8 @@
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -504,9 +503,8 @@
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -531,9 +529,8 @@
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 pl-9 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all shadow-sm"
           >
-            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             <div class="flex items-start justify-between mb-6">
               <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
                 <svg class="h-7 w-7 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -669,8 +666,6 @@
                 : 'hover:border-neutral-300 cursor-pointer'
             ]"
           >
-            <!-- Accent Bar -->
-            <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
             
             <!-- Product Type Badge -->
             <div class="absolute top-4 right-4">
@@ -682,7 +677,7 @@
               </span>
             </div>
             
-            <div class="p-6 pl-7">
+            <div class="p-6">
               <!-- Header -->
               <div class="flex items-start gap-4 mb-6">
                 <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
@@ -1408,8 +1403,6 @@
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
                 <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
-                  <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
-                  <div class="pl-6">
                   <div class="flex items-center justify-between mb-6">
                     <div>
                       <h2 class="text-2xl font-medium text-neutral-900">Purchased Domains</h2>
@@ -1472,7 +1465,6 @@
                       </tbody>
                     </table>
                   </div>
-                  </div>
                 </div>
               </div>
 
@@ -1485,7 +1477,6 @@
 
                 <!-- Search Domain -->
                 <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                   <div class="pl-6">
                   <div class="space-y-4">
                     <div>
@@ -1563,7 +1554,6 @@
 
                 <!-- Selected Domain -->
                 <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                   <div class="pl-6">
                   <div class="flex items-start justify-between">
                     <div>
@@ -1601,7 +1591,6 @@
 
                 <!-- Registrant Information -->
                 <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                   <div class="pl-6">
                   <h3 class="text-lg font-medium text-neutral-900 mb-4">Registrant information</h3>
                   
@@ -1682,7 +1671,6 @@
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                   <div class="pl-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1746,8 +1734,6 @@
               </div>
 
               <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
-                <div class="pl-6">
                 <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                 <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                 <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1795,7 +1781,6 @@
                     </tbody>
                   </table>
                 </div>
-                </div>
               </div>
             </div>
 
@@ -1808,7 +1793,6 @@
 
               <!-- Search Domain -->
               <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                 <div class="pl-6 space-y-4">
                   <div>
                     <label class="block text-sm font-medium text-neutral-900 mb-2">Keyword / Brand</label>
@@ -2002,7 +1986,6 @@
               </div>
 
               <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#d97759] to-[#d97759]/60"></div>
                 <div class="pl-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
