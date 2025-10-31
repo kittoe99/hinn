@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     // Private keys (server-side only)
     // Nuxt automatically maps NUXT_SUPABASE_SERVICE_ROLE_KEY to supabaseServiceRoleKey
     supabaseServiceRoleKey: '',
+    openaiApiKey: process.env.OPENAI_API_KEY || process.env.NUXT_OPENAI_API_KEY || '',
     
     // Public keys (exposed to client)
     // Nuxt automatically maps NUXT_PUBLIC_SUPABASE_URL to public.supabaseUrl
