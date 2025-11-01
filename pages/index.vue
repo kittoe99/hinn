@@ -12,8 +12,8 @@
           <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-3xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
             We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
           </p>
-          <div class="mt-12 opacity-0 animate-fade-in" style="animation-delay: 150ms">
-            <div class="relative aspect-video rounded-2xl overflow-hidden border-2 border-neutral-200 shadow-2xl bg-black group hover:border-neutral-300 transition-all duration-300">
+          <div class="mt-12 opacity-0 animate-fade-in max-w-2xl" style="animation-delay: 150ms">
+            <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-neutral-200 shadow-xl bg-black group hover:border-neutral-300 transition-all duration-300">
               <div class="absolute inset-0 bg-gradient-to-br from-[#d97759]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <iframe
                 class="absolute inset-0 h-full w-full"
