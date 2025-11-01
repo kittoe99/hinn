@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-page">
     <!-- Header with Profile and Navigation -->
-    <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+    <header class="sticky top-0 z-50 bg-white">
       <!-- Top Bar with Logout -->
       <div class="flex h-16 items-center justify-end px-6 border-b border-neutral-100">
         <!-- Desktop: Show logout button -->
@@ -45,7 +45,7 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="border-b border-neutral-200 bg-white">
+      <div class="bg-white">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3">
           <button
