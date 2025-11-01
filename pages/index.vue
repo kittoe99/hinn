@@ -1,125 +1,221 @@
 <template>
-  <div class="relative overflow-hidden">
-    <!-- Hero Section -->
-    <section class="relative pt-20 pb-24 md:pt-32 md:pb-40">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8">
-        <div class="max-w-4xl">
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1] opacity-0 animate-fade-in" style="animation-delay: 0ms">
-            Websites, marketing &<br />
-            <span :class="['typewriter-word text-[#d97759]', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
-            that put growth at the frontier
-          </h1>
-          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
-            We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
-          </p>
-          <div class="mt-10 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
-            <NuxtLink
-              to="/dashboard"
-              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm hover:shadow"
-            >
-              Get Started
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </NuxtLink>
-            <NuxtLink
-              to="/showcase"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
-            >
-              View our work
-            </NuxtLink>
+  <div class="bg-white text-neutral-900">
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_#fbe8de,_transparent_55%),_radial-gradient(circle_at_bottom,_#f5f3ff,_transparent_50%)]"></div>
+      <div class="relative max-w-6xl mx-auto px-6 lg:px-12 py-24 lg:py-32">
+        <div class="grid lg:grid-cols-[3fr_2fr] gap-16 items-center">
+          <div class="space-y-8">
+            <p class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-600 shadow-sm backdrop-blur">
+              Full-stack creative and technical subscription
+            </p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
+              Digital experiences that feel effortless and keep revenue moving forward.
+            </h1>
+            <p class="text-lg text-neutral-600 leading-relaxed max-w-2xl">
+              Hinn pairs strategy, design, engineering, and AI automation in one polished subscription. Launch faster, iterate weekly, and give your team a partner that obsesses over momentum.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <NuxtLink
+                to="/dashboard"
+                class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
+              >
+                Start your subscription
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </NuxtLink>
+              <NuxtLink
+                to="/showcase"
+                class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-900 hover:text-neutral-600 transition-colors"
+              >
+                View recent launches
+              </NuxtLink>
+            </div>
+            <dl class="grid sm:grid-cols-3 gap-6 pt-6 border-t border-neutral-200">
+              <div v-for="stat in heroStats" :key="stat.label" class="space-y-1">
+                <dt class="text-sm uppercase tracking-wide text-neutral-500">{{ stat.label }}</dt>
+                <dd class="text-xl font-semibold">{{ stat.value }}</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-2xl border border-neutral-200 shadow-lg p-8 space-y-6">
+            <div class="space-y-3">
+              <h2 class="text-2xl font-semibold">Your fractional product pod</h2>
+              <p class="text-neutral-600 leading-relaxed">
+                Each plan unlocks a strategist, product designer, engineer, and AI specialist who ship together every sprint. No onboarding drag, no scope creep.
+              </p>
+            </div>
+            <ul class="space-y-4">
+              <li v-for="item in heroHighlights" :key="item.title" class="flex items-start gap-3">
+                <div class="mt-1 h-8 w-8 rounded-full bg-neutral-900 text-white flex items-center justify-center text-sm font-medium">{{ item.icon }}</div>
+                <div>
+                  <p class="font-medium">{{ item.title }}</p>
+                  <p class="text-sm text-neutral-600 leading-relaxed">{{ item.description }}</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="py-20 md:py-32 bg-neutral-50">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8">
-        <div class="mb-16">
-          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">What we build</h2>
-          <p class="text-lg text-neutral-600 max-w-2xl">
-            Monthly subscriptions for websites, AI agents, and marketing that actually work.
-          </p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <NuxtLink
-            v-for="(product, index) in subscriptionProducts"
-            :key="product.title"
-            :to="product.href"
-            :ref="el => { if (el) productRefs[index] = el }"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-8 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 opacity-0 animate-fade-in-up shadow-sm"
-            :style="{ animationDelay: `${index * 100}ms` }"
-          >
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-            <!-- Icon -->
-            <div class="mb-6">
-              <svg v-if="product.title === 'Websites'" :class="['h-8 w-8 transition-all duration-500 product-icon', { 'icon-active': productInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 2.25c-2.998 0-5.74 1.1-7.843 2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-              </svg>
-              <svg v-else-if="product.title === 'AI Agents'" :class="['h-8 w-8 transition-all duration-500 product-icon', { 'icon-active': productInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-              </svg>
-              <svg v-else-if="product.title === 'Marketing & Branding'" :class="['h-8 w-8 transition-all duration-500 product-icon', { 'icon-active': productInView[index] }]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" />
-              </svg>
-            </div>
-            
-            <h3 class="text-2xl font-medium text-neutral-900 mb-3">{{ product.title }}</h3>
-            <p class="text-base text-neutral-600 leading-relaxed mb-6">{{ product.description }}</p>
-            <div class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 group-hover:gap-3 transition-all">
-              Learn more
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </NuxtLink>
+    <!-- Logos -->
+    <section class="py-12 border-t border-neutral-200 bg-white">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <p class="text-sm uppercase tracking-[0.3em] text-neutral-500 text-center mb-8">Trusted by marketing and product teams</p>
+        <div class="flex flex-wrap items-center justify-center gap-10 text-neutral-400">
+          <span v-for="logo in partnerLogos" :key="logo" class="text-base font-semibold tracking-wide uppercase">{{ logo }}</span>
         </div>
       </div>
     </section>
 
-    <!-- Showcase Section -->
-    <section class="py-20 md:py-32">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8">
-        <div class="mb-16">
-          <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-4">Featured work</h2>
-          <p class="text-lg text-neutral-600 max-w-2xl">
-            Real projects we've built and launched for businesses.
+    <!-- Services -->
+    <section class="py-20 lg:py-28 bg-neutral-50">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="lg:flex lg:items-end lg:justify-between gap-12 mb-14">
+          <div>
+            <p class="text-sm font-semibold text-[#d97759] uppercase tracking-[0.3em]">Capabilities</p>
+            <h2 class="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight">Everything you need to ship and optimize</h2>
+          </div>
+          <p class="mt-6 lg:mt-0 max-w-xl text-neutral-600">
+            We blend brand storytelling with technical rigor. Each engagement is designed to feel calm and intentional while still driving measurable growth.
           </p>
         </div>
-        
-        <div class="space-y-3">
-          <a
-            v-for="(project, index) in showcaseProjects.slice(0, 6)"
-            :key="project.title"
-            href="#"
-            class="group block border border-neutral-200 bg-white rounded-xl p-6 hover:border-neutral-300 hover:shadow-lg transition-all duration-200 opacity-0 animate-fade-in-up shadow-sm"
-            :style="{ animationDelay: `${index * 50}ms` }"
+        <div class="grid gap-6 md:grid-cols-3">
+          <article
+            v-for="service in services"
+            :key="service.title"
+            class="group relative bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow"
           >
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <h3 class="text-xl font-medium text-neutral-900">{{ project.title }}</h3>
-                  <span :class="['text-xs font-medium uppercase tracking-wide', tagTextColor(project.tag)]">{{ project.tag }}</span>
-                </div>
-                <p class="text-base text-neutral-600 leading-relaxed">{{ project.description }}</p>
-              </div>
-              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
+            <div class="h-12 w-12 rounded-full bg-neutral-900 text-white flex items-center justify-center text-lg font-semibold mb-6">
+              {{ service.icon }}
             </div>
-          </a>
+            <h3 class="text-xl font-semibold mb-3">{{ service.title }}</h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">{{ service.description }}</p>
+            <ul class="space-y-2 text-sm text-neutral-500">
+              <li v-for="detail in service.details" :key="detail" class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#d97759]"></span>
+                <span>{{ detail }}</span>
+              </li>
+            </ul>
+          </article>
         </div>
-        
-        <div class="mt-10">
-          <NuxtLink 
-            to="/showcase" 
-            class="inline-flex items-center gap-2 text-base font-medium text-neutral-900 hover:gap-3 transition-all underline underline-offset-4"
-          >
-            View all projects
+      </div>
+    </section>
+
+    <!-- Approach -->
+    <section class="py-20 lg:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-[2fr_3fr] gap-16 items-start">
+          <div class="space-y-4">
+            <p class="text-sm font-semibold text-[#d97759] uppercase tracking-[0.3em]">Process</p>
+            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">A calm, transparent operating rhythm</h2>
+            <p class="text-neutral-600 leading-relaxed">
+              We keep collaboration lightweight and proactive. Weekly sprints, async updates, and shared dashboards make it easy to see what shipped and what’s next.
+            </p>
+            <NuxtLink to="/contact" class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-neutral-600 transition-colors">
+              Book a working session
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </NuxtLink>
+          </div>
+          <div class="grid gap-6">
+            <div v-for="(step, index) in approachSteps" :key="step.title" class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+              <div class="flex items-start gap-4">
+                <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 font-semibold border border-neutral-200">0{{ index + 1 }}</span>
+                <div class="space-y-2">
+                  <h3 class="text-lg font-semibold">{{ step.title }}</h3>
+                  <p class="text-neutral-600 leading-relaxed">{{ step.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured work -->
+    <section class="py-20 lg:py-28 bg-neutral-900 text-white">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
+          <div>
+            <p class="text-sm font-semibold text-[#f3b398] uppercase tracking-[0.3em]">Featured work</p>
+            <h2 class="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight">Launches engineered for growth</h2>
+          </div>
+          <NuxtLink to="/showcase" class="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors">
+            View the full showcase
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
+          </NuxtLink>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <article v-for="project in featuredProjects" :key="project.title" class="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium uppercase tracking-wide text-[#f3b398]">{{ project.tag }}</span>
+              <div class="flex gap-3 text-sm text-white/70">
+                <span v-for="metric in project.metrics" :key="metric.label">{{ metric.label }}: <span class="font-semibold text-white">{{ metric.value }}</span></span>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+            <p class="text-white/80 leading-relaxed">{{ project.description }}</p>
+            <div class="flex flex-wrap gap-2 text-xs text-white/60">
+              <span v-for="tech in project.tech" :key="tech" class="rounded-full border border-white/20 px-3 py-1">{{ tech }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 lg:py-24 bg-neutral-50">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="lg:flex lg:items-end lg:justify-between gap-12 mb-14">
+          <div>
+            <p class="text-sm font-semibold text-[#d97759] uppercase tracking-[0.3em]">Testimonials</p>
+            <h2 class="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight">Teams that work with us stay with us</h2>
+          </div>
+          <p class="mt-6 lg:mt-0 max-w-xl text-neutral-600">
+            We plug into your stack, lead with clarity, and make continuous improvement feel second nature.
+          </p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <figure v-for="testimonial in testimonials" :key="testimonial.name" class="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm">
+            <blockquote class="text-neutral-700 leading-relaxed mb-6">“{{ testimonial.quote }}”</blockquote>
+            <figcaption class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-neutral-900 text-white flex items-center justify-center text-sm font-semibold">{{ testimonial.initials }}</div>
+              <div>
+                <p class="font-medium text-neutral-900">{{ testimonial.name }}</p>
+                <p class="text-sm text-neutral-500">{{ testimonial.role }}</p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 lg:py-24">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+        <p class="text-sm font-semibold text-[#d97759] uppercase tracking-[0.3em]">Let’s build</p>
+        <h2 class="mt-6 text-3xl sm:text-4xl font-semibold tracking-tight">Ready for a quieter, faster way to launch?</h2>
+        <p class="mt-4 text-neutral-600 leading-relaxed">
+          Share your roadmap, and we’ll shape a sprint plan that pairs beautiful brand moments with powerful automation.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <NuxtLink
+            to="/signup"
+            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
+          >
+            Secure a kickoff slot
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </NuxtLink>
+          <NuxtLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
+            Talk with our team
           </NuxtLink>
         </div>
       </div>
@@ -128,7 +224,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useHead } from '#imports'
 
 useHead({
   title: 'Professional Website Design & Development Services | Monthly Subscription | Hinn',
@@ -136,448 +232,136 @@ useHead({
     {
       name: 'description',
       content:
-        'Custom web design, React/Vue.js development, SEO optimization, and AI chatbot integration on a monthly subscription. Launch your website in 10 days with ongoing support and optimization.'
+        'Custom web design, AI automation, and marketing support in a single subscription. Launch in weeks and keep iterating without the overhead.'
     }
   ]
 })
 
-// Typewriter effect with flip transition
-const words = ['AI agents', 'automation', 'chatbots', 'workflows']
-const currentWord = ref(words[0])
-let wordIndex = 0
-let charIndex = words[0].length
-let isTyping = true
-let typewriterTimeout = null
-const isFlipping = ref(false)
-
-// Scroll-based icon animation for mobile
-const productRefs = ref([])
-const productInView = ref([false, false, false])
-let observer = null
-
-const typeWriter = () => {
-  const currentFullWord = words[wordIndex]
-  
-  if (isTyping) {
-    currentWord.value = currentFullWord.substring(0, charIndex + 1)
-    charIndex++
-    
-    if (charIndex === currentFullWord.length) {
-      // Word complete, pause then flip to next word
-      typewriterTimeout = setTimeout(() => {
-        isFlipping.value = true
-        setTimeout(() => {
-          wordIndex = (wordIndex + 1) % words.length
-          charIndex = 0
-          currentWord.value = ''
-          isFlipping.value = false
-          typewriterTimeout = setTimeout(typeWriter, 100)
-        }, 600) // Flip animation duration
-      }, 2500) // Pause before flip
-      return
-    }
-    
-    typewriterTimeout = setTimeout(typeWriter, 120)
-  }
-}
-
-onMounted(() => {
-  // First word is already shown, wait then start the flip cycle
-  setTimeout(() => {
-    // Trigger flip to second word after pause
-    isFlipping.value = true
-    setTimeout(() => {
-      wordIndex = 1
-      charIndex = 0
-      currentWord.value = ''
-      isFlipping.value = false
-      typewriterTimeout = setTimeout(typeWriter, 100)
-    }, 600) // Flip animation duration
-  }, 3500) // Pause on first word before starting animation
-
-  // Set up Intersection Observer for scroll-based icon animation
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const element = entry.target
-        const index = productRefs.value.findIndex(ref => {
-          if (ref && ref.$el) return ref.$el === element
-          return ref === element
-        })
-        
-        if (index !== -1) {
-          productInView.value[index] = entry.isIntersecting
-        }
-      })
-    },
-    {
-      threshold: 0.5, // Trigger when 50% of the element is visible
-      rootMargin: '-50px'
-    }
-  )
-
-  // Observe all product cards after a slight delay to ensure refs are set
-  setTimeout(() => {
-    productRefs.value.forEach((ref) => {
-      const element = ref && ref.$el ? ref.$el : ref
-      if (element && element instanceof Element) {
-        observer.observe(element)
-      }
-    })
-  }, 200)
-})
-
-onUnmounted(() => {
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout)
-  }
-  
-  // Clean up observer
-  if (observer) {
-    observer.disconnect()
-  }
-})
-
-// Subtle color palette for chips ("stickers")
-const chipColorClasses = [
-  'border border-blue-200 bg-blue-50 text-blue-700',
-  'border border-amber-200 bg-amber-50 text-amber-700',
-  'border border-emerald-200 bg-emerald-50 text-emerald-700',
-  'border border-purple-200 bg-purple-50 text-purple-700'
+const heroStats = [
+  { label: 'Launch timeline', value: '10 days avg.' },
+  { label: 'Active partnerships', value: '40+' },
+  { label: 'Avg. conversion lift', value: '+28%' }
 ]
 
-// Marker/badge color by tag label
-const projectTagColor = (tag) => {
-  const key = String(tag || '').toLowerCase()
-  if (key.includes('brand')) return 'border border-purple-200 bg-purple-50 text-purple-700 group-hover:bg-purple-600 group-hover:text-white'
-  if (key.includes('case')) return 'border border-amber-200 bg-amber-50 text-amber-700 group-hover:bg-amber-600 group-hover:text-white'
-  if (key.includes('cms')) return 'border border-emerald-200 bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
-  if (key.includes('web')) return 'border border-blue-200 bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white'
-  return 'border border-neutral-200 bg-neutral-100 text-neutral-700 group-hover:bg-neutral-900 group-hover:text-white'
-}
-
-// Plain text color for Featured work tags
-const tagTextColor = (tag) => {
-  const key = String(tag || '').toLowerCase()
-  if (key.includes('web')) return 'text-[#d97759]'
-  if (key.includes('agent')) return 'text-[#d97759]'
-  if (key.includes('marketing')) return 'text-[#d97759]'
-  return 'text-neutral-500'
-}
-
-
-const heroBenefits = [
+const heroHighlights = [
   {
-    title: 'Fractional product pod',
-    description: 'Partner with a strategist, designer, and engineer who launch together every sprint.',
-    icon: 'M5 13l4 4L19 7'
+    icon: 'A',
+    title: 'Automated growth ops',
+    description: 'AI copilots, lead routing, and reporting built directly into your experience.'
   },
   {
-    title: 'Iterate without limits',
-    description: 'Drop in new pages, experiments, and UX tune-ups whenever you need momentum.',
-    icon: 'M4 7v6a5 5 0 005 5h7m4-4V8a5 5 0 00-5-5H8'
+    icon: 'S',
+    title: 'Strategic creative',
+    description: 'Brand, copy, and UX that stay on-message across every touchpoint.'
   },
   {
-    title: 'Ops handled for you',
-    description: 'Hosting, monitoring, analytics, and SEO upkeep are bundled so nothing slips.',
-    icon: 'M12 6v12m6-6H6'
-  },
-  {
-    title: 'Connect your stack',
-    description: 'Integrations with your CRM, marketing tools, and data sources come standard.',
-    icon: 'M4 7h16M4 12h12M4 17h8'
+    icon: 'E',
+    title: 'Engineering on demand',
+    description: 'Full-stack development, integrations, and performance tuning every sprint.'
   }
 ]
 
+const partnerLogos = ['Northwind', 'Evergreen', 'Summit', 'Bluegrain', 'Atrium', 'Revloop']
 
-const subscriptionHighlights = [
+const services = [
   {
-    title: 'Launch-ready in weeks',
-    description: 'We run design sprints, QA, and launch support so your team can focus on storytelling and distribution.',
-    icon: 'M9 5l7 7-7 7'
+    icon: '01',
+    title: 'Websites & product experiences',
+    description: 'Launch high-performing sites, dashboards, and funnels engineered for reliability and speed.',
+    details: ['UX research & journey mapping', 'Component-driven design systems', 'Headless CMS implementation']
   },
   {
-    title: 'Continuous optimization',
-    description: 'Proactive experiments, UX updates, and growth playbooks based on analytics and user interviews.',
-    icon: 'M5 12h14M12 5l7 7-7 7'
+    icon: '02',
+    title: 'AI agents & automation',
+    description: 'Deploy intelligent assistants that qualify leads, support customers, and run ops around the clock.',
+    details: ['Knowledge base ingestion', 'Workflow orchestration', 'Analytics & governance']
   },
   {
-    title: 'Deep integrations',
-    description: 'Connect to HubSpot, Airtable, Zapier, and internal tools to keep your marketing stack humming.',
-    icon: 'M12 6v12m6-6H6'
+    icon: '03',
+    title: 'Marketing & brand systems',
+    description: 'Craft campaigns, content, and identity systems that stay cohesive as you scale.',
+    details: ['Messaging strategy', 'Visual identity refresh', 'Launch playbooks & reporting']
   }
 ]
 
-const featureHighlights = [
+const approachSteps = [
   {
-    title: 'Websites',
-    description: 'We design, build, and launch your site—then keep it fast, secure, and converting.',
-    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
+    title: 'Kickoff & clarity',
+    description: 'We synthesize goals, audit your stack, and align on the roadmap for the first 4–6 sprints.'
   },
   {
-    title: 'Branding',
-    description: 'Complete visual identity—logo, colors, fonts—delivered ready to use everywhere.',
-    icon: 'M3 5h18M8 5v14m8-14v14M4 19h16'
+    title: 'Sprint production',
+    description: 'Design, build, and ship in tight iterations with async updates, Figma previews, and QA baked in.'
   },
   {
-    title: 'AI Agents',
-    description: 'Autonomous agents handle support, qualify leads, and work 24/7—no training required.',
-    icon: 'M9 5v2a2 2 0 002 2h2a2 2 0 002-2V5m-2 6v7m-6-7v7m-4 0h12'
-  },
-  {
-    title: 'Fully Managed',
-    description: 'Hosting, security, backups, analytics\u2014we handle it all so you don\'t have to.',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+    title: 'Launch & iterate',
+    description: 'Monitor performance, automate insights, and layer in experiments that keep the wins compounding.'
   }
 ]
 
-const subscriptionProducts = [
+const featuredProjects = [
   {
-    title: 'Websites',
-    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment booking—all working 24/7.',
-    href: '/website',
-    cta: 'Explore Websites',
-    tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
-    delay: 0
+    title: 'Northwind Commerce platform',
+    description: 'Rebuilt a DTC storefront with AI-assisted merchandising and a reusable component library.',
+    tag: 'Websites',
+    metrics: [
+      { label: 'Conversion', value: '+45%' },
+      { label: 'Speed', value: '95/100' }
+    ],
+    tech: ['Nuxt', 'Supabase', 'Stripe']
   },
   {
-    title: 'AI Agents',
-    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistants—ready to work 24/7. No coding required.',
-    href: '/agents',
-    cta: 'Explore AI Agents',
-    tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
-    delay: 100
+    title: 'Evergreen donor experience',
+    description: 'Designed an always-on donor journey with predictive insights for campaign teams.',
+    tag: 'AI Agents',
+    metrics: [
+      { label: 'Automation', value: '80%' },
+      { label: 'Response', value: '<2s' }
+    ],
+    tech: ['OpenAI', 'LangChain', 'HubSpot']
   },
   {
-    title: 'Marketing & Branding',
-    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presence—all powered by AI. Create, launch, optimize automatically.',
-    href: '/marketing',
-    cta: 'Explore Marketing',
-    tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],
-    delay: 200
+    title: 'Summit product launch',
+    description: 'Led messaging, creative, and automation for a category launch across digital channels.',
+    tag: 'Marketing',
+    metrics: [
+      { label: 'Leads', value: '2.4k+' },
+      { label: 'ROI', value: '340%' }
+    ],
+    tech: ['Contentful', 'Segment', 'GA4']
   }
 ]
 
 const testimonials = [
   {
     name: 'Melissa Ward',
-    role: 'Head of Marketing, Northwind SaaS',
-    quote: 'Hinn shipped a new site in 12 days and continues to deliver fresh campaign pages every sprint without needing to brief multiple vendors.',
+    role: 'Head of Marketing, Northwind',
+    quote: 'Hinn shipped a new site in under two weeks and now pushes fresh experiments live every sprint without disrupting our roadmap.',
     initials: 'MW'
-  },
-  {
-    name: 'Sujay Patel',
-    role: 'Founder, Summit Outdoors',
-    quote: 'Our subscription gives us product design, copy, and technical help in one place. Conversions are up 28% and we finally have momentum.',
-    initials: 'SP'
-  },
-  {
-    name: 'Alexis Romero',
-    role: 'Director of Growth, Evergreen Nonprofit',
-    quote: 'The team handles updates, analytics, and donor journeys weekly. We just drop ideas in Slack and they’re live within days.',
-    initials: 'AR'
   },
   {
     name: 'Tyler Chan',
     role: 'COO, Bluegrain Coffee',
-    quote: 'It feels like having a full product squad on retainer. They iterate quickly and give us clarity on what’s driving results.',
+    quote: 'They operate like an embedded squad—responsive, organized, and focused on metrics that matter.',
     initials: 'TC'
+  },
+  {
+    name: 'Sujay Patel',
+    role: 'Founder, Summit Outdoors',
+    quote: 'We consolidated design, dev, and automation under one subscription. The pace and quality finally match our ambitions.',
+    initials: 'SP'
+  },
+  {
+    name: 'Alexis Romero',
+    role: 'Director of Growth, Evergreen',
+    quote: 'From strategic workshops to AI agent launches, the team keeps everything thoughtful and on brand.',
+    initials: 'AR'
   }
 ]
-
-const faqs = [
-  {
-    question: 'What does the monthly subscription include?',
-    answer:
-      'Every plan includes a dedicated cross-functional team, design and development hours, hosting and maintenance, analytics reporting, and weekly strategy reviews. You can request new pages, experiments, and enhancements anytime.'
-  },
-  {
-    question: 'How quickly can we launch?',
-    answer:
-      'Most clients launch in around ten days. We begin with discovery and design sprints, then develop, QA, and deploy. We handle DNS, CMS migration, and on-call support for the first weeks after launch.'
-  },
-  {
-    question: 'Can you work with our existing tools?',
-    answer:
-      'Yes. We regularly integrate with HubSpot, Salesforce, Airtable, Webflow, Supabase, and proprietary APIs. We coordinate with your team to ensure security and compliance requirements are met.'
-  },
-  {
-    question: 'What if we need to pause or cancel?',
-    answer:
-      'Subscriptions are billed monthly. You can pause or cancel with 30 days notice. When you return, we pick up where we left off with the same context, assets, and roadmap.'
-  }
-]
-
-const brandFeatures = [
-  {
-    title: 'Logo & Identity',
-    description: 'Complete logo system with typography and color guidelines.',
-    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
-  },
-  {
-    title: 'Brand Assets',
-    description: 'Templates for social media, presentations, and marketing.',
-    icon: 'M3 5h18M8 5v14m8-14v14M4 19h16'
-  },
-  {
-    title: 'Style Guide',
-    description: 'Documentation to keep your brand consistent everywhere.',
-    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
-  }
-]
-
-const selectedShowcaseCategory = ref('all')
-
-const showcaseCategories = [
-  { label: 'All Projects', value: 'all' },
-  { label: 'Websites', value: 'websites' },
-  { label: 'AI Agents', value: 'agents' },
-  { label: 'Marketing', value: 'marketing' }
-]
-
-const showcaseProjects = [
-  {
-    title: 'E-Commerce Platform Redesign',
-    description: 'Complete redesign and development of a high-converting e-commerce platform with custom checkout flow.',
-    tag: 'Websites',
-    featured: true,
-    metrics: [
-      { label: 'conversion', value: '+45%' },
-      { label: 'page speed', value: '95/100' }
-    ],
-    tech: ['Next.js', 'Stripe', 'Tailwind']
-  },
-  {
-    title: 'AI Customer Support Agent',
-    description: 'Intelligent chatbot trained on company knowledge base, handling 80% of customer inquiries automatically.',
-    tag: 'AI Agents',
-    featured: true,
-    metrics: [
-      { label: 'automation', value: '80%' },
-      { label: 'response time', value: '<2s' }
-    ],
-    tech: ['OpenAI', 'LangChain', 'Supabase']
-  },
-  {
-    title: 'SaaS Product Launch Campaign',
-    description: 'Multi-channel marketing campaign for B2B SaaS product launch, including SEO, paid ads, and email automation.',
-    tag: 'Marketing',
-    metrics: [
-      { label: 'leads', value: '2,400+' },
-      { label: 'ROI', value: '340%' }
-    ],
-    tech: ['Google Ads', 'HubSpot', 'Analytics']
-  },
-  {
-    title: 'Real Estate Listing Platform',
-    description: 'Modern property listing website with advanced search, map integration, and virtual tour capabilities.',
-    tag: 'Websites',
-    metrics: [
-      { label: 'listings', value: '5,000+' },
-      { label: 'uptime', value: '99.9%' }
-    ],
-    tech: ['Vue.js', 'Mapbox', 'Firebase']
-  },
-  {
-    title: 'Sales Qualification Bot',
-    description: 'AI agent that qualifies leads through conversational interface and schedules demos automatically.',
-    tag: 'AI Agents',
-    metrics: [
-      { label: 'qualified leads', value: '+120%' },
-      { label: 'time saved', value: '15hrs/wk' }
-    ],
-    tech: ['GPT-4', 'Salesforce', 'Calendly']
-  },
-  {
-    title: 'Content Marketing Strategy',
-    description: 'SEO-focused content strategy with blog posts, case studies, and whitepapers driving organic traffic growth.',
-    tag: 'Marketing',
-    metrics: [
-      { label: 'organic traffic', value: '+280%' },
-      { label: 'keywords ranked', value: '450+' }
-    ],
-    tech: ['Ahrefs', 'WordPress', 'GA4']
-  }
-]
-
-const filteredShowcaseProjects = computed(() => {
-  if (selectedShowcaseCategory.value === 'all') {
-    return showcaseProjects
-  }
-  return showcaseProjects.filter(p => p.tag.toLowerCase() === selectedShowcaseCategory.value)
-})
 </script>
 
 <style scoped>
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.typewriter-word {
-  display: inline;
-  will-change: opacity;
-  -webkit-font-smoothing: antialiased;
-}
-
-.typewriter-word.flipping {
-  animation: fadeOut 0.4s ease-in-out;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Product icon styles */
-.product-icon {
-  stroke: #a3a3a3;
-  fill: none;
-}
-
-/* Desktop: hover effect */
-@media (min-width: 768px) {
-  .group:hover .product-icon {
-    fill: #d97759;
-    stroke: #d97759;
-  }
-}
-
-/* Mobile: scroll-based fill */
-@media (max-width: 767px) {
-  .product-icon.icon-active {
-    fill: #d97759;
-    stroke: #d97759;
-  }
+section {
+  scroll-margin-top: 4rem;
 }
 </style>
