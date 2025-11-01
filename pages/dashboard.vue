@@ -675,9 +675,9 @@
           </div>
 
           <!-- Filters -->
-          <div class="flex flex-wrap items-center gap-3 mb-6">
-            <div class="relative">
-              <select v-model="leadsFilter" class="h-9 rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+          <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 mb-6">
+            <div class="relative w-full sm:w-auto">
+              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
                 <option value="all">All Leads</option>
                 <option value="new">New</option>
                 <option value="contacted">Contacted</option>
@@ -689,8 +689,8 @@
               </svg>
             </div>
 
-            <div class="relative">
-              <select v-model="leadsSource" class="h-9 rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+            <div class="relative w-full sm:w-auto">
+              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
                 <option value="all">All Sources</option>
                 <option value="website">Website</option>
                 <option value="referral">Referral</option>
@@ -702,7 +702,7 @@
               </svg>
             </div>
 
-            <div class="relative flex-1 max-w-xs">
+            <div class="relative w-full sm:flex-1 sm:max-w-xs">
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
