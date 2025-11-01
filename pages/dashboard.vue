@@ -580,16 +580,16 @@
         </div>
 
         <!-- Summary Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <!-- Websites Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
               </div>
@@ -597,19 +597,19 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-3xl font-semibold text-neutral-900 mb-1">{{ filteredProjects.length }}</div>
-            <div class="text-sm font-medium text-neutral-600">Websites</div>
+            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">{{ filteredProjects.length }}</div>
+            <div class="text-xs font-medium text-neutral-600">Websites</div>
           </NuxtLink>
 
           <!-- AI Agents Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
                 </svg>
               </div>
@@ -617,19 +617,19 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-3xl font-semibold text-neutral-900 mb-1">0</div>
-            <div class="text-sm font-medium text-neutral-600">AI Agents</div>
+            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
+            <div class="text-xs font-medium text-neutral-600">AI Agents</div>
           </NuxtLink>
 
           <!-- Marketing Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
                 </svg>
               </div>
@@ -637,19 +637,19 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-3xl font-semibold text-neutral-900 mb-1">0</div>
-            <div class="text-sm font-medium text-neutral-600">Campaigns</div>
+            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
+            <div class="text-xs font-medium text-neutral-600">Campaigns</div>
           </NuxtLink>
 
           <!-- Domains Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=domains"
             @click="activeTab = 'domains'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                 </svg>
               </div>
@@ -657,9 +657,112 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-3xl font-semibold text-neutral-900 mb-1">0</div>
-            <div class="text-sm font-medium text-neutral-600">Domains</div>
+            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
+            <div class="text-xs font-medium text-neutral-600">Domains</div>
           </NuxtLink>
+        </div>
+
+        <!-- Leads Section -->
+        <div class="mt-12">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-medium text-neutral-900">Leads</h2>
+            <button class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+              Add Lead
+            </button>
+          </div>
+
+          <!-- Filters -->
+          <div class="flex flex-wrap items-center gap-3 mb-6">
+            <div class="relative">
+              <select v-model="leadsFilter" class="h-9 rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+                <option value="all">All Leads</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="qualified">Qualified</option>
+                <option value="converted">Converted</option>
+              </select>
+              <svg class="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+
+            <div class="relative">
+              <select v-model="leadsSource" class="h-9 rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+                <option value="all">All Sources</option>
+                <option value="website">Website</option>
+                <option value="referral">Referral</option>
+                <option value="social">Social Media</option>
+                <option value="email">Email Campaign</option>
+              </select>
+              <svg class="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+
+            <div class="relative flex-1 max-w-xs">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </div>
+              <input
+                v-model="leadsSearch"
+                type="text"
+                placeholder="Search leads..."
+                class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Leads Table -->
+          <div class="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-neutral-50 border-b border-neutral-200">
+                  <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Name</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Email</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Source</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Date</th>
+                    <th class="px-4 py-3 text-right text-xs font-medium text-neutral-600 uppercase tracking-wider">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200">
+                  <tr v-if="filteredLeads.length === 0">
+                    <td colspan="6" class="px-4 py-12 text-center text-sm text-neutral-500">
+                      No leads found
+                    </td>
+                  </tr>
+                  <tr v-for="lead in filteredLeads" :key="lead.id" class="hover:bg-neutral-50 transition-colors">
+                    <td class="px-4 py-3 text-sm font-medium text-neutral-900">{{ lead.name }}</td>
+                    <td class="px-4 py-3 text-sm text-neutral-600">{{ lead.email }}</td>
+                    <td class="px-4 py-3 text-sm text-neutral-600 capitalize">{{ lead.source }}</td>
+                    <td class="px-4 py-3">
+                      <span :class="[
+                        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+                        lead.status === 'new' ? 'bg-blue-100 text-blue-800' :
+                        lead.status === 'contacted' ? 'bg-yellow-100 text-yellow-800' :
+                        lead.status === 'qualified' ? 'bg-purple-100 text-purple-800' :
+                        'bg-green-100 text-green-800'
+                      ]">
+                        {{ lead.status }}
+                      </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm text-neutral-600">{{ lead.date }}</td>
+                    <td class="px-4 py-3 text-right">
+                      <button class="text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors">
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2383,6 +2486,32 @@ const activeTab = ref('overview')
 const mobileNavExpanded = ref(false)
 const viewMode = ref('grid')
 const searchQuery = ref('')
+
+// Leads filters
+const leadsFilter = ref('all')
+const leadsSource = ref('all')
+const leadsSearch = ref('')
+
+// Sample leads data
+const leads = ref([
+  { id: 1, name: 'John Doe', email: 'john@example.com', source: 'website', status: 'new', date: '2024-11-01' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com', source: 'referral', status: 'contacted', date: '2024-10-30' },
+  { id: 3, name: 'Mike Johnson', email: 'mike@example.com', source: 'social', status: 'qualified', date: '2024-10-28' },
+  { id: 4, name: 'Sarah Williams', email: 'sarah@example.com', source: 'email', status: 'converted', date: '2024-10-25' },
+])
+
+// Filtered leads computed property
+const filteredLeads = computed(() => {
+  return leads.value.filter(lead => {
+    const matchesStatus = leadsFilter.value === 'all' || lead.status === leadsFilter.value
+    const matchesSource = leadsSource.value === 'all' || lead.source === leadsSource.value
+    const matchesSearch = leadsSearch.value === '' || 
+      lead.name.toLowerCase().includes(leadsSearch.value.toLowerCase()) ||
+      lead.email.toLowerCase().includes(leadsSearch.value.toLowerCase())
+    
+    return matchesStatus && matchesSource && matchesSearch
+  })
+})
 
 // Settings sub-navigation
 const settingsTabs = [
