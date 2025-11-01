@@ -2,44 +2,72 @@
   <div class="min-h-screen bg-page">
     <!-- Header with Profile and Navigation -->
     <header class="sticky top-0 z-50 bg-white">
-      <!-- Top Bar with Logout -->
-      <div class="flex h-16 items-center justify-end px-6 border-b border-neutral-100">
-        <!-- Desktop: Show logout button -->
-        <button 
-          @click="handleLogout"
-          class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-red-600 transition-colors"
-        >
-          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-          </svg>
-          Logout
-        </button>
+      <!-- Top Bar with Logo, Search, and Logout -->
+      <div class="flex h-16 items-center justify-between gap-4 px-6 border-b border-neutral-100">
+        <!-- Logo -->
+        <NuxtLink to="/" class="flex items-center gap-2">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900">
+            <span class="text-lg font-bold text-white">H</span>
+          </div>
+          <span class="hidden sm:block text-lg font-semibold text-neutral-900">Hinn</span>
+        </NuxtLink>
 
-        <!-- Mobile: Show menu button -->
-        <div class="md:hidden relative" @click.stop>
+        <!-- Search Bar -->
+        <div class="flex flex-1 max-w-md">
+          <div class="relative w-full">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search..."
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
+            />
+          </div>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-2">
+          <!-- Desktop: Show logout button -->
           <button 
-            @click.stop="showMobileMenu = !showMobileMenu"
-            class="p-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+            @click="handleLogout"
+            class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-red-600 transition-colors"
           >
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
             </svg>
+            Logout
           </button>
 
-          <!-- Mobile Menu Dropdown -->
-          <div 
-            v-if="showMobileMenu"
-            class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden z-50"
-          >
+          <!-- Mobile: Show menu button -->
+          <div class="md:hidden relative" @click.stop>
             <button 
-              @click="handleLogout; showMobileMenu = false"
-              class="flex w-full items-center gap-2 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+              @click.stop="showMobileMenu = !showMobileMenu"
+              class="p-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
             >
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
               </svg>
-              Logout
             </button>
+
+            <!-- Mobile Menu Dropdown -->
+            <div 
+              v-if="showMobileMenu"
+              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden z-50"
+            >
+              <button 
+                @click="handleLogout; showMobileMenu = false"
+                class="flex w-full items-center gap-2 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+              >
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
