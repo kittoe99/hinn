@@ -1,6 +1,6 @@
 <template>
-  <header class="border-b border-neutral-200 bg-white">
-    <nav class="max-w-5xl mx-auto px-6 lg:px-8">
+  <header class="border-b border-neutral-200 bg-white relative">
+    <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <NuxtLink to="/" class="text-lg font-medium text-neutral-900">
@@ -100,21 +100,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <Transition
-      enter-active-class="transition-opacity duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-300"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div 
-        v-if="mobileMenuOpen"
-        @click="mobileMenuOpen = false"
-        class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-      />
-    </Transition>
 
     <!-- Mobile Menu Dropdown -->
     <Transition
@@ -127,23 +112,23 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-white border-b border-neutral-200 shadow-xl z-50 md:hidden"
+        class="absolute top-full left-0 right-0 bg-white z-50 md:hidden border-b border-neutral-200"
       >
         <!-- Navigation -->
-        <nav class="px-6 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
+        <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
           <!-- Home -->
           <NuxtLink 
             to="/"
-            class="block py-3 text-sm font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
+            class="block py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
             @click="mobileMenuOpen = false"
           >
             Home
           </NuxtLink>
           <!-- Products Section -->
-          <div class="mb-6">
+          <div>
             <button 
               @click="productsExpanded = !productsExpanded"
-              class="flex items-center justify-between w-full py-3 text-sm font-medium text-neutral-900"
+              class="flex items-center justify-between w-full py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
             >
               <span>Products</span>
               <svg 
@@ -165,43 +150,49 @@
               leave-from-class="opacity-100 max-h-96"
               leave-to-class="opacity-0 max-h-0"
             >
-              <div v-if="productsExpanded" class="pl-4 mt-2 space-y-1 overflow-hidden">
+              <div v-if="productsExpanded" class="mt-3 ml-4 space-y-3 overflow-hidden pb-2">
                 <NuxtLink 
                   to="/website"
-                  class="flex items-center gap-3 py-3 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+                  class="flex items-center gap-3 group"
                   @click="mobileMenuOpen = false"
                 >
-                  <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
+                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
                   <div>
-                    <div class="font-medium text-neutral-900">Website</div>
+                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">Website</div>
                     <div class="text-xs text-neutral-500">Professional sites</div>
                   </div>
                 </NuxtLink>
                 <NuxtLink 
                   to="/agents"
-                  class="flex items-center gap-3 py-3 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+                  class="flex items-center gap-3 group"
                   @click="mobileMenuOpen = false"
                 >
-                  <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-                  </svg>
+                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                    </svg>
+                  </div>
                   <div>
-                    <div class="font-medium text-neutral-900">AI Agents</div>
+                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">AI Agents</div>
                     <div class="text-xs text-neutral-500">Automate tasks</div>
                   </div>
                 </NuxtLink>
                 <NuxtLink 
                   to="/marketing"
-                  class="flex items-center gap-3 py-3 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+                  class="flex items-center gap-3 group"
                   @click="mobileMenuOpen = false"
                 >
-                  <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                  </svg>
+                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                    </svg>
+                  </div>
                   <div>
-                    <div class="font-medium text-neutral-900">Marketing</div>
+                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">Marketing</div>
                     <div class="text-xs text-neutral-500">Boost your reach</div>
                   </div>
                 </NuxtLink>
@@ -212,7 +203,7 @@
           <!-- Other Links -->
           <NuxtLink 
             to="/contact"
-            class="block py-3 text-sm font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
+            class="block py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
             @click="mobileMenuOpen = false"
           >
             Contact
@@ -220,17 +211,17 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-4 border-t border-neutral-200 bg-neutral-50 flex gap-3">
+        <div class="px-6 py-6 border-t border-neutral-200 flex gap-3">
           <NuxtLink 
             to="/login"
-            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-300 hover:bg-neutral-50 transition-colors"
             @click="mobileMenuOpen = false"
           >
             Sign in
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
             @click="mobileMenuOpen = false"
           >
             Get Started
