@@ -2149,13 +2149,13 @@
 
   <!-- Change Request Modal -->
   <Teleport to="body">
-    <div v-if="showChangeRequestForm" class="fixed inset-0 z-50 overflow-y-auto">
+    <div v-if="showChangeRequestForm" class="fixed inset-0 z-[1000] overflow-y-auto">
       <div class="flex min-h-screen items-start md:items-center justify-center p-4">
         <!-- Backdrop -->
-        <div class="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm transition-opacity" @click="showChangeRequestForm = false"></div>
+        <div class="fixed inset-0 z-[1000] bg-neutral-900/50 backdrop-blur-sm transition-opacity" @click="showChangeRequestForm = false"></div>
         
         <!-- Modal -->
-        <div class="relative w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-neutral-200 transform transition-all max-h-[90vh] overflow-y-auto">
+        <div class="relative z-[1001] w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-neutral-200 transform transition-all max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center justify-between border-b border-neutral-200 px-6 py-4">
             <div>
