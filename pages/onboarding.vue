@@ -137,7 +137,6 @@
               </div>
 
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
 
@@ -191,7 +190,6 @@
               </div>
 
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
@@ -329,7 +327,6 @@
             <!-- Step 3: Existing Website -->
             <div v-if="currentStep === 3" class="space-y-6">
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Existing website</h3>
                 <p class="mt-1 text-sm text-secondary">Do you have a current website we can analyze?</p>
 
@@ -446,7 +443,6 @@
               </div>
 
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
                 <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
@@ -623,7 +619,6 @@
               </div>
 
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
 
@@ -736,7 +731,6 @@
             <!-- Step 6: Design -->
             <div v-if="currentStep === 6" class="space-y-6">
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we'll fine-tune the details together.</p>
 
@@ -908,7 +902,6 @@
             <!-- Step 7: Logo & Assets -->
             <div v-if="currentStep === 7" class="space-y-6">
               <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 
@@ -1093,7 +1086,6 @@
             <div v-if="currentStep === 8" class="space-y-6">
               <!-- Success Message -->
               <div v-if="isSubmitted" class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 text-center shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50">
                   <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -1128,7 +1120,6 @@
               </div>
 
               <div v-if="!isSubmitted" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <h3 class="text-base font-semibold text-primary">Review your information</h3>
                 <p class="mt-1 text-sm text-secondary">Check everything below and make any final edits before submitting.</p>
 
