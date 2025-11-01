@@ -9,10 +9,10 @@
             <span :class="['typewriter-word text-[#d97759]', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
             that put growth at the frontier
           </h1>
-          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
+          <p class="mt-10 md:mt-12 text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
             We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
           </p>
-          <div class="mt-12 opacity-0 animate-fade-in max-w-2xl mx-auto" style="animation-delay: 150ms">
+          <div class="mt-14 md:mt-16 opacity-0 animate-fade-in max-w-2xl mx-auto" style="animation-delay: 150ms">
             <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-neutral-200 shadow-xl bg-black group hover:border-neutral-300 transition-all duration-300">
               <div class="absolute inset-0 bg-gradient-to-br from-[#d97759]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <iframe
@@ -25,7 +25,7 @@
               ></iframe>
             </div>
           </div>
-          <div class="mt-12 flex flex-wrap items-center justify-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
+          <div class="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-6 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
               to="/dashboard"
               class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
@@ -37,12 +37,10 @@
             </NuxtLink>
             <NuxtLink
               to="/website"
-              class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-neutral-900 bg-white border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              class="inline-flex items-center gap-1 text-base font-medium text-neutral-900 hover:text-neutral-700 transition-colors"
             >
-              Learn More
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              Learn more
+              <span class="inline-block">&gt;</span>
             </NuxtLink>
           </div>
         </div>
@@ -94,9 +92,9 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="py-20 md:py-32 bg-gradient-to-b from-white to-neutral-50">
-      <div class="max-w-6xl mx-auto px-6 lg:px-8">
-        <div class="mb-16 text-center">
+    <section class="py-20 md:py-32 bg-gradient-to-b from-white to-neutral-50 overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-12 text-center px-6 lg:px-8">
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d97759]/10 border border-[#d97759]/20 text-sm font-medium text-[#d97759] mb-6">
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
@@ -111,14 +109,15 @@
           </p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <a
-            v-for="(project, index) in showcaseItems"
-            :key="project.title"
-            :href="project.link || '#'"
-            class="group block rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 opacity-0 animate-fade-in-up transform hover:-translate-y-1"
-            :style="{ animationDelay: `${index * 100}ms` }"
-          >
+        <!-- Horizontal Slider -->
+        <div class="relative">
+          <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-6 lg:px-8 pb-4">
+            <a
+              v-for="(project, index) in showcaseItems"
+              :key="project.title"
+              :href="project.link || '#'"
+              class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[30vw] snap-center block rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 transform hover:-translate-y-1"
+            >
             <!-- Thumbnail with gradient overlay -->
             <div class="relative aspect-[4/3] bg-gradient-to-br from-neutral-100 to-neutral-200 overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-[#d97759]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -168,7 +167,13 @@
                 </svg>
               </div>
             </div>
-          </a>
+            </a>
+          </div>
+          
+          <!-- Scroll indicator dots -->
+          <div class="flex items-center justify-center gap-2 mt-8">
+            <div v-for="i in showcaseItems.length" :key="i" class="h-2 w-2 rounded-full bg-neutral-300"></div>
+          </div>
         </div>
       </div>
     </section>
