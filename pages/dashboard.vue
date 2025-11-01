@@ -1037,17 +1037,13 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="settingsActiveTab = subTab.id; settingsMobileContentOpen = true"
-                  class="relative block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
+                  class="block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
                   :class="[
                     settingsActiveTab === subTab.id
                       ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
                       : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                   ]"
                 >
-                  <span
-                    v-if="settingsActiveTab === subTab.id"
-                    class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-xl"
-                  ></span>
                   {{ subTab.label }}
                 </a>
               </div>
@@ -1180,17 +1176,13 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="settingsActiveTab = subTab.id"
-                class="relative block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
+                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
                   settingsActiveTab === subTab.id
                     ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
                     : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                 ]"
               >
-                <span
-                  v-if="settingsActiveTab === subTab.id"
-                  class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-lg"
-                ></span>
                 {{ subTab.label }}
               </a>
             </nav>
@@ -1278,17 +1270,13 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="supportActiveTab = subTab.id; supportMobileContentOpen = true"
-                  class="relative block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
+                  class="block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
                   :class="[
                     supportActiveTab === subTab.id
                       ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
                       : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                   ]"
                 >
-                  <span
-                    v-if="supportActiveTab === subTab.id"
-                    class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-xl"
-                  ></span>
                   {{ subTab.label }}
                 </a>
               </div>
@@ -1413,17 +1401,13 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="supportActiveTab = subTab.id"
-                class="relative block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
+                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
                   supportActiveTab === subTab.id
                     ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
                     : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                 ]"
               >
-                <span
-                  v-if="supportActiveTab === subTab.id"
-                  class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-lg"
-                ></span>
                 {{ subTab.label }}
               </a>
             </nav>
@@ -1555,17 +1539,13 @@
                   :key="subTab.id"
                   href="#"
                   @click.prevent="domainsActiveTab = subTab.id; domainsMobileContentOpen = true"
-                  class="relative block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
+                  class="block rounded-xl border px-4 py-3 text-base font-medium transition-all shadow-sm"
                   :class="[
                     domainsActiveTab === subTab.id
                       ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
                       : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                   ]"
                 >
-                  <span
-                    v-if="domainsActiveTab === subTab.id"
-                    class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-xl"
-                  ></span>
                   {{ subTab.label }}
                 </a>
               </div>
@@ -1884,17 +1864,13 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="domainsActiveTab = subTab.id"
-                class="relative block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all"
+                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all"
                 :class="[
                   domainsActiveTab === subTab.id
                     ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30 shadow-sm'
                     : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
                 ]"
               >
-                <span
-                  v-if="domainsActiveTab === subTab.id"
-                  class="absolute left-0 top-0 bottom-0 w-1 bg-[#d97759] rounded-l-lg"
-                ></span>
                 {{ subTab.label }}
               </a>
             </nav>
@@ -2189,33 +2165,51 @@
 
       <!-- Coming Soon Tabs (Branding, Marketing, AI Agents) -->
       <div v-if="activeTab === 'branding' || activeTab === 'marketing' || activeTab === 'ai-agents'" class="flex items-center justify-center min-h-[60vh]">
-        <div class="text-center max-w-lg px-4">
+        <div class="text-center max-w-md px-4">
           <!-- Icon Container -->
-          <div class="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-[#d97759]/10">
-            <svg v-if="activeTab === 'branding'" class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#d97759]/10 border border-[#d97759]/20">
+            <svg v-if="activeTab === 'branding'" class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
             </svg>
-            <svg v-else-if="activeTab === 'marketing'" class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <svg v-else-if="activeTab === 'marketing'" class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
             </svg>
-            <svg v-else class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <svg v-else class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
             </svg>
           </div>
           
           <!-- Title & Description -->
-          <h2 class="text-4xl font-medium text-neutral-900 mb-4">Coming Soon</h2>
-          <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-            We're working hard to bring you {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. 
-            Stay tuned for updates!
+          <h2 class="text-3xl font-semibold text-neutral-900 mb-3">Coming Soon</h2>
+          <p class="text-base text-neutral-600 mb-6">
+            We're building {{ activeTab === 'ai-agents' ? 'AI Agents' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) }}. Get notified when we launch!
           </p>
           
-          <!-- Info Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 bg-white text-sm text-neutral-600 shadow-sm">
-            <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            This feature is under development
+          <!-- Email Notification Form -->
+          <div class="bg-white border border-neutral-200 rounded-lg p-6 shadow-sm">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-neutral-700 mb-2 text-left">Email address</label>
+                <input
+                  v-model="notifyEmail"
+                  type="email"
+                  placeholder="your@email.com"
+                  class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-[#d97759] focus:ring-2 focus:ring-[#d97759]/20 focus:outline-none transition-all"
+                />
+              </div>
+              <button
+                @click="handleNotifyMe"
+                :disabled="notifyLoading"
+                class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg v-if="!notifyLoading" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+                {{ notifyLoading ? 'Submitting...' : 'Notify Me' }}
+              </button>
+              <p v-if="notifySuccess" class="text-sm text-green-600 text-center">{{ notifySuccess }}</p>
+              <p v-if="notifyError" class="text-sm text-red-600 text-center">{{ notifyError }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2491,6 +2485,12 @@ const searchQuery = ref('')
 const leadsFilter = ref('all')
 const leadsSource = ref('all')
 const leadsSearch = ref('')
+
+// Coming Soon notification
+const notifyEmail = ref('')
+const notifyLoading = ref(false)
+const notifySuccess = ref('')
+const notifyError = ref('')
 
 // Sample leads data
 const leads = ref([
