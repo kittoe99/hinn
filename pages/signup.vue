@@ -1,7 +1,6 @@
 <template>
   <div class="min-h-screen bg-neutral-50 flex items-center justify-center px-6 py-12">
-    <div class="relative overflow-hidden w-full max-w-md border border-neutral-200 bg-white rounded-xl p-8 space-y-6 shadow-sm">
-      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+    <div class="w-full max-w-md border border-neutral-200 bg-white rounded-xl p-8 space-y-6 shadow-sm">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Create your account</h1>
         <p class="text-base text-neutral-600">Get started with Hinn in just a few steps.</p>
