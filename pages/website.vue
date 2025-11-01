@@ -21,12 +21,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </NuxtLink>
-            <NuxtLink
-              to="/showcase"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
-            >
-              See examples
-            </NuxtLink>
           </div>
         </div>
       </div>

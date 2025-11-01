@@ -52,11 +52,6 @@
           <h4 class="text-sm font-medium text-neutral-900 mb-4">Resources</h4>
           <ul class="space-y-3">
             <li>
-              <NuxtLink to="/showcase" class="text-sm text-neutral-600 hover:text-[#d97759] transition-colors">
-                Work
-              </NuxtLink>
-            </li>
-            <li>
               <NuxtLink to="/dashboard" class="text-sm text-neutral-600 hover:text-[#d97759] transition-colors">
                 Pricing
               </NuxtLink>

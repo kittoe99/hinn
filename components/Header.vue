@@ -28,12 +28,6 @@
             Marketing
           </NuxtLink>
           <NuxtLink 
-            to="/showcase" 
-            class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-          >
-            Showcase
-          </NuxtLink>
-          <NuxtLink 
             to="/contact" 
             class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
           >
@@ -195,13 +189,6 @@
           </div>
 
           <!-- Other Links -->
-          <NuxtLink 
-            to="/showcase"
-            class="block py-3 text-sm font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
-            @click="mobileMenuOpen = false"
-          >
-            Showcase
-          </NuxtLink>
           <NuxtLink 
             to="/contact"
             class="block py-3 text-sm font-medium text-neutral-900 hover:text-[#d97759] transition-colors"

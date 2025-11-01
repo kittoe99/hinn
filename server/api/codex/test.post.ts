@@ -1,81 +1,52 @@
-import { Codex } from '@openai/codex-sdk'
-import { defineEventHandler, readBody, createError, sendError } from 'h3'
+import OpenAI from 'openai'
+import { defineEventHandler, readBody, createError, sendError, setResponseHeader } from 'h3'
 import { useRuntimeConfig } from '#imports'
-import fs from 'node:fs'
-import path from 'node:path'
-
-function parseEnv(content: string): Record<string, string> {
-  const env: Record<string, string> = {}
-  const lines = content.split(/\r?\n/)
-  for (const raw of lines) {
-    const line = raw.trim()
-    if (!line || line.startsWith('#')) continue
-    const idx = line.indexOf('=')
-    if (idx === -1) continue
-    const key = line.slice(0, idx).trim()
-    let val = line.slice(idx + 1).trim()
-    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1)
-    }
-    if (key) env[key] = val
-  }
-  return env
-}
-
-function loadEnvKeyIfMissing(keys: string[]) {
-  const hasAll = keys.every((k) => !!process.env[k])
-  if (hasAll) return
-  try {
-    const envPath = path.resolve(process.cwd(), '.env')
-    if (fs.existsSync(envPath)) {
-      const vars = parseEnv(fs.readFileSync(envPath, 'utf8'))
-      for (const k of keys) {
-        if (!process.env[k] && vars[k] !== undefined) {
-          process.env[k] = vars[k]
-        }
-      }
-    }
-  } catch {
-    // ignore; detailed diagnostics available at /api/debug/env
-  }
-}
 
 export default defineEventHandler(async (event) => {
   try {
-    const body = await readBody<{ prompt?: string }>(event)
-    const prompt = body?.prompt || 'Say hello'
+    const body = await readBody<{ messages?: Array<{ role: string; content: string }> }>(event)
+    const messages = body?.messages || [{ role: 'user', content: 'Say hello' }]
     const config = useRuntimeConfig()
-    // Ensure env is present even if Nuxt hasn't loaded .env yet
-    loadEnvKeyIfMissing(['OPENAI_API_KEY', 'NUXT_OPENAI_API_KEY', 'V0_API_KEY'])
-    const apiKey =
-      (config as any).openaiApiKey ||
-      process.env.OPENAI_API_KEY ||
-      process.env.NUXT_OPENAI_API_KEY ||
-      process.env.V0_API_KEY
+    const apiKey = (config as any).openaiApiKey || process.env.OPENAI_API_KEY
     if (!apiKey) {
       throw new Error('Missing OPENAI_API_KEY. Add it to your .env and restart the server.')
     }
-    process.env.OPENAI_API_KEY = apiKey
 
-    const codex = new Codex()
-    const thread = codex.startThread({
-      skipGitRepoCheck: true,
+    const openai = new OpenAI({ apiKey })
+    
+    // Set headers for SSE streaming
+    setResponseHeader(event, 'Content-Type', 'text/event-stream')
+    setResponseHeader(event, 'Cache-Control', 'no-cache')
+    setResponseHeader(event, 'Connection', 'keep-alive')
+
+    const stream = await openai.chat.completions.create({
+      model: 'gpt-4',
+      messages: messages as any,
+      stream: true,
     })
 
-    const withTimeout = async <T>(p: Promise<T>, ms: number) => {
-      return await Promise.race<Promise<T> | Promise<T>>([
-        p,
-        new Promise<T>((_, reject) => setTimeout(() => reject(new Error(`Timed out after ${ms}ms`)), ms)),
-      ])
-    }
+    // Stream the response
+    const encoder = new TextEncoder()
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of stream) {
+            const content = chunk.choices[0]?.delta?.content || ''
+            if (content) {
+              const data = `data: ${JSON.stringify({ content })}\n\n`
+              controller.enqueue(encoder.encode(data))
+            }
+          }
+          controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+          controller.close()
+        } catch (e: any) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: e.message })}\n\n`))
+          controller.close()
+        }
+      },
+    })
 
-    const TIMEOUT_MS = 30000
-    const start = Date.now()
-    const result = await withTimeout(thread.run(prompt), TIMEOUT_MS)
-    const elapsed = Date.now() - start
-    console.log(`[codex] run completed in ${elapsed}ms`)
-
-    return { ok: true, result }
+    return readable
   } catch (e: any) {
     return sendError(event, createError({ statusCode: 500, statusMessage: e?.message || String(e) }))
   }

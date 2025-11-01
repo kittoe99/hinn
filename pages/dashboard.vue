@@ -175,11 +175,11 @@
                     <div class="flex flex-wrap gap-3">
                       <button class="inline-flex items-center gap-2 border border-neutral-200 bg-white px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-colors">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9"/>
                         </svg>
                         Add Domain
                       </button>
-                      <button class="inline-flex items-center gap-2 bg-neutral-900 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+                      <button @click="showChangeRequestForm = true" class="inline-flex items-center gap-2 bg-neutral-900 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
@@ -2147,6 +2147,98 @@
       </div>
   </div>
 
+  <!-- Change Request Modal -->
+  <Teleport to="body">
+    <div v-if="showChangeRequestForm" class="fixed inset-0 z-50 overflow-y-auto">
+      <div class="flex min-h-screen items-start md:items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm transition-opacity" @click="showChangeRequestForm = false"></div>
+        
+        <!-- Modal -->
+        <div class="relative w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-neutral-200 transform transition-all max-h-[90vh] overflow-y-auto">
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-neutral-200 px-6 py-4">
+            <div>
+              <h2 class="text-xl font-bold text-neutral-900">Request Site Changes</h2>
+              <p class="text-sm text-neutral-600 mt-1">Submit a change request for your website</p>
+            </div>
+            <button @click="showChangeRequestForm = false" class="rounded-lg p-2 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 transition-colors">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Form -->
+          <form @submit.prevent="handleSubmitChangeRequest" class="p-6 space-y-5">
+            <div>
+              <label for="cr_title" class="block text-sm font-semibold text-neutral-900 mb-2">Request Title <span class="text-red-500">*</span></label>
+              <input id="cr_title" v-model="changeRequestForm.title" type="text" required placeholder="e.g., Update homepage hero section" class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 transition-all"/>
+            </div>
+            <div>
+              <label for="cr_description" class="block text-sm font-semibold text-neutral-900 mb-2">Description <span class="text-red-500">*</span></label>
+              <textarea id="cr_description" v-model="changeRequestForm.description" required rows="5" placeholder="Describe the changes you'd like to make..." class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 transition-all resize-none"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="relative">
+                <label class="block text-sm font-semibold text-neutral-900 mb-2">Priority <span class="text-red-500">*</span></label>
+                <button type="button" @click.stop="showPriorityMenu = !showPriorityMenu" :aria-expanded="showPriorityMenu ? 'true' : 'false'" class="w-full flex items-center justify-between rounded-lg border border-neutral-300 px-4 py-2.5 text-sm text-neutral-900 hover:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all">
+                  <span class="inline-flex items-center gap-2">
+                    <span :class="['h-2.5 w-2.5 rounded-full', priorityDotClass(changeRequestForm.priority)]"></span>
+                    <span class="capitalize">{{ changeRequestForm.priority }}</span>
+                  </span>
+                  <svg class="h-4 w-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+                <div v-if="showPriorityMenu" @click.stop class="absolute z-50 top-full left-0 right-0 mt-1 rounded-lg border border-neutral-200 bg-white shadow-lg overflow-hidden">
+                  <button v-for="opt in priorityOptions" :key="opt.value" type="button" @click.stop="selectPriority(opt.value)" :class="['w-full flex items-center justify-between px-4 py-2.5 text-sm text-neutral-900 hover:bg-neutral-50', changeRequestForm.priority === opt.value ? 'bg-neutral-50' : '']">
+                    <span class="inline-flex items-center gap-2">
+                      <span :class="['h-2.5 w-2.5 rounded-full', priorityDotClass(opt.value)]"></span>
+                      <span class="capitalize">{{ opt.label }}</span>
+                    </span>
+                    <svg v-if="changeRequestForm.priority === opt.value" class="h-4 w-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label for="cr_screenshot" class="block text-sm font-semibold text-neutral-900 mb-2">Screenshot (Optional)</label>
+                <input id="cr_screenshot" type="file" accept="image/*" @change="handleScreenshotChange" class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-sm text-neutral-900 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 transition-all"/>
+                <p v-if="screenshotFile" class="text-xs text-neutral-600 mt-1">Selected: {{ screenshotFile.name }} ({{ formatFileSize(screenshotFile.size) }})</p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-neutral-50 border border-neutral-200 p-4">
+              <div class="flex items-start gap-3">
+                <svg class="h-5 w-5 text-neutral-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-neutral-700">You can attach a screenshot image (optional).</p>
+                  <p class="text-xs text-neutral-500 mt-1">Multiple file attachments coming soon. Include any extra URLs in the description.</p>
+                </div>
+              </div>
+            </div>
+            <div v-if="changeRequestError" class="rounded-lg bg-red-50 border border-red-200 p-4">
+              <p class="text-sm text-red-700">{{ changeRequestError }}</p>
+            </div>
+            <div v-if="changeRequestSuccess" class="rounded-lg bg-emerald-50 border border-emerald-200 p-4">
+              <p class="text-sm text-emerald-700">{{ changeRequestSuccess }}</p>
+            </div>
+            <div class="flex items-center justify-end gap-3 pt-2">
+              <button type="button" @click="showChangeRequestForm = false" class="rounded-lg border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 transition-colors" :disabled="submittingChangeRequest">Cancel</button>
+              <button type="submit" class="rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2" :disabled="submittingChangeRequest">
+                <svg v-if="submittingChangeRequest" class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                {{ submittingChangeRequest ? 'Submitting...' : 'Submit Request' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </Teleport>
+
   </template>
 
   <script setup>
@@ -2271,6 +2363,45 @@ const selectedWebsiteOnboarding = ref(null)
 const websiteDetailsLoading = ref(false)
 const websiteDetailsError = ref(null)
 
+// Change Request Modal state
+const showChangeRequestForm = ref(false)
+const changeRequestForm = ref({
+  title: '',
+  description: '',
+  priority: 'medium'
+})
+const submittingChangeRequest = ref(false)
+const changeRequestError = ref('')
+const changeRequestSuccess = ref('')
+const screenshotFile = ref(null)
+
+const handleScreenshotChange = (event) => {
+  const file = event?.target?.files?.[0]
+  screenshotFile.value = file || null
+}
+
+// Priority dropdown state & helpers
+const showPriorityMenu = ref(false)
+const priorityOptions = [
+  { value: 'low', label: 'Low' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'high', label: 'High' },
+  { value: 'urgent', label: 'Urgent' }
+]
+const priorityDotClass = (val) => {
+  switch (val) {
+    case 'low': return 'bg-neutral-300'
+    case 'medium': return 'bg-amber-400'
+    case 'high': return 'bg-orange-500'
+    case 'urgent': return 'bg-red-600'
+    default: return 'bg-neutral-300'
+  }
+}
+const selectPriority = (val) => {
+  changeRequestForm.value.priority = val
+  showPriorityMenu.value = false
+}
+
 // Website expanded sections
 const websiteExpandedSections = ref({
   business: false,
@@ -2347,6 +2478,7 @@ if (process.client) {
   document.addEventListener('click', () => {
     showProfileMenu.value = false
     showMobileMenu.value = false
+    showPriorityMenu.value = false
   })
 }
 
@@ -3076,6 +3208,53 @@ const formatFileSize = (bytes) => {
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i]
+}
+
+// Submit change request (placeholder - wire to API later)
+const handleSubmitChangeRequest = async () => {
+  try {
+    submittingChangeRequest.value = true
+    changeRequestError.value = ''
+    changeRequestSuccess.value = ''
+
+    // Build FormData for multipart
+    const fd = new FormData()
+    fd.append('title', changeRequestForm.value.title)
+    fd.append('description', changeRequestForm.value.description)
+    fd.append('priority', changeRequestForm.value.priority)
+    if (selectedWebsite.value?.id) fd.append('websiteId', selectedWebsite.value.id)
+    if (screenshotFile.value) fd.append('screenshot', screenshotFile.value)
+
+    // Auth header
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) throw new Error('Not authenticated')
+
+    const resp = await fetch('/api/change-requests', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${session.access_token}` },
+      body: fd
+    })
+
+    if (!resp.ok) {
+      const errText = await resp.text().catch(() => '')
+      throw new Error(errText || 'Failed to submit')
+    }
+
+    changeRequestSuccess.value = 'Change request submitted successfully!'
+    changeRequestForm.value = { title: '', description: '', priority: 'medium' }
+    screenshotFile.value = null
+
+    setTimeout(() => {
+      showChangeRequestForm.value = false
+      changeRequestSuccess.value = ''
+    }, 1500)
+  } catch (err) {
+    console.error(err)
+    changeRequestError.value = err?.message || 'Failed to submit request.'
+  } finally {
+    submittingChangeRequest.value = false
+  }
 }
 </script>
 

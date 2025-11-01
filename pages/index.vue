@@ -22,12 +22,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </NuxtLink>
-            <NuxtLink
-              to="/showcase"
-              class="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors underline underline-offset-4"
-            >
-              View our work
-            </NuxtLink>
           </div>
         </div>
       </div>
@@ -109,18 +103,6 @@
               </svg>
             </div>
           </a>
-        </div>
-        
-        <div class="mt-10">
-          <NuxtLink 
-            to="/showcase" 
-            class="inline-flex items-center gap-2 text-base font-medium text-neutral-900 hover:gap-3 transition-all underline underline-offset-4"
-          >
-            View all projects
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </NuxtLink>
         </div>
       </div>
     </section>
