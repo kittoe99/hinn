@@ -9,24 +9,59 @@
         
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-8">
-          <NuxtLink 
-            to="/website" 
-            class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-          >
-            Website
-          </NuxtLink>
-          <NuxtLink 
-            to="/agents" 
-            class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-          >
-            Agents
-          </NuxtLink>
-          <NuxtLink 
-            to="/marketing" 
-            class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
-          >
-            Marketing
-          </NuxtLink>
+          <!-- Products Dropdown -->
+          <div class="relative" @mouseenter="productsOpen = true" @mouseleave="productsOpen = false">
+            <button class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1">
+              Products
+              <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': productsOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <Transition
+              enter-active-class="transition-all duration-200"
+              enter-from-class="opacity-0 translate-y-1"
+              enter-to-class="opacity-100 translate-y-0"
+              leave-active-class="transition-all duration-150"
+              leave-from-class="opacity-100 translate-y-0"
+              leave-to-class="opacity-0 translate-y-1"
+            >
+              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-200 rounded-xl shadow-xl py-2 z-50">
+                <NuxtLink to="/website" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-900">Website</div>
+                    <div class="text-xs text-neutral-500">Professional sites</div>
+                  </div>
+                </NuxtLink>
+                <NuxtLink to="/agents" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-900">AI Agents</div>
+                    <div class="text-xs text-neutral-500">Automate tasks</div>
+                  </div>
+                </NuxtLink>
+                <NuxtLink to="/marketing" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-900">Marketing</div>
+                    <div class="text-xs text-neutral-500">Boost your reach</div>
+                  </div>
+                </NuxtLink>
+              </div>
+            </Transition>
+          </div>
           <NuxtLink 
             to="/contact" 
             class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
@@ -81,35 +116,21 @@
       />
     </Transition>
 
-    <!-- Mobile Menu Drawer -->
+    <!-- Mobile Menu Dropdown -->
     <Transition
-      enter-active-class="transition-transform duration-300 ease-out"
-      enter-from-class="translate-x-full"
-      enter-to-class="translate-x-0"
-      leave-active-class="transition-transform duration-300 ease-in"
-      leave-from-class="translate-x-0"
-      leave-to-class="translate-x-full"
+      enter-active-class="transition-all duration-200"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-all duration-150"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
     >
       <div 
         v-if="mobileMenuOpen"
-        class="fixed top-0 right-0 bottom-0 w-80 bg-white shadow-2xl z-50 md:hidden overflow-y-auto"
+        class="absolute top-full left-0 right-0 bg-white border-b border-neutral-200 shadow-xl z-50 md:hidden"
       >
-        <!-- Header -->
-        <div class="flex items-center justify-between p-6 border-b border-neutral-200">
-          <span class="text-lg font-medium text-neutral-900">Menu</span>
-          <button 
-            @click="mobileMenuOpen = false"
-            class="p-2 -m-2 text-neutral-600 hover:text-neutral-900 transition-colors"
-            aria-label="Close menu"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
         <!-- Navigation -->
-        <nav class="p-6 space-y-1">
+        <nav class="px-6 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
           <!-- Home -->
           <NuxtLink 
             to="/"
@@ -199,17 +220,17 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-neutral-200 bg-white space-y-3">
+        <div class="px-6 py-4 border-t border-neutral-200 bg-neutral-50 flex gap-3">
           <NuxtLink 
             to="/login"
-            class="block w-full rounded-lg py-3 text-center text-sm font-medium text-neutral-900 border border-neutral-200 hover:bg-neutral-50 transition-colors"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
             @click="mobileMenuOpen = false"
           >
             Sign in
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="block w-full rounded-lg py-3 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors shadow-sm"
             @click="mobileMenuOpen = false"
           >
             Get Started
@@ -223,4 +244,5 @@
 <script setup>
 const mobileMenuOpen = ref(false)
 const productsExpanded = ref(false)
+const productsOpen = ref(false)
 </script>
