@@ -2238,6 +2238,25 @@
       </div>
     </main>
 
+    <!-- Floating Action Button -->
+    <button
+      v-if="!selectedWebsiteId"
+      @click="showAddNewModal = true"
+      class="fixed bottom-6 right-6 z-40 group flex items-center gap-3 bg-neutral-900 hover:bg-neutral-800 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+    >
+      <!-- Collapsed state (icon only) -->
+      <div class="flex items-center justify-center w-14 h-14 md:w-16 md:h-16">
+        <svg class="h-6 w-6 md:h-7 md:w-7 transition-transform group-hover:rotate-90 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+      </div>
+      
+      <!-- Expanded text (shows on hover on desktop) -->
+      <span class="hidden md:block max-w-0 group-hover:max-w-xs opacity-0 group-hover:opacity-100 whitespace-nowrap overflow-hidden transition-all duration-300 text-sm font-medium pr-0 group-hover:pr-5">
+        Add New Service
+      </span>
+    </button>
+
       <!-- Add New Modal -->
       <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="hasProduct && (showAddNewModal = false)">
         <div class="bg-white rounded-2xl border border-neutral-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
