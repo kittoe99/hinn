@@ -680,8 +680,8 @@
             <div class="p-6">
               <!-- Header -->
               <div class="flex items-start gap-4 mb-6">
-                <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <div class="h-12 w-12 rounded-xl border border-neutral-200 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-6 w-6 text-neutral-900/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
@@ -742,8 +742,8 @@
               ]"
             >
               <div class="flex items-center gap-3">
-                <div class="h-8 w-8 rounded-lg border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-4 w-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <div class="h-8 w-8 rounded-lg border border-neutral-200 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-4 w-4 text-neutral-900/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
@@ -2034,7 +2034,6 @@
                 @click="selectProduct('website')"
                 class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 text-left hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg"
               >
-                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
                 <div class="flex items-start justify-between mb-6">
                   <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center">
                     <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
