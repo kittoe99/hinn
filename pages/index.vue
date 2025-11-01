@@ -3,16 +3,16 @@
     <!-- Hero Section -->
     <section class="relative pt-20 pb-24 md:pt-32 md:pb-40 bg-gradient-to-b from-white via-neutral-50/30 to-white">
       <div class="max-w-6xl mx-auto px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-5xl mx-auto text-center">
           <h1 class="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-900 leading-[1.1] opacity-0 animate-fade-in" style="animation-delay: 0ms">
             Websites, marketing &<br />
             <span :class="['typewriter-word text-[#d97759]', { 'flipping': isFlipping }]">{{ currentWord }}</span><br />
             that put growth at the frontier
           </h1>
-          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-3xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
+          <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
             We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
           </p>
-          <div class="mt-12 opacity-0 animate-fade-in max-w-2xl" style="animation-delay: 150ms">
+          <div class="mt-12 opacity-0 animate-fade-in max-w-2xl mx-auto" style="animation-delay: 150ms">
             <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-neutral-200 shadow-xl bg-black group hover:border-neutral-300 transition-all duration-300">
               <div class="absolute inset-0 bg-gradient-to-br from-[#d97759]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <iframe
@@ -25,12 +25,21 @@
               ></iframe>
             </div>
           </div>
-          <div class="mt-12 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
+          <div class="mt-12 flex flex-wrap items-center justify-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
               to="/dashboard"
               class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Get Started
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </NuxtLink>
+            <NuxtLink
+              to="/website"
+              class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-neutral-900 bg-white border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+            >
+              Learn More
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
