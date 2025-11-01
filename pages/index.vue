@@ -12,6 +12,18 @@
           <p class="mt-8 text-lg md:text-xl text-neutral-600 max-w-2xl leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 100ms">
             We build reliable, scalable digital products. One monthly subscription for websites, AI agents, and marketing that actually work.
           </p>
+          <div class="mt-10 opacity-0 animate-fade-in" style="animation-delay: 150ms">
+            <div class="relative aspect-video rounded-2xl overflow-hidden border border-neutral-200 shadow-xl bg-black">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src="https://player.vimeo.com/video/970513558?title=0&byline=0&portrait=0"
+                title="Hinn capabilities overview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
           <div class="mt-10 flex flex-wrap items-center gap-4 opacity-0 animate-fade-in" style="animation-delay: 200ms">
             <NuxtLink
               to="/dashboard"
