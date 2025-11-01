@@ -569,13 +569,28 @@
 
       <!-- Overview Tab -->
       <div v-else-if="!selectedWebsiteId && activeTab === 'overview'" class="space-y-6">
-        <!-- Welcome Section -->
+        <!-- Welcome Section with Quick Links -->
         <div class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <h1 class="text-4xl font-medium text-neutral-900 mb-3">Welcome back</h1>
-              <p class="text-lg text-neutral-600">Here's what's happening with your projects</p>
-            </div>
+          <h1 class="text-4xl font-medium text-neutral-900 mb-4">Welcome back</h1>
+          <div class="flex items-center gap-3">
+            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+              </svg>
+              Logo generator
+            </a>
+            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
+              Store
+            </a>
+            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+              </svg>
+              AI tools
+            </a>
           </div>
         </div>
 
@@ -2710,6 +2725,38 @@ const handleLogout = async () => {
   const supabase = getSupabaseClient()
   await supabase.auth.signOut()
   navigateTo('/login')
+}
+
+// Handle notify me for coming soon features
+const handleNotifyMe = async () => {
+  notifyError.value = ''
+  notifySuccess.value = ''
+  
+  if (!notifyEmail.value) {
+    notifyError.value = 'Please enter your email address'
+    return
+  }
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(notifyEmail.value)) {
+    notifyError.value = 'Please enter a valid email address'
+    return
+  }
+  
+  notifyLoading.value = true
+  
+  try {
+    // TODO: Implement API call to save notification email
+    // For now, just simulate success
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    notifySuccess.value = 'Thanks! We\'ll notify you when we launch.'
+    notifyEmail.value = ''
+  } catch (error) {
+    notifyError.value = 'Something went wrong. Please try again.'
+  } finally {
+    notifyLoading.value = false
+  }
 }
 
 // Close menus when clicking outside
