@@ -529,8 +529,7 @@
       </div>
 
       <!-- Onboarding Required Banner (shows on all tabs) -->
-      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="relative overflow-hidden mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60"></div>
+      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
         <div class="flex flex-col md:flex-row items-start justify-between gap-6">
           <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
