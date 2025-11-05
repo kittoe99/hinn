@@ -79,7 +79,7 @@
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group relative bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-2xl p-8 hover:bg-white hover:border-neutral-300 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            class="group relative bg-[#fefbf3] border border-neutral-200 rounded-2xl p-8 hover:bg-white hover:border-neutral-300 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
             <!-- Accent Border -->
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d97759] to-[#d97759]/60 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>

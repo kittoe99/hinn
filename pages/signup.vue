@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-[#fdf6e6] flex items-center justify-center px-6 py-12">
-    <div class="w-full max-w-md border border-neutral-200 bg-white/80 backdrop-blur-sm rounded-xl p-8 space-y-6 shadow-lg">
+    <div class="w-full max-w-md border border-neutral-200 bg-[#fefbf3] rounded-xl p-8 space-y-6 shadow-lg">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Create your account</h1>
         <p class="text-base text-neutral-600">Get started with Hinn in just a few steps.</p>

@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-page">
+  <div class="min-h-screen bg-[#fdf6e6]">
     <!-- Header with Profile and Navigation -->
-    <header class="sticky top-0 z-50 bg-white">
+    <header class="sticky top-0 z-50 bg-[#fdf6e6] border-b border-neutral-200">
       <!-- Top Bar with Logo, Search, and Logout -->
       <div class="flex h-16 items-center justify-between gap-4 px-6 border-b border-neutral-100">
         <!-- Logo -->
@@ -24,7 +24,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-white/60 backdrop-blur-sm pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
             <!-- Mobile Menu Dropdown -->
             <div 
               v-if="showMobileMenu"
-              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden z-50"
+              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white/95 backdrop-blur-md shadow-xl overflow-hidden z-50"
             >
               <button 
                 @click="handleLogout; showMobileMenu = false"
@@ -73,14 +73,14 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="bg-white">
+      <div class="bg-[#fdf6e6]">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3">
           <button
             @click="mobileNavExpanded = !mobileNavExpanded"
             :class="[
               'w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all',
-              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-white'
+              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-[#fdf6e6]'
             ]"
           >
             <div class="flex items-center gap-3">
@@ -119,7 +119,7 @@
             leave-from-class="opacity-100 translate-y-0"
             leave-to-class="opacity-0 -translate-y-2"
           >
-            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-white shadow-lg overflow-hidden">
+            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-[#fdf6e6] shadow-lg overflow-hidden">
               <button
                 v-for="tab in navigationTabs"
                 :key="tab.id"
@@ -210,10 +210,10 @@
         </div>
 
         <!-- Website Content -->
-        <div v-else-if="selectedWebsite" class="bg-white">
+        <div v-else-if="selectedWebsite">
           <div class="mx-auto max-w-5xl">
             <!-- Header Card -->
-            <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
+            <div class="relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl shadow-sm mb-8">
               <!-- Accent Bar -->
               <!-- Accent bar removed per design update -->
               
@@ -281,7 +281,7 @@
 
                     <!-- Action Buttons -->
                     <div class="flex gap-3 flex-nowrap overflow-x-auto scrollbar-hide whitespace-nowrap -mx-1 px-1">
-                      <button class="inline-flex items-center gap-2 shrink-0 border border-neutral-200 bg-white px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-colors">
+                      <button class="inline-flex items-center gap-2 shrink-0 border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-[#fdf6e6] hover:border-neutral-300 transition-colors">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9"/>
                         </svg>
@@ -302,7 +302,7 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-3">
               <!-- Business Information -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -328,7 +328,7 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -354,7 +354,7 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +373,7 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -395,7 +395,7 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -417,7 +417,7 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -439,7 +439,7 @@
               </section>
 
               <!-- Logo & Assets -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Logo & Assets</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.logoAssets ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -517,7 +517,7 @@
             </div>
 
             <!-- No Onboarding Data -->
-            <div v-else class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
+            <div v-else class="rounded-lg border border-neutral-200 bg-[#fefbf3] p-8 text-center">
               <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
@@ -529,7 +529,7 @@
       </div>
 
       <!-- Onboarding Required Banner (shows on all tabs) -->
-      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="mb-6 rounded-xl border border-neutral-200 bg-[#fefbf3] p-8 shadow-sm">
         <div class="flex flex-col md:flex-row items-start justify-between gap-6">
           <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -608,7 +608,7 @@
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -628,7 +628,7 @@
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -648,7 +648,7 @@
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -668,7 +668,7 @@
           <NuxtLink 
             to="/dashboard?tab=domains"
             @click="activeTab = 'domains'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -700,7 +700,7 @@
           <!-- Filters -->
           <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 mb-6">
             <div class="relative w-full sm:w-auto">
-              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-[#fefbf3] px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Leads</option>
                 <option value="new">New</option>
                 <option value="contacted">Contacted</option>
@@ -713,12 +713,12 @@
             </div>
 
             <div class="relative w-full sm:w-auto">
-              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all appearance-none">
+              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-[#fefbf3] px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Sources</option>
                 <option value="website">Website</option>
                 <option value="referral">Referral</option>
-                <option value="social">Social Media</option>
-                <option value="email">Email Campaign</option>
+                <option value="social">Social</option>
+                <option value="email">Email</option>
               </select>
               <svg class="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -735,16 +735,16 @@
                 v-model="leadsSearch"
                 type="text"
                 placeholder="Search leads..."
-                class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
+                class="h-9 w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
               />
             </div>
           </div>
 
           <!-- Leads Table -->
-          <div class="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+          <div class="bg-[#fefbf3] border border-neutral-200 rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
               <table class="w-full">
-                <thead class="bg-neutral-50 border-b border-neutral-200">
+                <thead class="bg-[#fefbf3] border-b border-neutral-200">
                   <tr>
                     <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Name</th>
                     <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Email</th>
@@ -760,7 +760,7 @@
                       No leads found
                     </td>
                   </tr>
-                  <tr v-for="lead in filteredLeads" :key="lead.id" class="hover:bg-neutral-50 transition-colors">
+                  <tr v-for="lead in filteredLeads" :key="lead.id" class="hover:bg-[#fdf6e6] transition-colors">
                     <td class="px-4 py-3 text-sm font-medium text-neutral-900">{{ lead.name }}</td>
                     <td class="px-4 py-3 text-sm text-neutral-600">{{ lead.email }}</td>
                     <td class="px-4 py-3 text-sm text-neutral-600 capitalize">{{ lead.source }}</td>
@@ -805,15 +805,15 @@
               placeholder="Search websites..."
               :disabled="showOnboardingRequired"
               :class="[
-                'h-11 w-full rounded-lg border border-neutral-200 pl-11 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all',
-                showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
+                'h-11 w-full rounded-lg border border-neutral-200 pl-11 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all',
+                showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-[#fefbf3]'
               ]"
             />
           </div>
 
           <div class="flex items-center gap-3">
             <!-- View Toggle -->
-            <div class="inline-flex items-center rounded-lg border border-neutral-200 bg-white p-1">
+            <div class="inline-flex items-center rounded-lg border border-neutral-200 bg-[#fefbf3] p-1">
               <button
                 @click="!showOnboardingRequired && (viewMode = 'grid')"
                 :disabled="showOnboardingRequired"
@@ -896,7 +896,7 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden border border-neutral-200 bg-white rounded-xl transition-all shadow-sm hover:shadow-lg',
+              'group relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl transition-all shadow-sm hover:shadow-lg',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
                 : 'hover:border-neutral-300 cursor-pointer'
@@ -957,7 +957,7 @@
         <!-- List View -->
         <div v-else-if="viewMode === 'list'" :class="['relative']">
           <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10"></div>
-          <div class="overflow-hidden  border border-neutral-200 bg-white">
+          <div class="overflow-hidden  border border-neutral-200 bg-[#fefbf3]">
             <div class="hidden md:grid grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-3 text-xs font-medium text-neutral-500 border-b border-neutral-200">
               <div>Project</div>
               <div>Domain</div>
@@ -974,7 +974,7 @@
                 'grid grid-cols-1 md:grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-4 border-b border-neutral-100 last:border-0 transition-colors',
                 showOnboardingRequired
                   ? 'cursor-not-allowed opacity-60'
-                  : 'hover:bg-neutral-50 cursor-pointer'
+                  : 'hover:bg-[#fdf6e6] cursor-pointer'
               ]"
             >
               <div class="flex items-center gap-3">
@@ -1201,9 +1201,9 @@
                 @click.prevent="settingsActiveTab = subTab.id"
                 class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
-                  settingsActiveTab === subTab.id
-                    ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                  domainsActiveTab === subTab.id
+                    ? 'bg-[#fefbf3] text-[#d97759] border-[#d97759]/30 focus:ring-[#d97759]'
+                    : 'bg-[#fefbf3] text-neutral-700 border-neutral-200 hover:bg-[#fdf6e6] hover:border-neutral-300 focus:ring-[#d97759]'
                 ]"
               >
                 {{ subTab.label }}
@@ -1551,7 +1551,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200 focus:outline-none transition-all"
+                  class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
                 />
               </div>
 
@@ -1600,7 +1600,7 @@
                     </div>
                     <button 
                       @click="loadMyDomains" 
-                      class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm"
+                      class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm"
                     >
                       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -1634,7 +1634,7 @@
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-neutral-200">
-                        <tr v-for="domain in myDomains" :key="domain.id">
+                        <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-[#fdf6e6] transition-colors">
                           <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                           <td class="px-4 py-3">
                             <span v-if="domain.status" :class="[
