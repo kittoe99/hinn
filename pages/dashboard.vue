@@ -16,7 +16,7 @@
         <div class="flex flex-1 max-w-md">
           <div class="relative w-full">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
             </div>
@@ -24,7 +24,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-white/60 backdrop-blur-sm pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-500 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
             <!-- Mobile Menu Dropdown -->
             <div 
               v-if="showMobileMenu"
-              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white/95 backdrop-blur-md shadow-xl overflow-hidden z-50"
+              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-[#fefbf3] shadow-xl overflow-hidden z-50"
             >
               <button 
                 @click="handleLogout; showMobileMenu = false"
@@ -119,7 +119,7 @@
             leave-from-class="opacity-100 translate-y-0"
             leave-to-class="opacity-0 -translate-y-2"
           >
-            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-[#fdf6e6] shadow-lg overflow-hidden">
+            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-[#fefbf3] shadow-lg overflow-hidden">
               <button
                 v-for="tab in navigationTabs"
                 :key="tab.id"
@@ -129,7 +129,7 @@
                   showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                   activeTab === tab.id
                     ? 'bg-[#d97759]/5 text-[#d97759]'
-                    : 'text-neutral-700 hover:bg-neutral-50'
+                    : 'text-neutral-700 hover:bg-[#fdf6e6]'
                 ]"
               >
                 <div :class="['flex h-8 w-8 items-center justify-center rounded-lg', activeTab === tab.id ? 'bg-[#d97759]/10' : 'bg-neutral-100']">
@@ -1592,7 +1592,7 @@
             <div>
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-8 shadow-sm">
                   <div class="flex items-center justify-between mb-6">
                     <div>
                       <h2 class="text-2xl font-medium text-neutral-900">Purchased Domains</h2>
@@ -1666,7 +1666,7 @@
                 </div>
 
                 <!-- Search Domain -->
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="space-y-4">
                     <div>
@@ -1676,7 +1676,7 @@
                           v-model="domainSearchQuery"
                           type="text"
                           placeholder="acme, mybrand, etc"
-                          class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
+                          class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                           @keyup.enter="handleDomainSearch"
                         />
                         <button 
@@ -1743,7 +1743,7 @@
                 </div>
 
                 <!-- Selected Domain -->
-                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="flex items-start justify-between">
                     <div>
@@ -1780,54 +1780,54 @@
                 </div>
 
                 <!-- Registrant Information -->
-                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <h3 class="text-lg font-medium text-neutral-900 mb-4">Registrant information</h3>
                   
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                      <input v-model="registrant.organization" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.organization" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                      <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                      <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                      <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                      <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                      <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                      <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                      <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div class="sm:col-span-2">
                       <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
@@ -1860,7 +1860,7 @@
                   <p class="text-sm text-neutral-600">Manage DNS records and domain settings</p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
