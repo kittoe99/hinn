@@ -896,57 +896,45 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl transition-all shadow-sm hover:shadow-lg',
+              'group relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl transition-all shadow-sm hover:shadow-md',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
                 : 'hover:border-neutral-300 cursor-pointer'
             ]"
           >
             
-            <!-- Product Type Badge -->
-            <div class="absolute top-4 right-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[#d97759]/20 bg-[#d97759]/5 text-xs font-medium text-[#d97759]">
-                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                Website
-              </span>
-            </div>
-            
             <div class="p-6">
               <!-- Header -->
-              <div class="flex items-start gap-4 mb-6">
-                <div class="h-12 w-12 rounded-xl border border-neutral-200 flex items-center justify-center flex-shrink-0">
-                  <svg class="h-6 w-6 text-neutral-900/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <div class="flex items-start gap-3 mb-4">
+                <div class="h-10 w-10 rounded-lg bg-[#d97759]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
                 <div class="flex-1">
-                  <h3 class="text-lg font-medium text-neutral-900 mb-2">{{ project.name }}</h3>
+                  <h3 class="text-base font-semibold text-neutral-900 mb-0.5">{{ project.name }}</h3>
+                  <p class="text-xs text-neutral-500 mb-2">{{ project.domain }}</p>
                   <div class="flex items-center gap-2 flex-wrap">
-                    <span v-if="project.plan_tier" class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-medium text-neutral-700 capitalize">
-                      {{ project.plan_tier }}
-                    </span>
                     <span class="flex items-center gap-1.5">
                       <span :class="[
                         'h-2 w-2 rounded-full',
                         project.status === 'Ready' ? 'bg-emerald-500' : 'bg-amber-500'
                       ]"></span>
-                      <span class="text-xs font-medium text-neutral-600">{{ project.status }}</span>
+                      <span class="text-xs text-neutral-600">{{ project.status }}</span>
                     </span>
                   </div>
                 </div>
               </div>
 
               <!-- Footer Info -->
-              <div class="flex items-center justify-between pt-4 border-t border-neutral-100">
-                <div class="flex items-center gap-2 text-xs text-neutral-500">
+              <div class="flex items-center justify-between pt-3 border-t border-neutral-200">
+                <div class="flex items-center gap-1.5 text-xs text-neutral-500">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   <span>{{ project.lastDeployed }}</span>
                 </div>
-                <div class="text-xs font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">
+                <div class="text-xs font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors">
                   View details →
                 </div>
               </div>
@@ -1891,7 +1879,7 @@
                 :class="[
                   domainsActiveTab === subTab.id
                     ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30 shadow-sm'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                    : 'bg-[#fefbf3] text-neutral-700 border-neutral-200 hover:bg-[#fdf6e6] hover:border-neutral-300'
                 ]"
               >
                 {{ subTab.label }}
@@ -1919,7 +1907,7 @@
                 </button>
               </div>
 
-              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                 <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                 <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                 <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1937,7 +1925,7 @@
                 </div>
                 <div v-else class="overflow-hidden rounded-lg border border-neutral-200">
                   <table class="w-full text-sm">
-                    <thead class="bg-neutral-50/50 text-neutral-700">
+                    <thead class="bg-[#fefbf3] text-neutral-700">
                       <tr>
                         <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Domain</th>
                         <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Status</th>
@@ -1946,7 +1934,7 @@
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-neutral-200">
-                      <tr v-for="domain in myDomains" :key="domain.id">
+                      <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-[#fdf6e6] transition-colors">
                         <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                         <td class="px-4 py-3">
                           <span v-if="domain.status" :class="[
