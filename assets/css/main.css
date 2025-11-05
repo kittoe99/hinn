@@ -5,7 +5,7 @@
 @layer base {
   :root {
     /* Light, near-neutral background system */
-    --bg-page: #fefefe;
+    --bg-page: #fdf6e6;
     --panel: #f9f9f9;
     --panel-hover: #f5f5f5;
     --border: #e5e5e5;

@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-200 bg-white relative">
+  <header class="border-b border-neutral-300/50 bg-[#fdf6e6] backdrop-blur-sm relative shadow-sm">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
@@ -25,8 +25,8 @@
               leave-from-class="opacity-100 translate-y-0"
               leave-to-class="opacity-0 translate-y-1"
             >
-              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-200 rounded-xl shadow-xl py-2 z-50">
-                <NuxtLink to="/website" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-[#fdf6e6] border border-neutral-300 rounded-xl shadow-2xl py-2 z-50">
+                <NuxtLink to="/website" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
                     <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -37,7 +37,7 @@
                     <div class="text-xs text-neutral-500">Professional sites</div>
                   </div>
                 </NuxtLink>
-                <NuxtLink to="/agents" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+                <NuxtLink to="/agents" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
                     <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
@@ -48,7 +48,7 @@
                     <div class="text-xs text-neutral-500">Automate tasks</div>
                   </div>
                 </NuxtLink>
-                <NuxtLink to="/marketing" class="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors">
+                <NuxtLink to="/marketing" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
                     <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
@@ -112,7 +112,7 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-white z-50 md:hidden border-b border-neutral-200"
+        class="absolute top-full left-0 right-0 bg-[#fdf6e6] z-50 md:hidden border-b border-neutral-300/50 shadow-lg"
       >
         <!-- Navigation -->
         <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
@@ -211,10 +211,10 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-6 border-t border-neutral-200 flex gap-3">
+        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-[#fdf6e6]/80">
           <NuxtLink 
             to="/login"
-            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-300 hover:bg-neutral-50 transition-colors"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-400 hover:bg-[#d97759]/10 transition-colors"
             @click="mobileMenuOpen = false"
           >
             Sign in
