@@ -80,7 +80,7 @@
             @click="mobileNavExpanded = !mobileNavExpanded"
             :class="[
               'w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all',
-              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-[#fdf6e6]'
+              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-[#fefbf3]'
             ]"
           >
             <div class="flex items-center gap-3">
