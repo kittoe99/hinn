@@ -63,30 +63,6 @@
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 border-y border-neutral-200 bg-white/40 backdrop-blur-sm">
-      <div class="max-w-6xl mx-auto px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-neutral-900 mb-2">500+</div>
-            <div class="text-sm text-neutral-600">Active Projects</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-neutral-900 mb-2">98%</div>
-            <div class="text-sm text-neutral-600">Client Satisfaction</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-neutral-900 mb-2">10 Days</div>
-            <div class="text-sm text-neutral-600">Average Launch</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-neutral-900 mb-2">24/7</div>
-            <div class="text-sm text-neutral-600">AI Support</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Products Section -->
     <section class="py-24 md:py-32">
       <div class="max-w-6xl mx-auto px-6 lg:px-8">

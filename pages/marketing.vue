@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="bg-[#fdf6e6]">
     <!-- Hero -->
-    <section class="pt-20 pb-16 md:pt-32 md:pb-24">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 relative">
         <div class="max-w-3xl">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
             Marketing that drives results
@@ -24,7 +27,7 @@
     </section>
 
     <!-- Services -->
-    <section class="py-16 md:py-24 bg-neutral-50">
+    <section class="py-16 md:py-24">
       <div class="max-w-5xl mx-auto px-6 lg:px-8">
         <div class="mb-12">
           <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-neutral-900 mb-3">What's included</h2>
@@ -34,7 +37,7 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
-          <div v-for="service in services" :key="service.title" class="bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all">
+          <div v-for="service in services" :key="service.title" class="bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-xl p-6 hover:bg-white hover:border-neutral-300 hover:shadow-lg transition-all transform hover:-translate-y-1">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 mb-4">
               <svg class="h-5 w-5 text-[#d97759]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="service.icon" />
@@ -48,23 +51,25 @@
     </section>
 
     <!-- CTA -->
-    <section class="py-16 md:py-24 bg-neutral-50">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-neutral-900 mb-4">Ready to grow?</h2>
-        <p class="text-base text-neutral-600 max-w-2xl mx-auto mb-8">
+    <section class="py-16 md:py-24 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
+      <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4wNSIvPjwvZz48L3N2Zz4=')"></div>
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center relative">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Ready to grow?</h2>
+        <p class="text-base text-neutral-300 max-w-2xl mx-auto mb-8">
           Start your marketing subscription today.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
           <NuxtLink 
             to="/dashboard"
-            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-neutral-900 bg-white hover:bg-neutral-100 transition-all shadow-lg hover:shadow-xl"
           >
             Get Started
             <span>&rarr;</span>
           </NuxtLink>
           <NuxtLink 
             to="/contact"
-            class="text-base font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+            class="text-base font-medium text-white border-2 border-white/20 hover:border-white/40 hover:bg-white/10 rounded-xl px-8 py-4 transition-all"
           >
             Contact us
           </NuxtLink>

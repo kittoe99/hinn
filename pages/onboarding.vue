@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-neutral-50">
+  <div class="min-h-screen bg-[#fdf6e6]">
     <section class="pt-20 pb-16 md:pt-32 md:pb-24">
       <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
         <h1 class="text-5xl md:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
@@ -58,7 +58,7 @@
 
         <div class="space-y-6">
           <!-- Keep the old progress indicator hidden for compatibility -->
-          <div class="hidden items-center justify-between border border-neutral-200 bg-white p-4">
+          <div class="hidden items-center justify-between border border-neutral-200 bg-white/60 backdrop-blur-sm p-4">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-wide text-secondary">Step {{ currentStep }} of {{ totalSteps }}</p>
                 <h2 class="mt-1 text-lg font-semibold text-primary">{{ stepSummaries[currentStep - 1].title }}</h2>
@@ -136,7 +136,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
 
@@ -152,7 +152,7 @@
                         ? 'border-[#d97759] bg-[#d97759]/5 shadow-sm'
                         : validationErrors.siteType
                         ? 'border-red-300 bg-red-50 hover:border-red-400'
-                        : 'border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm'
+                        : 'border-neutral-200 bg-white/60 backdrop-blur-sm hover:border-neutral-300 hover:shadow-sm'
                     ]"
                   >
                     <span class="text-base font-medium text-neutral-900">{{ type }}</span>
@@ -189,7 +189,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
@@ -206,7 +206,7 @@
                           'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.businessName
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white'
+                            : 'border-neutral-200 bg-white/80'
                         ]"
                         placeholder="Your company or product name"
                       />
@@ -230,7 +230,7 @@
                           'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.businessEmail
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white'
+                            : 'border-neutral-200 bg-white/80'
                         ]"
                         placeholder="you@company.com"
                       />
@@ -279,7 +279,7 @@
                           'w-full rounded-lg border px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all',
                           validationErrors.description
                             ? 'border-red-300 bg-red-50 focus:border-red-400 focus:ring-red-200'
-                            : 'border-neutral-200 bg-white'
+                            : 'border-neutral-200 bg-white/80'
                         ]"
                         placeholder="Share your core services, audience, and goals"
                       />
@@ -289,7 +289,7 @@
                           type="button"
                           @click="enhanceDescription"
                           :disabled="!formData.description.trim() || isEnhancing"
-                          class="inline-flex items-center gap-2 rounded-lg border border-neutral-900 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
+                          class="inline-flex items-center gap-2 rounded-lg border border-neutral-900 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
                         >
                           <svg v-if="!isEnhancing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 22.5l-.394-1.933a2.25 2.25 0 00-1.423-1.423L12.75 18.75l1.933-.394a2.25 2.25 0 001.423-1.423l.394-1.933.394 1.933a2.25 2.25 0 001.423 1.423l1.933.394-1.933.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -326,7 +326,7 @@
 
             <!-- Step 3: Existing Website -->
             <div v-if="currentStep === 3" class="space-y-6">
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Existing website</h3>
                 <p class="mt-1 text-sm text-secondary">Do you have a current website we can analyze?</p>
 
@@ -359,7 +359,7 @@
                         :disabled="searching"
                         type="text"
                         placeholder="example.com or https://example.com"
-                        class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent disabled:opacity-60 transition-all"
+                        class="w-full rounded-lg border border-neutral-200 bg-white/80 px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent disabled:opacity-60 transition-all"
                         @input="currentUrl = formData.currentWebsiteUrl"
                       />
                     </div>
@@ -383,7 +383,7 @@
                     </div>
 
                     <!-- Progress indicator -->
-                    <div v-if="searching" class="rounded-xl border border-neutral-200 bg-white p-4">
+                    <div v-if="searching" class="rounded-xl border border-neutral-200 bg-white/60 backdrop-blur-sm p-4">
                       <div class="text-sm font-medium text-neutral-900 mb-2">Analyzing your website…</div>
                       <div class="h-2 w-full rounded-full bg-neutral-100 overflow-hidden">
                         <div class="h-2 bg-[#d97759] transition-all duration-300" :style="{ width: `${searchProgress}%` }" />
@@ -442,7 +442,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
                 <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
@@ -618,7 +618,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
 
@@ -730,7 +730,7 @@
 
             <!-- Step 6: Design -->
             <div v-if="currentStep === 6" class="space-y-6">
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we'll fine-tune the details together.</p>
 
@@ -901,7 +901,7 @@
 
             <!-- Step 7: Logo & Assets -->
             <div v-if="currentStep === 7" class="space-y-6">
-              <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 shadow-sm">
+              <div class="relative overflow-hidden border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg">
                 <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 

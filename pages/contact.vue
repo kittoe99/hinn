@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-[#fdf6e6]">
     <!-- Hero -->
     <section class="pt-20 pb-16 md:pt-32 md:pb-24">
       <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
@@ -52,7 +52,7 @@
               </div>
             </div>
 
-            <div class="mt-8 border border-neutral-200 bg-neutral-50 p-6 rounded-xl">
+            <div class="mt-8 border border-neutral-200 bg-white/60 backdrop-blur-sm p-6 rounded-xl">
               <h3 class="text-sm font-semibold text-neutral-900">Response Time</h3>
               <p class="mt-2 text-sm text-neutral-600 leading-relaxed">
                 We respond to all inquiries within 24 hours during business days.
@@ -61,7 +61,7 @@
           </div>
 
           <!-- Contact Form -->
-          <div class="border border-neutral-200 bg-white rounded-xl p-8">
+          <div class="border border-neutral-200 bg-white/60 backdrop-blur-sm rounded-xl p-8">
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>

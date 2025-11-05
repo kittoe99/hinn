@@ -233,6 +233,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 const mobileMenuOpen = ref(false)
 const productsExpanded = ref(false)
 const productsOpen = ref(false)
