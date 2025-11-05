@@ -1,7 +1,7 @@
-﻿<template>
-  <div class="min-h-screen bg-white">
+<template>
+  <div class="min-h-screen bg-[#fdf6e6]">
     <!-- Header with Profile and Navigation -->
-    <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+    <header class="sticky top-0 z-50 bg-[#fdf6e6] border-b border-neutral-200">
       <!-- Top Bar with Logo, Search, and Logout -->
       <div class="flex h-16 items-center justify-between gap-4 px-6 border-b border-neutral-100">
         <!-- Logo -->
@@ -24,7 +24,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-500 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-500 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
             <!-- Mobile Menu Dropdown -->
             <div 
               v-if="showMobileMenu"
-              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white shadow-xl overflow-hidden z-50"
+              class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-[#fefbf3] shadow-xl overflow-hidden z-50"
             >
               <button 
                 @click="handleLogout; showMobileMenu = false"
@@ -73,14 +73,14 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="bg-white">
+      <div class="bg-[#fdf6e6]">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3">
           <button
             @click="mobileNavExpanded = !mobileNavExpanded"
             :class="[
               'w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all',
-              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-white'
+              mobileNavExpanded ? 'border-[#d97759] bg-[#d97759]/5' : 'border-neutral-200 bg-[#fefbf3]'
             ]"
           >
             <div class="flex items-center gap-3">
@@ -119,7 +119,7 @@
             leave-from-class="opacity-100 translate-y-0"
             leave-to-class="opacity-0 -translate-y-2"
           >
-            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-white shadow-lg overflow-hidden">
+            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-[#fefbf3] shadow-lg overflow-hidden">
               <button
                 v-for="tab in navigationTabs"
                 :key="tab.id"
@@ -129,7 +129,7 @@
                   showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                   activeTab === tab.id
                     ? 'bg-[#d97759]/5 text-[#d97759]'
-                    : 'text-neutral-700 hover:bg-white'
+                    : 'text-neutral-700 hover:bg-[#fdf6e6]'
                 ]"
               >
                 <div :class="['flex h-8 w-8 items-center justify-center rounded-lg', activeTab === tab.id ? 'bg-[#d97759]/10' : 'bg-neutral-100']">
@@ -213,7 +213,7 @@
         <div v-else-if="selectedWebsite">
           <div class="mx-auto max-w-5xl">
             <!-- Header Card -->
-            <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
+            <div class="relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl shadow-sm mb-8">
               <!-- Accent Bar -->
               <!-- Accent bar removed per design update -->
               
@@ -267,7 +267,7 @@
                         ]"></span>
                         <span class="text-sm font-medium text-neutral-900">{{ selectedWebsite.status === 'active' ? 'Ready' : selectedWebsite.status }}</span>
                       </div>
-                      <span class="text-neutral-300">GÇó</span>
+                      <span class="text-neutral-300">•</span>
                       <div class="flex items-center gap-2 text-sm text-neutral-600">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -281,7 +281,7 @@
 
                     <!-- Action Buttons -->
                     <div class="flex gap-3 flex-nowrap overflow-x-auto scrollbar-hide whitespace-nowrap -mx-1 px-1">
-                      <button class="inline-flex items-center gap-2 shrink-0 border border-neutral-200 bg-white px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-white hover:border-neutral-300 transition-colors">
+                      <button class="inline-flex items-center gap-2 shrink-0 border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 rounded-lg text-sm font-medium text-neutral-700 hover:bg-[#fdf6e6] hover:border-neutral-300 transition-colors">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9"/>
                         </svg>
@@ -302,7 +302,7 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-3">
               <!-- Business Information -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -313,11 +313,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Business Name</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.business_name || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.business_name || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Category</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.category || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.category || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.description">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Description</dt>
@@ -328,7 +328,7 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,11 +339,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Email</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.email || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.email || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Phone</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.phone || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.phone || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.contact_info.preferred_contact_method">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Preferred Contact</dt>
@@ -354,7 +354,7 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +373,7 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -384,18 +384,18 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Primary Location</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.service_area.primary_location || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.service_area.primary_location || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Coverage Type</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type || '—' }}</dd>
                     </div>
                   </dl>
                 </div>
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -406,18 +406,18 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">On-Site Mode</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Business Hours</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours || '—' }}</dd>
                     </div>
                   </dl>
                 </div>
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -428,7 +428,7 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Primary Goal</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.website_info.primary_goal || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.website_info.primary_goal || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.website_info.has_current_website !== undefined">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Has Current Website</dt>
@@ -439,7 +439,7 @@
               </section>
 
               <!-- Logo & Assets -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+              <section class="rounded-xl border border-neutral-200 bg-[#fefbf3] overflow-hidden shadow-sm">
                 <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Logo & Assets</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.logoAssets ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -517,7 +517,7 @@
             </div>
 
             <!-- No Onboarding Data -->
-            <div v-else class="rounded-lg border border-neutral-200 bg-white p-8 text-center">
+            <div v-else class="rounded-lg border border-neutral-200 bg-[#fefbf3] p-8 text-center">
               <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
@@ -529,7 +529,7 @@
       </div>
 
       <!-- Onboarding Required Banner (shows on all tabs) -->
-      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="mb-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+      <div v-if="!selectedWebsiteId && showOnboardingRequired && pendingPlan && !isOnboardingPage" class="mb-6 rounded-xl border border-neutral-200 bg-[#fefbf3] p-8 shadow-sm">
         <div class="flex flex-col md:flex-row items-start justify-between gap-6">
           <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -608,7 +608,7 @@
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -628,7 +628,7 @@
           <NuxtLink 
             to="/dashboard?tab=ai-agents"
             @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -648,7 +648,7 @@
           <NuxtLink 
             to="/dashboard?tab=marketing"
             @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -668,7 +668,7 @@
           <NuxtLink 
             to="/dashboard?tab=domains"
             @click="activeTab = 'domains'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-[#fefbf3] border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
           >
             <div class="flex items-center justify-between mb-3">
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
@@ -700,7 +700,7 @@
           <!-- Filters -->
           <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 mb-6">
             <div class="relative w-full sm:w-auto">
-              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
+              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-[#fefbf3] px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Leads</option>
                 <option value="new">New</option>
                 <option value="contacted">Contacted</option>
@@ -713,7 +713,7 @@
             </div>
 
             <div class="relative w-full sm:w-auto">
-              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
+              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-[#fefbf3] px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Sources</option>
                 <option value="website">Website</option>
                 <option value="referral">Referral</option>
@@ -735,16 +735,16 @@
                 v-model="leadsSearch"
                 type="text"
                 placeholder="Search leads..."
-                class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+                class="h-9 w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
               />
             </div>
           </div>
 
           <!-- Leads Table -->
-          <div class="bg-white border border-neutral-200 rounded-lg overflow-hidden">
+          <div class="bg-[#fefbf3] border border-neutral-200 rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
               <table class="w-full">
-                <thead class="bg-white border-b border-neutral-200">
+                <thead class="bg-[#fefbf3] border-b border-neutral-200">
                   <tr>
                     <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Name</th>
                     <th class="px-4 py-3 text-left text-xs font-medium text-neutral-600 uppercase tracking-wider">Email</th>
@@ -760,7 +760,7 @@
                       No leads found
                     </td>
                   </tr>
-                  <tr v-for="lead in filteredLeads" :key="lead.id" class="hover:bg-white transition-colors">
+                  <tr v-for="lead in filteredLeads" :key="lead.id" class="hover:bg-[#fdf6e6] transition-colors">
                     <td class="px-4 py-3 text-sm font-medium text-neutral-900">{{ lead.name }}</td>
                     <td class="px-4 py-3 text-sm text-neutral-600">{{ lead.email }}</td>
                     <td class="px-4 py-3 text-sm text-neutral-600 capitalize">{{ lead.source }}</td>
@@ -806,14 +806,14 @@
               :disabled="showOnboardingRequired"
               :class="[
                 'h-11 w-full rounded-lg border border-neutral-200 pl-11 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all',
-                showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-white'
+                showOnboardingRequired ? 'bg-neutral-100 cursor-not-allowed opacity-60' : 'bg-[#fefbf3]'
               ]"
             />
           </div>
 
           <div class="flex items-center gap-3">
             <!-- View Toggle -->
-            <div class="inline-flex items-center rounded-lg border border-neutral-200 bg-white p-1">
+            <div class="inline-flex items-center rounded-lg border border-neutral-200 bg-[#fefbf3] p-1">
               <button
                 @click="!showOnboardingRequired && (viewMode = 'grid')"
                 :disabled="showOnboardingRequired"
@@ -896,7 +896,7 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden border border-neutral-200 bg-white rounded-xl transition-all shadow-sm hover:shadow-md',
+              'group relative overflow-hidden border border-neutral-200 bg-[#fefbf3] rounded-xl transition-all shadow-sm hover:shadow-md',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
                 : 'hover:border-neutral-300 cursor-pointer'
@@ -935,7 +935,7 @@
                   <span>{{ project.lastDeployed }}</span>
                 </div>
                 <div class="text-xs font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors">
-                  View details GåÆ
+                  View details →
                 </div>
               </div>
             </div>
@@ -945,7 +945,7 @@
         <!-- List View -->
         <div v-else-if="viewMode === 'list'" :class="['relative']">
           <div v-if="showOnboardingRequired" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10"></div>
-          <div class="overflow-hidden  border border-neutral-200 bg-white">
+          <div class="overflow-hidden  border border-neutral-200 bg-[#fefbf3]">
             <div class="hidden md:grid grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-3 text-xs font-medium text-neutral-500 border-b border-neutral-200">
               <div>Project</div>
               <div>Domain</div>
@@ -962,7 +962,7 @@
                 'grid grid-cols-1 md:grid-cols-[1.5fr,1.2fr,0.9fr,0.8fr,0.8fr] gap-4 px-5 py-4 border-b border-neutral-100 last:border-0 transition-colors',
                 showOnboardingRequired
                   ? 'cursor-not-allowed opacity-60'
-                  : 'hover:bg-white cursor-pointer'
+                  : 'hover:bg-[#fdf6e6] cursor-pointer'
               ]"
             >
               <div class="flex items-center gap-3">
@@ -983,7 +983,7 @@
                 <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[11px] font-medium text-neutral-700 capitalize">
                   {{ project.plan_tier }}
                 </span>
-                <span v-else class="text-sm text-neutral-400">GÇö</span>
+                <span v-else class="text-sm text-neutral-400">—</span>
               </div>
 
               <div class="hidden md:flex items-center gap-2 self-center">
@@ -1190,8 +1190,8 @@
                 class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
                 :class="[
                   domainsActiveTab === subTab.id
-                    ? 'bg-white text-[#d97759] border-[#d97759]/30 focus:ring-[#d97759]'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-white hover:border-neutral-300 focus:ring-[#d97759]'
+                    ? 'bg-[#fefbf3] text-[#d97759] border-[#d97759]/30 focus:ring-[#d97759]'
+                    : 'bg-[#fefbf3] text-neutral-700 border-neutral-200 hover:bg-[#fdf6e6] hover:border-neutral-300 focus:ring-[#d97759]'
                 ]"
               >
                 {{ subTab.label }}
@@ -1539,7 +1539,7 @@
                   v-model="domainsSearchQuery"
                   type="text"
                   placeholder="Search..."
-                  class="w-full rounded-lg border border-neutral-200 bg-white pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+                  class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] pl-11 pr-4 py-3 text-base text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
                 />
               </div>
 
@@ -1580,7 +1580,7 @@
             <div>
               <!-- Purchased Domains Section -->
               <div v-if="domainsActiveTab === 'purchased'" class="space-y-6">
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-8 shadow-sm">
                   <div class="flex items-center justify-between mb-6">
                     <div>
                       <h2 class="text-2xl font-medium text-neutral-900">Purchased Domains</h2>
@@ -1588,7 +1588,7 @@
                     </div>
                     <button 
                       @click="loadMyDomains" 
-                      class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm"
+                      class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm"
                     >
                       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -1622,7 +1622,7 @@
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-neutral-200">
-                        <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-white transition-colors">
+                        <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-[#fdf6e6] transition-colors">
                           <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                           <td class="px-4 py-3">
                             <span v-if="domain.status" :class="[
@@ -1633,10 +1633,10 @@
                             ]">
                               {{ domain.status }}
                             </span>
-                            <span v-else class="inline-flex items-center px-2.5 py-0.5 text-xs border border-neutral-200 bg-neutral-100 text-neutral-700">GÇö</span>
+                            <span v-else class="inline-flex items-center px-2.5 py-0.5 text-xs border border-neutral-200 bg-neutral-100 text-neutral-700">—</span>
                           </td>
                           <td class="px-4 py-3 text-neutral-800 hidden sm:table-cell">
-                            {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : 'GÇö' }}
+                            {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
                           </td>
                           <td class="px-4 py-3 text-neutral-700 hidden sm:table-cell">{{ formatDate(domain.created_at) }}</td>
                         </tr>
@@ -1654,7 +1654,7 @@
                 </div>
 
                 <!-- Search Domain -->
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="space-y-4">
                     <div>
@@ -1664,7 +1664,7 @@
                           v-model="domainSearchQuery"
                           type="text"
                           placeholder="acme, mybrand, etc"
-                          class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
+                          class="w-full sm:flex-1 rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                           @keyup.enter="handleDomainSearch"
                         />
                         <button 
@@ -1731,7 +1731,7 @@
                 </div>
 
                 <!-- Selected Domain -->
-                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="flex items-start justify-between">
                     <div>
@@ -1768,54 +1768,54 @@
                 </div>
 
                 <!-- Registrant Information -->
-                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div v-if="purchaseMode" class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <h3 class="text-lg font-medium text-neutral-900 mb-4">Registrant information</h3>
                   
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Country</label>
-                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.country" type="text" placeholder="US" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Organization (optional)</label>
-                      <input v-model="registrant.organization" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.organization" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">First name</label>
-                      <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.firstName" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Last name</label>
-                      <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.lastName" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 1</label>
-                      <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.address1" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Address line 2 (optional)</label>
-                      <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.address2" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">City</label>
-                      <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.city" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">State / Province</label>
-                      <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.state" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Postal code</label>
-                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.postalCode" type="text" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Phone</label>
-                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.phone" type="tel" placeholder="+1.4158551452" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-neutral-800 mb-2">Email</label>
-                      <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
+                      <input v-model="registrant.email" type="email" class="w-full rounded-lg border border-neutral-200 bg-[#fefbf3] px-4 py-2.5 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all" />
                     </div>
                     <div class="sm:col-span-2">
                       <label class="inline-flex items-center gap-2 text-sm text-neutral-800 cursor-pointer">
@@ -1848,7 +1848,7 @@
                   <p class="text-sm text-neutral-600">Manage DNS records and domain settings</p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                   <div class="pl-6">
                   <div class="text-center py-12">
                     <svg class="h-12 w-12 text-neutral-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1879,7 +1879,7 @@
                 :class="[
                   domainsActiveTab === subTab.id
                     ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30 shadow-sm'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-white hover:border-neutral-300'
+                    : 'bg-[#fefbf3] text-neutral-700 border-neutral-200 hover:bg-[#fdf6e6] hover:border-neutral-300'
                 ]"
               >
                 {{ subTab.label }}
@@ -1907,7 +1907,7 @@
                 </button>
               </div>
 
-              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-[#fefbf3] p-6 shadow-sm">
                 <div v-if="myDomainsLoading" class="text-sm text-neutral-600">Loading...</div>
                 <div v-else-if="myDomainsError" class="text-sm text-red-600">{{ myDomainsError }}</div>
                 <div v-else-if="myDomains.length === 0" class="text-center py-12">
@@ -1925,7 +1925,7 @@
                 </div>
                 <div v-else class="overflow-hidden rounded-lg border border-neutral-200">
                   <table class="w-full text-sm">
-                    <thead class="bg-white text-neutral-700">
+                    <thead class="bg-[#fefbf3] text-neutral-700">
                       <tr>
                         <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Domain</th>
                         <th class="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Status</th>
@@ -1934,7 +1934,7 @@
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-neutral-200">
-                      <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-white transition-colors">
+                      <tr v-for="domain in myDomains" :key="domain.id" class="hover:bg-[#fdf6e6] transition-colors">
                         <td class="px-4 py-3 text-neutral-900 font-medium">{{ domain.domain }}</td>
                         <td class="px-4 py-3">
                           <span v-if="domain.status" :class="[
@@ -1945,10 +1945,10 @@
                           ]">
                             {{ domain.status }}
                           </span>
-                          <span v-else class="inline-flex items-center border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">GÇö</span>
+                          <span v-else class="inline-flex items-center border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
                         </td>
                         <td class="px-4 py-3 text-neutral-800">
-                          {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : 'GÇö' }}
+                          {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
                         </td>
                         <td class="px-4 py-3 text-neutral-700">{{ formatDate(domain.created_at) }}</td>
                       </tr>
@@ -2011,7 +2011,7 @@
                               <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">Available</span>
                               <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">Taken</span>
                             </td>
-                            <td class="px-4 py-3 text-neutral-800">{{ suggestion.price != null ? `$${suggestion.price}` : 'GÇö' }}</td>
+                            <td class="px-4 py-3 text-neutral-800">{{ suggestion.price != null ? `$${suggestion.price}` : '—' }}</td>
                             <td class="px-4 py-3 text-right">
                               <button
                                 @click.stop="selectDomain(suggestion.name)"
@@ -2983,7 +2983,7 @@ const formatRelativeTime = (dateString) => {
 
 // Helper to format date
 const formatDate = (dateString) => {
-  if (!dateString) return 'GÇö'
+  if (!dateString) return '—'
   return new Date(dateString).toLocaleDateString('en-US', { 
     year: 'numeric', 
     month: 'short', 
@@ -3588,4 +3588,3 @@ const handleSubmitChangeRequest = async () => {
   fill: none;
 }
 </style>
-

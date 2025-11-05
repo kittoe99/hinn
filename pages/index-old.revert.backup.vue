@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="relative overflow-hidden scroll-smooth">
     <!-- Hero Section -->
     <section class="relative pt-20 pb-24 md:pt-32 md:pb-40 bg-gradient-to-b from-[#fdf6e6] via-[#fdf6e6]/80 to-[#fdf6e6]">
@@ -48,7 +48,7 @@
     </section>
 
     <!-- Products Section -->
-    <section class="py-20 md:py-32 bg-white">
+    <section class="py-20 md:py-32 bg-[#fdf6e6]">
       <div class="max-w-5xl mx-auto px-6 lg:px-8">
         <div class="mb-12">
           <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 mb-3">What we build</h2>
@@ -62,7 +62,7 @@
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group block bg-white/50 border border-neutral-200 rounded-2xl p-8 md:p-10 hover:border-neutral-300 hover:shadow-lg transition-all duration-300"
+            class="group block bg-[#fdf6e6]/50 border border-neutral-200 rounded-2xl p-8 md:p-10 hover:border-neutral-300 hover:shadow-lg transition-all duration-300"
           >
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <!-- Left: Icon and Title -->
@@ -290,17 +290,17 @@ const subscriptionHighlights = [
 const featureHighlights = [
   {
     title: 'Websites',
-    description: 'We design, build, and launch your siteâ€”then keep it fast, secure, and converting.',
+    description: 'We design, build, and launch your site—then keep it fast, secure, and converting.',
     icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
   },
   {
     title: 'Branding',
-    description: 'Complete visual identityâ€”logo, colors, fontsâ€”delivered ready to use everywhere.',
+    description: 'Complete visual identity—logo, colors, fonts—delivered ready to use everywhere.',
     icon: 'M3 5h18M8 5v14m8-14v14M4 19h16'
   },
   {
     title: 'AI Agents',
-    description: 'Autonomous agents handle support, qualify leads, and work 24/7â€”no training required.',
+    description: 'Autonomous agents handle support, qualify leads, and work 24/7—no training required.',
     icon: 'M9 5v2a2 2 0 002 2h2a2 2 0 002-2V5m-2 6v7m-6-7v7m-4 0h12'
   },
   {
@@ -313,7 +313,7 @@ const featureHighlights = [
 const subscriptionProducts = [
   {
     title: 'Websites',
-    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment bookingâ€”all working 24/7.',
+    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment booking—all working 24/7.',
     href: '/website',
     cta: 'Explore Websites',
     tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
@@ -321,7 +321,7 @@ const subscriptionProducts = [
   },
   {
     title: 'AI Agents',
-    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistantsâ€”ready to work 24/7. No coding required.',
+    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistants—ready to work 24/7. No coding required.',
     href: '/agents',
     cta: 'Explore AI Agents',
     tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
@@ -329,7 +329,7 @@ const subscriptionProducts = [
   },
   {
     title: 'Marketing & Branding',
-    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presenceâ€”all powered by AI. Create, launch, optimize automatically.',
+    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presence—all powered by AI. Create, launch, optimize automatically.',
     href: '/marketing',
     cta: 'Explore Marketing',
     tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],
@@ -353,13 +353,13 @@ const testimonials = [
   {
     name: 'Alexis Romero',
     role: 'Director of Growth, Evergreen Nonprofit',
-    quote: 'The team handles updates, analytics, and donor journeys weekly. We just drop ideas in Slack and theyâ€™re live within days.',
+    quote: 'The team handles updates, analytics, and donor journeys weekly. We just drop ideas in Slack and they’re live within days.',
     initials: 'AR'
   },
   {
     name: 'Tyler Chan',
     role: 'COO, Bluegrain Coffee',
-    quote: 'It feels like having a full product squad on retainer. They iterate quickly and give us clarity on whatâ€™s driving results.',
+    quote: 'It feels like having a full product squad on retainer. They iterate quickly and give us clarity on what’s driving results.',
     initials: 'TC'
   }
 ]
@@ -587,4 +587,3 @@ const showcaseItems = [
   }
 }
 </style>
-

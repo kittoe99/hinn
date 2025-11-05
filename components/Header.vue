@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-300/50 bg-[#fdf6e6] backdrop-blur-sm relative shadow-sm">
+  <header class="border-b border-neutral-300/50 bg-white backdrop-blur-sm relative shadow-sm">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
@@ -25,7 +25,7 @@
               leave-from-class="opacity-100 translate-y-0"
               leave-to-class="opacity-0 translate-y-1"
             >
-              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-[#fdf6e6] border border-neutral-300 rounded-xl shadow-2xl py-2 z-50">
+              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-300 rounded-xl shadow-2xl py-2 z-50">
                 <NuxtLink to="/website" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
                     <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -112,7 +112,7 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-[#fdf6e6] z-50 md:hidden border-b border-neutral-300/50 shadow-lg"
+        class="absolute top-full left-0 right-0 bg-white z-50 md:hidden border-b border-neutral-300/50 shadow-lg"
       >
         <!-- Navigation -->
         <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
@@ -211,7 +211,7 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-[#fdf6e6]/80">
+        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-white">
           <NuxtLink 
             to="/login"
             class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-400 hover:bg-[#d97759]/10 transition-colors"

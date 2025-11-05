@@ -1,5 +1,5 @@
 <template>
-  <footer class="border-t border-neutral-300/50 bg-[#fdf6e6] py-16 md:py-20">
+  <footer class="border-t border-neutral-300/50 bg-white py-16 md:py-20">
     <div class="max-w-5xl mx-auto px-6 lg:px-8">
       <!-- Top Section: Brand & CTA -->
       <div class="mb-12 pb-12 border-b border-neutral-300/30">

@@ -1,5 +1,5 @@
-﻿<template>
-  <div class="bg-white">
+<template>
+  <div class="bg-[#fdf6e6]">
     <!-- Hero -->
     <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
-          <div v-for="agent in agents" :key="agent.title" class="bg-white border border-neutral-200 rounded-xl p-6 hover:bg-white hover:border-neutral-300 hover:shadow-lg transition-all transform hover:-translate-y-1">
+          <div v-for="agent in agents" :key="agent.title" class="bg-[#fefbf3] border border-neutral-200 rounded-xl p-6 hover:bg-white hover:border-neutral-300 hover:shadow-lg transition-all transform hover:-translate-y-1">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 mb-4">
               <svg class="h-5 w-5 text-[#d97759]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="agent.icon" />
@@ -124,4 +124,3 @@ const agents = [
 ]
 
 </script>
-

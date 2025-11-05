@@ -1,6 +1,6 @@
-﻿<template>
-  <div class="min-h-screen bg-white flex items-center justify-center px-6 py-12">
-    <div class="w-full max-w-md border border-neutral-200 bg-white rounded-xl p-8 space-y-6 shadow-lg">
+<template>
+  <div class="min-h-screen bg-[#fdf6e6] flex items-center justify-center px-6 py-12">
+    <div class="w-full max-w-md border border-neutral-200 bg-[#fefbf3] rounded-xl p-8 space-y-6 shadow-lg">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Create your account</h1>
         <p class="text-base text-neutral-600">Get started with Hinn in just a few steps.</p>
@@ -87,7 +87,7 @@
             required
             minlength="8"
             class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
-            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+            placeholder="••••••••"
           />
           <p class="mt-1.5 text-xs text-neutral-500">Must be at least 8 characters</p>
         </div>
@@ -100,7 +100,7 @@
             type="password"
             required
             class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
-            placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+            placeholder="••••••••"
           />
         </div>
 
@@ -208,4 +208,3 @@ const handleSignup = () => {
   }, 1000)
 }
 </script>
-
