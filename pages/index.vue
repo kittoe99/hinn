@@ -1,29 +1,29 @@
 <template>
   <div class="relative overflow-hidden scroll-smooth bg-white">
     <!-- Hero Section -->
-    <section class="relative pt-24 pb-32 md:pt-40 md:pb-48">
+    <section class="relative pt-24 pb-20 md:pt-32 md:pb-24">
       <!-- Decorative Elements -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 right-10 w-72 h-72 bg-[#d97759]/5 rounded-full blur-3xl"></div>
+        <div class="absolute top-20 right-10 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-20 left-10 w-96 h-96 bg-[#d97759]/3 rounded-full blur-3xl"></div>
       </div>
 
-      <div class="max-w-6xl mx-auto px-6 lg:px-8 relative">
-        <div class="max-w-4xl mx-auto text-center">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 relative">
+        <div class="text-center">
           <!-- Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-neutral-200 mb-8 opacity-0 animate-fade-in" style="animation-delay: 0ms">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-neutral-200 mb-6 opacity-0 animate-fade-in" style="animation-delay: 0ms">
             <span class="inline-block w-2 h-2 rounded-full bg-[#d97759] animate-pulse"></span>
             <span class="text-sm font-medium text-neutral-700">Trusted by 500+ companies</span>
           </div>
 
-          <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-neutral-900 leading-[1.05] opacity-0 animate-fade-in mb-8" style="animation-delay: 50ms">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 leading-[1.05] opacity-0 animate-fade-in mb-6" style="animation-delay: 50ms">
             Build, launch, and
             <span class="block mt-2">
               <span :class="['typewriter-word text-[#d97759]', { 'flipping': isFlipping }]">{{ currentWord }}</span> faster
             </span>
           </h1>
           
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in mb-12" style="animation-delay: 100ms">
+          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in mb-8" style="animation-delay: 100ms">
             One subscription for AI-powered websites, intelligent agents, and marketing that drives real growth.
           </p>
 
@@ -37,26 +37,183 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </NuxtLink>
-            <NuxtLink
-              to="/contact"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-semibold text-neutral-900 bg-white/60 backdrop-blur-sm border border-neutral-300 hover:bg-white hover:border-neutral-400 transition-all duration-300"
-            >
-              Book a Demo
-            </NuxtLink>
           </div>
 
-          <!-- Video Preview -->
+          <!-- Website Showcase Grid -->
           <div class="opacity-0 animate-fade-in" style="animation-delay: 200ms">
-            <div class="relative aspect-video rounded-2xl overflow-hidden border border-neutral-300 shadow-2xl bg-neutral-900 group hover:border-neutral-400 transition-all duration-300">
-              <div class="absolute inset-0 bg-gradient-to-br from-[#d97759]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <iframe
-                class="absolute inset-0 h-full w-full"
-                src="https://player.vimeo.com/video/970513558?title=0&byline=0&portrait=0"
-                title="Hinn capabilities overview"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                loading="lazy"
-                allowfullscreen
-              ></iframe>
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-900">From the Community</h3>
+                <p class="text-sm text-neutral-600">Explore what the community is building</p>
+              </div>
+              <button class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors">
+                Browse All →
+              </button>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Card 1 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-50 relative">
+                  <img 
+                    src="/website-v2.png" 
+                    alt="SaaS Landing Page"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <!-- View Details Button -->
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">SaaS Landing Page</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>Technology</span>
+                    <span>•</span>
+                    <span>Landing Page</span>
+                    <span>•</span>
+                    <span>Nov 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
+                  <img 
+                    src="/website-v2.png" 
+                    alt="Photography Portfolio"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Photography Portfolio</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>Creative</span>
+                    <span>•</span>
+                    <span>Portfolio</span>
+                    <span>•</span>
+                    <span>Oct 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
+                  <img 
+                    src="/agents-v2.png" 
+                    alt="AI Gateway Starter"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">AI Gateway Starter</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>AI & Tech</span>
+                    <span>•</span>
+                    <span>Dashboard</span>
+                    <span>•</span>
+                    <span>Nov 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-800 relative">
+                  <img 
+                    src="/agents-v2.png" 
+                    alt="AI Agents Dashboard"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">AI Agents Dashboard</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>Enterprise</span>
+                    <span>•</span>
+                    <span>Analytics</span>
+                    <span>•</span>
+                    <span>Oct 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 5 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
+                  <img 
+                    src="/marketing-v2.png" 
+                    alt="Marketing Analytics"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Marketing Analytics</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>Marketing</span>
+                    <span>•</span>
+                    <span>Dashboard</span>
+                    <span>•</span>
+                    <span>Sep 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 6 -->
+              <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
+                  <img 
+                    src="/marketing-v2.png" 
+                    alt="Brand Studio"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Brand Studio</h4>
+                  <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span>Design</span>
+                    <span>•</span>
+                    <span>Branding</span>
+                    <span>•</span>
+                    <span>Nov 2024</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -268,7 +425,7 @@ const subscriptionProducts = [
     href: '/website',
     cta: 'Explore Websites',
     tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
-    image: '/website.png',
+    image: '/website-v2.png',
     delay: 0
   },
   {
@@ -277,7 +434,7 @@ const subscriptionProducts = [
     href: '/agents',
     cta: 'Explore AI Agents',
     tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
-    image: '/agents.png',
+    image: '/agents-v2.png',
     delay: 100
   },
   {
@@ -286,7 +443,7 @@ const subscriptionProducts = [
     href: '/marketing',
     cta: 'Explore Marketing',
     tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],
-    image: '/marketing.png',
+    image: '/marketing-v2.png',
     delay: 200
   }
 ]
@@ -326,6 +483,19 @@ const subscriptionProducts = [
   100% {
     opacity: 1;
   }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
 /* Product icon styles */

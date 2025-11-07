@@ -26,7 +26,7 @@
           </div>
           <div class="relative">
             <img 
-              src="/agents.png" 
+              src="/agents-v2.png" 
               alt="AI Agents Dashboard"
               class="w-full h-auto rounded-2xl shadow-2xl border border-neutral-200"
             />

@@ -26,7 +26,7 @@
           </div>
           <div class="relative">
             <img 
-              src="/marketing.png" 
+              src="/marketing-v2.png" 
               alt="Marketing & Branding Tools"
               class="w-full h-auto rounded-2xl shadow-2xl border border-neutral-200"
             />

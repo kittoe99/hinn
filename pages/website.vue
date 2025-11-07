@@ -26,7 +26,7 @@
           </div>
           <div class="relative">
             <img 
-              src="/website.png" 
+              src="/website-v2.png" 
               alt="Website Builder Interface"
               class="w-full h-auto rounded-2xl shadow-2xl border border-neutral-200"
             />

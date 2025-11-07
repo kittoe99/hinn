@@ -1,6 +1,6 @@
 <template>
-  <header class="border-b border-neutral-300/50 bg-white backdrop-blur-sm relative shadow-sm">
-    <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative">
+  <header class="border-b border-neutral-300/50 bg-white backdrop-blur-sm relative shadow-sm z-[100]">
+    <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <NuxtLink to="/" class="text-lg font-medium text-neutral-900">
@@ -11,7 +11,7 @@
         <div class="hidden md:flex items-center gap-8">
           <!-- Products Dropdown -->
           <div class="relative" @mouseenter="productsOpen = true" @mouseleave="productsOpen = false">
-            <button class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1">
+            <button @click="productsOpen = !productsOpen" class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1">
               Products
               <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': productsOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -25,7 +25,7 @@
               leave-from-class="opacity-100 translate-y-0"
               leave-to-class="opacity-0 translate-y-1"
             >
-              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-300 rounded-xl shadow-2xl py-2 z-50">
+              <div v-if="productsOpen" class="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-300 rounded-xl shadow-2xl py-2 z-[110]">
                 <NuxtLink to="/website" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
                   <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
                     <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -112,7 +112,7 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-white z-50 md:hidden border-b border-neutral-300/50 shadow-lg"
+        class="absolute top-full left-0 right-0 bg-white z-[110] md:hidden border-b border-neutral-300/50 shadow-lg"
       >
         <!-- Navigation -->
         <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
