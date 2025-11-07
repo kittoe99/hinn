@@ -51,7 +51,7 @@
               </button>
             </div>
             
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <!-- Card 1 -->
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-50 relative">
