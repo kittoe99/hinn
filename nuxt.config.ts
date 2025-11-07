@@ -3,6 +3,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: false },
   modules: ['@nuxtjs/tailwindcss'],
+  nitro: {
+    // Exclude dev-only endpoints that pull large deps (@openai/codex-sdk, debug tooling)
+    ignore: process.env.NODE_ENV === 'production' ? [
+      'server/api/codex/agent.post.ts',
+      'server/api/debug/**',
+    ] : [],
+  },
   app: {
     head: {
       title: 'Hinn - Professional Web Services',

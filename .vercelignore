@@ -8,3 +8,10 @@ VERCEL_ENV_CHECKLIST.md
 # Documentation that shouldn't be public
 *.md
 !README.md
+
+# Exclude dev-only server routes to keep serverless bundle small
+# Codex Agent uses @openai/codex-sdk which is large and not needed in production
+server/api/codex/agent.post.ts
+
+# Debug utilities are not needed in production
+server/api/debug/**
