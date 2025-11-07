@@ -79,24 +79,36 @@
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group block rounded-2xl border border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group block rounded-2xl border border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md transition-all overflow-hidden"
           >
-            <div class="px-6 py-5 md:px-7 md:py-6">
-              <div class="flex items-start gap-6">
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-xl md:text-2xl font-semibold text-neutral-900 mb-1.5">{{ product.title }}</h3>
-                  <p class="text-sm md:text-base text-neutral-600 mb-3">{{ product.description }}</p>
-                  <div class="flex flex-wrap gap-2">
-                    <span v-for="tag in product.tags.slice(0, 3)" :key="tag" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-600">{{ tag }}</span>
+            <div class="flex flex-col md:flex-row">
+              <!-- Product Image -->
+              <div class="md:w-2/5 lg:w-1/3 relative overflow-hidden bg-neutral-50">
+                <img 
+                  :src="product.image" 
+                  :alt="product.title"
+                  class="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              
+              <!-- Product Content -->
+              <div class="flex-1 px-6 py-5 md:px-7 md:py-6">
+                <div class="flex items-start gap-6">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-xl md:text-2xl font-semibold text-neutral-900 mb-1.5">{{ product.title }}</h3>
+                    <p class="text-sm md:text-base text-neutral-600 mb-3">{{ product.description }}</p>
+                    <div class="flex flex-wrap gap-2">
+                      <span v-for="tag in product.tags.slice(0, 3)" :key="tag" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-600">{{ tag }}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="hidden sm:flex items-center">
-                  <span class="inline-flex items-center rounded-full border border-[#d97759]/20 bg-[#d97759]/5 px-3.5 py-1.5 text-sm font-medium text-[#d97759] group-hover:bg-[#d97759]/10 transition-colors">
-                    {{ product.cta }}
-                    <svg class="ml-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </span>
+                  <div class="hidden sm:flex items-center">
+                    <span class="inline-flex items-center rounded-full border border-[#d97759]/20 bg-[#d97759]/5 px-3.5 py-1.5 text-sm font-medium text-[#d97759] group-hover:bg-[#d97759]/10 transition-colors">
+                      {{ product.cta }}
+                      <svg class="ml-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -252,26 +264,29 @@ onUnmounted(() => {
 const subscriptionProducts = [
   {
     title: 'Websites',
-    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment bookingâ€”all working 24/7.',
+    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment bookingâ€"all working 24/7.',
     href: '/website',
     cta: 'Explore Websites',
     tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
+    image: '/website.png',
     delay: 0
   },
   {
     title: 'AI Agents',
-    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistantsâ€”ready to work 24/7. No coding required.',
+    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistantsâ€"ready to work 24/7. No coding required.',
     href: '/agents',
     cta: 'Explore AI Agents',
     tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
+    image: '/agents.png',
     delay: 100
   },
   {
     title: 'Marketing & Branding',
-    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presenceâ€”all powered by AI. Create, launch, optimize automatically.',
+    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presenceâ€"all powered by AI. Create, launch, optimize automatically.',
     href: '/marketing',
     cta: 'Explore Marketing',
     tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],
+    image: '/marketing.png',
     delay: 200
   }
 ]

@@ -1,22 +1,55 @@
-﻿<template>
+<template>
   <div class="min-h-screen bg-white">
     <!-- Header with Profile and Navigation -->
     <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
-      <!-- Top Bar with Logo, Search, and Logout -->
-      <div class="flex h-16 items-center justify-between gap-4 px-6 border-b border-neutral-100">
+      <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
+      <div class="flex h-16 items-center px-6">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2">
+        <NuxtLink to="/" class="flex items-center gap-2 flex-shrink-0 mr-12">
           <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900">
             <span class="text-lg font-bold text-white">H</span>
           </div>
           <span class="hidden sm:block text-lg font-semibold text-neutral-900">Hinn</span>
         </NuxtLink>
 
+        <!-- Desktop Navigation Tabs (hidden on mobile) -->
+        <nav class="hidden lg:flex items-center gap-0.5 mr-auto">
+          <!-- Regular tabs -->
+          <a
+            v-for="tab in navigationTabs.filter(t => t.id !== 'support' && t.id !== 'settings')"
+            :key="tab.id"
+            @click="!showOnboardingRequired && (activeTab = tab.id)"
+            :class="[
+              'relative whitespace-nowrap px-4 h-16 flex items-center text-sm font-medium transition-colors',
+              showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+              activeTab === tab.id ? 'text-neutral-900' : 'text-neutral-600 hover:text-neutral-900'
+            ]"
+          >
+            {{ tab.label }}
+            <span v-if="activeTab === tab.id" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
+          </a>
+
+          <!-- Dropdown for Support & Settings -->
+          <div 
+            ref="dropdownTrigger"
+            class="relative z-50" 
+            @mouseenter="openDropdown" 
+            @mouseleave="closeDropdown"
+          >
+            <div class="relative whitespace-nowrap px-4 h-16 flex items-center text-sm font-medium transition-colors cursor-pointer text-neutral-600 hover:text-neutral-900">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+              <span v-if="activeTab === 'support' || activeTab === 'settings'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
+            </div>
+          </div>
+        </nav>
+
         <!-- Search Bar -->
-        <div class="flex flex-1 max-w-md">
+        <div class="flex flex-1 lg:flex-initial lg:w-72 lg:mx-6">
           <div class="relative w-full">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
             </div>
@@ -24,17 +57,17 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-500 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-[#d97759] focus:outline-none transition-all"
             />
           </div>
         </div>
 
         <!-- Right Side Actions -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-shrink-0">
           <!-- Desktop: Show logout button -->
           <button 
             @click="handleLogout"
-            class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-red-600 transition-colors"
+            class="hidden md:flex items-center gap-2 px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
           >
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
@@ -43,7 +76,7 @@
           </button>
 
           <!-- Mobile: Show menu button -->
-          <div class="md:hidden relative" @click.stop>
+          <div class="lg:hidden relative" @click.stop>
             <button 
               @click.stop="showMobileMenu = !showMobileMenu"
               class="p-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -153,27 +186,6 @@
           </Transition>
         </div>
 
-        <!-- Desktop: Horizontal Tabs -->
-        <nav class="hidden md:flex gap-1 overflow-x-auto scrollbar-hide md:justify-center px-4 md:px-6">
-          <a
-            v-for="tab in navigationTabs"
-            :key="tab.id"
-            @click="!showOnboardingRequired && (activeTab = tab.id)"
-            :class="[
-              'relative whitespace-nowrap px-5 py-4 text-sm font-medium transition-all',
-              showOnboardingRequired ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
-              activeTab === tab.id
-                ? 'text-neutral-900'
-                : 'text-neutral-600 hover:text-neutral-900'
-            ]"
-          >
-            {{ tab.label }}
-            <span
-              v-if="activeTab === tab.id"
-              class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759] rounded-t-full"
-            ></span>
-          </a>
-        </nav>
       </div>
     </header>
 
@@ -267,7 +279,7 @@
                         ]"></span>
                         <span class="text-sm font-medium text-neutral-900">{{ selectedWebsite.status === 'active' ? 'Ready' : selectedWebsite.status }}</span>
                       </div>
-                      <span class="text-neutral-300">GÇó</span>
+                      <span class="text-neutral-300">·</span>
                       <div class="flex items-center gap-2 text-sm text-neutral-600">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -313,11 +325,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Business Name</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.business_name || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.business_name || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Category</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.category || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.category || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.description">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Description</dt>
@@ -339,11 +351,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Email</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.email || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.email || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Phone</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.phone || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.contact_info.phone || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.contact_info.preferred_contact_method">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Preferred Contact</dt>
@@ -384,11 +396,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Primary Location</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.service_area.primary_location || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.service_area.primary_location || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Coverage Type</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.service_area.coverage_type || '—' }}</dd>
                     </div>
                   </dl>
                 </div>
@@ -406,11 +418,11 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">On-Site Mode</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.on_site_mode || '—' }}</dd>
                     </div>
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Business Hours</dt>
-                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900 capitalize">{{ selectedWebsiteOnboarding.operation_details.business_hours || '—' }}</dd>
                     </div>
                   </dl>
                 </div>
@@ -428,7 +440,7 @@
                   <dl class="space-y-3 mt-4">
                     <div>
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Primary Goal</dt>
-                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.website_info.primary_goal || 'GÇö' }}</dd>
+                      <dd class="text-sm text-neutral-900">{{ selectedWebsiteOnboarding.website_info.primary_goal || '—' }}</dd>
                     </div>
                     <div v-if="selectedWebsiteOnboarding.website_info.has_current_website !== undefined">
                       <dt class="text-xs font-medium text-neutral-500 mb-1">Has Current Website</dt>
@@ -687,45 +699,37 @@
 
         <!-- Leads Section -->
         <div class="mt-12">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-medium text-neutral-900">Leads</h2>
-            <button class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-              </svg>
-              Add Lead
-            </button>
-          </div>
+          <h2 class="text-xl font-semibold text-neutral-900 mb-6">Leads</h2>
 
-          <!-- Filters -->
-          <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 mb-6">
-            <div class="relative w-full sm:w-auto">
-              <select v-model="leadsFilter" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
+          <!-- Filters and Actions -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+            <div class="relative">
+              <select v-model="leadsFilter" class="h-10 w-full sm:w-auto min-w-[140px] rounded-lg border border-neutral-200 bg-white px-3 pr-9 text-sm text-neutral-700 focus:border-neutral-300 focus:ring-1 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Leads</option>
                 <option value="new">New</option>
                 <option value="contacted">Contacted</option>
                 <option value="qualified">Qualified</option>
                 <option value="converted">Converted</option>
               </select>
-              <svg class="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </div>
 
-            <div class="relative w-full sm:w-auto">
-              <select v-model="leadsSource" class="h-9 w-full sm:w-auto rounded-lg border border-neutral-200 bg-white px-3 pr-8 text-sm text-neutral-900 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
+            <div class="relative">
+              <select v-model="leadsSource" class="h-10 w-full sm:w-auto min-w-[140px] rounded-lg border border-neutral-200 bg-white px-3 pr-9 text-sm text-neutral-700 focus:border-neutral-300 focus:ring-1 focus:ring-[#d97759] focus:outline-none transition-all appearance-none">
                 <option value="all">All Sources</option>
                 <option value="website">Website</option>
                 <option value="referral">Referral</option>
                 <option value="social">Social</option>
                 <option value="email">Email</option>
               </select>
-              <svg class="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </div>
 
-            <div class="relative w-full sm:flex-1 sm:max-w-xs">
+            <div class="relative flex-1">
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -735,9 +739,16 @@
                 v-model="leadsSearch"
                 type="text"
                 placeholder="Search leads..."
-                class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
+                class="h-10 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-[#d97759] focus:outline-none transition-all"
               />
             </div>
+
+            <button class="inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors flex-shrink-0">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+              Add Lead
+            </button>
           </div>
 
           <!-- Leads Table -->
@@ -935,7 +946,7 @@
                   <span>{{ project.lastDeployed }}</span>
                 </div>
                 <div class="text-xs font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors">
-                  View details GåÆ
+                  View details
                 </div>
               </div>
             </div>
@@ -983,7 +994,7 @@
                 <span v-if="project.plan_tier" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[11px] font-medium text-neutral-700 capitalize">
                   {{ project.plan_tier }}
                 </span>
-                <span v-else class="text-sm text-neutral-400">GÇö</span>
+                <span v-else class="text-sm text-neutral-400">—</span>
               </div>
 
               <div class="hidden md:flex items-center gap-2 self-center">
@@ -1187,11 +1198,11 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="settingsActiveTab = subTab.id"
-                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
+                class="block pl-3 py-2 text-sm font-medium transition-colors border-l-2"
                 :class="[
-                  domainsActiveTab === subTab.id
-                    ? 'bg-white text-[#d97759] border-[#d97759]/30 focus:ring-[#d97759]'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-white hover:border-neutral-300 focus:ring-[#d97759]'
+                  settingsActiveTab === subTab.id
+                    ? 'text-neutral-900 border-[#d97759]'
+                    : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                 ]"
               >
                 {{ subTab.label }}
@@ -1412,11 +1423,11 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="supportActiveTab = subTab.id"
-                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all shadow-sm"
+                class="block pl-3 py-2 text-sm font-medium transition-colors border-l-2"
                 :class="[
                   supportActiveTab === subTab.id
-                    ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
+                    ? 'text-neutral-900 border-[#d97759]'
+                    : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                 ]"
               >
                 {{ subTab.label }}
@@ -1633,10 +1644,10 @@
                             ]">
                               {{ domain.status }}
                             </span>
-                            <span v-else class="inline-flex items-center px-2.5 py-0.5 text-xs border border-neutral-200 bg-neutral-100 text-neutral-700">GÇö</span>
+                            <span v-else class="inline-flex items-center px-2.5 py-0.5 text-xs border border-neutral-200 bg-neutral-100 text-neutral-700">—</span>
                           </td>
                           <td class="px-4 py-3 text-neutral-800 hidden sm:table-cell">
-                            {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : 'GÇö' }}
+                            {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
                           </td>
                           <td class="px-4 py-3 text-neutral-700 hidden sm:table-cell">{{ formatDate(domain.created_at) }}</td>
                         </tr>
@@ -1875,11 +1886,11 @@
                 :key="subTab.id"
                 href="#"
                 @click.prevent="domainsActiveTab = subTab.id"
-                class="block rounded-lg border px-3.5 py-2.5 text-sm font-medium transition-all"
+                class="block pl-3 py-2 text-sm font-medium transition-colors border-l-2"
                 :class="[
                   domainsActiveTab === subTab.id
-                    ? 'bg-[#d97759]/5 text-[#d97759] border-[#d97759]/30 shadow-sm'
-                    : 'bg-white text-neutral-700 border-neutral-200 hover:bg-white hover:border-neutral-300'
+                    ? 'text-neutral-900 border-[#d97759]'
+                    : 'text-neutral-500 hover:text-neutral-700 border-transparent'
                 ]"
               >
                 {{ subTab.label }}
@@ -1945,10 +1956,10 @@
                           ]">
                             {{ domain.status }}
                           </span>
-                          <span v-else class="inline-flex items-center border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">GÇö</span>
+                          <span v-else class="inline-flex items-center border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700">—</span>
                         </td>
                         <td class="px-4 py-3 text-neutral-800">
-                          {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : 'GÇö' }}
+                          {{ domain.price ? `${domain.currency || 'USD'} $${domain.price}${domain.period ? ` / ${domain.period} yr` : ''}` : '—' }}
                         </td>
                         <td class="px-4 py-3 text-neutral-700">{{ formatDate(domain.created_at) }}</td>
                       </tr>
@@ -2011,7 +2022,7 @@
                               <span v-else-if="suggestion.available" class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">Available</span>
                               <span v-else class="inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-xs text-rose-700">Taken</span>
                             </td>
-                            <td class="px-4 py-3 text-neutral-800">{{ suggestion.price != null ? `$${suggestion.price}` : 'GÇö' }}</td>
+                            <td class="px-4 py-3 text-neutral-800">{{ suggestion.price != null ? `$${suggestion.price}` : '—' }}</td>
                             <td class="px-4 py-3 text-right">
                               <button
                                 @click.stop="selectDomain(suggestion.name)"
@@ -2475,10 +2486,36 @@
     </div>
   </Teleport>
 
+  <!-- Dropdown Menu (Teleported to body) -->
+  <Teleport to="body">
+    <div 
+      v-if="moreMenuOpen"
+      ref="dropdownMenu"
+      @mouseenter="openDropdown"
+      @mouseleave="closeDropdown"
+      :style="dropdownStyle"
+      class="fixed bg-white rounded-lg shadow-xl border border-neutral-200 py-2 z-[99999]"
+      style="width: 160px;"
+    >
+      <button 
+        @click="activeTab = 'support'; moreMenuOpen = false"
+        class="w-full text-left px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 transition-colors"
+      >
+        Support
+      </button>
+      <button 
+        @click="activeTab = 'settings'; moreMenuOpen = false"
+        class="w-full text-left px-4 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 transition-colors"
+      >
+        Settings
+      </button>
+    </div>
+  </Teleport>
+
   </template>
 
   <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
 // Disable default layout (removes navigation and footer)
@@ -2508,8 +2545,38 @@ const navigationTabs = [
 
 const activeTab = ref('overview')
 const mobileNavExpanded = ref(false)
+const moreMenuOpen = ref(false)
+const dropdownTrigger = ref(null)
+const dropdownMenu = ref(null)
+const dropdownStyle = ref({})
+const dropdownCloseTimer = ref(null)
 const viewMode = ref('grid')
 const searchQuery = ref('')
+
+// Dropdown functions
+const openDropdown = () => {
+  // Clear any pending close timer
+  if (dropdownCloseTimer.value) {
+    clearTimeout(dropdownCloseTimer.value)
+    dropdownCloseTimer.value = null
+  }
+  
+  moreMenuOpen.value = true
+  if (dropdownTrigger.value) {
+    const rect = dropdownTrigger.value.getBoundingClientRect()
+    dropdownStyle.value = {
+      top: `${rect.bottom + 4}px`,
+      left: `${rect.left}px`
+    }
+  }
+}
+
+const closeDropdown = () => {
+  // Add delay before closing
+  dropdownCloseTimer.value = setTimeout(() => {
+    moreMenuOpen.value = false
+  }, 150)
+}
 
 // Leads filters
 const leadsFilter = ref('all')
@@ -2983,7 +3050,7 @@ const formatRelativeTime = (dateString) => {
 
 // Helper to format date
 const formatDate = (dateString) => {
-  if (!dateString) return 'GÇö'
+  if (!dateString) return '—'
   return new Date(dateString).toLocaleDateString('en-US', { 
     year: 'numeric', 
     month: 'short', 
