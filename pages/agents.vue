@@ -1,26 +1,35 @@
-﻿<template>
+<template>
   <div class="bg-white">
     <!-- Hero -->
     <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-20 left-10 w-72 h-72 bg-[#d97759]/5 rounded-full blur-3xl"></div>
       </div>
-      <div class="max-w-5xl mx-auto px-6 lg:px-8 relative">
-        <div class="max-w-3xl">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
-            AI agents that work 24/7
-          </h1>
-          <p class="mt-6 text-lg text-neutral-600 leading-relaxed">
-            Deploy intelligent agents for customer support, sales, and operations.
-          </p>
-          <div class="mt-8 flex flex-wrap items-center gap-4">
-            <NuxtLink
-              to="/dashboard"
-              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
-            >
-              Get Started
-              <span>&rarr;</span>
-            </NuxtLink>
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
+              AI agents that work 24/7
+            </h1>
+            <p class="mt-6 text-lg text-neutral-600 leading-relaxed">
+              Deploy intelligent agents for customer support, sales, and operations.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <NuxtLink
+                to="/dashboard"
+                class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              >
+                Get Started
+                <span>&rarr;</span>
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="relative">
+            <img 
+              src="/agents.png" 
+              alt="AI Agents Dashboard"
+              class="w-full h-auto rounded-2xl shadow-2xl border border-neutral-200"
+            />
           </div>
         </div>
       </div>

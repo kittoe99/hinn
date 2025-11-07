@@ -83,11 +83,11 @@
           >
             <div class="flex flex-col md:flex-row">
               <!-- Product Image -->
-              <div class="md:w-2/5 lg:w-1/3 relative overflow-hidden bg-neutral-50">
+              <div class="md:w-1/4 lg:w-1/5 relative overflow-hidden bg-neutral-50 flex-shrink-0">
                 <img 
                   :src="product.image" 
                   :alt="product.title"
-                  class="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-32 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               
