@@ -114,6 +114,7 @@ useHead({
 })
 
 const router = useRouter()
+const supabase = useSupabaseClient()
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
@@ -124,21 +125,30 @@ const formData = ref({
   remember: false
 })
 
-const signInWithGoogle = () => {
+const signInWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
-  // In production, this would integrate with your auth provider
-  setTimeout(() => {
-    success.value = 'Login successful! Redirecting...'
-    setTimeout(() => {
-      router.push('/dashboard')
-    }, 500)
-  }, 1000)
+  try {
+    const { error: authError } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`
+      }
+    })
+    
+    if (authError) {
+      error.value = authError.message
+      loading.value = false
+    }
+  } catch (err) {
+    error.value = 'Failed to sign in with Google'
+    loading.value = false
+  }
 }
 
-const handleLogin = () => {
+const handleLogin = async () => {
   loading.value = true
   error.value = null
   success.value = null
@@ -150,20 +160,28 @@ const handleLogin = () => {
     return
   }
 
-  // Simulate login
-  setTimeout(() => {
-    // In production, this would call your auth API
-    if (formData.value.email && formData.value.password) {
+  try {
+    const { data, error: authError } = await supabase.auth.signInWithPassword({
+      email: formData.value.email,
+      password: formData.value.password
+    })
+
+    if (authError) {
+      error.value = authError.message
+      loading.value = false
+      return
+    }
+
+    if (data.session) {
       success.value = 'Login successful! Redirecting...'
-      
       setTimeout(() => {
         router.push('/dashboard')
       }, 500)
-    } else {
-      error.value = 'Invalid email or password'
-      loading.value = false
     }
-  }, 1000)
+  } catch (err) {
+    error.value = 'An error occurred during login'
+    loading.value = false
+  }
 }
 </script>
 

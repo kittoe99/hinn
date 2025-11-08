@@ -148,6 +148,7 @@ useHead({
 })
 
 const router = useRouter()
+const supabase = useSupabaseClient()
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
@@ -161,21 +162,30 @@ const formData = ref({
   agreeToTerms: false
 })
 
-const signUpWithGoogle = () => {
+const signUpWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
-  // In production, this would integrate with your auth provider
-  setTimeout(() => {
-    success.value = 'Account created! Redirecting...'
-    setTimeout(() => {
-      router.push('/dashboard')
-    }, 500)
-  }, 1000)
+  try {
+    const { error: authError } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`
+      }
+    })
+    
+    if (authError) {
+      error.value = authError.message
+      loading.value = false
+    }
+  } catch (err) {
+    error.value = 'Failed to sign up with Google'
+    loading.value = false
+  }
 }
 
-const handleSignup = () => {
+const handleSignup = async () => {
   loading.value = true
   error.value = null
   success.value = null
@@ -199,14 +209,38 @@ const handleSignup = () => {
     return
   }
 
-  // Simulate signup
-  setTimeout(() => {
-    success.value = 'Account created successfully! Redirecting...'
-    
-    setTimeout(() => {
-      router.push('/dashboard')
-    }, 500)
-  }, 1000)
+  try {
+    const { data, error: authError } = await supabase.auth.signUp({
+      email: formData.value.email,
+      password: formData.value.password,
+      options: {
+        data: {
+          first_name: formData.value.firstName,
+          last_name: formData.value.lastName,
+          full_name: `${formData.value.firstName} ${formData.value.lastName}`
+        }
+      }
+    })
+
+    if (authError) {
+      error.value = authError.message
+      loading.value = false
+      return
+    }
+
+    if (data.session) {
+      success.value = 'Account created successfully! Redirecting...'
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 500)
+    } else if (data.user && !data.session) {
+      success.value = 'Account created! Please check your email to verify your account.'
+      loading.value = false
+    }
+  } catch (err) {
+    error.value = 'An error occurred during signup'
+    loading.value = false
+  }
 }
 </script>
 
