@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-200 bg-white backdrop-blur-sm relative rounded-b-2xl shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
+  <header class="border-b border-neutral-200 bg-[#e8e3d8] backdrop-blur-sm relative rounded-b-2xl shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->
@@ -146,7 +146,7 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-white z-[110] md:hidden border-b border-neutral-300/50 shadow-lg"
+        class="absolute top-full left-0 right-0 bg-[#e8e3d8] z-[110] md:hidden border-b border-neutral-300/50 shadow-lg"
       >
         <!-- Navigation -->
         <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
@@ -245,7 +245,7 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-white">
+        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-[#e8e3d8]">
           <NuxtLink 
             to="/login"
             class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-400 hover:bg-[#d97759]/10 transition-colors"

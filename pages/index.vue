@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden scroll-smooth bg-white">
+  <div class="relative overflow-hidden scroll-smooth bg-[#e8e3d8]">
     <!-- Hero Section -->
     <section class="relative pt-16 pb-20 md:pt-24 md:pb-24">
       <!-- Decorative Elements -->
