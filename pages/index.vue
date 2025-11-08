@@ -1,7 +1,7 @@
 <template>
   <div class="relative overflow-hidden scroll-smooth bg-white">
     <!-- Hero Section -->
-    <section class="relative pt-24 pb-20 md:pt-32 md:pb-24">
+    <section class="relative pt-16 pb-20 md:pt-24 md:pb-24">
       <!-- Decorative Elements -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-20 right-10 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
@@ -56,9 +56,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-50 relative">
                   <img 
-                    src="/website-v2.png" 
+                    src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1200&q=80" 
                     alt="SaaS Landing Page"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <!-- View Details Button -->
@@ -69,13 +70,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">SaaS Landing Page</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">SaaS Landing Page</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>Technology</span>
                     <span>•</span>
                     <span>Landing Page</span>
-                    <span>•</span>
-                    <span>Nov 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Nov 2024</span>
                   </div>
                 </div>
               </div>
@@ -84,9 +85,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
-                    src="/website-v2.png" 
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" 
                     alt="Photography Portfolio"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -96,13 +98,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Photography Portfolio</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">Photography Portfolio</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>Creative</span>
                     <span>•</span>
                     <span>Portfolio</span>
-                    <span>•</span>
-                    <span>Oct 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Oct 2024</span>
                   </div>
                 </div>
               </div>
@@ -111,9 +113,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
-                    src="/agents-v2.png" 
+                    src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=80" 
                     alt="AI Gateway Starter"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -123,13 +126,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">AI Gateway Starter</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">AI Gateway Starter</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>AI & Tech</span>
                     <span>•</span>
                     <span>Dashboard</span>
-                    <span>•</span>
-                    <span>Nov 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Nov 2024</span>
                   </div>
                 </div>
               </div>
@@ -138,9 +141,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-800 relative">
                   <img 
-                    src="/agents-v2.png" 
+                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=80" 
                     alt="AI Agents Dashboard"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -150,13 +154,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">AI Agents Dashboard</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">AI Agents Dashboard</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>Enterprise</span>
                     <span>•</span>
                     <span>Analytics</span>
-                    <span>•</span>
-                    <span>Oct 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Oct 2024</span>
                   </div>
                 </div>
               </div>
@@ -165,9 +169,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
-                    src="/marketing-v2.png" 
+                    src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" 
                     alt="Marketing Analytics"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -177,13 +182,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Marketing Analytics</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">Marketing Analytics</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>Marketing</span>
                     <span>•</span>
                     <span>Dashboard</span>
-                    <span>•</span>
-                    <span>Sep 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Sep 2024</span>
                   </div>
                 </div>
               </div>
@@ -192,9 +197,10 @@
               <div class="group relative rounded-xl overflow-hidden border border-neutral-200 bg-white shadow-sm hover:shadow-lg hover:border-neutral-300 transition-all duration-300">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
-                    src="/marketing-v2.png" 
+                    src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80" 
                     alt="Brand Studio"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div class="absolute inset-0 bg-neutral-900/20 group-hover:bg-neutral-900/40 transition-colors"></div>
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -204,13 +210,13 @@
                   </div>
                 </div>
                 <div class="p-3">
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-1">Brand Studio</h4>
+                  <h4 class="text-sm font-semibold text-neutral-900 mb-1 text-left">Brand Studio</h4>
                   <div class="flex items-center gap-2 text-xs text-neutral-600">
                     <span>Design</span>
                     <span>•</span>
                     <span>Branding</span>
-                    <span>•</span>
-                    <span>Nov 2024</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:inline">Nov 2024</span>
                   </div>
                 </div>
               </div>
@@ -238,33 +244,38 @@
             :ref="el => { if (el) productRefs[index] = el }"
             class="group block rounded-2xl border border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md transition-all overflow-hidden"
           >
-            <div class="flex flex-col md:flex-row">
-              <!-- Product Image -->
-              <div class="md:w-1/4 lg:w-1/5 relative overflow-hidden bg-neutral-50 flex-shrink-0">
+            <div class="flex flex-row items-center gap-4 p-4 md:p-0 md:flex-row">
+              <!-- Product Image - Smaller on mobile -->
+              <div class="w-24 h-24 md:w-1/4 lg:w-1/5 md:h-auto relative overflow-hidden bg-neutral-50 flex-shrink-0 rounded-lg md:rounded-none">
                 <img 
                   :src="product.image" 
                   :alt="product.title"
-                  class="w-full h-32 md:h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               
               <!-- Product Content -->
-              <div class="flex-1 px-6 py-5 md:px-7 md:py-6">
-                <div class="flex items-start gap-6">
+              <div class="flex-1 md:px-7 md:py-6">
+                <div class="flex items-start justify-between gap-3">
                   <div class="flex-1 min-w-0">
-                    <h3 class="text-xl md:text-2xl font-semibold text-neutral-900 mb-1.5">{{ product.title }}</h3>
-                    <p class="text-sm md:text-base text-neutral-600 mb-3">{{ product.description }}</p>
-                    <div class="flex flex-wrap gap-2">
-                      <span v-for="tag in product.tags.slice(0, 3)" :key="tag" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs text-neutral-600">{{ tag }}</span>
+                    <h3 class="text-base md:text-2xl font-semibold text-neutral-900 mb-1">{{ product.title }}</h3>
+                    <p class="text-xs md:text-base text-neutral-600 mb-2 line-clamp-2 md:line-clamp-none">{{ product.description }}</p>
+                    <div class="flex flex-wrap gap-1.5 md:gap-2">
+                      <span v-for="tag in product.tags.slice(0, 3)" :key="tag" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[10px] md:text-xs text-neutral-600">{{ tag }}</span>
                     </div>
                   </div>
-                  <div class="hidden sm:flex items-center">
+                  <div class="hidden md:flex items-center">
                     <span class="inline-flex items-center rounded-full border border-[#d97759]/20 bg-[#d97759]/5 px-3.5 py-1.5 text-sm font-medium text-[#d97759] group-hover:bg-[#d97759]/10 transition-colors">
                       {{ product.cta }}
                       <svg class="ml-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </span>
+                  </div>
+                  <div class="md:hidden">
+                    <svg class="h-4 w-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -275,31 +286,56 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 md:py-32 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
-      <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4wNSIvPjwvZz48L3N2Zz4=')"></div>
-      
-      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to transform your digital presence?</h2>
-        <p class="text-xl text-neutral-300 mb-10 max-w-2xl mx-auto">
-          Join hundreds of companies building faster with AI-powered tools
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <NuxtLink
-            to="/dashboard"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-semibold text-neutral-900 bg-white hover:bg-neutral-100 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Get Started Free
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </NuxtLink>
-          <NuxtLink
-            to="/contact"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-semibold text-white border-2 border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-300"
-          >
-            Talk to Sales
-          </NuxtLink>
+    <section class="py-20 md:py-24 relative overflow-hidden bg-[#e8e3d8] rounded-3xl mx-6 lg:mx-8 mb-12">
+      <div class="max-w-6xl mx-auto px-8 lg:px-12">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+          <!-- Left Column: Heading and CTA -->
+          <div>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-4 leading-tight">
+              Ready to transform your digital presence?
+            </h2>
+            <p class="text-lg text-neutral-700 mb-8 leading-relaxed">
+              Join hundreds of companies building faster with AI-powered tools
+            </p>
+            <NuxtLink
+              to="/dashboard"
+              class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300"
+            >
+              Get Started Free
+            </NuxtLink>
+          </div>
+
+          <!-- Right Column: Links -->
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-neutral-600 mb-4">Learn more</div>
+            <NuxtLink
+              to="/website"
+              class="group flex items-center justify-between py-4 border-b border-neutral-300 hover:border-neutral-400 transition-colors"
+            >
+              <span class="text-lg font-medium text-neutral-900">Build professional websites</span>
+              <svg class="w-5 h-5 text-neutral-900 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </NuxtLink>
+            <NuxtLink
+              to="/agents"
+              class="group flex items-center justify-between py-4 border-b border-neutral-300 hover:border-neutral-400 transition-colors"
+            >
+              <span class="text-lg font-medium text-neutral-900">Deploy AI agents instantly</span>
+              <svg class="w-5 h-5 text-neutral-900 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </NuxtLink>
+            <NuxtLink
+              to="/marketing"
+              class="group flex items-center justify-between py-4 border-b border-neutral-300 hover:border-neutral-400 transition-colors"
+            >
+              <span class="text-lg font-medium text-neutral-900">Grow with smart marketing</span>
+              <svg class="w-5 h-5 text-neutral-900 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </section>

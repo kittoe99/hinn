@@ -1,11 +1,28 @@
 <template>
-  <header class="border-b border-neutral-300/50 bg-white backdrop-blur-sm relative shadow-sm z-[100]">
+  <header class="border-b border-neutral-200 bg-white backdrop-blur-sm relative rounded-b-2xl shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->
-        <NuxtLink to="/" class="text-lg font-medium text-neutral-900">
+        <NuxtLink to="/" class="text-lg font-medium text-neutral-900 flex-shrink-0">
           Hinn
         </NuxtLink>
+        
+        <!-- Mobile Search Bar (between logo and menu button) -->
+        <div class="flex-1 md:hidden">
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search..."
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
+            />
+          </div>
+        </div>
         
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-8">
@@ -70,8 +87,25 @@
           </NuxtLink>
         </div>
 
+        <!-- Desktop Search Bar -->
+        <div class="hidden md:block flex-1 max-w-xs">
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search..."
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
+            />
+          </div>
+        </div>
+
         <!-- CTA -->
-        <div class="hidden md:flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-4 flex-shrink-0">
           <NuxtLink 
             to="/login"
             class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
@@ -238,4 +272,5 @@ import { ref } from 'vue'
 const mobileMenuOpen = ref(false)
 const productsExpanded = ref(false)
 const productsOpen = ref(false)
+const searchQuery = ref('')
 </script>
