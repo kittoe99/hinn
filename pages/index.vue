@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden scroll-smooth bg-[#e8e3d8]">
+  <div class="relative overflow-hidden scroll-smooth bg-[#ebe8e1]">
     <!-- Hero Section -->
     <section class="relative pt-16 pb-20 md:pt-24 md:pb-24">
       <!-- Decorative Elements -->
@@ -242,7 +242,7 @@
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group block rounded-2xl border border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md transition-all overflow-hidden"
+            class="group block rounded-2xl border border-neutral-200 bg-white shadow-sm hover:border-neutral-300 hover:shadow-lg transition-all overflow-hidden"
           >
             <div class="flex flex-row items-center gap-4 p-4 md:p-0 md:flex-row">
               <!-- Product Image - Smaller on mobile -->

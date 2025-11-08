@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-200 bg-[#e8e3d8] backdrop-blur-sm relative rounded-b-2xl shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
+  <header class="border-b border-neutral-200 bg-[#ebe8e1] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->
@@ -123,13 +123,14 @@
         <!-- Mobile Menu Button -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+          class="md:hidden p-2.5 rounded-lg hover:bg-neutral-900/5 transition-all duration-200"
           aria-label="Toggle menu"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            <path v-else stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <div class="w-5 h-5 flex flex-col justify-center gap-1">
+            <span :class="['block h-0.5 bg-neutral-900 rounded-full transition-all duration-300', mobileMenuOpen ? 'rotate-45 translate-y-1.5' : '']"></span>
+            <span :class="['block h-0.5 bg-neutral-900 rounded-full transition-all duration-300', mobileMenuOpen ? 'opacity-0' : '']"></span>
+            <span :class="['block h-0.5 bg-neutral-900 rounded-full transition-all duration-300', mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : '']"></span>
+          </div>
         </button>
       </div>
     </nav>
@@ -146,14 +147,14 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-[#e8e3d8] z-[110] md:hidden border-b border-neutral-300/50 shadow-lg"
+        class="absolute top-full left-0 right-0 bg-white z-[110] md:hidden border-b border-neutral-200 shadow-xl"
       >
         <!-- Navigation -->
-        <nav class="px-6 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
+        <nav class="px-6 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
           <!-- Home -->
           <NuxtLink 
             to="/"
-            class="block py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
+            class="block px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
             @click="mobileMenuOpen = false"
           >
             Home
@@ -162,7 +163,7 @@
           <div>
             <button 
               @click="productsExpanded = !productsExpanded"
-              class="flex items-center justify-between w-full py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
+              class="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
             >
               <span>Products</span>
               <svg 
@@ -237,7 +238,7 @@
           <!-- Other Links -->
           <NuxtLink 
             to="/contact"
-            class="block py-3 text-base font-medium text-neutral-900 hover:text-[#d97759] transition-colors"
+            class="block px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
             @click="mobileMenuOpen = false"
           >
             Contact
@@ -245,17 +246,17 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-6 border-t border-neutral-300/50 flex gap-3 bg-[#e8e3d8]">
+        <div class="px-6 py-4 border-t border-neutral-200 flex gap-3 bg-white">
           <NuxtLink 
             to="/login"
-            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-400 hover:bg-[#d97759]/10 transition-colors"
+            class="flex-1 rounded-lg py-3 text-center text-sm font-semibold text-neutral-900 border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 transition-all"
             @click="mobileMenuOpen = false"
           >
             Sign in
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+            class="flex-1 rounded-lg py-3 text-center text-sm font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-sm"
             @click="mobileMenuOpen = false"
           >
             Get Started
@@ -270,7 +271,7 @@
 import { ref } from 'vue'
 
 const mobileMenuOpen = ref(false)
-const productsExpanded = ref(false)
+const productsExpanded = ref(true)
 const productsOpen = ref(false)
 const searchQuery = ref('')
 </script>
