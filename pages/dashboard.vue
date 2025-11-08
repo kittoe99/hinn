@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-[#f5f3ef]">
     <!-- Header with Profile and Navigation -->
-    <header class="bg-[#fefbf3] border-b border-neutral-200">
+    <header class="bg-[#f5f3ef] border-b border-neutral-200">
       <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
       <div class="flex h-16 items-center px-6">
         <!-- Logo -->
@@ -107,7 +107,7 @@
     </header>
       
     <!-- Navigation Tabs -->
-    <div class="bg-[#fefbf3] border-t border-neutral-100">
+    <div class="bg-[#f5f3ef] border-t border-neutral-100">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3 relative">
           <button

@@ -160,15 +160,17 @@ const formData = ref({
   agreeToTerms: false
 })
 
-const signUpWithGoogle = () => {
+const signUpWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
   // In production, this would integrate with your auth provider
   setTimeout(() => {
-    alert('Google Sign-Up would be integrated here.\n\nIn production, this connects to your authentication service (Supabase, Auth0, etc.)')
-    loading.value = false
+    success.value = 'Account created! Redirecting...'
+    setTimeout(() => {
+      navigateTo('/dashboard')
+    }, 500)
   }, 1000)
 }
 
@@ -201,10 +203,8 @@ const handleSignup = () => {
     success.value = 'Account created successfully! Redirecting...'
     
     setTimeout(() => {
-      // In production: navigateTo('/onboarding') or navigateTo('/dashboard')
-      alert(`Account created for ${formData.value.firstName} ${formData.value.lastName}!\n\nIn production, you would be redirected to onboarding or dashboard.`)
-      loading.value = false
-    }, 1500)
+      navigateTo('/dashboard')
+    }, 500)
   }, 1000)
 }
 </script>

@@ -123,15 +123,17 @@ const formData = ref({
   remember: false
 })
 
-const signInWithGoogle = () => {
+const signInWithGoogle = async () => {
   loading.value = true
   error.value = null
   success.value = null
   
   // In production, this would integrate with your auth provider
   setTimeout(() => {
-    alert('Google Sign-In would be integrated here.\n\nIn production, this connects to your authentication service (Supabase, Auth0, etc.)')
-    loading.value = false
+    success.value = 'Login successful! Redirecting...'
+    setTimeout(() => {
+      navigateTo('/dashboard')
+    }, 500)
   }, 1000)
 }
 
@@ -154,10 +156,8 @@ const handleLogin = () => {
       success.value = 'Login successful! Redirecting...'
       
       setTimeout(() => {
-        // In production: navigateTo('/dashboard')
-        alert('Login successful!\n\nIn production, you would be redirected to your dashboard.')
-        loading.value = false
-      }, 1000)
+        navigateTo('/dashboard')
+      }, 500)
     } else {
       error.value = 'Invalid email or password'
       loading.value = false
