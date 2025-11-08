@@ -106,6 +106,8 @@
 </template>
 
 <script setup>
+import { useSupabaseClient } from '#imports'
+
 useHead({
   title: 'Login - Hinn',
   meta: [

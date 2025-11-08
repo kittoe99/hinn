@@ -140,6 +140,8 @@
 </template>
 
 <script setup>
+import { useSupabaseClient } from '#imports'
+
 useHead({
   title: 'Sign Up - Hinn',
   meta: [
