@@ -10,7 +10,7 @@
       <div v-if="error" class="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
         {{ error }}
       </div>
-      <div v-if="success" class="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
+      <div v-if="success" class="text-sm text-neutral-900 bg-[#d97759]/10 border border-[#d97759]/20 rounded-lg px-4 py-3">
         {{ success }}
       </div>
 
@@ -113,6 +113,7 @@ useHead({
   ]
 })
 
+const router = useRouter()
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
@@ -123,7 +124,7 @@ const formData = ref({
   remember: false
 })
 
-const signInWithGoogle = async () => {
+const signInWithGoogle = () => {
   loading.value = true
   error.value = null
   success.value = null
@@ -131,8 +132,8 @@ const signInWithGoogle = async () => {
   // In production, this would integrate with your auth provider
   setTimeout(() => {
     success.value = 'Login successful! Redirecting...'
-    setTimeout(async () => {
-      await navigateTo('/dashboard')
+    setTimeout(() => {
+      router.push('/dashboard')
     }, 500)
   }, 1000)
 }
@@ -155,8 +156,8 @@ const handleLogin = () => {
     if (formData.value.email && formData.value.password) {
       success.value = 'Login successful! Redirecting...'
       
-      setTimeout(async () => {
-        await navigateTo('/dashboard')
+      setTimeout(() => {
+        router.push('/dashboard')
       }, 500)
     } else {
       error.value = 'Invalid email or password'
