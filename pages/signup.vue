@@ -140,8 +140,6 @@
 </template>
 
 <script setup>
-import { useSupabaseClient } from '#imports'
-
 useHead({
   title: 'Sign Up - Hinn',
   meta: [
@@ -150,7 +148,7 @@ useHead({
 })
 
 const router = useRouter()
-const supabase = useSupabaseClient()
+const supabase = useSupabase()
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
