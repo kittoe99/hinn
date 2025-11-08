@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-[#f5f3ef]">
     <!-- Header with Profile and Navigation -->
-    <header class="bg-white border-b border-neutral-200">
+    <header class="bg-[#fefbf3] border-b border-neutral-200">
       <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
       <div class="flex h-16 items-center px-6">
         <!-- Logo -->
@@ -57,7 +57,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-[#d97759] focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border-0 bg-white pl-9 pr-4 text-sm text-neutral-900 placeholder-neutral-500 focus:ring-2 focus:ring-[#d97759] focus:outline-none transition-all"
             />
           </div>
         </div>
@@ -107,7 +107,7 @@
     </header>
       
     <!-- Navigation Tabs -->
-    <div class="bg-white border-b border-neutral-200">
+    <div class="bg-[#fefbf3] border-t border-neutral-100">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3 relative">
           <button
@@ -224,7 +224,7 @@
         <div v-else-if="selectedWebsite">
           <div class="mx-auto max-w-5xl">
             <!-- Header Card -->
-            <div class="relative overflow-hidden border border-neutral-200 bg-white rounded-xl shadow-sm mb-8">
+            <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl mb-8">
               <!-- Accent Bar -->
               <!-- Accent bar removed per design update -->
               
@@ -313,8 +313,8 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-3">
               <!-- Business Information -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -339,8 +339,8 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -365,8 +365,8 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -384,8 +384,8 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -406,8 +406,8 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -428,8 +428,8 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -450,8 +450,8 @@
               </section>
 
               <!-- Logo & Assets -->
-              <section class="rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
-                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
+              <section class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
+                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Logo & Assets</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.logoAssets ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -906,10 +906,10 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden border border-neutral-200 bg-white rounded-xl transition-all shadow-sm hover:shadow-md',
+              'group relative overflow-hidden bg-[#e8e3d8] rounded-2xl transition-all',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:border-neutral-300 cursor-pointer'
+                : 'hover:bg-[#ded9cc] cursor-pointer'
             ]"
           >
             
@@ -2257,9 +2257,9 @@
 
       <!-- Add New Modal -->
       <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="hasProduct && (showAddNewModal = false)">
-        <div class="bg-white rounded-2xl border border-neutral-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div class="bg-[#fefbf3] rounded-2xl border border-neutral-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
           <!-- Header -->
-          <div class="sticky top-0 bg-white border-b border-neutral-100 px-8 py-6 flex items-center justify-between">
+          <div class="sticky top-0 bg-[#fefbf3] border-b border-neutral-100 px-8 py-6 flex items-center justify-between">
             <div>
               <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
               <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
@@ -2279,7 +2279,7 @@
               <!-- Website -->
               <button
                 @click="selectProduct('website')"
-                class="group relative overflow-hidden border border-neutral-200 bg-white rounded-xl p-8 text-left hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg"
+                class="group relative overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] rounded-2xl p-8 text-left transition-all"
               >
                 <div class="flex items-start justify-between mb-6">
                   <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center">
@@ -2331,7 +2331,7 @@
               <p class="text-base text-neutral-600 mt-2">Select the plan that fits your needs</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg">
+              <div class="bg-[#e8e3d8] hover:bg-[#ded9cc] rounded-2xl p-8 transition-all">
                 <h4 class="text-xl font-medium text-neutral-900 mb-4">Starter</h4>
                 <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$29</span><span class="text-lg text-neutral-600">/month</span></div>
                 <ul class="space-y-3 mb-8 text-sm text-neutral-600">
@@ -2350,13 +2350,13 @@
                 </ul>
                 <button @click="selectPlan('starter')" class="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Starter</button>
               </div>
-              <div class="relative border-2 border-neutral-900 bg-white rounded-xl p-8 shadow-lg">
+              <div class="relative bg-neutral-900 rounded-2xl p-8">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span class="px-3 py-1.5 rounded-full bg-neutral-900 text-white text-xs font-medium">Popular</span>
+                  <span class="px-3 py-1.5 rounded-full bg-[#d97759] text-white text-xs font-medium">Popular</span>
                 </div>
-                <h4 class="text-xl font-medium text-neutral-900 mb-4">Professional</h4>
-                <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$79</span><span class="text-lg text-neutral-600">/month</span></div>
-                <ul class="space-y-3 mb-8 text-sm text-neutral-600">
+                <h4 class="text-xl font-medium text-white mb-4">Professional</h4>
+                <div class="mb-6"><span class="text-4xl font-medium text-white">$79</span><span class="text-lg text-neutral-300">/month</span></div>
+                <ul class="space-y-3 mb-8 text-sm text-neutral-300">
                   <li class="flex items-center gap-2">
                     <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                     Up to 15 pages
@@ -2370,9 +2370,9 @@
                     E-commerce ready
                   </li>
                 </ul>
-                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">Select Professional</button>
+                <button @click="selectPlan('professional')" class="w-full rounded-lg bg-white px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-neutral-100 transition-colors">Select Professional</button>
               </div>
-              <div class="border border-neutral-200 bg-white rounded-xl p-8 hover:border-neutral-300 transition-all shadow-sm hover:shadow-lg">
+              <div class="bg-[#e8e3d8] hover:bg-[#ded9cc] rounded-2xl p-8 transition-all">
                 <h4 class="text-xl font-medium text-neutral-900 mb-4">Enterprise</h4>
                 <div class="mb-6"><span class="text-4xl font-medium text-neutral-900">$199</span><span class="text-lg text-neutral-600">/month</span></div>
                 <ul class="space-y-3 mb-8 text-sm text-neutral-600">
