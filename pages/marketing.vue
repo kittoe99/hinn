@@ -12,7 +12,7 @@
               Marketing that drives results
             </h1>
             <p class="mt-6 text-lg text-neutral-600 leading-relaxed">
-              Email campaigns, social media, and content strategyâ€"all managed monthly.
+              Email campaigns, social media, and content strategy—all managed monthly.
             </p>
             <div class="mt-8 flex flex-wrap items-center gap-4">
               <NuxtLink

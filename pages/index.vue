@@ -445,7 +445,7 @@ onUnmounted(() => {
 const subscriptionProducts = [
   {
     title: 'Websites',
-    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment bookingâ€"all working 24/7.',
+    description: 'AI-powered websites that sell and book on autopilot. Built-in sales automation, lead qualification, and appointment booking—all working 24/7.',
     href: '/website',
     cta: 'Explore Websites',
     tags: ['AI site builder', 'Sales automation', 'Lead qualification', 'Auto-booking'],
@@ -454,7 +454,7 @@ const subscriptionProducts = [
   },
   {
     title: 'AI Agents',
-    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistantsâ€"ready to work 24/7. No coding required.',
+    description: 'Configure and launch intelligent, autonomous AI agents in minutes. From phone agents to hiring assistants—ready to work 24/7. No coding required.',
     href: '/agents',
     cta: 'Explore AI Agents',
     tags: ['Phone agents', 'Sales agents', 'Support agents', 'Hiring agents'],
@@ -463,7 +463,7 @@ const subscriptionProducts = [
   },
   {
     title: 'Marketing & Branding',
-    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presenceâ€"all powered by AI. Create, launch, optimize automatically.',
+    description: 'Generate custom brand assets, launch campaigns with a click, and improve your online presence—all powered by AI. Create, launch, optimize automatically.',
     href: '/marketing',
     cta: 'Explore Marketing',
     tags: ['Brand generator', 'Campaign launcher', 'Content creation', 'SEO automation'],

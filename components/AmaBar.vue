@@ -11,26 +11,26 @@
     >
       <div class="pointer-events-auto">
         <form @submit.prevent="handleStickySubmit">
-          <div class="flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 backdrop-blur px-4 py-2 shadow-lg">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-200 bg-[#d97759]/10 text-neutral-900" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" class="h-4 w-4 ama-bar-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
+          <div class="flex items-center gap-3 rounded-2xl bg-[#e8e3d8] px-5 py-3 shadow-xl">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
               </svg>
             </div>
             <input
               v-model="stickyInput"
               type="text"
-              placeholder="Ask me anything…"
+              placeholder="Ask me anything..."
               aria-label="Ask Me Anything"
-              class="w-[56vw] max-w-[28rem] min-w-[220px] border-0 bg-transparent px-2 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
+              class="flex-1 w-[50vw] max-w-[24rem] min-w-[200px] border-0 bg-transparent px-2 py-1 text-sm text-neutral-900 placeholder:text-neutral-600 focus:outline-none"
             />
             <button
               type="submit"
-              class="inline-flex items-center justify-center gap-1.5 rounded-full bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-neutral-800"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-neutral-800 hover:scale-105"
             >
               <span>Ask</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </button>
           </div>
@@ -60,55 +60,58 @@
           aria-label="AI Chat"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-4">
-            <div class="flex items-center gap-2 font-semibold text-neutral-900">
-              <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg border border-neutral-200 bg-[#d97759]/10 text-neutral-900">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 ama-icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 3.866-3.582 7-8 7-1.168 0-2.272-.22-3.254-.615L4 20l1.748-3.059C5.27 16.02 5 14.997 5 14c0-3.866 3.582-7 8-7s8 3.134 8 7z" />
+          <div class="flex items-center justify-between border-b border-neutral-200 bg-[#e8e3d8] px-6 py-4">
+            <div class="flex items-center gap-3 font-semibold text-neutral-900">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-neutral-900">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </span>
-              <span>AI Assistant</span>
+              <span class="text-base">AI Assistant</span>
             </div>
-            <button @click="modalOpen = false" class="rounded-md p-1.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900" aria-label="Close">
+            <button @click="modalOpen = false" class="rounded-lg p-2 text-neutral-600 hover:bg-neutral-900/10 hover:text-neutral-900 transition-colors" aria-label="Close">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
           </div>
           <!-- Messages -->
-          <div ref="messagesBoxRef" class="h-[calc(70vh-128px)] space-y-3 overflow-y-auto bg-white p-4">
+          <div ref="messagesBoxRef" class="h-[calc(70vh-128px)] space-y-3 overflow-y-auto bg-[#f5f3ef] p-6">
             <div
               v-for="(message, idx) in messages"
               :key="idx"
               :class="[
-                'max-w-[85%] rounded-lg px-4 py-2.5 text-sm leading-relaxed',
-                message.role === 'user' ? 'ml-auto bg-neutral-200 text-neutral-900' : 'mr-auto bg-neutral-50 text-neutral-900 border border-neutral-200'
+                'max-w-[85%] rounded-2xl px-5 py-3 text-sm leading-relaxed',
+                message.role === 'user' ? 'ml-auto bg-neutral-900 text-white' : 'mr-auto bg-[#e8e3d8] text-neutral-900'
               ]"
             >
               {{ message.content }}
             </div>
             <!-- Thinking indicator -->
-            <div v-if="isThinking && !typedText" class="mr-auto inline-flex max-w-[85%] items-center gap-1 rounded-lg bg-neutral-50 px-4 py-2.5 text-sm leading-relaxed text-neutral-900 border border-neutral-200">
-              <span class="dot h-1.5 w-1.5 rounded-full bg-neutral-900" />
-              <span class="dot h-1.5 w-1.5 rounded-full bg-neutral-900" />
-              <span class="dot h-1.5 w-1.5 rounded-full bg-neutral-900" />
+            <div v-if="isThinking && !typedText" class="mr-auto inline-flex max-w-[85%] items-center gap-1.5 rounded-2xl bg-[#e8e3d8] px-5 py-3 text-sm leading-relaxed text-neutral-900">
+              <span class="dot h-2 w-2 rounded-full bg-neutral-900" />
+              <span class="dot h-2 w-2 rounded-full bg-neutral-900" />
+              <span class="dot h-2 w-2 rounded-full bg-neutral-900" />
             </div>
             <!-- Streaming typed text with caret -->
-            <div v-if="typedText" class="mr-auto max-w-[85%] rounded-lg bg-neutral-50 px-4 py-2.5 text-sm leading-relaxed text-neutral-900 border border-neutral-200">
+            <div v-if="typedText" class="mr-auto max-w-[85%] rounded-2xl bg-[#e8e3d8] px-5 py-3 text-sm leading-relaxed text-neutral-900">
               <span>{{ typedText }}</span>
               <span class="typing-caret" />
             </div>
           </div>
           <!-- Composer -->
-          <form @submit.prevent="handleModalSubmit" class="border-t border-neutral-200 p-3">
+          <form @submit.prevent="handleModalSubmit" class="border-t border-neutral-200 bg-[#e8e3d8] p-4">
             <div class="relative">
               <input
                 v-model="pending"
                 placeholder="Type your message..."
-                class="w-full rounded-full border border-neutral-200 bg-white px-4 py-2 pr-24 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                class="w-full rounded-xl border-0 bg-white px-5 py-3 pr-28 text-sm text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-900"
               />
-              <button type="submit" class="absolute right-1 top-1 inline-flex items-center justify-center rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800">
-                Send
+              <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center gap-1.5 rounded-lg bg-neutral-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800 hover:scale-105">
+                <span>Send</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </button>
             </div>
           </form>
