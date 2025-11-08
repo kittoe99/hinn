@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-200 bg-[#ebe8e1] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
+  <header class="border-b border-neutral-200 bg-[#f5f3ef] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->

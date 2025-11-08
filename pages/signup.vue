@@ -1,5 +1,5 @@
-﻿<template>
-  <div class="min-h-screen bg-white flex items-center justify-center px-6 py-12">
+<template>
+  <div class="min-h-screen bg-[#f5f3ef] flex items-center justify-center px-6 py-12">
     <div class="w-full max-w-md border border-neutral-200 bg-white rounded-xl p-8 space-y-6 shadow-lg">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Create your account</h1>

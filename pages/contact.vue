@@ -1,5 +1,5 @@
-﻿<template>
-  <div class="min-h-screen bg-white">
+<template>
+  <div class="min-h-screen bg-[#f5f3ef]">
     <!-- Hero -->
     <section class="pt-20 pb-16 md:pt-32 md:pb-24">
       <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">

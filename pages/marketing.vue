@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="min-h-screen bg-[#f5f3ef]">
     <!-- Hero -->
     <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
