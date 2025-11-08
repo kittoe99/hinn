@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-white">
     <!-- Header with Profile and Navigation -->
-    <header class="sticky top-0 z-50 bg-white border-b border-neutral-200">
+    <header class="bg-white border-b border-neutral-200">
       <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
       <div class="flex h-16 items-center px-6">
         <!-- Logo -->
@@ -104,11 +104,12 @@
           </div>
         </div>
       </div>
-
-      <!-- Navigation Tabs -->
-      <div class="bg-white">
+    </header>
+      
+    <!-- Navigation Tabs -->
+    <div class="bg-white border-b border-neutral-200">
         <!-- Mobile: Expandable Navigation -->
-        <div class="md:hidden px-4 py-3">
+        <div class="md:hidden px-4 py-3 relative">
           <button
             @click="mobileNavExpanded = !mobileNavExpanded"
             :class="[
@@ -152,7 +153,7 @@
             leave-from-class="opacity-100 translate-y-0"
             leave-to-class="opacity-0 -translate-y-2"
           >
-            <div v-if="mobileNavExpanded" class="mt-2 rounded-lg border border-neutral-200 bg-white shadow-lg overflow-hidden">
+            <div v-if="mobileNavExpanded" class="absolute top-full left-4 right-4 mt-2 rounded-lg border border-neutral-200 bg-white shadow-lg overflow-hidden z-50">
               <button
                 v-for="tab in navigationTabs"
                 :key="tab.id"
@@ -185,9 +186,7 @@
             </div>
           </Transition>
         </div>
-
-      </div>
-    </header>
+    </div>
 
     <!-- Main Content -->
     <main class="mx-auto max-w-7xl px-6 py-8">

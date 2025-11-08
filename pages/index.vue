@@ -227,58 +227,46 @@
     </section>
 
     <!-- Products Section -->
-    <section class="py-24 md:py-32">
+    <section class="py-20 md:py-32">
       <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <!-- Header -->
         <div class="text-center mb-16">
-          <h2 class="text-5xl md:text-6xl font-bold tracking-tight text-neutral-900 mb-4">Everything you need</h2>
-          <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-4">Everything you need</h2>
+          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
             Three powerful products, one seamless subscription
           </p>
         </div>
-        <!-- List-style product cards -->
-        <div class="space-y-4">
+
+        <!-- Product Grid -->
+        <div class="grid md:grid-cols-3 gap-8 md:gap-12">
           <NuxtLink
             v-for="(product, index) in subscriptionProducts"
             :key="product.title"
             :to="product.href"
             :ref="el => { if (el) productRefs[index] = el }"
-            class="group block rounded-2xl border border-neutral-200 bg-white shadow-sm hover:border-neutral-300 hover:shadow-lg transition-all overflow-hidden"
+            class="group relative p-8 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all"
           >
-            <div class="flex flex-row items-center gap-4 p-4 md:p-0 md:flex-row">
-              <!-- Product Image - Smaller on mobile -->
-              <div class="w-24 h-24 md:w-1/4 lg:w-1/5 md:h-auto relative overflow-hidden bg-neutral-50 flex-shrink-0 rounded-lg md:rounded-none">
-                <img 
-                  :src="product.image" 
-                  :alt="product.title"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <!-- Icon -->
+            <div class="mb-6">
+              <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-neutral-900 group-hover:scale-110 transition-transform">
+                <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path v-if="product.title === 'Websites'" stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  <path v-else-if="product.title === 'AI Agents'" stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                  <path v-else stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                </svg>
               </div>
-              
-              <!-- Product Content -->
-              <div class="flex-1 md:px-7 md:py-6">
-                <div class="flex items-start justify-between gap-3">
-                  <div class="flex-1 min-w-0">
-                    <h3 class="text-base md:text-2xl font-semibold text-neutral-900 mb-1">{{ product.title }}</h3>
-                    <p class="text-xs md:text-base text-neutral-600 mb-2 line-clamp-2 md:line-clamp-none">{{ product.description }}</p>
-                    <div class="flex flex-wrap gap-1.5 md:gap-2">
-                      <span v-for="tag in product.tags.slice(0, 3)" :key="tag" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[10px] md:text-xs text-neutral-600">{{ tag }}</span>
-                    </div>
-                  </div>
-                  <div class="hidden md:flex items-center">
-                    <span class="inline-flex items-center rounded-full border border-[#d97759]/20 bg-[#d97759]/5 px-3.5 py-1.5 text-sm font-medium text-[#d97759] group-hover:bg-[#d97759]/10 transition-colors">
-                      {{ product.cta }}
-                      <svg class="ml-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                  </div>
-                  <div class="md:hidden">
-                    <svg class="h-4 w-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+            </div>
+
+            <!-- Content -->
+            <h3 class="text-2xl font-semibold text-neutral-900 mb-3">{{ product.title }}</h3>
+            <p class="text-base text-neutral-600 mb-6 leading-relaxed">{{ product.description }}</p>
+
+            <!-- Arrow Link -->
+            <div class="inline-flex items-center text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">
+              <span>{{ product.cta }}</span>
+              <svg class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </div>
           </NuxtLink>
         </div>
