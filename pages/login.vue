@@ -131,8 +131,8 @@ const signInWithGoogle = async () => {
   // In production, this would integrate with your auth provider
   setTimeout(() => {
     success.value = 'Login successful! Redirecting...'
-    setTimeout(() => {
-      navigateTo('/dashboard')
+    setTimeout(async () => {
+      await navigateTo('/dashboard')
     }, 500)
   }, 1000)
 }
@@ -155,8 +155,8 @@ const handleLogin = () => {
     if (formData.value.email && formData.value.password) {
       success.value = 'Login successful! Redirecting...'
       
-      setTimeout(() => {
-        navigateTo('/dashboard')
+      setTimeout(async () => {
+        await navigateTo('/dashboard')
       }, 500)
     } else {
       error.value = 'Invalid email or password'

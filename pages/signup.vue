@@ -168,8 +168,8 @@ const signUpWithGoogle = async () => {
   // In production, this would integrate with your auth provider
   setTimeout(() => {
     success.value = 'Account created! Redirecting...'
-    setTimeout(() => {
-      navigateTo('/dashboard')
+    setTimeout(async () => {
+      await navigateTo('/dashboard')
     }, 500)
   }, 1000)
 }
@@ -202,8 +202,8 @@ const handleSignup = () => {
   setTimeout(() => {
     success.value = 'Account created successfully! Redirecting...'
     
-    setTimeout(() => {
-      navigateTo('/dashboard')
+    setTimeout(async () => {
+      await navigateTo('/dashboard')
     }, 500)
   }, 1000)
 }
