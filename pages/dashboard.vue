@@ -208,7 +208,7 @@
         <div v-else-if="selectedWebsite">
           <div class="mx-auto max-w-5xl">
             <!-- Header Card -->
-            <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl mb-8">
+            <div class="relative overflow-hidden bg-white border border-neutral-200 rounded-2xl mb-8">
               <!-- Accent Bar -->
               <!-- Accent bar removed per design update -->
               
@@ -297,8 +297,8 @@
             <!-- Onboarding Sections (if available) -->
             <div v-if="selectedWebsiteOnboarding" class="space-y-3">
               <!-- Business Information -->
-              <section class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('business')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Business Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.business ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -323,8 +323,8 @@
               </section>
 
               <!-- Contact Information -->
-              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.contact_info" class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('contact')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Contact Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.contact ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -349,8 +349,8 @@
               </section>
 
               <!-- Services -->
-              <section v-if="selectedWebsiteOnboarding.services" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.services" class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('services')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Services</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.services ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -368,8 +368,8 @@
               </section>
 
               <!-- Service Area -->
-              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.service_area" class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('serviceArea')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Service Area</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.serviceArea ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -838,10 +838,10 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden bg-[#f0ebe3] rounded-2xl border border-neutral-300 transition-all',
+              'group relative overflow-hidden bg-white rounded-2xl border border-neutral-300 transition-all',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-[#e8e3d8] cursor-pointer'
+                : 'hover:bg-[#f9f8f6] cursor-pointer'
             ]"
           >
             

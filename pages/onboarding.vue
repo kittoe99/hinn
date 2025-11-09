@@ -155,7 +155,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <div class="mb-8">
                   <h3 class="text-xl font-semibold text-neutral-900 mb-2">What type of site do you need?</h3>
                   <p class="text-sm text-neutral-600">Choose the option that best describes your project.</p>
@@ -215,7 +215,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Business basics</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your company and how we can reach you.</p>
 
@@ -352,7 +352,7 @@
 
             <!-- Step 3: Existing Website -->
             <div v-if="currentStep === 3" class="space-y-6">
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Existing website</h3>
                 <p class="mt-1 text-sm text-secondary">Do you have a current website we can analyze?</p>
 
@@ -468,7 +468,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Services & coverage</h3>
                 <p class="mt-1 text-sm text-secondary">What services do you offer and where?</p>
 
@@ -644,7 +644,7 @@
                 </div>
               </div>
 
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Operations</h3>
                 <p class="mt-1 text-sm text-secondary">Tell us about your hours, goals, and language preferences.</p>
 
@@ -756,7 +756,7 @@
 
             <!-- Step 6: Design -->
             <div v-if="currentStep === 6" class="space-y-6">
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Share the look and feel</h3>
                 <p class="mt-1 text-sm text-secondary">Choose the options that feel closest—we'll fine-tune the details together.</p>
 
@@ -927,7 +927,7 @@
 
             <!-- Step 7: Logo & Assets -->
             <div v-if="currentStep === 7" class="space-y-6">
-              <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
+              <div class="relative overflow-hidden bg-[#f0ebe3] rounded-2xl p-8">
                 <h3 class="text-base font-semibold text-primary">Logo & brand assets</h3>
                 <p class="mt-1 text-sm text-secondary">Upload your logo and any brand materials you'd like us to use.</p>
 

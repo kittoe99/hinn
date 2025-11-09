@@ -240,7 +240,7 @@
         <!-- Feature Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Feature 1 -->
-          <div class="p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
@@ -251,7 +251,7 @@
           </div>
 
           <!-- Feature 2 -->
-          <div class="p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
@@ -262,7 +262,7 @@
           </div>
 
           <!-- Feature 3 -->
-          <div class="p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
@@ -273,7 +273,7 @@
           </div>
 
           <!-- Feature 4 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
@@ -284,7 +284,7 @@
           </div>
 
           <!-- Feature 5 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
@@ -295,7 +295,7 @@
           </div>
 
           <!-- Feature 6 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
@@ -310,7 +310,7 @@
         <div v-if="!showMoreFeatures" class="mt-8 text-center md:hidden">
           <button
             @click="showMoreFeatures = true"
-            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-neutral-900 bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all"
+            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-neutral-900 bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all"
           >
             <span>Show More Features</span>
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">

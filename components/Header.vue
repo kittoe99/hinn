@@ -19,7 +19,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
             />
           </div>
         </div>
@@ -77,7 +77,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="h-9 w-full rounded-lg border border-neutral-200 bg-neutral-50 pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:bg-white focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
+              class="h-9 w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-3 text-sm text-neutral-900 placeholder-neutral-400 focus:border-neutral-300 focus:ring-1 focus:ring-neutral-300 focus:outline-none transition-all"
             />
           </div>
         </div>
