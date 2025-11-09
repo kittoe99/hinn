@@ -335,7 +335,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 md:py-24 relative overflow-hidden bg-[#e8e3d8] rounded-3xl mx-6 lg:mx-8 mb-12">
+    <section class="py-20 md:py-24 relative overflow-hidden bg-[#f0ebe3] rounded-3xl mx-6 lg:mx-8 mb-12">
       <div class="max-w-6xl mx-auto px-8 lg:px-12">
         <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           <!-- Left Column: Heading and CTA -->

@@ -52,7 +52,7 @@
               </div>
             </div>
 
-            <div class="mt-8 bg-[#e8e3d8] p-6 rounded-2xl">
+            <div class="mt-8 bg-[#f0ebe3] p-6 rounded-2xl">
               <h3 class="text-sm font-semibold text-neutral-900">Response Time</h3>
               <p class="mt-2 text-sm text-neutral-600 leading-relaxed">
                 We respond to all inquiries within 24 hours during business days.
@@ -61,7 +61,7 @@
           </div>
 
           <!-- Contact Form -->
-          <div class="bg-[#e8e3d8] rounded-2xl p-8">
+          <div class="bg-[#f0ebe3] rounded-2xl p-8">
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
