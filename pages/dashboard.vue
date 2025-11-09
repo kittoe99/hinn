@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-[#f5f3ef]">
+  <div class="min-h-screen bg-[#f9f8f6]">
     <!-- Header with Profile and Navigation -->
-    <header class="bg-[#f5f3ef] border-b border-neutral-200">
+    <header class="bg-[#f9f8f6] border-b border-neutral-200">
       <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
       <div class="flex h-16 items-center px-6">
         <!-- Logo -->
@@ -14,9 +14,8 @@
 
         <!-- Desktop Navigation Tabs (hidden on mobile) -->
         <nav class="hidden lg:flex items-center gap-0.5 mr-auto">
-          <!-- Regular tabs -->
           <a
-            v-for="tab in navigationTabs.filter(t => t.id !== 'support' && t.id !== 'settings')"
+            v-for="tab in navigationTabs"
             :key="tab.id"
             @click="!showOnboardingRequired && (activeTab = tab.id)"
             :class="[
@@ -28,25 +27,10 @@
             {{ tab.label }}
             <span v-if="activeTab === tab.id" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
           </a>
-
-          <!-- Dropdown for Support & Settings -->
-          <div 
-            ref="dropdownTrigger"
-            class="relative z-50" 
-            @mouseenter="openDropdown" 
-            @mouseleave="closeDropdown"
-          >
-            <div class="relative whitespace-nowrap px-4 h-16 flex items-center text-sm font-medium transition-colors cursor-pointer text-neutral-600 hover:text-neutral-900">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-              </svg>
-              <span v-if="activeTab === 'support' || activeTab === 'settings'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
-            </div>
-          </div>
         </nav>
 
         <!-- Search Bar -->
-        <div class="flex flex-1 lg:flex-initial lg:w-72 lg:mx-6">
+        <div class="flex flex-1 lg:flex-initial lg:w-[480px] lg:ml-4">
           <div class="relative w-full">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -63,7 +47,7 @@
         </div>
 
         <!-- Right Side Actions -->
-        <div class="flex items-center gap-2 flex-shrink-0">
+        <div class="flex items-center gap-2 flex-shrink-0 ml-8">
           <!-- Desktop: Show logout button -->
           <button 
             @click="handleLogout"
@@ -107,7 +91,7 @@
     </header>
       
     <!-- Navigation Tabs -->
-    <div class="bg-[#f5f3ef] border-t border-neutral-100">
+    <div class="bg-[#f9f8f6] border-t border-neutral-100">
         <!-- Mobile: Expandable Navigation -->
         <div class="md:hidden px-4 py-3 relative">
           <button
@@ -579,121 +563,69 @@
 
       <!-- Overview Tab -->
       <div v-else-if="!selectedWebsiteId && activeTab === 'overview'" class="space-y-6">
-        <!-- Welcome Section with Quick Links -->
+        <!-- Welcome Section -->
         <div class="mb-12">
-          <h1 class="text-4xl font-medium text-neutral-900 mb-4">Welcome back</h1>
-          <div class="flex items-center gap-2 md:gap-3 -mx-2 md:mx-0">
-            <a href="#" class="group inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors whitespace-nowrap">
-              <svg class="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-              </svg>
-              Logo generator
-              <svg class="h-3.5 w-3.5 flex-shrink-0 text-neutral-400 group-hover:text-neutral-600 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-            <a href="#" class="group inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors whitespace-nowrap">
-              <svg class="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-              </svg>
-              Store
-              <svg class="h-3.5 w-3.5 flex-shrink-0 text-neutral-400 group-hover:text-neutral-600 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-            <a href="#" class="group inline-flex items-center gap-1.5 px-2.5 md:px-3 py-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors whitespace-nowrap">
-              <svg class="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-              </svg>
-              AI tools
-              <svg class="h-3.5 w-3.5 flex-shrink-0 text-neutral-400 group-hover:text-neutral-600 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+          <h1 class="text-4xl font-medium text-neutral-900 mb-2">Welcome back</h1>
+          <p class="text-base text-neutral-600">Manage your websites, domains, and grow your online presence</p>
         </div>
 
         <!-- Summary Stats Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Websites Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=websites"
             @click="activeTab = 'websites'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
               </div>
-              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">{{ filteredProjects.length }}</div>
-            <div class="text-xs font-medium text-neutral-600">Websites</div>
-          </NuxtLink>
-
-          <!-- AI Agents Stats Card -->
-          <NuxtLink 
-            to="/dashboard?tab=ai-agents"
-            @click="activeTab = 'ai-agents'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-                </svg>
-              </div>
-              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </div>
-            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
-            <div class="text-xs font-medium text-neutral-600">AI Agents</div>
-          </NuxtLink>
-
-          <!-- Marketing Stats Card -->
-          <NuxtLink 
-            to="/dashboard?tab=marketing"
-            @click="activeTab = 'marketing'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                </svg>
-              </div>
-              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </div>
-            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
-            <div class="text-xs font-medium text-neutral-600">Campaigns</div>
+            <div class="text-3xl font-semibold text-neutral-900 mb-1">{{ filteredProjects.length }}</div>
+            <div class="text-sm font-medium text-neutral-600">Active Websites</div>
           </NuxtLink>
 
           <!-- Domains Stats Card -->
           <NuxtLink 
             to="/dashboard?tab=domains"
             @click="activeTab = 'domains'"
-            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-lg p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all"
           >
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 919-9"/>
                 </svg>
               </div>
-              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </div>
-            <div class="text-2xl font-semibold text-neutral-900 mb-0.5">0</div>
-            <div class="text-xs font-medium text-neutral-600">Domains</div>
+            <div class="text-3xl font-semibold text-neutral-900 mb-1">0</div>
+            <div class="text-sm font-medium text-neutral-600">Registered Domains</div>
           </NuxtLink>
+
+          <!-- Leads Stats Card -->
+          <div class="group relative overflow-hidden bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 hover:shadow-md transition-all cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10">
+                <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <div class="text-3xl font-semibold text-neutral-900 mb-1">{{ filteredLeads.length }}</div>
+            <div class="text-sm font-medium text-neutral-600">Total Leads</div>
+          </div>
         </div>
 
         <!-- Leads Section -->
@@ -906,10 +838,10 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden bg-[#e8e3d8] rounded-2xl transition-all',
+              'group relative overflow-hidden bg-[#f0ebe3] rounded-2xl border border-neutral-300 transition-all',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-[#ded9cc] cursor-pointer'
+                : 'hover:bg-[#e8e3d8] cursor-pointer'
             ]"
           >
             
@@ -2257,12 +2189,12 @@
 
       <!-- Add New Modal -->
       <div v-if="showAddNewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" @click.self="hasProduct && (showAddNewModal = false)">
-        <div class="bg-[#fefbf3] rounded-2xl border border-neutral-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div class="bg-[#fefbf3] rounded-2xl border border-neutral-200 max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
           <!-- Header -->
           <div class="sticky top-0 bg-[#fefbf3] border-b border-neutral-100 px-8 py-6 flex items-center justify-between">
             <div>
-              <h2 class="text-2xl font-medium text-neutral-900">Add New Product</h2>
-              <p class="text-base text-neutral-600 mt-1">Pick what to create</p>
+              <h2 class="text-3xl font-semibold text-neutral-900">Create Your Website</h2>
+              <p class="text-base text-neutral-600 mt-1">Choose the perfect plan to get started</p>
             </div>
             <button v-if="hasProduct" @click="showAddNewModal = false" class="p-2 rounded-lg hover:bg-neutral-100 transition-colors">
               <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2270,65 +2202,16 @@
               </svg>
             </button>
           </div>
-          <!-- Step: Select Product -->
-          <div v-if="addNewStep === 'select'" class="p-8">
-            <div class="mb-8">
-              <p class="text-base text-neutral-600">Choose a product to start. More coming soon.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <!-- Website -->
-              <button
-                @click="selectProduct('website')"
-                class="group relative overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] rounded-2xl p-8 text-left transition-all"
-              >
-                <div class="flex items-start justify-between mb-6">
-                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-[#d97759]/10 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  </div>
-                  <span class="px-2.5 py-1 rounded-full bg-[#d97759]/10 border border-[#d97759]/20 text-xs font-medium text-[#d97759]">Available</span>
-                </div>
-                <h3 class="text-xl font-medium text-neutral-900 mb-2">Website</h3>
-                <p class="text-sm text-neutral-600 mb-6">Professional site with custom design</p>
-                <div class="inline-flex items-center gap-2 text-sm font-medium px-6 py-2.5 rounded-lg bg-neutral-900 text-white group-hover:bg-neutral-800 transition-colors">
-                  Get Started
-                  <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                </div>
-              </button>
-
-              <!-- Marketing (disabled) -->
-              <div class="relative overflow-hidden border border-neutral-200 bg-neutral-50/50 rounded-xl p-8 text-left opacity-60 cursor-not-allowed">
-                <div class="flex items-start justify-between mb-6">
-                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-neutral-100 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-                  </div>
-                  <span class="px-2.5 py-1 rounded-full bg-neutral-200 border border-neutral-300 text-xs font-medium text-neutral-600">Coming Soon</span>
-                </div>
-                <h3 class="text-xl font-medium text-neutral-700 mb-2">Marketing</h3>
-                <p class="text-sm text-neutral-500">Boost reach with campaigns</p>
+          
+          <!-- Plan Selection -->
+          <div class="p-8">
+            <div class="mb-8 text-center">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#d97759]/10 mb-4">
+                <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
               </div>
-
-              <!-- AI Agent (disabled) -->
-              <div class="relative overflow-hidden border border-neutral-200 bg-neutral-50/50 rounded-xl p-8 text-left opacity-60 cursor-not-allowed">
-                <div class="flex items-start justify-between mb-6">
-                  <div class="h-12 w-12 rounded-xl border border-neutral-200 bg-neutral-100 flex items-center justify-center">
-                    <svg class="h-6 w-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
-                  </div>
-                  <span class="px-2.5 py-1 rounded-full bg-neutral-200 border border-neutral-300 text-xs font-medium text-neutral-600">Coming Soon</span>
-                </div>
-                <h3 class="text-xl font-medium text-neutral-700 mb-2">AI Agent</h3>
-                <p class="text-sm text-neutral-500">Automate tasks with agents</p>
-              </div>
-            </div>
-          </div>
-          <!-- Step: Choose Plan -->
-          <div v-if="addNewStep === 'plan'" class="p-8">
-            <button @click="addNewStep = 'select'" class="flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors mb-6">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-              Back to Products
-            </button>
-            <div class="mb-8">
-              <h3 class="text-2xl font-medium text-neutral-900">Choose Your Website Plan</h3>
-              <p class="text-base text-neutral-600 mt-2">Select the plan that fits your needs</p>
+              <p class="text-sm text-neutral-600 max-w-2xl mx-auto">Professional websites with custom design, hosting, and ongoing support included</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div class="bg-[#e8e3d8] hover:bg-[#ded9cc] rounded-2xl p-8 transition-all">
@@ -2535,9 +2418,6 @@ const navigationTabs = [
   { id: 'overview', label: 'Overview' },
   { id: 'websites', label: 'Websites' },
   { id: 'domains', label: 'Domains' },
-  { id: 'branding', label: 'Branding' },
-  { id: 'marketing', label: 'Marketing' },
-  { id: 'ai-agents', label: 'AI Agents' },
   { id: 'support', label: 'Support' },
   { id: 'settings', label: 'Settings' }
 ]

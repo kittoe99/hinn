@@ -1,13 +1,32 @@
 <template>
-  <div class="min-h-screen bg-[#f5f3ef]">
-    <section class="pt-20 pb-16 md:pt-32 md:pb-24">
-      <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-        <h1 class="text-5xl md:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">
+  <div class="min-h-screen bg-[#f9f8f6]">
+    <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-10 right-10 w-72 h-72 bg-[#d97759]/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 left-10 w-72 h-72 bg-[#d97759]/3 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center relative">
+        <!-- Icon -->
+        <div class="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-[#d97759]/10 mb-6">
+          <svg class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-semibold tracking-tight text-neutral-900 leading-[1.1]">
           Website Onboarding
         </h1>
-        <p class="mt-8 text-lg text-neutral-600 leading-relaxed">
+        <p class="mt-6 text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
           Help us understand your needs so we can build the perfect website for you.
         </p>
+
+        <!-- Step Indicator -->
+        <div class="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-neutral-200 shadow-sm">
+          <div class="h-2 w-2 rounded-full bg-[#d97759] animate-pulse"></div>
+          <span class="text-sm font-medium text-neutral-700">Let's get started</span>
+        </div>
       </div>
     </section>
 
@@ -137,36 +156,43 @@
               </div>
 
               <div class="relative overflow-hidden bg-[#e8e3d8] rounded-2xl p-8">
-                <h3 class="text-base font-semibold text-primary">What type of site do you need? *</h3>
-                <p class="mt-1 text-sm text-secondary">Choose the option that best describes your project.</p>
+                <div class="mb-8">
+                  <h3 class="text-xl font-semibold text-neutral-900 mb-2">What type of site do you need?</h3>
+                  <p class="text-sm text-neutral-600">Choose the option that best describes your project.</p>
+                </div>
 
-                <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   <button
                     v-for="type in siteTypes"
                     :key="type"
                     type="button"
                     @click="formData.siteType = type; validationErrors.siteType = false"
                     :class="[
-                      'flex h-full flex-col justify-center rounded-lg border-2 p-6 text-left transition-all',
+                      'rounded-lg border p-5 text-left transition-all',
                       formData.siteType === type
-                        ? 'border-[#d97759] bg-[#d97759]/5 shadow-sm'
+                        ? 'border-[#d97759] bg-white'
                         : validationErrors.siteType
                         ? 'border-red-300 bg-red-50 hover:border-red-400'
-                        : 'border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm'
+                        : 'border-neutral-300 bg-white hover:border-neutral-400'
                     ]"
                   >
                     <span class="text-base font-medium text-neutral-900">{{ type }}</span>
                   </button>
                 </div>
-                <p v-if="validationErrors.siteType" class="mt-2 text-xs text-red-600">Please select a site type</p>
+                
+                <p v-if="validationErrors.siteType" class="mt-3 text-sm text-red-600">
+                  Please select a site type to continue
+                </p>
 
-                <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p class="text-xs text-secondary">Not sure? Pick the closest fit—we'll refine together.</p>
+                <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-neutral-300">
+                  <p class="text-sm text-neutral-600">
+                    Not sure? Pick the closest fit—we'll refine together.
+                  </p>
                   <button
                     type="button"
                     @click="nextStep"
                     :disabled="!formData.siteType"
-                    class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50 shadow-sm hover:shadow"
+                    class="rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Continue
                   </button>

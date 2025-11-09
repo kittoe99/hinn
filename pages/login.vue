@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#f5f3ef] flex items-center justify-center px-6 py-12">
+  <div class="min-h-screen bg-[#f9f8f6] flex items-center justify-center px-6 py-12">
     <div class="w-full max-w-md bg-[#e8e3d8] rounded-2xl p-8 space-y-6">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Welcome back</h1>

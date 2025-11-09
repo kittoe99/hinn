@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-neutral-200 bg-[#f5f3ef] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
+  <header class="border-b border-neutral-200 bg-[#f9f8f6] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->
@@ -125,23 +125,24 @@
     >
       <div 
         v-if="mobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-white z-[110] md:hidden border-b border-neutral-200 shadow-xl"
+        class="absolute top-full left-0 right-0 bg-[#f9f8f6] z-[110] md:hidden border-b border-neutral-200"
       >
         <!-- Navigation -->
-        <nav class="px-6 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
+        <nav class="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
           <!-- Home -->
           <NuxtLink 
             to="/"
-            class="block px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
+            class="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-white rounded-lg transition-colors"
             @click="mobileMenuOpen = false"
           >
             Home
           </NuxtLink>
+          
           <!-- Products Section -->
           <div>
             <button 
               @click="productsExpanded = !productsExpanded"
-              class="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
+              class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-white rounded-lg transition-colors"
             >
               <span>Products</span>
               <svg 
@@ -163,19 +164,19 @@
               leave-from-class="opacity-100 max-h-96"
               leave-to-class="opacity-0 max-h-0"
             >
-              <div v-if="productsExpanded" class="mt-3 ml-4 space-y-3 overflow-hidden pb-2">
+              <div v-if="productsExpanded" class="mt-1 ml-2 space-y-1 overflow-hidden">
                 <NuxtLink 
                   to="/website"
-                  class="flex items-center gap-3 group"
+                  class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white group transition-colors"
                   @click="mobileMenuOpen = false"
                 >
-                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
                     <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
                   </div>
                   <div>
-                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">Website</div>
+                    <div class="text-sm font-medium text-neutral-900">Website</div>
                     <div class="text-xs text-neutral-500">Professional sites</div>
                   </div>
                 </NuxtLink>
@@ -186,7 +187,7 @@
           <!-- Other Links -->
           <NuxtLink 
             to="/contact"
-            class="block px-4 py-3 text-base font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors"
+            class="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-white rounded-lg transition-colors"
             @click="mobileMenuOpen = false"
           >
             Contact
@@ -194,17 +195,17 @@
         </nav>
 
         <!-- Footer Actions -->
-        <div class="px-6 py-4 border-t border-neutral-200 flex gap-3 bg-white">
+        <div class="px-4 py-4 border-t border-neutral-200 flex gap-2">
           <NuxtLink 
             to="/login"
-            class="flex-1 rounded-lg py-3 text-center text-sm font-semibold text-neutral-900 border-2 border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 transition-all"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-neutral-900 border border-neutral-300 hover:bg-white transition-all"
             @click="mobileMenuOpen = false"
           >
             Sign in
           </NuxtLink>
           <NuxtLink 
             to="/dashboard"
-            class="flex-1 rounded-lg py-3 text-center text-sm font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all shadow-sm"
+            class="flex-1 rounded-lg py-2.5 text-center text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-all"
             @click="mobileMenuOpen = false"
           >
             Get Started
