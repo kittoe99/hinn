@@ -384,7 +384,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 useHead({
   title: 'Professional Website Design & Development Services | Monthly Subscription | Hinn',
@@ -405,11 +405,6 @@ let charIndex = words[0].length
 let isTyping = true
 let typewriterTimeout = null
 const isFlipping = ref(false)
-
-// Scroll-based icon animation for mobile
-const productRefs = ref([])
-const productInView = ref([false, false, false])
-let observer = null
 
 const typeWriter = () => {
   const currentFullWord = words[wordIndex]
@@ -450,47 +445,11 @@ onMounted(() => {
       typewriterTimeout = setTimeout(typeWriter, 100)
     }, 600) // Flip animation duration
   }, 3500) // Pause on first word before starting animation
-
-  // Set up Intersection Observer for scroll-based icon animation
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const element = entry.target
-        const index = productRefs.value.findIndex(ref => {
-          if (ref && ref.$el) return ref.$el === element
-          return ref === element
-        })
-        
-        if (index !== -1) {
-          productInView.value[index] = entry.isIntersecting
-        }
-      })
-    },
-    {
-      threshold: 0.5, // Trigger when 50% of the element is visible
-      rootMargin: '-50px'
-    }
-  )
-
-  // Observe all product cards after a slight delay to ensure refs are set
-  setTimeout(() => {
-    productRefs.value.forEach((ref) => {
-      const element = ref && ref.$el ? ref.$el : ref
-      if (element && element instanceof Element) {
-        observer.observe(element)
-      }
-    })
-  }, 200)
 })
 
 onUnmounted(() => {
   if (typewriterTimeout) {
     clearTimeout(typewriterTimeout)
-  }
-  
-  // Clean up observer
-  if (observer) {
-    observer.disconnect()
   }
 })
 
@@ -556,26 +515,5 @@ const subscriptionProducts = [
   animation: float 3s ease-in-out infinite;
 }
 
-/* Product icon styles */
-.product-icon {
-  stroke: #a3a3a3;
-  fill: none;
-}
-
-/* Desktop: hover effect */
-@media (min-width: 768px) {
-  .group:hover .product-icon {
-    fill: #d97759;
-    stroke: #d97759;
-  }
-}
-
-/* Mobile: scroll-based fill */
-@media (max-width: 767px) {
-  .product-icon.icon-active {
-    fill: #d97759;
-    stroke: #d97759;
-  }
-}
 </style>
 

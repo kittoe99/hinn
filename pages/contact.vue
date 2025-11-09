@@ -111,15 +111,13 @@
                   Service Interest *
                 </label>
                 <select
-                  id="service"
-                  v-model="form.service"
+                  id="subject"
+                  v-model="form.subject"
                   required
                   class="w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all"
                 >
-                  <option value="">Select a service</option>
+                  <option value="">Select a topic...</option>
                   <option value="website">Website Development</option>
-                  <option value="agents">AI Agents</option>
-                  <option value="marketing">Digital Marketing</option>
                   <option value="other">Other / Not Sure</option>
                 </select>
               </div>
