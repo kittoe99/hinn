@@ -36,22 +36,6 @@
                 </svg>
               </NuxtLink>
             </li>
-            <li>
-              <NuxtLink to="/agents" class="text-sm text-neutral-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
-                <span>AI Agents</span>
-                <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/marketing" class="text-sm text-neutral-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
-                <span>Marketing</span>
-                <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </NuxtLink>
-            </li>
           </ul>
         </div>
 

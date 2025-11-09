@@ -137,13 +137,11 @@ const typedText = ref('')
 const mainInput = ref('')
 const stickyInput = ref('')
 
-// Only show on homepage and product pages (website, agents, marketing)
+// Only show on homepage and website pages
 const shouldShow = computed(() => {
   const path = route.path
   return path === '/' || 
-         path.startsWith('/website') || 
-         path.startsWith('/agents') || 
-         path.startsWith('/marketing')
+         path.startsWith('/website')
 })
 
 const suggestions = [

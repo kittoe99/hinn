@@ -54,28 +54,6 @@
                     <div class="text-xs text-neutral-500">Professional sites</div>
                   </div>
                 </NuxtLink>
-                <NuxtLink to="/agents" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-medium text-neutral-900">AI Agents</div>
-                    <div class="text-xs text-neutral-500">Automate tasks</div>
-                  </div>
-                </NuxtLink>
-                <NuxtLink to="/marketing" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-medium text-neutral-900">Marketing</div>
-                    <div class="text-xs text-neutral-500">Boost your reach</div>
-                  </div>
-                </NuxtLink>
               </div>
             </Transition>
           </div>
@@ -199,36 +177,6 @@
                   <div>
                     <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">Website</div>
                     <div class="text-xs text-neutral-500">Professional sites</div>
-                  </div>
-                </NuxtLink>
-                <NuxtLink 
-                  to="/agents"
-                  class="flex items-center gap-3 group"
-                  @click="mobileMenuOpen = false"
-                >
-                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
-                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">AI Agents</div>
-                    <div class="text-xs text-neutral-500">Automate tasks</div>
-                  </div>
-                </NuxtLink>
-                <NuxtLink 
-                  to="/marketing"
-                  class="flex items-center gap-3 group"
-                  @click="mobileMenuOpen = false"
-                >
-                  <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0 group-hover:bg-[#d97759]/20 transition-colors">
-                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-medium text-neutral-900 group-hover:text-[#d97759] transition-colors">Marketing</div>
-                    <div class="text-xs text-neutral-500">Boost your reach</div>
                   </div>
                 </NuxtLink>
               </div>
