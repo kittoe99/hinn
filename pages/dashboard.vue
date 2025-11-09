@@ -390,8 +390,8 @@
               </section>
 
               <!-- Operation Details -->
-              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.operation_details" class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('operations')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Operation Details</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.operations ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -412,8 +412,8 @@
               </section>
 
               <!-- Website Information -->
-              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section v-if="selectedWebsiteOnboarding.website_info" class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('websiteInfo')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Website Information</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.websiteInfo ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -434,8 +434,8 @@
               </section>
 
               <!-- Logo & Assets -->
-              <section class="rounded-2xl bg-[#e8e3d8] overflow-hidden">
-                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#ded9cc] transition-colors group">
+              <section class="rounded-2xl bg-white border border-neutral-200 overflow-hidden">
+                <button @click="toggleWebsiteSection('logoAssets')" class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-neutral-50 transition-colors group">
                   <h2 class="text-base font-medium text-neutral-900">Logo & Assets</h2>
                   <svg :class="['h-4 w-4 text-neutral-400 transition-transform group-hover:text-neutral-700', websiteExpandedSections.logoAssets ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
