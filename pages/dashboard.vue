@@ -631,6 +631,138 @@
           </button>
         </div>
 
+        <!-- Quick Links Section -->
+        <div class="mt-12">
+          <h2 class="text-xl font-semibold text-neutral-900 mb-6">Quick Links</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Logo Generator -->
+            <a 
+              href="https://logo.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Logo Generator</div>
+                <div class="text-xs text-neutral-600">Create your brand logo</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Domain Search -->
+            <a 
+              href="https://www.namecheap.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 919-9"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Domain Search</div>
+                <div class="text-xs text-neutral-600">Find your perfect domain</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Stock Photos -->
+            <a 
+              href="https://unsplash.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Stock Photos</div>
+                <div class="text-xs text-neutral-600">Free high-quality images</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Color Palette -->
+            <a 
+              href="https://coolors.co" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Color Palette</div>
+                <div class="text-xs text-neutral-600">Generate color schemes</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Font Pairing -->
+            <a 
+              href="https://fontpair.co" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Font Pairing</div>
+                <div class="text-xs text-neutral-600">Beautiful font combinations</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Icon Library -->
+            <a 
+              href="https://heroicons.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 bg-white border border-neutral-200 rounded-xl p-4 hover:border-neutral-300 hover:shadow-md transition-all"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-neutral-900 group-hover:text-[#d97759] transition-colors">Icon Library</div>
+                <div class="text-xs text-neutral-600">Beautiful SVG icons</div>
+              </div>
+              <svg class="h-4 w-4 text-neutral-400 group-hover:text-neutral-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
         <!-- Leads Section -->
         <div class="mt-12">
           <h2 class="text-xl font-semibold text-neutral-900 mb-6">Leads</h2>
