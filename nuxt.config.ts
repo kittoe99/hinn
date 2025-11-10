@@ -9,6 +9,17 @@ export default defineNuxtConfig({
       'server/api/codex/agent.post.ts',
       'server/api/debug/**',
     ] : [],
+    // Add CORS and timeout configuration for mobile compatibility
+    routeRules: {
+      '/api/**': {
+        cors: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        }
+      }
+    }
   },
   app: {
     head: {
@@ -25,6 +36,7 @@ export default defineNuxtConfig({
     // Nuxt automatically maps NUXT_SUPABASE_SERVICE_ROLE_KEY to supabaseServiceRoleKey
     supabaseServiceRoleKey: '',
     openaiApiKey: process.env.OPENAI_API_KEY || process.env.NUXT_OPENAI_API_KEY || '',
+    githubToken: process.env.GITHUB_TOKEN || process.env.NUXT_GITHUB_TOKEN || '',
     
     // Public keys (exposed to client)
     // Nuxt automatically maps NUXT_PUBLIC_SUPABASE_URL to public.supabaseUrl

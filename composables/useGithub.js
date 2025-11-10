@@ -9,13 +9,17 @@ export const useGithub = () => {
     try {
       const response = await $fetch('/api/github/readFile', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: {
           owner,
           repo,
           path,
           ref,
           token: githubToken.value
-        }
+        },
+        timeout: 30000 // 30 second timeout for mobile networks
       });
       return response;
     } catch (error) {

@@ -1,12 +1,34 @@
 import { readFile, writeFile, getRepository, listBranches, searchCode } from '../../utils/github.js';
 
 export default defineEventHandler(async (event) => {
+  // Set CORS headers for mobile compatibility
+  setResponseHeaders(event, {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
+
+  // Handle preflight requests
+  if (event.method === 'OPTIONS') {
+    return { statusCode: 200 };
+  }
+
   const operation = event.context.params.operation;
-  const body = await readBody(event);
   
-  // Get GitHub token from environment or user session
-  // TODO: Store user's GitHub token securely
-  const token = process.env.GITHUB_TOKEN || body.token;
+  let body;
+  try {
+    body = await readBody(event);
+  } catch (error) {
+    console.error('Failed to parse request body:', error);
+    throw createError({
+      statusCode: 400,
+      message: 'Invalid request body'
+    });
+  }
+  
+  // Get GitHub token from runtime config, environment, or user session
+  const config = useRuntimeConfig();
+  const token = config.githubToken || process.env.GITHUB_TOKEN || body.token;
   
   if (!token) {
     throw createError({
@@ -121,10 +143,24 @@ export default defineEventHandler(async (event) => {
         });
     }
   } catch (error) {
-    console.error(`GitHub ${operation} error:`, error);
+    console.error(`GitHub ${operation} error:`, {
+      message: error.message,
+      statusCode: error.statusCode,
+      data: error.data,
+      stack: error.stack
+    });
+    
+    // Provide more detailed error messages
+    const errorMessage = error.data?.message || error.message || `Failed to ${operation}`;
+    const statusCode = error.statusCode || error.status || 500;
+    
     throw createError({
-      statusCode: error.statusCode || 500,
-      message: error.message || `Failed to ${operation}`
+      statusCode,
+      message: `GitHub API Error: ${errorMessage}`,
+      data: {
+        operation,
+        originalError: error.message
+      }
     });
   }
 });
