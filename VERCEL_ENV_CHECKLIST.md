@@ -4,7 +4,7 @@
 
 In Vercel, go to your project → Settings → Environment Variables
 
-You need EXACTLY these 3 variables with EXACTLY these names:
+You need EXACTLY these 5 variables with EXACTLY these names:
 
 ### Variable 1: Supabase URL
 ```
@@ -26,6 +26,29 @@ Name: NUXT_SUPABASE_SERVICE_ROLE_KEY
 Value: [Get from Supabase Dashboard - see below]
 Environments: ✓ Production ✓ Preview ✓ Development
 ```
+
+### Variable 4: OpenAI API Key
+```
+Name: OPENAI_API_KEY
+Value: [Your OpenAI API key - starts with sk-]
+Environments: ✓ Production ✓ Preview ✓ Development
+```
+
+### Variable 5: GitHub Token (for Website Builder)
+```
+Name: GITHUB_TOKEN
+Value: [Your GitHub Personal Access Token - starts with github_pat_ or ghp_]
+Environments: ✓ Production ✓ Preview ✓ Development
+```
+
+**How to get GitHub Token:**
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token" → "Generate new token (classic)"
+3. Give it a name like "Hinn Website Builder"
+4. Select scopes: ✓ repo (Full control of private repositories)
+5. Click "Generate token"
+6. Copy the token immediately (you won't see it again!)
+7. Paste into Vercel
 
 ## Common Mistakes
 
@@ -68,9 +91,28 @@ Expected output:
   "values": {
     "supabaseUrl": "SET",
     "supabaseAnonKey": "SET",
-    "supabaseServiceRoleKey": "SET"
+    "supabaseServiceRoleKey": "SET",
+    "openaiApiKey": "SET",
+    "githubToken": "SET"
   }
 }
 ```
 
 If any show "NOT SET", that variable is missing or incorrectly named.
+
+## Quick Fix for Mobile GitHub Error
+
+If you're getting "GitHub token not configured" error on mobile:
+
+1. Go to Vercel Dashboard: https://vercel.com/dashboard
+2. Select your project
+3. Go to Settings → Environment Variables
+4. Add new variable:
+   - **Name**: `GITHUB_TOKEN`
+   - **Value**: Your GitHub token (from .env file or generate new one)
+   - **Environments**: Check all 3 boxes (Production, Preview, Development)
+5. Click "Save"
+6. Go to Deployments tab
+7. Click "Redeploy" on the latest deployment
+8. Wait 2-3 minutes for deployment to complete
+9. Test on mobile again

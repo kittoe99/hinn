@@ -339,6 +339,18 @@ useHead({
     {
       name: 'description',
       content: 'Autonomous website design and development agent powered by AI'
+    },
+    {
+      'http-equiv': 'Cache-Control',
+      content: 'no-cache, no-store, must-revalidate'
+    },
+    {
+      'http-equiv': 'Pragma',
+      content: 'no-cache'
+    },
+    {
+      'http-equiv': 'Expires',
+      content: '0'
     }
   ]
 })

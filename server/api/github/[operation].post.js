@@ -30,10 +30,18 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const token = config.githubToken || process.env.GITHUB_TOKEN || body.token;
   
+  // Log token availability for debugging (without exposing the actual token)
+  console.log('GitHub token check:', {
+    hasRuntimeConfigToken: !!config.githubToken,
+    hasEnvToken: !!process.env.GITHUB_TOKEN,
+    hasBodyToken: !!body.token,
+    finalTokenAvailable: !!token
+  });
+  
   if (!token) {
     throw createError({
-      statusCode: 401,
-      message: 'GitHub token is required'
+      statusCode: 500,
+      message: 'GitHub token not configured. Please set GITHUB_TOKEN environment variable on your hosting platform (Vercel/Netlify).'
     });
   }
 
