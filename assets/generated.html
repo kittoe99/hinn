@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bello Moving - Your Trusted Moving Partner</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Navbar */
+        nav {
+            background-color: #2F4F4F;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?moving') no-repeat center center/cover;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .hero button {
+            background-color: #48C9B0;
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .hero button:hover {
+            background-color: #1ABC9C;
+        }
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background-color: #f4f4f4;
+        }
+        .features h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2F4F4F;
+        }
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        .feature-card p {
+            color: #666;
+        }
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+        }
+        .about img {
+            max-width: 45%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .about-text {
+            max-width: 50%;
+        }
+        .about-text h2 {
+            color: #2F4F4F;
+            margin-bottom: 1rem;
+        }
+        .about-text p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 2rem;
+            background-color: #f4f4f4;
+        }
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2F4F4F;
+        }
+        .testimonial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .testimonial-card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-card p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        .testimonial-card h4 {
+            font-weight: bold;
+            color: #2F4F4F;
+        }
+        /* Contact Section */
+        .contact {
+            padding: 4rem 2rem;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .contact-form {
+            max-width: 50%;
+        }
+        .contact h2 {
+            color: #2F4F4F;
+            margin-bottom: 1rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #48C9B0;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #1ABC9C;
+        }
+        /* Footer */
+        footer {
+            background-color: #2F4F4F;
+            color: #fff;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer div {
+            max-width: 25%;
+        }
+        footer h3 {
+            margin-bottom: 1rem;
+        }
+        footer ul {
+            list-style: none;
+        }
+        footer ul li {
+            margin-bottom: 0.5rem;
+        }
+        footer ul li a {
+            color: #fff;
+            transition: color 0.3s;
+        }
+        footer ul li a:hover {
+            color: #48C9B0;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about img {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+            .contact {
+                flex-direction: column;
+            }
+            .contact-form {
+                max-width: 100%;
+            }
+            footer div {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div>
+            <h1>Bello Moving</h1>
+        </div>
+        <div>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Welcome to Bello Moving</h1>
+            <p>Your Trusted Moving Partner</p>
+            <button>Get a Quote</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Our Features</h2>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <h3>Reliable Service</h3>
+                <p>We ensure timely and safe delivery of your belongings.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Affordable Pricing</h3>
+                <p>Quality service at competitive prices.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Professional Team</h3>
+                <p>Experienced team committed to excellence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>About Us</h2>
+            <p>Bello Moving has been in the moving industry for over a decade, providing top-notch services to our valued customers. Our commitment to quality and customer satisfaction sets us apart in the industry.</p>
+        </div>
+        <img src="https://source.unsplash.com/800x600/?team" alt="Our Team">
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <p>"Bello Moving made my relocation a breeze! Highly recommend their services."</p>
+                <h4>- Sarah Johnson</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Professional and efficient. I was impressed with how smoothly everything went."</p>
+                <h4>- Michael Brown</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        <img src="https://source.unsplash.com/800x600/?contact" alt="Contact Us">
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <h3>Address</h3>
+            <p>123 Moving Lane, Suite 456<br>Moving City, MC 78901</p>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <ul>
+                <li><a href="mailto:info@bellomoving.com">info@bellomoving.com</a></li>
+                <li><a href="tel:+1234567890">+1 234 567 890</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Services</h3>
+            <ul>
+                <li><a href="#">Residential Moving</a></li>
+                <li><a href="#">Commercial Moving</a></li>
+                <li><a href="#">Packing Services</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Follow Us</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>

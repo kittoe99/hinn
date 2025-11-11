@@ -42,81 +42,100 @@
     <!-- Main Chat Area -->
     <main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
       <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-neutral-200 overflow-hidden h-full flex flex-col">
-        <!-- GitHub Repository Form -->
+        <!-- AI Generated Code Section -->
         <div class="border-b border-neutral-200 p-3 sm:p-4 md:p-6 bg-neutral-50">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-neutral-700" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <h3 class="text-xs sm:text-sm font-semibold text-neutral-900">GitHub Repository</h3>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
-            <input 
-              v-model="githubOwner"
-              type="text" 
-              placeholder="Owner"
-              class="px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500"
-            />
-            <input 
-              v-model="githubRepo"
-              type="text" 
-              placeholder="Repository"
-              class="px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500"
-            />
-            <input 
-              v-model="githubPath"
-              type="text" 
-              placeholder="File path"
-              class="px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500 sm:col-span-2 md:col-span-1"
-            />
-          </div>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <button 
-              @click="loadGithubFile"
-              :disabled="!githubOwner || !githubRepo || !githubPath || isLoadingFile"
-              class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 sm:gap-2"
-            >
-              <svg v-if="!isLoadingFile" class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-              </svg>
-              <svg v-else class="w-3 h-3 sm:w-4 sm:h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              <span>{{ isLoadingFile ? 'Loading...' : 'Load File' }}</span>
-            </button>
-            <button 
-              v-if="loadedFile"
-              @click="clearLoadedFile"
-              class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all flex items-center gap-1.5 sm:gap-2"
-            >
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span>Clear</span>
-            </button>
-          </div>
-          <!-- Loaded File Preview -->
-          <div v-if="loadedFile" class="mt-3 sm:mt-4 space-y-3 sm:space-y-4">
-            <!-- File Info -->
+          <div v-if="generatedCode" class="space-y-3 sm:space-y-4">
+            <!-- Save to Project Form -->
+            <div class="p-3 sm:p-4 bg-gradient-to-br from-[#d97759]/5 to-[#d97759]/10 border border-[#d97759]/30 rounded-lg">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                </svg>
+                <h4 class="text-xs sm:text-sm font-semibold text-neutral-900">Save to Website Project</h4>
+              </div>
+              
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs font-medium text-neutral-700 mb-1">Business/Website Name *</label>
+                  <input 
+                    v-model="projectName"
+                    type="text" 
+                    placeholder="e.g., Coffee Shop, Portfolio, Blog"
+                    class="w-full px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500"
+                  />
+                </div>
+                
+                <div>
+                  <label class="block text-xs font-medium text-neutral-700 mb-1">Description (Optional)</label>
+                  <input 
+                    v-model="projectDescription"
+                    type="text" 
+                    placeholder="Brief description of the website"
+                    class="w-full px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-neutral-700 mb-1">Save As *</label>
+                  <input 
+                    v-model="saveFileName"
+                    type="text" 
+                    placeholder="e.g., index.html, styles.css"
+                    class="w-full px-3 py-2 border border-neutral-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent transition-all text-xs sm:text-sm text-neutral-900 placeholder-neutral-500"
+                  />
+                  <p class="text-[10px] text-neutral-600 mt-1">Filename to save in the project folder</p>
+                </div>
+
+                <button 
+                  @click="saveToProject"
+                  :disabled="!projectName || !saveFileName || isSavingToProject"
+                  class="w-full px-4 py-2.5 text-xs sm:text-sm font-medium text-white bg-[#d97759] hover:bg-[#c86648] rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <svg v-if="!isSavingToProject" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <svg v-else class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>{{ isSavingToProject ? 'Saving...' : 'Save to Project' }}</span>
+                </button>
+
+                <div v-if="savedProject" class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <div class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-medium text-green-900">Saved Successfully!</p>
+                      <p class="text-[10px] text-green-700 mt-1">Project: {{ savedProject.name }}</p>
+                      <p class="text-[10px] text-green-700">File: {{ savedProject.fileName }}</p>
+                      <p class="text-[10px] text-green-700">ID: {{ savedProject.id }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Generated Code Info -->
             <div class="p-3 sm:p-4 bg-white border border-neutral-200 rounded-lg">
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                   <svg class="w-3 h-3 sm:w-4 sm:h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                   </svg>
-                  <span class="text-xs sm:text-sm font-medium text-neutral-900 truncate max-w-[150px] sm:max-w-none">{{ loadedFile.path }}</span>
-                  <span class="text-[10px] sm:text-xs text-neutral-500">({{ (loadedFile.size / 1024).toFixed(1) }} KB)</span>
+                  <span class="text-xs sm:text-sm font-medium text-neutral-900">{{ generatedCode.fileName }}</span>
+                  <span class="text-[10px] sm:text-xs text-neutral-500">({{ generatedCode.type }})</span>
                 </div>
                 <button 
-                  @click="toggleFilePreview"
+                  @click="toggleCodePreview"
                   class="text-[10px] sm:text-xs text-[#d97759] hover:text-[#c86648] font-medium whitespace-nowrap ml-2"
                 >
-                  {{ showFilePreview ? 'Hide' : 'Show' }}
+                  {{ showCodePreview ? 'Hide' : 'Show' }}
                 </button>
               </div>
-              <div v-if="showFilePreview" class="mt-2 sm:mt-3 max-h-48 sm:max-h-64 overflow-y-auto bg-neutral-900 rounded-lg p-2 sm:p-4">
-                <pre class="text-[10px] sm:text-xs text-neutral-100 font-mono whitespace-pre-wrap break-all">{{ loadedFile.contentText }}</pre>
+              <div v-if="showCodePreview" class="mt-2 sm:mt-3 max-h-48 sm:max-h-64 overflow-y-auto bg-neutral-900 rounded-lg p-2 sm:p-4">
+                <pre class="text-[10px] sm:text-xs text-neutral-100 font-mono whitespace-pre-wrap break-all">{{ generatedCode.content }}</pre>
               </div>
             </div>
 
@@ -167,15 +186,18 @@
               </div>
               
               <!-- Selected Element Info -->
-              <div v-if="selectedElement" class="mt-3 p-3 bg-[#f0ebe3] border border-[#d97759] rounded-lg">
+              <div v-if="selectedElement" class="mt-3 p-3 bg-gradient-to-br from-[#d97759]/10 to-[#d97759]/5 border-2 border-[#d97759] rounded-lg">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center gap-2">
-                    <span class="text-xs font-semibold text-neutral-900">Selected:</span>
-                    <code class="text-xs bg-white px-2 py-0.5 rounded border border-neutral-300">{{ selectedElement.tag }}</code>
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                    </svg>
+                    <span class="text-xs font-semibold text-neutral-900">Element Selected</span>
+                    <code class="text-xs bg-white px-2 py-0.5 rounded border border-[#d97759]/30 font-mono">{{ selectedElement.tag }}</code>
                   </div>
                   <button 
                     @click="clearSelection"
-                    class="text-xs text-neutral-600 hover:text-neutral-900"
+                    class="text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -183,10 +205,16 @@
                   </button>
                 </div>
                 <div class="text-xs text-neutral-700 mb-2">
-                  <strong>Selector:</strong> <code class="bg-white px-1 py-0.5 rounded text-[10px]">{{ selectedElement.selector }}</code>
+                  <strong>CSS Selector:</strong> <code class="bg-white px-1.5 py-0.5 rounded text-[10px] font-mono border border-neutral-200">{{ selectedElement.selector }}</code>
+                </div>
+                <div class="text-xs text-[#d97759] font-medium mb-2 flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  Ask AI to modify this element (e.g., "Change the color to blue" or "Add a hover effect")
                 </div>
                 <details class="text-xs">
-                  <summary class="cursor-pointer text-[#d97759] hover:text-[#c86648] font-medium">View HTML</summary>
+                  <summary class="cursor-pointer text-[#d97759] hover:text-[#c86648] font-medium">View HTML Code</summary>
                   <pre class="mt-2 p-2 bg-neutral-900 text-neutral-100 rounded text-[10px] overflow-x-auto">{{ selectedElement.html }}</pre>
                 </details>
               </div>
@@ -204,14 +232,15 @@
               </svg>
             </div>
             <div class="flex-1 bg-[#f0ebe3] rounded-xl sm:rounded-2xl rounded-tl-none p-3 sm:p-4">
-              <p class="text-neutral-800 text-xs sm:text-sm">Hello! I'm your AI-powered website builder assistant, powered by GPT-4. I can help you:</p>
+              <p class="text-neutral-800 text-xs sm:text-sm">Hello! I'm your AI-powered website builder assistant, powered by GPT-5-Codex. I can help you:</p>
               <ul class="text-neutral-800 text-xs sm:text-sm mt-2 space-y-1 ml-3 sm:ml-4 list-disc">
-                <li>Load and edit files from GitHub repositories</li>
-                <li>Preview websites with live element selection</li>
-                <li>Write and modify HTML, CSS, JavaScript, React, Vue.js, and more</li>
-                <li>Provide code suggestions and best practices</li>
+                <li>Generate complete HTML, CSS, and JavaScript files from scratch</li>
+                <li>Preview generated code with live element selection</li>
+                <li>Save generated files to your website projects</li>
+                <li>Create landing pages, portfolios, forms, and more</li>
               </ul>
-              <p class="text-neutral-800 text-xs sm:text-sm mt-2 sm:mt-3">Load a file from GitHub or describe what you'd like to create!</p>
+              <p class="text-neutral-800 text-xs sm:text-sm mt-2 sm:mt-3">Just describe what you want to build, and I'll generate the code for you!</p>
+              <p class="text-neutral-800 text-[10px] sm:text-xs mt-2 italic">Example: "Create a landing page for a coffee shop with a hero section and contact form"</p>
             </div>
           </div>
 
@@ -334,11 +363,11 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Codex Web Designer | Hinn',
+  title: 'AI Website Builder | Hinn',
   meta: [
     {
       name: 'description',
-      content: 'Autonomous website design and development agent powered by AI'
+      content: 'AI-powered website builder with GPT-5 - Generate complete websites with code'
     },
     {
       'http-equiv': 'Cache-Control',
@@ -363,13 +392,16 @@ const isTyping = ref(false)
 const chatContainer = ref(null)
 const fileInput = ref(null)
 
-// GitHub state
-const githubOwner = ref('')
-const githubRepo = ref('')
-const githubPath = ref('')
-const loadedFile = ref(null)
-const isLoadingFile = ref(false)
-const showFilePreview = ref(true)
+// Generated code state
+const generatedCode = ref(null)
+const showCodePreview = ref(true)
+
+// Project save state
+const projectName = ref('')
+const projectDescription = ref('')
+const saveFileName = ref('')
+const isSavingToProject = ref(false)
+const savedProject = ref(null)
 
 // Preview state
 const previewIframe = ref(null)
@@ -378,8 +410,10 @@ const enableElementSelector = ref(true)
 const selectedElement = ref(null)
 const previewHeight = ref('550px')
 
-// GitHub composable
-const github = useGithub()
+// Supabase and storage (client-side only)
+const supabase = ref(null)
+const user = ref(null)
+const storage = ref(null)
 
 // Computed viewport style
 const previewWrapperStyle = computed(() => {
@@ -429,11 +463,7 @@ const sendMessage = async () => {
       method: 'POST',
       body: {
         messages: messages.value,
-        loadedFile: loadedFile.value ? {
-          path: loadedFile.value.path,
-          size: loadedFile.value.size,
-          contentText: loadedFile.value.contentText
-        } : null,
+        generatedCode: generatedCode.value,
         selectedElement: selectedElement.value
       }
     })
@@ -443,6 +473,9 @@ const sendMessage = async () => {
       content: response.message
     }
     messages.value.push(assistantMessage)
+    
+    // Extract code blocks from AI response
+    extractCodeFromResponse(response.message)
   } catch (error) {
     console.error('Error sending message:', error)
     const errorMessage = {
@@ -480,48 +513,196 @@ const resetChat = () => {
   }
 }
 
-// Load GitHub file
-const loadGithubFile = async () => {
-  if (!githubOwner.value || !githubRepo.value || !githubPath.value) return
+// Extract code from AI response
+const extractCodeFromResponse = (message) => {
+  // Match code blocks with language identifier
+  const codeBlockRegex = /```(\w+)\n([\s\S]*?)```/g
+  const matches = [...message.matchAll(codeBlockRegex)]
   
-  isLoadingFile.value = true
-  
-  try {
-    const result = await github.readFile(
-      githubOwner.value,
-      githubRepo.value,
-      githubPath.value
-    )
+  if (matches.length > 0) {
+    // Use the first code block found
+    const [, language, code] = matches[0]
     
-    loadedFile.value = result.data
-    showFilePreview.value = true
-    
-    // Add success message to chat
-    const successMessage = {
-      role: 'assistant',
-      content: `Successfully loaded ${result.data.path} from ${githubOwner.value}/${githubRepo.value}. File size: ${(result.data.size / 1024).toFixed(1)} KB. You can now ask me to edit or analyze this file.`
+    // Determine file extension and type
+    const extensions = {
+      'html': { ext: 'html', type: 'HTML' },
+      'css': { ext: 'css', type: 'CSS' },
+      'javascript': { ext: 'js', type: 'JavaScript' },
+      'js': { ext: 'js', type: 'JavaScript' },
+      'json': { ext: 'json', type: 'JSON' },
+      'typescript': { ext: 'ts', type: 'TypeScript' },
+      'ts': { ext: 'ts', type: 'TypeScript' }
     }
-    messages.value.push(successMessage)
-    scrollToBottom()
-  } catch (error) {
-    console.error('Error loading GitHub file:', error)
     
-    // Add error message to chat
-    const errorMessage = {
-      role: 'assistant',
-      content: `Failed to load file from GitHub: ${error.message || 'Unknown error'}. Please check your repository details and GitHub token.`
+    const fileInfo = extensions[language.toLowerCase()] || { ext: 'txt', type: 'Text' }
+    
+    generatedCode.value = {
+      content: code.trim(),
+      language: language,
+      type: fileInfo.type,
+      fileName: saveFileName.value || `generated.${fileInfo.ext}`
     }
-    messages.value.push(errorMessage)
-    scrollToBottom()
-  } finally {
-    isLoadingFile.value = false
+    
+    // Auto-populate filename if not set
+    if (!saveFileName.value) {
+      saveFileName.value = `generated.${fileInfo.ext}`
+    }
   }
 }
 
-// Clear loaded file
-const clearLoadedFile = () => {
-  loadedFile.value = null
-  showFilePreview.value = true
+// Toggle code preview
+const toggleCodePreview = () => {
+  showCodePreview.value = !showCodePreview.value
+}
+
+// Clear generated code
+const clearGeneratedCode = () => {
+  generatedCode.value = null
+  projectName.value = ''
+  projectDescription.value = ''
+  saveFileName.value = ''
+  savedProject.value = null
+}
+
+// Save to project
+const saveToProject = async () => {
+  if (!user.value) {
+    messages.value.push({
+      role: 'assistant',
+      content: 'Please sign in to save files to your projects.'
+    })
+    scrollToBottom()
+    return
+  }
+
+  if (!storage.value) {
+    messages.value.push({
+      role: 'assistant',
+      content: 'Storage not available. Please refresh the page.'
+    })
+    scrollToBottom()
+    return
+  }
+
+  if (!projectName.value || !saveFileName.value || !generatedCode.value) return
+  
+  isSavingToProject.value = true
+  savedProject.value = null
+  
+  try {
+    // Step 1: Create or find website project in database
+    const { data: existingWebsite, error: findError} = await supabase.value
+      .from('websites')
+      .select('id, name, storage_path')
+      .eq('user_id', user.value.value.id)
+      .eq('name', projectName.value)
+      .single()
+    
+    let websiteId
+    
+    if (existingWebsite) {
+      // Use existing website
+      websiteId = existingWebsite.id
+      console.log('Using existing website:', existingWebsite)
+    } else {
+      // Create new website project
+      // Generate slug from project name
+      const slug = projectName.value
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .substring(0, 50) // Limit length
+      
+      const { data: newWebsite, error: createError } = await supabase.value
+        .from('websites')
+        .insert({
+          name: projectName.value,
+          slug: slug,
+          description: projectDescription.value || null,
+          user_id: user.value.value.id,
+          status: 'pending', // Valid status: pending, active, paused, archived
+          plan_id: null // No plan required for builder projects
+        })
+        .select('id, name, storage_path')
+        .single()
+      
+      if (createError) throw createError
+      
+      websiteId = newWebsite.id
+      console.log('Created new website:', newWebsite)
+    }
+    
+    // Step 2: Upload file to storage
+    // Convert string content to Blob for proper file upload
+    const contentType = getContentType(saveFileName.value)
+    const blob = new Blob([generatedCode.value.content], { type: contentType })
+    
+    const { data: uploadData, error: uploadError } = await storage.value.uploadFile(
+      websiteId,
+      saveFileName.value,
+      blob,
+      {
+        contentType: contentType,
+        upsert: true
+      }
+    )
+    
+    if (uploadError) throw uploadError
+    
+    // Success!
+    savedProject.value = {
+      id: websiteId,
+      name: projectName.value,
+      fileName: saveFileName.value
+    }
+    
+    // Add success message to chat
+    messages.value.push({
+      role: 'assistant',
+      content: `✅ Successfully saved **${saveFileName.value}** to project "${projectName.value}"!
+      
+📁 Storage Path: \`website/${websiteId}/${saveFileName.value}\`
+📝 File Type: ${contentType}
+🆔 Project ID: ${websiteId}
+
+The HTML file is now stored in Supabase Storage and ready to use!`
+    })
+    scrollToBottom()
+    
+  } catch (error) {
+    console.error('Error saving to project:', error)
+    
+    // Add error message to chat
+    messages.value.push({
+      role: 'assistant',
+      content: `❌ Failed to save file: ${error.message || 'Unknown error'}. Please try again.`
+    })
+    scrollToBottom()
+  } finally {
+    isSavingToProject.value = false
+  }
+}
+
+// Helper function to determine content type from filename
+const getContentType = (filename) => {
+  const ext = filename.split('.').pop().toLowerCase()
+  const types = {
+    'html': 'text/html',
+    'css': 'text/css',
+    'js': 'application/javascript',
+    'json': 'application/json',
+    'png': 'image/png',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'gif': 'image/gif',
+    'svg': 'image/svg+xml',
+    'webp': 'image/webp',
+    'woff': 'font/woff',
+    'woff2': 'font/woff2',
+    'ttf': 'font/ttf',
+    'otf': 'font/otf'
+  }
+  return types[ext] || 'text/plain'
 }
 
 // Toggle file preview
@@ -531,13 +712,13 @@ const toggleFilePreview = () => {
 
 // Refresh preview
 const refreshPreview = () => {
-  if (!loadedFile.value || !previewIframe.value) return
+  if (!generatedCode.value || !previewIframe.value) return
   
   const iframe = previewIframe.value
   const doc = iframe.contentDocument || iframe.contentWindow.document
   
   doc.open()
-  doc.write(loadedFile.value.contentText)
+  doc.write(generatedCode.value.content)
   doc.close()
   
   // Setup element selector after content loads
@@ -638,19 +819,63 @@ const clearSelection = () => {
   selectedElement.value = null
 }
 
-// Watch for file changes and refresh preview
-watch(loadedFile, (newFile) => {
-  if (newFile) {
+// Watch for generated code changes and refresh preview
+watch(generatedCode, (newCode) => {
+  if (newCode && newCode.type === 'HTML') {
     nextTick(() => {
       refreshPreview()
     })
   }
 })
 
-// Auto-scroll on mount
-onMounted(() => {
+// Auto-scroll on mount and initialize client-side composables
+onMounted(async () => {
   scrollToBottom()
+  
+  // Initialize Supabase and storage on client side only
+  if (process.client) {
+    supabase.value = useSupabaseClient()
+    user.value = useSupabaseUser()
+    storage.value = useWebsiteStorage()
+    
+    // Load website context from URL
+    const route = useRoute()
+    const websiteId = route.query.website
+    if (websiteId) {
+      await loadWebsiteContext(websiteId)
+    }
+  }
 })
+
+// Load website context
+const loadWebsiteContext = async (websiteId) => {
+  if (!supabase.value) return
+  
+  try {
+    const { data: website, error } = await supabase.value
+      .from('websites')
+      .select('id, name, description, storage_path')
+      .eq('id', websiteId)
+      .single()
+    
+    if (error) throw error
+    
+    if (website) {
+      // Auto-populate project name
+      projectName.value = website.name
+      projectDescription.value = website.description || ''
+      
+      // Add welcome message with website context
+      messages.value.push({
+        role: 'assistant',
+        content: `Welcome! I'm ready to help you build **${website.name}**. I can generate HTML, CSS, and JavaScript files for your website. What would you like to create?`
+      })
+      scrollToBottom()
+    }
+  } catch (error) {
+    console.error('Error loading website context:', error)
+  }
+}
 </script>
 
 <style scoped>

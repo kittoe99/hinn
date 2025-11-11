@@ -1003,17 +1003,23 @@
                 </div>
               </div>
 
-              <!-- Footer Info -->
-              <div class="flex items-center justify-between pt-3 border-t border-neutral-200">
+              <!-- Footer Actions -->
+              <div class="flex items-center justify-between pt-3 border-t border-neutral-200 gap-2">
                 <div class="flex items-center gap-1.5 text-xs text-neutral-500">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   <span>{{ project.lastDeployed }}</span>
                 </div>
-                <div class="text-xs font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors">
-                  View details
-                </div>
+                <button
+                  @click.stop="startBuild(project.id)"
+                  class="px-3 py-1.5 text-xs font-medium text-white bg-[#d97759] hover:bg-[#c86648] rounded-lg transition-colors flex items-center gap-1.5"
+                >
+                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                  </svg>
+                  Start Build
+                </button>
               </div>
             </div>
           </div>
@@ -3590,6 +3596,11 @@ const formatFileSize = (bytes) => {
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i]
+}
+
+// Navigate to builder with website context
+const startBuild = (websiteId) => {
+  navigateTo(`/builder?website=${websiteId}`)
 }
 
 // Submit change request (placeholder - wire to API later)
