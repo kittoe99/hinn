@@ -18,7 +18,7 @@
             <rect x="4" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
             <rect x="10" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
           </svg>
-          <span class="hidden sm:block text-lg font-semibold text-neutral-900">WPScanvas</span>
+          <span class="text-lg font-semibold text-neutral-900">WPScanvas</span>
         </NuxtLink>
 
         <!-- Desktop Navigation Tabs (hidden on mobile) -->
