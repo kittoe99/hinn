@@ -1,10 +1,24 @@
 <template>
-  <header class="border-b border-neutral-200 bg-[#f9f8f6] backdrop-blur-sm relative shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
+  <header class="sticky top-0 border-b border-neutral-200 bg-[#f9f8f6] backdrop-blur-sm shadow-[0_1px_0_rgba(0,0,0,0.04)] z-[100]">
     <nav class="max-w-5xl mx-auto px-6 lg:px-8 relative z-[100]">
       <div class="flex items-center justify-between h-16 gap-4">
         <!-- Logo -->
-        <NuxtLink to="/" class="text-lg font-medium text-neutral-900 flex-shrink-0">
-          Hinn
+        <NuxtLink to="/" class="flex items-center flex-shrink-0 group" aria-label="WPScanvas Home">
+          <svg
+            class="w-7 h-7 text-[#d97759] -mr-1.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+          >
+            <!-- Two thick vertical bars tilted left -->
+            <rect x="4" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+            <rect x="10" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+          </svg>
+          <span class="text-lg font-semibold tracking-tight text-neutral-900 group-hover:text-neutral-900 overflow-hidden">
+            <span class="inline-block">WPS</span><span class="inline-block transition-all duration-300" :style="{ opacity: canvasOpacity, maxWidth: canvasOpacity > 0 ? '200px' : '0px' }">canvas</span>
+          </span>
         </NuxtLink>
         
         <!-- Mobile Search Bar (between logo and menu button) -->
@@ -217,10 +231,36 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const mobileMenuOpen = ref(false)
 const productsExpanded = ref(true)
 const productsOpen = ref(false)
 const searchQuery = ref('')
+const canvasOpacity = ref(1)
+
+// Handle scroll to fade out "canvas" text
+const handleScroll = () => {
+  const scrollY = window.scrollY
+  
+  // Start fading at 100px, fully hidden at 300px
+  const fadeStart = 100
+  const fadeEnd = 300
+  
+  if (scrollY < fadeStart) {
+    canvasOpacity.value = 1
+  } else if (scrollY >= fadeEnd) {
+    canvasOpacity.value = 0
+  } else {
+    canvasOpacity.value = 1 - ((scrollY - fadeStart) / (fadeEnd - fadeStart))
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
