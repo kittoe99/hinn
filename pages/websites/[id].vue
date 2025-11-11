@@ -52,66 +52,91 @@
           
           <!-- Left Column: Website Preview -->
           <div>
-            <div class="rounded-xl border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
-              <div v-if="websiteUrl" class="aspect-video relative bg-white group">
-                <!-- Screenshot Preview -->
-                <img
-                  v-if="screenshotUrl && !screenshotError"
-                  :src="screenshotUrl"
-                  :alt="`Preview of ${website.name}`"
-                  class="w-full h-full object-cover object-top"
-                  @error="handleScreenshotError"
-                  @load="screenshotLoaded = true"
-                />
-                <!-- Loading State -->
-                <div v-if="!screenshotLoaded && !screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100">
-                  <div class="text-center">
-                    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#d97759] border-r-transparent mb-3"></div>
-                    <p class="text-sm text-neutral-500">Capturing preview...</p>
-                  </div>
-                </div>
-                <!-- Fallback: Show domain with icon -->
-                <div v-if="screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#d97759]/5 to-neutral-50">
-                  <div class="text-center p-8">
-                    <div class="h-16 w-16 rounded-2xl bg-[#d97759]/10 flex items-center justify-center mx-auto mb-4">
-                      <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                      </svg>
+            <div class="rounded-xl border border-neutral-200 overflow-hidden bg-white shadow-lg">
+              <div v-if="websiteUrl" class="relative bg-white">
+                <!-- Browser Chrome -->
+                <div class="bg-neutral-100 border-b border-neutral-200 px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <!-- Browser Dots -->
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                      <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                      <div class="w-3 h-3 rounded-full bg-green-400"></div>
                     </div>
-                    <h3 class="text-base font-semibold text-neutral-900 mb-2">{{ website.name }}</h3>
-                    <p class="text-sm text-neutral-500 mb-4">{{ website.domain || website.custom_domain }}</p>
+                    
+                    <!-- Address Bar -->
+                    <div class="flex-1 flex items-center gap-2 bg-white rounded-lg px-3 py-2 border border-neutral-200">
+                      <svg class="h-4 w-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                      </svg>
+                      <span class="text-sm text-neutral-600 truncate">{{ websiteUrl }}</span>
+                    </div>
+                    
+                    <!-- Open in New Tab Button -->
                     <a 
                       :href="websiteUrl" 
                       target="_blank"
-                      class="inline-flex items-center gap-2 px-4 py-2 bg-[#d97759] text-white rounded-lg text-sm font-medium hover:bg-[#c86648] transition-colors"
+                      rel="noopener noreferrer"
+                      class="flex items-center gap-2 px-3 py-2 bg-[#d97759] text-white rounded-lg text-xs font-medium hover:bg-[#c86648] transition-colors"
                     >
-                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                       </svg>
-                      Visit Website
+                      Open
                     </a>
                   </div>
                 </div>
-                <!-- Hover Overlay with Link -->
-                <a 
-                  :href="websiteUrl" 
-                  target="_blank"
-                  class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
-                >
-                  <div class="bg-white rounded-lg px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium text-neutral-900">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                    </svg>
-                    Open Site
+                
+                <!-- Live Website Preview in iframe -->
+                <div class="aspect-video relative bg-white">
+                  <iframe
+                    :src="proxyUrl"
+                    class="w-full h-full border-0"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Website Preview"
+                    @load="iframeLoaded = true"
+                    @error="iframeError = true"
+                  ></iframe>
+                  
+                  <!-- Loading State -->
+                  <div v-if="!iframeLoaded && !iframeError" class="absolute inset-0 flex items-center justify-center bg-white">
+                    <div class="text-center">
+                      <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#d97759] border-r-transparent mb-3"></div>
+                      <p class="text-sm text-neutral-500">Loading preview...</p>
+                    </div>
                   </div>
-                </a>
+                  
+                  <!-- Error State -->
+                  <div v-if="iframeError" class="absolute inset-0 flex items-center justify-center bg-neutral-50">
+                    <div class="text-center p-8">
+                      <div class="h-16 w-16 rounded-2xl bg-[#d97759]/10 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                      </div>
+                      <h3 class="text-base font-semibold text-neutral-900 mb-2">Preview unavailable</h3>
+                      <p class="text-sm text-neutral-500 mb-4">This website cannot be embedded</p>
+                      <a 
+                        :href="websiteUrl" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-[#d97759] text-white rounded-lg text-sm font-medium hover:bg-[#c86648] transition-colors"
+                      >
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                        Visit Website
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div v-else class="aspect-video flex items-center justify-center p-8">
+              <div v-else class="aspect-video flex items-center justify-center p-8 bg-neutral-50">
                 <div class="text-center">
                   <svg class="h-16 w-16 text-neutral-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
-                  <p class="text-sm text-neutral-500">No preview available</p>
+                  <p class="text-sm text-neutral-500">No domain configured</p>
                 </div>
               </div>
             </div>
@@ -407,45 +432,26 @@ const website = ref(null)
 const onboarding = ref(null)
 const loading = ref(true)
 const error = ref(null)
-const screenshotError = ref(false)
-const screenshotLoaded = ref(false)
-
-const handleScreenshotError = () => {
-  console.log('Screenshot failed to load')
-  screenshotError.value = true
-}
+const iframeLoaded = ref(false)
+const iframeError = ref(false)
 
 // Compute website URL for preview
 const websiteUrl = computed(() => {
   if (!website.value) return null
+  
   let domain = website.value.custom_domain || website.value.domain
-  if (domain) {
-    // Remove trailing slash if present
-    domain = domain.replace(/\/$/, '')
-    // Add https:// if not present
-    if (!domain.startsWith('http://') && !domain.startsWith('https://')) {
-      domain = `https://${domain}`
-    }
-    return domain
-  }
-  return null
+  if (!domain) return null
+  
+  // Remove trailing slash and protocol
+  domain = domain.replace(/\/$/, '').replace(/^https?:\/\//, '')
+  
+  return `https://${domain}`
 })
 
-// Generate screenshot URL using screenshot API
-const screenshotUrl = computed(() => {
-  if (!websiteUrl.value) {
-    console.log('No websiteUrl available')
-    return null
-  }
-  console.log('Website URL for screenshot:', websiteUrl.value)
-  
-  // Using multiple screenshot services as fallbacks
-  // Primary: screenshot.rocks (free, no key required)
-  const encodedUrl = encodeURIComponent(websiteUrl.value)
-  const screenshotService = `https://api.screenshotone.com/take?url=${encodedUrl}&viewport_width=1200&viewport_height=800&format=jpg&cache=true&access_key=demo`
-  
-  console.log('Screenshot URL:', screenshotService)
-  return screenshotService
+// Compute proxied URL for iframe to bypass X-Frame-Options
+const proxyUrl = computed(() => {
+  if (!websiteUrl.value) return null
+  return `/api/proxy-website?url=${encodeURIComponent(websiteUrl.value)}`
 })
 
 // Expandable sections state - consolidated to 2 sections
