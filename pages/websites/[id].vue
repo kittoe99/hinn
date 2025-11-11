@@ -53,12 +53,65 @@
           <!-- Left Column: Website Preview -->
           <div>
             <div class="rounded-xl border border-neutral-200 overflow-hidden bg-neutral-50 shadow-sm">
-              <div class="aspect-video flex items-center justify-center p-8">
+              <div v-if="websiteUrl" class="aspect-video relative bg-white group">
+                <!-- Screenshot Preview -->
+                <img
+                  v-if="screenshotUrl && !screenshotError"
+                  :src="screenshotUrl"
+                  :alt="`Preview of ${website.name}`"
+                  class="w-full h-full object-cover object-top"
+                  @error="handleScreenshotError"
+                  @load="screenshotLoaded = true"
+                />
+                <!-- Loading State -->
+                <div v-if="!screenshotLoaded && !screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100">
+                  <div class="text-center">
+                    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#d97759] border-r-transparent mb-3"></div>
+                    <p class="text-sm text-neutral-500">Capturing preview...</p>
+                  </div>
+                </div>
+                <!-- Fallback: Show domain with icon -->
+                <div v-if="screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#d97759]/5 to-neutral-50">
+                  <div class="text-center p-8">
+                    <div class="h-16 w-16 rounded-2xl bg-[#d97759]/10 flex items-center justify-center mx-auto mb-4">
+                      <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                      </svg>
+                    </div>
+                    <h3 class="text-base font-semibold text-neutral-900 mb-2">{{ website.name }}</h3>
+                    <p class="text-sm text-neutral-500 mb-4">{{ website.domain || website.custom_domain }}</p>
+                    <a 
+                      :href="websiteUrl" 
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-[#d97759] text-white rounded-lg text-sm font-medium hover:bg-[#c86648] transition-colors"
+                    >
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                      Visit Website
+                    </a>
+                  </div>
+                </div>
+                <!-- Hover Overlay with Link -->
+                <a 
+                  :href="websiteUrl" 
+                  target="_blank"
+                  class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                >
+                  <div class="bg-white rounded-lg px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium text-neutral-900">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    Open Site
+                  </div>
+                </a>
+              </div>
+              <div v-else class="aspect-video flex items-center justify-center p-8">
                 <div class="text-center">
                   <svg class="h-16 w-16 text-neutral-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
-                  <p class="text-sm text-neutral-500">Website preview</p>
+                  <p class="text-sm text-neutral-500">No preview available</p>
                 </div>
               </div>
             </div>
@@ -340,7 +393,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
 definePageMeta({
@@ -354,6 +407,46 @@ const website = ref(null)
 const onboarding = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const screenshotError = ref(false)
+const screenshotLoaded = ref(false)
+
+const handleScreenshotError = () => {
+  console.log('Screenshot failed to load')
+  screenshotError.value = true
+}
+
+// Compute website URL for preview
+const websiteUrl = computed(() => {
+  if (!website.value) return null
+  let domain = website.value.custom_domain || website.value.domain
+  if (domain) {
+    // Remove trailing slash if present
+    domain = domain.replace(/\/$/, '')
+    // Add https:// if not present
+    if (!domain.startsWith('http://') && !domain.startsWith('https://')) {
+      domain = `https://${domain}`
+    }
+    return domain
+  }
+  return null
+})
+
+// Generate screenshot URL using screenshot API
+const screenshotUrl = computed(() => {
+  if (!websiteUrl.value) {
+    console.log('No websiteUrl available')
+    return null
+  }
+  console.log('Website URL for screenshot:', websiteUrl.value)
+  
+  // Using multiple screenshot services as fallbacks
+  // Primary: screenshot.rocks (free, no key required)
+  const encodedUrl = encodeURIComponent(websiteUrl.value)
+  const screenshotService = `https://api.screenshotone.com/take?url=${encodedUrl}&viewport_width=1200&viewport_height=800&format=jpg&cache=true&access_key=demo`
+  
+  console.log('Screenshot URL:', screenshotService)
+  return screenshotService
+})
 
 // Expandable sections state - consolidated to 2 sections
 const expandedSections = ref({

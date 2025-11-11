@@ -391,9 +391,22 @@ useHead({
   meta: [
     {
       name: 'description',
-      content:
-        'Build stunning professional websites with AI-powered tools. WPScanvas makes website creation fast, easy, and affordable. No coding required. Start building today.'
-    }
+      content: 'Build stunning professional websites with AI-powered tools. WPScanvas makes website creation fast, easy, and affordable. No coding required. Start building today.'
+    },
+    {
+      name: 'keywords',
+      content: 'AI website builder, create website, website maker, no-code website builder, AI web design, professional website, website templates, drag and drop website builder, WPScanvas'
+    },
+    { property: 'og:title', content: 'WPScanvas - AI-Powered Website Builder' },
+    { property: 'og:description', content: 'Build stunning professional websites with AI-powered tools. No coding required. Start building today.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://wpscanvas.com' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'WPScanvas - AI-Powered Website Builder' },
+    { name: 'twitter:description', content: 'Build stunning professional websites with AI-powered tools. No coding required.' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://wpscanvas.com' }
   ]
 })
 

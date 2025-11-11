@@ -23,11 +23,25 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'WPScanvas - AI-Powered Website Builder',
+      title: 'WPScanvas - AI-Powered Website Builder | Create Professional Websites in Minutes',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Build professional websites with AI-powered tools. Create, customize, and deploy stunning websites in minutes.' }
+        { name: 'description', content: 'WPScanvas is an AI-powered website builder that helps you create stunning, professional websites in minutes. No coding required. Build, customize, and deploy with intelligent AI assistance.' },
+        { name: 'keywords', content: 'AI website builder, website creator, no-code website, professional website design, AI web design, website builder tool, create website, WPScanvas' },
+        { name: 'author', content: 'WPScanvas' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'WPScanvas - AI-Powered Website Builder' },
+        { property: 'og:description', content: 'Create stunning professional websites in minutes with AI-powered tools. No coding required.' },
+        { property: 'og:site_name', content: 'WPScanvas' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'WPScanvas - AI-Powered Website Builder' },
+        { name: 'twitter:description', content: 'Create stunning professional websites in minutes with AI-powered tools. No coding required.' },
+        { name: 'theme-color', content: '#d97759' }
+      ],
+      link: [
+        { rel: 'canonical', href: 'https://wpscanvas.com' }
       ]
     }
   },

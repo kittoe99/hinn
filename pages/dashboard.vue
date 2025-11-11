@@ -609,7 +609,7 @@
             <div class="flex items-center justify-between mb-4">
               <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10">
                 <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 919-9"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                 </svg>
               </div>
               <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -674,7 +674,7 @@
             >
               <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
                 <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 919-9"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                 </svg>
               </div>
               <div class="flex-1 min-w-0">
@@ -982,10 +982,10 @@
             :key="project.id"
             @click="!showOnboardingRequired && openWebsiteDetails(project.id)"
             :class="[
-              'group relative overflow-hidden bg-white rounded-2xl border border-neutral-300 transition-all',
+              'group relative overflow-hidden bg-white rounded-2xl border border-neutral-200 transition-all',
               showOnboardingRequired 
                 ? 'cursor-not-allowed opacity-60' 
-                : 'hover:bg-[#f9f8f6] cursor-pointer'
+                : 'hover:border-neutral-300 cursor-pointer'
             ]"
           >
             
@@ -1012,23 +1012,17 @@
                 </div>
               </div>
 
-              <!-- Footer Actions -->
-              <div class="flex items-center justify-between pt-3 border-t border-neutral-200 gap-2">
+              <!-- Footer Info -->
+              <div class="flex items-center justify-between pt-3 border-t border-neutral-200">
                 <div class="flex items-center gap-1.5 text-xs text-neutral-500">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                   <span>{{ project.lastDeployed }}</span>
                 </div>
-                <button
-                  @click.stop="startBuild(project.id)"
-                  class="px-3 py-1.5 text-xs font-medium text-white bg-[#d97759] hover:bg-[#c86648] rounded-lg transition-colors flex items-center gap-1.5"
-                >
-                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                  </svg>
-                  Start Build
-                </button>
+                <div class="text-xs font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors">
+                  View details →
+                </div>
               </div>
             </div>
           </div>
@@ -2557,9 +2551,12 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Dashboard - WPScanvas',
+  title: 'Dashboard - Manage Your Websites | WPScanvas',
   meta: [
-    { name: 'description', content: 'Manage your websites and projects with WPScanvas' }
+    { name: 'description', content: 'Manage your websites, domains, and projects with WPScanvas. Access your AI-powered website builder dashboard to create, edit, and deploy professional websites.' },
+    { name: 'robots', content: 'noindex, nofollow' }, // Dashboard should not be indexed
+    { property: 'og:title', content: 'Dashboard - WPScanvas' },
+    { property: 'og:description', content: 'Manage your websites and projects with WPScanvas' }
   ]
 })
 
@@ -3607,9 +3604,9 @@ const formatFileSize = (bytes) => {
   return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i]
 }
 
-// Navigate to builder with website context
-const startBuild = (websiteId) => {
-  navigateTo(`/builder?website=${websiteId}`)
+// View website details
+const viewWebsite = (websiteId) => {
+  navigateTo(`/websites/${websiteId}`)
 }
 
 // Submit change request (placeholder - wire to API later)
