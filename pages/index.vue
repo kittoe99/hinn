@@ -387,12 +387,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 useHead({
-  title: 'Professional Website Design & Development Services | Monthly Subscription | Hinn',
+  title: 'AI-Powered Website Builder | Create Professional Websites in Minutes | WPScanvas',
   meta: [
     {
       name: 'description',
       content:
-        'Custom web design, React/Vue.js development, SEO optimization, and AI chatbot integration on a monthly subscription. Launch your website in 10 days with ongoing support and optimization.'
+        'Build stunning professional websites with AI-powered tools. WPScanvas makes website creation fast, easy, and affordable. No coding required. Start building today.'
     }
   ]
 })

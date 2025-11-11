@@ -23,11 +23,11 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Hinn - Professional Web Services',
+      title: 'WPScanvas - AI-Powered Website Builder',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Professional websites, AI agents, and marketing services' }
+        { name: 'description', content: 'Build professional websites with AI-powered tools. Create, customize, and deploy stunning websites in minutes.' }
       ]
     }
   },

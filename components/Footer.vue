@@ -5,7 +5,23 @@
       <div class="mb-12 pb-12 border-b border-neutral-800/80">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <h3 class="text-2xl font-semibold text-white mb-2">Hinn</h3>
+            <NuxtLink to="/" class="flex items-center mb-3 group" aria-label="WPScanvas Home">
+              <svg
+                class="w-7 h-7 text-white -mr-1.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-hidden="true"
+              >
+                <!-- Two thick vertical bars tilted left -->
+                <rect x="4" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+                <rect x="10" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+              </svg>
+              <span class="text-2xl font-semibold text-white group-hover:text-neutral-200 transition-colors">
+                WPScanvas
+              </span>
+            </NuxtLink>
             <p class="text-sm text-neutral-300 max-w-md">
               Building the future of digital products with AI-powered websites, agents, and marketing.
             </p>
@@ -136,7 +152,7 @@
       <!-- Bottom -->
       <div class="pt-8 border-t border-neutral-800/80 flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-sm text-neutral-400">
-          © {{ new Date().getFullYear() }} Hinn. All rights reserved.
+          © {{ new Date().getFullYear() }} WPScanvas. All rights reserved.
         </p>
         <div class="flex items-center gap-5">
           <a href="#" class="text-neutral-400 hover:text-white transition-all duration-300 hover:scale-110" aria-label="Twitter">

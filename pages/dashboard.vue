@@ -5,11 +5,20 @@
       <!-- Top Bar with Logo, Navigation (Desktop), Search, and Logout -->
       <div class="flex h-16 items-center px-6">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 flex-shrink-0 mr-12">
-          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900">
-            <span class="text-lg font-bold text-white">H</span>
-          </div>
-          <span class="hidden sm:block text-lg font-semibold text-neutral-900">Hinn</span>
+        <NuxtLink to="/" class="flex items-center flex-shrink-0 mr-12" aria-label="WPScanvas Home">
+          <svg
+            class="w-7 h-7 text-[#d97759] -mr-1.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+          >
+            <!-- Two thick vertical bars tilted left -->
+            <rect x="4" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+            <rect x="10" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+          </svg>
+          <span class="hidden sm:block text-lg font-semibold text-neutral-900">WPScanvas</span>
         </NuxtLink>
 
         <!-- Desktop Navigation Tabs (hidden on mobile) -->
@@ -2548,9 +2557,9 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Dashboard - Hinn',
+  title: 'Dashboard - WPScanvas',
   meta: [
-    { name: 'description', content: 'Manage your projects and deployments' }
+    { name: 'description', content: 'Manage your websites and projects with WPScanvas' }
   ]
 })
 
