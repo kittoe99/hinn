@@ -109,8 +109,13 @@
     </section>
 
     <!-- How It Works -->
-    <section class="py-16 md:py-24 bg-white">
-      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <section class="py-16 md:py-24 bg-white relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 relative">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-neutral-900 mb-3">How it works</h2>
           <p class="text-base text-neutral-600">
@@ -118,29 +123,76 @@
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="relative">
-            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">1</div>
-            <h3 class="text-xl font-semibold text-neutral-900 mb-3">Share Your Vision</h3>
-            <p class="text-neutral-600">
-              Tell us about your business, goals, and preferences through our simple onboarding process.
-            </p>
-          </div>
+        <div class="relative">
+          <!-- Connection line -->
+          <div class="hidden md:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-[#d97759]/20 via-[#d97759]/40 to-[#d97759]/20"></div>
           
-          <div class="relative">
-            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">2</div>
-            <h3 class="text-xl font-semibold text-neutral-900 mb-3">AI Builds Your Site</h3>
-            <p class="text-neutral-600">
-              Our AI creates a custom website tailored to your business with optimized content and design.
-            </p>
-          </div>
-          
-          <div class="relative">
-            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">3</div>
-            <h3 class="text-xl font-semibold text-neutral-900 mb-3">Launch & Grow</h3>
-            <p class="text-neutral-600">
-              Review, customize if needed, and launch. Your AI assistant starts converting visitors immediately.
-            </p>
+          <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+            <!-- Step 1 -->
+            <div class="relative group">
+              <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-[#d97759] transition-all hover:shadow-xl">
+                <!-- Number badge -->
+                <div class="absolute -top-5 left-8 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#d97759] to-[#c86648] text-white font-bold text-lg shadow-lg">
+                  1
+                </div>
+                
+                <!-- Icon -->
+                <div class="mt-4 mb-6 flex items-center justify-center w-16 h-16 rounded-xl bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                  </svg>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-neutral-900 mb-3">Share Your Vision</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">
+                  Tell us about your business, goals, and preferences through our simple onboarding process.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="relative group">
+              <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-[#d97759] transition-all hover:shadow-xl">
+                <!-- Number badge -->
+                <div class="absolute -top-5 left-8 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#d97759] to-[#c86648] text-white font-bold text-lg shadow-lg">
+                  2
+                </div>
+                
+                <!-- Icon -->
+                <div class="mt-4 mb-6 flex items-center justify-center w-16 h-16 rounded-xl bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                  </svg>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-neutral-900 mb-3">AI Builds Your Site</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">
+                  Our AI creates a custom website tailored to your business with optimized content and design.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="relative group">
+              <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-[#d97759] transition-all hover:shadow-xl">
+                <!-- Number badge -->
+                <div class="absolute -top-5 left-8 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#d97759] to-[#c86648] text-white font-bold text-lg shadow-lg">
+                  3
+                </div>
+                
+                <!-- Icon -->
+                <div class="mt-4 mb-6 flex items-center justify-center w-16 h-16 rounded-xl bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                  </svg>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-neutral-900 mb-3">Launch & Grow</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">
+                  Review, customize if needed, and launch. Your AI assistant starts converting visitors immediately.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
