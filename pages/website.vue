@@ -25,11 +25,55 @@
             </div>
           </div>
           <div class="relative">
-            <img 
-              src="/website-v2.png" 
-              alt="Website Builder Interface"
-              class="w-full h-auto rounded-2xl shadow-2xl border border-neutral-200"
-            />
+            <!-- SVG Illustration -->
+            <svg viewBox="0 0 600 500" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+              <!-- Browser Window -->
+              <rect x="50" y="80" width="500" height="350" rx="12" fill="#ffffff" stroke="#e5e5e5" stroke-width="2"/>
+              
+              <!-- Browser Header -->
+              <rect x="50" y="80" width="500" height="40" rx="12" fill="#f5f5f5"/>
+              <circle cx="75" cy="100" r="6" fill="#ff5f57"/>
+              <circle cx="95" cy="100" r="6" fill="#ffbd2e"/>
+              <circle cx="115" cy="100" r="6" fill="#28ca42"/>
+              
+              <!-- Address Bar -->
+              <rect x="150" y="90" width="300" height="20" rx="10" fill="#ffffff" stroke="#e5e5e5" stroke-width="1"/>
+              <text x="160" y="104" font-family="system-ui" font-size="12" fill="#999">https://yourwebsite.com</text>
+              
+              <!-- Content Area -->
+              <g transform="translate(80, 150)">
+                <!-- Header -->
+                <rect x="0" y="0" width="440" height="60" rx="8" fill="#d97759" opacity="0.1"/>
+                <rect x="15" y="15" width="200" height="12" rx="6" fill="#d97759"/>
+                <rect x="15" y="35" width="300" height="8" rx="4" fill="#d97759" opacity="0.5"/>
+                
+                <!-- Cards -->
+                <rect x="0" y="80" width="135" height="100" rx="8" fill="#f0ebe3"/>
+                <rect x="15" y="95" width="105" height="8" rx="4" fill="#d97759" opacity="0.3"/>
+                <rect x="15" y="110" width="80" height="6" rx="3" fill="#999" opacity="0.3"/>
+                
+                <rect x="152" y="80" width="135" height="100" rx="8" fill="#f0ebe3"/>
+                <rect x="167" y="95" width="105" height="8" rx="4" fill="#d97759" opacity="0.3"/>
+                <rect x="167" y="110" width="80" height="6" rx="3" fill="#999" opacity="0.3"/>
+                
+                <rect x="305" y="80" width="135" height="100" rx="8" fill="#f0ebe3"/>
+                <rect x="320" y="95" width="105" height="8" rx="4" fill="#d97759" opacity="0.3"/>
+                <rect x="320" y="110" width="80" height="6" rx="3" fill="#999" opacity="0.3"/>
+                
+                <!-- Footer -->
+                <rect x="0" y="200" width="440" height="40" rx="8" fill="#1a1a1a"/>
+                <rect x="15" y="215" width="100" height="10" rx="5" fill="#ffffff" opacity="0.8"/>
+              </g>
+              
+              <!-- Floating Elements -->
+              <circle cx="480" cy="60" r="30" fill="#d97759" opacity="0.1"/>
+              <circle cx="100" cy="450" r="40" fill="#d97759" opacity="0.05"/>
+              
+              <!-- AI Sparkles -->
+              <path d="M520 200 L525 210 L530 200 L525 190 Z" fill="#d97759" opacity="0.6"/>
+              <path d="M510 230 L513 236 L516 230 L513 224 Z" fill="#d97759" opacity="0.4"/>
+              <path d="M540 180 L543 186 L546 180 L543 174 Z" fill="#d97759" opacity="0.5"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -64,6 +108,202 @@
       </div>
     </section>
 
+    <!-- How It Works -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-neutral-900 mb-3">How it works</h2>
+          <p class="text-base text-neutral-600">
+            From idea to live website in three simple steps
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">1</div>
+            <h3 class="text-xl font-semibold text-neutral-900 mb-3">Share Your Vision</h3>
+            <p class="text-neutral-600">
+              Tell us about your business, goals, and preferences through our simple onboarding process.
+            </p>
+          </div>
+          
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">2</div>
+            <h3 class="text-xl font-semibold text-neutral-900 mb-3">AI Builds Your Site</h3>
+            <p class="text-neutral-600">
+              Our AI creates a custom website tailored to your business with optimized content and design.
+            </p>
+          </div>
+          
+          <div class="relative">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97759] text-white font-bold text-lg mb-4">3</div>
+            <h3 class="text-xl font-semibold text-neutral-900 mb-3">Launch & Grow</h3>
+            <p class="text-neutral-600">
+              Review, customize if needed, and launch. Your AI assistant starts converting visitors immediately.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="py-16 md:py-24 bg-[#f9f8f6]">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-neutral-900 mb-3">Choose your plan</h2>
+          <p class="text-base text-neutral-600">
+            Flexible pricing for businesses of all sizes
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Starter -->
+          <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-[#d97759] transition-all">
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold text-neutral-900 mb-2">Starter</h3>
+              <p class="text-sm text-neutral-600">Perfect for small businesses</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-neutral-900">$99</span>
+                <span class="text-neutral-600">/month</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                5-page website
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                AI chatbot included
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Basic analytics
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                SSL certificate
+              </li>
+            </ul>
+            <NuxtLink to="/dashboard" class="block w-full text-center py-3 px-4 rounded-lg bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-colors">
+              Get Started
+            </NuxtLink>
+          </div>
+
+          <!-- Professional -->
+          <div class="bg-[#d97759] rounded-2xl p-8 border-2 border-[#d97759] relative transform md:scale-105">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-xs font-semibold px-4 py-1 rounded-full">
+              Most Popular
+            </div>
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold text-white mb-2">Professional</h3>
+              <p class="text-sm text-white/80">For growing businesses</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-white">$199</span>
+                <span class="text-white/80">/month</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-2 text-sm text-white">
+                <svg class="h-5 w-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                15-page website
+              </li>
+              <li class="flex items-start gap-2 text-sm text-white">
+                <svg class="h-5 w-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Advanced AI chatbot
+              </li>
+              <li class="flex items-start gap-2 text-sm text-white">
+                <svg class="h-5 w-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Advanced analytics
+              </li>
+              <li class="flex items-start gap-2 text-sm text-white">
+                <svg class="h-5 w-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Priority support
+              </li>
+              <li class="flex items-start gap-2 text-sm text-white">
+                <svg class="h-5 w-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Custom domain
+              </li>
+            </ul>
+            <NuxtLink to="/dashboard" class="block w-full text-center py-3 px-4 rounded-lg bg-white text-[#d97759] font-medium hover:bg-neutral-50 transition-colors">
+              Get Started
+            </NuxtLink>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-[#d97759] transition-all">
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold text-neutral-900 mb-2">Enterprise</h3>
+              <p class="text-sm text-neutral-600">For large organizations</p>
+            </div>
+            <div class="mb-6">
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-bold text-neutral-900">$499</span>
+                <span class="text-neutral-600">/month</span>
+              </div>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Unlimited pages
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Custom AI training
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                White-label options
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                Dedicated support
+              </li>
+              <li class="flex items-start gap-2 text-sm text-neutral-600">
+                <svg class="h-5 w-5 text-[#d97759] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                SLA guarantee
+              </li>
+            </ul>
+            <NuxtLink to="/dashboard" class="block w-full text-center py-3 px-4 rounded-lg bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-colors">
+              Get Started
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
     <section class="py-20 md:py-24 relative overflow-hidden bg-[#f0ebe3] rounded-3xl mx-6 lg:mx-8 mb-12">
       <div class="max-w-6xl mx-auto px-8 lg:px-12">
@@ -87,33 +327,54 @@
             </NuxtLink>
           </div>
 
-          <!-- Right: Quick Links -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-semibold text-neutral-900 uppercase tracking-wider mb-6">Website Types</h3>
-            <NuxtLink to="/dashboard" class="group flex items-center justify-between p-4 rounded-xl bg-white hover:bg-neutral-50 transition-all">
-              <span class="text-base font-medium text-neutral-900">Landing Pages</span>
-              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </NuxtLink>
-            <NuxtLink to="/dashboard" class="group flex items-center justify-between p-4 rounded-xl bg-white hover:bg-neutral-50 transition-all">
-              <span class="text-base font-medium text-neutral-900">E-commerce Stores</span>
-              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </NuxtLink>
-            <NuxtLink to="/dashboard" class="group flex items-center justify-between p-4 rounded-xl bg-white hover:bg-neutral-50 transition-all">
-              <span class="text-base font-medium text-neutral-900">Corporate Websites</span>
-              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </NuxtLink>
-            <NuxtLink to="/dashboard" class="group flex items-center justify-between p-4 rounded-xl bg-white hover:bg-neutral-50 transition-all">
-              <span class="text-base font-medium text-neutral-900">Portfolio Sites</span>
-              <svg class="h-5 w-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </NuxtLink>
+          <!-- Right: Website Types Grid -->
+          <div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-6">Perfect for any business</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Landing Pages -->
+              <NuxtLink to="/dashboard" class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Landing Pages</h4>
+                <p class="text-xs text-neutral-600">High-converting single pages</p>
+              </NuxtLink>
+
+              <!-- E-commerce -->
+              <NuxtLink to="/dashboard" class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                  </svg>
+                </div>
+                <h4 class="text-sm font-semibold text-neutral-900 mb-1">E-commerce</h4>
+                <p class="text-xs text-neutral-600">Online stores & shops</p>
+              </NuxtLink>
+
+              <!-- Corporate -->
+              <NuxtLink to="/dashboard" class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                </div>
+                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Corporate</h4>
+                <p class="text-xs text-neutral-600">Professional business sites</p>
+              </NuxtLink>
+
+              <!-- Portfolio -->
+              <NuxtLink to="/dashboard" class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
+                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Portfolio</h4>
+                <p class="text-xs text-neutral-600">Showcase your work</p>
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
