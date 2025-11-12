@@ -67,22 +67,48 @@ export default defineEventHandler(async (event) => {
     // Use Firecrawl's screenshot capability
     const result = await firecrawl.scrape(url, {
       formats: ['screenshot'],
-      onlyMainContent: false,
       waitFor: 2000
     })
     
-    if (!result?.screenshot) {
+    console.log('[screenshot] Firecrawl full result:', JSON.stringify(result, null, 2).slice(0, 500))
+    console.log('[screenshot] Result keys:', Object.keys(result || {}))
+    
+    // Check if screenshot exists in the result
+    const screenshotData = result?.screenshot || (result as any)?.data?.screenshot
+    
+    console.log('[screenshot] Screenshot data type:', typeof screenshotData)
+    console.log('[screenshot] Screenshot data:', screenshotData?.substring?.(0, 100))
+    
+    if (!screenshotData) {
       throw new Error('No screenshot data returned from Firecrawl')
     }
     
-    // Convert base64 to buffer
+    // Firecrawl might return screenshot as URL or base64
     let imageBuffer: Buffer
-    if (result.screenshot.startsWith('data:image')) {
-      const base64Data = result.screenshot.split(',')[1]
+    
+    // If it's a URL, fetch it
+    if (screenshotData.startsWith('http://') || screenshotData.startsWith('https://')) {
+      console.log('[screenshot] Screenshot is URL, fetching:', screenshotData)
+      const imageResponse = await fetch(screenshotData)
+      if (!imageResponse.ok) {
+        throw new Error('Failed to fetch screenshot from URL')
+      }
+      const arrayBuffer = await imageResponse.arrayBuffer()
+      imageBuffer = Buffer.from(arrayBuffer)
+    } 
+    // If it's base64 with data URI
+    else if (screenshotData.startsWith('data:image')) {
+      console.log('[screenshot] Screenshot is data URI')
+      const base64Data = screenshotData.split(',')[1]
       imageBuffer = Buffer.from(base64Data, 'base64')
-    } else {
-      imageBuffer = Buffer.from(result.screenshot, 'base64')
+    } 
+    // If it's raw base64
+    else {
+      console.log('[screenshot] Screenshot is raw base64')
+      imageBuffer = Buffer.from(screenshotData, 'base64')
     }
+    
+    console.log('[screenshot] Image buffer size:', imageBuffer.length, 'bytes')
     
     // Upload to Supabase storage
     const fileName = `${websiteId}-${Date.now()}.png`

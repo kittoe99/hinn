@@ -249,20 +249,21 @@
                         
                         <!-- Screenshot Preview -->
                         <div class="aspect-[4/3] relative bg-white">
+                          <!-- Screenshot Image -->
                           <img
-                            v-if="websiteScreenshot"
+                            v-if="websiteScreenshot && !screenshotError"
                             :src="websiteScreenshot"
                             :alt="`Preview of ${selectedWebsite.name}`"
                             class="w-full h-full object-cover object-top"
-                            @error="screenshotError = true"
+                            @error="handleScreenshotError"
                             @load="screenshotLoaded = true"
                           />
                           
                           <!-- Loading State -->
-                          <div v-if="!screenshotLoaded && !screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100">
+                          <div v-if="!websiteScreenshot && !screenshotError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100">
                             <div class="text-center">
                               <div class="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-[#d97759] border-r-transparent mb-2"></div>
-                              <p class="text-xs text-neutral-500">Loading preview...</p>
+                              <p class="text-xs text-neutral-500">Capturing screenshot...</p>
                             </div>
                           </div>
                           
@@ -3222,6 +3223,13 @@ const openWebsiteDetails = async (websiteId) => {
   } finally {
     websiteDetailsLoading.value = false
   }
+}
+
+// Handle screenshot image error
+const handleScreenshotError = () => {
+  console.error('[Dashboard] Screenshot image failed to load')
+  screenshotError.value = true
+  websiteScreenshot.value = null
 }
 
 // Fetch screenshot using Firecrawl API
