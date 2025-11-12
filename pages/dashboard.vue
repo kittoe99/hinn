@@ -221,7 +221,7 @@
               <!-- Accent Bar -->
               <!-- Accent bar removed per design update -->
               
-              <div class="p-8">
+              <div class="p-4 sm:p-6 md:p-8">
                 <div class="flex flex-col md:flex-row items-start gap-8">
                   <!-- Site Preview -->
                   <div class="w-full md:w-[600px] lg:w-[700px] flex-shrink-0">
