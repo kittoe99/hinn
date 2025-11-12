@@ -13,6 +13,7 @@
     "@mendable/firecrawl-js": "^4.4.0",
     "@supabase/supabase-js": "^2.75.0",
     "nuxt": "^3.13.0",
+    "nuxt-simple-sitemap": "^4.4.1",
     "openai": "^4.77.0",
     "vue": "^3.4.0",
     "vue-router": "^4.4.0"

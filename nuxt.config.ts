@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-simple-sitemap'],
   nitro: {
     // Exclude dev-only endpoints that pull large deps (@openai/codex-sdk, debug tooling)
     ignore: process.env.NODE_ENV === 'production' ? [
@@ -44,6 +44,12 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://wpscanvas.com' }
       ]
     }
+  },
+  site: {
+    url: 'https://wpscanvas.com'
+  },
+  sitemap: {
+    exclude: ['/dashboard', '/api/**']
   },
   runtimeConfig: {
     // Private keys (server-side only)
