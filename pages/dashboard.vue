@@ -224,7 +224,7 @@
               <div class="p-8">
                 <div class="flex flex-col md:flex-row items-start gap-8">
                   <!-- Site Preview -->
-                  <div class="w-full md:w-96 flex-shrink-0">
+                  <div class="w-full md:w-[450px] flex-shrink-0">
                     <div class="rounded-xl border border-neutral-200 overflow-hidden bg-white shadow-lg">
                       <div v-if="selectedWebsite.custom_domain || selectedWebsite.domain" class="relative bg-white group">
                         <!-- Browser Chrome -->
