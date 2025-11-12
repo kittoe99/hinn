@@ -90,44 +90,15 @@
                 <!-- Live Website Preview in iframe -->
                 <div class="aspect-video relative bg-white">
                   <iframe
-                    :src="proxyUrl"
+                    :src="websiteUrl"
                     class="w-full h-full border-0"
-                    referrerpolicy="no-referrer-when-downgrade"
                     title="Website Preview"
-                    @load="iframeLoaded = true"
-                    @error="iframeError = true"
+                    @load="handleIframeLoad"
                   ></iframe>
                   
-                  <!-- Loading State -->
-                  <div v-if="!iframeLoaded && !iframeError" class="absolute inset-0 flex items-center justify-center bg-white">
-                    <div class="text-center">
-                      <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#d97759] border-r-transparent mb-3"></div>
-                      <p class="text-sm text-neutral-500">Loading preview...</p>
-                    </div>
-                  </div>
-                  
-                  <!-- Error State -->
-                  <div v-if="iframeError" class="absolute inset-0 flex items-center justify-center bg-neutral-50">
-                    <div class="text-center p-8">
-                      <div class="h-16 w-16 rounded-2xl bg-[#d97759]/10 flex items-center justify-center mx-auto mb-4">
-                        <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                        </svg>
-                      </div>
-                      <h3 class="text-base font-semibold text-neutral-900 mb-2">Preview unavailable</h3>
-                      <p class="text-sm text-neutral-500 mb-4">This website cannot be embedded</p>
-                      <a 
-                        :href="websiteUrl" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-[#d97759] text-white rounded-lg text-sm font-medium hover:bg-[#c86648] transition-colors"
-                      >
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                        </svg>
-                        Visit Website
-                      </a>
-                    </div>
+                  <!-- Info Message (shows after load) -->
+                  <div v-if="showIframeWarning" class="absolute top-4 left-4 right-4 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg p-3 text-xs shadow-md">
+                    <p>Note: Some websites prevent themselves from being loaded in an iframe for security reasons. If the preview remains blank, this is likely why.</p>
                   </div>
                 </div>
               </div>
@@ -432,8 +403,7 @@ const website = ref(null)
 const onboarding = ref(null)
 const loading = ref(true)
 const error = ref(null)
-const iframeLoaded = ref(false)
-const iframeError = ref(false)
+const showIframeWarning = ref(false)
 
 // Compute website URL for preview
 const websiteUrl = computed(() => {
@@ -448,11 +418,14 @@ const websiteUrl = computed(() => {
   return `https://${domain}`
 })
 
-// Compute proxied URL for iframe to bypass X-Frame-Options
-const proxyUrl = computed(() => {
-  if (!websiteUrl.value) return null
-  return `/api/proxy-website?url=${encodeURIComponent(websiteUrl.value)}`
-})
+// Handle iframe load event
+const handleIframeLoad = () => {
+  showIframeWarning.value = true
+  // Hide warning after 7 seconds
+  setTimeout(() => {
+    showIframeWarning.value = false
+  }, 7000)
+}
 
 // Expandable sections state - consolidated to 2 sections
 const expandedSections = ref({
