@@ -215,7 +215,7 @@
 
         <!-- Website Content -->
         <div v-else-if="selectedWebsite">
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <!-- Header Card -->
             <div class="relative overflow-hidden bg-white border border-neutral-200 rounded-2xl mb-8">
               <!-- Accent Bar -->
@@ -224,7 +224,7 @@
               <div class="p-4 sm:p-6 md:p-8">
                 <div class="flex flex-col md:flex-row items-start gap-8">
                   <!-- Site Preview -->
-                  <div class="w-full md:w-[600px] lg:w-[700px] flex-shrink-0">
+                  <div class="w-full md:w-[450px] lg:w-[500px] flex-shrink-0">
                     <div class="rounded-xl border border-neutral-200 overflow-hidden bg-white shadow-lg">
                       <div v-if="selectedWebsite.custom_domain || selectedWebsite.domain" class="relative bg-white group">
                         <!-- Browser Chrome -->
@@ -248,7 +248,7 @@
                         </div>
                         
                         <!-- Screenshot Preview -->
-                        <div class="aspect-[4/3] relative bg-white">
+                        <div class="aspect-[16/10] relative bg-white">
                           <!-- Screenshot Image -->
                           <img
                             v-if="websiteScreenshot && !screenshotError"
