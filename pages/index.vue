@@ -24,7 +24,7 @@
           </h1>
           
           <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in mb-8" style="animation-delay: 100ms">
-            One subscription for AI-powered websites, intelligent agents, and marketing that drives real growth.
+            Build professional websites with AI and print your images on premium canvas—all in one place.
           </p>
 
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in mb-16" style="animation-delay: 150ms">
@@ -334,6 +334,68 @@
       </div>
     </section>
 
+    <!-- Canvas Printing Section -->
+    <section class="py-20 md:py-32 bg-white">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-4">Canvas Printing</h2>
+          <p class="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
+            Turn your generated or uploaded images into gallery‑quality canvas prints. Premium materials, vivid colors, fast delivery.
+          </p>
+        </div>
+
+        <!-- Canvas Features Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+          <!-- Canvas Feature 1 -->
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
+              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Upload or Generate</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">Print AI-generated images or upload your own photos. Any image, any size.</p>
+          </div>
+
+          <!-- Canvas Feature 2 -->
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
+              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Premium Quality</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">Museum-grade canvas, archival inks, and hand-stretched frames for lasting beauty.</p>
+          </div>
+
+          <!-- Canvas Feature 3 -->
+          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
+              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Fast Delivery</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">Printed and shipped within days. Track your order every step of the way.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center">
+          <NuxtLink
+            to="/canvas-printing"
+            class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Explore Canvas Printing
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-20 md:py-24 relative overflow-hidden bg-[#f0ebe3] rounded-3xl mx-6 lg:mx-8 mb-12">
       <div class="max-w-6xl mx-auto px-8 lg:px-12">
@@ -367,10 +429,10 @@
               </svg>
             </NuxtLink>
             <NuxtLink
-              to="/website"
+              to="/canvas-printing"
               class="group flex items-center justify-between py-4 border-b border-neutral-300 hover:border-neutral-400 transition-colors"
             >
-              <span class="text-lg font-medium text-neutral-900">Explore website features</span>
+              <span class="text-lg font-medium text-neutral-900">Print your art on canvas</span>
               <svg class="w-5 h-5 text-neutral-900 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -386,29 +448,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-useHead({
-  title: 'AI-Powered Website Builder | Create Professional Websites in Minutes | WPScanvas',
-  meta: [
-    {
-      name: 'description',
-      content: 'Build stunning professional websites with AI-powered tools. WPScanvas makes website creation fast, easy, and affordable. No coding required. Start building today.'
-    },
-    {
-      name: 'keywords',
-      content: 'AI website builder, create website, website maker, no-code website builder, AI web design, professional website, website templates, drag and drop website builder, WPScanvas'
-    },
-    { property: 'og:title', content: 'WPScanvas - AI-Powered Website Builder' },
-    { property: 'og:description', content: 'Build stunning professional websites with AI-powered tools. No coding required. Start building today.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://wpscanvas.com' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'WPScanvas - AI-Powered Website Builder' },
-    { name: 'twitter:description', content: 'Build stunning professional websites with AI-powered tools. No coding required.' }
-  ],
-  link: [
-    { rel: 'canonical', href: 'https://wpscanvas.com' }
-  ]
-})
+// Page-level SEO inherits from global nuxt.config.ts
+// No need to override unless this page needs different meta
 
 // Typewriter effect with flip transition
 const words = ['scale', 'grow', 'innovate', 'succeed']

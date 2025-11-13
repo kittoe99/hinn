@@ -23,25 +23,57 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'WPScanvas - AI-Powered Website Builder | Create Professional Websites in Minutes',
+      title: 'WPS Canvas | Create Websites and Print Your Art on Canvas',
+      titleTemplate: '%s | WPS Canvas',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'WPScanvas is an AI-powered website builder that helps you create stunning, professional websites in minutes. No coding required. Build, customize, and deploy with intelligent AI assistance.' },
-        { name: 'keywords', content: 'AI website builder, website creator, no-code website, professional website design, AI web design, website builder tool, create website, WPScanvas' },
-        { name: 'author', content: 'WPScanvas' },
+        { name: 'description', content: 'Create a website in minutes and turn images into gallery‑quality canvas prints with WPS Canvas. AI tools, easy publishing, fast delivery.' },
+        { name: 'keywords', content: 'WPS Canvas, AI website builder, website creator, no-code website, professional website design, AI web design, website builder tool, create website, canvas printing, print canvas art' },
+        { name: 'author', content: 'WPS Canvas' },
         { name: 'robots', content: 'index, follow' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'WPScanvas - AI-Powered Website Builder' },
-        { property: 'og:description', content: 'Create stunning professional websites in minutes with AI-powered tools. No coding required.' },
-        { property: 'og:site_name', content: 'WPScanvas' },
+        { property: 'og:title', content: 'WPS Canvas | Create Websites and Print Your Art on Canvas' },
+        { property: 'og:description', content: 'Create a website in minutes and turn images into gallery‑quality canvas prints with WPS Canvas. AI tools, easy publishing, fast delivery.' },
+        { property: 'og:site_name', content: 'WPS Canvas' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'WPScanvas - AI-Powered Website Builder' },
-        { name: 'twitter:description', content: 'Create stunning professional websites in minutes with AI-powered tools. No coding required.' },
+        { name: 'twitter:title', content: 'WPS Canvas | Create Websites and Print Your Art on Canvas' },
+        { name: 'twitter:description', content: 'Create a website in minutes and turn images into gallery‑quality canvas prints with WPS Canvas. AI tools, easy publishing, fast delivery.' },
         { name: 'theme-color', content: '#d97759' }
       ],
       link: [
         { rel: 'canonical', href: 'https://wpscanvas.com' }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'WPS Canvas',
+            url: 'https://wpscanvas.com'
+          })
+        },
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'WPS Canvas',
+            url: 'https://wpscanvas.com'
+          })
+        },
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: 'Canvas Printing',
+            brand: { '@type': 'Brand', name: 'WPS Canvas' },
+            description: 'Print your generated or uploaded images on premium canvas.',
+            url: 'https://wpscanvas.com'
+          })
+        }
       ]
     }
   },

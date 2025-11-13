@@ -68,6 +68,17 @@
                     <div class="text-xs text-neutral-500">Professional sites</div>
                   </div>
                 </NuxtLink>
+                <NuxtLink to="/canvas-printing" class="flex items-center gap-3 px-4 py-3 hover:bg-[#d97759]/10 rounded-lg mx-2 transition-colors">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
+                    <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-900">Canvas Printing</div>
+                    <div class="text-xs text-neutral-500">Print your art</div>
+                  </div>
+                </NuxtLink>
               </div>
             </Transition>
           </div>
@@ -192,6 +203,21 @@
                   <div>
                     <div class="text-sm font-medium text-neutral-900">Website</div>
                     <div class="text-xs text-neutral-500">Professional sites</div>
+                  </div>
+                </NuxtLink>
+                <NuxtLink 
+                  to="/canvas-printing"
+                  class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white group transition-colors"
+                  @click="mobileMenuOpen = false"
+                >
+                  <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium text-neutral-900">Canvas Printing</div>
+                    <div class="text-xs text-neutral-500">Print your art</div>
                   </div>
                 </NuxtLink>
               </div>
