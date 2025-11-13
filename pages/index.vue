@@ -335,63 +335,146 @@
     </section>
 
     <!-- Canvas Printing Section -->
-    <section class="py-20 md:py-32 bg-white">
-      <div class="max-w-6xl mx-auto px-6 lg:px-8">
-        <!-- Header -->
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-4">Canvas Printing</h2>
-          <p class="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
-            Turn your generated or uploaded images into gallery‑quality canvas prints. Premium materials, vivid colors, fast delivery.
-          </p>
-        </div>
+    <section class="py-20 md:py-32 bg-gradient-to-b from-white via-[#fefbf3] to-white relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#d97759]/3 rounded-full blur-3xl"></div>
+      </div>
 
-        <!-- Canvas Features Grid -->
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-          <!-- Canvas Feature 1 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Left: Content -->
+          <div class="order-2 lg:order-1">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d97759]/10 border border-[#d97759]/20 mb-6">
+              <svg class="w-4 h-4 text-[#d97759]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
+              <span class="text-sm font-medium text-[#d97759]">Premium Canvas Printing</span>
             </div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Upload or Generate</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">Print AI-generated images or upload your own photos. Any image, any size.</p>
+
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 mb-6 leading-tight">
+              Canvas Printing
+            </h2>
+            
+            <p class="text-xl text-neutral-600 mb-8 leading-relaxed">
+              Turn your generated or uploaded images into gallery‑quality canvas prints. Premium materials, vivid colors, fast delivery.
+            </p>
+
+            <!-- Features List -->
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-neutral-900 mb-1">Upload or Generate</h3>
+                  <p class="text-neutral-600">Print AI-generated images or upload your own photos. Any image, any size.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-neutral-900 mb-1">Museum-Grade Quality</h3>
+                  <p class="text-neutral-600">Premium canvas, archival inks, and hand-stretched frames for lasting beauty.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10 flex-shrink-0">
+                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-neutral-900 mb-1">Fast Delivery</h3>
+                  <p class="text-neutral-600">Printed and shipped within days. Track your order every step of the way.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <NuxtLink
+                to="/canvas-printing"
+                class="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Explore Canvas Printing
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </NuxtLink>
+              <NuxtLink
+                to="/contact"
+                class="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-neutral-900 bg-white border-2 border-neutral-200 hover:border-neutral-300 transition-all duration-300"
+              >
+                Get a Quote
+              </NuxtLink>
+            </div>
           </div>
 
-          <!-- Canvas Feature 2 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Premium Quality</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">Museum-grade canvas, archival inks, and hand-stretched frames for lasting beauty.</p>
-          </div>
+          <!-- Right: Visual -->
+          <div class="order-1 lg:order-2">
+            <div class="relative">
+              <!-- Main Image Container -->
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 aspect-[4/3]">
+                <img 
+                  src="/assets/wps-canvas.png" 
+                  alt="Canvas Print Example"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <!-- Overlay gradient -->
+                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent"></div>
+              </div>
 
-          <!-- Canvas Feature 3 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-2">Fast Delivery</h3>
-            <p class="text-sm text-neutral-600 leading-relaxed">Printed and shipped within days. Track your order every step of the way.</p>
-          </div>
-        </div>
+              <!-- Floating Badge -->
+              <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 border border-neutral-200">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
+                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-semibold text-neutral-900">Premium Quality</div>
+                    <div class="text-xs text-neutral-500">Museum-grade materials</div>
+                  </div>
+                </div>
+              </div>
 
-        <!-- CTA -->
-        <div class="text-center">
-          <NuxtLink
-            to="/canvas-printing"
-            class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Explore Canvas Printing
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </NuxtLink>
+              <!-- Decorative dots -->
+              <div class="hidden lg:block absolute -top-8 -right-8 w-32 h-32 opacity-20">
+                <div class="grid grid-cols-4 gap-3">
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
