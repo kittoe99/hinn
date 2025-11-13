@@ -436,7 +436,7 @@
 
 <script setup>
 useHead({
-  title: 'Website Development | Hinn',
+  title: 'Website Development | WPS Canvas',
   meta: [
     {
       name: 'description',

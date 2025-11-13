@@ -181,7 +181,7 @@ const performSearch = async () => {
       {
         headers: {
           Accept: 'application/json',
-          'User-Agent': 'HinnOnboarding/1.0 (hello@hinn.studio)'
+          'User-Agent': 'WPSCanvasOnboarding/1.0 (hello@wpscanvas.com)'
         },
         signal: controller.value.signal
       }

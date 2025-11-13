@@ -3,7 +3,7 @@
     <div class="w-full max-w-md bg-[#e8e3d8] rounded-2xl p-8 space-y-6">
       <div class="space-y-2">
         <h1 class="text-3xl font-medium tracking-tight text-neutral-900">Create your account</h1>
-        <p class="text-base text-neutral-600">Get started with Hinn in just a few steps.</p>
+        <p class="text-base text-neutral-600">Get started with WPS Canvas in just a few steps.</p>
       </div>
 
       <!-- Error/Success Messages -->
@@ -141,9 +141,9 @@
 
 <script setup>
 useHead({
-  title: 'Sign Up - Hinn',
+  title: 'Sign Up - WPS Canvas',
   meta: [
-    { name: 'description', content: 'Create your Hinn account' }
+    { name: 'description', content: 'Create your WPS Canvas account' }
   ]
 })
 

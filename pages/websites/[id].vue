@@ -455,7 +455,7 @@ const formatDate = (dateString) => {
 }
 
 useHead(() => ({
-  title: website.value ? `${website.value.name} - Hinn` : 'Website Details - Hinn',
+  title: website.value ? `${website.value.name} - WPS Canvas` : 'Website Details - WPS Canvas',
   meta: [
     { name: 'description', content: 'View website details and onboarding information' }
   ]

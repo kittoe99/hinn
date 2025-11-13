@@ -107,9 +107,9 @@
 
 <script setup>
 useHead({
-  title: 'Login - Hinn',
+  title: 'Login - WPS Canvas',
   meta: [
-    { name: 'description', content: 'Sign in to your Hinn account' }
+    { name: 'description', content: 'Sign in to your WPS Canvas account' }
   ]
 })
 

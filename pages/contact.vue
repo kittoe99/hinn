@@ -156,11 +156,11 @@
 
 <script setup>
 useHead({
-  title: 'Contact Us | Hinn',
+  title: 'Contact Us | WPS Canvas',
   meta: [
     {
       name: 'description',
-      content: 'Get in touch with Hinn for website development, AI agents, or digital marketing.'
+      content: 'Get in touch with WPS Canvas for website development, canvas printing, or digital marketing.'
     }
   ]
 })

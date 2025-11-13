@@ -1364,7 +1364,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Onboarding - Hinn',
+  title: 'Onboarding - WPS Canvas',
   meta: [
     { name: 'description', content: 'Complete your onboarding to get started' }
   ]
