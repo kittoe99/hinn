@@ -534,6 +534,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 // Page-level SEO inherits from global nuxt.config.ts
 // No need to override unless this page needs different meta
 
+// Show more features toggle for mobile
+const showMoreFeatures = ref(false)
+
 // Typewriter effect with flip transition
 const words = ['scale', 'grow', 'innovate', 'succeed']
 const currentWord = ref(words[0])

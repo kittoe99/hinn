@@ -1,392 +1,340 @@
 <template>
   <main class="min-h-screen bg-[#f9f8f6]">
-    <!-- Hero -->
-    <section class="pt-20 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 right-10 w-72 h-72 bg-[#d97759]/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 left-10 w-64 h-64 bg-[#d97759]/3 rounded-full blur-3xl"></div>
-      </div>
-      <div class="max-w-6xl mx-auto px-6 lg:px-8 relative">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-900 leading-[1.1]">Canvas Printing</h1>
-            <p class="mt-6 text-lg text-neutral-600 leading-relaxed">Turn your generated or uploaded images into gallery‑quality canvas prints. Premium materials, crisp detail, and fast delivery.</p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <div class="flex items-center gap-2 rounded-lg bg-[#d97759]/10 px-3 py-2 text-sm text-[#d97759] border border-[#d97759]">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                <span>Premium canvas</span>
-              </div>
-              <div class="flex items-center gap-2 rounded-lg bg-[#d97759]/10 px-3 py-2 text-sm text-[#d97759] border border-[#d97759]">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                <span>Multiple sizes</span>
-              </div>
-              <div class="flex items-center gap-2 rounded-lg bg-[#d97759]/10 px-3 py-2 text-sm text-[#d97759] border border-[#d97759]">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                <span>Fast shipping</span>
-              </div>
-            </div>
-            <div class="mt-8 flex flex-wrap items-center gap-4">
-              <NuxtLink
-                to="/dashboard"
-                class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
-              >
-                Print A Design
-                <span>&rarr;</span>
-              </NuxtLink>
-            </div>
-          </div>
-          <div class="relative">
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 aspect-[4/3] transform hover:scale-[1.02] transition-transform duration-300">
-              <img :src="heroImg" alt="Canvas Print Example" class="w-full h-full object-cover" loading="lazy" />
-              <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent"></div>
-            </div>
-            <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-xl p-4 border border-neutral-200">
-              <div class="text-center">
-                <div class="text-2xl font-bold text-neutral-900">48hrs</div>
-                <div class="text-xs text-neutral-600">Fast delivery</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Highlights -->
-    <section class="py-16 md:py-20 bg-white border-y border-neutral-200">
-      <div class="mx-auto max-w-6xl px-6 lg:px-8">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="text-center">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mx-auto mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            </div>
-            <h3 class="text-base font-semibold text-neutral-900 mb-1">Upload or Generate</h3>
-            <p class="text-sm text-neutral-600">AI-generated or your own photos</p>
-          </div>
-          <div class="text-center">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mx-auto mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            </div>
-            <h3 class="text-base font-semibold text-neutral-900 mb-1">Choose Size</h3>
-            <p class="text-sm text-neutral-600">From 8"×10" to 30"×40"</p>
-          </div>
-          <div class="text-center">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mx-auto mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <h3 class="text-base font-semibold text-neutral-900 mb-1">Premium Quality</h3>
-            <p class="text-sm text-neutral-600">Museum-grade materials</p>
-          </div>
-          <div class="text-center">
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mx-auto mb-4">
-              <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
-            </div>
-            <h3 class="text-base font-semibold text-neutral-900 mb-1">Fast Delivery</h3>
-            <p class="text-sm text-neutral-600">Ships within 2-4 days</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="bg-[#fefbf3] border-y border-neutral-200/60">
-      <div class="mx-auto max-w-5xl px-6 py-16">
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
-          <div class="max-w-sm">
-            <h2 class="text-2xl font-semibold tracking-tight text-neutral-900 mb-3">How it works</h2>
-            <p class="text-neutral-700 text-sm md:text-base">
-              Go from image to ready‑to‑hang canvas in a few simple steps.
-            </p>
-          </div>
-
-          <ol class="flex-1 space-y-6">
-            <li class="flex gap-4">
-              <div class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-[#d97759]/10 text-[#d97759] text-sm font-semibold">
-                1
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-neutral-900">Upload or generate your image</h3>
-                <p class="text-sm text-neutral-700 mt-1">
-                  Use AI to generate artwork or upload your own photos, brand visuals, or illustrations.
-                </p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-[#d97759]/10 text-[#d97759] text-sm font-semibold">
-                2
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-neutral-900">Choose size and finish</h3>
-                <p class="text-sm text-neutral-700 mt-1">
-                  Pick from popular sizes and edge styles to match your home, office, or gallery wall.
-                </p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="mt-1 h-8 w-8 flex items-center justify-center rounded-full bg-[#d97759]/10 text-[#d97759] text-sm font-semibold">
-                3
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-neutral-900">We print and ship</h3>
-                <p class="text-sm text-neutral-700 mt-1">
-                  Your canvas is printed on premium materials, hand‑stretched, inspected, and shipped to your door.
-                </p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="mx-auto max-w-6xl px-6 py-16">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-        <div class="rounded-2xl bg-[#f0ebe3] p-6">
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">Sizes & options</h3>
-          <div class="flex flex-wrap gap-2 mb-4 text-sm">
-            <span class="px-3 py-1 rounded-lg bg-white border border-neutral-200">8" × 10"</span>
-            <span class="px-3 py-1 rounded-lg bg-white border border-neutral-200">12" × 16"</span>
-            <span class="px-3 py-1 rounded-lg bg-white border border-neutral-200">18" × 24"</span>
-            <span class="px-3 py-1 rounded-lg bg-white border border-neutral-200">24" × 36"</span>
-            <span class="px-3 py-1 rounded-lg bg-white border border-neutral-200">30" × 40"</span>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4 text-sm">
-            <div class="rounded-xl bg-white border border-neutral-200 p-4">
-              <div class="font-medium text-neutral-900 mb-1">Edge styles</div>
-              <div class="text-neutral-700">Mirror wrap, black wrap, white wrap</div>
-            </div>
-            <div class="rounded-xl bg-white border border-neutral-200 p-4">
-              <div class="font-medium text-neutral-900 mb-1">Hardware</div>
-              <div class="text-neutral-700">Ready‑to‑hang sawtooth hanger</div>
-            </div>
-          </div>
-        </div>
-        <div class="rounded-2xl bg-[#f0ebe3] p-6">
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">Materials</h3>
-          <ul class="space-y-2 text-sm text-neutral-700">
-            <li>• Museum‑grade canvas with archival inks</li>
-            <li>• Hand‑stretched over kiln‑dried wood frames</li>
-            <li>• Rich color reproduction and crisp details</li>
-            <li>• Protective finish for durability</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Showcase prints -->
-    <section class="bg-white border-t border-neutral-200/70">
-      <div class="mx-auto max-w-5xl px-6 py-16">
-        <div class="flex items-start justify-between gap-6 mb-8">
-          <div>
-            <h2 class="text-2xl font-semibold tracking-tight text-neutral-900 mb-2">Showcase prints</h2>
-            <p class="text-sm text-neutral-700 max-w-xl">
-              A glimpse of what your images can look like on canvas. Each piece is printed with the same process we use for customers.
-            </p>
-          </div>
-          <div class="hidden sm:flex items-center gap-2 text-xs text-neutral-500">
-            <span class="inline-flex h-2 w-2 rounded-full bg-[#d97759]"></span>
-            <span>Real layouts, curated for inspiration.</span>
-          </div>
+    <!-- Create Your Canvas -->
+    <section class="pt-20 pb-16 md:pt-32 md:pb-24 bg-white">
+      <div class="mx-auto max-w-4xl px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-neutral-900 mb-4">
+            What do you want to create?
+          </h2>
+          <p class="text-lg text-neutral-600">
+            Generate with AI or upload your own image. No design skills needed.
+          </p>
         </div>
 
-        <div class="grid gap-4 md:grid-cols-3">
-          <!-- Card 1 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                :src="heroImg"
-                alt="Colorful abstract canvas print"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Abstract gallery wall</h3>
-              <p class="mt-1 text-xs text-neutral-600">AI‑generated artwork printed on 18" × 24" canvas.</p>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80"
-                alt="Family canvas print on wall"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Family & memories</h3>
-              <p class="mt-1 text-xs text-neutral-600">Personal photos turned into a warm living‑room gallery.</p>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80"
-                alt="Brand artwork canvas in studio"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Brand & studio pieces</h3>
-              <p class="mt-1 text-xs text-neutral-600">Logo marks, campaigns, and hero visuals for offices and studios.</p>
-            </div>
-          </div>
-          
-          <!-- Card 4 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1000&q=80"
-                alt="Large statement canvas in living room"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Statement pieces</h3>
-              <p class="mt-1 text-xs text-neutral-600">Bring any space to life with large‑format canvases.</p>
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80"
-                alt="Minimal canvas in a modern workspace"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Workspaces</h3>
-              <p class="mt-1 text-xs text-neutral-600">Elevate offices, studios, and creative spaces.</p>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="group rounded-2xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all">
-            <div class="aspect-[4/5] bg-neutral-900 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1000&q=80"
-                alt="Canvas prints in a bedroom"
-                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-4">
-              <h3 class="text-sm font-semibold text-neutral-900">Home & lifestyle</h3>
-              <p class="mt-1 text-xs text-neutral-600">Create cozy vibes with personal memories and art.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="bg-[#fefbf3] border-t border-neutral-200/70">
-      <div class="mx-auto max-w-6xl px-6 py-16">
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="rounded-2xl bg-white border border-neutral-200 p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div class="text-sm font-semibold text-neutral-900">Truly impressed</div>
-            </div>
-            <p class="text-sm text-neutral-700">“The colors pop and the texture feels premium. Setup was effortless. Will order again.”</p>
-            <div class="mt-4 text-xs text-neutral-500">— Sarah D.</div>
-          </div>
-          <div class="rounded-2xl bg-white border border-neutral-200 p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div class="text-sm font-semibold text-neutral-900">Great gift</div>
-            </div>
-            <p class="text-sm text-neutral-700">“I turned a favorite photo into a canvas for my parents. Quality exceeded expectations.”</p>
-            <div class="mt-4 text-xs text-neutral-500">— Kevin M.</div>
-          </div>
-          <div class="rounded-2xl bg-white border border-neutral-200 p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#d97759]/10">
-                <svg class="h-6 w-6 text-[#d97759]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div class="text-sm font-semibold text-neutral-900">Fast turnaround</div>
-            </div>
-            <p class="text-sm text-neutral-700">“From upload to the wall in less than a week. Bright, sharp, and perfectly stretched.”</p>
-            <div class="mt-4 text-xs text-neutral-500">— Maria P.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    
-
-    <section class="py-20 md:py-24 relative overflow-hidden bg-[#f0ebe3] rounded-3xl mx-6 lg:mx-8 mb-12">
-      <div class="max-w-6xl mx-auto px-8 lg:px-12">
-        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-          <div>
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 mb-6 leading-tight">
-              Ready to print your design?
-            </h2>
-            <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-              Create a stunning canvas from any image—generated or uploaded—and have it delivered to your door.
-            </p>
-            <NuxtLink 
-              to="/dashboard"
-              class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
+        <div class="bg-[#f9f8f6] rounded-2xl border border-neutral-200 p-6 md:p-8">
+          <!-- Tabs -->
+          <div class="flex gap-2 mb-6 border-b border-neutral-200">
+            <button
+              @click="activeTab = 'generate'"
+              :class="[
+                'px-4 py-2 text-sm font-medium transition-colors relative',
+                activeTab === 'generate' ? 'text-neutral-900' : 'text-neutral-600 hover:text-neutral-900'
+              ]"
             >
-              Print A Design
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </NuxtLink>
+              Generate with AI
+              <span v-if="activeTab === 'generate'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
+            </button>
+            <button
+              @click="activeTab = 'upload'"
+              :class="[
+                'px-4 py-2 text-sm font-medium transition-colors relative',
+                activeTab === 'upload' ? 'text-neutral-900' : 'text-neutral-600 hover:text-neutral-900'
+              ]"
+            >
+              Upload Image
+              <span v-if="activeTab === 'upload'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97759]"></span>
+            </button>
           </div>
-          <div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-6">Perfect for any space</h3>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
-                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
-                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2z"/>
+
+          <!-- Generate Tab -->
+          <div v-if="activeTab === 'generate'" class="space-y-4">
+            <div class="relative">
+              <textarea
+                v-model="prompt"
+                placeholder="Describe what you want to create... (e.g., 'A serene mountain landscape at sunset with vibrant colors')"
+                rows="4"
+                class="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#d97759] focus:border-transparent resize-none"
+              ></textarea>
+              <div class="absolute bottom-3 right-3 flex items-center gap-2">
+                <button
+                  type="button"
+                  class="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+                  title="Add image reference"
+                >
+                  <svg class="h-5 w-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
                   </svg>
-                </div>
-                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Gallery walls</h4>
-                <p class="text-xs text-neutral-600">Bold statements for living areas</p>
-              </div>
-              <div class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
-                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
-                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </button>
+                <button
+                  @click="generateImage"
+                  :disabled="!prompt.trim()"
+                  class="p-2 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  title="Generate"
+                >
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                   </svg>
-                </div>
-                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Workspaces</h4>
-                <p class="text-xs text-neutral-600">Offices, studios, and lobbies</p>
-              </div>
-              <div class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
-                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
-                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                  </svg>
-                </div>
-                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Studios</h4>
-                <p class="text-xs text-neutral-600">Brand & campaign visuals</p>
-              </div>
-              <div class="group relative overflow-hidden rounded-xl bg-white p-5 hover:shadow-lg transition-all border border-neutral-200 hover:border-[#d97759]">
-                <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-[#d97759]/10 mb-3 group-hover:bg-[#d97759]/20 transition-colors">
-                  <svg class="h-5 w-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                  </svg>
-                </div>
-                <h4 class="text-sm font-semibold text-neutral-900 mb-1">Gifts</h4>
-                <p class="text-xs text-neutral-600">Memories made memorable</p>
+                </button>
               </div>
             </div>
+            
+            <!-- Quick Prompts -->
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="example in promptExamples"
+                :key="example"
+                @click="prompt = example"
+                class="px-3 py-1.5 text-xs bg-white border border-neutral-200 rounded-lg hover:border-[#d97759] hover:bg-[#d97759]/5 transition-colors"
+              >
+                {{ example }}
+              </button>
+            </div>
           </div>
+
+          <!-- Upload Tab -->
+          <div v-if="activeTab === 'upload'" class="space-y-4">
+            <div
+              @click="triggerFileUpload"
+              @dragover.prevent
+              @drop.prevent="handleFileDrop"
+              class="relative border-2 border-dashed border-neutral-300 rounded-xl p-12 text-center hover:border-[#d97759] hover:bg-[#d97759]/5 transition-all cursor-pointer"
+            >
+              <input
+                ref="fileInput"
+                type="file"
+                accept="image/*"
+                @change="handleFileSelect"
+                class="hidden"
+              />
+              <div class="flex flex-col items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10">
+                  <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-neutral-900 mb-1">
+                    Click to upload or drag and drop
+                  </p>
+                  <p class="text-xs text-neutral-600">
+                    PNG, JPG up to 10MB
+                  </p>
+                </div>
+              </div>
+              <div v-if="uploadedFile" class="mt-4 text-sm text-neutral-700">
+                Selected: <span class="font-medium">{{ uploadedFile.name }}</span>
+              </div>
+            </div>
+            
+            <button
+              @click="proceedWithUpload"
+              :disabled="!uploadedFile"
+              class="w-full py-3 px-4 rounded-lg bg-neutral-900 text-white font-medium hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Continue with Upload
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Showcase -->
+        <div class="mt-16">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl md:text-3xl font-medium tracking-tight text-neutral-900 mb-2">
+              Canvas showcase
+            </h3>
+            <p class="text-base text-neutral-600">
+              Explore stunning examples of canvas prints
+            </p>
+          </div>
+
+        <!-- Canvas Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          <!-- Canvas frame wrapper -->
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <!-- Canvas border effect -->
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    :src="heroImg"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <!-- Canvas depth effect -->
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">24" × 36"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">18" × 24"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">12" × 16"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">18" × 24"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">24" × 36"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">30" × 40"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">16" × 20"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">18" × 24"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">20" × 30"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">16" × 20"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">12" × 16"</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative bg-white p-3 shadow-lg hover:shadow-xl transition-all">
+              <div class="relative border-4 border-neutral-800 overflow-hidden">
+                <div class="aspect-square">
+                  <img
+                    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=400&q=80"
+                    alt="Canvas print"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+              <div class="absolute inset-0 pointer-events-none shadow-inner"></div>
+            </div>
+            <p class="text-xs text-center text-neutral-600 mt-2">18" × 24"</p>
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -395,6 +343,52 @@
 
 <script setup lang="ts">
 import heroImg from '~/assets/wps-canvas.png'
+
+// Interactive section state
+const activeTab = ref('generate')
+const prompt = ref('')
+const uploadedFile = ref<File | null>(null)
+const fileInput = ref<HTMLInputElement | null>(null)
+
+const promptExamples = [
+  'Abstract geometric patterns',
+  'Minimalist mountain landscape',
+  'Vibrant sunset over ocean',
+  'Modern art with bold colors'
+]
+
+const generateImage = () => {
+  if (!prompt.value.trim()) return
+  // TODO: Integrate with AI image generation API
+  console.log('Generating image with prompt:', prompt.value)
+  // Navigate to dashboard or show generation UI
+  navigateTo('/dashboard')
+}
+
+const triggerFileUpload = () => {
+  fileInput.value?.click()
+}
+
+const handleFileSelect = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files[0]) {
+    uploadedFile.value = target.files[0]
+  }
+}
+
+const handleFileDrop = (event: DragEvent) => {
+  if (event.dataTransfer?.files && event.dataTransfer.files[0]) {
+    uploadedFile.value = event.dataTransfer.files[0]
+  }
+}
+
+const proceedWithUpload = () => {
+  if (!uploadedFile.value) return
+  // TODO: Handle file upload and navigate to canvas customization
+  console.log('Proceeding with file:', uploadedFile.value.name)
+  navigateTo('/dashboard')
+}
+
 useHead({
   title: 'Canvas Printing',
   meta: [
