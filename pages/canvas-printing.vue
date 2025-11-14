@@ -70,15 +70,17 @@
             </div>
             
             <!-- Quick Prompts -->
-            <div class="flex flex-wrap gap-2">
-              <button
-                v-for="example in promptExamples"
-                :key="example"
-                @click="prompt = example"
-                class="px-3 py-1.5 text-xs bg-white border border-neutral-200 rounded-lg hover:border-[#d97759] hover:bg-[#d97759]/5 transition-colors"
-              >
-                {{ example }}
-              </button>
+            <div class="relative">
+              <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+                <button
+                  v-for="example in promptExamples"
+                  :key="example"
+                  @click="prompt = example"
+                  class="flex-shrink-0 px-4 py-2 text-sm bg-white border border-neutral-200 rounded-lg hover:border-[#d97759] hover:bg-[#d97759]/5 transition-colors snap-start whitespace-nowrap"
+                >
+                  {{ example }}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -414,3 +416,16 @@ useHead({
   ]
 })
 </script>
+
+<style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
