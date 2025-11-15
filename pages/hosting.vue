@@ -314,7 +314,10 @@
                 placeholder="<!doctype html>\n<html>\n  <head>...</head>\n  <body>...</body>\n</html>"
               ></textarea>
               <p class="mt-1 text-[10px] text-neutral-500">
-                💡 Load a file above, edit manually, or ask AI below to modify the code.
+                💡 Load a file above, edit manually, or ask AI below for targeted changes.
+              </p>
+              <p class="mt-1 text-[9px] text-neutral-400 italic">
+                The AI will provide specific code snippets and instructions on where to place them.
               </p>
             </div>
 
@@ -363,7 +366,9 @@
                      class="flex" :class="msg.role === 'user' ? 'justify-end' : 'justify-start'">
                   <div :class="msg.role === 'user' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-800'"
                        class="inline-block rounded-lg px-3 py-2 text-xs max-w-[85%] shadow-sm">
-                    <pre v-if="msg.content.includes('```')" class="whitespace-pre-wrap font-mono text-[10px]">{{ msg.content }}</pre>
+                    <div v-if="msg.content.includes('```')" class="space-y-1">
+                      <div v-html="formatMessageWithCode(msg.content)" class="prose prose-xs max-w-none"></div>
+                    </div>
                     <span v-else>{{ msg.content }}</span>
                   </div>
                 </div>
@@ -393,7 +398,10 @@
               </div>
               
               <p class="mt-2 text-[10px] text-neutral-600">
-                💬 Examples: "Add a contact form", "Make it responsive", "Change colors to blue", "Add animations"
+                💬 Examples: "Add a contact form after the hero", "Change the header background to blue", "Add hover effects to buttons", "Make the footer responsive"
+              </p>
+              <p class="mt-1 text-[9px] text-neutral-500 italic">
+                💡 Tip: Be specific about where to make changes. The AI will provide targeted edits instead of regenerating everything.
               </p>
             </div>
 
@@ -828,6 +836,30 @@ const startNewChat = () => {
   chatMessages.value = []
 }
 
+const formatMessageWithCode = (content: string) => {
+  // Format markdown-style messages with code blocks
+  let formatted = content
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // Bold
+    .replace(/\*(.+?)\*/g, '<em>$1</em>') // Italic
+    .replace(/`([^`]+)`/g, '<code class="bg-neutral-100 px-1 rounded text-[10px]">$1</code>') // Inline code
+  
+  // Handle code blocks
+  formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+    return `<pre class="bg-neutral-900 text-neutral-100 p-2 rounded text-[10px] overflow-x-auto mt-1 mb-1"><code>${escapeHtml(code.trim())}</code></pre>`
+  })
+  
+  // Handle line breaks
+  formatted = formatted.replace(/\n/g, '<br>')
+  
+  return formatted
+}
+
+const escapeHtml = (text: string) => {
+  const div = document.createElement('div')
+  div.textContent = text
+  return div.innerHTML
+}
+
 const deleteCurrentChat = async () => {
   if (!currentChatId.value) return
   
@@ -853,19 +885,31 @@ const deleteCurrentChat = async () => {
 }
 
 const extractCodeFromResponse = (message: string) => {
-  const codeBlockRegex = /```(\w+)\n([\s\S]*?)```/g
+  const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g
   const matches = [...message.matchAll(codeBlockRegex)]
   
   if (matches.length > 0) {
     const [, language, code] = matches[0]
     
-    if (language.toLowerCase() === 'html') {
-      // Write the generated code to the editor
-      aiHtml.value = code.trim()
-      
-      // Update loaded file indicator
-      aiLoadedFile.value = 'AI Generated'
-      aiLoadedFrom.value = 'AI Assistant'
+    // Check if this is a complete HTML document (starts with <!DOCTYPE or <html>)
+    const isCompleteDocument = code.trim().startsWith('<!DOCTYPE') || code.trim().startsWith('<html')
+    
+    if (language?.toLowerCase() === 'html' || isCompleteDocument) {
+      if (isCompleteDocument) {
+        // Full document - replace everything
+        aiHtml.value = code.trim()
+        
+        // Update loaded file indicator
+        aiLoadedFile.value = 'AI Generated (Full)'
+        aiLoadedFrom.value = 'AI Assistant'
+      } else {
+        // Partial code snippet - don't auto-apply, let user manually integrate
+        // The AI's instructions will guide where to place it
+        console.log('[AI] Received code snippet - check AI instructions for placement')
+        
+        // Optionally, you could append it to the end with a comment
+        // or show a notification that manual integration is needed
+      }
     }
   }
 }

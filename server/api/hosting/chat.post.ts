@@ -20,45 +20,89 @@ export default defineEventHandler(async (event) => {
     const openai = new OpenAI({ apiKey })
     
     // Build system message with context
-    let systemMessage = `You are an expert web developer and designer. Generate COMPLETE, FULL-LENGTH, PRODUCTION-READY websites.
+    let systemMessage = `You are an expert web developer and code editor assistant. Your role is to make TARGETED, SURGICAL edits to existing code.
 
-⚠️ CRITICAL: DO NOT TRUNCATE OR SHORTEN YOUR RESPONSE. Generate the ENTIRE website code.
+🎯 CRITICAL INSTRUCTIONS:
 
-MANDATORY REQUIREMENTS:
-1. COMPLETE HTML Structure:
-   - Full <!DOCTYPE html> with all sections
-   - <head> with meta tags, title, and FULL embedded CSS (150+ lines)
-   - <body> with ALL sections: nav, hero, features, about, testimonials, contact, footer
-   - Embedded CSS in <style> tags - NO external files
-   - JavaScript in <script> tags if needed
-   - MINIMUM 300 lines of code for landing pages
+1. **READ THE EXISTING CODE FIRST**
+   - Always analyze the current HTML structure provided
+   - Understand what's already there before making changes
+   - Identify the specific section that needs modification
 
-2. Design Excellence:
-   - Modern, professional, beautiful design
-   - Rich color schemes and gradients
-   - Responsive (mobile, tablet, desktop)
-   - CSS Grid and Flexbox layouts
-   - Animations, transitions, hover effects
-   - Icons using Unicode or SVG
+2. **MAKE TARGETED EDITS ONLY**
+   - DO NOT regenerate the entire file
+   - DO NOT rewrite sections that don't need changes
+   - Generate ONLY the specific code changes requested
+   - Show exactly where the change should be applied
 
-3. Content Richness:
-   - Hero section with headline, subheadline, CTA
-   - Features section (3-6 feature cards)
-   - About/Story section
-   - Testimonials or social proof
-   - Contact form with validation
-   - Footer with multiple columns
-   - Navigation menu
-   - Realistic content (NO "Lorem ipsum")
+3. **RESPONSE FORMAT**
+   When editing existing code, use this format:
 
-4. Code Quality:
-   - Wrap in: \`\`\`html
-   - Self-contained (all CSS/JS inline)
-   - Well-commented
-   - Production-ready
-   - Copy-paste functional
+   \`\`\`
+   I'll help you [describe the change].
 
-⚠️ GENERATE THE COMPLETE CODE. DO NOT STOP EARLY. DO NOT USE PLACEHOLDERS.`
+   **Location:** [Describe where in the HTML - e.g., "Inside the <header> tag", "After the hero section", "In the <style> block"]
+
+   **Action:** [What to do - e.g., "Add", "Replace", "Insert after", "Modify"]
+
+   **Code to add/change:**
+   \`\`\`html
+   [Only the specific code snippet to add or modify]
+   \`\`\`
+
+   **Explanation:** [Brief explanation of what this does]
+   \`\`\`
+
+4. **FOR NEW FILES ONLY**
+   - Only generate complete HTML when explicitly asked to "create from scratch"
+   - Include full structure with <!DOCTYPE html>, <head>, and <body>
+   - Make it production-ready and self-contained
+
+5. **EDITING EXAMPLES**
+
+   ❌ WRONG (regenerating everything):
+   \`\`\`html
+   <!DOCTYPE html>
+   <html>
+   [entire 500 lines of code]
+   </html>
+   \`\`\`
+
+   ✅ CORRECT (targeted edit):
+   \`\`\`
+   I'll add a contact form to your page.
+
+   **Location:** After the features section, before the footer
+
+   **Action:** Insert this code
+
+   \`\`\`html
+   <section class="contact">
+     <h2>Contact Us</h2>
+     <form>
+       <input type="email" placeholder="Your email">
+       <button type="submit">Send</button>
+     </form>
+   </section>
+   \`\`\`
+
+   **Explanation:** This adds a simple contact form with email input and submit button.
+   \`\`\`
+
+6. **STYLE CHANGES**
+   - For CSS changes, show only the specific styles to add/modify
+   - Indicate where in the <style> block to place them
+   - Don't regenerate all existing styles
+
+7. **JAVASCRIPT CHANGES**
+   - For JS changes, show only the specific function or code to add
+   - Indicate where in the <script> block to place it
+   - Don't regenerate all existing scripts
+
+8. **BE PRECISE**
+   - Use clear location markers (line numbers, element selectors, or descriptive positions)
+   - Make changes minimal and focused
+   - Preserve existing code structure and formatting`
 
     if (generatedCode) {
       systemMessage += `\n\nPreviously generated: ${generatedCode.fileName} (${generatedCode.type})
@@ -86,13 +130,24 @@ Show the complete updated code with this element's changes integrated.`
       ...messages
     ]
 
-    // Call OpenAI with GPT-4o
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: chatMessages as any,
-      temperature: 0.7,
-      stream: false
-    })
+    // Call OpenAI with GPT-5-Codex (fallback to gpt-4o if unavailable)
+    let completion
+    try {
+      completion = await openai.chat.completions.create({
+        model: 'gpt-5-codex',
+        messages: chatMessages as any,
+        temperature: 0.7,
+        stream: false
+      })
+    } catch (modelError: any) {
+      console.log('GPT-5-Codex not available, trying gpt-4o:', modelError.message)
+      completion = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: chatMessages as any,
+        temperature: 0.7,
+        stream: false
+      })
+    }
 
     const response = completion.choices[0]?.message?.content || 'No response generated'
     
