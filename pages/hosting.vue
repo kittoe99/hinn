@@ -848,19 +848,27 @@ const startNewChat = () => {
 }
 
 const formatMessageWithCode = (content: string) => {
-  // Format markdown-style messages with code blocks
-  let formatted = content
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // Bold
-    .replace(/\*(.+?)\*/g, '<em>$1</em>') // Italic
-    .replace(/`([^`]+)`/g, '<code class="bg-neutral-100 px-1 rounded text-[10px]">$1</code>') // Inline code
-  
-  // Handle code blocks
-  formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-    return `<pre class="bg-neutral-900 text-neutral-100 p-2 rounded text-[10px] overflow-x-auto mt-1 mb-1"><code>${escapeHtml(code.trim())}</code></pre>`
+  // First, protect code blocks from other replacements
+  const codeBlocks: string[] = []
+  let formatted = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+    const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`
+    codeBlocks.push(`<pre class="bg-neutral-900 text-neutral-100 p-3 rounded text-[10px] overflow-x-auto mt-2 mb-2 font-mono"><code>${escapeHtml(code.trim())}</code></pre>`)
+    return placeholder
   })
+  
+  // Format markdown
+  formatted = formatted
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>') // Bold
+    .replace(/\*(.+?)\*/g, '<em>$1</em>') // Italic
+    .replace(/`([^`]+)`/g, '<code class="bg-neutral-100 px-1.5 py-0.5 rounded text-[10px] font-mono text-neutral-800">$1</code>') // Inline code
   
   // Handle line breaks
   formatted = formatted.replace(/\n/g, '<br>')
+  
+  // Restore code blocks
+  codeBlocks.forEach((block, index) => {
+    formatted = formatted.replace(`__CODE_BLOCK_${index}__`, block)
+  })
   
   return formatted
 }
@@ -896,31 +904,43 @@ const deleteCurrentChat = async () => {
 }
 
 const extractCodeFromResponse = (message: string) => {
+  // Match code blocks with language identifier
   const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g
   const matches = [...message.matchAll(codeBlockRegex)]
   
   if (matches.length > 0) {
+    // Use the first code block found
     const [, language, code] = matches[0]
     
-    // Check if this is a complete HTML document (starts with <!DOCTYPE or <html>)
-    const isCompleteDocument = code.trim().startsWith('<!DOCTYPE') || code.trim().startsWith('<html')
+    // Determine file extension and type
+    const extensions: Record<string, { ext: string; type: string }> = {
+      'html': { ext: 'html', type: 'HTML' },
+      'css': { ext: 'css', type: 'CSS' },
+      'javascript': { ext: 'js', type: 'JavaScript' },
+      'js': { ext: 'js', type: 'JavaScript' },
+      'json': { ext: 'json', type: 'JSON' },
+      'typescript': { ext: 'ts', type: 'TypeScript' },
+      'ts': { ext: 'ts', type: 'TypeScript' }
+    }
     
-    if (language?.toLowerCase() === 'html' || isCompleteDocument) {
-      if (isCompleteDocument) {
-        // Full document - replace everything
-        aiHtml.value = code.trim()
-        
-        // Update loaded file indicator
-        aiLoadedFile.value = 'AI Generated (Full)'
-        aiLoadedFrom.value = 'AI Assistant'
-      } else {
-        // Partial code snippet - don't auto-apply, let user manually integrate
-        // The AI's instructions will guide where to place it
-        console.log('[AI] Received code snippet - check AI instructions for placement')
-        
-        // Optionally, you could append it to the end with a comment
-        // or show a notification that manual integration is needed
-      }
+    const fileInfo = extensions[language?.toLowerCase() || ''] || { ext: 'txt', type: 'Text' }
+    
+    // Check if this is HTML code
+    if (fileInfo.type === 'HTML' || code.trim().startsWith('<!DOCTYPE') || code.trim().startsWith('<html')) {
+      // Auto-apply HTML code to editor
+      aiHtml.value = code.trim()
+      
+      // Update loaded file indicator
+      aiLoadedFile.value = `AI Generated (${fileInfo.type})`
+      aiLoadedFrom.value = 'AI Assistant'
+      
+      console.log('[AI] Code extracted and applied to editor:', {
+        type: fileInfo.type,
+        length: code.trim().length
+      })
+    } else {
+      // For non-HTML code (CSS, JS), log but don't auto-apply
+      console.log('[AI] Non-HTML code detected:', fileInfo.type)
     }
   }
 }
