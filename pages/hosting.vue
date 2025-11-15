@@ -397,6 +397,17 @@
                 </button>
               </div>
               
+              <div v-if="aiHtml" class="mt-2 p-2 bg-emerald-50 border border-emerald-200 rounded-lg">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p class="text-[9px] text-emerald-800 font-medium">
+                    AI can read your file ({{ aiHtml.length }} characters loaded)
+                  </p>
+                </div>
+              </div>
+              
               <p class="mt-2 text-[10px] text-neutral-600">
                 💬 Examples: "Add a contact form after the hero", "Change the header background to blue", "Add hover effects to buttons", "Make the footer responsive"
               </p>
@@ -708,8 +719,8 @@ const sendAiMessage = async () => {
       body: {
         messages: chatMessages.value,
         generatedCode: aiHtml.value ? {
-          content: aiHtml.value,
-          fileName: 'index.html',
+          content: aiHtml.value, // Send full HTML content so AI can read it
+          fileName: aiLoadedFile.value || 'index.html',
           type: 'HTML'
         } : null
       }

@@ -105,8 +105,21 @@ export default defineEventHandler(async (event) => {
    - Preserve existing code structure and formatting`
 
     if (generatedCode) {
-      systemMessage += `\n\nPreviously generated: ${generatedCode.fileName} (${generatedCode.type})
-You can reference or modify this code.`
+      systemMessage += `\n\n📄 CURRENT FILE CONTENT:
+File: ${generatedCode.fileName} (${generatedCode.type})
+
+You have full access to the current file content below. Read it carefully before making any suggestions.
+
+\`\`\`html
+${generatedCode.content}
+\`\`\`
+
+IMPORTANT: 
+- This is the COMPLETE current file content
+- Analyze this code before suggesting changes
+- Reference specific sections when making edits
+- Do NOT regenerate sections that don't need changes
+- Make targeted edits based on what's already there`
     }
 
     if (selectedElement) {
