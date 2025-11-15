@@ -50,6 +50,27 @@ export default defineEventHandler(async (event) => {
     const storageRoot = `${websiteId}/${versionId}`
     const indexPath = `${storageRoot}/index.html`
 
+    // STEP 1: Upload to storage FIRST (before database)
+    // Convert HTML string to Blob with proper MIME type
+    const blob = new Blob([html], { type: 'text/html' })
+
+    const { error: uploadError } = await supabase.storage
+      .from('websites')
+      .upload(indexPath, blob, {
+        contentType: 'text/html',
+        upsert: false,
+        cacheControl: '3600'
+      })
+
+    if (uploadError) {
+      console.error('[Hosting] Storage upload error (generated):', uploadError)
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Upload failed: ${uploadError.message}`
+      })
+    }
+
+    // STEP 2: Create database record AFTER successful upload
     const { error: versionError } = await supabase
       .from('website_versions')
       .insert({
@@ -64,27 +85,13 @@ export default defineEventHandler(async (event) => {
 
     if (versionError) {
       console.error('[Hosting] Failed to create website_version (generated):', versionError)
+      
+      // Rollback: Delete the uploaded file
+      await supabase.storage.from('websites').remove([indexPath])
+      
       throw createError({
         statusCode: 500,
         statusMessage: `Failed to create website version: ${versionError.message}`
-      })
-    }
-
-    const content = new TextEncoder().encode(html)
-
-    const { error: uploadError } = await supabase.storage
-      .from('websites')
-      .upload(indexPath, content, {
-        contentType: 'text/html; charset=utf-8',
-        upsert: false,
-        cacheControl: '3600'
-      })
-
-    if (uploadError) {
-      console.error('[Hosting] Storage upload error (generated):', uploadError)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Upload failed: ${uploadError.message}`
       })
     }
 
