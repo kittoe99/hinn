@@ -403,7 +403,7 @@
             </div>
 
             <!-- CTA -->
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex">
               <NuxtLink
                 to="/canvas-printing"
                 class="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -412,12 +412,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </NuxtLink>
-              <NuxtLink
-                to="/contact"
-                class="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-neutral-900 bg-white border-2 border-neutral-200 hover:border-neutral-300 transition-all duration-300"
-              >
-                Get a Quote
               </NuxtLink>
             </div>
           </div>
@@ -435,21 +429,6 @@
                 />
                 <!-- Overlay gradient -->
                 <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent"></div>
-              </div>
-
-              <!-- Floating Badge -->
-              <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 border border-neutral-200">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10">
-                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-sm font-semibold text-neutral-900">Premium Quality</div>
-                    <div class="text-xs text-neutral-500">Museum-grade materials</div>
-                  </div>
-                </div>
               </div>
 
               <!-- Decorative dots -->
@@ -486,7 +465,7 @@
           <!-- Left Column: Heading and CTA -->
           <div>
             <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-4 leading-tight">
-              Ready to transform your digital presence?
+              Turn your ideas into live sites and canvas art
             </h2>
             <p class="text-lg text-neutral-700 mb-8 leading-relaxed">
               Join hundreds of companies building faster with AI-powered tools
