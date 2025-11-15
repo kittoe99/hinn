@@ -3,7 +3,24 @@ import { defineEventHandler, readBody, createError } from 'h3'
 
 export default defineEventHandler(async (event) => {
   try {
-    const body = await readBody(event)
+    const body = await readBody<{
+      messages: Array<{ role: string; content: string }>
+      generatedCode?: { content: string; fileName: string; type: string }
+      selectedElement?: { 
+        tag: string
+        selector: string
+        html: string
+        lineNumber?: number
+        lineRange?: { start: number; end: number; confidence?: number }
+        context?: {
+          parent?: string
+          siblings?: { before?: string; after?: string }
+          attributes?: Record<string, string>
+          textContent?: string
+          index?: number
+        }
+      }
+    }>(event)
     const { messages, generatedCode, selectedElement } = body
     
     const config = useRuntimeConfig()
@@ -156,18 +173,70 @@ IMPORTANT:
     }
 
     if (selectedElement) {
+      const lineInfo = selectedElement.lineRange 
+        ? `Lines ${selectedElement.lineRange.start}-${selectedElement.lineRange.end} (${Math.round((selectedElement.lineRange.confidence || 0) * 100)}% confidence)`
+        : selectedElement.lineNumber 
+        ? `Line ${selectedElement.lineNumber}`
+        : 'Line detection unavailable'
+      
+      const contextInfo = selectedElement.context ? `
+Parent Element: <${selectedElement.context.parent || 'unknown'}>
+Position: ${(selectedElement.context.index || 0) + 1} child of parent
+${selectedElement.context.siblings?.before ? `Previous Sibling: <${selectedElement.context.siblings.before}>` : ''}
+${selectedElement.context.siblings?.after ? `Next Sibling: <${selectedElement.context.siblings.after}>` : ''}
+${selectedElement.context.attributes ? `Attributes: ${Object.entries(selectedElement.context.attributes).map(([k, v]) => `${k}="${v}"`).join(', ')}` : ''}
+${selectedElement.context.textContent ? `Text Content: "${selectedElement.context.textContent}"` : ''}` : ''
+      
       systemMessage += `\n\n🎯 SELECTED ELEMENT CONTEXT:
 Tag: <${selectedElement.tag}>
 CSS Selector: ${selectedElement.selector}
+Location: ${lineInfo}
+${contextInfo}
+
 HTML Content: ${selectedElement.html || 'N/A'}
 
-When the user asks to modify, style, or edit something, they are referring to THIS specific element.
-Provide targeted code changes for this element, including:
-- CSS styles for this selector
-- HTML modifications if needed
-- JavaScript interactions if requested
+⚡ CRITICAL: The user has selected THIS SPECIFIC ELEMENT for modification.
 
-Show the complete updated code with this element's changes integrated.`
+**RESPONSE FORMAT FOR ELEMENT-SPECIFIC CHANGES:**
+
+When the user asks to modify this element, provide:
+
+1. **Brief explanation** of what you're changing
+2. **Complete updated HTML** with the changes applied to this element
+3. **Line-specific change summary** showing:
+   - Which lines were modified
+   - What was changed
+   - Why it was changed
+
+Example response format:
+
+I'll update your ${selectedElement.tag} element to [describe change].
+
+Here's the updated HTML with your changes:
+
+\`\`\`html
+<!DOCTYPE html>
+<html>
+  [... complete file with changes applied ...]
+</html>
+\`\`\`
+
+**Changes made:**
+- Line ${selectedElement.lineNumber || 'X'}: Modified ${selectedElement.tag} element
+- Added/Changed: [specific attributes or styles]
+- Preserved: All other elements and structure
+
+**Technical details:**
+- Target selector: ${selectedElement.selector}
+- Change type: [style/content/structure]
+- Impact: Isolated to selected element only
+
+IMPORTANT:
+- Make changes ONLY to the selected element
+- Return the COMPLETE updated file
+- Preserve all other code exactly as-is
+- Apply changes at line ${selectedElement.lineNumber || 'specified location'}
+- Ensure changes are production-ready`
     }
 
     // Prepare messages with system context
