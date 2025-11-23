@@ -36,9 +36,9 @@
       </div>
     </header>
 
-    <main class="flex flex-1 overflow-hidden relative">
+    <main class="relative flex flex-1 min-h-0 overflow-hidden">
       <!-- Mobile Toggle (Absolute) -->
-      <div class="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-1 rounded-full bg-neutral-900/90 p-1 shadow-lg backdrop-blur lg:hidden">
+      <div class="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-1 rounded-full bg-neutral-900/90 p-1 shadow-lg backdrop-blur lg:hidden mb-safe">
         <button
           @click="activePanel = 'chat'"
           class="rounded-full px-4 py-2 text-xs font-medium transition"
@@ -56,11 +56,11 @@
       </div>
 
       <!-- Split View -->
-      <div class="flex w-full h-full">
+      <div class="flex w-full flex-1 min-h-0">
         <!-- Chat Panel -->
         <div 
-          class="flex h-full w-full flex-col border-r border-neutral-200 bg-white lg:w-[400px] lg:shrink-0 xl:w-[450px]"
-          :class="activePanel === 'chat' ? 'block' : 'hidden lg:flex'"
+          class="flex w-full flex-1 flex-col border-r border-neutral-200 bg-white lg:w-[400px] lg:shrink-0 xl:w-[450px]"
+          :class="activePanel === 'chat' ? 'flex' : 'hidden lg:flex'"
         >
           <!-- Messages -->
           <div class="flex-1 overflow-y-auto p-4 space-y-4" ref="messagesContainer">
@@ -111,7 +111,7 @@
           </div>
 
           <!-- Input -->
-          <div class="border-t border-neutral-200 p-4 bg-white">
+          <div class="border-t border-neutral-200 p-4 bg-white shrink-0">
             <!-- Context Previews (File & Selection) -->
             <div class="mb-2 flex flex-wrap gap-2">
               <!-- Selected Element -->
@@ -175,8 +175,8 @@
 
         <!-- Preview Panel -->
         <div 
-          class="flex-1 flex flex-col bg-neutral-100/50 relative"
-          :class="activePanel === 'preview' ? 'block' : 'hidden lg:flex'"
+          class="relative flex w-full flex-1 flex-col bg-neutral-100/50"
+          :class="activePanel === 'preview' ? 'flex' : 'hidden lg:flex'"
         >
           <!-- Loading Overlay -->
           <div v-if="isGenerating && !previewContent" class="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-sm">
@@ -187,9 +187,9 @@
           </div>
 
           <!-- Preview Area -->
-          <div class="flex-1 overflow-hidden p-4 md:p-8 flex items-center justify-center">
+          <div class="flex flex-1 items-center justify-center overflow-hidden p-6">
             <div 
-              class="relative h-full bg-white shadow-2xl transition-all duration-500 ease-in-out overflow-hidden"
+              class="relative w-full h-full bg-white shadow-2xl transition-all duration-500 ease-in-out overflow-hidden"
               :class="[
                 viewportMode === 'mobile' ? 'w-[375px] rounded-[40px] border-[8px] border-neutral-800' : '',
                 viewportMode === 'tablet' ? 'w-[768px] rounded-xl border-4 border-neutral-800' : '',
@@ -201,7 +201,7 @@
 
               <iframe
                 ref="previewFrame"
-                class="h-full w-full bg-white"
+                class="w-full h-full bg-white"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 :srcdoc="previewContent"
               ></iframe>
@@ -215,6 +215,10 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted, watch } from 'vue'
+
+definePageMeta({
+  layout: false
+})
 
 // Types
 interface Attachment {
