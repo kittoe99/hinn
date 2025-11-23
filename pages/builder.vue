@@ -59,11 +59,11 @@
       <div class="flex w-full flex-1 min-h-0">
         <!-- Chat Panel -->
         <div 
-          class="flex w-full flex-1 flex-col border-r border-neutral-200 bg-white lg:w-[400px] lg:shrink-0 xl:w-[450px]"
+          class="flex w-full h-full flex-col border-r border-neutral-200 bg-white lg:w-[400px] lg:shrink-0 xl:w-[450px]"
           :class="activePanel === 'chat' ? 'flex' : 'hidden lg:flex'"
         >
           <!-- Messages -->
-          <div class="flex-1 overflow-y-auto p-4 space-y-4" ref="messagesContainer">
+          <div class="flex-1 overflow-y-auto p-4 pb-2 space-y-4" ref="messagesContainer">
             <transition-group name="message" tag="div" class="space-y-4">
               <div 
                 v-for="(msg, index) in messages" 
@@ -124,7 +124,7 @@
           </div>
 
           <!-- Input -->
-          <div class="border-t border-neutral-200 p-4 bg-white shrink-0">
+          <div class="border-t border-neutral-200 p-4 bg-white shrink-0 pb-safe">
             <!-- Context Previews (File & Selection) -->
             <div class="mb-2 flex flex-wrap gap-2">
               <!-- Selected Element -->
@@ -188,7 +188,7 @@
 
         <!-- Preview Panel -->
         <div 
-          class="relative flex w-full flex-1 flex-col bg-neutral-100/50"
+          class="relative flex w-full h-full flex-col bg-neutral-100/50"
           :class="activePanel === 'preview' ? 'flex' : 'hidden lg:flex'"
         >
           <!-- Loading Overlay -->

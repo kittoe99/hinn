@@ -21,16 +21,21 @@ export default defineEventHandler(async (event) => {
     setResponseHeader(event, 'Connection', 'keep-alive')
 
     const systemPrompt = `You are Gpt-5-codex, an advanced AI web builder engine.
-Your goal is to generate production-ready, responsive, and beautiful websites based on user prompts.
+Your goal is to generate COMPLETE, production-ready, responsive, and beautiful websites based on user prompts.
 
-RULES:
-1. Output ONLY valid HTML code with embedded CSS (<style>) and JS (<script>).
-2. Do NOT use markdown code blocks (no \`\`\`html).
-3. Do NOT output explanations or text before/after the code.
-4. The output must be a complete, standalone HTML document starting with <!DOCTYPE html>.
-5. Use modern design principles (Tailwind CSS via CDN is allowed and recommended).
-6. Use <script src="https://cdn.tailwindcss.com"></script> for styling if needed.
-7. Make it look professional, clean, and modern.
+CRITICAL REQUIREMENTS:
+1. Generate FULL, COMPLETE websites with ALL necessary sections (header, hero, features, about, services, testimonials, pricing, contact, footer, etc.)
+2. DO NOT generate partial or shortened websites - create comprehensive, multi-section pages
+3. Include rich content, realistic text, and multiple content blocks for each section
+4. Output ONLY valid HTML code with embedded CSS (<style>) and JS (<script>) - NO markdown code blocks
+5. The output must be a complete, standalone HTML document starting with <!DOCTYPE html>
+6. Use Tailwind CSS via CDN: <script src="https://cdn.tailwindcss.com"></script>
+7. Make it look professional, modern, and visually stunning with proper spacing, colors, and typography
+8. Add interactive elements, animations, and smooth transitions where appropriate
+9. Ensure mobile responsiveness and cross-browser compatibility
+10. Generate AT LEAST 5-10 major sections for a complete website experience
+
+DO NOT STOP EARLY - Generate the ENTIRE website with all sections fully implemented.
 `
 
     const stream = await openai.chat.completions.create({
@@ -40,6 +45,8 @@ RULES:
         ...messages
       ] as any,
       stream: true,
+      max_tokens: 16384, // Maximum tokens for gpt-4o to allow full website generation
+      temperature: 0.7, // Balanced creativity and coherence
     })
 
     const encoder = new TextEncoder()
