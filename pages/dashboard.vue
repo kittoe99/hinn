@@ -363,12 +363,6 @@
                         </svg>
                         Add Domain
                       </button>
-                      <button @click="showChangeRequestForm = true" class="inline-flex items-center gap-2 shrink-0 bg-neutral-900 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
-                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                        </svg>
-                        Request Changes
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -2617,9 +2611,9 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
 // Disable default layout (removes navigation and footer)
+// Note: Auth middleware removed - using global-auth.global.ts instead
 definePageMeta({
-  layout: false,
-  middleware: ['auth']
+  layout: false
 })
 
 useHead({

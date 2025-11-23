@@ -1,6 +1,6 @@
 -- Migration: Create chats table for AI conversation tracking
 -- Created: 2025-01-15
--- Description: Stores AI chat conversations associated with websites for the hosting AI generator
+-- Description: Stores AI chat conversations associated with websites
 
 -- Create chats table
 CREATE TABLE IF NOT EXISTS chats (
@@ -51,7 +51,7 @@ CREATE POLICY "Users can delete their own chats"
   USING (auth.uid() = user_id);
 
 -- Add comments
-COMMENT ON TABLE chats IS 'Stores AI chat conversations associated with websites for the hosting AI generator';
+COMMENT ON TABLE chats IS 'Stores AI chat conversations associated with websites';
 COMMENT ON COLUMN chats.messages IS 'Array of chat messages in format: [{"role": "user|assistant", "content": "..."}]';
 COMMENT ON COLUMN chats.title IS 'Optional title for the chat, can be auto-generated from first message';
 COMMENT ON COLUMN chats.website_id IS 'Reference to the website this chat is associated with';

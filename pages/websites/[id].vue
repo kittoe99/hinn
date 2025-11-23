@@ -392,8 +392,9 @@
 import { ref, computed, onMounted } from 'vue'
 import { getSupabaseClient } from '~/lib/supabaseClient'
 
+// Note: Auth middleware removed - using global-auth.global.ts instead
 definePageMeta({
-  middleware: ['auth']
+  layout: false
 })
 
 const route = useRoute()

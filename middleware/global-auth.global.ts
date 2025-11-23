@@ -5,6 +5,9 @@
  */
 
 export default defineNuxtRouteMiddleware(async (to) => {
+  // Skip on server-side to avoid SSR issues
+  if (process.server) return
+
   // Public routes that don't require authentication
   const publicRoutes = [
     '/coming-soon',

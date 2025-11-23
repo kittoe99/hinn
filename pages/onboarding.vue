@@ -1359,8 +1359,9 @@ import { getSupabaseClient } from '~/lib/supabaseClient'
 import FormSelect from '~/components/FormSelect.vue'
 import ServiceAreaPicker from '~/components/ServiceAreaPicker.vue'
 
+// Note: Auth middleware removed - using global-auth.global.ts instead
 definePageMeta({
-  middleware: 'auth'
+  layout: false
 })
 
 useHead({
