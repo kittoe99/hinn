@@ -64,11 +64,12 @@
         >
           <!-- Messages -->
           <div class="flex-1 overflow-y-auto p-4 space-y-4" ref="messagesContainer">
-            <div 
-              v-for="(msg, index) in messages" 
-              :key="index"
-              class="flex gap-3"
-              :class="msg.role === 'user' ? 'flex-row-reverse' : ''"
+            <transition-group name="message" tag="div" class="space-y-4">
+              <div 
+                v-for="(msg, index) in messages" 
+                :key="index"
+                class="flex gap-3 message-item"
+                :class="msg.role === 'user' ? 'flex-row-reverse' : ''"
             >
               <!-- Avatar -->
               <div 
@@ -105,9 +106,21 @@
                   <span class="h-1.5 w-1.5 animate-bounce rounded-full bg-[#d97759] delay-75"></span>
                   <span class="h-1.5 w-1.5 animate-bounce rounded-full bg-[#d97759] delay-150"></span>
                 </div>
-                <div v-else>{{ msg.role === 'assistant' && msg.content.startsWith('<!DOCTYPE') ? 'I\'ve updated the preview based on your request.' : msg.content }}</div>
+                <div v-else>
+                  <template v-if="msg.role === 'assistant' && (msg.content.startsWith('<!DOCTYPE') || msg.content.includes('<html'))">
+                    <div class="flex items-center gap-2 text-sm">
+                      <svg class="h-4 w-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                      <span class="font-medium">Website updated successfully</span>
+                    </div>
+                    <p class="mt-2 text-xs text-neutral-500">Check the preview to see your changes</p>
+                  </template>
+                  <template v-else>
+                    {{ msg.content }}
+                  </template>
+                </div>
               </div>
-            </div>
+              </div>
+            </transition-group>
           </div>
 
           <!-- Input -->
@@ -179,12 +192,20 @@
           :class="activePanel === 'preview' ? 'flex' : 'hidden lg:flex'"
         >
           <!-- Loading Overlay -->
-          <div v-if="isGenerating && !previewContent" class="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-            <div class="flex flex-col items-center gap-3">
-              <div class="h-8 w-8 animate-spin rounded-full border-4 border-[#d97759] border-t-transparent"></div>
-              <p class="text-sm font-medium text-neutral-600">Building your site...</p>
+          <transition name="fade">
+            <div v-if="isGenerating" class="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-[#d97759]/5 to-transparent backdrop-blur-sm pointer-events-none">
+              <div class="flex flex-col items-center gap-3 bg-white/90 rounded-2xl p-6 shadow-lg">
+                <div class="relative">
+                  <div class="h-12 w-12 animate-spin rounded-full border-4 border-[#d97759]/20 border-t-[#d97759]" style="animation-duration: 1.2s;"></div>
+                  <div class="absolute inset-0 h-12 w-12 rounded-full bg-[#d97759]/10" style="animation: gentlePulse 2s ease-in-out infinite;"></div>
+                </div>
+                <div class="text-center">
+                  <p class="text-sm font-semibold text-neutral-800">Generating your website...</p>
+                  <p class="text-xs text-neutral-500 mt-1">This may take a few moments</p>
+                </div>
+              </div>
             </div>
-          </div>
+          </transition>
 
           <!-- Preview Area -->
           <div class="flex flex-1 items-center justify-center overflow-hidden p-6">
@@ -406,6 +427,18 @@ const sendMessage = async () => {
 
   isGenerating.value = true
   
+  // Auto-switch to preview on desktop when generating starts
+  if (window.innerWidth >= 1024) {
+    // On desktop, preview is always visible, just add visual cue
+  } else {
+    // On mobile/tablet, switch to preview to show live generation with smooth delay
+    setTimeout(() => {
+      if (isGenerating.value) {
+        activePanel.value = 'preview'
+      }
+    }, 1200)
+  }
+  
   const assistantMessageIndex = messages.value.push({
     role: 'assistant',
     content: '',
@@ -474,6 +507,13 @@ const sendMessage = async () => {
             if (data.content) {
               fullResponse += data.content
               messages.value[assistantMessageIndex].content = fullResponse
+              
+              // Live preview update - try to render partial HTML
+              let cleanHtml = fullResponse.replace(/```html/g, '').replace(/```/g, '').trim()
+              if (cleanHtml.includes('<!DOCTYPE html>') || cleanHtml.includes('<html')) {
+                // Only update if we have a valid HTML structure starting
+                previewContent.value = processHtml(cleanHtml)
+              }
             }
           } catch (e) {
             console.error('Error parsing chunk:', e)
@@ -491,8 +531,12 @@ const sendMessage = async () => {
        previewContent.value = processHtml(`<!DOCTYPE html><html><body>${cleanHtml}</body></html>`)
     }
     
-    if (window.innerWidth < 1024) {
-       activePanel.value = 'preview'
+    // Keep on preview if we auto-switched, or switch if on mobile
+    if (window.innerWidth < 1024 && activePanel.value === 'chat') {
+       // Briefly show success, then optionally switch back
+       setTimeout(() => {
+         // User can manually switch if needed
+       }, 1000)
     }
 
   } catch (error: any) {
@@ -524,5 +568,71 @@ const sendMessage = async () => {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #d4d4d4;
+}
+
+/* Smooth Fade Transitions */
+.fade-enter-active {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(1.02);
+}
+
+/* Message Animations */
+.message-item {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.message-enter-active {
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.message-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+  position: absolute;
+}
+.message-enter-from {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+.message-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.98);
+}
+.message-move {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Delay animations for bouncing dots */
+.delay-75 {
+  animation-delay: 75ms;
+}
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+/* Smooth panel transitions */
+@media (max-width: 1023px) {
+  [class*="flex"][class*="flex-col"] {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  }
+}
+
+/* Smooth iframe content transitions */
+iframe {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Loading spinner smooth animation */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
 }
 </style>
