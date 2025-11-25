@@ -102,14 +102,18 @@ export const useBuilderProject = () => {
           if (event.data.type === 'TOGGLE_SELECTION_MODE') {
             if (event.data.enabled) {
               document.body.style.cursor = 'crosshair';
+              // Mouse events
               document.addEventListener('click', handleSelection, true);
               document.addEventListener('mouseover', handleHover, true);
               document.addEventListener('mouseout', handleHoverOut, true);
+              // Touch events for mobile
+              document.addEventListener('touchstart', handleTouchStart, { capture: true, passive: false });
             } else {
               document.body.style.cursor = 'default';
               document.removeEventListener('click', handleSelection, true);
               document.removeEventListener('mouseover', handleHover, true);
               document.removeEventListener('mouseout', handleHoverOut, true);
+              document.removeEventListener('touchstart', handleTouchStart, true);
               if (lastHighlighted) {
                 lastHighlighted.style.outline = '';
                 lastHighlighted = null;
@@ -131,6 +135,21 @@ export const useBuilderProject = () => {
           e.target.style.outline = '';
         }
 
+        function handleTouchStart(e) {
+           // Identify the element being touched
+           const touch = e.touches[0];
+           const target = document.elementFromPoint(touch.clientX, touch.clientY);
+           if (target) {
+             // Trigger selection logic for this element
+             // Create a synthetic event object
+             handleSelection({
+               target: target,
+               preventDefault: () => e.preventDefault(),
+               stopPropagation: () => e.stopPropagation()
+             });
+           }
+        }
+
         function handleSelection(e) {
           e.preventDefault();
           e.stopPropagation();
@@ -145,6 +164,31 @@ export const useBuilderProject = () => {
             payload: { tagName, html, text }
           }, '*');
         }
+
+        // Scroll detection for mobile floating UI
+        let lastScrollY = 0;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              const currentScrollY = window.scrollY;
+              const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+              const atBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+              
+              window.parent.postMessage({
+                type: 'PREVIEW_SCROLL',
+                direction: direction,
+                scrollY: currentScrollY,
+                atBottom: atBottom
+              }, '*');
+              
+              lastScrollY = currentScrollY;
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
       </script>
     `;
 

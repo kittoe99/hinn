@@ -324,6 +324,40 @@
           </div>
         </div>
       </div>
+
+      <!-- Mobile Floating Input -->
+      <div 
+        v-if="!isMobileMenuOpen && Object.keys(files).length > 0" 
+        :class="[
+          'absolute bottom-6 left-4 right-4 z-30 md:hidden transition-all duration-300 transform',
+          showMobileQuickInput ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
+        ]"
+      >
+        <div class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-2xl p-2 flex gap-2 items-center">
+          <div class="flex-1 relative">
+            <input
+              v-model="prompt"
+              @keydown.enter="handleGenerate"
+              type="text"
+              placeholder="Ask a follow-up..."
+              :disabled="isBusy"
+              class="w-full bg-transparent border-0 text-sm text-white placeholder-zinc-500 focus:ring-0 px-3 py-2"
+            />
+          </div>
+          <button
+            @click="handleGenerate"
+            :disabled="isBusy || !prompt.trim()"
+            class="bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white rounded-xl p-2 flex-shrink-0 transition-colors"
+          >
+            <svg v-if="isBusy" class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -355,6 +389,7 @@ const showFileExplorer = ref(false)
 const isSelectionMode = ref(false)
 const selectedElement = ref<{tagName: string, html: string, text: string} | null>(null)
 const isMobileMenuOpen = ref(true) // Start with chat open on mobile
+const showMobileQuickInput = ref(true) // Toggle for scroll
 
 // Computed
 const isEditing = computed(() => Object.keys(files.value).length > 0)
@@ -470,6 +505,13 @@ onMounted(() => {
           type: 'TOGGLE_SELECTION_MODE',
           enabled: false
         }, '*')
+      }
+    } else if (event.data.type === 'PREVIEW_SCROLL') {
+      // Hide on scroll down, show on scroll up (or at bottom)
+      if (event.data.direction === 'down' && event.data.scrollY > 50) {
+        showMobileQuickInput.value = false
+      } else {
+        showMobileQuickInput.value = true
       }
     }
   })
