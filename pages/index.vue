@@ -2,16 +2,11 @@
   <div class="relative overflow-hidden scroll-smooth bg-[#f9f8f6]">
     <!-- Hero Section -->
     <section class="relative pt-16 pb-20 md:pt-24 md:pb-24">
-      <!-- Decorative Elements -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 right-10 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 left-10 w-96 h-96 bg-[#d97759]/3 rounded-full blur-3xl"></div>
-      </div>
 
       <div class="max-w-5xl mx-auto px-6 lg:px-8 relative">
         <div class="text-center">
           <!-- Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-neutral-200 mb-6 opacity-0 animate-fade-in" style="animation-delay: 0ms">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-neutral-200 mb-6 opacity-0 animate-fade-in" style="animation-delay: 0ms">
             <span class="inline-block w-2 h-2 rounded-full bg-[#d97759] animate-pulse"></span>
             <span class="text-sm font-medium text-neutral-700">Trusted by 500+ companies</span>
           </div>
@@ -30,10 +25,10 @@
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in mb-16" style="animation-delay: 150ms">
             <NuxtLink
               to="/dashboard"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
             >
               Start Building
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </NuxtLink>
@@ -53,7 +48,7 @@
             
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <!-- Card 1 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-50 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1200&q=80" 
@@ -82,7 +77,7 @@
               </div>
 
               <!-- Card 2 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" 
@@ -110,7 +105,7 @@
               </div>
 
               <!-- Card 3 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=80" 
@@ -138,7 +133,7 @@
               </div>
 
               <!-- Card 4 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-800 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=80" 
@@ -166,7 +161,7 @@
               </div>
 
               <!-- Card 5 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" 
@@ -194,7 +189,7 @@
               </div>
 
               <!-- Card 6 -->
-              <div class="group relative rounded-xl overflow-hidden bg-[#e8e3d8] hover:bg-[#ded9cc] transition-all duration-300">
+              <div class="group relative rounded-lg overflow-hidden bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
                 <div class="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80" 
@@ -240,7 +235,7 @@
         <!-- Feature Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Feature 1 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+          <div class="p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
@@ -251,7 +246,7 @@
           </div>
 
           <!-- Feature 2 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+          <div class="p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
@@ -262,7 +257,7 @@
           </div>
 
           <!-- Feature 3 -->
-          <div class="p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all">
+          <div class="p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
@@ -273,7 +268,7 @@
           </div>
 
           <!-- Feature 4 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
@@ -284,7 +279,7 @@
           </div>
 
           <!-- Feature 5 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
@@ -295,7 +290,7 @@
           </div>
 
           <!-- Feature 6 - Hidden on mobile initially -->
-          <div :class="['p-6 rounded-2xl bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all', showMoreFeatures ? 'block' : 'hidden md:block']">
+          <div :class="['p-6 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-colors', showMoreFeatures ? 'block' : 'hidden md:block']">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#d97759]/10 mb-4">
               <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
@@ -310,7 +305,7 @@
         <div v-if="!showMoreFeatures" class="mt-8 text-center md:hidden">
           <button
             @click="showMoreFeatures = true"
-            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-neutral-900 bg-[#f0ebe3] hover:bg-[#e8e3d8] transition-all"
+            class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-neutral-900 bg-white border border-neutral-200 hover:border-neutral-300 transition-colors"
           >
             <span>Show More Features</span>
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -323,7 +318,7 @@
         <div class="mt-16 text-center">
           <NuxtLink
             to="/website"
-            class="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+            class="inline-flex items-center gap-2 rounded-lg px-8 py-4 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
           >
             Explore All Features
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
@@ -335,12 +330,7 @@
     </section>
 
     <!-- Canvas Printing Section -->
-    <section class="py-20 md:py-32 bg-gradient-to-b from-white via-[#fefbf3] to-white relative overflow-hidden">
-      <!-- Decorative Elements -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#d97759]/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#d97759]/3 rounded-full blur-3xl"></div>
-      </div>
+    <section class="py-20 md:py-32 bg-white relative overflow-hidden">
 
       <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
         <!-- Main Content Grid -->
@@ -406,7 +396,7 @@
             <div class="flex">
               <NuxtLink
                 to="/canvas-printing"
-                class="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                class="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
               >
                 Explore Canvas Printing
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-5 w-5">
@@ -420,37 +410,13 @@
           <div class="order-1 lg:order-2">
             <div class="relative">
               <!-- Main Image Container -->
-              <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 aspect-[4/3]">
+              <div class="relative rounded-lg overflow-hidden bg-neutral-100 aspect-[4/3] border border-neutral-200">
                 <img 
                   src="/assets/wps-canvas.png" 
                   alt="Canvas Print Example"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <!-- Overlay gradient -->
-                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent"></div>
-              </div>
-
-              <!-- Decorative dots -->
-              <div class="hidden lg:block absolute -top-8 -right-8 w-32 h-32 opacity-20">
-                <div class="grid grid-cols-4 gap-3">
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                  <div class="w-2 h-2 rounded-full bg-[#d97759]"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -459,7 +425,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 md:py-24 relative overflow-hidden bg-[#f0ebe3] rounded-3xl mx-6 lg:mx-8 mb-12">
+    <section class="py-20 md:py-24 relative overflow-hidden bg-white border border-neutral-200 rounded-xl mx-6 lg:mx-8 mb-12">
       <div class="max-w-6xl mx-auto px-8 lg:px-12">
         <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           <!-- Left Column: Heading and CTA -->
@@ -472,7 +438,7 @@
             </p>
             <NuxtLink
               to="/dashboard"
-              class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold text-white bg-neutral-900 hover:bg-neutral-800 transition-all duration-300"
+              class="inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors"
             >
               Get Started Free
             </NuxtLink>
