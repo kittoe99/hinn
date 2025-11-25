@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import { FileMap, ProjectFile } from '../types';
+import type { FileMap, ProjectFile } from '../types.js';
 
 /**
  * Parses a FileMap to find the entry point (index.html)

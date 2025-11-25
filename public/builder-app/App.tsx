@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GenerationStatus, ViewMode, GeneratedSite, SearchSource, FileMap } from './types';
-import { generateProjectStream } from './services/geminiService';
-import { saveSite, getAllSites, deleteSite } from './services/storageService';
-import { bundleProjectForPreview, createZipFromProject, parseZipToProject, findEntryPoint, resolvePath } from './services/projectService';
-import { Button } from './components/Button';
-import { PreviewFrame } from './components/PreviewFrame';
-import { CodeEditor } from './components/CodeEditor';
-import { Icons } from './components/Icons';
-import { FileExplorer } from './components/FileExplorer';
+import { GenerationStatus, ViewMode } from './types.js';
+import type { GeneratedSite, SearchSource, FileMap } from './types.js';
+import { generateProjectStream } from './services/geminiService.js';
+import { saveSite, getAllSites, deleteSite } from './services/storageService.js';
+import { bundleProjectForPreview, createZipFromProject, parseZipToProject, findEntryPoint, resolvePath } from './services/projectService.js';
+import { Button } from './components/Button.js';
+import { PreviewFrame } from './components/PreviewFrame.js';
+import { CodeEditor } from './components/CodeEditor.js';
+import { Icons } from './components/Icons.js';
+import { FileExplorer } from './components/FileExplorer.js';
 
 const INITIAL_PROMPT = "A modern landing page for an AI startup called 'Nebula'. Dark theme, glowing gradients, hero section, features grid, and a newsletter signup.";
 

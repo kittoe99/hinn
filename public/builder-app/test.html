@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+  <style>
+    body {
+      background: #1a1a1a;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    h1 {
+      color: #4ade80;
+    }
+  </style>
+</head>
+<body>
+  <h1>✅ Test Page Loaded Successfully!</h1>
+  <p>If you can see this, the Vite server is working correctly.</p>
+  <p>Vite server: <strong>http://localhost:3001</strong></p>
+  <p>Now checking if the main app loads...</p>
+  <script>
+    console.log('✅ Test page JavaScript is running');
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 2000);
+  </script>
+</body>
+</html>

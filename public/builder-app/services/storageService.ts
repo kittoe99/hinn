@@ -1,4 +1,4 @@
-import { GeneratedSite } from '../types';
+import type { GeneratedSite } from '../types.js';
 
 const DB_NAME = 'NebulaDB';
 const DB_VERSION = 2; // Incremented version for schema change if needed, though objects are flexible
