@@ -99,9 +99,30 @@ export const useBuilderProject = () => {
     const selectionScript = `
       <script>
         const SELECTION_STYLE_ID = 'nebula-selection-style';
+        const PERSISTENT_STYLE_ID = 'nebula-persistent-style';
+        const SELECTED_CLASS = 'nebula-selected-element';
+
+        function injectPersistentStyles() {
+          if (!document.getElementById(PERSISTENT_STYLE_ID)) {
+            const style = document.createElement('style');
+            style.id = PERSISTENT_STYLE_ID;
+            style.innerHTML = \`
+              .\${SELECTED_CLASS} {
+                outline: 3px solid #2563eb !important;
+                outline-offset: -3px !important;
+                box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2) !important;
+                position: relative;
+                z-index: 50;
+              }
+            \`;
+            document.head.appendChild(style);
+          }
+        }
+        // Call immediately
+        injectPersistentStyles();
 
         function enableSelectionMode() {
-          // 1. Inject global styles to show interactivity
+          // 1. Inject global mode styles
           if (!document.getElementById(SELECTION_STYLE_ID)) {
             const style = document.createElement('style');
             style.id = SELECTION_STYLE_ID;
@@ -113,7 +134,7 @@ export const useBuilderProject = () => {
                 touch-action: manipulation !important;
               }
               body {
-                touch-action: none !important; /* Prevent scroll only on body to help selection */
+                touch-action: none !important; 
               }
               *:hover {
                 outline: 2px solid #3b82f6 !important;
@@ -123,7 +144,6 @@ export const useBuilderProject = () => {
             \`;
             document.head.appendChild(style);
           }
-
           // 2. Add Capture Phase Listeners to intercept EVERYTHING
           window.addEventListener('click', handleCapture, { capture: true, passive: false });
           window.addEventListener('touchstart', handleTouch, { capture: true, passive: false });
@@ -138,6 +158,11 @@ export const useBuilderProject = () => {
 
           window.removeEventListener('click', handleCapture, { capture: true });
           window.removeEventListener('touchstart', handleTouch, { capture: true });
+        }
+
+        function clearPreviousSelection() {
+          const prev = document.querySelector('.' + SELECTED_CLASS);
+          if (prev) prev.classList.remove(SELECTED_CLASS);
         }
 
         function handleCapture(e) {
@@ -170,6 +195,9 @@ export const useBuilderProject = () => {
 
         function selectElement(target) {
           if (!target || target === document.documentElement) return;
+
+          clearPreviousSelection();
+          target.classList.add(SELECTED_CLASS);
 
           const html = target.outerHTML;
           const tagName = target.tagName.toLowerCase();

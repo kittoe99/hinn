@@ -93,6 +93,7 @@
             
             <div class="relative">
               <textarea
+                ref="mainInput"
                 v-model="prompt"
                 :placeholder="isEditing ? 'Ask a follow-up...' : 'Describe your website...'"
                 :disabled="isBusy"
@@ -337,6 +338,7 @@
         <div class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-2xl p-2 flex gap-2 items-center ring-1 ring-white/10">
           <div class="flex-1 relative">
             <input
+              ref="mobileInput"
               v-model="prompt"
               @keydown.enter="handleGenerate"
               type="text"
@@ -391,6 +393,8 @@ const isSelectionMode = ref(false)
 const selectedElement = ref<{tagName: string, html: string, text: string} | null>(null)
 const isMobileMenuOpen = ref(true) // Start with chat open on mobile
 const showMobileQuickInput = ref(true) // Toggle for scroll
+const mainInput = ref<HTMLTextAreaElement | null>(null)
+const mobileInput = ref<HTMLInputElement | null>(null)
 
 // Computed
 const isEditing = computed(() => Object.keys(files.value).length > 0)
@@ -516,6 +520,21 @@ onMounted(() => {
       }
     }
   })
+})
+
+// Auto-focus input when element is selected
+watch(selectedElement, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      // Check if mobile menu is closed (Preview mode) -> Focus mobile input
+      // Check if desktop or mobile menu open -> Focus main input
+      if (window.innerWidth < 768 && !isMobileMenuOpen.value) {
+        mobileInput.value?.focus()
+      } else {
+        mainInput.value?.focus()
+      }
+    })
+  }
 })
 
 // Update preview when files change
