@@ -98,92 +98,95 @@ export const useBuilderProject = () => {
     // Inject Selection Script
     const selectionScript = `
       <script>
-        let selectionOverlay = null;
+        const SELECTION_STYLE_ID = 'nebula-selection-style';
 
-        function createOverlay() {
-          if (selectionOverlay) return;
-          selectionOverlay = document.createElement('div');
-          selectionOverlay.id = 'nebula-selection-overlay';
-          selectionOverlay.style.position = 'fixed';
-          selectionOverlay.style.inset = '0';
-          selectionOverlay.style.zIndex = '999999';
-          selectionOverlay.style.cursor = 'crosshair';
-          selectionOverlay.style.background = 'rgba(59, 130, 246, 0.1)'; // Slight blue tint
-          selectionOverlay.style.touchAction = 'none'; // Prevent scrolling while selecting
-          
-          // Handle clicks on the overlay
-          selectionOverlay.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            selectElementAt(e.clientX, e.clientY);
-          });
+        function enableSelectionMode() {
+          // 1. Inject global styles to show interactivity
+          if (!document.getElementById(SELECTION_STYLE_ID)) {
+            const style = document.createElement('style');
+            style.id = SELECTION_STYLE_ID;
+            style.innerHTML = \`
+              * { 
+                cursor: crosshair !important; 
+                user-select: none !important;
+                -webkit-user-select: none !important;
+                touch-action: manipulation !important;
+              }
+              body {
+                touch-action: none !important; /* Prevent scroll only on body to help selection */
+              }
+              *:hover {
+                outline: 2px solid #3b82f6 !important;
+                outline-offset: -2px !important;
+                box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+              }
+            \`;
+            document.head.appendChild(style);
+          }
 
-          // Handle touch on the overlay
-          selectionOverlay.addEventListener('touchstart', (e) => {
-             e.preventDefault(); // Prevent scroll
-             const touch = e.touches[0];
-             selectElementAt(touch.clientX, touch.clientY);
-          }, { passive: false });
-
-          // Hover effect (desktop only)
-          selectionOverlay.addEventListener('mousemove', (e) => {
-            highlightElementAt(e.clientX, e.clientY);
-          });
-
-          document.body.appendChild(selectionOverlay);
+          // 2. Add Capture Phase Listeners to intercept EVERYTHING
+          window.addEventListener('click', handleCapture, { capture: true, passive: false });
+          window.addEventListener('touchstart', handleTouch, { capture: true, passive: false });
+          // Disable normal mouseover to prevent conflict with CSS hover
+          // but we can use it for detailed highlighting if needed. 
+          // CSS :hover is usually enough for visual feedback on desktop.
         }
 
-        function removeOverlay() {
-          if (selectionOverlay) {
-            selectionOverlay.remove();
-            selectionOverlay = null;
-          }
-          if (lastHighlighted) {
-            lastHighlighted.style.outline = '';
-            lastHighlighted = null;
-          }
+        function disableSelectionMode() {
+          const style = document.getElementById(SELECTION_STYLE_ID);
+          if (style) style.remove();
+
+          window.removeEventListener('click', handleCapture, { capture: true });
+          window.removeEventListener('touchstart', handleTouch, { capture: true });
         }
 
-        let lastHighlighted = null;
+        function handleCapture(e) {
+          // Stop the event from reaching the element's normal handlers
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
 
-        function highlightElementAt(x, y) {
-          // Hide overlay momentarily to check element underneath
-          selectionOverlay.style.pointerEvents = 'none';
-          const target = document.elementFromPoint(x, y);
-          selectionOverlay.style.pointerEvents = 'auto';
-
-          if (target && target !== document.body && target !== document.documentElement) {
-            if (lastHighlighted && lastHighlighted !== target) {
-              lastHighlighted.style.outline = '';
-            }
-            target.style.outline = '2px solid #3b82f6';
-            lastHighlighted = target;
-          }
+          selectElement(e.target);
+          return false;
         }
 
-        function selectElementAt(x, y) {
-          selectionOverlay.style.pointerEvents = 'none';
-          const target = document.elementFromPoint(x, y);
-          selectionOverlay.style.pointerEvents = 'auto';
+        function handleTouch(e) {
+           // For touch, we want to select on TAP, not scroll.
+           // But blocking all touchstart prevents scroll. 
+           // Let's rely on 'click' which fires after a tap on mobile.
+           // EXCEPT some elements don't fire click if they are not interactive.
+           // So we'll do a hybrid: prevent default to stop scroll/zoom, select target.
+           
+           e.preventDefault();
+           e.stopPropagation();
+           e.stopImmediatePropagation();
+           
+           const touch = e.touches[0];
+           const target = document.elementFromPoint(touch.clientX, touch.clientY);
+           if (target) {
+             selectElement(target);
+           }
+        }
 
-          if (target) {
-             const html = target.outerHTML;
-             const tagName = target.tagName.toLowerCase();
-             const text = target.innerText.substring(0, 50) + (target.innerText.length > 50 ? '...' : '');
+        function selectElement(target) {
+          if (!target || target === document.documentElement) return;
 
-             window.parent.postMessage({
-               type: 'NEBULA_ELEMENT_SELECTED',
-               payload: { tagName, html, text }
-             }, '*');
-          }
+          const html = target.outerHTML;
+          const tagName = target.tagName.toLowerCase();
+          const text = target.innerText.substring(0, 50) + (target.innerText.length > 50 ? '...' : '');
+
+          window.parent.postMessage({
+            type: 'NEBULA_ELEMENT_SELECTED',
+            payload: { tagName, html, text }
+          }, '*');
         }
 
         window.addEventListener('message', (event) => {
           if (event.data.type === 'TOGGLE_SELECTION_MODE') {
             if (event.data.enabled) {
-              createOverlay();
+              enableSelectionMode();
             } else {
-              removeOverlay();
+              disableSelectionMode();
             }
           }
         });
