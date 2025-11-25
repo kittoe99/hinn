@@ -51,21 +51,25 @@
               </div>
             </div>
 
-            <!-- Status Message in Chat -->
-            <div v-if="status === GenerationStatus.THINKING" class="flex justify-start animate-pulse">
-              <div class="bg-neutral-100 border border-neutral-200 rounded-lg px-4 py-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <span class="text-sm text-neutral-600">Thinking...</span>
-              </div>
-            </div>
+            <!-- Real-time AI Streaming Output -->
             <div v-if="status === GenerationStatus.STREAMING" class="flex justify-start">
-              <div class="bg-neutral-100 border border-neutral-200 rounded-lg px-4 py-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#d97759] animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span class="text-sm text-neutral-600">Writing code...</span>
+              <div class="bg-white border border-neutral-200 rounded-xl px-5 py-4 max-w-2xl w-full shadow-sm">
+                <!-- Header with Thinking/Generating Status -->
+                <div class="flex items-center gap-2 mb-3 pb-3 border-b border-neutral-100">
+                  <svg class="w-4 h-4 text-neutral-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span class="text-sm text-neutral-600">{{ streamingProgress.isThinking ? 'Thinking' : 'Generating' }}</span>
+                </div>
+
+                <!-- Streaming AI Output -->
+                <div class="relative">
+                  <div ref="streamingOutputRef" class="max-h-96 overflow-y-auto pr-2 scroll-smooth">
+                    <pre class="text-xs text-neutral-700 font-mono whitespace-pre-wrap break-words leading-relaxed">{{ streamingText || 'Initializing...' }}</pre>
+                    <!-- Blinking cursor -->
+                    <span v-if="isStreamingText" class="inline-block w-2 h-4 bg-neutral-900 ml-0.5 animate-pulse"></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -401,6 +405,24 @@ const showMobileQuickInput = ref(true) // Toggle for scroll
 const mainInput = ref<HTMLTextAreaElement | null>(null)
 const mobileInput = ref<HTMLInputElement | null>(null)
 
+// Streaming progress state
+const streamingProgress = ref<{
+  currentFile: string | null
+  filesGenerated: string[]
+  totalFiles: number
+  isThinking: boolean
+}>({
+  currentFile: null,
+  filesGenerated: [],
+  totalFiles: 0,
+  isThinking: false
+})
+
+// Real-time AI output streaming
+const streamingText = ref('')
+const isStreamingText = ref(false)
+const streamingOutputRef = ref<HTMLDivElement | null>(null)
+
 // Computed
 const isEditing = computed(() => Object.keys(files.value).length > 0)
 const isBusy = computed(() => 
@@ -426,6 +448,18 @@ const handleGenerate = async () => {
   status.value = GenerationStatus.STREAMING
   errorMsg.value = null
   
+  // Reset streaming progress
+  streamingProgress.value = {
+    currentFile: null,
+    filesGenerated: [],
+    totalFiles: 0,
+    isThinking: true
+  }
+  
+  // Reset streaming text
+  streamingText.value = ''
+  isStreamingText.value = true
+  
   try {
     console.log('🚀 Starting generation with prompt:', userPrompt)
     
@@ -437,11 +471,36 @@ const handleGenerate = async () => {
       useSearch.value
     )
 
+    let previousFileCount = 0
+    
     for await (const update of stream) {
       console.log('📦 Received update:', Object.keys(update.files).length, 'files')
+      
+      // Update streaming text in real-time
+      if (update.streamingText) {
+        streamingText.value = update.streamingText
+      }
+      
+      // Update thinking state
+      streamingProgress.value.isThinking = update.isThinking
+      
+      // Track new files
+      const currentFileKeys = Object.keys(update.files)
+      const newFiles = currentFileKeys.filter(key => !Object.keys(files.value).includes(key))
+      
+      if (newFiles.length > 0) {
+        streamingProgress.value.currentFile = newFiles[newFiles.length - 1]
+        streamingProgress.value.filesGenerated = [...new Set([...streamingProgress.value.filesGenerated, ...newFiles])]
+      }
+      
+      streamingProgress.value.totalFiles = currentFileKeys.length
+      
       files.value = update.files
+      previousFileCount = currentFileKeys.length
       // Preview update handled by throttled watcher
     }
+    
+    isStreamingText.value = false
 
     status.value = GenerationStatus.COMPLETE
     console.log('✅ Generation complete!')
@@ -559,6 +618,18 @@ watch(selectedElement, (newVal) => {
       } else {
         mainInput.value?.focus()
       }
+    })
+  }
+})
+
+// Auto-scroll chat container as text is generated
+watch(streamingText, () => {
+  if (isStreamingText.value && chatContainer.value) {
+    nextTick(() => {
+      chatContainer.value?.scrollTo({
+        top: chatContainer.value.scrollHeight,
+        behavior: 'smooth'
+      })
     })
   }
 })

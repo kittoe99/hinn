@@ -4,6 +4,8 @@ interface GenerateStreamUpdate {
   files: FileMap;
   sources: SearchSource[];
   isThinking: boolean;
+  streamingText?: string;
+  chunkText?: string;
 }
 
 export const useBuilderGeneration = () => {
@@ -75,6 +77,17 @@ export const useBuilderGeneration = () => {
                     accumulatedSources.push(source);
                   }
                 });
+              }
+              
+              // Yield chunk text for real-time streaming display
+              if (chunkText) {
+                yield {
+                  files: workingFiles,
+                  sources: accumulatedSources,
+                  isThinking: false,
+                  streamingText: accumulatedText,
+                  chunkText: chunkText
+                };
               }
             } catch (e) {
               continue;
