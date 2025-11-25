@@ -35,13 +35,13 @@
           <div v-if="chatHistory.length > 0" ref="chatContainer" class="flex-1 min-h-0 overflow-y-auto space-y-3 mb-3 pr-2">
             <div v-for="(message, index) in chatHistory" :key="index" :class="['flex', message.role === 'user' ? 'justify-end' : 'justify-start']">
               <div :class="[
-                'max-w-[85%] rounded-lg px-3 py-2',
+                'max-w-[85%] rounded-xl px-4 py-3',
                 message.role === 'user' 
                   ? 'bg-blue-600 text-white' 
                   : 'bg-zinc-800 text-zinc-200 border border-zinc-700'
               ]">
-                <p class="text-xs leading-relaxed whitespace-pre-wrap break-words">{{ message.content }}</p>
-                <span class="text-[9px] opacity-50 mt-0.5 block">
+                <p class="text-sm leading-relaxed whitespace-pre-wrap break-words">{{ message.content }}</p>
+                <span class="text-[10px] opacity-60 mt-1 block">
                   {{ new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
                 </span>
               </div>
@@ -49,19 +49,19 @@
 
             <!-- Status Message in Chat -->
             <div v-if="status === GenerationStatus.THINKING" class="flex justify-start animate-pulse">
-              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-3 py-2 flex items-center gap-2">
-                <svg class="w-3 h-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-4 py-2 flex items-center gap-2">
+                <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <span class="text-xs text-zinc-400">Thinking...</span>
+                <span class="text-sm text-zinc-400">Thinking...</span>
               </div>
             </div>
             <div v-if="status === GenerationStatus.STREAMING" class="flex justify-start">
-              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-3 py-2 flex items-center gap-2">
-                <svg class="w-3 h-3 text-green-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-4 py-2 flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                <span class="text-xs text-zinc-400">Writing code...</span>
+                <span class="text-sm text-zinc-400">Writing code...</span>
               </div>
             </div>
           </div>
@@ -79,13 +79,13 @@
               Clear conversation
             </button>
 
-            <div v-if="selectedElement" class="flex items-center gap-1 text-[10px] text-blue-400 bg-blue-900/20 px-2 py-1 rounded-md border border-blue-900/50 w-fit">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div v-if="selectedElement" class="flex items-center gap-1 text-xs text-blue-400 bg-blue-900/20 px-3 py-1.5 rounded-md border border-blue-900/50 w-fit">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               <span>Target: &lt;{{ selectedElement.tagName }}&gt;</span>
               <button @click="selectedElement = null" class="hover:text-white ml-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -97,15 +97,15 @@
                 :placeholder="isEditing ? 'Ask a follow-up...' : 'Describe your website...'"
                 :disabled="isBusy"
                 :class="[
-                  'w-full h-24 bg-zinc-900 border rounded-lg p-3 text-xs text-zinc-100 placeholder-zinc-500 focus:ring-1 focus:border-transparent resize-none transition-all',
+                  'w-full h-28 bg-zinc-900 border rounded-xl p-4 text-sm text-zinc-100 placeholder-zinc-500 focus:ring-1 focus:border-transparent resize-none transition-all',
                   selectedElement ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-zinc-700 focus:ring-blue-500',
                   isBusy ? 'opacity-50' : ''
                 ]"
                 rows="3"
               />
-              <div class="absolute bottom-2 left-2 flex gap-1.5">
-                <label class="flex items-center gap-1 text-[10px] text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors select-none bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded-md border border-zinc-700" title="Web search">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="absolute bottom-3 left-3 flex gap-1.5">
+                <label class="flex items-center gap-1 text-xs text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors select-none bg-zinc-800 hover:bg-zinc-700 px-2.5 py-1.5 rounded-lg border border-zinc-700" title="Web search">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                   </svg>
                   <input type="checkbox" class="hidden" v-model="useSearch" :disabled="isBusy" />
@@ -114,12 +114,12 @@
               <button
                 @click="handleGenerate"
                 :disabled="isBusy || !prompt.trim()"
-                class="absolute bottom-2 right-2 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                class="absolute bottom-3 right-3 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <svg v-if="isBusy" class="w-3 h-3 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg v-if="isBusy" class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                <svg v-else class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
@@ -342,13 +342,13 @@
               type="text"
               placeholder="Ask a follow-up..."
               :disabled="isBusy"
-              class="w-full bg-transparent border-0 text-sm text-white placeholder-zinc-500 focus:ring-0 px-3 py-2"
+              class="w-full bg-transparent border-0 text-base text-white placeholder-zinc-500 focus:ring-0 px-4 py-2"
             />
           </div>
           <button
             @click="handleGenerate"
             :disabled="isBusy || !prompt.trim()"
-            class="bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white rounded-xl p-2 flex-shrink-0 transition-colors"
+            class="bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white rounded-xl p-3 flex-shrink-0 transition-colors"
           >
             <svg v-if="isBusy" class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
