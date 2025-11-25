@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen w-full bg-zinc-950 text-zinc-100 overflow-hidden selection:bg-blue-500/30 relative">
+  <div class="flex h-[100dvh] w-full bg-zinc-950 text-zinc-100 overflow-hidden selection:bg-blue-500/30 relative">
     
     <!-- Mobile Menu Backdrop -->
     <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm" @click="isMobileMenuOpen = false" />
