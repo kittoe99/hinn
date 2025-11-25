@@ -509,6 +509,21 @@ const autoResize = (event: Event) => {
 }
 
 onMounted(() => {
+  // Check if there's a prompt from the website page
+  if (process.client) {
+    const websitePrompt = sessionStorage.getItem('websitePrompt')
+    if (websitePrompt) {
+      prompt.value = websitePrompt
+      // Clear it so it doesn't persist
+      sessionStorage.removeItem('websitePrompt')
+      
+      // Auto-generate after a brief moment to show the prompt
+      setTimeout(() => {
+        handleGenerate()
+      }, 500)
+    }
+  }
+  
   window.addEventListener('message', (event) => {
     if (event.data.type === 'NEBULA_ELEMENT_SELECTED') {
       selectedElement.value = event.data.payload
