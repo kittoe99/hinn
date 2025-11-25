@@ -329,11 +329,12 @@
       <div 
         v-if="!isMobileMenuOpen && Object.keys(files).length > 0" 
         :class="[
-          'absolute bottom-6 left-4 right-4 z-30 md:hidden transition-all duration-300 transform',
-          showMobileQuickInput ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
+          'fixed bottom-8 left-4 right-4 z-50 md:hidden transition-all duration-300 transform',
+          showMobileQuickInput ? 'translate-y-0 opacity-100' : 'translate-y-[150%] opacity-0 pointer-events-none'
         ]"
+        style="padding-bottom: env(safe-area-inset-bottom);"
       >
-        <div class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-2xl p-2 flex gap-2 items-center">
+        <div class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-2xl p-2 flex gap-2 items-center ring-1 ring-white/10">
           <div class="flex-1 relative">
             <input
               v-model="prompt"
