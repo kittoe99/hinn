@@ -1,27 +1,31 @@
 <template>
-  <div class="flex h-[100dvh] w-full bg-zinc-950 text-zinc-100 overflow-hidden selection:bg-blue-500/30 relative">
+  <div class="flex h-[100dvh] w-full bg-[#f9f8f6] text-neutral-900 overflow-hidden selection:bg-[#d97759]/30 relative">
     
     <!-- Mobile Menu Backdrop -->
-    <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm" @click="isMobileMenuOpen = false" />
+    <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-neutral-900/40 z-40 md:hidden backdrop-blur-sm" @click="isMobileMenuOpen = false" />
 
     <!-- SIDEBAR - Chat Interface -->
     <aside 
       :class="[
-        'fixed inset-y-0 left-0 z-50 w-full md:w-80 lg:w-96 flex flex-col border-r border-zinc-800 bg-zinc-900 md:bg-zinc-900/50 backdrop-blur-sm shadow-2xl md:shadow-none transition-transform duration-300 ease-in-out md:relative md:translate-x-0',
+        'fixed inset-y-0 left-0 z-50 w-full md:w-80 lg:w-96 flex flex-col border-r border-neutral-200 bg-white md:bg-white/80 backdrop-blur-sm shadow-2xl md:shadow-none transition-transform duration-300 ease-in-out md:relative md:translate-x-0',
         isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
       ]"
     >
       <!-- Header -->
-      <div class="p-4 md:p-6 border-b border-zinc-800 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-          </div>
-          <h1 class="text-xl font-bold tracking-tight text-white">Chat</h1>
+      <div class="p-4 md:p-6 border-b border-neutral-200 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg
+            class="w-7 h-7 text-[#d97759] -mr-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="4" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+            <rect x="10" y="4" width="5" height="16" rx="1" fill="currentColor" transform="rotate(-15 12 12)" />
+          </svg>
+          <h1 class="text-lg font-semibold tracking-tight text-neutral-900">WPS<span class="text-neutral-600">canvas</span></h1>
         </div>
-        <button @click="isMobileMenuOpen = false" class="md:hidden text-zinc-400 hover:text-white p-1">
+        <button @click="isMobileMenuOpen = false" class="md:hidden text-neutral-600 hover:text-neutral-900 p-1">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -37,8 +41,8 @@
               <div :class="[
                 'max-w-[85%] rounded-xl px-4 py-3',
                 message.role === 'user' 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-zinc-800 text-zinc-200 border border-zinc-700'
+                  ? 'bg-[#d97759] text-white' 
+                  : 'bg-neutral-100 text-neutral-900 border border-neutral-200'
               ]">
                 <p class="text-sm leading-relaxed whitespace-pre-wrap break-words">{{ message.content }}</p>
                 <span class="text-[10px] opacity-60 mt-1 block">
@@ -49,19 +53,19 @@
 
             <!-- Status Message in Chat -->
             <div v-if="status === GenerationStatus.THINKING" class="flex justify-start animate-pulse">
-              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-4 py-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-neutral-100 border border-neutral-200 rounded-lg px-4 py-2 flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <span class="text-sm text-zinc-400">Thinking...</span>
+                <span class="text-sm text-neutral-600">Thinking...</span>
               </div>
             </div>
             <div v-if="status === GenerationStatus.STREAMING" class="flex justify-start">
-              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-4 py-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-green-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-neutral-100 border border-neutral-200 rounded-lg px-4 py-2 flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#d97759] animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                <span class="text-sm text-zinc-400">Writing code...</span>
+                <span class="text-sm text-neutral-600">Writing code...</span>
               </div>
             </div>
           </div>
@@ -71,7 +75,7 @@
             <button
               v-if="chatHistory.length > 0"
               @click="chatHistory = []"
-              class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1"
+              class="text-xs text-neutral-500 hover:text-neutral-900 transition-colors flex items-center gap-1"
             >
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -79,7 +83,7 @@
               Clear conversation
             </button>
 
-            <div v-if="selectedElement" class="flex items-center gap-1 text-xs text-blue-400 bg-blue-900/20 px-3 py-1.5 rounded-md border border-blue-900/50 w-fit">
+            <div v-if="selectedElement" class="flex items-center gap-1 text-xs text-[#d97759] bg-[#d97759]/10 px-3 py-1.5 rounded-md border border-[#d97759]/20 w-fit">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
@@ -95,17 +99,18 @@
               <textarea
                 ref="mainInput"
                 v-model="prompt"
+                @input="autoResize"
                 :placeholder="isEditing ? 'Ask a follow-up...' : 'Describe your website...'"
                 :disabled="isBusy"
                 :class="[
-                  'w-full h-28 bg-zinc-900 border rounded-xl p-4 text-sm text-zinc-100 placeholder-zinc-500 focus:ring-1 focus:border-transparent resize-none transition-all',
-                  selectedElement ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-zinc-700 focus:ring-blue-500',
+                  'w-full min-h-[7rem] max-h-[20rem] bg-neutral-50 border rounded-xl pt-4 px-4 pb-12 text-sm text-neutral-900 placeholder-neutral-500 focus:ring-1 focus:border-transparent resize-none transition-all',
+                  selectedElement ? 'border-[#d97759]/50 ring-1 ring-[#d97759]/20' : 'border-neutral-200 focus:ring-[#d97759]',
                   isBusy ? 'opacity-50' : ''
                 ]"
                 rows="3"
               />
               <div class="absolute bottom-3 left-3 flex gap-1.5">
-                <label class="flex items-center gap-1 text-xs text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors select-none bg-zinc-800 hover:bg-zinc-700 px-2.5 py-1.5 rounded-lg border border-zinc-700" title="Web search">
+                <label class="flex items-center gap-1 text-xs text-neutral-600 cursor-pointer hover:text-neutral-900 transition-colors select-none bg-neutral-100 hover:bg-neutral-200 px-2.5 py-1.5 rounded-lg border border-neutral-200" title="Web search">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                   </svg>
@@ -115,7 +120,7 @@
               <button
                 @click="handleGenerate"
                 :disabled="isBusy || !prompt.trim()"
-                class="absolute bottom-3 right-3 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                class="absolute bottom-3 right-3 flex items-center gap-1.5 bg-neutral-900 hover:bg-neutral-800 disabled:bg-neutral-300 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg v-if="isBusy" class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -127,7 +132,7 @@
             </div>
 
             <!-- Error Message -->
-            <div v-if="errorMsg" class="p-2 bg-red-900/20 border border-red-800 rounded-lg text-red-400 text-xs">
+            <div v-if="errorMsg" class="p-2 bg-red-100 border border-red-300 rounded-lg text-red-700 text-xs">
               {{ errorMsg }}
             </div>
           </div>
@@ -136,24 +141,24 @@
     </aside>
 
     <!-- RIGHT PANEL -->
-    <main class="flex-1 flex flex-col min-w-0 bg-zinc-950 relative">
+    <main class="flex-1 flex flex-col min-w-0 bg-white relative">
       <!-- Header Toolbar -->
-      <header class="h-16 border-b border-zinc-800 flex items-center justify-between px-4 md:px-6 bg-zinc-900/30 backdrop-blur sticky top-0 z-30">
+      <header class="h-16 border-b border-neutral-200 flex items-center justify-between px-4 md:px-6 bg-white/80 backdrop-blur sticky top-0 z-30">
         <div class="flex items-center gap-3 md:gap-4">
           <!-- Mobile Menu Button -->
-          <button @click="isMobileMenuOpen = true" class="md:hidden text-zinc-400 hover:text-white p-1 -ml-2">
+          <button @click="isMobileMenuOpen = true" class="md:hidden text-neutral-600 hover:text-neutral-900 p-1 -ml-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
 
           <!-- View Mode Toggle -->
-          <div class="flex bg-zinc-800 p-1 rounded-lg">
+          <div class="flex bg-neutral-100 p-1 rounded-lg">
             <button
               @click="viewMode = 'preview'"
               :class="[
                 'flex items-center px-3 py-1.5 rounded-md text-xs md:text-sm font-medium transition-all',
-                viewMode === 'preview' ? 'bg-zinc-700 text-white shadow' : 'text-zinc-400 hover:text-zinc-200'
+                viewMode === 'preview' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
               ]"
             >
               <svg class="w-3.5 h-3.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,7 +171,7 @@
               @click="viewMode = 'code'"
               :class="[
                 'flex items-center px-3 py-1.5 rounded-md text-xs md:text-sm font-medium transition-all',
-                viewMode === 'code' ? 'bg-zinc-700 text-white shadow' : 'text-zinc-400 hover:text-zinc-200'
+                viewMode === 'code' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
               ]"
             >
               <svg class="w-3.5 h-3.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,13 +182,13 @@
           </div>
 
           <!-- Status Indicators -->
-          <div v-if="status === GenerationStatus.THINKING" class="hidden sm:flex items-center gap-2 text-yellow-500 text-xs animate-pulse">
+          <div v-if="status === GenerationStatus.THINKING" class="hidden sm:flex items-center gap-2 text-[#d97759] text-xs animate-pulse">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Thinking...
           </div>
-          <div v-if="status === GenerationStatus.STREAMING" class="hidden sm:flex items-center gap-2 text-green-400 text-xs">
+          <div v-if="status === GenerationStatus.STREAMING" class="hidden sm:flex items-center gap-2 text-[#d97759] text-xs">
             <svg class="w-3.5 h-3.5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
@@ -196,7 +201,7 @@
           <button 
             v-if="Object.keys(files).length > 0"
             @click="showFileExplorer = true"
-            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-white hover:border-zinc-600"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-white text-neutral-600 border border-neutral-200 hover:text-neutral-900 hover:border-neutral-300"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
@@ -208,7 +213,7 @@
             @click="toggleSelectionMode"
             :class="[
               'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all border',
-              isSelectionMode ? 'bg-blue-600 text-white border-blue-500' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:text-white'
+              isSelectionMode ? 'bg-[#d97759] text-white border-[#d97759]' : 'bg-white text-neutral-600 border-neutral-200 hover:text-neutral-900'
             ]"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,7 +224,7 @@
           <button 
             @click="handleNewProject"
             :disabled="isBusy"
-            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-white hover:border-zinc-600 disabled:opacity-50"
+            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-white text-neutral-600 border border-neutral-200 hover:text-neutral-900 hover:border-neutral-300 disabled:opacity-50"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -230,16 +235,16 @@
       </header>
 
       <!-- File Explorer Modal -->
-      <div v-if="showFileExplorer" class="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm" @click="showFileExplorer = false" />
-      <div v-if="showFileExplorer" class="fixed top-20 right-6 bottom-6 w-96 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl z-50 flex flex-col">
-        <div class="p-4 border-b border-zinc-800 flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-white flex items-center gap-2">
+      <div v-if="showFileExplorer" class="fixed inset-0 bg-neutral-900/40 z-40 backdrop-blur-sm" @click="showFileExplorer = false" />
+      <div v-if="showFileExplorer" class="fixed top-20 right-6 bottom-6 w-96 bg-white border border-neutral-200 rounded-xl shadow-2xl z-50 flex flex-col">
+        <div class="p-4 border-b border-neutral-200 flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-neutral-900 flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
             Files
           </h2>
-          <button @click="showFileExplorer = false" class="text-zinc-400 hover:text-white">
+          <button @click="showFileExplorer = false" class="text-neutral-600 hover:text-neutral-900">
             <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -257,29 +262,29 @@
       <!-- Content Area -->
       <div class="flex-1 overflow-hidden relative">
         <!-- Loading Overlay (Initial Generation) -->
-        <div v-if="status === GenerationStatus.THINKING && Object.keys(files).length === 0" class="absolute inset-0 z-20 flex items-center justify-center bg-zinc-950/80 backdrop-blur-sm transition-opacity duration-500">
+        <div v-if="status === GenerationStatus.THINKING && Object.keys(files).length === 0" class="absolute inset-0 z-20 flex items-center justify-center bg-white/90 backdrop-blur-sm transition-opacity duration-500">
           <div class="text-center">
             <div class="relative w-24 h-24 mx-auto mb-6">
-              <div class="absolute inset-0 border-4 border-blue-500/30 rounded-full animate-ping"></div>
-              <div class="absolute inset-0 border-4 border-t-blue-500 rounded-full animate-spin"></div>
-              <div class="absolute inset-4 bg-zinc-900 rounded-full flex items-center justify-center">
-                <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="absolute inset-0 border-4 border-[#d97759]/30 rounded-full animate-ping"></div>
+              <div class="absolute inset-0 border-4 border-t-[#d97759] rounded-full animate-spin"></div>
+              <div class="absolute inset-4 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <svg class="w-10 h-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
               </div>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Building your website...</h3>
-            <p class="text-zinc-400 text-sm animate-pulse">Architecting layout & design</p>
+            <h3 class="text-xl font-bold text-neutral-900 mb-2">Building your website...</h3>
+            <p class="text-neutral-600 text-sm animate-pulse">Architecting layout & design</p>
           </div>
         </div>
 
         <!-- Live Update Indicator -->
-        <div v-if="status === GenerationStatus.STREAMING" class="absolute top-4 right-4 z-20 flex items-center gap-2 bg-zinc-900/90 backdrop-blur border border-zinc-700 px-3 py-1.5 rounded-full shadow-xl transition-all duration-300">
+        <div v-if="status === GenerationStatus.STREAMING" class="absolute top-4 right-4 z-20 flex items-center gap-2 bg-white/90 backdrop-blur border border-neutral-200 px-3 py-1.5 rounded-full shadow-xl transition-all duration-300">
           <span class="relative flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d97759] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#d97759]"></span>
           </span>
-          <span class="text-xs font-medium text-zinc-200">Live Updating</span>
+          <span class="text-xs font-medium text-neutral-900">Live Updating</span>
         </div>
 
         <div v-if="viewMode === 'preview'" class="h-full bg-white transition-opacity duration-500">
@@ -290,22 +295,22 @@
               sandbox="allow-scripts"
             />
           </div>
-          <div v-else class="h-full flex items-center justify-center text-zinc-400 bg-zinc-900">
+          <div v-else class="h-full flex items-center justify-center text-neutral-600 bg-neutral-50">
             <div class="text-center">
-              <svg class="w-16 h-16 mx-auto mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-16 h-16 mx-auto mb-4 opacity-30 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <p class="text-lg mb-2 font-medium">Ready to Create</p>
-              <p class="text-sm opacity-60">Describe your dream website to get started</p>
+              <p class="text-lg mb-2 font-medium text-neutral-900">Ready to Create</p>
+              <p class="text-sm text-neutral-600">Describe your dream website to get started</p>
             </div>
           </div>
         </div>
 
-        <div v-else class="h-full bg-zinc-900 flex flex-col">
+        <div v-else class="h-full bg-neutral-50 flex flex-col">
           <div v-if="activeFile && files[activeFile]" class="flex-1 flex flex-col overflow-hidden">
             <!-- File Header -->
-            <div class="px-4 py-2 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
-              <div class="flex items-center gap-2 text-xs text-zinc-400">
+            <div class="px-4 py-2 border-b border-neutral-200 flex items-center justify-between bg-white">
+              <div class="flex items-center gap-2 text-xs text-neutral-600">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -314,13 +319,13 @@
             </div>
             <!-- File Content -->
             <div class="flex-1 overflow-auto p-4">
-              <pre class="text-xs text-zinc-300 font-mono leading-relaxed">{{ files[activeFile].content }}</pre>
+              <pre class="text-xs text-neutral-900 font-mono leading-relaxed">{{ files[activeFile].content }}</pre>
             </div>
           </div>
-          <div v-else class="h-full flex items-center justify-center text-zinc-400">
+          <div v-else class="h-full flex items-center justify-center text-neutral-600">
             <div class="text-center">
-              <p class="text-lg mb-2">{{ Object.keys(files).length > 0 ? 'Select a file' : 'No code yet' }}</p>
-              <p class="text-sm">{{ Object.keys(files).length > 0 ? 'Click the Files button to browse' : 'Generate a website to see the code' }}</p>
+              <p class="text-lg mb-2 text-neutral-900">{{ Object.keys(files).length > 0 ? 'Select a file' : 'No code yet' }}</p>
+              <p class="text-sm text-neutral-600">{{ Object.keys(files).length > 0 ? 'Click the Files button to browse' : 'Generate a website to see the code' }}</p>
             </div>
           </div>
         </div>
@@ -335,7 +340,7 @@
         ]"
         style="padding-bottom: env(safe-area-inset-bottom);"
       >
-        <div class="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-2xl p-2 flex gap-2 items-center ring-1 ring-white/10">
+        <div class="bg-white/95 backdrop-blur-md border border-neutral-200 rounded-2xl shadow-2xl p-2 flex gap-2 items-center">
           <div class="flex-1 relative">
             <input
               ref="mobileInput"
@@ -344,13 +349,13 @@
               type="text"
               placeholder="Ask a follow-up..."
               :disabled="isBusy"
-              class="w-full bg-transparent border-0 text-base text-white placeholder-zinc-500 focus:ring-0 px-4 py-2"
+              class="w-full bg-transparent border-0 text-base text-neutral-900 placeholder-neutral-500 focus:ring-0 px-4 py-2"
             />
           </div>
           <button
             @click="handleGenerate"
             :disabled="isBusy || !prompt.trim()"
-            class="bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white rounded-xl p-3 flex-shrink-0 transition-colors"
+            class="bg-neutral-900 hover:bg-neutral-800 disabled:bg-neutral-300 text-white rounded-xl p-3 flex-shrink-0 transition-colors"
           >
             <svg v-if="isBusy" class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -495,6 +500,12 @@ const toggleSelectionMode = () => {
       enabled: isSelectionMode.value
     }, '*')
   }
+}
+
+const autoResize = (event: Event) => {
+  const textarea = event.target as HTMLTextAreaElement
+  textarea.style.height = 'auto'
+  textarea.style.height = `${textarea.scrollHeight}px`
 }
 
 onMounted(() => {
