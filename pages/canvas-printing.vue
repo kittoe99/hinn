@@ -1,7 +1,7 @@
 <template>
   <main class="min-h-screen bg-[#f9f8f6]">
     <!-- Hero Section -->
-    <section class="relative -mt-6 pt-0 pb-12 md:mt-0 md:pt-6 md:pb-20 bg-white overflow-hidden">
+    <section class="relative -mt-6 pt-0 pb-12 md:mt-0 md:pt-6 md:pb-20 bg-[#f9f8f6] overflow-hidden">
       <div class="relative mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
         <div v-if="!showResults">
           <!-- SVG Pattern Background -->
@@ -40,15 +40,15 @@
           </div>
         </div>
 
-        <div v-if="!showResults" class="relative bg-white rounded-2xl md:rounded-3xl border border-neutral-200 p-4 md:p-6 lg:p-8 shadow-sm">
+        <div v-if="!showResults" class="relative bg-white rounded-xl border border-neutral-200 p-4 md:p-6 lg:p-8 shadow-sm">
           <!-- Tabs -->
-          <div class="relative flex gap-1 md:gap-2 mb-6 md:mb-8 p-1 bg-neutral-100/80 rounded-xl w-full md:w-fit border border-neutral-200">
+          <div class="relative flex gap-1 md:gap-2 mb-6 md:mb-8 p-1 bg-neutral-50 rounded-lg w-full md:w-fit border border-neutral-200">
             <button
               @click="activeTab = 'generate'"
               :class="[
-                'flex-1 md:flex-none px-3 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-semibold transition-all duration-300 rounded-lg relative',
+                'flex-1 md:flex-none px-3 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-semibold transition-all duration-200 rounded-lg relative',
                 activeTab === 'generate' 
-                  ? 'text-white bg-gradient-to-r from-[#d97759] to-[#c46a4f] shadow-lg shadow-[#d97759]/25' 
+                  ? 'bg-white text-neutral-900 shadow-sm' 
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
               ]"
             >
@@ -62,9 +62,9 @@
             <button
               @click="activeTab = 'upload'"
               :class="[
-                'flex-1 md:flex-none px-3 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-semibold transition-all duration-300 rounded-lg relative',
+                'flex-1 md:flex-none px-3 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-semibold transition-all duration-200 rounded-lg relative',
                 activeTab === 'upload' 
-                  ? 'text-white bg-gradient-to-r from-[#d97759] to-[#c46a4f] shadow-lg shadow-[#d97759]/25' 
+                  ? 'bg-white text-neutral-900 shadow-sm' 
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
               ]"
             >
@@ -100,10 +100,10 @@
                 <button
                   @click="generateImage"
                   :disabled="!prompt.trim()"
-                  class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#d97759] to-[#c46a4f] text-white font-semibold hover:shadow-lg hover:shadow-[#d97759]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 flex items-center gap-2"
+                  class="px-5 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-medium disabled:bg-neutral-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                   title="Generate"
                 >
-                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                   </svg>
                   Generate
@@ -122,7 +122,7 @@
                   <button
                     type="button"
                     @click="scrollQuickIdeas('left')"
-                    class="h-8 w-8 flex items-center justify-center rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 hover:border-[#d97759] transition-all"
+                    class="h-8 w-8 flex items-center justify-center rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
                     aria-label="Scroll ideas left"
                   >
                     <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -132,7 +132,7 @@
                   <button
                     type="button"
                     @click="scrollQuickIdeas('right')"
-                    class="h-8 w-8 flex items-center justify-center rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 hover:border-[#d97759] transition-all"
+                    class="h-8 w-8 flex items-center justify-center rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
                     aria-label="Scroll ideas right"
                   >
                     <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -152,7 +152,7 @@
                   @click="prompt = example.label"
                   class="group flex-shrink-0 snap-start w-44 md:w-52 text-left"
                 >
-                  <div class="relative rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200 group-hover:border-[#d97759] transition-all duration-300 shadow-sm group-hover:shadow-md">
+                  <div class="relative rounded-lg overflow-hidden bg-neutral-100 border border-neutral-200 group-hover:border-[#d97759] transition-all duration-200">
                     <div class="relative aspect-[4/3]">
                       <img
                         :src="example.image"
@@ -184,7 +184,7 @@
               @click="triggerFileUpload"
               @dragover.prevent
               @drop.prevent="handleFileDrop"
-              class="group relative border border-dashed border-neutral-300 rounded-2xl p-16 text-center hover:border-[#d97759] hover:bg-gradient-to-br hover:from-[#d97759]/5 hover:to-transparent transition-all duration-300 cursor-pointer"
+              class="group relative border-2 border-dashed border-neutral-300 rounded-xl p-16 text-center hover:border-[#d97759] hover:bg-neutral-50 transition-all duration-200 cursor-pointer"
             >
               <input
                 ref="fileInput"
@@ -195,9 +195,8 @@
               />
               <div class="flex flex-col items-center gap-5">
                 <div class="relative">
-                  <div class="absolute inset-0 bg-[#d97759]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                  <div class="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[#d97759]/10 to-[#c46a4f]/10 group-hover:from-[#d97759]/20 group-hover:to-[#c46a4f]/20 transition-all duration-300 transform group-hover:scale-110">
-                    <svg class="h-10 w-10 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
                   </div>
@@ -225,10 +224,10 @@
             <button
               @click="proceedWithUpload"
               :disabled="!uploadedFile"
-              class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#d97759] to-[#c46a4f] text-white font-semibold hover:shadow-xl hover:shadow-[#d97759]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none transition-all duration-300 transform hover:scale-[1.02] disabled:hover:scale-100 flex items-center justify-center gap-2"
+              class="w-full py-3 px-6 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-medium disabled:bg-neutral-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               <span>Continue with Upload</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
             </button>
@@ -401,14 +400,14 @@
                 <button
                   @click="generateImage"
                   :disabled="!prompt.trim()"
-                  class="flex-1 lg:flex-none px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#d97759] to-[#c46a4f] text-white font-semibold hover:shadow-lg hover:shadow-[#d97759]/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+                  class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-medium disabled:bg-neutral-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm"
                 >
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                   </svg>
                   Generate More
                 </button>
-                <button class="flex-1 lg:flex-none px-4 py-2.5 rounded-xl border-2 border-[#d97759] text-[#d97759] font-semibold hover:bg-[#d97759] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                <button class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                   </svg>
@@ -423,13 +422,11 @@
         <div v-if="!showResults" class="mt-32 relative">
           <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Header with gradient background -->
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#fff3ec] via-white to-neutral-50 border border-neutral-200 p-8 md:p-12 mb-12">
+            <div class="relative overflow-hidden rounded-xl bg-white border border-neutral-200 p-8 md:p-12 mb-12">
               <div
                 class="absolute inset-0 opacity-20"
                 style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80'); background-size: cover; background-position: center"
               />
-              <div class="absolute top-0 right-0 w-64 h-64 bg-[#d97759]/5 rounded-full blur-3xl"></div>
-              <div class="absolute bottom-0 left-0 w-48 h-48 bg-[#d97759]/5 rounded-full blur-3xl"></div>
               
               <div class="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div class="flex-1">
@@ -446,7 +443,7 @@
                     Discover stunning creations from our community of artists and designers. Get inspired for your next masterpiece.
                   </p>
                 </div>
-                <button class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#d97759] to-[#c46a4f] text-white font-semibold hover:shadow-lg hover:shadow-[#d97759]/30 transition-all duration-300 whitespace-nowrap">
+                <button class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-medium transition-colors whitespace-nowrap">
                   <span>View All Prints</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
