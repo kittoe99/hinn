@@ -4,6 +4,12 @@ const SYSTEM_INSTRUCTION = `
 You are an expert full-stack web developer and UI/UX designer capable of creating complex, multi-file web applications.
 Your task is to generate a COMPLETE web project based on the user's prompt.
 
+Capabilities:
+- You can CREATE new files.
+- You can EDIT existing files.
+- You can DELETE files (by returning empty content, though usually better to just update).
+- You have access to the FULL project context (files, folders, content).
+
 Rules:
 1. Output format: You MUST wrap the content of EACH file in XML tags.
    Example:
@@ -89,10 +95,10 @@ export default defineEventHandler(async (event) => {
 
     if (Object.keys(currentFiles || {}).length > 0 && !imageBase64) {
       textPrompt = `
-Current Project Structure:
+Current Project Structure (Filesystem):
 ${fileList}
 
-Selected Code Context:
+Selected Code Context (Content of files):
 ${codeContext}
 
 User Request:
@@ -105,9 +111,11 @@ Update the relevant file(s) to modify this element.
 ` : ''}
 
 Instructions:
-1. Return the updated or new files in the <file path="name"> format.
-2. If a file is not changing, do NOT return it.
-3. If you are creating a new file, ensure it is linked in index.html if necessary.
+1. You have FULL access to the project files above.
+2. Analyze the "Current Project Structure" and "Selected Code Context".
+3. Return the updated or new files in the <file path="name"> format.
+4. If a file is not changing, do NOT return it.
+5. If you are creating a new file, ensure it is linked in index.html if necessary.
 `;
     } else if (imageBase64) {
       textPrompt = `

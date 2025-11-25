@@ -1,0 +1,476 @@
+<template>
+  <div class="flex h-screen w-full bg-zinc-950 text-zinc-100 overflow-hidden selection:bg-blue-500/30 relative">
+    
+    <!-- SIDEBAR - Chat Interface -->
+    <aside class="w-80 sm:w-96 flex flex-col border-r border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
+      <!-- Header -->
+      <div class="p-6 border-b border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <h1 class="text-xl font-bold tracking-tight text-white">Chat</h1>
+        </div>
+      </div>
+
+      <!-- Chat Content -->
+      <div class="flex-1 overflow-y-auto p-6 scrollbar-thin">
+        <div class="flex flex-col h-full">
+          <!-- Chat History -->
+          <div v-if="chatHistory.length > 0" ref="chatContainer" class="flex-1 min-h-0 overflow-y-auto space-y-3 mb-3 pr-2">
+            <div v-for="(message, index) in chatHistory" :key="index" :class="['flex', message.role === 'user' ? 'justify-end' : 'justify-start']">
+              <div :class="[
+                'max-w-[85%] rounded-lg px-3 py-2',
+                message.role === 'user' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-zinc-800 text-zinc-200 border border-zinc-700'
+              ]">
+                <p class="text-xs leading-relaxed whitespace-pre-wrap break-words">{{ message.content }}</p>
+                <span class="text-[9px] opacity-50 mt-0.5 block">
+                  {{ new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Status Message in Chat -->
+            <div v-if="status === GenerationStatus.THINKING" class="flex justify-start animate-pulse">
+              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-3 py-2 flex items-center gap-2">
+                <svg class="w-3 h-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-xs text-zinc-400">Thinking...</span>
+              </div>
+            </div>
+            <div v-if="status === GenerationStatus.STREAMING" class="flex justify-start">
+              <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg px-3 py-2 flex items-center gap-2">
+                <svg class="w-3 h-3 text-green-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span class="text-xs text-zinc-400">Writing code...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <div class="space-y-2 flex-shrink-0">
+            <button
+              v-if="chatHistory.length > 0"
+              @click="chatHistory = []"
+              class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1"
+            >
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Clear conversation
+            </button>
+
+            <div v-if="selectedElement" class="flex items-center gap-1 text-[10px] text-blue-400 bg-blue-900/20 px-2 py-1 rounded-md border border-blue-900/50 w-fit">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>Target: &lt;{{ selectedElement.tagName }}&gt;</span>
+              <button @click="selectedElement = null" class="hover:text-white ml-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div class="relative">
+              <textarea
+                v-model="prompt"
+                :placeholder="isEditing ? 'Ask a follow-up...' : 'Describe your website...'"
+                :disabled="isBusy"
+                :class="[
+                  'w-full h-24 bg-zinc-900 border rounded-lg p-3 text-xs text-zinc-100 placeholder-zinc-500 focus:ring-1 focus:border-transparent resize-none transition-all',
+                  selectedElement ? 'border-blue-500/50 ring-1 ring-blue-500/20' : 'border-zinc-700 focus:ring-blue-500',
+                  isBusy ? 'opacity-50' : ''
+                ]"
+                rows="3"
+              />
+              <div class="absolute bottom-2 left-2 flex gap-1.5">
+                <label class="flex items-center gap-1 text-[10px] text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors select-none bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded-md border border-zinc-700" title="Web search">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                  <input type="checkbox" class="hidden" v-model="useSearch" :disabled="isBusy" />
+                </label>
+              </div>
+              <button
+                @click="handleGenerate"
+                :disabled="isBusy || !prompt.trim()"
+                class="absolute bottom-2 right-2 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-700 text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg v-if="isBusy" class="w-3 h-3 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <svg v-else class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Error Message -->
+            <div v-if="errorMsg" class="p-2 bg-red-900/20 border border-red-800 rounded-lg text-red-400 text-xs">
+              {{ errorMsg }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="flex-1 flex flex-col min-w-0 bg-zinc-950 relative">
+      <!-- Header Toolbar -->
+      <header class="h-16 border-b border-zinc-800 flex items-center justify-between px-4 md:px-6 bg-zinc-900/30 backdrop-blur sticky top-0 z-30">
+        <div class="flex items-center gap-3 md:gap-4">
+          <!-- View Mode Toggle -->
+          <div class="flex bg-zinc-800 p-1 rounded-lg">
+            <button
+              @click="viewMode = 'preview'"
+              :class="[
+                'flex items-center px-3 py-1.5 rounded-md text-xs md:text-sm font-medium transition-all',
+                viewMode === 'preview' ? 'bg-zinc-700 text-white shadow' : 'text-zinc-400 hover:text-zinc-200'
+              ]"
+            >
+              <svg class="w-3.5 h-3.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              Preview
+            </button>
+            <button
+              @click="viewMode = 'code'"
+              :class="[
+                'flex items-center px-3 py-1.5 rounded-md text-xs md:text-sm font-medium transition-all',
+                viewMode === 'code' ? 'bg-zinc-700 text-white shadow' : 'text-zinc-400 hover:text-zinc-200'
+              ]"
+            >
+              <svg class="w-3.5 h-3.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              Code
+            </button>
+          </div>
+
+          <!-- Status Indicators -->
+          <div v-if="status === GenerationStatus.THINKING" class="hidden sm:flex items-center gap-2 text-yellow-500 text-xs animate-pulse">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Thinking...
+          </div>
+          <div v-if="status === GenerationStatus.STREAMING" class="hidden sm:flex items-center gap-2 text-green-400 text-xs">
+            <svg class="w-3.5 h-3.5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Coding...
+          </div>
+        </div>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-2">
+          <button 
+            v-if="Object.keys(files).length > 0"
+            @click="showFileExplorer = true"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-white hover:border-zinc-600"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            </svg>
+            Files
+          </button>
+          <button
+            v-if="viewMode === 'preview' && !isBusy && previewHtml"
+            @click="toggleSelectionMode"
+            :class="[
+              'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all border',
+              isSelectionMode ? 'bg-blue-600 text-white border-blue-500' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:text-white'
+            ]"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+            </svg>
+            <span class="hidden sm:inline">Select</span>
+          </button>
+          <button 
+            @click="handleNewProject"
+            :disabled="isBusy"
+            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-zinc-800 text-zinc-400 border border-zinc-700 hover:text-white hover:border-zinc-600 disabled:opacity-50"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            New
+          </button>
+        </div>
+      </header>
+
+      <!-- File Explorer Modal -->
+      <div v-if="showFileExplorer" class="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm" @click="showFileExplorer = false" />
+      <div v-if="showFileExplorer" class="fixed top-20 right-6 bottom-6 w-96 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl z-50 flex flex-col">
+        <div class="p-4 border-b border-zinc-800 flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-white flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            </svg>
+            Files
+          </h2>
+          <button @click="showFileExplorer = false" class="text-zinc-400 hover:text-white">
+            <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4">
+          <BuilderFileExplorer 
+            :files="files" 
+            :activeFile="activeFile"
+            @fileSelect="handleFileSelect"
+          />
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="flex-1 overflow-hidden relative">
+        <!-- Loading Overlay (Initial Generation) -->
+        <div v-if="status === GenerationStatus.THINKING && Object.keys(files).length === 0" class="absolute inset-0 z-20 flex items-center justify-center bg-zinc-950/80 backdrop-blur-sm transition-opacity duration-500">
+          <div class="text-center">
+            <div class="relative w-24 h-24 mx-auto mb-6">
+              <div class="absolute inset-0 border-4 border-blue-500/30 rounded-full animate-ping"></div>
+              <div class="absolute inset-0 border-4 border-t-blue-500 rounded-full animate-spin"></div>
+              <div class="absolute inset-4 bg-zinc-900 rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Building your website...</h3>
+            <p class="text-zinc-400 text-sm animate-pulse">Architecting layout & design</p>
+          </div>
+        </div>
+
+        <!-- Live Update Indicator -->
+        <div v-if="status === GenerationStatus.STREAMING" class="absolute top-4 right-4 z-20 flex items-center gap-2 bg-zinc-900/90 backdrop-blur border border-zinc-700 px-3 py-1.5 rounded-full shadow-xl transition-all duration-300">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          <span class="text-xs font-medium text-zinc-200">Live Updating</span>
+        </div>
+
+        <div v-if="viewMode === 'preview'" class="h-full bg-white transition-opacity duration-500">
+          <div v-if="previewHtml" class="h-full relative group">
+            <iframe
+              :srcdoc="previewHtml"
+              class="w-full h-full border-0 transition-opacity duration-300"
+              sandbox="allow-scripts"
+            />
+          </div>
+          <div v-else class="h-full flex items-center justify-center text-zinc-400 bg-zinc-900">
+            <div class="text-center">
+              <svg class="w-16 h-16 mx-auto mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p class="text-lg mb-2 font-medium">Ready to Create</p>
+              <p class="text-sm opacity-60">Describe your dream website to get started</p>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="h-full bg-zinc-900 flex flex-col">
+          <div v-if="activeFile && files[activeFile]" class="flex-1 flex flex-col overflow-hidden">
+            <!-- File Header -->
+            <div class="px-4 py-2 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
+              <div class="flex items-center gap-2 text-xs text-zinc-400">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {{ activeFile }}
+              </div>
+            </div>
+            <!-- File Content -->
+            <div class="flex-1 overflow-auto p-4">
+              <pre class="text-xs text-zinc-300 font-mono leading-relaxed">{{ files[activeFile].content }}</pre>
+            </div>
+          </div>
+          <div v-else class="h-full flex items-center justify-center text-zinc-400">
+            <div class="text-center">
+              <p class="text-lg mb-2">{{ Object.keys(files).length > 0 ? 'Select a file' : 'No code yet' }}</p>
+              <p class="text-sm">{{ Object.keys(files).length > 0 ? 'Click the Files button to browse' : 'Generate a website to see the code' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { FileMap } from '~/types/builder'
+import { GenerationStatus } from '~/types/builder'
+
+definePageMeta({
+  layout: false
+})
+
+// Composables
+const { generateProjectStream } = useBuilderGeneration()
+const { bundleProjectForPreview } = useBuilderProject()
+
+// State
+const viewMode = ref<'preview' | 'code'>('preview')
+const prompt = ref("A modern landing page for an AI startup called 'Nebula'. Dark theme, glowing gradients, hero section, features grid, and a newsletter signup.")
+const status = ref<GenerationStatus>(GenerationStatus.IDLE)
+const files = ref<FileMap>({})
+const previewHtml = ref('')
+const errorMsg = ref<string | null>(null)
+const useSearch = ref(false)
+const chatHistory = ref<Array<{role: 'user' | 'assistant', content: string, timestamp: number}>>([])
+const chatContainer = ref<HTMLDivElement | null>(null)
+const activeFile = ref<string | null>(null)
+const showFileExplorer = ref(false)
+const isSelectionMode = ref(false)
+const selectedElement = ref<{tagName: string, html: string, text: string} | null>(null)
+const isMobileMenuOpen = ref(false)
+
+// Computed
+const isEditing = computed(() => Object.keys(files.value).length > 0)
+const isBusy = computed(() => 
+  status.value === GenerationStatus.THINKING || 
+  status.value === GenerationStatus.STREAMING
+)
+const isGenerating = computed(() => isBusy.value)
+
+// Methods
+const handleGenerate = async () => {
+  if (!prompt.value.trim() || isGenerating.value) return
+  
+  // Add user message to chat
+  chatHistory.value.push({
+    role: 'user',
+    content: prompt.value,
+    timestamp: Date.now()
+  })
+  
+  const userPrompt = prompt.value
+  prompt.value = '' // Clear input
+  
+  status.value = GenerationStatus.STREAMING
+  errorMsg.value = null
+  
+  try {
+    console.log('🚀 Starting generation with prompt:', userPrompt)
+    
+    const stream = generateProjectStream(
+      userPrompt,
+      files.value,
+      undefined,
+      undefined,
+      useSearch.value
+    )
+
+    for await (const update of stream) {
+      console.log('📦 Received update:', Object.keys(update.files).length, 'files')
+      files.value = update.files
+      // Preview update handled by throttled watcher
+    }
+
+    status.value = GenerationStatus.COMPLETE
+    console.log('✅ Generation complete!')
+    
+    // Force final update
+    previewHtml.value = bundleProjectForPreview(files.value)
+    
+    // Add assistant response to chat
+    chatHistory.value.push({
+      role: 'assistant',
+      content: `Generated ${Object.keys(files.value).length} files successfully!`,
+      timestamp: Date.now()
+    })
+    
+  } catch (error: any) {
+    console.error('❌ Generation error:', error)
+    errorMsg.value = error.message || 'Failed to generate project'
+    status.value = GenerationStatus.ERROR
+    
+    // Add error to chat
+    chatHistory.value.push({
+      role: 'assistant',
+      content: `Error: ${error.message || 'Failed to generate project'}`,
+      timestamp: Date.now()
+    })
+  }
+}
+
+const handleNewProject = () => {
+  if (confirm('Start a new project? This will clear your current work.')) {
+    files.value = {}
+    previewHtml.value = ''
+    chatHistory.value = []
+    activeFile.value = null
+    prompt.value = "A modern landing page for an AI startup called 'Nebula'. Dark theme, glowing gradients, hero section, features grid, and a newsletter signup."
+    status.value = GenerationStatus.IDLE
+    errorMsg.value = null
+  }
+}
+
+const handleFileSelect = (path: string) => {
+  activeFile.value = path
+  viewMode.value = 'code'
+  showFileExplorer.value = false
+}
+
+const toggleSelectionMode = () => {
+  isSelectionMode.value = !isSelectionMode.value
+  const iframe = document.querySelector('iframe')
+  if (iframe?.contentWindow) {
+    iframe.contentWindow.postMessage({
+      type: 'TOGGLE_SELECTION_MODE',
+      enabled: isSelectionMode.value
+    }, '*')
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('message', (event) => {
+    if (event.data.type === 'NEBULA_ELEMENT_SELECTED') {
+      selectedElement.value = event.data.payload
+      isSelectionMode.value = false
+      
+      // Disable selection mode in iframe
+      const iframe = document.querySelector('iframe')
+      if (iframe?.contentWindow) {
+        iframe.contentWindow.postMessage({
+          type: 'TOGGLE_SELECTION_MODE',
+          enabled: false
+        }, '*')
+      }
+    }
+  })
+})
+
+// Update preview when files change
+let lastUpdate = 0
+watch(files, (newFiles) => {
+  const now = Date.now()
+  // Throttle updates (100ms) - fast enough for live feel, slow enough to prevent browser lag
+  if (now - lastUpdate > 100 || status.value !== GenerationStatus.STREAMING) {
+    if (Object.keys(newFiles).length > 0) {
+      previewHtml.value = bundleProjectForPreview(newFiles)
+      lastUpdate = now
+    }
+  }
+}, { deep: true })
+
+// Auto-scroll chat to bottom
+watch(chatHistory, () => {
+  nextTick(() => {
+    if (chatContainer.value) {
+      chatContainer.value.scrollTop = chatContainer.value.scrollHeight
+    }
+  })
+}, { deep: true })
+</script>
