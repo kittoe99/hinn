@@ -5,23 +5,35 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "dev:builder": "vite --config public/builder-app/vite.config.ts",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:builder\"",
+    "build": "nuxt build && npm run build:builder",
+    "build:builder": "vite build --config public/builder-app/vite.config.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@google/genai": "^1.30.0",
     "@mendable/firecrawl-js": "^4.4.0",
     "@openai/agents": "^0.3.2",
     "@supabase/supabase-js": "^2.75.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.554.0",
     "nuxt": "^3.13.0",
     "nuxt-simple-sitemap": "^4.4.1",
     "openai": "^4.77.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "vue": "^3.4.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@openai/codex-sdk": "^0.53.0",
-    "@types/node": "^20.19.21"
+    "@types/node": "^20.19.21",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "vite": "^7.2.4"
   }
 }

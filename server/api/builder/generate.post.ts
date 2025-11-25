@@ -1,76 +1,176 @@
-import OpenAI from 'openai'
-import { defineEventHandler, readBody, createError, sendError, setResponseHeader } from 'h3'
-import { useRuntimeConfig } from '#imports'
+import { GoogleGenAI } from "@google/genai";
+
+const SYSTEM_INSTRUCTION = `
+You are an expert full-stack web developer and UI/UX designer capable of creating complex, multi-file web applications.
+Your task is to generate a COMPLETE web project based on the user's prompt.
+
+Rules:
+1. Output format: You MUST wrap the content of EACH file in XML tags.
+   Example:
+   <file path="index.html">
+     <!DOCTYPE html>
+     <html>
+       <head>
+         <style>/* CSS here */</style>
+       </head>
+       <body class="bg-zinc-900 text-white">
+         <!-- HTML here -->
+         <script>// JS here</script>
+       </body>
+     </html>
+   </file>
+   <file path="README.md">
+     # Project Documentation
+   </file>
+
+2. Do not put markdown code fences around the XML tags. Just return the raw XML-like structure.
+3. Use TAILWIND CSS via CDN: <script src="https://cdn.tailwindcss.com"></script>
+4. **CRITICAL**: You MUST add a background color class to the <body> tag. 
+   - For Dark Mode (default): class="bg-zinc-900 text-zinc-100" or similar.
+   - For Light Mode: class="bg-white text-zinc-900".
+   - DO NOT leave the body background transparent.
+5. Use FontAwesome and Google Fonts.
+6. Always include an 'index.html' as the entry point.
+7. **COMBINATION PREFERENCE**: Prefer keeping CSS and JS inside the HTML files (using <style> and <script>) for simpler projects. Only create separate files if the project is complex or the user asks for it.
+8. Create separate files for:
+   - Additional HTML pages
+   - Documentation (README.md)
+   - Configuration (package.json)
+9. If the user asks for edits, you will receive the current file structure. Update ONLY the necessary files or create new ones.
+10. If you are just updating one file, still wrap it in the <file path="..."> tag.
+11. Ensure the code is production-ready, accessible, and responsive.
+12. If the user provides an image, replicate the design in the code.
+`;
 
 export default defineEventHandler(async (event) => {
   try {
-    const body = await readBody<{ messages?: Array<{ role: string; content: any }> }>(event)
-    const messages = body?.messages || []
-    const config = useRuntimeConfig()
-    const apiKey = (config as any).openaiApiKey || process.env.OPENAI_API_KEY
-    
+    const body = await readBody(event);
+    const { prompt, currentFiles, imageBase64, focusedElementHtml, useSearch } = body;
+
+    const config = useRuntimeConfig();
+    const apiKey = config.geminiApiKey || process.env.GEMINI_API_KEY;
+
     if (!apiKey) {
-      throw new Error('Missing OPENAI_API_KEY')
+      throw createError({
+        statusCode: 500,
+        message: 'Gemini API key not configured'
+      });
     }
 
-    const openai = new OpenAI({ apiKey })
+    const ai = new GoogleGenAI({ apiKey });
     
-    // Set headers for SSE streaming
-    setResponseHeader(event, 'Content-Type', 'text/event-stream')
-    setResponseHeader(event, 'Cache-Control', 'no-cache')
-    setResponseHeader(event, 'Connection', 'keep-alive')
+    let contents: any = [];
 
-    const systemPrompt = `You are Gpt-5-codex, an advanced AI web builder engine.
-Your goal is to generate COMPLETE, production-ready, responsive, and beautiful websites based on user prompts.
+    // Handle Image
+    if (imageBase64) {
+      const cleanBase64 = imageBase64.replace(/^data:image\/(png|jpeg|jpg|webp);base64,/, '');
+      contents.push({
+        inlineData: {
+          mimeType: 'image/png',
+          data: cleanBase64
+        }
+      });
+    }
 
-CRITICAL REQUIREMENTS:
-1. Generate FULL, COMPLETE websites with ALL necessary sections (header, hero, features, about, services, testimonials, pricing, contact, footer, etc.)
-2. DO NOT generate partial or shortened websites - create comprehensive, multi-section pages
-3. Include rich content, realistic text, and multiple content blocks for each section
-4. Output ONLY valid HTML code with embedded CSS (<style>) and JS (<script>) - NO markdown code blocks
-5. The output must be a complete, standalone HTML document starting with <!DOCTYPE html>
-6. Use Tailwind CSS via CDN: <script src="https://cdn.tailwindcss.com"></script>
-7. Make it look professional, modern, and visually stunning with proper spacing, colors, and typography
-8. Add interactive elements, animations, and smooth transitions where appropriate
-9. Ensure mobile responsiveness and cross-browser compatibility
-10. Generate AT LEAST 5-10 major sections for a complete website experience
+    // Context Construction
+    const fileList = Object.keys(currentFiles || {}).map((path: string) => `- ${path}`).join('\n');
+    
+    let codeContext = '';
+    const MAX_CONTEXT_CHARS = 50000;
+    
+    for (const [path, file] of Object.entries(currentFiles || {})) {
+      const fileData = file as any;
+      if (fileData.type === 'file' && codeContext.length < MAX_CONTEXT_CHARS) {
+        codeContext += `\n--- START OF FILE ${path} ---\n${fileData.content}\n--- END OF FILE ${path} ---\n`;
+      }
+    }
 
-DO NOT STOP EARLY - Generate the ENTIRE website with all sections fully implemented.
-`
+    let textPrompt = prompt;
 
-    const stream = await openai.chat.completions.create({
-      model: 'gpt-4o', // Using the most advanced available model to simulate "Gpt-5-codex" capability
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages
-      ] as any,
-      stream: true,
-      max_tokens: 16384, // Maximum tokens for gpt-4o to allow full website generation
-      temperature: 0.7, // Balanced creativity and coherence
-    })
+    if (Object.keys(currentFiles || {}).length > 0 && !imageBase64) {
+      textPrompt = `
+Current Project Structure:
+${fileList}
 
-    const encoder = new TextEncoder()
-    const readable = new ReadableStream({
+Selected Code Context:
+${codeContext}
+
+User Request:
+${prompt}
+
+${focusedElementHtml ? `
+IMPORTANT: The user is focused on this element:
+${focusedElementHtml}
+Update the relevant file(s) to modify this element.
+` : ''}
+
+Instructions:
+1. Return the updated or new files in the <file path="name"> format.
+2. If a file is not changing, do NOT return it.
+3. If you are creating a new file, ensure it is linked in index.html if necessary.
+`;
+    } else if (imageBase64) {
+      textPrompt = `
+User Request: ${prompt}
+
+Instructions:
+1. Analyze the image and build a multi-file project (html, css, js) to replicate it.
+2. Use <file path="..."> tags.
+${Object.keys(currentFiles || {}).length > 0 ? `Merge into existing project:\n${fileList}` : ''}
+`;
+    }
+
+    contents.push({ text: textPrompt });
+
+    const tools = useSearch ? [{ googleSearch: {} }] : undefined;
+
+    const result = await ai.models.generateContentStream({
+      model: 'gemini-2.0-flash-exp',
+      contents: { parts: contents },
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION,
+        temperature: 0.7,
+        tools: tools,
+      }
+    });
+
+    // Set up SSE headers
+    setResponseHeaders(event, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    });
+
+    const stream = new ReadableStream({
       async start(controller) {
         try {
-          for await (const chunk of stream) {
-            const content = chunk.choices[0]?.delta?.content || ''
-            if (content) {
-              const data = `data: ${JSON.stringify({ content })}\n\n`
-              controller.enqueue(encoder.encode(data))
-            }
+          for await (const chunk of result) {
+            const chunkText = chunk.text || '';
+            const sources = chunk.groundingMetadata?.searchEntryPoint?.renderedContent || '';
+            
+            const data = JSON.stringify({
+              text: chunkText,
+              sources: sources ? [{ title: 'Search Results', url: sources }] : []
+            });
+            
+            controller.enqueue(new TextEncoder().encode(`data: ${data}\n\n`));
           }
-          controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-          controller.close()
-        } catch (e: any) {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: e.message })}\n\n`))
-          controller.close()
+          
+          controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+          controller.close();
+        } catch (error: any) {
+          controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ error: error.message })}\n\n`));
+          controller.close();
         }
-      },
-    })
+      }
+    });
 
-    return readable
-  } catch (e: any) {
-    return sendError(event, createError({ statusCode: 500, statusMessage: e?.message || String(e) }))
+    return stream;
+  } catch (error: any) {
+    console.error('Builder API Error:', error);
+    throw createError({
+      statusCode: 500,
+      message: error.message || 'Failed to generate content'
+    });
   }
-})
+});

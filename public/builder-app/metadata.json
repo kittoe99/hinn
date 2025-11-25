@@ -1,0 +1,5 @@
+{
+  "name": "Nebula WebGen",
+  "description": "An AI-powered website generator that creates modern, responsive web layouts instantly using Gemini 2.5 Flash. Features real-time code generation and live preview.",
+  "requestFramePermissions": []
+}
