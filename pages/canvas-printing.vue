@@ -146,29 +146,26 @@
             
             <!-- Quick Prompts -->
             <div class="relative">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="text-sm font-semibold text-neutral-900 mb-0.5">Quick start ideas</h4>
-                  <p class="text-xs text-neutral-500">Click any prompt to get started instantly</p>
-                </div>
-                <div class="flex items-center gap-2">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xs font-semibold text-neutral-700">Quick start ideas</h4>
+                <div class="flex items-center gap-1">
                   <button
                     type="button"
                     @click="scrollQuickIdeas('left')"
-                    class="h-8 w-8 flex items-center justify-center rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
-                    aria-label="Scroll ideas left"
+                    class="h-6 w-6 flex items-center justify-center rounded-lg hover:bg-neutral-100 transition-colors"
+                    aria-label="Scroll left"
                   >
-                    <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <svg class="w-3 h-3 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
                   <button
                     type="button"
                     @click="scrollQuickIdeas('right')"
-                    class="h-8 w-8 flex items-center justify-center rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 transition-colors"
-                    aria-label="Scroll ideas right"
+                    class="h-6 w-6 flex items-center justify-center rounded-lg hover:bg-neutral-100 transition-colors"
+                    aria-label="Scroll right"
                   >
-                    <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <svg class="w-3 h-3 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -176,34 +173,25 @@
               </div>
               <div
                 ref="quickIdeasRef"
-                class="flex gap-4 overflow-x-auto pb-3 scrollbar-hide snap-x snap-mandatory"
+                class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
               >
                 <button
                   v-for="example in promptExamples"
                   :key="example.label"
                   type="button"
                   @click="prompt = example.label"
-                  class="group flex-shrink-0 snap-start w-44 md:w-52 text-left"
+                  class="group flex-shrink-0 snap-start w-28 text-left"
                 >
                   <div class="relative rounded-lg overflow-hidden bg-neutral-100 border border-neutral-200 group-hover:border-[#d97759] transition-all duration-200">
                     <div class="relative aspect-[4/3]">
                       <img
                         :src="example.image"
                         :alt="example.label"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        class="w-full h-full object-cover"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div class="flex items-center gap-1.5 text-xs font-semibold">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        Try this prompt
-                      </div>
                     </div>
                   </div>
-                  <p class="mt-2 text-xs md:text-sm font-medium text-neutral-700 group-hover:text-[#d97759] transition-colors line-clamp-2">
+                  <p class="mt-1.5 text-[10px] font-medium text-neutral-600 group-hover:text-[#d97759] transition-colors line-clamp-2 leading-tight">
                     {{ example.label }}
                   </p>
                 </button>
@@ -417,9 +405,23 @@
             <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-bold text-neutral-900">Your Selection</h3>
-                <span class="px-3 py-1 rounded-full bg-[#d97759]/10 text-[#d97759] text-xs font-semibold">
-                  {{ selectedImages.length }} image{{ selectedImages.length > 1 ? 's' : '' }}
-                </span>
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 rounded-full bg-[#d97759]/10 text-[#d97759] text-xs font-semibold">
+                    {{ selectedImages.length }} image{{ selectedImages.length > 1 ? 's' : '' }}
+                  </span>
+                  <button
+                    v-if="selectedImages.length > 0"
+                    @click="saveAllPhotos"
+                    :disabled="isSaving"
+                    class="px-4 py-2 rounded-lg bg-[#d97759] hover:bg-[#c46a4f] text-white text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <svg v-if="!isSaving" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                    </svg>
+                    <div v-else class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    {{ isSaving ? 'Saving...' : 'Save All Photos' }}
+                  </button>
+                </div>
               </div>
               <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
                 <button
@@ -452,20 +454,61 @@
               </div>
             </div>
 
-            <!-- Large Preview -->
+            <!-- Large Preview with Edit Controls -->
             <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-neutral-900">Current Image</h3>
-                <button
-                  v-if="selectedRefinementImage"
-                  @click="downloadImage(selectedRefinementImage.src, 'edited-image')"
-                  class="px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium transition-colors flex items-center gap-2"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download
-                </button>
+                <div class="flex items-center gap-3">
+                  <h3 class="text-lg font-bold text-neutral-900">Current Image</h3>
+                  <div v-if="editHistory.length > 1" class="flex items-center gap-1">
+                    <button
+                      @click="undoEdit"
+                      :disabled="currentEditIndex <= 0"
+                      class="p-2 rounded-lg hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      title="Undo"
+                    >
+                      <svg class="w-4 h-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                      </svg>
+                    </button>
+                    <button
+                      @click="redoEdit"
+                      :disabled="currentEditIndex >= editHistory.length - 1"
+                      class="p-2 rounded-lg hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      title="Redo"
+                    >
+                      <svg class="w-4 h-4 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6" />
+                      </svg>
+                    </button>
+                    <span class="text-xs text-neutral-500 ml-1">
+                      {{ currentEditIndex + 1 }} / {{ editHistory.length }}
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button
+                    v-if="selectedRefinementImage"
+                    @click="downloadImage(selectedRefinementImage.src, 'edited-image')"
+                    class="px-3 py-2 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-900 text-sm font-medium transition-colors flex items-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download
+                  </button>
+                  <button
+                    v-if="selectedRefinementImage"
+                    @click="saveCurrentImage"
+                    :disabled="isSaving"
+                    class="px-4 py-2 rounded-lg bg-[#d97759] hover:bg-[#c46a4f] text-white text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+                  >
+                    <svg v-if="!isSaving" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                    </svg>
+                    <div v-else class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    {{ isSaving ? 'Saving...' : 'Save Image' }}
+                  </button>
+                </div>
               </div>
               <div class="aspect-square max-w-2xl mx-auto rounded-xl overflow-hidden border-2 border-neutral-200 bg-neutral-50">
                 <img
@@ -475,72 +518,111 @@
                   class="w-full h-full object-cover"
                 />
               </div>
+
+              <!-- Edit Image Button -->
+              <div class="mt-4 flex justify-center">
+                <button
+                  @click="showChatbot = !showChatbot"
+                  class="px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  {{ showChatbot ? 'Close Editor' : 'Edit Image' }}
+                </button>
+              </div>
+              
+              <!-- Edit History Timeline -->
+              <div v-if="editHistory.length > 1" class="mt-4 pt-4 border-t border-neutral-200">
+                <h4 class="text-sm font-semibold text-neutral-700 mb-3">Edit History</h4>
+                <div class="space-y-2">
+                  <button
+                    v-for="(edit, index) in editHistory"
+                    :key="index"
+                    @click="currentEditIndex = index; selectedRefinementImage = { src: edit.src, label: selectedRefinementImage?.label || '' }"
+                    :class="[
+                      'w-full text-left px-3 py-2 rounded-lg text-sm transition-colors',
+                      currentEditIndex === index
+                        ? 'bg-[#d97759]/10 text-[#d97759] font-medium'
+                        : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100'
+                    ]"
+                  >
+                    <span class="font-semibold">{{ index + 1 }}.</span> {{ edit.prompt }}
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <!-- Variations Grid -->
-            <div v-if="refinementVariations.length > 0" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+
+            <!-- Saved Images Gallery -->
+            <div v-if="savedImages.length > 0" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-neutral-900">Generated Variations</h3>
+                <div>
+                  <h3 class="text-lg font-bold text-neutral-900">Saved Images</h3>
+                  <p class="text-xs text-neutral-500 mt-0.5">Your permanently saved canvas images</p>
+                </div>
                 <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-xs font-semibold">
-                  {{ refinementVariations.length }} results
+                  {{ savedImages.length }} saved
                 </span>
               </div>
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                 <div
-                  v-for="(variation, index) in refinementVariations"
-                  :key="index"
-                  class="group cursor-pointer relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300"
+                  v-for="savedImage in savedImages"
+                  :key="savedImage.id"
+                  class="group relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300"
                 >
                   <img
-                    :src="variation.src"
-                    :alt="variation.label"
+                    :src="savedImage.image_url"
+                    :alt="savedImage.original_prompt"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div class="absolute bottom-3 left-3 right-3 flex gap-2">
                       <button
-                        @click="downloadImage(variation.src, `variation-${index + 1}`)"
+                        @click="downloadImage(savedImage.image_url, `saved-${savedImage.id}`)"
                         class="flex-1 px-3 py-2 rounded-lg bg-white text-neutral-900 text-xs font-semibold hover:bg-neutral-100 transition-colors flex items-center justify-center gap-1.5"
                       >
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        Download
+                      </button>
+                      <button
+                        @click="deleteSavedImage(savedImage.id)"
+                        class="px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors flex items-center justify-center"
+                      >
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- Loading State -->
-            <div v-else-if="isRefining" class="bg-white rounded-2xl border border-neutral-200 p-8 shadow-sm">
-              <div class="flex flex-col items-center justify-center space-y-4">
-                <div class="relative">
-                  <div class="w-16 h-16 relative">
-                    <div class="absolute inset-0 rounded-full border-4 border-[#d97759]/20"></div>
-                    <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-[#d97759] animate-spin"></div>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <p class="text-sm font-semibold text-neutral-900">Creating variations...</p>
-                  <p class="text-xs text-neutral-500 mt-1">This may take a few moments</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Floating Modification Chatbot -->
-          <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4">
+          <div v-if="showChatbot" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4">
             <div class="bg-white rounded-2xl border-2 border-neutral-200 shadow-2xl backdrop-blur-sm">
               <div class="p-4">
-                <div class="flex items-center gap-2 mb-3">
-                  <div class="h-8 w-8 rounded-lg bg-[#d97759]/10 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="h-8 w-8 rounded-lg bg-[#d97759]/10 flex items-center justify-center">
+                      <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                    </div>
+                    <h4 class="text-sm font-bold text-neutral-900">Modification Prompt</h4>
                   </div>
-                  <h4 class="text-sm font-bold text-neutral-900">Modification Prompt</h4>
+                  <button
+                    @click="showChatbot = false"
+                    class="p-1.5 rounded-lg hover:bg-neutral-100 transition-colors"
+                    title="Close"
+                  >
+                    <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
                 
                 <div class="flex gap-2">
@@ -549,10 +631,10 @@
                     type="text"
                     placeholder="Describe how you want to modify this image..."
                     class="flex-1 px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#d97759] focus:ring-2 focus:ring-[#d97759]/10 transition-all"
-                    @keydown.enter="generateVariations"
+                    @keydown.enter="applyEdit"
                   />
                   <button
-                    @click="generateVariations"
+                    @click="applyEdit"
                     :disabled="!refinementPrompt.trim() || isRefining"
                     class="px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold disabled:bg-neutral-300 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none"
                   >
@@ -560,20 +642,48 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
                     <div v-else class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    <span class="hidden sm:inline">{{ isRefining ? 'Generating...' : 'Generate' }}</span>
+                    <span class="hidden sm:inline">{{ isRefining ? 'Applying...' : 'Apply Edit' }}</span>
                   </button>
                 </div>
 
                 <!-- Quick suggestions -->
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <button
-                    v-for="suggestion in quickSuggestions"
-                    :key="suggestion"
-                    @click="refinementPrompt = suggestion"
-                    class="px-3 py-1 rounded-full bg-neutral-100 hover:bg-[#d97759]/10 hover:text-[#d97759] text-xs font-medium text-neutral-600 transition-colors"
-                  >
-                    {{ suggestion }}
-                  </button>
+                <div class="mt-3 relative">
+                  <div class="flex items-center gap-2">
+                    <button
+                      @click="scrollSuggestions('left')"
+                      class="flex-shrink-0 p-1.5 rounded-lg hover:bg-neutral-100 transition-colors"
+                      aria-label="Scroll left"
+                    >
+                      <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <div 
+                      ref="suggestionsContainer"
+                      class="flex-1 overflow-x-auto scrollbar-hide scroll-smooth"
+                      style="scrollbar-width: none; -ms-overflow-style: none;"
+                    >
+                      <div class="flex gap-2">
+                        <button
+                          v-for="suggestion in quickSuggestions"
+                          :key="suggestion"
+                          @click="refinementPrompt = suggestion"
+                          class="flex-shrink-0 px-3 py-1 rounded-full bg-neutral-100 hover:bg-[#d97759]/10 hover:text-[#d97759] text-xs font-medium text-neutral-600 transition-colors whitespace-nowrap"
+                        >
+                          {{ suggestion }}
+                        </button>
+                      </div>
+                    </div>
+                    <button
+                      @click="scrollSuggestions('right')"
+                      class="flex-shrink-0 p-1.5 rounded-lg hover:bg-neutral-100 transition-colors"
+                      aria-label="Scroll right"
+                    >
+                      <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -769,13 +879,21 @@ const selectedImages = ref<number[]>([])
 const isLoading = ref(false)
 const revealedImages = ref<number[]>([])
 const quickIdeasRef = ref<HTMLDivElement | null>(null)
+const suggestionsContainer = ref<HTMLDivElement | null>(null)
 
 // Refinement state
 const refinementMode = ref(false)
 const selectedRefinementImage = ref<{ src: string; label: string } | null>(null)
 const refinementPrompt = ref('')
-const refinementVariations = ref<Array<{ src: string; label: string }>>([])
 const isRefining = ref(false)
+const editHistory = ref<Array<{ src: string; prompt: string }>>([])
+const currentEditIndex = ref(-1)
+const showChatbot = ref(false)
+
+// Saved images state
+const isSaving = ref(false)
+const savedImages = ref<any[]>([])
+const showSavedImages = ref(false)
 
 // Quick suggestions for modifications
 const quickSuggestions = [
@@ -896,6 +1014,13 @@ const scrollQuickIdeas = (direction: 'left' | 'right') => {
   container.scrollBy({ left: amount, behavior: 'smooth' })
 }
 
+const scrollSuggestions = (direction: 'left' | 'right') => {
+  const container = suggestionsContainer.value
+  if (!container) return
+  const amount = direction === 'left' ? -150 : 150
+  container.scrollBy({ left: amount, behavior: 'smooth' })
+}
+
 const toggleStyleTag = (tagValue: string) => {
   const index = selectedStyleTags.value.indexOf(tagValue)
   if (index > -1) {
@@ -976,7 +1101,8 @@ const closeResults = () => {
   refinementMode.value = false
   selectedRefinementImage.value = null
   refinementPrompt.value = ''
-  refinementVariations.value = []
+  editHistory.value = []
+  currentEditIndex.value = -1
 }
 
 const startRefinement = () => {
@@ -984,47 +1110,94 @@ const startRefinement = () => {
   
   // Use the first selected image for refinement
   const firstSelectedIndex = selectedImages.value[0]
-  selectedRefinementImage.value = generatedImages.value[firstSelectedIndex]
+  const initialImage = generatedImages.value[firstSelectedIndex]
+  selectedRefinementImage.value = initialImage
+  
+  // Initialize edit history with the original image
+  editHistory.value = [{ src: initialImage.src, prompt: 'Original' }]
+  currentEditIndex.value = 0
+  
   refinementMode.value = true
-  refinementVariations.value = []
   
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const selectImageForEditing = (index: number) => {
-  selectedRefinementImage.value = generatedImages.value[index]
-  refinementVariations.value = []
+  const selectedImage = generatedImages.value[index]
+  selectedRefinementImage.value = selectedImage
+  
+  // Reset edit history with new image
+  editHistory.value = [{ src: selectedImage.src, prompt: 'Original' }]
+  currentEditIndex.value = 0
   refinementPrompt.value = ''
 }
 
-const generateVariations = async () => {
+const applyEdit = async () => {
   if (!refinementPrompt.value.trim() || !selectedRefinementImage.value) return
   
   isRefining.value = true
-  refinementVariations.value = []
   
   try {
     const response = await $fetch('/api/canvas/generate', {
       method: 'POST',
       body: {
         prompt: refinementPrompt.value,
-        numberOfImages: 6,
+        numberOfImages: 1, // Only generate 1 edited image
         aspectRatio: '1:1',
-        sourceImage: selectedRefinementImage.value.src, // Pass source image for nano banana editing
+        sourceImage: selectedRefinementImage.value.src,
       },
     })
     
-    if (response.success && response.images) {
-      refinementVariations.value = response.images.map((img: any) => ({
-        src: img.url,
-        label: img.label,
-      }))
+    if (response.success && response.images && response.images.length > 0) {
+      const editedImage = {
+        src: response.images[0].url,
+        prompt: refinementPrompt.value
+      }
+      
+      // Remove any history after current index (if user went back and made new edit)
+      editHistory.value = editHistory.value.slice(0, currentEditIndex.value + 1)
+      
+      // Add new edit to history
+      editHistory.value.push(editedImage)
+      currentEditIndex.value = editHistory.value.length - 1
+      
+      // Update the displayed image
+      selectedRefinementImage.value = {
+        src: editedImage.src,
+        label: selectedRefinementImage.value.label
+      }
+      
+      // Clear the prompt for next edit
+      refinementPrompt.value = ''
     }
   } catch (error: any) {
-    console.error('Error generating variations:', error)
+    console.error('Error applying edit:', error)
+    alert('Failed to apply edit. Please try again.')
   } finally {
     isRefining.value = false
+  }
+}
+
+const undoEdit = () => {
+  if (currentEditIndex.value > 0) {
+    currentEditIndex.value--
+    const previousEdit = editHistory.value[currentEditIndex.value]
+    selectedRefinementImage.value = {
+      src: previousEdit.src,
+      label: selectedRefinementImage.value?.label || ''
+    }
+  }
+}
+
+const redoEdit = () => {
+  if (currentEditIndex.value < editHistory.value.length - 1) {
+    currentEditIndex.value++
+    const nextEdit = editHistory.value[currentEditIndex.value]
+    selectedRefinementImage.value = {
+      src: nextEdit.src,
+      label: selectedRefinementImage.value?.label || ''
+    }
   }
 }
 
@@ -1084,6 +1257,165 @@ const downloadSelectedImages = async () => {
     await downloadImage(image.src, `${name}-${index + 1}.png`);
   }
 }
+
+// Save current edited image to Supabase
+const saveCurrentImage = async () => {
+  const supabase = useSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) {
+    alert('Please sign in to save images')
+    return
+  }
+  
+  if (!selectedRefinementImage.value) return
+  
+  isSaving.value = true
+  
+  try {
+    const imagesToSave = [{
+      src: selectedRefinementImage.value.src,
+      label: selectedRefinementImage.value.label,
+      modificationPrompt: editHistory.value.slice(1).map(e => e.prompt).join(' → '),
+      isVariation: editHistory.value.length > 1
+    }]
+    
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch('/api/canvas/save-images', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: {
+        images: imagesToSave,
+        originalPrompt: prompt.value
+      }
+    })
+    
+    if (response.success) {
+      alert('Image saved successfully!')
+      await fetchSavedImages()
+    } else {
+      alert('Failed to save image')
+    }
+  } catch (error: any) {
+    console.error('Error saving image:', error)
+    alert('Failed to save image')
+  } finally {
+    isSaving.value = false
+  }
+}
+
+// Save selected images to Supabase
+const saveAllPhotos = async () => {
+  const supabase = useSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) {
+    alert('Please sign in to save images')
+    return
+  }
+  
+  isSaving.value = true
+  
+  try {
+    const imagesToSave = selectedImages.value.map(index => ({
+      src: generatedImages.value[index].src,
+      label: generatedImages.value[index].label,
+      modificationPrompt: '',
+      isVariation: false
+    }))
+    
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch('/api/canvas/save-images', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: {
+        images: imagesToSave,
+        originalPrompt: prompt.value
+      }
+    })
+    
+    if (response.success) {
+      alert(`Successfully saved ${imagesToSave.length} image(s)!`)
+      await fetchSavedImages()
+    } else {
+      alert('Failed to save images')
+    }
+  } catch (error: any) {
+    console.error('Error saving images:', error)
+    alert('Failed to save images')
+  } finally {
+    isSaving.value = false
+  }
+}
+
+// Fetch saved images
+const fetchSavedImages = async () => {
+  const supabase = useSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) return
+  
+  try {
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch('/api/canvas/saved-images', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    if (response.success) {
+      savedImages.value = response.images
+    }
+  } catch (error) {
+    console.error('Error fetching saved images:', error)
+  }
+}
+
+// Delete saved image
+const deleteSavedImage = async (imageId: string) => {
+  const supabase = useSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) return
+  
+  if (!confirm('Are you sure you want to delete this image?')) return
+  
+  try {
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch(`/api/canvas/delete-image?id=${imageId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    if (response.success) {
+      await fetchSavedImages()
+    } else {
+      alert('Failed to delete image: ' + response.error)
+    }
+  } catch (error) {
+    console.error('Error deleting image:', error)
+    alert('Failed to delete image')
+  }
+}
+
+// Load saved images on mount
+onMounted(() => {
+  fetchSavedImages()
+})
 
 useHead({
   title: 'Canvas Printing',
