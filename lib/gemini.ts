@@ -107,10 +107,48 @@ export async function generateImages(
 
   console.log(`Generating ${numberOfImages} images for prompt: "${prompt}"${sourceImage ? ' (editing mode)' : ''}`)
   
-  // Run requests in parallel
-  const promises = Array.from({ length: numberOfImages }).map(() => 
-    generateSingleImage(prompt, sourceImage)
-  )
+  // If editing mode (sourceImage provided), generate variations of the same image
+  if (sourceImage) {
+    const promises = Array.from({ length: numberOfImages }).map(() => 
+      generateSingleImage(prompt, sourceImage)
+    )
+    
+    const results = await Promise.allSettled(promises)
+    
+    const successfulImages: GeneratedImage[] = results
+      .filter((result): result is PromiseFulfilledResult<GeneratedImage> => 
+        result.status === 'fulfilled'
+      )
+      .map(result => result.value)
+
+    if (successfulImages.length === 0 && numberOfImages > 0) {
+      const firstFailure = results.find(r => r.status === 'rejected') as PromiseRejectedResult
+      throw firstFailure?.reason || new Error('Failed to generate images. Please try again.')
+    }
+
+    return successfulImages
+  }
+  
+  // For initial generation, create diverse unique images with style variations
+  const styleVariations = [
+    '', // Original prompt
+    ', photorealistic style',
+    ', artistic illustration style',
+    ', minimalist design',
+    ', vibrant and colorful',
+    ', dramatic lighting',
+    ', soft and dreamy atmosphere',
+    ', bold and modern',
+    ', vintage aesthetic',
+    ', abstract interpretation',
+  ]
+  
+  // Create diverse prompts by adding different style modifiers
+  const promises = Array.from({ length: numberOfImages }).map((_, index) => {
+    const styleModifier = styleVariations[index % styleVariations.length]
+    const diversePrompt = `${prompt}${styleModifier}`
+    return generateSingleImage(diversePrompt, sourceImage)
+  })
   
   // Use allSettled so one failure doesn't stop the whole batch
   const results = await Promise.allSettled(promises)

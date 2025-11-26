@@ -111,6 +111,39 @@
               </div>
             </div>
             
+            <!-- Style Tags -->
+            <div class="space-y-3">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                <h4 class="text-sm font-semibold text-neutral-900">Style Tags</h4>
+                <span class="text-xs text-neutral-500">Select styles to enhance your generation</span>
+              </div>
+              <div class="grid grid-cols-3 sm:flex sm:flex-wrap gap-2">
+                <button
+                  v-for="tag in styleTags"
+                  :key="tag.value"
+                  @click="toggleStyleTag(tag.value)"
+                  :class="[
+                    'group relative px-2 sm:px-3.5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2',
+                    selectedStyleTags.includes(tag.value)
+                      ? 'bg-[#d97759] text-white shadow-lg'
+                      : 'bg-neutral-50 border border-neutral-200 text-neutral-700 hover:border-[#d97759]/50 hover:bg-[#d97759]/5'
+                  ]"
+                >
+                  <span
+                    :class="[
+                      'w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-colors',
+                      selectedStyleTags.includes(tag.value) ? 'text-white' : 'text-[#d97759]'
+                    ]"
+                    v-html="tag.icon"
+                  ></span>
+                  <span class="truncate">{{ tag.label }}</span>
+                </button>
+              </div>
+            </div>
+            
             <!-- Quick Prompts -->
             <div class="relative">
               <div class="flex items-center justify-between mb-4">
@@ -379,140 +412,168 @@
             </div>
           </div>
 
-          <div class="grid lg:grid-cols-2 gap-6 md:gap-8">
-            <!-- Left Column: Selected Images Gallery -->
-            <div class="space-y-6">
-              <!-- Selected Images Thumbnails -->
-              <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
-                <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-bold text-neutral-900">Your Selection</h3>
-                  <span class="px-3 py-1 rounded-full bg-[#d97759]/10 text-[#d97759] text-xs font-semibold">
-                    {{ selectedImages.length }} image{{ selectedImages.length > 1 ? 's' : '' }}
-                  </span>
-                </div>
-                <div class="grid grid-cols-3 gap-3">
-                  <button
-                    v-for="imgIndex in selectedImages"
-                    :key="imgIndex"
-                    @click="selectImageForEditing(imgIndex)"
-                    :class="[
-                      'relative aspect-square rounded-xl overflow-hidden transition-all duration-300',
-                      selectedRefinementImage?.src === generatedImages[imgIndex].src
-                        ? 'ring-4 ring-[#d97759] shadow-lg scale-105'
-                        : 'ring-2 ring-neutral-200 hover:ring-neutral-300 hover:scale-102'
-                    ]"
-                  >
-                    <img
-                      :src="generatedImages[imgIndex].src"
-                      :alt="generatedImages[imgIndex].label"
-                      class="w-full h-full object-cover"
-                    />
-                    <div
-                      v-if="selectedRefinementImage?.src === generatedImages[imgIndex].src"
-                      class="absolute inset-0 bg-[#d97759]/20 flex items-center justify-center"
-                    >
-                      <div class="h-8 w-8 rounded-full bg-[#d97759] flex items-center justify-center shadow-lg">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
-                </div>
+          <div class="space-y-6 pb-32">
+            <!-- Selected Images Thumbnails -->
+            <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-neutral-900">Your Selection</h3>
+                <span class="px-3 py-1 rounded-full bg-[#d97759]/10 text-[#d97759] text-xs font-semibold">
+                  {{ selectedImages.length }} image{{ selectedImages.length > 1 ? 's' : '' }}
+                </span>
               </div>
-
-              <!-- Large Preview -->
-              <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
-                <h3 class="text-lg font-bold text-neutral-900 mb-4">Current Image</h3>
-                <div class="aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 bg-neutral-50">
+              <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                <button
+                  v-for="imgIndex in selectedImages"
+                  :key="imgIndex"
+                  @click="selectImageForEditing(imgIndex)"
+                  :class="[
+                    'relative aspect-square rounded-xl overflow-hidden transition-all duration-300',
+                    selectedRefinementImage?.src === generatedImages[imgIndex].src
+                      ? 'ring-4 ring-[#d97759] shadow-lg scale-105'
+                      : 'ring-2 ring-neutral-200 hover:ring-neutral-300 hover:scale-102'
+                  ]"
+                >
                   <img
-                    v-if="selectedRefinementImage"
-                    :src="selectedRefinementImage.src"
-                    :alt="selectedRefinementImage.label"
+                    :src="generatedImages[imgIndex].src"
+                    :alt="generatedImages[imgIndex].label"
                     class="w-full h-full object-cover"
                   />
+                  <div
+                    v-if="selectedRefinementImage?.src === generatedImages[imgIndex].src"
+                    class="absolute inset-0 bg-[#d97759]/20 flex items-center justify-center"
+                  >
+                    <div class="h-8 w-8 rounded-full bg-[#d97759] flex items-center justify-center shadow-lg">
+                      <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Large Preview -->
+            <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-neutral-900">Current Image</h3>
+                <button
+                  v-if="selectedRefinementImage"
+                  @click="downloadImage(selectedRefinementImage.src, 'edited-image')"
+                  class="px-3 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium transition-colors flex items-center gap-2"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download
+                </button>
+              </div>
+              <div class="aspect-square max-w-2xl mx-auto rounded-xl overflow-hidden border-2 border-neutral-200 bg-neutral-50">
+                <img
+                  v-if="selectedRefinementImage"
+                  :src="selectedRefinementImage.src"
+                  :alt="selectedRefinementImage.label"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <!-- Variations Grid -->
+            <div v-if="refinementVariations.length > 0" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-neutral-900">Generated Variations</h3>
+                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-xs font-semibold">
+                  {{ refinementVariations.length }} results
+                </span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <div
+                  v-for="(variation, index) in refinementVariations"
+                  :key="index"
+                  class="group cursor-pointer relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300"
+                >
+                  <img
+                    :src="variation.src"
+                    :alt="variation.label"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-3 left-3 right-3 flex gap-2">
+                      <button
+                        @click="downloadImage(variation.src, `variation-${index + 1}`)"
+                        class="flex-1 px-3 py-2 rounded-lg bg-white text-neutral-900 text-xs font-semibold hover:bg-neutral-100 transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Right Column: Editing Controls & Variations -->
-            <div class="space-y-6">
-              <!-- Refinement Controls -->
-              <div class="bg-gradient-to-br from-white to-neutral-50 rounded-2xl border border-neutral-200 p-6 shadow-sm">
-                <div class="flex items-center gap-2 mb-4">
-                  <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                  </svg>
-                  <h3 class="text-lg font-bold text-neutral-900">Modification Prompt</h3>
+            <!-- Loading State -->
+            <div v-else-if="isRefining" class="bg-white rounded-2xl border border-neutral-200 p-8 shadow-sm">
+              <div class="flex flex-col items-center justify-center space-y-4">
+                <div class="relative">
+                  <div class="w-16 h-16 relative">
+                    <div class="absolute inset-0 rounded-full border-4 border-[#d97759]/20"></div>
+                    <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-[#d97759] animate-spin"></div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-sm font-semibold text-neutral-900">Creating variations...</p>
+                  <p class="text-xs text-neutral-500 mt-1">This may take a few moments</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Modification Chatbot -->
+          <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4">
+            <div class="bg-white rounded-2xl border-2 border-neutral-200 shadow-2xl backdrop-blur-sm">
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="h-8 w-8 rounded-lg bg-[#d97759]/10 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <h4 class="text-sm font-bold text-neutral-900">Modification Prompt</h4>
                 </div>
                 
-                <div class="space-y-4">
-                  <div class="relative">
-                    <textarea
-                      v-model="refinementPrompt"
-                      placeholder="Describe how you want to modify this image...&#10;&#10;Examples:&#10;• Make it more vibrant with warm sunset tones&#10;• Add soft pastel colors and dreamy atmosphere&#10;• Increase contrast and make it bold&#10;• Convert to black and white with high contrast"
-                      rows="6"
-                      class="w-full px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#d97759] focus:ring-4 focus:ring-[#d97759]/10 resize-none transition-all duration-300 text-sm"
-                    ></textarea>
-                  </div>
-
+                <div class="flex gap-2">
+                  <input
+                    v-model="refinementPrompt"
+                    type="text"
+                    placeholder="Describe how you want to modify this image..."
+                    class="flex-1 px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#d97759] focus:ring-2 focus:ring-[#d97759]/10 transition-all"
+                    @keydown.enter="generateVariations"
+                  />
                   <button
                     @click="generateVariations"
                     :disabled="!refinementPrompt.trim() || isRefining"
-                    class="w-full px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold disabled:bg-neutral-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none"
+                    class="px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold disabled:bg-neutral-300 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none"
                   >
-                    <svg v-if="!isRefining" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <svg v-if="!isRefining" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
-                    <div v-else class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    {{ isRefining ? 'Generating Variations...' : 'Generate Variations' }}
+                    <div v-else class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span class="hidden sm:inline">{{ isRefining ? 'Generating...' : 'Generate' }}</span>
                   </button>
                 </div>
-              </div>
 
-              <!-- Variations Grid -->
-              <div v-if="refinementVariations.length > 0" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
-                <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-bold text-neutral-900">Generated Variations</h3>
-                  <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-xs font-semibold">
-                    {{ refinementVariations.length }} results
-                  </span>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div
-                    v-for="(variation, index) in refinementVariations"
-                    :key="index"
-                    class="group cursor-pointer relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300"
+                <!-- Quick suggestions -->
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button
+                    v-for="suggestion in quickSuggestions"
+                    :key="suggestion"
+                    @click="refinementPrompt = suggestion"
+                    class="px-3 py-1 rounded-full bg-neutral-100 hover:bg-[#d97759]/10 hover:text-[#d97759] text-xs font-medium text-neutral-600 transition-colors"
                   >
-                    <img
-                      :src="variation.src"
-                      :alt="variation.label"
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div class="absolute bottom-3 left-3 right-3">
-                        <button class="w-full px-3 py-2 rounded-lg bg-white text-neutral-900 text-xs font-semibold hover:bg-neutral-100 transition-colors">
-                          Use This
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Loading State -->
-              <div v-else-if="isRefining" class="bg-white rounded-2xl border border-neutral-200 p-8 shadow-sm">
-                <div class="flex flex-col items-center justify-center space-y-4">
-                  <div class="relative">
-                    <div class="w-16 h-16 relative">
-                      <div class="absolute inset-0 rounded-full border-4 border-[#d97759]/20"></div>
-                      <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-[#d97759] animate-spin"></div>
-                    </div>
-                  </div>
-                  <div class="text-center">
-                    <p class="text-sm font-semibold text-neutral-900">Creating variations...</p>
-                    <p class="text-xs text-neutral-500 mt-1">This may take a few moments</p>
-                  </div>
+                    {{ suggestion }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -716,6 +777,16 @@ const refinementPrompt = ref('')
 const refinementVariations = ref<Array<{ src: string; label: string }>>([])
 const isRefining = ref(false)
 
+// Quick suggestions for modifications
+const quickSuggestions = [
+  'Make it more vibrant',
+  'Add warm sunset tones',
+  'Convert to black & white',
+  'Increase contrast',
+  'Add dreamy atmosphere',
+  'Make it photorealistic'
+]
+
 const promptExamples = [
   {
     label: 'Abstract geometric patterns',
@@ -754,6 +825,61 @@ const promptExamples = [
 const generatedImages = ref<Array<{ src: string; label: string; id?: string }>>([])
 const generationError = ref<string | null>(null)
 
+// Style tags
+const selectedStyleTags = ref<string[]>([])
+const styleTags = [
+  { 
+    label: 'Realistic', 
+    value: 'photorealistic, highly detailed', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
+  },
+  { 
+    label: 'Cartoony', 
+    value: 'cartoon style, playful illustration', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>'
+  },
+  { 
+    label: 'Dark Mode', 
+    value: 'dark moody atmosphere, dramatic shadows', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>'
+  },
+  { 
+    label: 'Vibrant', 
+    value: 'vibrant colors, high saturation, energetic', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>'
+  },
+  { 
+    label: 'Minimalist', 
+    value: 'minimalist design, clean and simple', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>'
+  },
+  { 
+    label: 'Vintage', 
+    value: 'vintage aesthetic, retro style', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+  },
+  { 
+    label: 'Dreamy', 
+    value: 'soft dreamy atmosphere, ethereal', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>'
+  },
+  { 
+    label: '3D Render', 
+    value: '3D rendered, CGI, octane render', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>'
+  },
+  { 
+    label: 'Watercolor', 
+    value: 'watercolor painting style, artistic', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>'
+  },
+  { 
+    label: 'Cinematic', 
+    value: 'cinematic lighting, movie scene quality', 
+    icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>'
+  },
+]
+
 const showcaseCanvases = [
   { src: '/assets/wps-canvas.png', size: '24" × 36"', artist: 'Sarah M.', likes: 234 },
   { src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=400&q=80', size: '18" × 24"', artist: 'Alex K.', likes: 189 },
@@ -770,6 +896,15 @@ const scrollQuickIdeas = (direction: 'left' | 'right') => {
   container.scrollBy({ left: amount, behavior: 'smooth' })
 }
 
+const toggleStyleTag = (tagValue: string) => {
+  const index = selectedStyleTags.value.indexOf(tagValue)
+  if (index > -1) {
+    selectedStyleTags.value.splice(index, 1)
+  } else {
+    selectedStyleTags.value.push(tagValue)
+  }
+}
+
 const generateImage = async () => {
   if (!prompt.value.trim()) return
   
@@ -783,11 +918,17 @@ const generateImage = async () => {
   generatedImages.value = []
   
   try {
+    // Build enhanced prompt with selected style tags
+    let enhancedPrompt = prompt.value
+    if (selectedStyleTags.value.length > 0) {
+      enhancedPrompt = `${prompt.value}, ${selectedStyleTags.value.join(', ')}`
+    }
+    
     // Call the API to generate images
     const response = await $fetch('/api/canvas/generate', {
       method: 'POST',
       body: {
-        prompt: prompt.value,
+        prompt: enhancedPrompt,
         numberOfImages: 10,
         aspectRatio: '1:1',
       },
