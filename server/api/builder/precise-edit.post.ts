@@ -72,7 +72,7 @@ Be precise. Output ONLY the OLD and NEW lines, nothing else.
 `
 
     const identifyResult = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-pro-preview',
       contents: { parts: [{ text: identifyPrompt }] },
       config: {
         temperature: 0.1,

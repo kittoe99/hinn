@@ -272,9 +272,9 @@
               :disabled="!uploadedFile"
               class="w-full py-3 px-6 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white font-medium disabled:bg-neutral-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
-              <span>Continue with Upload</span>
+              <span>Open in Editor</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
               </svg>
             </button>
           </div>
@@ -1266,11 +1266,46 @@ const handleFileDrop = (event: DragEvent) => {
   }
 }
 
-const proceedWithUpload = () => {
+const proceedWithUpload = async () => {
   if (!uploadedFile.value) return
-  // TODO: Handle file upload and navigate to canvas customization
-  console.log('Proceeding with file:', uploadedFile.value.name)
-  navigateTo('/dashboard')
+  
+  try {
+    // Convert uploaded file to data URL
+    const reader = new FileReader()
+    
+    reader.onload = (e) => {
+      const dataUrl = e.target?.result as string
+      
+      // Set up the uploaded image as the selected refinement image
+      selectedRefinementImage.value = {
+        src: dataUrl,
+        label: uploadedFile.value?.name || 'Uploaded Image'
+      }
+      
+      // Initialize edit history with the uploaded image
+      editHistory.value = [{ src: dataUrl, prompt: 'Original Upload' }]
+      currentEditIndex.value = 0
+      
+      // Enter refinement mode to allow editing
+      refinementMode.value = true
+      showResults.value = true
+      
+      // Reset upload state
+      uploadedFile.value = null
+      
+      // Scroll to top to show the editor
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    
+    reader.onerror = () => {
+      alert('Failed to read the uploaded file. Please try again.')
+    }
+    
+    reader.readAsDataURL(uploadedFile.value)
+  } catch (error) {
+    console.error('Error processing uploaded file:', error)
+    alert('Failed to process the uploaded file. Please try again.')
+  }
 }
 
 const downloadImage = async (url: string, filename: string) => {

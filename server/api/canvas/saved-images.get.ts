@@ -3,29 +3,37 @@ import { createClient } from '@supabase/supabase-js'
 export default defineEventHandler(async (event) => {
   try {
     const config = useRuntimeConfig()
-    const supabase = createClient(
-      config.public.supabaseUrl,
-      config.public.supabaseAnonKey
-    )
-
+    
     // Get authenticated user
     const authHeader = getHeader(event, 'authorization')
     if (!authHeader) {
-      return {
-        success: false,
-        error: 'Not authenticated'
-      }
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Not authenticated'
+      })
     }
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser(
-      authHeader.replace('Bearer ', '')
+    const token = authHeader.replace('Bearer ', '')
+    
+    const supabase = createClient(
+      config.public.supabaseUrl,
+      config.public.supabaseAnonKey,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
     )
 
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
     if (authError || !user) {
-      return {
-        success: false,
-        error: 'Authentication failed'
-      }
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Authentication failed'
+      })
     }
 
     // Fetch user's saved images
@@ -36,10 +44,10 @@ export default defineEventHandler(async (event) => {
       .order('created_at', { ascending: false })
 
     if (error) {
-      return {
-        success: false,
-        error: error.message
-      }
+      throw createError({
+        statusCode: 500,
+        statusMessage: error.message
+      })
     }
 
     return {
@@ -48,9 +56,9 @@ export default defineEventHandler(async (event) => {
     }
   } catch (error: any) {
     console.error('Error fetching saved images:', error)
-    return {
-      success: false,
-      error: error.message || 'Failed to fetch saved images'
-    }
+    throw createError({
+      statusCode: error.statusCode || 500,
+      statusMessage: error.statusMessage || error.message || 'Failed to fetch saved images'
+    })
   }
 })

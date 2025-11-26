@@ -3720,17 +3720,29 @@ const fetchGalleryImages = async () => {
     const { data: session } = await supabase.auth.getSession()
     const token = session?.session?.access_token
     
+    if (!token) {
+      console.error('No auth token available')
+      galleryImages.value = []
+      return
+    }
+    
     const response = await $fetch('/api/canvas/saved-images', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
     
-    if (response.success) {
-      galleryImages.value = response.images || []
+    // API now returns { success: true, images: [...] }
+    if (response.success && response.images) {
+      galleryImages.value = response.images
+      console.log('Fetched gallery images:', response.images.length)
+    } else {
+      galleryImages.value = []
     }
   } catch (error) {
     console.error('Error fetching gallery images:', error)
+    console.error('Error details:', error.data || error.message)
+    galleryImages.value = []
   } finally {
     galleryLoading.value = false
   }

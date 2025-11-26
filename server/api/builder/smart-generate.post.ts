@@ -219,7 +219,7 @@ Step 4: RETURN the complete file
 
   // Use extremely low temperature for precise replacements
   const result = await ai.models.generateContentStream({
-    model: 'gemini-2.0-flash-exp',
+    model: 'gemini-3-pro-preview',
     contents: { parts: [{ text: editPrompt }] },
     config: {
       systemInstruction: TARGETED_EDIT_INSTRUCTION,
@@ -300,7 +300,7 @@ Create a complete new project based on this request.
   const tools = useSearch ? [{ googleSearch: {} }] : undefined
   
   const result = await ai.models.generateContentStream({
-    model: 'gemini-2.0-flash-exp',
+    model: 'gemini-3-pro-preview',
     contents: { parts: [{ text: fullPrompt }] },
     config: {
       systemInstruction: FULL_GENERATION_INSTRUCTION,

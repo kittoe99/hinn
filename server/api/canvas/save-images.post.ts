@@ -6,10 +6,10 @@ export default defineEventHandler(async (event) => {
     const { images, originalPrompt } = body
 
     if (!images || !Array.isArray(images) || images.length === 0) {
-      return {
-        success: false,
-        error: 'No images provided'
-      }
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'No images provided'
+      })
     }
 
     const config = useRuntimeConfig()
@@ -17,10 +17,10 @@ export default defineEventHandler(async (event) => {
     // Get authenticated user token
     const authHeader = getHeader(event, 'authorization')
     if (!authHeader) {
-      return {
-        success: false,
-        error: 'Not authenticated'
-      }
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Not authenticated'
+      })
     }
 
     const token = authHeader.replace('Bearer ', '')
@@ -41,10 +41,10 @@ export default defineEventHandler(async (event) => {
     const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     if (authError || !user) {
-      return {
-        success: false,
-        error: 'Authentication failed'
-      }
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Authentication failed'
+      })
     }
 
     const savedImages = []
@@ -117,9 +117,9 @@ export default defineEventHandler(async (event) => {
     }
   } catch (error: any) {
     console.error('Error saving images:', error)
-    return {
-      success: false,
-      error: error.message || 'Failed to save images'
-    }
+    throw createError({
+      statusCode: error.statusCode || 500,
+      statusMessage: error.statusMessage || error.message || 'Failed to save images'
+    })
   }
 })

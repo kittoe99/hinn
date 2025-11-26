@@ -107,7 +107,7 @@ Remember: Output ONLY the raw HTML, no explanations, no markdown, no code fences
 `
 
     const result = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-pro-preview',
       contents: { parts: [{ text: prompt }] },
       config: {
         systemInstruction: ELEMENT_EDIT_INSTRUCTION,

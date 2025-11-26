@@ -257,7 +257,7 @@ ${Object.keys(currentFiles || {}).length > 0 ? `Merge into existing project:\n${
     const tools = useSearch ? [{ googleSearch: {} }] : undefined;
 
     const result = await ai.models.generateContentStream({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-pro-preview',
       contents: { parts: contents },
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,

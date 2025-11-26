@@ -182,7 +182,7 @@ Start by reading the files to understand the structure.`
       console.log(`🔄 Agent iteration ${iteration}`)
 
       const result = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-3-pro-preview',
         contents: conversationHistory,
         config: {
           systemInstruction: AGENT_SYSTEM_INSTRUCTION,

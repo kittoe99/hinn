@@ -59,12 +59,26 @@ const getBase64String = (dataUrl: string): string => {
 /**
  * Generate a single image using Gemini (with optional source image for editing)
  */
-async function generateSingleImage(prompt: string, sourceImage?: string): Promise<GeneratedImage> {
+async function generateSingleImage(prompt: string, sourceImage?: string, styleModifier?: string): Promise<GeneratedImage> {
   try {
     const ai = getGenAI()
     
-    // Build parts array - add source image if provided (nano banana editing)
-    const parts: any[] = [{ text: prompt }]
+    // Enhance prompt to prevent canvas-on-wall generations and ensure artwork focus
+    let enhancedPrompt = prompt
+    
+    // Add negative prompt instructions to prevent unwanted elements
+    const negativeInstructions = "DO NOT include: canvas on wall, framed picture, gallery wall, hanging artwork, room interior, wall mockup. "
+    const focusInstructions = "Generate ONLY the artwork itself, the actual image content, not a photo of a canvas. "
+    
+    // Apply style modifier if provided (for diversity)
+    if (styleModifier) {
+      enhancedPrompt = `${focusInstructions}${negativeInstructions}Create: ${prompt}. Style: ${styleModifier}`
+    } else {
+      enhancedPrompt = `${focusInstructions}${negativeInstructions}${prompt}`
+    }
+    
+    // Build parts array - add source image if provided (for editing mode)
+    const parts: any[] = [{ text: enhancedPrompt }]
     
     if (sourceImage) {
       const cleanBase64 = getBase64String(sourceImage)
@@ -82,7 +96,7 @@ async function generateSingleImage(prompt: string, sourceImage?: string): Promis
         parts,
       },
       config: {
-        // Image generation config (optional)
+        temperature: 1.2, // Higher temperature for more creative diversity
       }
     })
 
@@ -107,11 +121,20 @@ export async function generateImages(
 
   console.log(`Generating ${numberOfImages} images for prompt: "${prompt}"${sourceImage ? ' (editing mode)' : ''}`)
   
-  // If editing mode (sourceImage provided), generate variations of the same image
+  // If editing mode (sourceImage provided), generate variations with subtle style differences
   if (sourceImage) {
-    const promises = Array.from({ length: numberOfImages }).map(() => 
-      generateSingleImage(prompt, sourceImage)
-    )
+    const editStyleVariations = [
+      'enhanced details, improved quality',
+      'slightly different composition, refined',
+      'alternative color grading, professional',
+      'adjusted lighting, optimized',
+      'refined details, polished look',
+    ]
+    
+    const promises = Array.from({ length: numberOfImages }).map((_, index) => {
+      const styleModifier = editStyleVariations[index % editStyleVariations.length]
+      return generateSingleImage(prompt, sourceImage, styleModifier)
+    })
     
     const results = await Promise.allSettled(promises)
     
@@ -129,25 +152,24 @@ export async function generateImages(
     return successfulImages
   }
   
-  // For initial generation, create diverse unique images with style variations
+  // For initial generation, create diverse unique images with distinct style variations
   const styleVariations = [
-    '', // Original prompt
-    ', photorealistic style',
-    ', artistic illustration style',
-    ', minimalist design',
-    ', vibrant and colorful',
-    ', dramatic lighting',
-    ', soft and dreamy atmosphere',
-    ', bold and modern',
-    ', vintage aesthetic',
-    ', abstract interpretation',
+    'photorealistic, ultra detailed, 8K resolution, professional photography',
+    'oil painting, impressionist style, visible brush strokes, artistic masterpiece',
+    'digital art, concept art style, trending on ArtStation, highly detailed',
+    'watercolor painting, soft edges, flowing colors, artistic illustration',
+    'minimalist vector art, clean lines, flat design, modern aesthetic',
+    'cinematic lighting, dramatic shadows, movie poster quality, epic composition',
+    '3D render, octane render, volumetric lighting, CGI quality',
+    'anime style, Studio Ghibli inspired, vibrant colors, detailed illustration',
+    'abstract expressionism, bold colors, dynamic composition, modern art',
+    'vintage retro aesthetic, 1970s style, nostalgic color palette, film grain',
   ]
   
   // Create diverse prompts by adding different style modifiers
   const promises = Array.from({ length: numberOfImages }).map((_, index) => {
     const styleModifier = styleVariations[index % styleVariations.length]
-    const diversePrompt = `${prompt}${styleModifier}`
-    return generateSingleImage(diversePrompt, sourceImage)
+    return generateSingleImage(prompt, sourceImage, styleModifier)
   })
   
   // Use allSettled so one failure doesn't stop the whole batch
