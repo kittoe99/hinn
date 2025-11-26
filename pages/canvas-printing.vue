@@ -235,7 +235,7 @@
         </div>
 
         <!-- Results View -->
-        <div v-if="showResults" class="relative pt-8 md:pt-12 space-y-8">
+        <div v-if="showResults && !refinementMode" class="relative pt-8 md:pt-12 space-y-8">
           <div class="flex items-center justify-between">
             <button
               @click="closeResults"
@@ -353,8 +353,174 @@
           </div>
         </div>
 
+        <!-- Refinement View -->
+        <div v-if="refinementMode" class="relative pt-8 md:pt-12 pb-32">
+          <!-- Header -->
+          <div class="mb-8">
+            <button
+              @click="refinementMode = false; selectedRefinementImage = null; refinementPrompt = ''; refinementVariations = []"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-600 hover:text-neutral-900 transition-colors mb-4"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to results
+            </button>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-xl bg-[#d97759]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-neutral-900">Edit Your Images</h2>
+                <p class="text-sm text-neutral-600 mt-1">Select an image to modify and generate variations</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-6 md:gap-8">
+            <!-- Left Column: Selected Images Gallery -->
+            <div class="space-y-6">
+              <!-- Selected Images Thumbnails -->
+              <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-bold text-neutral-900">Your Selection</h3>
+                  <span class="px-3 py-1 rounded-full bg-[#d97759]/10 text-[#d97759] text-xs font-semibold">
+                    {{ selectedImages.length }} image{{ selectedImages.length > 1 ? 's' : '' }}
+                  </span>
+                </div>
+                <div class="grid grid-cols-3 gap-3">
+                  <button
+                    v-for="imgIndex in selectedImages"
+                    :key="imgIndex"
+                    @click="selectImageForEditing(imgIndex)"
+                    :class="[
+                      'relative aspect-square rounded-xl overflow-hidden transition-all duration-300',
+                      selectedRefinementImage?.src === generatedImages[imgIndex].src
+                        ? 'ring-4 ring-[#d97759] shadow-lg scale-105'
+                        : 'ring-2 ring-neutral-200 hover:ring-neutral-300 hover:scale-102'
+                    ]"
+                  >
+                    <img
+                      :src="generatedImages[imgIndex].src"
+                      :alt="generatedImages[imgIndex].label"
+                      class="w-full h-full object-cover"
+                    />
+                    <div
+                      v-if="selectedRefinementImage?.src === generatedImages[imgIndex].src"
+                      class="absolute inset-0 bg-[#d97759]/20 flex items-center justify-center"
+                    >
+                      <div class="h-8 w-8 rounded-full bg-[#d97759] flex items-center justify-center shadow-lg">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Large Preview -->
+              <div class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+                <h3 class="text-lg font-bold text-neutral-900 mb-4">Current Image</h3>
+                <div class="aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 bg-neutral-50">
+                  <img
+                    v-if="selectedRefinementImage"
+                    :src="selectedRefinementImage.src"
+                    :alt="selectedRefinementImage.label"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Editing Controls & Variations -->
+            <div class="space-y-6">
+              <!-- Refinement Controls -->
+              <div class="bg-gradient-to-br from-white to-neutral-50 rounded-2xl border border-neutral-200 p-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-4">
+                  <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                  <h3 class="text-lg font-bold text-neutral-900">Modification Prompt</h3>
+                </div>
+                
+                <div class="space-y-4">
+                  <div class="relative">
+                    <textarea
+                      v-model="refinementPrompt"
+                      placeholder="Describe how you want to modify this image...&#10;&#10;Examples:&#10;• Make it more vibrant with warm sunset tones&#10;• Add soft pastel colors and dreamy atmosphere&#10;• Increase contrast and make it bold&#10;• Convert to black and white with high contrast"
+                      rows="6"
+                      class="w-full px-4 py-3 bg-white border-2 border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#d97759] focus:ring-4 focus:ring-[#d97759]/10 resize-none transition-all duration-300 text-sm"
+                    ></textarea>
+                  </div>
+
+                  <button
+                    @click="generateVariations"
+                    :disabled="!refinementPrompt.trim() || isRefining"
+                    class="w-full px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-semibold disabled:bg-neutral-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none"
+                  >
+                    <svg v-if="!isRefining" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <div v-else class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    {{ isRefining ? 'Generating Variations...' : 'Generate Variations' }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Variations Grid -->
+              <div v-if="refinementVariations.length > 0" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-bold text-neutral-900">Generated Variations</h3>
+                  <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-xs font-semibold">
+                    {{ refinementVariations.length }} results
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div
+                    v-for="(variation, index) in refinementVariations"
+                    :key="index"
+                    class="group cursor-pointer relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300"
+                  >
+                    <img
+                      :src="variation.src"
+                      :alt="variation.label"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div class="absolute bottom-3 left-3 right-3">
+                        <button class="w-full px-3 py-2 rounded-lg bg-white text-neutral-900 text-xs font-semibold hover:bg-neutral-100 transition-colors">
+                          Use This
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Loading State -->
+              <div v-else-if="isRefining" class="bg-white rounded-2xl border border-neutral-200 p-8 shadow-sm">
+                <div class="flex flex-col items-center justify-center space-y-4">
+                  <div class="relative">
+                    <div class="w-16 h-16 relative">
+                      <div class="absolute inset-0 rounded-full border-4 border-[#d97759]/20"></div>
+                      <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-[#d97759] animate-spin"></div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-sm font-semibold text-neutral-900">Creating variations...</p>
+                    <p class="text-xs text-neutral-500 mt-1">This may take a few moments</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Fixed Bottom Bar -->
-        <div v-if="showResults && !isLoading" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
+        <div v-if="showResults && !isLoading && !refinementMode" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
           <div class="relative bg-white rounded-2xl border border-neutral-200 shadow-2xl p-4">
             <div class="flex flex-col lg:flex-row gap-4 items-stretch">
               <!-- Selected images preview or prompt input -->
@@ -429,7 +595,11 @@
                   </svg>
                   Generate More
                 </button>
-                <button class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm">
+                <button
+                  v-if="selectedImages.length > 0"
+                  @click="startRefinement"
+                  class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm"
+                >
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                   </svg>
@@ -662,6 +832,58 @@ const closeResults = () => {
   isLoading.value = false
   revealedImages.value = []
   selectedImages.value = []
+  refinementMode.value = false
+  selectedRefinementImage.value = null
+  refinementPrompt.value = ''
+  refinementVariations.value = []
+}
+
+const startRefinement = () => {
+  if (selectedImages.value.length === 0) return
+  
+  // Use the first selected image for refinement
+  const firstSelectedIndex = selectedImages.value[0]
+  selectedRefinementImage.value = generatedImages.value[firstSelectedIndex]
+  refinementMode.value = true
+  refinementVariations.value = []
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const selectImageForEditing = (index: number) => {
+  selectedRefinementImage.value = generatedImages.value[index]
+  refinementVariations.value = []
+  refinementPrompt.value = ''
+}
+
+const generateVariations = async () => {
+  if (!refinementPrompt.value.trim() || !selectedRefinementImage.value) return
+  
+  isRefining.value = true
+  refinementVariations.value = []
+  
+  try {
+    const response = await $fetch('/api/canvas/generate', {
+      method: 'POST',
+      body: {
+        prompt: refinementPrompt.value,
+        numberOfImages: 6,
+        aspectRatio: '1:1',
+      },
+    })
+    
+    if (response.success && response.images) {
+      refinementVariations.value = response.images.map((img: any) => ({
+        src: img.url,
+        label: img.label,
+      }))
+    }
+  } catch (error: any) {
+    console.error('Error generating variations:', error)
+  } finally {
+    isRefining.value = false
+  }
 }
 
 const toggleImageSelection = (index: number) => {

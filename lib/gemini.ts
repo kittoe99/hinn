@@ -1,6 +1,6 @@
 /**
  * Gemini Image Generation Module
- * Uses Google's gemini-2.5-flash-image model for AI-powered image generation
+ * Uses Google's Gemini 3 Pro Image Preview model for AI-powered image generation
  */
 
 import { GoogleGenAI } from '@google/genai'
@@ -25,8 +25,8 @@ function getGenAI(): GoogleGenAI {
   return new GoogleGenAI({ apiKey })
 }
 
-// The model that supports image generation
-const MODEL_NAME = 'gemini-2.5-flash-image'
+// The model that supports native image generation
+const MODEL_NAME = 'gemini-3-pro-image-preview'
 
 export interface GenerateImageOptions {
   prompt: string
