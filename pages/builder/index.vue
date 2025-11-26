@@ -145,8 +145,7 @@
                       <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      <span class="font-medium">{{ file.name }}</span>
-                      <span class="text-neutral-400">{{ file.path }}</span>
+                      <span class="font-medium">{{ file }}</span>
                     </div>
                   </div>
 
@@ -160,6 +159,21 @@
                     </svg>
                     <span>{{ message.statusText || (message.status === 'success' ? 'No issues found' : 'Error occurred') }}</span>
                     <span v-if="message.duration" class="ml-auto">Worked for {{ message.duration }}</span>
+                  </div>
+                  
+                  <!-- Follow-up Suggestions -->
+                  <div v-if="message.status === 'success' && index === chatHistory.length - 1" class="mt-3 pt-3 border-t border-neutral-100">
+                    <p class="text-xs text-neutral-500 mb-2">Continue with:</p>
+                    <div class="flex flex-wrap gap-2">
+                      <button
+                        v-for="(suggestion, i) in getFollowUpSuggestions(message)"
+                        :key="i"
+                        @click="applySuggestion(suggestion)"
+                        class="px-3 py-1.5 text-xs bg-neutral-50 hover:bg-neutral-100 border border-neutral-200 rounded-lg transition-colors text-neutral-700"
+                      >
+                        {{ suggestion }}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -223,27 +237,39 @@
               </div>
 
               <!-- Main Streaming Content -->
-              <div v-if="streamingText || thinkingSteps.length > 0" class="bg-white border border-neutral-100 rounded-2xl rounded-tl-md px-4 py-3 max-w-[90%]">
-                <div v-if="streamingText" class="text-sm text-neutral-800 leading-relaxed whitespace-pre-wrap break-words">
-                  {{ streamingText.slice(-500) }}<span class="inline-block w-1.5 h-3.5 align-middle bg-neutral-900 ml-0.5 animate-pulse"></span>
-                </div>
-                <div v-else class="text-sm text-neutral-500 italic">
-                  Preparing response...
-                </div>
-
-                <!-- Progress -->
-                <div v-if="streamingProgress.filesGenerated.length > 0" class="mt-3 pt-3 border-t border-neutral-100">
-                  <div class="flex items-center gap-2 text-xs text-neutral-500 mb-2">
-                    <svg class="w-3.5 h-3.5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    <span>Generating {{ streamingProgress.filesGenerated.length }}/{{ streamingProgress.totalFiles }} files</span>
+              <div v-if="streamingText || thinkingSteps.length > 0" class="bg-white border border-neutral-100 rounded-2xl rounded-tl-md px-4 py-3 max-w-[90%] relative overflow-hidden">
+                <!-- Subtle animated gradient overlay -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-neutral-50 to-transparent animate-shimmer opacity-30 pointer-events-none"></div>
+                
+                <!-- Content -->
+                <div class="relative z-10">
+                  <!-- Iteration Status -->
+                  <div v-if="streamingText && streamingText.toLowerCase().includes('iteration')" class="flex items-center gap-2 mb-2 pb-2 border-b border-neutral-100">
+                    <div class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-neutral-500"></span>
+                    </div>
+                    <span class="text-xs font-medium text-neutral-700">{{ streamingText }}</span>
                   </div>
-                  <div class="h-1 w-full bg-neutral-100 rounded-full overflow-hidden">
-                    <div 
-                      class="h-full bg-[#d97759] transition-all duration-500 ease-out"
-                      :style="{ width: `${Math.min((streamingProgress.filesGenerated.length / Math.max(streamingProgress.totalFiles, 1)) * 100, 100)}%` }"
-                    ></div>
+                  
+                  <!-- Streaming text -->
+                  <div v-if="streamingText && !streamingText.toLowerCase().includes('iteration')" class="text-sm text-neutral-800 leading-relaxed whitespace-pre-wrap break-words">
+                    {{ streamingText.slice(-500) }}<span class="inline-block w-1.5 h-3.5 align-middle bg-neutral-900 ml-0.5 animate-pulse"></span>
+                  </div>
+                  
+                  <div v-if="!streamingText" class="text-sm text-neutral-500 italic">
+                    Preparing response...
+                  </div>
+
+                  <!-- Progress -->
+                  <div v-if="streamingProgress.filesGenerated.length > 0" class="mt-3 pt-3 border-t border-neutral-100">
+                    <div class="flex items-center gap-2">
+                      <div class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d97759] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#d97759]"></span>
+                      </div>
+                      <span class="text-xs text-neutral-600">Generating {{ streamingProgress.filesGenerated.length }}/{{ streamingProgress.totalFiles }} files</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -445,6 +471,21 @@
             <span class="hidden sm:inline">{{ isDeploying ? 'Deploying...' : 'Deploy' }}</span>
           </button>
           
+          <!-- Element Selector Button -->
+          <button
+            v-if="viewMode === 'preview' && !isBusy && previewHtml"
+            @click="toggleSelectionMode"
+            :class="[
+              'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors',
+              isSelectionMode ? 'bg-[#d97759] text-white' : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
+            ]"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+            </svg>
+            <span class="hidden sm:inline">Select</span>
+          </button>
+          
           <!-- New Project Button -->
           <button 
             @click="handleNewProject"
@@ -512,11 +553,28 @@
           <span class="text-xs font-medium text-neutral-900">Live Updating</span>
         </div>
 
-        <div v-if="viewMode === 'preview'" class="h-full bg-neutral-100 p-4 md:p-6 transition-opacity duration-500">
+        <div v-if="viewMode === 'preview'" :class="[
+          'h-full transition-opacity duration-500',
+          isFullscreenPreview ? 'bg-white p-0' : 'bg-neutral-100 p-4 md:p-6'
+        ]">
+          <!-- Close Button (Mobile Fullscreen) -->
+          <button
+            v-if="isFullscreenPreview && previewHtml"
+            @click="isFullscreenPreview = false"
+            class="md:hidden fixed top-4 right-4 z-50 p-2 bg-neutral-900 text-white rounded-full shadow-lg hover:bg-neutral-800 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
           <!-- Browser Window -->
-          <div v-if="previewHtml" class="h-full flex flex-col bg-white rounded-xl shadow-2xl border border-neutral-200 overflow-hidden">
-            <!-- Browser Chrome -->
-            <div class="flex-shrink-0 bg-neutral-50 border-b border-neutral-200">
+          <div v-if="previewHtml" :class="[
+            'h-full flex flex-col bg-white overflow-hidden',
+            isFullscreenPreview ? '' : 'rounded-xl shadow-2xl border border-neutral-200'
+          ]">
+            <!-- Browser Chrome (Hidden on mobile fullscreen) -->
+            <div v-if="!isFullscreenPreview" class="hidden md:flex flex-shrink-0 bg-neutral-50 border-b border-neutral-200">
               <!-- Window Controls & Tabs -->
               <div class="flex items-center justify-between px-3 py-2 border-b border-neutral-200">
                 <div class="flex items-center gap-2">
@@ -718,6 +776,18 @@ definePageMeta({
   middleware: 'auth'
 })
 
+// Chat message interface with optional properties
+interface ChatMessage {
+  role: 'user' | 'assistant'
+  content: string
+  timestamp: number
+  thinking?: Array<{type: string, text: string}>
+  files?: string[]
+  status?: string
+  statusText?: string
+  duration?: string
+}
+
 // Composables
 const { generateProjectStream, improveProjectAgentic } = useBuilderGeneration()
 const { bundleProjectForPreview } = useBuilderProject()
@@ -742,13 +812,14 @@ const {
 
 // State
 const viewMode = ref<'preview' | 'code'>('preview')
+const isFullscreenPreview = ref(false)
 const prompt = ref("A modern landing page for an AI startup called 'Nebula'. Dark theme, glowing gradients, hero section, features grid, and a newsletter signup.")
 const status = ref<GenerationStatus>(GenerationStatus.IDLE)
 const files = ref<FileMap>({})
 const previewHtml = ref('')
 const errorMsg = ref<string | null>(null)
 const useSearch = ref(false)
-const chatHistory = ref<Array<{role: 'user' | 'assistant', content: string, timestamp: number}>>([])
+const chatHistory = ref<Array<ChatMessage>>([])
 const agentLogs = ref<Array<{type: string, message?: string, tool?: string, args?: any}>>([])
 const showAgentLogs = ref(false)
 const chatContainer = ref<HTMLDivElement | null>(null)
@@ -852,6 +923,14 @@ const handleGenerate = async () => {
   errorMsg.value = null
   agentLogs.value = [] // Clear previous logs
   
+  // Track generation start time
+  const generationStartTime = Date.now()
+  
+  // Show chatbot area on mobile when generation starts
+  if (window.innerWidth < 768) {
+    isMobileMenuOpen.value = true
+  }
+  
   // Reset streaming state
   streamingText.value = ''
   isStreamingText.value = true
@@ -914,7 +993,7 @@ const handleGenerate = async () => {
           }
         }
         else if (update.type === 'message') {
-          // Final summary message
+          // Use the message from backend if available
           const assistantMessage = update.content || 'Generation complete.'
           chatHistory.value.push({
             role: 'assistant',
@@ -928,6 +1007,8 @@ const handleGenerate = async () => {
           }
         }
       }
+      
+      previewHtml.value = bundleProjectForPreview(files.value)
     } else {
       // Standard Full Generation for new projects
       const stream = generateProjectStream(
@@ -987,51 +1068,6 @@ const handleGenerate = async () => {
         files.value = update.files
       }
       
-      // Generate detailed summary of what was done
-      const startTime = Date.now()
-      const summaryPrompt = `You just generated a website based on this request: "${userPrompt}"
-
-Files created/modified:
-${Object.keys(files.value).map(path => `- ${path}`).join('\n')}
-
-Write a brief, professional summary (2-3 sentences) describing what you built and the key features you implemented. Be specific about the design choices, sections, and functionality you added. Format it like you're explaining your work to the user.
-
-Example format:
-"I've completely redesigned all homepage sections with unique, non-generic layouts. The services section now features asymmetric cards with gradient backgrounds and animated elements, the about section includes a stats bar and bento-style feature grid with an overlay image, the contact section uses a 3-2 column split with stacked info cards, and the footer has an enhanced layout with integrated contact info and a CTA section."`
-
-      try {
-        const response = await $fetch('/api/builder/generate-summary', {
-          method: 'POST',
-          body: { prompt: summaryPrompt }
-        })
-        
-        const completionMessage = response.summary || `Generated ${Object.keys(files.value).length} files successfully!`
-        const duration = Math.floor((Date.now() - startTime) / 1000)
-        
-        chatHistory.value.push({
-          role: 'assistant',
-          content: completionMessage,
-          timestamp: Date.now(),
-          status: 'success',
-          statusText: 'No issues found',
-          duration: `${Math.floor(duration / 60)}m ${duration % 60}s`
-        })
-        
-        // Save assistant message to database
-        if (currentConversationId.value) {
-          await addMessage(currentConversationId.value, 'assistant', completionMessage)
-        }
-      } catch (error) {
-        console.error('Failed to generate summary:', error)
-        // Fallback to generic message
-        const completionMessage = `Generated ${Object.keys(files.value).length} files successfully!`
-        chatHistory.value.push({
-          role: 'assistant',
-          content: completionMessage,
-          timestamp: Date.now()
-        })
-      }
-      
       previewHtml.value = bundleProjectForPreview(files.value)
     }
     
@@ -1070,8 +1106,35 @@ Example format:
     status.value = GenerationStatus.COMPLETE
     console.log('✅ Generation complete!')
     
-    // Switch to preview on mobile
-    isMobileMenuOpen.value = false
+    // Calculate actual generation duration
+    const totalDuration = Math.floor((Date.now() - generationStartTime) / 1000)
+    const minutes = Math.floor(totalDuration / 60)
+    const seconds = totalDuration % 60
+    const durationText = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
+    
+    // Add completion message
+    const completionMessage = `${isEditing.value ? 'Updated' : 'Generated'} ${Object.keys(files.value).length} files successfully!`
+    
+    chatHistory.value.push({
+      role: 'assistant',
+      content: completionMessage,
+      timestamp: Date.now(),
+      status: 'success',
+      statusText: 'No issues found',
+      duration: durationText
+    })
+    
+    if (currentConversationId.value) {
+      await addMessage(currentConversationId.value, 'assistant', completionMessage)
+    }
+    
+    // Auto-switch to preview on mobile after generation completes
+    if (window.innerWidth < 768) {
+      // Wait a moment for user to see the summary, then switch to preview
+      setTimeout(() => {
+        isMobileMenuOpen.value = false
+      }, 2000)
+    }
     
   } catch (error: any) {
     console.error('❌ Generation error:', error)
@@ -1425,6 +1488,66 @@ const autoResize = (event: Event) => {
   textarea.style.height = `${textarea.scrollHeight}px`
 }
 
+// Generate contextual follow-up suggestions based on chat history
+const getFollowUpSuggestions = (message: ChatMessage) => {
+  const recentMessages = chatHistory.value.slice(-3).map(m => m.content.toLowerCase())
+  const hasFiles = Object.keys(files.value).length > 0
+  
+  // Analyze what was just done
+  const isContactForm = recentMessages.some(m => m.includes('contact') || m.includes('form'))
+  const isLandingPage = recentMessages.some(m => m.includes('landing') || m.includes('hero'))
+  const hasColors = recentMessages.some(m => m.includes('color') || m.includes('theme'))
+  const hasLayout = recentMessages.some(m => m.includes('layout') || m.includes('section'))
+  
+  const suggestions: string[] = []
+  
+  if (!hasFiles) {
+    return ['Create a landing page', 'Build a contact form', 'Make a portfolio site']
+  }
+  
+  // Contextual suggestions based on what was created
+  if (isContactForm) {
+    suggestions.push('Add form validation', 'Style the submit button', 'Add a success message')
+  } else if (isLandingPage) {
+    suggestions.push('Add a pricing section', 'Create a testimonials area', 'Add a CTA button')
+  } else if (hasColors) {
+    suggestions.push('Adjust the font styles', 'Add hover effects', 'Update button styles')
+  } else if (hasLayout) {
+    suggestions.push('Make it mobile responsive', 'Add animations', 'Improve spacing')
+  } else {
+    // Generic but useful suggestions
+    suggestions.push('Change the color scheme', 'Add more sections', 'Improve the design')
+  }
+  
+  return suggestions.slice(0, 3)
+}
+
+// Apply a suggestion by setting it as the prompt
+const applySuggestion = (suggestion: string) => {
+  prompt.value = suggestion
+  // Auto-focus the textarea
+  nextTick(() => {
+    const textarea = document.querySelector('textarea')
+    if (textarea) {
+      textarea.focus()
+    }
+  })
+}
+
+// Auto-enable fullscreen on mobile when preview loads
+watch(previewHtml, (newHtml) => {
+  if (newHtml && window.innerWidth < 768) {
+    isFullscreenPreview.value = true
+  }
+})
+
+// Reset fullscreen when switching to code view
+watch(viewMode, (newMode) => {
+  if (newMode === 'code') {
+    isFullscreenPreview.value = false
+  }
+})
+
 const handleElementEdit = async () => {
   if (!selectedElement.value || !prompt.value.trim()) return
   
@@ -1661,3 +1784,18 @@ watch(chatHistory, () => {
   })
 }, { deep: true })
 </script>
+
+<style scoped>
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+</style>
