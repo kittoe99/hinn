@@ -1,5 +1,30 @@
 <template>
   <main class="min-h-screen bg-[#f9f8f6]">
+    <!-- User Profile Bar -->
+    <div class="bg-white border-b border-neutral-200">
+      <div class="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 py-3">
+        <div class="flex items-center justify-between">
+          <NuxtLink to="/dashboard" class="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Dashboard
+          </NuxtLink>
+          <div v-if="user" class="flex items-center gap-3">
+            <div class="text-right hidden sm:block">
+              <p class="text-xs text-neutral-500">Logged in as</p>
+              <p class="text-sm font-medium text-neutral-900">{{ user.email }}</p>
+            </div>
+            <div class="h-8 w-8 rounded-full bg-[#d97759]/10 flex items-center justify-center">
+              <svg class="w-4 h-4 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative -mt-6 pt-0 pb-12 md:mt-0 md:pt-6 md:pb-20 bg-[#f9f8f6] overflow-hidden">
       <div class="relative mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
@@ -869,6 +894,21 @@
 </template>
 
 <script setup lang="ts">
+// Authentication
+definePageMeta({
+  middleware: 'auth'
+})
+
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+// Redirect to login if not authenticated
+watchEffect(() => {
+  if (process.client && user.value === null) {
+    navigateTo('/login')
+  }
+})
+
 // Interactive section state
 const activeTab = ref('generate')
 const prompt = ref('')

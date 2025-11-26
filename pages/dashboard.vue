@@ -116,9 +116,7 @@
                   <path v-if="activeTab === 'overview'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                   <path v-else-if="activeTab === 'websites'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                   <path v-else-if="activeTab === 'domains'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                  <path v-else-if="activeTab === 'branding'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                  <path v-else-if="activeTab === 'marketing'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                  <path v-else-if="activeTab === 'ai-agents'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  <path v-else-if="activeTab === 'gallery'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                   <path v-else-if="activeTab === 'support'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
                   <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
@@ -1166,6 +1164,193 @@
           <NuxtLink v-if="!searchQuery" to="/onboarding" class="border border-neutral-200 bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
             Create Website
           </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Gallery Tab -->
+      <div v-if="!selectedWebsiteId && activeTab === 'gallery'" class="space-y-6">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-3xl font-medium text-neutral-900 mb-2">Image Gallery</h1>
+            <p class="text-sm text-neutral-600">View and manage all your AI-generated canvas images</p>
+          </div>
+          <button
+            @click="refreshGallery"
+            :disabled="galleryLoading"
+            class="px-4 py-2 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+          >
+            <svg :class="['w-4 h-4', galleryLoading ? 'animate-spin' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refresh
+          </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white rounded-xl border border-neutral-200 p-4">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-lg bg-[#d97759]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-neutral-900">{{ galleryImages.length }}</p>
+                <p class="text-xs text-neutral-600">Total Images</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-neutral-200 p-4">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-neutral-900">{{ galleryImages.filter(img => img.is_variation).length }}</p>
+                <p class="text-xs text-neutral-600">Edited Images</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-neutral-200 p-4">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-neutral-900">{{ galleryImages.filter(img => isRecent(img.created_at)).length }}</p>
+                <p class="text-xs text-neutral-600">This Week</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="galleryLoading" class="flex items-center justify-center py-20">
+          <div class="text-center">
+            <div class="w-12 h-12 border-4 border-neutral-200 border-t-[#d97759] rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-sm text-neutral-600">Loading your images...</p>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div v-else-if="galleryImages.length === 0" class="bg-white rounded-xl border border-neutral-200 p-12 text-center">
+          <div class="max-w-md mx-auto">
+            <div class="h-16 w-16 rounded-full bg-neutral-100 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-2">No images yet</h3>
+            <p class="text-sm text-neutral-600 mb-6">Start creating amazing canvas prints with AI</p>
+            <NuxtLink
+              to="/canvas-printing"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Generate Images
+            </NuxtLink>
+          </div>
+        </div>
+
+        <!-- Images Grid -->
+        <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div
+            v-for="image in galleryImages"
+            :key="image.id"
+            class="group relative aspect-square rounded-xl overflow-hidden border-2 border-neutral-200 hover:border-[#d97759] hover:shadow-lg transition-all duration-300 cursor-pointer"
+            @click="selectedGalleryImage = image"
+          >
+            <img
+              :src="image.image_url"
+              :alt="image.original_prompt"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-3">
+                <p class="text-white text-xs font-medium line-clamp-2 mb-2">{{ image.original_prompt }}</p>
+                <div class="flex items-center gap-2">
+                  <span v-if="image.is_variation" class="px-2 py-0.5 rounded-full bg-blue-500 text-white text-[10px] font-semibold">Edited</span>
+                  <span class="text-white/80 text-[10px]">{{ formatDate(image.created_at) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Detail Modal -->
+        <div
+          v-if="selectedGalleryImage"
+          @click="selectedGalleryImage = null"
+          class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        >
+          <div @click.stop class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-neutral-900 mb-1">Image Details</h3>
+                  <p class="text-sm text-neutral-600">{{ formatDate(selectedGalleryImage.created_at) }}</p>
+                </div>
+                <button
+                  @click="selectedGalleryImage = null"
+                  class="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+                >
+                  <svg class="w-5 h-5 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="aspect-square rounded-xl overflow-hidden border border-neutral-200 mb-4">
+                <img
+                  :src="selectedGalleryImage.image_url"
+                  :alt="selectedGalleryImage.original_prompt"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <h4 class="text-sm font-semibold text-neutral-700 mb-1">Original Prompt</h4>
+                  <p class="text-sm text-neutral-900 bg-neutral-50 rounded-lg p-3">{{ selectedGalleryImage.original_prompt }}</p>
+                </div>
+
+                <div v-if="selectedGalleryImage.modification_prompt">
+                  <h4 class="text-sm font-semibold text-neutral-700 mb-1">Modifications</h4>
+                  <p class="text-sm text-neutral-900 bg-blue-50 rounded-lg p-3">{{ selectedGalleryImage.modification_prompt }}</p>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                  <button
+                    @click="downloadGalleryImage(selectedGalleryImage)"
+                    class="flex-1 px-4 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download
+                  </button>
+                  <button
+                    @click="deleteGalleryImage(selectedGalleryImage.id)"
+                    class="px-4 py-2.5 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2631,6 +2816,7 @@ const navigationTabs = [
   { id: 'overview', label: 'Overview' },
   { id: 'websites', label: 'Websites' },
   { id: 'domains', label: 'Domains' },
+  { id: 'gallery', label: 'Gallery' },
   { id: 'support', label: 'Support' },
   { id: 'settings', label: 'Settings' }
 ]
@@ -2644,6 +2830,11 @@ const dropdownStyle = ref({})
 const dropdownCloseTimer = ref(null)
 const viewMode = ref('grid')
 const searchQuery = ref('')
+
+// Gallery state
+const galleryImages = ref([])
+const galleryLoading = ref(false)
+const selectedGalleryImage = ref(null)
 
 // Dropdown functions
 const openDropdown = () => {
@@ -3515,6 +3706,101 @@ if (process.client) {
     }
   })
 }
+
+// Gallery functions
+const fetchGalleryImages = async () => {
+  const supabase = getSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) return
+  
+  galleryLoading.value = true
+  
+  try {
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch('/api/canvas/saved-images', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    if (response.success) {
+      galleryImages.value = response.images || []
+    }
+  } catch (error) {
+    console.error('Error fetching gallery images:', error)
+  } finally {
+    galleryLoading.value = false
+  }
+}
+
+const refreshGallery = () => {
+  fetchGalleryImages()
+}
+
+const isRecent = (dateString) => {
+  const date = new Date(dateString)
+  const weekAgo = new Date()
+  weekAgo.setDate(weekAgo.getDate() - 7)
+  return date >= weekAgo
+}
+
+const downloadGalleryImage = async (image) => {
+  try {
+    const response = await fetch(image.image_url)
+    const blob = await response.blob()
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `canvas-${image.id}.png`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(link.href)
+  } catch (error) {
+    console.error('Error downloading image:', error)
+    alert('Failed to download image')
+  }
+}
+
+const deleteGalleryImage = async (imageId) => {
+  const supabase = getSupabaseClient()
+  const user = useSupabaseUser()
+  
+  if (!user.value) return
+  
+  if (!confirm('Are you sure you want to delete this image?')) return
+  
+  try {
+    const { data: session } = await supabase.auth.getSession()
+    const token = session?.session?.access_token
+    
+    const response = await $fetch(`/api/canvas/delete-image?id=${imageId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    
+    if (response.success) {
+      selectedGalleryImage.value = null
+      await fetchGalleryImages()
+    } else {
+      alert('Failed to delete image')
+    }
+  } catch (error) {
+    console.error('Error deleting image:', error)
+    alert('Failed to delete image')
+  }
+}
+
+// Watch for gallery tab activation
+watch(activeTab, (newTab) => {
+  if (newTab === 'gallery' && galleryImages.value.length === 0) {
+    fetchGalleryImages()
+  }
+})
 
 // Fetch on mount
 onMounted(() => {
