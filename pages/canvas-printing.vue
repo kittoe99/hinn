@@ -313,12 +313,12 @@
 
           <!-- Generated Images Grid -->
           <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
-            <button
+            <div
               v-for="(image, index) in generatedImages"
               :key="`${image.label}-${index}`"
               @click="toggleImageSelection(index)"
               :class="[
-                'relative aspect-square rounded-2xl overflow-hidden transition-all duration-500',
+                'group cursor-pointer relative aspect-square rounded-2xl overflow-hidden transition-all duration-500',
                 revealedImages.includes(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-95',
                 selectedImages.includes(index)
                   ? 'ring-4 ring-[#d97759] shadow-xl' 
@@ -330,14 +330,26 @@
                 :alt="image.label" 
                 class="w-full h-full object-cover" 
               />
-              <div v-if="selectedImages.includes(index)" class="absolute inset-0 bg-[#d97759]/10 flex items-center justify-center">
+              
+              <!-- Download Button -->
+              <button
+                @click.stop="downloadImage(image.src, (image.label.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'canvas') + '-' + (index + 1) + '.png')"
+                class="absolute top-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-sm text-neutral-600 opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:text-neutral-900 hover:scale-110 shadow-sm z-20"
+                title="Download image"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+
+              <div v-if="selectedImages.includes(index)" class="absolute inset-0 bg-[#d97759]/10 flex items-center justify-center pointer-events-none">
                 <div class="h-8 w-8 rounded-full bg-[#d97759] flex items-center justify-center shadow-lg">
                   <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                   </svg>
                 </div>
               </div>
-            </button>
+            </div>
           </div>
         </div>
 
@@ -397,6 +409,16 @@
 
               <!-- Action buttons -->
               <div class="flex flex-row lg:flex-col gap-2 lg:min-w-[180px]">
+                <button
+                  v-if="selectedImages.length > 0"
+                  @click="downloadSelectedImages"
+                  class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg border border-neutral-200 text-neutral-700 font-medium hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download Selected
+                </button>
                 <button
                   @click="generateImage"
                   :disabled="!prompt.trim()"
@@ -516,6 +538,13 @@ const selectedImages = ref<number[]>([])
 const isLoading = ref(false)
 const revealedImages = ref<number[]>([])
 const quickIdeasRef = ref<HTMLDivElement | null>(null)
+
+// Refinement state
+const refinementMode = ref(false)
+const selectedRefinementImage = ref<{ src: string; label: string } | null>(null)
+const refinementPrompt = ref('')
+const refinementVariations = ref<Array<{ src: string; label: string }>>([])
+const isRefining = ref(false)
 
 const promptExamples = [
   {
@@ -665,6 +694,31 @@ const proceedWithUpload = () => {
   // TODO: Handle file upload and navigate to canvas customization
   console.log('Proceeding with file:', uploadedFile.value.name)
   navigateTo('/dashboard')
+}
+
+const downloadImage = async (url: string, filename: string) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  } catch (error) {
+    console.error('Error downloading image:', error);
+  }
+}
+
+const downloadSelectedImages = async () => {
+  for (const index of selectedImages.value) {
+    const image = generatedImages.value[index];
+    // Clean filename from label or use default
+    const name = image.label.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'canvas';
+    await downloadImage(image.src, `${name}-${index + 1}.png`);
+  }
 }
 
 useHead({
