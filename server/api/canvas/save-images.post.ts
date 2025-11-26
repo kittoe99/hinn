@@ -13,12 +13,8 @@ export default defineEventHandler(async (event) => {
     }
 
     const config = useRuntimeConfig()
-    const supabase = createClient(
-      config.public.supabaseUrl,
-      config.public.supabaseAnonKey
-    )
-
-    // Get authenticated user
+    
+    // Get authenticated user token
     const authHeader = getHeader(event, 'authorization')
     if (!authHeader) {
       return {
@@ -27,9 +23,22 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser(
-      authHeader.replace('Bearer ', '')
+    const token = authHeader.replace('Bearer ', '')
+    
+    // Create Supabase client with user's token
+    const supabase = createClient(
+      config.public.supabaseUrl,
+      config.public.supabaseAnonKey,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
     )
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     if (authError || !user) {
       return {
@@ -64,8 +73,9 @@ export default defineEventHandler(async (event) => {
           })
 
         if (uploadError) {
-          console.error('Upload error:', uploadError)
-          continue
+          console.error('Upload error for image', i, ':', uploadError)
+          console.error('Upload error details:', JSON.stringify(uploadError, null, 2))
+          throw new Error(`Upload failed: ${uploadError.message}`)
         }
 
         // Get public URL
@@ -88,8 +98,9 @@ export default defineEventHandler(async (event) => {
           .single()
 
         if (dbError) {
-          console.error('Database error:', dbError)
-          continue
+          console.error('Database error for image', i, ':', dbError)
+          console.error('Database error details:', JSON.stringify(dbError, null, 2))
+          throw new Error(`Database insert failed: ${dbError.message}`)
         }
 
         savedImages.push(dbData)

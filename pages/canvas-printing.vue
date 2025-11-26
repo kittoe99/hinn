@@ -1338,11 +1338,13 @@ const saveCurrentImage = async () => {
       alert('Image saved successfully!')
       await fetchSavedImages()
     } else {
-      alert('Failed to save image')
+      console.error('Save failed:', response)
+      const errorMsg = (response as any).error || 'Unknown error'
+      alert(`Failed to save image: ${errorMsg}`)
     }
   } catch (error: any) {
     console.error('Error saving image:', error)
-    alert('Failed to save image')
+    alert(`Failed to save image: ${error.message || error.data?.error || 'Network error'}`)
   } finally {
     isSaving.value = false
   }
@@ -1386,11 +1388,13 @@ const saveAllPhotos = async () => {
       alert(`Successfully saved ${imagesToSave.length} image(s)!`)
       await fetchSavedImages()
     } else {
-      alert('Failed to save images')
+      console.error('Save failed:', response)
+      const errorMsg = (response as any).error || 'Unknown error'
+      alert(`Failed to save images: ${errorMsg}`)
     }
   } catch (error: any) {
     console.error('Error saving images:', error)
-    alert('Failed to save images')
+    alert(`Failed to save images: ${error.message || error.data?.error || 'Network error'}`)
   } finally {
     isSaving.value = false
   }
@@ -1413,8 +1417,8 @@ const fetchSavedImages = async () => {
       }
     })
     
-    if (response.success) {
-      savedImages.value = response.images
+    if (response.success && (response as any).images) {
+      savedImages.value = (response as any).images
     }
   } catch (error) {
     console.error('Error fetching saved images:', error)
@@ -1444,7 +1448,8 @@ const deleteSavedImage = async (imageId: string) => {
     if (response.success) {
       await fetchSavedImages()
     } else {
-      alert('Failed to delete image: ' + response.error)
+      const errorMsg = (response as any).error || 'Unknown error'
+      alert('Failed to delete image: ' + errorMsg)
     }
   } catch (error) {
     console.error('Error deleting image:', error)
