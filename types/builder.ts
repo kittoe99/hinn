@@ -32,3 +32,13 @@ export interface GeneratedSite {
   prompt: string;
   sources?: SearchSource[];
 }
+
+export interface AgentUpdate {
+  type: 'status' | 'action' | 'file_update' | 'file_delete' | 'message';
+  message?: string;
+  tool?: string;
+  args?: any;
+  path?: string;
+  content?: string;
+  files?: FileMap; // The complete accumulated file map
+}

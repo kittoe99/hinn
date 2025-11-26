@@ -1,4 +1,4 @@
-import type { FileMap, SearchSource } from '~/types/builder'
+import type { FileMap, SearchSource, AgentUpdate } from '~/types/builder'
 
 interface GenerateStreamUpdate {
   files: FileMap;
@@ -9,6 +9,89 @@ interface GenerateStreamUpdate {
 }
 
 export const useBuilderGeneration = () => {
+  async function* improveProjectAgentic(
+    projectId: string,
+    goal: string,
+    currentFiles: FileMap,
+    maxIterations: number = 10
+  ): AsyncGenerator<AgentUpdate, void, unknown> {
+    try {
+      const response = await fetch('/api/builder/agentic-improve-project', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          projectId,
+          goal,
+          files: currentFiles,
+          maxIterations
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.statusText}`);
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('No response body');
+      }
+
+      const decoder = new TextDecoder();
+      let workingFiles: FileMap = JSON.parse(JSON.stringify(currentFiles));
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n');
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6);
+            
+            if (data === '[DONE]') {
+              return;
+            }
+
+            try {
+              const update = JSON.parse(data);
+              
+              // Handle file updates locally to keep state consistent
+              if (update.type === 'file_update') {
+                const path = update.path;
+                const pathParts = path.split('/');
+                const fileName = pathParts.pop() || 'unknown';
+                
+                workingFiles[path] = {
+                  name: fileName,
+                  path: path,
+                  type: 'file',
+                  content: update.content
+                };
+                update.files = workingFiles; // Pass full state
+              } else if (update.type === 'file_delete') {
+                delete workingFiles[update.path];
+                update.files = workingFiles;
+              } else {
+                update.files = workingFiles; // Pass full state for other updates too
+              }
+
+              yield update as AgentUpdate;
+            } catch (e) {
+              continue;
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Agentic improvement error:", error);
+      throw new Error("Failed to improve project. Please try again.");
+    }
+  }
+
   async function* generateProjectStream(
     prompt: string,
     currentFiles: FileMap,
@@ -153,6 +236,7 @@ export const useBuilderGeneration = () => {
   }
 
   return {
-    generateProjectStream
+    generateProjectStream,
+    improveProjectAgentic
   }
 }
