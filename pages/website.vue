@@ -131,37 +131,75 @@
               </p>
             </div>
 
+            <!-- Upload Options -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <button
+                @click="triggerFileUpload(false)"
+                class="group relative border-2 border-neutral-300 rounded-xl p-6 text-center hover:border-[#d97759] hover:bg-neutral-50 transition-all duration-200"
+              >
+                <div class="flex flex-col items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-neutral-900">Upload Files</p>
+                    <p class="text-xs text-neutral-600 mt-1">Select individual files</p>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                @click="triggerFileUpload(true)"
+                class="group relative border-2 border-neutral-300 rounded-xl p-6 text-center hover:border-[#d97759] hover:bg-neutral-50 transition-all duration-200"
+              >
+                <div class="flex flex-col items-center gap-3">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
+                    <svg class="h-6 w-6 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-neutral-900">Upload Folder</p>
+                    <p class="text-xs text-neutral-600 mt-1">Select entire directory</p>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Hidden file inputs -->
+            <input
+              ref="fileInput"
+              type="file"
+              multiple
+              accept=".html,.htm,.css,.js,.json,.txt,.md,.svg,.png,.jpg,.jpeg,.gif,.webp"
+              @change="handleFileSelect"
+              class="hidden"
+            />
+            <input
+              ref="folderInput"
+              type="file"
+              webkitdirectory
+              directory
+              multiple
+              @change="handleFileSelect"
+              class="hidden"
+            />
+
+            <!-- Drag and Drop Area -->
             <div
-              @click="triggerFileUpload"
               @dragover.prevent
               @drop.prevent="handleFileDrop"
-              class="group relative border-2 border-dashed border-neutral-300 rounded-xl p-12 text-center hover:border-[#d97759] hover:bg-neutral-50 transition-all duration-200 cursor-pointer"
+              class="group relative border-2 border-dashed border-neutral-300 rounded-xl p-8 text-center hover:border-[#d97759] hover:bg-neutral-50 transition-all duration-200"
             >
-              <input
-                ref="fileInput"
-                type="file"
-                multiple
-                webkitdirectory
-                directory
-                @change="handleFileSelect"
-                class="hidden"
-              />
-              <div class="flex flex-col items-center gap-4">
-                <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-[#d97759]/10 group-hover:bg-[#d97759]/20 transition-colors">
-                  <svg class="h-8 w-8 text-[#d97759]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
-                  </svg>
-                </div>
+              <div class="flex flex-col items-center gap-3">
+                <svg class="h-10 w-10 text-neutral-400 group-hover:text-[#d97759] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
                 <div>
-                  <p class="text-base font-semibold text-neutral-900 mb-2">
-                    Click to upload folder or drag and drop
-                  </p>
-                  <p class="text-sm text-neutral-600 mb-1">
-                    Upload entire website folder with HTML, CSS, JS files
-                  </p>
-                  <p class="text-xs text-neutral-500">
-                    We'll analyze your files and help recreate or improve your site
-                  </p>
+                  <p class="text-sm font-semibold text-neutral-900">Or drag and drop here</p>
+                  <p class="text-xs text-neutral-600 mt-1">Files or folders supported</p>
                 </div>
               </div>
               <div v-if="uploadedFiles.length > 0" class="mt-6 text-left">
@@ -272,6 +310,8 @@ const activeTab = ref('describe')
 const businessDescription = ref('')
 const uploadedFiles = ref<File[]>([])
 const fileInput = ref<HTMLInputElement | null>(null)
+const folderInput = ref<HTMLInputElement | null>(null)
+const uploadedFileStructure = ref<{path: string, file: File}[]>([])
 
 const businessTemplates = [
   {
@@ -380,35 +420,99 @@ Website Requirements:
   }
 ]
 
-const triggerFileUpload = () => {
-  fileInput.value?.click()
+const triggerFileUpload = (isFolder: boolean) => {
+  if (isFolder) {
+    folderInput.value?.click()
+  } else {
+    fileInput.value?.click()
+  }
 }
 
 const handleFileSelect = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target.files) {
-    uploadedFiles.value = Array.from(target.files)
+    const files = Array.from(target.files)
+    uploadedFiles.value = files
+    
+    // Build file structure with paths
+    uploadedFileStructure.value = files.map(file => {
+      // For folder uploads, webkitRelativePath contains the full path
+      // For file uploads, just use the file name
+      const path = (file as any).webkitRelativePath || file.name
+      return { path, file }
+    })
   }
 }
 
-const handleFileDrop = (event: DragEvent) => {
-  if (event.dataTransfer?.files) {
-    uploadedFiles.value = Array.from(event.dataTransfer.files)
+const handleFileDrop = async (event: DragEvent) => {
+  const items = event.dataTransfer?.items
+  if (!items) return
+  
+  const files: {path: string, file: File}[] = []
+  
+  // Process dropped items (can be files or folders)
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i].webkitGetAsEntry()
+    if (item) {
+      await processEntry(item, '', files)
+    }
+  }
+  
+  uploadedFiles.value = files.map(f => f.file)
+  uploadedFileStructure.value = files
+}
+
+// Recursive function to process directory entries
+const processEntry = async (entry: any, path: string, files: {path: string, file: File}[]): Promise<void> => {
+  if (entry.isFile) {
+    return new Promise((resolve) => {
+      entry.file((file: File) => {
+        const fullPath = path ? `${path}/${file.name}` : file.name
+        files.push({ path: fullPath, file })
+        resolve()
+      })
+    })
+  } else if (entry.isDirectory) {
+    const dirReader = entry.createReader()
+    return new Promise((resolve) => {
+      dirReader.readEntries(async (entries: any[]) => {
+        for (const entry of entries) {
+          await processEntry(entry, path ? `${path}/${entry.name}` : entry.name, files)
+        }
+        resolve()
+      })
+    })
   }
 }
 
-const processUploadedFiles = () => {
+const processUploadedFiles = async () => {
   if (uploadedFiles.value.length === 0) return
   
-  // Create a prompt describing the uploaded files
-  const fileList = uploadedFiles.value.map(f => f.name).join(', ')
-  const prompt = `I have uploaded ${uploadedFiles.value.length} files from my existing website. Please analyze these files and help me recreate or improve my website.\n\nFiles: ${fileList}\n\nPlease recreate a modern, improved version of this website with better design and functionality.`
+  // Read file contents
+  const fileContents: {[key: string]: string} = {}
   
-  // Store the prompt in sessionStorage for the builder page
+  for (const item of uploadedFileStructure.value) {
+    try {
+      // Only read text-based files
+      if (item.file.type.includes('text') || 
+          item.file.name.endsWith('.html') || 
+          item.file.name.endsWith('.css') || 
+          item.file.name.endsWith('.js') ||
+          item.file.name.endsWith('.json') ||
+          item.file.name.endsWith('.md') ||
+          item.file.name.endsWith('.txt')) {
+        const content = await item.file.text()
+        fileContents[item.path] = content
+      }
+    } catch (error) {
+      console.error(`Failed to read file ${item.path}:`, error)
+    }
+  }
+  
+  // Store files in sessionStorage for the builder page (no prompt, just load the project)
   if (process.client) {
-    sessionStorage.setItem('websitePrompt', prompt)
-    // Also store the files for potential analysis
-    sessionStorage.setItem('uploadedFileCount', uploadedFiles.value.length.toString())
+    sessionStorage.setItem('uploadedFiles', JSON.stringify(fileContents))
+    sessionStorage.setItem('loadProjectOnly', 'true') // Flag to indicate we should only load, not generate
   }
   
   // Navigate to builder

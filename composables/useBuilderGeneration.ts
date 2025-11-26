@@ -17,7 +17,8 @@ export const useBuilderGeneration = () => {
     useSearch: boolean = false
   ): AsyncGenerator<GenerateStreamUpdate, void, unknown> {
     try {
-      const response = await fetch('/api/builder/generate', {
+      // Use smart generation endpoint that decides between full gen and targeted edit
+      const response = await fetch('/api/builder/smart-generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ export const useBuilderGeneration = () => {
           prompt,
           currentFiles,
           imageBase64,
-          focusedElementHtml,
+          elementHtml: focusedElementHtml,
           useSearch
         })
       });

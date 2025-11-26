@@ -435,6 +435,12 @@ const isGenerating = computed(() => isBusy.value)
 const handleGenerate = async () => {
   if (!prompt.value.trim() || isGenerating.value) return
   
+  // Check if we should use RAG-based element editing
+  if (selectedElement.value && Object.keys(files.value).length > 0) {
+    await handleElementEdit()
+    return
+  }
+  
   // Add user message to chat
   chatHistory.value.push({
     role: 'user',
@@ -567,16 +573,138 @@ const autoResize = (event: Event) => {
   textarea.style.height = `${textarea.scrollHeight}px`
 }
 
+const handleElementEdit = async () => {
+  if (!selectedElement.value || !prompt.value.trim()) return
+  
+  const userPrompt = prompt.value
+  prompt.value = ''
+  
+  // Add user message to chat
+  chatHistory.value.push({
+    role: 'user',
+    content: `[Editing selected element] ${userPrompt}`,
+    timestamp: Date.now()
+  })
+  
+  status.value = GenerationStatus.STREAMING
+  errorMsg.value = null
+  
+  try {
+    console.log('🎯 Using precise editing...')
+    
+    // Call the precise edit API (two-step replacement)
+    const response: any = await $fetch('/api/builder/precise-edit', {
+      method: 'POST',
+      body: {
+        currentFiles: files.value,
+        prompt: userPrompt
+      }
+    })
+    
+    if (response.success) {
+      // CRITICAL: Only update the ONE modified file, keep all others intact
+      const updatedFiles = { ...files.value }
+      
+      // Update only the modified file
+      updatedFiles[response.file] = {
+        name: response.file.split('/').pop() || response.file,
+        path: response.file,
+        content: response.content,
+        type: 'file'
+      }
+      
+      // Replace files.value with the merged result
+      files.value = updatedFiles
+      
+      // Update preview
+      previewHtml.value = bundleProjectForPreview(files.value)
+      
+      // Add success message to chat
+      const replacementInfo = response.replaced ? `\n\nReplaced: "${response.replaced.old}" → "${response.replaced.new}"` : ''
+      chatHistory.value.push({
+        role: 'assistant',
+        content: `✅ Successfully edited ${response.file}${replacementInfo}`,
+        timestamp: Date.now()
+      })
+      
+      // Clear selected element
+      selectedElement.value = null
+      
+      console.log('✅ Element edit complete - only modified file updated')
+      console.log('📊 Total files in project:', Object.keys(files.value).length)
+    }
+    
+    status.value = GenerationStatus.COMPLETE
+    
+  } catch (error: any) {
+    console.error('❌ Element edit error:', error)
+    errorMsg.value = error.message || 'Failed to edit element'
+    status.value = GenerationStatus.ERROR
+    
+    chatHistory.value.push({
+      role: 'assistant',
+      content: `❌ Error: ${error.message || 'Failed to edit element'}`,
+      timestamp: Date.now()
+    })
+  }
+}
+
 onMounted(() => {
   // Check if there's a prompt from the website page
   if (process.client) {
     const websitePrompt = sessionStorage.getItem('websitePrompt')
-    if (websitePrompt) {
+    const uploadedFilesJson = sessionStorage.getItem('uploadedFiles')
+    const loadProjectOnly = sessionStorage.getItem('loadProjectOnly')
+    
+    // Handle uploaded files (load as project)
+    if (uploadedFilesJson) {
+      try {
+        const uploadedFiles = JSON.parse(uploadedFilesJson)
+        
+        // Convert uploaded files to FileMap format
+        const convertedFiles: FileMap = {}
+        for (const [path, content] of Object.entries(uploadedFiles)) {
+          // Normalize path (remove leading slashes, ensure proper format)
+          const normalizedPath = path.replace(/^\/+/, '')
+          const pathParts = normalizedPath.split('/')
+          const fileName = pathParts[pathParts.length - 1]
+          
+          convertedFiles[normalizedPath] = {
+            name: fileName,
+            path: normalizedPath,
+            content: content as string,
+            type: 'file'
+          }
+        }
+        
+        // Load the files into the project
+        files.value = convertedFiles
+        
+        // Update preview
+        previewHtml.value = bundleProjectForPreview(convertedFiles)
+        
+        // Add a system message to chat
+        chatHistory.value.push({
+          role: 'assistant',
+          content: `Loaded ${Object.keys(convertedFiles).length} files from your upload. You can now make changes or improvements to your website.`,
+          timestamp: Date.now()
+        })
+        
+        // Clear the default prompt
+        prompt.value = ''
+        
+        sessionStorage.removeItem('uploadedFiles')
+        sessionStorage.removeItem('loadProjectOnly')
+      } catch (error) {
+        console.error('Failed to parse uploaded files:', error)
+      }
+    }
+    // Handle website prompt (auto-generate)
+    else if (websitePrompt) {
       prompt.value = websitePrompt
-      // Clear it so it doesn't persist
       sessionStorage.removeItem('websitePrompt')
       
-      // Auto-generate after a brief moment to show the prompt
+      // Auto-trigger generation after a short delay
       setTimeout(() => {
         handleGenerate()
       }, 500)
