@@ -3,7 +3,7 @@ import { generateImages } from '~/lib/gemini'
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
-    const { prompt, numberOfImages = 4, aspectRatio = '1:1' } = body
+    const { prompt, numberOfImages = 4, aspectRatio = '1:1', sourceImage } = body
 
     if (!prompt || typeof prompt !== 'string') {
       throw createError({
@@ -27,11 +27,12 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Generate images using Gemini
+    // Generate images using Gemini (with optional source image for editing)
     const images = await generateImages({
       prompt,
       numberOfImages: Math.min(numberOfImages, 10), // Max 10 images
       aspectRatio,
+      sourceImage, // Pass source image for editing
     })
 
     return {

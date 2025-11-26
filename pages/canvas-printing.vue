@@ -870,6 +870,7 @@ const generateVariations = async () => {
         prompt: refinementPrompt.value,
         numberOfImages: 6,
         aspectRatio: '1:1',
+        sourceImage: selectedRefinementImage.value.src, // Pass source image for nano banana editing
       },
     })
     

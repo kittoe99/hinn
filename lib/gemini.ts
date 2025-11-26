@@ -33,6 +33,7 @@ export interface GenerateImageOptions {
   numberOfImages?: number
   aspectRatio?: '1:1' | '16:9' | '9:16' | '4:3' | '3:4'
   negativePrompt?: string
+  sourceImage?: string // Base64 data URL for image editing
 }
 
 export interface GeneratedImage {
@@ -46,17 +47,39 @@ export interface GeneratedImage {
  * @param options - Image generation options
  * @returns Array of generated images with URLs
  */
+// Helper to strip data URL prefix if present
+const getBase64String = (dataUrl: string): string => {
+  const matches = dataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)
+  if (matches && matches.length === 3) {
+    return matches[2]
+  }
+  return dataUrl
+}
+
 /**
- * Generate a single image using Gemini
+ * Generate a single image using Gemini (with optional source image for editing)
  */
-async function generateSingleImage(prompt: string): Promise<GeneratedImage> {
+async function generateSingleImage(prompt: string, sourceImage?: string): Promise<GeneratedImage> {
   try {
     const ai = getGenAI()
+    
+    // Build parts array - add source image if provided (nano banana editing)
+    const parts: any[] = [{ text: prompt }]
+    
+    if (sourceImage) {
+      const cleanBase64 = getBase64String(sourceImage)
+      parts.push({
+        inlineData: {
+          mimeType: 'image/png',
+          data: cleanBase64
+        }
+      })
+    }
     
     const response = await ai.models.generateContent({
       model: MODEL_NAME,
       contents: {
-        parts: [{ text: prompt }],
+        parts,
       },
       config: {
         // Image generation config (optional)
@@ -79,13 +102,14 @@ export async function generateImages(
   const {
     prompt,
     numberOfImages = 4,
+    sourceImage,
   } = options
 
-  console.log(`Generating ${numberOfImages} images for prompt: "${prompt}"`)
+  console.log(`Generating ${numberOfImages} images for prompt: "${prompt}"${sourceImage ? ' (editing mode)' : ''}`)
   
   // Run requests in parallel
   const promises = Array.from({ length: numberOfImages }).map(() => 
-    generateSingleImage(prompt)
+    generateSingleImage(prompt, sourceImage)
   )
   
   // Use allSettled so one failure doesn't stop the whole batch
